@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "clean-read"
+  },
+  "targets": {
+    "clean-read": {
+      "hosting": {
+        "prod": [
+          "clean-read"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
