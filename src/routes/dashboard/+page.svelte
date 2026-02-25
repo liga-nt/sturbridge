@@ -6,7 +6,7 @@
     onMount(() => {
         if (!$session.loading && !$session.loggedIn) {
             localStorage.setItem('redirectUrl', '/dashboard');
-            goto('/login');
+            goto('/');
         }
     });
 </script>

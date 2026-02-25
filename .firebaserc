@@ -1,15 +1,6 @@
 {
   "projects": {
-    "default": "clean-read"
-  },
-  "targets": {
-    "clean-read": {
-      "hosting": {
-        "prod": [
-          "clean-read"
-        ]
-      }
-    }
+    "default": "sturbridge-e59d9"
   },
   "etags": {}
 }

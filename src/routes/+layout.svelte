@@ -31,8 +31,8 @@
                         Logout
                     </button>
                 {:else}
-                    <a 
-                        href="/login"
+                    <a
+                        href="/"
                         class="hover:text-gray-300"
                     >
                         Login

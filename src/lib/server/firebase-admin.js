@@ -6,12 +6,12 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 const serviceAccount = JSON.parse(
-    readFileSync(join(process.cwd(), 'clean-read-firebase-adminsdk-fbsvc-73c6658ec5.json'), 'utf8')
+    readFileSync(join(process.cwd(), 'sturbridge-e59d9-firebase-adminsdk-fbsvc-6a7604b3c2.json'), 'utf8')
 );
 
 export const app = initializeApp({
     credential: cert(serviceAccount),
-    storageBucket: 'clean-read.firebasestorage.app'
+    storageBucket: 'sturbridge.firebasestorage.app'
 });
 
 export const db = getFirestore();
