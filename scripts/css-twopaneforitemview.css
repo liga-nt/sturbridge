@@ -1,0 +1,74 @@
+.itemCanvas.pane-scrolling .itemCanvas-body {
+    margin: 0;
+    padding: 0;
+}
+
+.row.pane-scrolling, .qti-layout-row.pane-scrolling {
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+div.itemCanvas .span6.left-pane, div.itemCanvas .span6.right-pane, div.itemCanvas .qti-layout-col6.left-pane, div.itemCanvas .qti-layout-col6.right-pane {
+    width: 50% !important;
+}
+
+.itemCanvas.pane-scrolling .span5.left-pane, .itemCanvas.pane-scrolling .qti-layout-col5.left-pane {
+    width: 42%;
+}
+
+.itemCanvas.pane-scrolling .span7.right-pane, .itemCanvas.pane-scrolling .qti-layout-col7.right-pane {
+    width: 58%;
+}
+
+.itemCanvas.pane-scrolling .left-pane, .itemCanvas.pane-scrolling .right-pane {
+    padding-top: 16px;
+    padding-bottom: 8px;
+    height: inherit;
+    overflow: auto;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.itemCanvas.pane-scrolling .left-pane {
+    padding-right: 20px;
+    padding-left: 10px;
+}
+
+.itemCanvas.pane-scrolling .right-pane {
+    right: 0;
+    padding-right: 10px;
+    padding-left: 20px;
+}
+
+.itemCanvas.pane-scrolling .passage-parent,
+.itemCanvas.pane-scrolling .tabbed-passage-parent,
+.itemCanvas.pane-scrolling .paging-parent {
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.itemCanvas.pane-scrolling .passage-scrolling,
+.itemCanvas.pane-scrolling .tab-content,
+.itemCanvas.pane-scrolling .tab-pane,
+.itemCanvas.pane-scrolling .tab-scrolling,
+.itemCanvas.pane-scrolling .tab-paging,
+.itemCanvas.pane-scrolling .passage-paging {
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* In Previewer, SB Glossary popup content was getting scrolled. Reset height to auto */
+.itemCanvas.pane-scrolling #sbPopupContentWrapper .tab-pane,
+.itemCanvas.pane-scrolling #sbPopupContentWrapper .tab-content {
+    height: auto;
+}
+
+/* This is repeated from acc.css */
+#sbPopupContentWrapper .tn8-draggable-modal-body .content-panel .popup-content {
+    margin: 0 5px 0 10px;
+}

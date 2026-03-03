@@ -4,23 +4,33 @@ import { session } from '$lib/stores/session';
 import { browser } from '$app/environment';
 import { onAuthStateChanged } from 'firebase/auth';
 
-// Remove ssr = false to allow server-side data loading
-// export const ssr = false;
-
 export async function load({ url }) {
-    // Handle auth only on the client
     if (browser) {
         try {
             initializeFirebase();
             await new Promise((resolve) => {
-                const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-                    session.set({
-                        user: currentUser,
-                        loggedIn: !!currentUser,
-                        loading: false
-                    });
-                    unsubscribe();
-                    resolve();
+                let resolved = false;
+                onAuthStateChanged(auth, async (currentUser) => {
+                    if (currentUser) {
+                        const tokenResult = await currentUser.getIdTokenResult();
+                        session.set({
+                            user: currentUser,
+                            loggedIn: true,
+                            loading: false,
+                            role: tokenResult.claims.role ?? null
+                        });
+                    } else {
+                        session.set({
+                            user: null,
+                            loggedIn: false,
+                            loading: false,
+                            role: null
+                        });
+                    }
+                    if (!resolved) {
+                        resolved = true;
+                        resolve();
+                    }
                 });
             });
         } catch (ex) {
@@ -28,12 +38,11 @@ export async function load({ url }) {
             session.set({
                 user: null,
                 loggedIn: false,
-                loading: false
+                loading: false,
+                role: null
             });
         }
     }
 
-    return {
-        url: url.pathname
-    };
+    return { url: url.pathname };
 }

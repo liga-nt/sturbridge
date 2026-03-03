@@ -1,0 +1,1018 @@
+<html lang="en" class="full-height"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Preview Modal</title>
+    <link rel="stylesheet" href="./css/previewModal.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700" rel="stylesheet">
+    <script src="./config.js" type="text/javascript"></script>
+    <script src="./js/simulations.js" type="text/javascript"></script>
+    <script src="../items_scoring/js/scoring.js" type="text/javascript"></script>
+    <script src="./js/main.js" type="module"></script>
+    <script src="./js/MathJax/mathjax-startup.js" type="text/javascript"></script>
+    <script src="./js/MathJax/es5/tex-mml-chtml.js" type="text/javascript"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style>
+    <script src="./js/modal-iframe.js" type="module" defer=""></script>
+<style type="text/css" id="sketchpad-widget-custom-cursor-styles"></style><style id="text-editor-styles">
+    .text-editor-container {
+      background: white;
+      border: 1px solid #d0d0d0;
+      border-radius: 0;
+      overflow: hidden;
+    }
+    .text-editor-toolbar {
+      background: #f0f0f0;
+      border-bottom: 1px solid #d0d0d0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      align-items: center;
+    }
+    .text-editor-toolbar button {
+      background: transparent;
+      border: none;
+      border-radius: 2px;
+      padding: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 30px;
+      height: 30px;
+      color: #333;
+    }
+    .text-editor-toolbar button svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+    .text-editor-toolbar button:hover {
+      background: #e0e0e0;
+    }
+    .text-editor-toolbar button.active {
+      background: #d0d0d0;
+    }
+    .text-editor-toolbar button:disabled,
+    .text-editor-toolbar button.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .text-editor-content {
+      padding: 8px;
+      font-size: 16px;
+      line-height: 1.6;
+      outline: none;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+    .text-editor-content:empty:before {
+      content: attr(data-placeholder);
+      color: #adb5bd;
+    }
+    .text-editor-content h1 { font-size: 2em; margin: 0.67em 0; font-weight: bold; }
+    .text-editor-content h2 { font-size: 1.5em; margin: 0.75em 0; font-weight: bold; }
+    .text-editor-content h3 { font-size: 1.17em; margin: 0.83em 0; font-weight: bold; }
+    .text-editor-content p { margin: 1em 0; }
+    .text-editor-content ul, .text-editor-content ol { margin: 1em 0; padding-left: 40px; }
+    .text-editor-content li { margin: 0.5em 0; }
+    .text-editor-content blockquote {
+      margin: 1em 0;
+      padding: 10px 20px;
+      border-left: 4px solid #007bff;
+      background: #f8f9fa;
+      font-style: italic;
+    }
+    .text-editor-content pre {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin: 1em 0;
+    }
+    .text-editor-content code {
+      background: #f8f9fa;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+    .text-editor-content a {
+      color: #007bff;
+      text-decoration: underline;
+    }
+    .text-editor-content img {
+      max-width: 100%;
+      height: auto;
+    }
+    .text-editor-counter-bar {
+      padding: 5px 5px 5px 0px;
+      font-size: 12px;
+      color: #666;
+      background: #fff;
+      border-top: 1px solid #d0d0d0;
+      text-align: right;
+    }
+  </style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  border-collapse: collapse;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-mfrac {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-frac {
+  display: inline-block;
+  vertical-align: 0.17em;
+  padding: 0 .22em;
+}
+
+mjx-frac[type="d"] {
+  vertical-align: .04em;
+}
+
+mjx-frac[delims] {
+  padding: 0 .1em;
+}
+
+mjx-frac[atop] {
+  padding: 0 .12em;
+}
+
+mjx-frac[atop][delims] {
+  padding: 0;
+}
+
+mjx-dtable {
+  display: inline-table;
+  width: 100%;
+}
+
+mjx-dtable > * {
+  font-size: 2000%;
+}
+
+mjx-dbox {
+  display: block;
+  font-size: 5%;
+}
+
+mjx-num {
+  display: block;
+  text-align: center;
+}
+
+mjx-den {
+  display: block;
+  text-align: center;
+}
+
+mjx-mfrac[bevelled] > mjx-num {
+  display: inline-block;
+}
+
+mjx-mfrac[bevelled] > mjx-den {
+  display: inline-block;
+}
+
+mjx-den[align="right"], mjx-num[align="right"] {
+  text-align: right;
+}
+
+mjx-den[align="left"], mjx-num[align="left"] {
+  text-align: left;
+}
+
+mjx-nstrut {
+  display: inline-block;
+  height: .054em;
+  width: 0;
+  vertical-align: -.054em;
+}
+
+mjx-nstrut[type="d"] {
+  height: .217em;
+  vertical-align: -.217em;
+}
+
+mjx-dstrut {
+  display: inline-block;
+  height: .505em;
+  width: 0;
+}
+
+mjx-dstrut[type="d"] {
+  height: .726em;
+}
+
+mjx-line {
+  display: block;
+  box-sizing: border-box;
+  min-height: 1px;
+  height: .06em;
+  border-top: .06em solid;
+  margin: .06em -.1em;
+  overflow: hidden;
+}
+
+mjx-line[type="d"] {
+  margin: .18em -.1em;
+}
+
+mjx-mn {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+
+mjx-c.mjx-c35::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "5";
+}
+
+mjx-c.mjx-c36::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "6";
+}
+
+mjx-c.mjx-c31::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "1";
+}
+
+mjx-c.mjx-c32::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "2";
+}
+</style></head>
+<body class="full-height" style="visibility: visible;">
+    <div class="dil-modal-loading-spinner" id="globalLoadingSpinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    <div class="dil-modal-container full-height" id="DilModalContainer" style="visibility: visible; display: flex;">
+        <div id="DilModalContent" class="dil-modal-content">
+            <div class="dil-modal-header iframe-default-styles">
+                <div class="dil-modal-title" id="modalItemId">
+                    <span id="lighthouse-itemid" aria-live="polite">Item: MA801035466</span>
+                </div>
+                <button class="dil-modal-close" id="modalCloseButton" aria-label="Close modal">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="standardItemWrapper" class="dil-item-content-wrapper" style="overflow: visible; max-height: none; height: auto;">
+                <div id="standardItemContent" class="dil-item-content">
+                    <div id="itemPreview" class="dil-item-preview">
+                        <div class="lighthouse-canvas-container stimuli-wrapper"><div class="lighthouse-canvas runtime" ruler="1/8 in.,cm" style="overflow: visible; height: unset; min-height: 2392px;"><div widget="TextBox" id="TextBox_sp_1" class="TextBox" style="left: 0px; top: 0px; width: 944px; height: auto; overflow: visible; max-height: none;"><div class="abbi-richtext">
+<h3 id="TextBox_sp_1_1" class="semantic-marker part-label">This question has four parts.</h3>
+</div>
+<div class="abbi-richtext">
+<p><span id="TextBox_sp_1_2" class="text-anchor">Four friends live in different towns. </span><span id="TextBox_sp_1_3" class="text-anchor">They each placed a bucket outside to collect rainwater on the same night. </span><span id="TextBox_sp_1_4" class="text-anchor">The four buckets were labeled A, B, C, and D.</span></p>
+</div>
+<div class="abbi-richtext">
+<h3 id="TextBox_sp_1_5" class="semantic-marker part-label">Part A</h3>
+</div>
+<div class="abbi-richtext">
+<p><span id="TextBox_sp_1_6" class="text-anchor">Bucket A and Bucket B are the same size. </span><span id="TextBox_sp_1_7" class="text-anchor">This diagram shows the fraction of each bucket that was filled with rainwater.</span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><span class="text-anchor"><img data-media-guid="50e87622-1a8f-48f4-ac23-62c7b5366fea" src="data:image/png;base64,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" id="TextBox_sp_1_8" alt="The tactile graphics for this item are found in the Braille booklet. The image on the left is labeled Bucket AY and reads 7 over 8. the image on the right is labeled Bucket B and reads 5 over 6."></span></p>
+<p style="text-align: center;">&nbsp;</p>
+<p><span class="text-anchor" id="TextBox_sp_1_9">Write a number sentence using&nbsp;</span><span data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; alttext=&quot;greater than&quot;&gt;&lt;mo&gt;&amp;gt;&lt;/mo&gt;&lt;/math&gt;" id="TextBox_sp_1_10">&gt;</span><span class="text-anchor" id="TextBox_sp_1_11">,&nbsp;</span><span data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; alttext=&quot;less than&quot;&gt;&lt;mo&gt;&amp;lt;&lt;/mo&gt;&lt;/math&gt;" id="TextBox_sp_1_12">&lt;</span><span class="text-anchor" id="TextBox_sp_1_13">, or&nbsp;</span><span data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; alttext=&quot;equals&quot;&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;/math&gt;" id="TextBox_sp_1_14">=&nbsp;</span><span class="text-anchor" id="TextBox_sp_1_15">to compare the fraction of Bucket A that was filled to the fraction of Bucket B that was filled.&nbsp;</span><span class="text-anchor" id="TextBox_sp_1_16">Show or explain how you got your answer.</span></p>
+<p>&nbsp;</p>
+<p id="TextBox_sp_1_17">Enter your number sentence and your work or explanation in the space provided.</p>
+</div></div><textarea style="display: none; overflow: visible; max-height: none; height: auto;" name="text-editor-1772473744562-5zc1m1ko0"></textarea><div class="text-editor-container OpenEndedResponse-editor" style="width: 953px; position: absolute; top: 535px; left: 9px; z-index: 5;">
+          <div class="text-editor-toolbar"><button data-command="undo" title="Undo (Ctrl+Z)" type="button" aria-label="Undo" disabled="" class="disabled">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="transform: scaleX(-1);" aria-hidden="true">
+        <path d="M371.8 82.4C359.8 87.4 352 99 352 112L352 192L240 192C142.8 192 64 270.8 64 368C64 481.3 145.5 531.9 164.2 542.1C166.7 543.5 169.5 544 172.3 544C183.2 544 192 535.1 192 524.3C192 516.8 187.7 509.9 182.2 504.8C172.8 496 160 478.4 160 448.1C160 395.1 203 352.1 256 352.1L352 352.1L352 432.1C352 445 359.8 456.7 371.8 461.7C383.8 466.7 397.5 463.9 406.7 454.8L566.7 294.8C579.2 282.3 579.2 262 566.7 249.5L406.7 89.5C397.5 80.3 383.8 77.6 371.8 82.6z"></path>
+      </svg>
+    </button><button data-command="redo" title="Redo (Ctrl+Y)" type="button" aria-label="Redo" disabled="" class="disabled">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M371.8 82.4C359.8 87.4 352 99 352 112L352 192L240 192C142.8 192 64 270.8 64 368C64 481.3 145.5 531.9 164.2 542.1C166.7 543.5 169.5 544 172.3 544C183.2 544 192 535.1 192 524.3C192 516.8 187.7 509.9 182.2 504.8C172.8 496 160 478.4 160 448.1C160 395.1 203 352.1 256 352.1L352 352.1L352 432.1C352 445 359.8 456.7 371.8 461.7C383.8 466.7 397.5 463.9 406.7 454.8L566.7 294.8C579.2 282.3 579.2 262 566.7 249.5L406.7 89.5C397.5 80.3 383.8 77.6 371.8 82.6z"></path>
+      </svg>
+    </button><button data-command="bold" title="Bold (Ctrl+B)" type="button" aria-label="Bold">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M160 96C142.3 96 128 110.3 128 128C128 145.7 142.3 160 160 160L192 160L192 480L160 480C142.3 480 128 494.3 128 512C128 529.7 142.3 544 160 544L384 544C454.7 544 512 486.7 512 416C512 369.5 487.2 328.7 450 306.3C468.7 284 480 255.3 480 224C480 153.3 422.7 96 352 96L160 96zM416 224C416 259.3 387.3 288 352 288L256 288L256 160L352 160C387.3 160 416 188.7 416 224zM256 480L256 352L384 352C419.3 352 448 380.7 448 416C448 451.3 419.3 480 384 480L256 480z"></path>
+      </svg>
+    </button><button data-command="italic" title="Italic (Ctrl+I)" type="button" aria-label="Italic">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M256 128C256 110.3 270.3 96 288 96L480 96C497.7 96 512 110.3 512 128C512 145.7 497.7 160 480 160L421.3 160L288 480L352 480C369.7 480 384 494.3 384 512C384 529.7 369.7 544 352 544L160 544C142.3 544 128 529.7 128 512C128 494.3 142.3 480 160 480L218.7 480L352 160L288 160C270.3 160 256 145.7 256 128z"></path>
+      </svg>
+    </button><button data-command="underline" title="Underline (Ctrl+U)" type="button" aria-label="Underline">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M128 96C128 78.3 142.3 64 160 64L224 64C241.7 64 256 78.3 256 96C256 113.7 241.7 128 224 128L224 288C224 341 267 384 320 384C373 384 416 341 416 288L416 128C398.3 128 384 113.7 384 96C384 78.3 398.3 64 416 64L480 64C497.7 64 512 78.3 512 96C512 113.7 497.7 128 480 128L480 288C480 376.4 408.4 448 320 448C231.6 448 160 376.4 160 288L160 128C142.3 128 128 113.7 128 96zM128 544C128 526.3 142.3 512 160 512L480 512C497.7 512 512 526.3 512 544C512 561.7 497.7 576 480 576L160 576C142.3 576 128 561.7 128 544z"></path>
+      </svg>
+    </button><button data-command="insertUnorderedList" title="Bullet List" type="button" aria-label="Bullet list">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M112 208C138.5 208 160 186.5 160 160C160 133.5 138.5 112 112 112C85.5 112 64 133.5 64 160C64 186.5 85.5 208 112 208zM256 128C238.3 128 224 142.3 224 160C224 177.7 238.3 192 256 192L544 192C561.7 192 576 177.7 576 160C576 142.3 561.7 128 544 128L256 128zM256 288C238.3 288 224 302.3 224 320C224 337.7 238.3 352 256 352L544 352C561.7 352 576 337.7 576 320C576 302.3 561.7 288 544 288L256 288zM256 448C238.3 448 224 462.3 224 480C224 497.7 238.3 512 256 512L544 512C561.7 512 576 497.7 576 480C576 462.3 561.7 448 544 448L256 448zM112 528C138.5 528 160 506.5 160 480C160 453.5 138.5 432 112 432C85.5 432 64 453.5 64 480C64 506.5 85.5 528 112 528zM160 320C160 293.5 138.5 272 112 272C85.5 272 64 293.5 64 320C64 346.5 85.5 368 112 368C138.5 368 160 346.5 160 320z"></path>
+      </svg>
+    </button><button data-command="insertOrderedList" title="Numbered List" type="button" aria-label="Numbered list">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M64 136C64 122.8 74.7 112 88 112L136 112C149.3 112 160 122.7 160 136L160 240L184 240C197.3 240 208 250.7 208 264C208 277.3 197.3 288 184 288L88 288C74.7 288 64 277.3 64 264C64 250.7 74.7 240 88 240L112 240L112 160L88 160C74.7 160 64 149.3 64 136zM94.4 365.2C105.8 356.6 119.7 352 134 352L138.9 352C172.6 352 200 379.4 200 413.1C200 432.7 190.6 451 174.8 462.5L150.8 480L184 480C197.3 480 208 490.7 208 504C208 517.3 197.3 528 184 528L93.3 528C77.1 528 64 514.9 64 498.7C64 489.3 68.5 480.5 76.1 475L146.6 423.7C150 421.2 152 417.3 152 413.1C152 405.9 146.1 400 138.9 400L134 400C130.1 400 126.3 401.3 123.2 403.6L102.4 419.2C91.8 427.2 76.8 425 68.8 414.4C60.8 403.8 63 388.8 73.6 380.8L94.4 365.2zM288 128L544 128C561.7 128 576 142.3 576 160C576 177.7 561.7 192 544 192L288 192C270.3 192 256 177.7 256 160C256 142.3 270.3 128 288 128zM288 288L544 288C561.7 288 576 302.3 576 320C576 337.7 561.7 352 544 352L288 352C270.3 352 256 337.7 256 320C256 302.3 270.3 288 288 288zM288 448L544 448C561.7 448 576 462.3 576 480C576 497.7 561.7 512 544 512L288 512C270.3 512 256 497.7 256 480C256 462.3 270.3 448 288 448z"></path>
+      </svg>
+    </button><button data-command="indent" title="Increase Indent" type="button" aria-label="Increase indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96 128C96 110.3 110.3 96 128 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L128 160C110.3 160 96 145.7 96 128zM288 256C288 238.3 302.3 224 320 224L512 224C529.7 224 544 238.3 544 256C544 273.7 529.7 288 512 288L320 288C302.3 288 288 273.7 288 256zM320 352L512 352C529.7 352 544 366.3 544 384C544 401.7 529.7 416 512 416L320 416C302.3 416 288 401.7 288 384C288 366.3 302.3 352 320 352zM96 512C96 494.3 110.3 480 128 480L512 480C529.7 480 544 494.3 544 512C544 529.7 529.7 544 512 544L128 544C110.3 544 96 529.7 96 512zM223.8 332.6L121.8 411.9C111.3 420.1 96 412.6 96 399.3L96 240.7C96 227.4 111.3 219.9 121.8 228.1L223.7 307.4C231.9 313.8 231.9 326.3 223.7 332.7z"></path>
+      </svg>
+    </button><button data-command="outdent" title="Decrease Indent" type="button" aria-label="Decrease indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96.4 128C96.4 110.3 110.7 96 128.4 96L512.4 96C530.1 96 544.4 110.3 544.4 128C544.4 145.7 530.1 160 512.4 160L128.4 160C110.8 160 96.4 145.7 96.4 128zM288.4 256C288.4 238.3 302.7 224 320.4 224L512.4 224C530.1 224 544.4 238.3 544.4 256C544.4 273.7 530.1 288 512.4 288L320.4 288C302.7 288 288.4 273.7 288.4 256zM320.4 352L512.4 352C530.1 352 544.4 366.3 544.4 384C544.4 401.7 530.1 416 512.4 416L320.4 416C302.7 416 288.4 401.7 288.4 384C288.4 366.3 302.7 352 320.4 352zM96.4 512C96.4 494.3 110.7 480 128.4 480L512.4 480C530.1 480 544.4 494.3 544.4 512C544.4 529.7 530.1 544 512.4 544L128.4 544C110.7 544 96.4 529.7 96.4 512zM96.7 332.6C88.5 326.2 88.5 313.7 96.7 307.3L198.6 228C209.1 219.8 224.4 227.3 224.4 240.6L224.4 399.2C224.4 412.5 209.1 420 198.6 411.8L96.7 332.6z"></path>
+      </svg>
+    </button><button data-command="insertHTML" data-html=" " title="Line Indent" type="button" aria-label="Line indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96 96 L184 128 L96 160 Z" fill="currentColor"></path>
+        <path d="M224 128C224 110.3 238.3 96 256 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L256 160C238.3 160 224 145.7 224 128z"></path>
+        <path d="M96 256C96 238.3 110.3 224 128 224L512 224C529.7 224 544 238.3 544 256C544 273.7 529.7 288 512 288L128 288C110.3 288 96 273.7 96 256zM128 352L512 352C529.7 352 544 366.3 544 384C544 401.7 529.7 416 512 416L128 416C110.3 416 96 401.7 96 384C96 366.3 110.3 352 128 352zM96 512C96 494.3 110.3 480 128 480L512 480C529.7 480 544 494.3 544 512C544 529.7 529.7 544 512 544L128 544C110.3 544 96 529.7 96 512z"></path>
+      </svg>
+    </button><button data-command="mathquill" title="Insert Math Equation" type="button" aria-label="Insert math equation" style="font-weight: 600; font-size: 11px;">
+      MATH
+    </button></div>
+          <div class="text-editor-content" contenteditable="true" data-placeholder="" role="textbox" aria-multiline="true" aria-label="Rich text editor" style="height: auto; max-height: none; overflow: visible;"></div>
+          <div class="text-editor-counter-bar" style="display: none;"></div>
+        </div><div widget="TextBox" id="TextBox_sp_3" class="TextBox" style="left: 0px; top: 726px; width: 956px; height: auto; overflow: visible; max-height: none;"><div class="abbi-richtext">
+<h3 id="TextBox_sp_3_1" class="semantic-marker part-label">Part B</h3>
+</div>
+<div class="abbi-richtext">
+<p><span id="TextBox_sp_3_2" class="text-anchor">Bucket C and Bucket D are the same size. </span><span id="TextBox_sp_3_3" class="text-anchor">This diagram shows the fraction of each bucket that was filled with rainwater.</span></p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><img data-media-guid="d5a4af8c-2e50-4a8c-85bd-ac1c7459196c" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMoAAACVCAIAAACW3/LdAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAHJ5JREFUeNrsXX9sFGd6Hmz3RIKWGAl6/OiJdXo9m7QXILJPzSWV2UVNgzixdumlf8TUOPSPmEqx0alwupTaFk2buL1iRyd8f5QYBGmku0b2RqGcKrELUgkXmcQmuuC1esRGqheuHDXgECxdCX1mHvwynt2dnVnP7M6YeUGr2fXs7Pc+3/P++N75vm8W3bt3TwkkEHekLIAgEPekojg/MzIycuPGDbzevHkTb3nMP1VWVm7YsIHH69ev51u8Bn1TAMJnzpzh2wlNciG8adOm4rRqkUvBEaoODg5euHDh9OnTwqTVq9fgH4/raut4MJmGTPL4/NCQHhGgUF9fXzQs/CVgD7AFn0Y0MUE4NZaanp7GwfSt6bGxFD8Mh8NAmPAK+bxOL+gMVh09epQK19bVQcnq6hoch5aGxlL39bw1/UDPUChUo50AwZk4DSiAcKkxnIKXFKjW0NAQi8XwGrAKCPf29tJoAR0QBnp4BWi5EAbn1qy+zzn9mQAX9gyoiXBzc7PjluwYvaAw1Aa3oHMkuhmswsHQ+SEoafBJPBZN9G4cFxFEqmuqcREcAK9E8lQykcDX29vbgQIs7yEk1pEjR2C3gAiYRKKqpCfTKsKaEYpPEnAEYcZNQ04iCFfX1OAK8XgcF8F329radu7c6VRy4gC9oHBXVxdeYRmxbaqDIRtwIAGOrthiVKW3Z2AF8wAErhyNRKE/UIC1Qf+DBw8+PPkZiAWEAcW2WANwAAJkAzkEQUYFeC1aHRFmVAXCeCt8TSQS78UHy8vLYcbgmQMI35uHjI+P00TQ/QcOvAbl4bHwFp62v79/amrq3rxleHgYTCI1gQJ+Bf9xAM07OzvvLXRJJpPUHdj29LyJVwYBGNjAwIAjPwGEQSZSE/24d+++1tbd6Ef8CjpxnhcvnF70H8iWSCx6ZnzoCKuyogBMSTKBANDj8wVJLMCIXmeXH36rH6+MBvPvchMqM7sFwqDyi0076B3hRIpKL2hOp4U+ZjeDWO6pbfCXJBloDQgIOji9wLgFmwGTACzgZTfjLbq/OAiTZIxIDBQFe0qlAM1BJhKcQ0IEKZc8lkkb9PzGATi3kAIiwwIQZu8W337QBvQy+I1AwdBUWBsUu/0qAbHksQkKS7qAxoBwRWa5G4IgwEwLSs0/Ns1TGJ2lMQXYsGKXW/ofK3l3Ct1h6KS7rxkm3KLD8MLYBWGRCBfGMMUut+C3PKK5JIJMU+hQkTcsDG4VJ5e1ZcMFMEyx2IUSEz2luYFh8GE+zcPEer3GrawMs948S/RC57Hm5NlhGhlWgP4eaTzyaCaRnm08GRaJRjmWsphz56cX4iAdA1697BiQAlN/jORxUMKM2K4goIvr9XKRBZTiaB2WAHuwkuYqeQeouCKsCo4B7sH7Q3ppLcZcPkq5aL3eTxw5WmdrMa6cL71AKVAVhPWLPxBf64tyK5NauFs4XYv+wAu+VjKlvJVeJa9hHX6r31+VcZoEQ6THOwwOQIyhOEV5p0yCITJvQFPyGpaVq3gwRNKBe/m2N6IB2skbL/6qpzBE0u+YD0QUK1HGL4ald+BIvxjTPevAME6SKOOjgQgFoZxlFBwUQi98jQ7QLzlypmPwsgPTuy4/Fur0iZOJA1Pyftl3rkt8gwxKvDkE8a/rMjgwEweUnV74Ar/pr6wrMwOzkh+URCQ79u9cD6Aq6VOuKmtZriUo0Ug0mTjV1tbm0wnEsBCYVyKRwJg/Ho97qm2Dg4M3btwAt84PDTU3N/sUYSS45eXl09PTcMNHjx61uowWyuML6rql6WlfL86BbSQTiWhkM7vTOw0D3THyGEupSyf8u8yO64sSyVNNTU1A2Cq9wEQYViKZwJd9vVwC7U+nJ7nuL5f+pfJesVgMJPP70jpoAQOurqlBxJM1SGb04jISRkZ82dfKc3kS46MsXy65cHGOuvxrLOV3hOmA0pNphLusGUhZpvLqZP41qxEZF8DyaKiA/Kautk5WUJZcQHR0BrqkmIvxXUV46PwQwl1WhMsylWfKqV+Q6V+pr6+Hk4BG+sW6JfdeaA+6ZGFsbgCETQzYSC9ERmSdC0Z5asF18VmTg+ILmlFTXY283r2dHYop0AIJbnVNdVaEy7IpXwPXvTAW2iMAQRH0JRzGhQsXSt6eG5ow8YLdLzADzowPFZn6I/FyW3nZ9UAswL0hKug1mU6HQiEveC+2gWvZXTVgQ6hyNRbpDdgwFq7I1aaClefYE0S+fPmy7JlhK/URthEUEF2/90kB5vX+iRNIDkZHL3rBe4mtF4wwweRmaQKswWKtuBxBdZ4IQxFqlNmACpPvWNcWvARzufVIViUXL14crqrSxaxlyyqXydvxic/keObOjLgZgwlylw7ZlcqPoQQoceRkqy9lTxduOpIjDViWC+E7M3euXr2iR1guYigHbtCEG6JYRxgn/+fZszDgzPhQUbAVomUYZnITmzm8rKpauXLVI4sfobbhcFV+Y1Ki2X5iSs1TptTXK1ev4IAoCyLQivt+mXfV2rVr0Z2xbQ19fYc8lRRaMdp4PM46md5QV65aZRfhrALOzczMXL2ivsLCgbd+Jzo6OcCbd385E10ebMC0Z8+enp4eRbsNvOullmQymclfsgo661kPVaHnKu21UueT3JCJiXHAMT6Bf58BFHG03P0sKwqNjY3/PTkJ2yK9uH1DSSgViUTAFW1l/ff37391fHw8M0QAYe7jpe9mIlwVrgKxXEVYZdvVKxNo2cRnE9qUIT3CbW1tWWMamvbk+g3T07e4BxvX1MyhF5TZuHGjWu5LT7a27h46P/R/v/kNV4aIMfX29kJzsaSadU+sq1lXBEqZGN/w8Mep0VG4OPFn3P1Mn02iUw8ceA3cUm8QrV7zjW/8HidTFFkAXUtLi3qrcSzF9nzrW3UDAwN6hLu6unCaeCkgDErhFcclQTg1ehF2rEcYHqejo0Pvd+CS4JjokkKqLH3uuT/mhK4H9MIZJ0/+DJ6wu/sNcWBQHpwFn6A2HRuD+tNPf3vDxqdKpXNWnp079wGwoD+DhQECkkzvuriSu739laxuw21BS77U4sR78UGDAzMQCxa7ccNTJWRVVp6NpkZHhj/OJBlc1zPP/hH3oIT1wjf98If/ODU1NSf3Uu8zRqOJZIJvcSrsjIUi2Bw9FtSORDYXHOndE8SOxsbtM1u2/vzcB+fOnUVvoc2IL7Ah6PXCC39+/PhxjtdCS0P0E8WnF/zo9773193dr7MlvNHOrWjBLY8jDK7jfyQSTSYTINlpTbhHJFTY/7cdbx8/htMQH2A5LBcwA3mQ2t/SxpYUnIRT4bGoNsxoy5at8FheHpShkZsi0T98+tsDA+/C2qA/wr1UAbwm07emGTSYYyEmNP7pdg8SyzA4hRmDZEAYmRncLRtPXbJKeWdnJwfMJ94/geB49uxZuLhPPvnk+vVfM9bAN7S89Jfhqsd9MfKvqKj45jefxJgcg4DPP/8cKqTTaWSdy5evoCeHglC5+BONPvzwQ2S0zzzz7PVfX1fjw/nz4P3Vq1fpG3b8xU620PuyePEjGzc+tUhZpA6ztPYjxIMtCHfLly9fujT0y1/+l6RS93MveClA/+ijS+C0ItEoN94VbnknCbCVkPUd+pG8ra2rS0+qPNu1axfXURVZOHhiaq9HGDEBLsGPNTxESbgxHsMl8VYEtAO83BhMkXuOsGaMp77yld/SIuNSvD66ZAlY5VNu0TAQ0PXcguVs3769JNziqBZDpV/96qogLOFG8afAMCRfgsGAWPiPyCDcUjI3Hscw/qOPPoLfXrHit3/361+XHvKp/MPfHygrL//a73wNmiPT19csSiKIEkD40qVLCDG3v7j9J8897/GMNp86Uwf/+Z/WhsP/e/06OJM5JDfOmMBoE+fhC9eu/c+6dU8oPpeVq1aF14a5BXzJuaXM3ubTrHfFF7dvVy5b5mt4peQJjbJOEDTSixMlLk9MwHvdmK1e+Fdm7sxcu3aNsckjTVq/fj1e4bqUhSVZES7LdRK81/DIx75WWBvaXGFHeodebAkMGNnt8LC/EWah1cSAyzK9t7i4ifHxn5/7wK9+a2bm5L+fwAFikOLy5CpbIndU0DB0z4hvGQbTPXnyAcJZJwiWmXs5fN+P+oNb/W/9i34Wiqemhi4AhIHtO//6tswqyGXAZXmD6MDAu++8M+dC3o+JfYd+pOeWp4KjoScALBA+PXs7zheSGr0I65X73Iagp5eKXLmnvvSHyx0c/8z794WgMG+KzSm1RKPDH3/sqfXA4ProqPrgRXlOajJ5CnlYJBL1OMIwXTRVP1eHCN/78sus51fksi0p/WlPVLwFLGBk6DyvTZcQX33u3AdCLGkzj3MpX8LBY2dnJ3qF94DFNoiwN0lmIJYgzDWbW7Y8n/Vb2Z/nWFVVxTmoe/fu6+5+AxDwoZJyexj6r6vBvydK7q5So6OwewmFfJ4tZ3zI/CIvFFTnNlu9BXf37l2gina+ffzY7KYe902Ck728gHDmpDo0mH63tk59mGsycQpvs04+zUmvkZGRxsZGMOzCJ79Ip9P797/KDuOEFnm6rKLdjq0KV3ECdNHS9onxz7QJq+PCKhoAXtm2pqYdL7fu/nHfob6+Q+3t7aW6EWQ2pB8ZiUQiX/3qyp/89N/Onx9COwVh/ROvtTUKj4NlnABdNKO9euXKaGoUCAur+PRaMEnmdW3TrBe2YWK9OZ9Gy3meJ3/2H6u1xzADguPHjyEb4/ObETrBXz3PlNlZ9qtWrqpctszBuSWcdA9VpzS19Tk7db6fvmhtA7FebNrBiAN6jY5eLMncVCtChGHAfCsk4+PW1TlRk2nhmTI7y74q/PjKlSsXP/KIgwhz0j0QvnIV/67oc3ZhFUkvxOJfd+1q+c7WrR0dHbmuXGFentEmEKv0qq2tw394svfig3ziMH5pW6wBP4sDTlZE+/RJH+FQQ234/mQe4mKmp7asAAdTKqWmZu7MGAaAojBTQzSD4w/kMdpTS+fsCDKZTvtohx/Ae/hwPxCmGQvC/CuNOS/C+sVC5ghfUSl1R7Nc470ZOFGEAh4jI6LdRqKb9+7bh0baUsrsWdqLFi1Sn4Oa7YrkUyKZoAPj464lS2Vs1udqBQvjRV1tHZfC8qd5Zf4o/gRuyU/rJa9tlTpZnkAGhuDIx2JmIgwzBrx0YNLl6mz2UAgQAAFHEOYjVwGjmvdNT+P67Fzp1mgE/6JZv/vsM0+/+eabJnlthXl5Bj+TlV6qttU1fFAqvDpOS2lt4kibmRBaBkjQ6KWzfa8/zipyAsi0ZvVqvIWqcMuyhgzXVHP2bQ1aXrla8bNwhJ6LH9rzkWp4AvsbKAufiDA8ClAiVsrsfGNzhPUn40wijCjcNzQH4aYXd+D6eRHmnWyTEyosVv/MvbqegmAbJ1fhBYgYhgIWhfDRqtQB7L59akZik0/43Vd/8AOPk8xkJrFAQYRfnu1REkIQxhWQsdj9XcnwgHAoEtLIZA9hK44zzzJaKFBADqHUZv/T2FgeZ66GQlPjsysez72Q4HLyqi3Dmw/CdpMnE2HUNl/MXWGu/PsnTjiIZtYkwyVJa4bh6807PY6wFSlbqEAzC/T4HlpIP1K60oO/hFsPF04v7s6gBOImvby5Ts5i7jUvevl6Bzm7u9B4NrX3rNyyYBj5g2PafnbvEfF+4sWtX/0aHMdSeTdpKjNP7SWJ8Z34q2S/UGUhp/beD45MP3zqwJDaIzufF71YuA+s0FV6+TS7n29q7+vsHlbBabdBdu8St5wJjpNBau+msHDvx7xesbDhdFle5f2Y2j+cJfsgtS9eXq94vmQv6YcfC/dWSvb56RUU7otALz+m9lbyeiXvjAmXUvv1T/6B4ZPW1t0vt+52MK/30RN73Evt34vH4Rr37t3n+JVvWTMJS/vaI5VxfO7etliD/mmGXCrzsOX1ila45waRDg+ctbmHfX2HZFqz46n9d7ZunS+9DDPuHZQ1q1c7OPcoc7T7kOf1HnlGxIJN7f0SHF0q3B8+3I//LrkuxVrJ3hK9XCrcw7yQgeF/e/sr/r2t6xS9fJfdO5Pau5TdI9mkYamLCPoO7Xqp5Sc/fdfB+OuLWfbFye5d4paTwdHxwv2LTTu4PGFbLHb4rX51FXni1MOZ2is+LNxbLNlbopfbhXs6LQejQ1Cy946UPrU/ry1Wc3ANgo9K9pJ++Ktwb7Fkbyn3crxw//bxY6mxsWgkGlqqbqPQ3f06uGVrMdbCy+5/8emnbhgtUzoeO1gGspjXlya1R1KfSCYwYFS0VXvq5gWOlpX9VbJ3KbVn3Ys7GvH48OF+py5+y3ImY/VptA4W7rlXh6u95a/Ey43CvasIWyzZW03tFV/NuA9K9t6RimL+WHf3G+YjcLUeNu8cH5Zg0ba8k3vRJcxf97wIO+LVkNr/1e7djtHLZKscW1JTXWO+f4ts6PqwpfaKQ6WZvAh7LrV3MLs3bO/mVqXDbyV7B7P7IiBsywysBkc3Ztxz2ypuBOcsLr7LvQrYKsc6trm21yv4yoq1kr1isazqeOEeare3v/LCd/8sHo8PnR9KJB27IxSU7BWtsijYdne/vuX550q11L6iJL/KraZz7fs4z7xe8VXJXtIPBwv38FiyayksGfTq6zt04MDfOeO9LJfsrdLL2cI9vGsykYD+XtuMqrT0crBwrw+y3OfRweBjPa8vdmpP4U7DsDD4cMcTLz+W7B1M7XP5m0h0s1NXu2UntbdxS9up+M0NV1/47vZEMoFjBEokCg7OmPBj4uXeVjk/7jsEbFudWyZjZWMce97L8Rn3TA5kI3HQC8mBI3ceg5K9Xt6Lx7Ws67VS7aJdmgk56tbss0NlZGC1dXVO2a6PZtlnph/OOjBwC5Eh82kS8w+1VmbZ26OXgzPuwSc0sThph7/o5WCG4BK37Kb2Zbb0d0RisRiaiLxeYjn+x7Y1OJXa+2VjHPeye2Db3f16T8+bbnDL1vk26l5OFe7hvZBpdne/EY/H+XC8bbEGB4Hwae7lYOEeYyYWrvUf5np+j928XrFcsrdBL2f3uH+5dbc87daRWRL6sW2Q2gPSTDdTkiqjVXodOXJk+YoVDv4wn0rkrDIsHsIp+i67v3HjxsjIyKKyMqewdamdTJoHBwcbGiwlM2UWuTUxMeGXrXJ6enp852+6urrAMO8vpmUL0VonU/sLFy48umSJ9zsJBrA2HKYn8Be92GDvj6BZsrcOb5lF5Zc8ukTx/B73cr8CDPOdA3viid/3/mJatBDttH6+1WB/+4vbWjVl0LOaa0u9E9euXfNpPn7x4qcawnHPthDOBfGB7XSSXhg2fnFbpVdf3yHPWlh39xtI7dlO/w4eu7tf9ybCaqWj7RW737JEr/r6ejne9VKL1ywMmu/f/zfiWcPhsO9GjrKTHnQBwlz46im/hVYJ7y0OGxXzZ2nrJRKJnD59+sHbaHTv3u974XHDCIj0W/LJwMCAdf29U5jYuHEjhufyyYtNO1pbd4fcX5eRV94+fqxPm3YhnwwPD1s0YKv0gv5gGHJ8KCy/tC3W0NTUVKpZgXCix48fo0mxG7RSdfvBgwf9GBaBLRAGzoIwDjSEd5TEjJnLglhiumxYf3+/ybPZC6QXGdbY2AgfVltXhyG0uEr12emxWCS6uTgoQOdEEv9OCcu5LytQALFAL8W3Aoa1tLRcunQJGkE76VcAXrSn0+N3kb8DX0k2ON91LJUqLy8Ht2xFBhv0ovT09HR1dd29e5f7v8mz6dnNgKCutk4tyDvq0pCLQOeUNotaPsTP4YfSk2lOcAO3fDpP1WDDvb29nZ2dfJS6MvdB95y8pCFc4yDV+Ph3/NCQhrP+50JLQ3QlYBUQtjuzwTa9BALwTI2Ys7dgx1JjhgndAALEr6muEaTyPoldnjROJaErH3lvuCwuiA/5JxCro6PD+k1WXwiSMNjw4OCgIBwKLQUmWaFYA6LNIpz3pjURJmNuaazSOwhJrPFzOIlL2UCstra2whAuhF4iR44cicfjQEFUlQmombQoWEBKYCcLuIkyzAhqNzc3LwCPZWLGwBaWzCo5e53RKistChb2nWRXTDyAMHIsIDyfuVjzopeggIQMPBvRRMIW/oFjsC2+0lbML0Vvp2j196WhEKvweig3aYJUbwGzKhfPzpw5A5w5uqTJASsBiq95Eaa30yPMJI/horKyEvDW19fDdB2Z4ecAvQxAgGEAYkITHOvvzzCWm9VX5vo8cIgKr127doMmykMvgjCx1VeL6IfyBMe5Pk8QXr9+vRv1QofplWtARJLh4ObNmyZnQkkW3Kl2QCa7CIN25mcKwsXJVotBr0AeWikLIAgkoFcgAb0CCSSgVyABvQIJ6BVIIAG9AgnoFUhAr0ACCegVSECvQAJ6OS1dXV2Gm/xuyMTExGlN/Liedj5yRBMPNeheNsl8QFdDQ8Pw8PC9eQsuhYsX8EV8K5lM5j0N5xhmleDtwMDAPS8JGmmA16lGcj5cAV/s1yRv3+mFE9CnpqZMvmLmvZKzAs3hD7iOpVRmAHrlnW0Cw0Ujw+GwWAJaXllZ2dvb60FPg74RhNFmLpMpVWOOapL3tJ07dwol0GbEIgCuXz9nELMNmPRTgtBJXIhma54Q8QprYvErsgGJ3QlJ+OKePXvgZaG53ulCvLmjCTyW6IiDRYsWwX5sac1pXugaW9MA2SmFzahDP0oLAWxHR0ejJrBn28FR/wn7bHx8PNcJBrdMt6FnamZwhF+lknQ2eKtfQKd3QpmeLLPNXN4oLfSyMDjqYz10xycSnjJPMABuWMgKrKi4oReIp1wWF5FOwYF8buB0rvCaFXk2NVdgLTOnOQVBp6WlBZew6ITwFTAa7GZg1rsTvbOhX5VsCT8xODhITAEWfkvCMXUQz9zc3Jx5QZi+LTdZcoHvIbzQGpru1MSin8b5YkugGgiRGaGAJzpOVr329PSAHPA3Ysk4gZ6Ma/gghNfWOmT8NDDPmbdYTO3Zu5LHmXsvLgQwsQCD3yJGBnsFdnqzyDsmKDir9UJqz34SNMy9l4mfFhAMfgsCtA0Aci2QdfRydYHJdyvMB5V6h4TMBkaTM8rqBOZoslo6029JQnBGE/3Jly9fXqhFBKgvUQloCLx5HTB39zQ5zeC3JEvj8klDBcdVHW1s3cs8Dg21kkiapI3cnLJSE/mQSzwMQyeuEbKedXLFpR8FjQcbli1bZm6ZVuAVDPXnyFIaPZ+cWhqEy+YK6zY2HmdzrdQmcKbJaVAJ7p0jDlgwL/vYY48p2uY2BS8Qqq+vh8kCXJ+u2Kbi5iup5EwTr4O/Akb4QvgwIRAvDgfh+N5BwBx9nTUbtle17+3tNYyB9Urq+QQd+Ku5/goGgFj6WhrVzixQ5bpI1tQQaAJWw2l4661CtqlT12+llgveWCzGYUFWoFjvYC2NtSR+iLfzgTdXFgTAgXxOL2iS2nfqhN+XVJF5NzgBNfAh/yr5HRIIEhFmhBM4Hs5MD+U0jhgYFGR4yA0zJL3FxWmX/GvWZvOC+JZULHFNlmo8mNpDU4GX1iWJNvNuAqjfrsxQ0AHyxF+A0mfZhvETx+/4KzHEt3AsfcEeJ2657h/w62wwgGWn69uc5Su5bhFsmiu4nGGoInUKotCuib6nBRScJmrgUvrhDH9IvihM5bfwuYxVOfzmn0xuX6CRdGNiyvhprxXDqIteaFSGcwgF0SNQ+joZvsKQh1cZ1Gf2Ar4lFSL8hHQKvyVjVX3RMRdjDG1Gq/LeJwyW0QbiogQTcgIJ6BVIQK9AAgnoFUjx5P8FGADog0AVV0cyDQAAAABJRU5ErkJggg==" id="TextBox_sp_3_4" alt="The image on the left is labeled Bucket C and reads 5 over 6. The image on the right is labeled Bucket D and reads 1 over 2."></p>
+<p style="text-align: center;">&nbsp;</p>
+<p><span id="TextBox_sp_3_5" class="text-anchor">Which bucket, Bucket C or Bucket D, was filled with more rainwater?&nbsp;</span><span id="TextBox_sp_3_6" class="text-anchor">Explain how you got your answer.</span></p>
+<p>&nbsp;</p>
+<p id="TextBox_sp_3_7">Enter your answer and your explanation in the space provided.</p>
+</div></div><textarea style="display: none; overflow: visible; max-height: none; height: auto;" name="text-editor-1772473744563-xw6jbrtir"></textarea><div class="text-editor-container OpenEndedResponse-editor" style="width: 953px; position: absolute; top: 1092px; left: 9px; z-index: 5;">
+          <div class="text-editor-toolbar"><button data-command="undo" title="Undo (Ctrl+Z)" type="button" aria-label="Undo" disabled="" class="disabled">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="transform: scaleX(-1);" aria-hidden="true">
+        <path d="M371.8 82.4C359.8 87.4 352 99 352 112L352 192L240 192C142.8 192 64 270.8 64 368C64 481.3 145.5 531.9 164.2 542.1C166.7 543.5 169.5 544 172.3 544C183.2 544 192 535.1 192 524.3C192 516.8 187.7 509.9 182.2 504.8C172.8 496 160 478.4 160 448.1C160 395.1 203 352.1 256 352.1L352 352.1L352 432.1C352 445 359.8 456.7 371.8 461.7C383.8 466.7 397.5 463.9 406.7 454.8L566.7 294.8C579.2 282.3 579.2 262 566.7 249.5L406.7 89.5C397.5 80.3 383.8 77.6 371.8 82.6z"></path>
+      </svg>
+    </button><button data-command="redo" title="Redo (Ctrl+Y)" type="button" aria-label="Redo" disabled="" class="disabled">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M371.8 82.4C359.8 87.4 352 99 352 112L352 192L240 192C142.8 192 64 270.8 64 368C64 481.3 145.5 531.9 164.2 542.1C166.7 543.5 169.5 544 172.3 544C183.2 544 192 535.1 192 524.3C192 516.8 187.7 509.9 182.2 504.8C172.8 496 160 478.4 160 448.1C160 395.1 203 352.1 256 352.1L352 352.1L352 432.1C352 445 359.8 456.7 371.8 461.7C383.8 466.7 397.5 463.9 406.7 454.8L566.7 294.8C579.2 282.3 579.2 262 566.7 249.5L406.7 89.5C397.5 80.3 383.8 77.6 371.8 82.6z"></path>
+      </svg>
+    </button><button data-command="bold" title="Bold (Ctrl+B)" type="button" aria-label="Bold">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M160 96C142.3 96 128 110.3 128 128C128 145.7 142.3 160 160 160L192 160L192 480L160 480C142.3 480 128 494.3 128 512C128 529.7 142.3 544 160 544L384 544C454.7 544 512 486.7 512 416C512 369.5 487.2 328.7 450 306.3C468.7 284 480 255.3 480 224C480 153.3 422.7 96 352 96L160 96zM416 224C416 259.3 387.3 288 352 288L256 288L256 160L352 160C387.3 160 416 188.7 416 224zM256 480L256 352L384 352C419.3 352 448 380.7 448 416C448 451.3 419.3 480 384 480L256 480z"></path>
+      </svg>
+    </button><button data-command="italic" title="Italic (Ctrl+I)" type="button" aria-label="Italic">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M256 128C256 110.3 270.3 96 288 96L480 96C497.7 96 512 110.3 512 128C512 145.7 497.7 160 480 160L421.3 160L288 480L352 480C369.7 480 384 494.3 384 512C384 529.7 369.7 544 352 544L160 544C142.3 544 128 529.7 128 512C128 494.3 142.3 480 160 480L218.7 480L352 160L288 160C270.3 160 256 145.7 256 128z"></path>
+      </svg>
+    </button><button data-command="underline" title="Underline (Ctrl+U)" type="button" aria-label="Underline">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M128 96C128 78.3 142.3 64 160 64L224 64C241.7 64 256 78.3 256 96C256 113.7 241.7 128 224 128L224 288C224 341 267 384 320 384C373 384 416 341 416 288L416 128C398.3 128 384 113.7 384 96C384 78.3 398.3 64 416 64L480 64C497.7 64 512 78.3 512 96C512 113.7 497.7 128 480 128L480 288C480 376.4 408.4 448 320 448C231.6 448 160 376.4 160 288L160 128C142.3 128 128 113.7 128 96zM128 544C128 526.3 142.3 512 160 512L480 512C497.7 512 512 526.3 512 544C512 561.7 497.7 576 480 576L160 576C142.3 576 128 561.7 128 544z"></path>
+      </svg>
+    </button><button data-command="insertUnorderedList" title="Bullet List" type="button" aria-label="Bullet list">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M112 208C138.5 208 160 186.5 160 160C160 133.5 138.5 112 112 112C85.5 112 64 133.5 64 160C64 186.5 85.5 208 112 208zM256 128C238.3 128 224 142.3 224 160C224 177.7 238.3 192 256 192L544 192C561.7 192 576 177.7 576 160C576 142.3 561.7 128 544 128L256 128zM256 288C238.3 288 224 302.3 224 320C224 337.7 238.3 352 256 352L544 352C561.7 352 576 337.7 576 320C576 302.3 561.7 288 544 288L256 288zM256 448C238.3 448 224 462.3 224 480C224 497.7 238.3 512 256 512L544 512C561.7 512 576 497.7 576 480C576 462.3 561.7 448 544 448L256 448zM112 528C138.5 528 160 506.5 160 480C160 453.5 138.5 432 112 432C85.5 432 64 453.5 64 480C64 506.5 85.5 528 112 528zM160 320C160 293.5 138.5 272 112 272C85.5 272 64 293.5 64 320C64 346.5 85.5 368 112 368C138.5 368 160 346.5 160 320z"></path>
+      </svg>
+    </button><button data-command="insertOrderedList" title="Numbered List" type="button" aria-label="Numbered list">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M64 136C64 122.8 74.7 112 88 112L136 112C149.3 112 160 122.7 160 136L160 240L184 240C197.3 240 208 250.7 208 264C208 277.3 197.3 288 184 288L88 288C74.7 288 64 277.3 64 264C64 250.7 74.7 240 88 240L112 240L112 160L88 160C74.7 160 64 149.3 64 136zM94.4 365.2C105.8 356.6 119.7 352 134 352L138.9 352C172.6 352 200 379.4 200 413.1C200 432.7 190.6 451 174.8 462.5L150.8 480L184 480C197.3 480 208 490.7 208 504C208 517.3 197.3 528 184 528L93.3 528C77.1 528 64 514.9 64 498.7C64 489.3 68.5 480.5 76.1 475L146.6 423.7C150 421.2 152 417.3 152 413.1C152 405.9 146.1 400 138.9 400L134 400C130.1 400 126.3 401.3 123.2 403.6L102.4 419.2C91.8 427.2 76.8 425 68.8 414.4C60.8 403.8 63 388.8 73.6 380.8L94.4 365.2zM288 128L544 128C561.7 128 576 142.3 576 160C576 177.7 561.7 192 544 192L288 192C270.3 192 256 177.7 256 160C256 142.3 270.3 128 288 128zM288 288L544 288C561.7 288 576 302.3 576 320C576 337.7 561.7 352 544 352L288 352C270.3 352 256 337.7 256 320C256 302.3 270.3 288 288 288zM288 448L544 448C561.7 448 576 462.3 576 480C576 497.7 561.7 512 544 512L288 512C270.3 512 256 497.7 256 480C256 462.3 270.3 448 288 448z"></path>
+      </svg>
+    </button><button data-command="indent" title="Increase Indent" type="button" aria-label="Increase indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96 128C96 110.3 110.3 96 128 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L128 160C110.3 160 96 145.7 96 128zM288 256C288 238.3 302.3 224 320 224L512 224C529.7 224 544 238.3 544 256C544 273.7 529.7 288 512 288L320 288C302.3 288 288 273.7 288 256zM320 352L512 352C529.7 352 544 366.3 544 384C544 401.7 529.7 416 512 416L320 416C302.3 416 288 401.7 288 384C288 366.3 302.3 352 320 352zM96 512C96 494.3 110.3 480 128 480L512 480C529.7 480 544 494.3 544 512C544 529.7 529.7 544 512 544L128 544C110.3 544 96 529.7 96 512zM223.8 332.6L121.8 411.9C111.3 420.1 96 412.6 96 399.3L96 240.7C96 227.4 111.3 219.9 121.8 228.1L223.7 307.4C231.9 313.8 231.9 326.3 223.7 332.7z"></path>
+      </svg>
+    </button><button data-command="outdent" title="Decrease Indent" type="button" aria-label="Decrease indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96.4 128C96.4 110.3 110.7 96 128.4 96L512.4 96C530.1 96 544.4 110.3 544.4 128C544.4 145.7 530.1 160 512.4 160L128.4 160C110.8 160 96.4 145.7 96.4 128zM288.4 256C288.4 238.3 302.7 224 320.4 224L512.4 224C530.1 224 544.4 238.3 544.4 256C544.4 273.7 530.1 288 512.4 288L320.4 288C302.7 288 288.4 273.7 288.4 256zM320.4 352L512.4 352C530.1 352 544.4 366.3 544.4 384C544.4 401.7 530.1 416 512.4 416L320.4 416C302.7 416 288.4 401.7 288.4 384C288.4 366.3 302.7 352 320.4 352zM96.4 512C96.4 494.3 110.7 480 128.4 480L512.4 480C530.1 480 544.4 494.3 544.4 512C544.4 529.7 530.1 544 512.4 544L128.4 544C110.7 544 96.4 529.7 96.4 512zM96.7 332.6C88.5 326.2 88.5 313.7 96.7 307.3L198.6 228C209.1 219.8 224.4 227.3 224.4 240.6L224.4 399.2C224.4 412.5 209.1 420 198.6 411.8L96.7 332.6z"></path>
+      </svg>
+    </button><button data-command="insertHTML" data-html=" " title="Line Indent" type="button" aria-label="Line indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96 96 L184 128 L96 160 Z" fill="currentColor"></path>
+        <path d="M224 128C224 110.3 238.3 96 256 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L256 160C238.3 160 224 145.7 224 128z"></path>
+        <path d="M96 256C96 238.3 110.3 224 128 224L512 224C529.7 224 544 238.3 544 256C544 273.7 529.7 288 512 288L128 288C110.3 288 96 273.7 96 256zM128 352L512 352C529.7 352 544 366.3 544 384C544 401.7 529.7 416 512 416L128 416C110.3 416 96 401.7 96 384C96 366.3 110.3 352 128 352zM96 512C96 494.3 110.3 480 128 480L512 480C529.7 480 544 494.3 544 512C544 529.7 529.7 544 512 544L128 544C110.3 544 96 529.7 96 512z"></path>
+      </svg>
+    </button><button data-command="mathquill" title="Insert Math Equation" type="button" aria-label="Insert math equation" style="font-weight: 600; font-size: 11px;">
+      MATH
+    </button></div>
+          <div class="text-editor-content" contenteditable="true" data-placeholder="" role="textbox" aria-multiline="true" aria-label="Rich text editor" style="height: auto; max-height: none; overflow: visible;"></div>
+          <div class="text-editor-counter-bar" style="display: none;"></div>
+        </div><div widget="TextBox" id="TextBox_sp_5" class="TextBox" style="left: 0px; top: 1283px; width: 956px; height: auto; overflow: visible; max-height: none;"><div class="abbi-richtext">
+<h3 id="TextBox_sp_5_1" class="semantic-marker part-label">Part C</h3>
+</div>
+<div class="abbi-richtext">
+<p id="TextBox_sp_5_2">This diagram shows all of the friends’ buckets and the fraction of each bucket that was filled with rainwater.</p>
+<p>&nbsp;</p>
+<p style="text-align: center;"><img data-media-guid="cd8a5bb2-fd67-4c83-9af8-1767b25f8b39" src="data:image/png;base64,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" id="TextBox_sp_5_3" alt="Image one is labeled Bucket A and reads 7 over 8. Image two is labeled Bucket B and reads 5 over 6. Image three is labeled Bucket C and reads 5 over 6. The last image is labeled bucket D and reads 1 over 2."></p>
+<p>&nbsp;</p>
+<p><span id="TextBox_sp_5_4" class="text-anchor">One of the friends says that Bucket B and Bucket C were filled with the same amount of rainwater since&nbsp;</span><span contenteditable="false" style=""><mjx-container class="MathJax force-aria-label" jax="CHTML" id="TextBox_sp_5_5" aria-label="5 over 6" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mfrac><mjx-frac><mjx-num><mjx-nstrut></mjx-nstrut><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-num><mjx-dbox><mjx-dtable><mjx-line></mjx-line><mjx-row><mjx-den><mjx-dstrut></mjx-dstrut><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c36"></mjx-c></mjx-mn></mjx-den></mjx-row></mjx-dtable></mjx-dbox></mjx-frac></mjx-mfrac></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="5 over 6" aria-hidden="true"><mfrac><mn>5</mn><mn>6</mn></mfrac></math></mjx-assistive-mml></mjx-container></span><span id="TextBox_sp_5_6" class="text-anchor">&nbsp;of each bucket was filled with rainwater.</span></p>
+<p>&nbsp;</p>
+<p><span id="TextBox_sp_5_7" class="text-anchor">Is the friend correct?&nbsp;</span><span id="TextBox_sp_5_8" class="text-anchor">Explain your reasoning.</span></p>
+<p>&nbsp;</p>
+<p id="TextBox_sp_5_9">Enter your answer and your explanation in the space provided.</p>
+</div></div><textarea style="display: none; overflow: visible; max-height: none; height: auto;" name="text-editor-1772473744563-i8q97ou58"></textarea><div class="text-editor-container OpenEndedResponse-editor" style="width: 953px; position: absolute; top: 1761px; left: 8px; z-index: 5;">
+          <div class="text-editor-toolbar"><button data-command="undo" title="Undo (Ctrl+Z)" type="button" aria-label="Undo" disabled="" class="disabled">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="transform: scaleX(-1);" aria-hidden="true">
+        <path d="M371.8 82.4C359.8 87.4 352 99 352 112L352 192L240 192C142.8 192 64 270.8 64 368C64 481.3 145.5 531.9 164.2 542.1C166.7 543.5 169.5 544 172.3 544C183.2 544 192 535.1 192 524.3C192 516.8 187.7 509.9 182.2 504.8C172.8 496 160 478.4 160 448.1C160 395.1 203 352.1 256 352.1L352 352.1L352 432.1C352 445 359.8 456.7 371.8 461.7C383.8 466.7 397.5 463.9 406.7 454.8L566.7 294.8C579.2 282.3 579.2 262 566.7 249.5L406.7 89.5C397.5 80.3 383.8 77.6 371.8 82.6z"></path>
+      </svg>
+    </button><button data-command="redo" title="Redo (Ctrl+Y)" type="button" aria-label="Redo" disabled="" class="disabled">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M371.8 82.4C359.8 87.4 352 99 352 112L352 192L240 192C142.8 192 64 270.8 64 368C64 481.3 145.5 531.9 164.2 542.1C166.7 543.5 169.5 544 172.3 544C183.2 544 192 535.1 192 524.3C192 516.8 187.7 509.9 182.2 504.8C172.8 496 160 478.4 160 448.1C160 395.1 203 352.1 256 352.1L352 352.1L352 432.1C352 445 359.8 456.7 371.8 461.7C383.8 466.7 397.5 463.9 406.7 454.8L566.7 294.8C579.2 282.3 579.2 262 566.7 249.5L406.7 89.5C397.5 80.3 383.8 77.6 371.8 82.6z"></path>
+      </svg>
+    </button><button data-command="bold" title="Bold (Ctrl+B)" type="button" aria-label="Bold">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M160 96C142.3 96 128 110.3 128 128C128 145.7 142.3 160 160 160L192 160L192 480L160 480C142.3 480 128 494.3 128 512C128 529.7 142.3 544 160 544L384 544C454.7 544 512 486.7 512 416C512 369.5 487.2 328.7 450 306.3C468.7 284 480 255.3 480 224C480 153.3 422.7 96 352 96L160 96zM416 224C416 259.3 387.3 288 352 288L256 288L256 160L352 160C387.3 160 416 188.7 416 224zM256 480L256 352L384 352C419.3 352 448 380.7 448 416C448 451.3 419.3 480 384 480L256 480z"></path>
+      </svg>
+    </button><button data-command="italic" title="Italic (Ctrl+I)" type="button" aria-label="Italic">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M256 128C256 110.3 270.3 96 288 96L480 96C497.7 96 512 110.3 512 128C512 145.7 497.7 160 480 160L421.3 160L288 480L352 480C369.7 480 384 494.3 384 512C384 529.7 369.7 544 352 544L160 544C142.3 544 128 529.7 128 512C128 494.3 142.3 480 160 480L218.7 480L352 160L288 160C270.3 160 256 145.7 256 128z"></path>
+      </svg>
+    </button><button data-command="underline" title="Underline (Ctrl+U)" type="button" aria-label="Underline">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M128 96C128 78.3 142.3 64 160 64L224 64C241.7 64 256 78.3 256 96C256 113.7 241.7 128 224 128L224 288C224 341 267 384 320 384C373 384 416 341 416 288L416 128C398.3 128 384 113.7 384 96C384 78.3 398.3 64 416 64L480 64C497.7 64 512 78.3 512 96C512 113.7 497.7 128 480 128L480 288C480 376.4 408.4 448 320 448C231.6 448 160 376.4 160 288L160 128C142.3 128 128 113.7 128 96zM128 544C128 526.3 142.3 512 160 512L480 512C497.7 512 512 526.3 512 544C512 561.7 497.7 576 480 576L160 576C142.3 576 128 561.7 128 544z"></path>
+      </svg>
+    </button><button data-command="insertUnorderedList" title="Bullet List" type="button" aria-label="Bullet list">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M112 208C138.5 208 160 186.5 160 160C160 133.5 138.5 112 112 112C85.5 112 64 133.5 64 160C64 186.5 85.5 208 112 208zM256 128C238.3 128 224 142.3 224 160C224 177.7 238.3 192 256 192L544 192C561.7 192 576 177.7 576 160C576 142.3 561.7 128 544 128L256 128zM256 288C238.3 288 224 302.3 224 320C224 337.7 238.3 352 256 352L544 352C561.7 352 576 337.7 576 320C576 302.3 561.7 288 544 288L256 288zM256 448C238.3 448 224 462.3 224 480C224 497.7 238.3 512 256 512L544 512C561.7 512 576 497.7 576 480C576 462.3 561.7 448 544 448L256 448zM112 528C138.5 528 160 506.5 160 480C160 453.5 138.5 432 112 432C85.5 432 64 453.5 64 480C64 506.5 85.5 528 112 528zM160 320C160 293.5 138.5 272 112 272C85.5 272 64 293.5 64 320C64 346.5 85.5 368 112 368C138.5 368 160 346.5 160 320z"></path>
+      </svg>
+    </button><button data-command="insertOrderedList" title="Numbered List" type="button" aria-label="Numbered list">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M64 136C64 122.8 74.7 112 88 112L136 112C149.3 112 160 122.7 160 136L160 240L184 240C197.3 240 208 250.7 208 264C208 277.3 197.3 288 184 288L88 288C74.7 288 64 277.3 64 264C64 250.7 74.7 240 88 240L112 240L112 160L88 160C74.7 160 64 149.3 64 136zM94.4 365.2C105.8 356.6 119.7 352 134 352L138.9 352C172.6 352 200 379.4 200 413.1C200 432.7 190.6 451 174.8 462.5L150.8 480L184 480C197.3 480 208 490.7 208 504C208 517.3 197.3 528 184 528L93.3 528C77.1 528 64 514.9 64 498.7C64 489.3 68.5 480.5 76.1 475L146.6 423.7C150 421.2 152 417.3 152 413.1C152 405.9 146.1 400 138.9 400L134 400C130.1 400 126.3 401.3 123.2 403.6L102.4 419.2C91.8 427.2 76.8 425 68.8 414.4C60.8 403.8 63 388.8 73.6 380.8L94.4 365.2zM288 128L544 128C561.7 128 576 142.3 576 160C576 177.7 561.7 192 544 192L288 192C270.3 192 256 177.7 256 160C256 142.3 270.3 128 288 128zM288 288L544 288C561.7 288 576 302.3 576 320C576 337.7 561.7 352 544 352L288 352C270.3 352 256 337.7 256 320C256 302.3 270.3 288 288 288zM288 448L544 448C561.7 448 576 462.3 576 480C576 497.7 561.7 512 544 512L288 512C270.3 512 256 497.7 256 480C256 462.3 270.3 448 288 448z"></path>
+      </svg>
+    </button><button data-command="indent" title="Increase Indent" type="button" aria-label="Increase indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96 128C96 110.3 110.3 96 128 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L128 160C110.3 160 96 145.7 96 128zM288 256C288 238.3 302.3 224 320 224L512 224C529.7 224 544 238.3 544 256C544 273.7 529.7 288 512 288L320 288C302.3 288 288 273.7 288 256zM320 352L512 352C529.7 352 544 366.3 544 384C544 401.7 529.7 416 512 416L320 416C302.3 416 288 401.7 288 384C288 366.3 302.3 352 320 352zM96 512C96 494.3 110.3 480 128 480L512 480C529.7 480 544 494.3 544 512C544 529.7 529.7 544 512 544L128 544C110.3 544 96 529.7 96 512zM223.8 332.6L121.8 411.9C111.3 420.1 96 412.6 96 399.3L96 240.7C96 227.4 111.3 219.9 121.8 228.1L223.7 307.4C231.9 313.8 231.9 326.3 223.7 332.7z"></path>
+      </svg>
+    </button><button data-command="outdent" title="Decrease Indent" type="button" aria-label="Decrease indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96.4 128C96.4 110.3 110.7 96 128.4 96L512.4 96C530.1 96 544.4 110.3 544.4 128C544.4 145.7 530.1 160 512.4 160L128.4 160C110.8 160 96.4 145.7 96.4 128zM288.4 256C288.4 238.3 302.7 224 320.4 224L512.4 224C530.1 224 544.4 238.3 544.4 256C544.4 273.7 530.1 288 512.4 288L320.4 288C302.7 288 288.4 273.7 288.4 256zM320.4 352L512.4 352C530.1 352 544.4 366.3 544.4 384C544.4 401.7 530.1 416 512.4 416L320.4 416C302.7 416 288.4 401.7 288.4 384C288.4 366.3 302.7 352 320.4 352zM96.4 512C96.4 494.3 110.7 480 128.4 480L512.4 480C530.1 480 544.4 494.3 544.4 512C544.4 529.7 530.1 544 512.4 544L128.4 544C110.7 544 96.4 529.7 96.4 512zM96.7 332.6C88.5 326.2 88.5 313.7 96.7 307.3L198.6 228C209.1 219.8 224.4 227.3 224.4 240.6L224.4 399.2C224.4 412.5 209.1 420 198.6 411.8L96.7 332.6z"></path>
+      </svg>
+    </button><button data-command="insertHTML" data-html=" " title="Line Indent" type="button" aria-label="Line indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96 96 L184 128 L96 160 Z" fill="currentColor"></path>
+        <path d="M224 128C224 110.3 238.3 96 256 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L256 160C238.3 160 224 145.7 224 128z"></path>
+        <path d="M96 256C96 238.3 110.3 224 128 224L512 224C529.7 224 544 238.3 544 256C544 273.7 529.7 288 512 288L128 288C110.3 288 96 273.7 96 256zM128 352L512 352C529.7 352 544 366.3 544 384C544 401.7 529.7 416 512 416L128 416C110.3 416 96 401.7 96 384C96 366.3 110.3 352 128 352zM96 512C96 494.3 110.3 480 128 480L512 480C529.7 480 544 494.3 544 512C544 529.7 529.7 544 512 544L128 544C110.3 544 96 529.7 96 512z"></path>
+      </svg>
+    </button><button data-command="mathquill" title="Insert Math Equation" type="button" aria-label="Insert math equation" style="font-weight: 600; font-size: 11px;">
+      MATH
+    </button></div>
+          <div class="text-editor-content" contenteditable="true" data-placeholder="" role="textbox" aria-multiline="true" aria-label="Rich text editor" style="height: auto; max-height: none; overflow: visible;"></div>
+          <div class="text-editor-counter-bar" style="display: none;"></div>
+        </div><div widget="TextBox" id="TextBox_sp_7" class="TextBox" style="left: 0px; top: 1950px; width: 956px; height: auto; overflow: visible; max-height: none;"><div class="abbi-richtext">
+<h3 id="TextBox_sp_7_1" class="semantic-marker part-label">Part D</h3>
+</div>
+<div class="abbi-richtext">
+<p><span id="TextBox_sp_7_2" class="text-anchor">A weatherman in another town says that his town received </span><span class="ssml-emphasis:moderate"><strong><span id="TextBox_sp_7_3" class="text-anchor">less than&nbsp;</span><span contenteditable="false" style=""><span contenteditable="false" style=""><mjx-container class="MathJax force-aria-label" jax="CHTML" id="TextBox_sp_7_4" aria-label="1 over 2" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mfrac><mjx-frac><mjx-num><mjx-nstrut></mjx-nstrut><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-num><mjx-dbox><mjx-dtable><mjx-line></mjx-line><mjx-row><mjx-den><mjx-dstrut></mjx-dstrut><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-den></mjx-row></mjx-dtable></mjx-dbox></mjx-frac></mjx-mfrac></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="1 over 2" aria-hidden="true"><mfrac><mn>1</mn><mn>2</mn></mfrac></math></mjx-assistive-mml></mjx-container></span></span><span id="TextBox_sp_7_6" class="text-anchor"> </span></strong></span><span id="TextBox_sp_7_7" class="text-anchor">inch of rainwater.</span></p>
+<p>&nbsp;</p>
+<p><span id="TextBox_sp_7_8" class="text-anchor">Write a fraction that represents the amount of rainwater, in inches, this town could have received. </span><span id="TextBox_sp_7_9" class="text-anchor">Explain how you know your answer is correct.</span></p>
+<p>&nbsp;</p>
+<p id="TextBox_sp_7_10">Enter your answer and your explanation in the space provided.</p>
+</div></div><textarea style="display: none; overflow: visible; max-height: none; height: auto;" name="text-editor-1772473744564-wvszxojhq"></textarea><div class="text-editor-container OpenEndedResponse-editor" style="width: 953px; position: absolute; top: 2172px; left: 8px; z-index: 5;">
+          <div class="text-editor-toolbar"><button data-command="undo" title="Undo (Ctrl+Z)" type="button" aria-label="Undo" disabled="" class="disabled">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="transform: scaleX(-1);" aria-hidden="true">
+        <path d="M371.8 82.4C359.8 87.4 352 99 352 112L352 192L240 192C142.8 192 64 270.8 64 368C64 481.3 145.5 531.9 164.2 542.1C166.7 543.5 169.5 544 172.3 544C183.2 544 192 535.1 192 524.3C192 516.8 187.7 509.9 182.2 504.8C172.8 496 160 478.4 160 448.1C160 395.1 203 352.1 256 352.1L352 352.1L352 432.1C352 445 359.8 456.7 371.8 461.7C383.8 466.7 397.5 463.9 406.7 454.8L566.7 294.8C579.2 282.3 579.2 262 566.7 249.5L406.7 89.5C397.5 80.3 383.8 77.6 371.8 82.6z"></path>
+      </svg>
+    </button><button data-command="redo" title="Redo (Ctrl+Y)" type="button" aria-label="Redo" disabled="" class="disabled">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M371.8 82.4C359.8 87.4 352 99 352 112L352 192L240 192C142.8 192 64 270.8 64 368C64 481.3 145.5 531.9 164.2 542.1C166.7 543.5 169.5 544 172.3 544C183.2 544 192 535.1 192 524.3C192 516.8 187.7 509.9 182.2 504.8C172.8 496 160 478.4 160 448.1C160 395.1 203 352.1 256 352.1L352 352.1L352 432.1C352 445 359.8 456.7 371.8 461.7C383.8 466.7 397.5 463.9 406.7 454.8L566.7 294.8C579.2 282.3 579.2 262 566.7 249.5L406.7 89.5C397.5 80.3 383.8 77.6 371.8 82.6z"></path>
+      </svg>
+    </button><button data-command="bold" title="Bold (Ctrl+B)" type="button" aria-label="Bold">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M160 96C142.3 96 128 110.3 128 128C128 145.7 142.3 160 160 160L192 160L192 480L160 480C142.3 480 128 494.3 128 512C128 529.7 142.3 544 160 544L384 544C454.7 544 512 486.7 512 416C512 369.5 487.2 328.7 450 306.3C468.7 284 480 255.3 480 224C480 153.3 422.7 96 352 96L160 96zM416 224C416 259.3 387.3 288 352 288L256 288L256 160L352 160C387.3 160 416 188.7 416 224zM256 480L256 352L384 352C419.3 352 448 380.7 448 416C448 451.3 419.3 480 384 480L256 480z"></path>
+      </svg>
+    </button><button data-command="italic" title="Italic (Ctrl+I)" type="button" aria-label="Italic">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M256 128C256 110.3 270.3 96 288 96L480 96C497.7 96 512 110.3 512 128C512 145.7 497.7 160 480 160L421.3 160L288 480L352 480C369.7 480 384 494.3 384 512C384 529.7 369.7 544 352 544L160 544C142.3 544 128 529.7 128 512C128 494.3 142.3 480 160 480L218.7 480L352 160L288 160C270.3 160 256 145.7 256 128z"></path>
+      </svg>
+    </button><button data-command="underline" title="Underline (Ctrl+U)" type="button" aria-label="Underline">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M128 96C128 78.3 142.3 64 160 64L224 64C241.7 64 256 78.3 256 96C256 113.7 241.7 128 224 128L224 288C224 341 267 384 320 384C373 384 416 341 416 288L416 128C398.3 128 384 113.7 384 96C384 78.3 398.3 64 416 64L480 64C497.7 64 512 78.3 512 96C512 113.7 497.7 128 480 128L480 288C480 376.4 408.4 448 320 448C231.6 448 160 376.4 160 288L160 128C142.3 128 128 113.7 128 96zM128 544C128 526.3 142.3 512 160 512L480 512C497.7 512 512 526.3 512 544C512 561.7 497.7 576 480 576L160 576C142.3 576 128 561.7 128 544z"></path>
+      </svg>
+    </button><button data-command="insertUnorderedList" title="Bullet List" type="button" aria-label="Bullet list">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M112 208C138.5 208 160 186.5 160 160C160 133.5 138.5 112 112 112C85.5 112 64 133.5 64 160C64 186.5 85.5 208 112 208zM256 128C238.3 128 224 142.3 224 160C224 177.7 238.3 192 256 192L544 192C561.7 192 576 177.7 576 160C576 142.3 561.7 128 544 128L256 128zM256 288C238.3 288 224 302.3 224 320C224 337.7 238.3 352 256 352L544 352C561.7 352 576 337.7 576 320C576 302.3 561.7 288 544 288L256 288zM256 448C238.3 448 224 462.3 224 480C224 497.7 238.3 512 256 512L544 512C561.7 512 576 497.7 576 480C576 462.3 561.7 448 544 448L256 448zM112 528C138.5 528 160 506.5 160 480C160 453.5 138.5 432 112 432C85.5 432 64 453.5 64 480C64 506.5 85.5 528 112 528zM160 320C160 293.5 138.5 272 112 272C85.5 272 64 293.5 64 320C64 346.5 85.5 368 112 368C138.5 368 160 346.5 160 320z"></path>
+      </svg>
+    </button><button data-command="insertOrderedList" title="Numbered List" type="button" aria-label="Numbered list">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M64 136C64 122.8 74.7 112 88 112L136 112C149.3 112 160 122.7 160 136L160 240L184 240C197.3 240 208 250.7 208 264C208 277.3 197.3 288 184 288L88 288C74.7 288 64 277.3 64 264C64 250.7 74.7 240 88 240L112 240L112 160L88 160C74.7 160 64 149.3 64 136zM94.4 365.2C105.8 356.6 119.7 352 134 352L138.9 352C172.6 352 200 379.4 200 413.1C200 432.7 190.6 451 174.8 462.5L150.8 480L184 480C197.3 480 208 490.7 208 504C208 517.3 197.3 528 184 528L93.3 528C77.1 528 64 514.9 64 498.7C64 489.3 68.5 480.5 76.1 475L146.6 423.7C150 421.2 152 417.3 152 413.1C152 405.9 146.1 400 138.9 400L134 400C130.1 400 126.3 401.3 123.2 403.6L102.4 419.2C91.8 427.2 76.8 425 68.8 414.4C60.8 403.8 63 388.8 73.6 380.8L94.4 365.2zM288 128L544 128C561.7 128 576 142.3 576 160C576 177.7 561.7 192 544 192L288 192C270.3 192 256 177.7 256 160C256 142.3 270.3 128 288 128zM288 288L544 288C561.7 288 576 302.3 576 320C576 337.7 561.7 352 544 352L288 352C270.3 352 256 337.7 256 320C256 302.3 270.3 288 288 288zM288 448L544 448C561.7 448 576 462.3 576 480C576 497.7 561.7 512 544 512L288 512C270.3 512 256 497.7 256 480C256 462.3 270.3 448 288 448z"></path>
+      </svg>
+    </button><button data-command="indent" title="Increase Indent" type="button" aria-label="Increase indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96 128C96 110.3 110.3 96 128 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L128 160C110.3 160 96 145.7 96 128zM288 256C288 238.3 302.3 224 320 224L512 224C529.7 224 544 238.3 544 256C544 273.7 529.7 288 512 288L320 288C302.3 288 288 273.7 288 256zM320 352L512 352C529.7 352 544 366.3 544 384C544 401.7 529.7 416 512 416L320 416C302.3 416 288 401.7 288 384C288 366.3 302.3 352 320 352zM96 512C96 494.3 110.3 480 128 480L512 480C529.7 480 544 494.3 544 512C544 529.7 529.7 544 512 544L128 544C110.3 544 96 529.7 96 512zM223.8 332.6L121.8 411.9C111.3 420.1 96 412.6 96 399.3L96 240.7C96 227.4 111.3 219.9 121.8 228.1L223.7 307.4C231.9 313.8 231.9 326.3 223.7 332.7z"></path>
+      </svg>
+    </button><button data-command="outdent" title="Decrease Indent" type="button" aria-label="Decrease indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96.4 128C96.4 110.3 110.7 96 128.4 96L512.4 96C530.1 96 544.4 110.3 544.4 128C544.4 145.7 530.1 160 512.4 160L128.4 160C110.8 160 96.4 145.7 96.4 128zM288.4 256C288.4 238.3 302.7 224 320.4 224L512.4 224C530.1 224 544.4 238.3 544.4 256C544.4 273.7 530.1 288 512.4 288L320.4 288C302.7 288 288.4 273.7 288.4 256zM320.4 352L512.4 352C530.1 352 544.4 366.3 544.4 384C544.4 401.7 530.1 416 512.4 416L320.4 416C302.7 416 288.4 401.7 288.4 384C288.4 366.3 302.7 352 320.4 352zM96.4 512C96.4 494.3 110.7 480 128.4 480L512.4 480C530.1 480 544.4 494.3 544.4 512C544.4 529.7 530.1 544 512.4 544L128.4 544C110.7 544 96.4 529.7 96.4 512zM96.7 332.6C88.5 326.2 88.5 313.7 96.7 307.3L198.6 228C209.1 219.8 224.4 227.3 224.4 240.6L224.4 399.2C224.4 412.5 209.1 420 198.6 411.8L96.7 332.6z"></path>
+      </svg>
+    </button><button data-command="insertHTML" data-html=" " title="Line Indent" type="button" aria-label="Line indent">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+        <path d="M96 96 L184 128 L96 160 Z" fill="currentColor"></path>
+        <path d="M224 128C224 110.3 238.3 96 256 96L512 96C529.7 96 544 110.3 544 128C544 145.7 529.7 160 512 160L256 160C238.3 160 224 145.7 224 128z"></path>
+        <path d="M96 256C96 238.3 110.3 224 128 224L512 224C529.7 224 544 238.3 544 256C544 273.7 529.7 288 512 288L128 288C110.3 288 96 273.7 96 256zM128 352L512 352C529.7 352 544 366.3 544 384C544 401.7 529.7 416 512 416L128 416C110.3 416 96 401.7 96 384C96 366.3 110.3 352 128 352zM96 512C96 494.3 110.3 480 128 480L512 480C529.7 480 544 494.3 544 512C544 529.7 529.7 544 512 544L128 544C110.3 544 96 529.7 96 512z"></path>
+      </svg>
+    </button><button data-command="mathquill" title="Insert Math Equation" type="button" aria-label="Insert math equation" style="font-weight: 600; font-size: 11px;">
+      MATH
+    </button></div>
+          <div class="text-editor-content" contenteditable="true" data-placeholder="" role="textbox" aria-multiline="true" aria-label="Rich text editor" style="height: auto; max-height: none; overflow: visible;"></div>
+          <div class="text-editor-counter-bar" style="display: none;"></div>
+        </div></div></div>
+                    </div>
+
+                    <!-- References Modal -->
+                    <div id="referencesModal" class="references-modal" style="display: none;">
+                        <div class="references-modal-header">
+                            <h3>References</h3>
+                            <button id="referencesModalClose" class="dil-modal-close" aria-label="Close References">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="references-modal-tabs" id="referencesModalTabs" style="overflow: visible; max-height: none; height: auto;">
+                            <!-- Tabs will be dynamically generated -->
+                        </div>
+                        <div class="references-modal-content" id="referencesModalContent" style="overflow: visible; max-height: none; height: auto;">
+                            <!-- Tab content will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons iframe-default-styles" style="display: flex;">
+                <div id="automaticScoringButtons" class="automatic-scoring-action-buttons" style="align-content: center; display: none;">
+                    <button class="action-button score-button" id="scoreButton" style="display: none;">Score Answer</button>
+                    <button class="action-button answer-button" id="showAnswerButton" style="display: none;">View Correct Answer</button>
+                    <button class="action-button references-button" id="referencesButton" style="display: none;" aria-label="Show References">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2v6h6"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 13H8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17H8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9H8"></path>
+                        </svg>
+                        <span>References</span>
+                    </button>
+                    <button class="action-button reset-button" id="resetButton" style="display: none;">Reset</button>
+                </div>
+                <div id="humanScoringMessageContainer" class="human-scoring-message-container" style="display: block;">
+                    <span class="human-scoring-message" id="humanScoringText">This question cannot be scored.</span>
+                </div>
+                <button class="action-button copy-button" id="copyUrlButton">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>Copy URL</span>
+                </button>
+                
+                <!-- Answer key selector (populated by JS after "View Correct Answer") -->
+                <div class="answer-key-section" id="answerKeySection" style="display: none;">
+                    <div class="answer-key-content" id="answerKeyContent">
+                        <div class="answer-key-header">
+                            <button class="collapse-button" id="collapseButton" aria-label="Collapse answer key section" aria-expanded="true" aria-controls="segmentedControl">
+                                <span id="collapseIcon">▼</span>
+                            </button>
+                            <span class="answer-key-label">Score Point:</span>
+                            <div class="segmented-control" id="segmentedControl" role="radiogroup" aria-label="Answer key options"></div>
+                        </div>
+                    </div>
+                <div id="answerKeySrAnnouncement" class="sr-only" aria-live="polite" aria-atomic="true"></div></div>                
+            </div>            
+            <div class="item-metadata iframe-default-styles" id="itemMetadata" style="display: block;">
+                <strong>Subject:</strong> Math |
+                <strong>Grade:</strong> 4 |
+                <strong>Type:</strong> CR |
+                <strong>Reporting Category:</strong> Number and Operations-Fractions |
+                <strong>Points:</strong> 4
+            </div>
+        </div>
+    </div>
+    
+    <!-- Screen reader feedback for copyUrlButton, resetButton, correctAnswerButton -->
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="copyUrlFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="resetFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="correctAnswerFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="scoreAnswerFeedback"></div>
+
+
+<link type="text/css" rel="stylesheet" href="/authoring/css/lighthouse-editor.css"><link type="text/css" rel="stylesheet" href="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/css/mathquill.css"><link type="text/css" rel="stylesheet" href="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/css/mathkeyboard.css"><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-3.5.0.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-migrate-3.4.1.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-bbq.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.freetile.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.maskedinput.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.autoGrowInput.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.sortable.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/zebra_datepicker.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/shaka-player/dist/shaka-player.compiled.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/hls.js/hls.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/media/output/media.combined.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/dexie.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/MediaStreamRecorder.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/underscore-min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/js/mathquill.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/raphael-min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/raphael.sketchpad.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/lighthouse/editor/jpicker/jpicker-1.1.6.js"></script><script type="text/javascript" src="/authoring/js/lighthouse-en.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/lighthouse/editor/tips.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/mathinput.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/chart.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/fraction.min.js"></script></body></html>

@@ -1,0 +1,710 @@
+[
+  {
+    "item_id": "MA301798",
+    "question_number": "1",
+    "stimulus_intro": "Lily made some cookies, as shown.",
+    "stimulus_type": "item_array",
+    "stimulus_params": {
+      "rows": 4,
+      "cols": 6,
+      "item": "cupcake"
+    },
+    "question_text": "Lily made 2 times as many cupcakes as Tommy made. How many cupcakes did Tommy make?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "12"
+      },
+      {
+        "letter": "B",
+        "text": "24"
+      },
+      {
+        "letter": "C",
+        "text": "36"
+      },
+      {
+        "letter": "D",
+        "text": "48"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "4\u00d76 grid of cupcakes (24 total), representing Lily's cookies.",
+    "correct_answer": "A"
+  },
+  {
+    "item_id": "MA297614",
+    "question_number": "2",
+    "stimulus_intro": "Diego solved math problems each day for one week.",
+    "stimulus_list": [
+      "On the first day, he solved 10 math problems.",
+      "On the second day, he solved 15 math problems.",
+      "On the third day, he solved 20 math problems."
+    ],
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Each day, Diego continued to solve 5 more math problems than the day before. On which day did he solve 35 math problems?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "the fourth day"
+      },
+      {
+        "letter": "B",
+        "text": "the fifth day"
+      },
+      {
+        "letter": "C",
+        "text": "the sixth day"
+      },
+      {
+        "letter": "D",
+        "text": "the seventh day"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "C"
+  },
+  {
+    "item_id": "MA247705",
+    "question_number": "3",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Which of the following shapes has more than one line of symmetry?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "shape": { "type": "triangle", "kind": "right", "legs": [110, 72] }
+      },
+      {
+        "letter": "B",
+        "shape": { "type": "semicircle", "r": 62 }
+      },
+      {
+        "letter": "C",
+        "shape": { "type": "polygon", "vertices": [[-55, 38], [55, 38], [83, -38], [-27, -38]] }
+      },
+      {
+        "letter": "D",
+        "shape": { "type": "circle", "r": 55 }
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Four shapes shown as answer options: A=right triangle, B=semicircle with flat base, C=slanted parallelogram, D=circle.",
+    "correct_answer": "D"
+  },
+  {
+    "item_id": "MA801035466",
+    "question_number": "4",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Students collected rainwater in buckets.",
+    "math_expression": null,
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "Bucket A is [3/4] full and Bucket B is [2/4] full. Both buckets are the same size. Write a number sentence to compare the total amount of water in Bucket A to the total amount in Bucket B. Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      },
+      {
+        "label": "B",
+        "question_text": "Bucket C is [5/6] full and Bucket D is [4/6] full. Both buckets are the same size. Which bucket has more water? Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      },
+      {
+        "label": "C",
+        "question_text": "A student says Bucket A has more water than Bucket C because [3/4] > [5/6]. Is the student correct? Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      },
+      {
+        "label": "D",
+        "question_text": "Write a fraction to describe how much rainwater is in one of the buckets. Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      }
+    ],
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Fraction bar/circle diagrams showing fill levels for Buckets A, B, C, D.",
+    "correct_answer": null,
+    "_stub": true,
+    "_needs": "FractionDiagram stimulus + MultiPart extended to 4 parts"
+  },
+  {
+    "item_id": "MA002128911",
+    "question_number": "5",
+    "stimulus_intro": "A figure is shown.",
+    "stimulus_type": "symmetry_figure",
+    "stimulus_params": {
+      "shape": {
+        "type": "triangle",
+        "kind": "scalene",
+        "base": 180,
+        "height": 120
+      }
+    },
+    "question_text": "How many acute angles does this figure have?",
+    "math_expression": null,
+    "answer_type": "short_answer",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "A scalene triangle.",
+    "correct_answer": "2",
+    "_stub": true,
+    "_needs": "ShortAnswer+Stimulus slot (ShortAnswer currently has no stimulus support)"
+  },
+  {
+    "item_id": "MA002334462",
+    "question_number": "6",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": {
+      "min": 0,
+      "max": 1,
+      "small_intervals": 10
+    },
+    "question_text": "Plot the point that represents the location of [91/100] on this number line.",
+    "math_expression": null,
+    "answer_type": "number_line_plot",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "0.91"
+  },
+  {
+    "item_id": "MA307060",
+    "question_number": "7",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Which of the following shapes is a quadrilateral with only one pair of perpendicular sides?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "parallelogram"
+      },
+      {
+        "letter": "B",
+        "text": "right trapezoid"
+      },
+      {
+        "letter": "C",
+        "text": "rectangle"
+      },
+      {
+        "letter": "D",
+        "text": "square"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Four quadrilateral shapes shown as SVG answer options.",
+    "correct_answer": "B",
+    "_stub": true,
+    "_needs": "Polygon/shape SVG answer options in MultipleChoice"
+  },
+  {
+    "item_id": "MA002139080",
+    "question_number": "8",
+    "stimulus_intro": "The dot plot shows the distances, in miles, students ran on Saturday.",
+    "stimulus_type": "dot_plot",
+    "stimulus_params": {
+      "title": "Distances Students Ran on Saturday",
+      "axis_label": "Distance (in miles)",
+      "data_points": [
+        {
+          "label": "[1/4]",
+          "count": 3
+        },
+        {
+          "label": "[1/2]",
+          "count": 4
+        },
+        {
+          "label": "[3/4]",
+          "count": 2
+        },
+        {
+          "label": "1",
+          "count": 1
+        }
+      ]
+    },
+    "question_text": "What is the total distance, in miles, run by the students who ran [1/2] mile or more?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "[13/4]"
+      },
+      {
+        "letter": "B",
+        "text": "[9/4]"
+      },
+      {
+        "letter": "C",
+        "text": "[7/4]"
+      },
+      {
+        "letter": "D",
+        "text": "[5/4]"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Dot plot with filled circles above a fractional number line.",
+    "correct_answer": "A",
+    "_stub": true,
+    "_needs": "DotPlot stimulus (LinePlot variant with filled circles/dots)"
+  },
+  {
+    "item_id": "MA002034926",
+    "question_number": "9",
+    "stimulus_intro": "An expression is shown.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Which of these numbers is the difference of the expression?",
+    "math_expression": "372,068 \u2212 8,329",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "363,739"
+      },
+      {
+        "letter": "B",
+        "text": "364,341"
+      },
+      {
+        "letter": "C",
+        "text": "364,749"
+      },
+      {
+        "letter": "D",
+        "text": "366,341"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "A"
+  },
+  {
+    "item_id": "MA903776098",
+    "question_number": "10",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Which of these is the measure of an angle that turns through [1/3] of a circle?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "45\u00b0"
+      },
+      {
+        "letter": "B",
+        "text": "90\u00b0"
+      },
+      {
+        "letter": "C",
+        "text": "120\u00b0"
+      },
+      {
+        "letter": "D",
+        "text": "180\u00b0"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "C"
+  },
+  {
+    "item_id": "MA002145158",
+    "question_number": "11",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Drag each decimal to complete the comparison statements.",
+    "math_expression": null,
+    "answer_type": "drag_drop_inequality",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Three inequality blanks: ___ > 0.52, 0.65 > ___ > 0.52, 0.78 > ___. Tile bank with 0.65, 0.52, 0.78.",
+    "correct_answer": null,
+    "_stub": true,
+    "_needs": "DragDropInequality component \u2014 drag decimal tiles into inequality blanks"
+  },
+  {
+    "item_id": "MA002140372",
+    "question_number": "12",
+    "stimulus_intro": "Some angle measures are shown in this diagram.",
+    "stimulus_type": "angle_diagram",
+    "stimulus_params": {
+      "center": "V",
+      "rays": [
+        {
+          "label": "Q",
+          "angle": 145
+        },
+        {
+          "label": "R",
+          "angle": 104
+        },
+        {
+          "label": "S",
+          "angle": 50
+        },
+        {
+          "label": "T",
+          "angle": 21
+        }
+      ],
+      "arc_labels": [
+        {
+          "between": [
+            "Q",
+            "R"
+          ],
+          "text": "41\u00b0",
+          "radius": 45
+        },
+        {
+          "between": [
+            "R",
+            "S"
+          ],
+          "text": "54\u00b0",
+          "radius": 52
+        },
+        {
+          "between": [
+            "S",
+            "T"
+          ],
+          "text": "29\u00b0",
+          "radius": 62
+        }
+      ]
+    },
+    "question_text": "Angle QVR has a measure of 41\u00b0. Angle RVS has a measure of 54\u00b0. Angle SVT has a measure of 29\u00b0. Which of the following is the measure, in degrees, of angle QVT?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "124\u00b0"
+      },
+      {
+        "letter": "B",
+        "text": "114\u00b0"
+      },
+      {
+        "letter": "C",
+        "text": "95\u00b0"
+      },
+      {
+        "letter": "D",
+        "text": "83\u00b0"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Rays Q, R, S, T from vertex V with arc labels 41\u00b0, 54\u00b0, 29\u00b0 between consecutive rays.",
+    "correct_answer": "A"
+  },
+  {
+    "item_id": "MA307317",
+    "question_number": "13",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "A store sells boxes of crayons.",
+    "math_expression": null,
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "There are 24 crayons in each box. The store has 16 boxes. How many crayons does the store have in all? Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      },
+      {
+        "label": "B",
+        "question_text": "The store also sells markers. There are 12 markers in each pack and 23 packs. How many markers are there in all? Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      },
+      {
+        "label": "C",
+        "question_text": "A teacher buys 4 boxes of crayons and 3 packs of markers. How many total items did the teacher buy? Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      }
+    ],
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": null,
+    "_stub": true,
+    "_needs": "MultiPart extended to support 3 parts (currently 2-part max)"
+  },
+  {
+    "item_id": "MA002135528",
+    "question_number": "14",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "A metal bar has a mass of 5 kilograms. Which of these is the mass, in grams, of the bar?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "50 grams"
+      },
+      {
+        "letter": "B",
+        "text": "500 grams"
+      },
+      {
+        "letter": "C",
+        "text": "5,000 grams"
+      },
+      {
+        "letter": "D",
+        "text": "50,000 grams"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "C"
+  },
+  {
+    "item_id": "MA903571693",
+    "question_number": "15",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "A rectangle has a width of 5 inches and a length of 4 inches. Which of these equations shows the perimeter, in inches, of the rectangle?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "5 + 4 = 9"
+      },
+      {
+        "letter": "B",
+        "text": "5 \u00d7 4 = 20"
+      },
+      {
+        "letter": "C",
+        "text": "2 + 5 \u00d7 2 + 4 = 16"
+      },
+      {
+        "letter": "D",
+        "text": "2 \u00d7 5 + 2 \u00d7 4 = 18"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "D"
+  },
+  {
+    "item_id": "MA001851276",
+    "question_number": "16",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Select \u201cTrue\u201d or \u201cFalse\u201d in the table for each statement.",
+    "math_expression": null,
+    "answer_type": "true_false_table",
+    "answer_options": null,
+    "statements": [
+      {
+        "text": "44,285 rounded to the nearest hundred is 44,200."
+      },
+      {
+        "text": "44,285 rounded to the nearest thousand is 44,000."
+      },
+      {
+        "text": "44,285 rounded to the nearest ten thousand is 40,000."
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "B,C,E"
+  },
+  {
+    "item_id": "MA001750121",
+    "question_number": "17",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "A group of friends are going to eat lunch in the cafeteria. At the cafeteria, a boxed lunch costs $7. Each friend in the group will buy a boxed lunch. Which of these could be the total cost to buy boxed lunches for all the friends in the group?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "$62"
+      },
+      {
+        "letter": "B",
+        "text": "$84"
+      },
+      {
+        "letter": "C",
+        "text": "$93"
+      },
+      {
+        "letter": "D",
+        "text": "$97"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA704653374",
+    "question_number": "18",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "There are 5 times as many students in fourth grade as there are teachers.",
+    "math_expression": null,
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "There are 6 teachers. Write a multiplication equation to find s, the number of fourth-grade students.",
+        "answer_type": "short_answer"
+      },
+      {
+        "label": "B",
+        "question_text": "Select from the drop-down menus to complete the sentence.",
+        "answer_type": "inline_choice",
+        "sentences": [
+          "The number of fourth-grade students is [RESPONSE_A1] times [RESPONSE_A2] the number of teachers."
+        ],
+        "dropdowns": [
+          {
+            "id": "RESPONSE_A1",
+            "options": [
+              "3",
+              "4",
+              "5",
+              "6"
+            ]
+          },
+          {
+            "id": "RESPONSE_A2",
+            "options": [
+              "greater than",
+              "less than",
+              "equal to"
+            ]
+          }
+        ]
+      }
+    ],
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "A;C",
+    "_stub": true,
+    "_needs": "MultiPart with mixed part types (short_answer + inline_choice); pattern similar to Q9 2019"
+  },
+  {
+    "item_id": "MA900846441",
+    "question_number": "19",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Two friends bought a chocolate bar. One friend ate [2/8] of the chocolate bar. The other friend ate [1/8] of the chocolate bar. Create a fraction model in which the shaded part represents the fraction of the chocolate bar that remains. Divide the figure into the correct number of equal parts by using the More and Fewer buttons. Then shade by selecting the part or parts.",
+    "math_expression": null,
+    "answer_type": "interactive_fraction_model",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Interactive rectangle with More/Fewer/Reset buttons to partition and click-to-shade. Answer: 8 parts, 5 shaded (5/8 remaining).",
+    "correct_answer": "[5/8]",
+    "_stub": true,
+    "_needs": "InteractiveFractionModel component \u2014 More/Fewer buttons to divide rectangle + click-to-shade"
+  },
+  {
+    "item_id": "MA303324",
+    "question_number": "20",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "A market sells beans in bags. Each bag has [3/4] pound of beans. How many pounds of beans are in 8 bags altogether?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "2[3/4]"
+      },
+      {
+        "letter": "B",
+        "text": "6"
+      },
+      {
+        "letter": "C",
+        "text": "8[3/4]"
+      },
+      {
+        "letter": "D",
+        "text": "15"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "B"
+  }
+]

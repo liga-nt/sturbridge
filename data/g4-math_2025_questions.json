@@ -1,0 +1,697 @@
+[
+  {
+    "item_id": "MA900754381",
+    "question_number": "1",
+    "stimulus_intro": "A student wrote this comparison.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Which of these fractions belongs in the {?} to make the student's comparison true?",
+    "math_expression": "{?} > [5/2]",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "[4/2]"
+      },
+      {
+        "letter": "B",
+        "text": "[10/4]"
+      },
+      {
+        "letter": "C",
+        "text": "[3/5]"
+      },
+      {
+        "letter": "D",
+        "text": "[21/6]"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "D"
+  },
+  {
+    "item_id": "MA136448521",
+    "question_number": "2",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Drag each number into the correct box to show whether it is prime or composite.",
+    "math_expression": null,
+    "answer_type": "category_sort",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Tile bank with numbers 4, 7, 18, 25, 43. Two drop boxes labeled Composite and Prime.",
+    "correct_answer": "Prime: 7, 43; Composite: 4, 18, 25",
+    "_stub": true,
+    "_needs": "CategorySort component \u2014 drag tiles into labeled category boxes"
+  },
+  {
+    "item_id": "MA800780887",
+    "question_number": "3",
+    "stimulus_intro": "A cafe owner recorded how many desserts were sold on Saturday.\n\u2022 [5/8] of the desserts sold were pies.\n\u2022 [1/8] of the desserts sold were cakes.\n\u2022 The remaining desserts sold were cookies.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": null,
+    "math_expression": null,
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "Which equation can be used to find the total fraction of desserts sold that were either pies or cakes?",
+        "answer_type": "multiple_choice",
+        "answer_options": [
+          {
+            "letter": "A",
+            "text": "[5/8] + [1/8] = [48/16]"
+          },
+          {
+            "letter": "B",
+            "text": "[5/8] + [1/8] = [6/16]"
+          },
+          {
+            "letter": "C",
+            "text": "[5/8] + [1/8] = [22/8]"
+          },
+          {
+            "letter": "D",
+            "text": "[5/8] + [1/8] = [6/8]"
+          }
+        ]
+      },
+      {
+        "label": "B",
+        "question_text": "Of all the desserts sold on Saturday, what fraction were cookies? Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      },
+      {
+        "label": "C",
+        "question_text": "Of all the desserts sold on Saturday, [4/10] of the desserts were sold in the first two hours. A worker created this equation: [3/4] + [1/6] = [4/10]. Is the worker's equation correct? Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      },
+      {
+        "label": "D",
+        "question_text": "At the beginning of Saturday the cafe had 6[1/8] pies. At the end they had 2[3/8] pies remaining. What is the total amount of pie the cafe sold? Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      }
+    ],
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": null,
+    "_stub": true,
+    "_needs": "MultiPart extended to 4 parts; Part A is MC, Parts B/C/D are constructed response"
+  },
+  {
+    "item_id": "MA010534486",
+    "question_number": "4",
+    "stimulus_intro": "A room has a length of 15 feet and a width of 12 feet.",
+    "stimulus_type": "rectangle_diagram",
+    "stimulus_params": {
+      "width": 15,
+      "height": 12,
+      "width_label": "15 feet",
+      "height_label": "12 feet"
+    },
+    "question_text": "What is the perimeter of the floor of the room?",
+    "math_expression": null,
+    "answer_type": "inline_choice",
+    "instruction": "Select from the drop-down menus to correctly complete the sentence.",
+    "sentences": [
+      "The floor of the room has a perimeter of [RESPONSE_A1] [RESPONSE_A2]."
+    ],
+    "dropdowns": [
+      {
+        "id": "RESPONSE_A1",
+        "options": [
+          "27",
+          "54",
+          "180"
+        ]
+      },
+      {
+        "id": "RESPONSE_A2",
+        "options": [
+          "feet",
+          "square feet"
+        ]
+      }
+    ],
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Rectangle labeled 15 feet wide by 12 feet tall.",
+    "correct_answer": "54 feet"
+  },
+  {
+    "item_id": "MA232254177",
+    "question_number": "5",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Which of these shapes have at least one pair of parallel sides? Select the three correct answers.",
+    "math_expression": null,
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "irregular quadrilateral 1"
+      },
+      {
+        "letter": "B",
+        "text": "irregular quadrilateral 2"
+      },
+      {
+        "letter": "C",
+        "text": "irregular quadrilateral 3"
+      },
+      {
+        "letter": "D",
+        "text": "irregular quadrilateral 4"
+      },
+      {
+        "letter": "E",
+        "text": "irregular quadrilateral 5"
+      }
+    ],
+    "parts": null,
+    "select_count": 3,
+    "has_visual": true,
+    "visual_description": "Five irregular quadrilateral shapes shown as answer options (SVG polygons).",
+    "correct_answer": "A,D,E",
+    "_stub": true,
+    "_needs": "Polygon/shape SVG answer options in MultipleSelect"
+  },
+  {
+    "item_id": "MA202029218",
+    "question_number": "6",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Which of these numbers is 231,198 rounded to the nearest <strong>thousand</strong>?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "230,000"
+      },
+      {
+        "letter": "B",
+        "text": "231,000"
+      },
+      {
+        "letter": "C",
+        "text": "232,000"
+      },
+      {
+        "letter": "D",
+        "text": "240,000"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA713677363",
+    "question_number": "7",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": null,
+    "math_expression": null,
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "Drag each expression to match the number it represents.",
+        "answer_type": "drag_drop_match",
+        "tiles": [
+          "(6 \u00d7 10,000) + (3 \u00d7 100) + (8 \u00d7 10) + (1 \u00d7 1)",
+          "(1 \u00d7 10,000) + (3 \u00d7 1,000) + (8 \u00d7 100) + (4 \u00d7 1)",
+          "(6 \u00d7 10,000) + (1 \u00d7 1,000) + (8 \u00d7 100) + (4 \u00d7 10)"
+        ],
+        "targets": [
+          "sixty-three thousand, eight hundred one",
+          "thirteen thousand, eight hundred four",
+          "sixty-one thousand, eight hundred forty"
+        ]
+      },
+      {
+        "label": "B",
+        "question_text": "Select 'Less Than 13,084' or 'Greater Than 13,084' for each number.",
+        "answer_type": "true_false_table",
+        "column_labels": [
+          "Number",
+          "Less Than 13,084",
+          "Greater Than 13,084"
+        ],
+        "statements": [
+          {
+            "text": "thirteen thousand, eight hundred forty"
+          },
+          {
+            "text": "thirteen thousand, four hundred eighty"
+          },
+          {
+            "text": "thirteen thousand, eighty-four"
+          }
+        ]
+      }
+    ],
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "A,D,E; B,C,F",
+    "_stub": true,
+    "_needs": "DragDropMatch component (Part A) + TrueFalseTable with custom column labels (Part B)"
+  },
+  {
+    "item_id": "MA900741771",
+    "question_number": "8",
+    "stimulus_intro": "A teacher has 36 jars of paint to use in art class. The number of jars is 4 times the number of students in the class.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Which of these equations can be used to find y, the number of students in the class? Select the three correct answers.",
+    "math_expression": null,
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "36 \u00f7 4 = y"
+      },
+      {
+        "letter": "B",
+        "text": "4 \u00d7 y = 36"
+      },
+      {
+        "letter": "C",
+        "text": "y \u00f7 4 = 36"
+      },
+      {
+        "letter": "D",
+        "text": "36 \u00d7 y = 4"
+      },
+      {
+        "letter": "E",
+        "text": "36 \u00f7 y = 4"
+      }
+    ],
+    "parts": null,
+    "select_count": 3,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "A,B,E"
+  },
+  {
+    "item_id": "MA311554",
+    "question_number": "9",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "What is the measure of an angle that turns through [1/4] of a circle?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "15\u00b0"
+      },
+      {
+        "letter": "B",
+        "text": "90\u00b0"
+      },
+      {
+        "letter": "C",
+        "text": "270\u00b0"
+      },
+      {
+        "letter": "D",
+        "text": "345\u00b0"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA232261850",
+    "question_number": "10",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Select 'Line of Symmetry' or 'Not a Line of Symmetry' for each figure.",
+    "math_expression": null,
+    "answer_type": "true_false_table",
+    "answer_options": null,
+    "statements": [
+      {
+        "text": "Figure A \u2014 square with vertical dashed line"
+      },
+      {
+        "text": "Figure B \u2014 rectangle with diagonal dashed line"
+      },
+      {
+        "text": "Figure C \u2014 circle with horizontal dashed line"
+      },
+      {
+        "text": "Figure D \u2014 irregular quadrilateral with vertical dashed line"
+      },
+      {
+        "text": "Figure E \u2014 regular pentagon with vertical dashed line"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "5 geometric figures each with a dashed line drawn on them. Columns: Line of Symmetry / Not a Line of Symmetry.",
+    "correct_answer": "A,E",
+    "_stub": true,
+    "_needs": "FigureSymmetryTable \u2014 TrueFalseTable variant with SVG figures in first column and custom column headers"
+  },
+  {
+    "item_id": "MA233051799",
+    "question_number": "11",
+    "stimulus_intro": "There are 5 jugs on a table. Each jug is filled with [3/4] gallon of water.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "What is the total number of gallons of water in all of the jugs?",
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "[15/4]"
+      },
+      {
+        "letter": "B",
+        "text": "[23/4]"
+      },
+      {
+        "letter": "C",
+        "text": "[3/20]"
+      },
+      {
+        "letter": "D",
+        "text": "[15/20]"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "A"
+  },
+  {
+    "item_id": "MA307314",
+    "question_number": "12",
+    "stimulus_intro": "An equation is shown.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "What value of w makes the equation true?",
+    "math_expression": "70,368 \u2212 2,419 = w",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "67,849"
+      },
+      {
+        "letter": "B",
+        "text": "67,949"
+      },
+      {
+        "letter": "C",
+        "text": "68,151"
+      },
+      {
+        "letter": "D",
+        "text": "68,949"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA900776517",
+    "question_number": "13",
+    "stimulus_intro": "The shaded part of this model represents a decimal number.",
+    "stimulus_type": "decimal_grid",
+    "stimulus_params": {
+      "shaded": 9,
+      "total": 100
+    },
+    "question_text": "Write a decimal number that is less than the decimal number represented in the model.",
+    "math_expression": null,
+    "answer_type": "short_answer",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "10\u00d710 grid with 9 squares shaded (representing 0.09).",
+    "correct_answer": "Any decimal less than 0.09",
+    "_stub": true,
+    "_needs": "DecimalGrid stimulus + ShortAnswer+Stimulus slot"
+  },
+  {
+    "item_id": "MA231875780",
+    "question_number": "14",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": null,
+    "math_expression": null,
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "Read the graduated cylinder and write the measurement in liters.",
+        "answer_type": "short_answer"
+      },
+      {
+        "label": "B",
+        "question_text": "Convert the measurement from Part A to milliliters. Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      },
+      {
+        "label": "C",
+        "question_text": "Convert the time 1 hour and 45 minutes to only minutes. Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      },
+      {
+        "label": "D",
+        "question_text": "Compare two masses given in different metric units. Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      }
+    ],
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Graduated cylinder diagram for Part A. Parts B/C/D are text-only constructed response.",
+    "correct_answer": null,
+    "_stub": true,
+    "_needs": "GraduatedCylinder stimulus + MultiPart extended to 4 parts"
+  },
+  {
+    "item_id": "MA000732007",
+    "question_number": "15",
+    "stimulus_intro": "A protractor is shown.",
+    "stimulus_type": "protractor_image",
+    "stimulus_params": {
+      "angle_PLM": 130,
+      "angle_KLP": 50
+    },
+    "question_text": "Use the protractor to find the measures of the angles.",
+    "math_expression": null,
+    "answer_type": "inline_choice",
+    "instruction": "Select from the drop-down menus to correctly complete each sentence.",
+    "sentences": [
+      "The measure of angle PLM is [RESPONSE_A1] degrees.",
+      "The measure of angle KLP is [RESPONSE_A2] degrees."
+    ],
+    "dropdowns": [
+      {
+        "id": "RESPONSE_A1",
+        "options": [
+          "50",
+          "100",
+          "130",
+          "140"
+        ]
+      },
+      {
+        "id": "RESPONSE_A2",
+        "options": [
+          "40",
+          "50",
+          "60",
+          "80"
+        ]
+      }
+    ],
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "A dual-scale protractor with rays forming angles PLM and KLP. Student reads the degree measures.",
+    "correct_answer": "B,E",
+    "_stub": true,
+    "_needs": "ProtractorImage stimulus (static read-only SVG protractor) + InlineChoice"
+  },
+  {
+    "item_id": "MA900750085",
+    "question_number": "16",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Which of these numbers are factors of 64? Select the three correct answers.",
+    "math_expression": null,
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "6"
+      },
+      {
+        "letter": "B",
+        "text": "8"
+      },
+      {
+        "letter": "C",
+        "text": "16"
+      },
+      {
+        "letter": "D",
+        "text": "24"
+      },
+      {
+        "letter": "E",
+        "text": "64"
+      },
+      {
+        "letter": "F",
+        "text": "128"
+      }
+    ],
+    "parts": null,
+    "select_count": 3,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "B,C,E"
+  },
+  {
+    "item_id": "MA231836735",
+    "question_number": "17",
+    "stimulus_intro": "A decimal number is shown.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Write a fraction that is equivalent to the decimal number.",
+    "math_expression": "0.49",
+    "answer_type": "short_answer",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "[49/100]"
+  },
+  {
+    "item_id": "MA311543",
+    "question_number": "18",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "What is the quotient of this expression?",
+    "math_expression": "4,527 \u00f7 3",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "1,509"
+      },
+      {
+        "letter": "B",
+        "text": "1,519"
+      },
+      {
+        "letter": "C",
+        "text": "1,566"
+      },
+      {
+        "letter": "D",
+        "text": "1,590"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "A"
+  },
+  {
+    "item_id": "MA250533",
+    "question_number": "19",
+    "stimulus_intro": "A student wrote this subtraction pattern.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "The student uses the same rule each time to find the next number in the pattern. What is the next number in the student's pattern?",
+    "math_expression": "234, 225, 216, 207, . . .",
+    "answer_type": "short_answer",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "198"
+  },
+  {
+    "item_id": "MA002162929",
+    "question_number": "20",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Select \u201cTrue\u201d or \u201cFalse\u201d in the table for each equation.",
+    "math_expression": null,
+    "answer_type": "true_false_table",
+    "answer_options": null,
+    "statements": [
+      {
+        "text": "4 \u00d7 318 = 1,262"
+      },
+      {
+        "text": "3 \u00d7 286 = 858"
+      },
+      {
+        "text": "5 \u00d7 174 = 870"
+      },
+      {
+        "text": "6 \u00d7 253 = 1,508"
+      },
+      {
+        "text": "2 \u00d7 447 = 894"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "B,C,E",
+    "_stub": true,
+    "_needs": "TrueFalseTable with 'Equation' column label instead of 'Statement' (minor prop extension)"
+  }
+]

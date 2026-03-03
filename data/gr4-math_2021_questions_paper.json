@@ -1,0 +1,610 @@
+[
+  {
+    "item_id": "MA704649496_PA",
+    "question_number": "1",
+    "question_text": "In which fraction model does the shaded part represent the sum of this expression? 1/10 + 7/10",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "Circle divided into 10 equal parts with 2 parts shaded"
+      },
+      {
+        "letter": "B",
+        "text": "Circle divided into 10 equal parts with 8 parts shaded, missing one part at the top and one part near the bottom"
+      },
+      {
+        "letter": "C",
+        "text": "Circle divided into 10 equal parts with 4 parts shaded, spaced around the circle"
+      },
+      {
+        "letter": "D",
+        "text": "Circle divided into 10 equal parts with 7 parts shaded, leaving 3 unshaded together at the top right"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Four circular fraction models, each a circle partitioned into 10 equal wedges with different numbers of wedges shaded, labeled A, B, C, and D.",
+    "page": 1,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA307079",
+    "question_number": "2",
+    "question_text": "Takara is 4 years old. Her brother is 2 times as old as Takara. Which equation can be used to find b, the age in years of Takara\u2019s brother?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "b = 1 \u00d7 2"
+      },
+      {
+        "letter": "B",
+        "text": "b = 2 \u00d7 2"
+      },
+      {
+        "letter": "C",
+        "text": "b = 4 \u00d7 2"
+      },
+      {
+        "letter": "D",
+        "text": "b = 8 \u00d7 2"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 2,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA229063",
+    "question_number": "3",
+    "question_text": "The shaded portion of this model represents a fraction less than 1. Which of these decimals are equivalent to the fraction represented in the model? Select the two correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "0.80"
+      },
+      {
+        "letter": "B",
+        "text": "8.0"
+      },
+      {
+        "letter": "C",
+        "text": "0.08"
+      },
+      {
+        "letter": "D",
+        "text": "80.0"
+      },
+      {
+        "letter": "E",
+        "text": "0.8"
+      }
+    ],
+    "parts": null,
+    "select_count": 2,
+    "has_visual": true,
+    "visual_description": "Two 10-by-10 square grids of small equal-sized squares. The left grid is partially shaded to represent a fraction less than 1. The right grid is fully shaded and labeled 'represents 1 whole.'",
+    "page": 3,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA297973",
+    "question_number": "4",
+    "question_text": "Ms. Lewis bought 5 sticks of butter. Each stick of butter weighs 1/4 pound. What is the total weight, in pounds, of the 5 sticks of butter?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "5/4"
+      },
+      {
+        "letter": "B",
+        "text": "6/4"
+      },
+      {
+        "letter": "C",
+        "text": "1/20"
+      },
+      {
+        "letter": "D",
+        "text": "5/20"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 4,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA297973",
+    "question_number": "5",
+    "question_text": "Which of these numbers are prime numbers? Select the two correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "27"
+      },
+      {
+        "letter": "B",
+        "text": "43"
+      },
+      {
+        "letter": "C",
+        "text": "52"
+      },
+      {
+        "letter": "D",
+        "text": "67"
+      },
+      {
+        "letter": "E",
+        "text": "95"
+      }
+    ],
+    "parts": null,
+    "select_count": 2,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 4,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA800780932",
+    "question_number": "6",
+    "question_text": "This question has four parts. Be sure to label each part of your response.",
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "Write this number in standard form: one hundred sixty-eight thousand, twenty-one."
+      },
+      {
+        "label": "B",
+        "text": "Write the number 168,201 in expanded form."
+      },
+      {
+        "label": "C",
+        "text": "Use >, <, or = to write a comparison of the two numbers in Part A and Part B. Explain how you got your answer."
+      },
+      {
+        "label": "D",
+        "text": "Write a number that is 1,000 greater than the number 169,201. Explain how you got your answer."
+      }
+    ],
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "A rectangular box containing the text 'one hundred sixty-eight thousand, twenty-one.'",
+    "page": 5,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA306940",
+    "question_number": "7",
+    "question_text": "A sign is in the shape of a square. Each side of the sign has a length of 6 inches. What is the area of the sign?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "12 square inches"
+      },
+      {
+        "letter": "B",
+        "text": "24 square inches"
+      },
+      {
+        "letter": "C",
+        "text": "36 square inches"
+      },
+      {
+        "letter": "D",
+        "text": "48 square inches"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 6,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA306940",
+    "question_number": "8",
+    "question_text": "Which of these shapes have at least one line of symmetry? Select the three correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "Trapezoid with one pair of nonparallel equal-length slanted sides and a shorter top base"
+      },
+      {
+        "letter": "B",
+        "text": "Parallelogram with no right angles"
+      },
+      {
+        "letter": "C",
+        "text": "Rectangle"
+      },
+      {
+        "letter": "D",
+        "text": "Square"
+      },
+      {
+        "letter": "E",
+        "text": "Quadrilateral with one slanted side forming an irregular shape"
+      }
+    ],
+    "parts": null,
+    "select_count": 3,
+    "has_visual": true,
+    "visual_description": "Five unlabeled quadrilateral outlines arranged in two columns and labeled A through E: a symmetric isosceles trapezoid (A), a slanted parallelogram (B), a rectangle (C), a square (D), and an irregular quadrilateral with one slanted side (E).",
+    "page": 6,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA800763292_PA",
+    "question_number": "9",
+    "question_text": "This list shows the snowfall amounts, in inches, for eight towns during a storm: 2 1/4, 1 1/2, 2, 2 3/4, 1 1/2, 3 1/4, 2 3/4, 1 1/4. This line plot also shows some of the snowfall amounts. One of the snowfall amounts is missing from the line plot. Which of these line plots shows all eight snowfall amounts correctly plotted?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "Snowfall Amounts line plot labeled 0 to 3 inches with a specific arrangement of Xs"
+      },
+      {
+        "letter": "B",
+        "text": "Snowfall Amounts line plot labeled 0 to 3 inches with a different arrangement of Xs"
+      },
+      {
+        "letter": "C",
+        "text": "Snowfall Amounts line plot labeled 0 to 3 inches with another arrangement of Xs"
+      },
+      {
+        "letter": "D",
+        "text": "Snowfall Amounts line plot labeled 0 to 3 inches with yet another arrangement of Xs"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Top box lists snowfall amounts: 2 1/4, 1 1/2, 2, 2 3/4, 1 1/2, 3 1/4, 2 3/4, 1 1/4. Below is a line plot titled \"Snowfall Amounts\" with a horizontal axis from 0 to 3 inches marked in fourths and several Xs above some values. Four additional answer-choice line plots (A\u2013D), each titled \"Snowfall Amounts,\" also show Xs over a 0\u20133 inch axis with tick marks at fourths, each arranged differently.",
+    "page": 7,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA270627",
+    "question_number": "10",
+    "question_text": "What is the value of the question-mark box that makes this number sentence true? 325 = 147 + (question-mark box)",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "178"
+      },
+      {
+        "letter": "B",
+        "text": "188"
+      },
+      {
+        "letter": "C",
+        "text": "222"
+      },
+      {
+        "letter": "D",
+        "text": "472"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 8,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA803730594",
+    "question_number": "11",
+    "question_text": "The rule for a pattern is \"multiply by 3.\" The first number in the pattern is 2. What is the fifth number in the pattern? Enter your answer in the box.",
+    "answer_type": "short_answer",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 9,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA736379417",
+    "question_number": "12",
+    "question_text": "What value of x makes this equation true? 7/10 = x/100 Enter your answer in the box.",
+    "answer_type": "short_answer",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 10,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA311574",
+    "question_number": "13",
+    "question_text": "Which of these triangles have at least one obtuse angle? Select the two correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "Triangle with one right angle marked near the top side."
+      },
+      {
+        "letter": "B",
+        "text": "Long, flat triangle with the top angle appearing obtuse."
+      },
+      {
+        "letter": "C",
+        "text": "Triangle with three acute angles."
+      },
+      {
+        "letter": "D",
+        "text": "Upside-down triangle with a right angle marked at the bottom vertex."
+      },
+      {
+        "letter": "E",
+        "text": "Irregular triangle with one angle appearing obtuse."
+      }
+    ],
+    "parts": null,
+    "select_count": 2,
+    "has_visual": true,
+    "visual_description": "Five separate labeled triangles A, B, C, D, and E, each drawn with different side lengths and angle types; right angles are marked in triangles A and D.",
+    "page": 11,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA704649496_PA",
+    "question_number": "14",
+    "question_text": "This clock shows the time that Cary woke up this morning.",
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "At what time did Cary wake up? Be sure to label your answer with a.m. or p.m."
+      },
+      {
+        "label": "B",
+        "text": "Cary left for school 1 hour and 15 minutes after he woke up. At what time did Cary leave for school? Show or explain how you got your answer."
+      },
+      {
+        "label": "C",
+        "text": "Cary left school at 3:40. He ate lunch 4 hours before he left school. At what time did Cary eat lunch? Show or explain how you got your answer."
+      },
+      {
+        "label": "D",
+        "text": "Cary has 45 minutes of homework. His favorite TV show is at 5:30. What is the latest time Cary can start his homework to be finished at 5:30? Show or explain how you got your answer."
+      }
+    ],
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Analog clock face showing the time Cary woke up, with hour hand a little past 7 and minute hand on 12.",
+    "page": 1,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA713629341_PA",
+    "question_number": "15",
+    "question_text": "Alonzo and Mindy are buying pretzels to share with their class. They will put all the pretzels into bags.\n\nAlonzo buys 8 pretzels.\nMindy buys 3 times as many pretzels as Alonzo.\nEach bag will hold up to 5 pretzels.\n\nAlonzo and Mindy want to know the least number of bags they need to hold all the pretzels.\n\nWhich of these statements are true?\n\nSelect the two correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "Alonzo and Mindy have a total of 24 pretzels."
+      },
+      {
+        "letter": "B",
+        "text": "Alonzo and Mindy have a total of 32 pretzels."
+      },
+      {
+        "letter": "C",
+        "text": "Alonzo and Mindy need 5 bags to hold all the pretzels."
+      },
+      {
+        "letter": "D",
+        "text": "Alonzo and Mindy need 6 bags to hold all the pretzels."
+      },
+      {
+        "letter": "E",
+        "text": "Alonzo and Mindy need 7 bags to hold all the pretzels."
+      }
+    ],
+    "parts": null,
+    "select_count": 2,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 12,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA714226701_PA",
+    "question_number": "16",
+    "question_text": "A shopper bought peppers and grapes.",
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "The shopper bought 54/100 pound of peppers. What is the decimal equivalent of the fraction 54/100? Enter your answer in the answer boxes at the top of the answer grid and completely fill the matching circles."
+      },
+      {
+        "label": "B",
+        "question_text": "The shopper bought 0.62 pound of grapes. Which of these number lines shows a point that represents where 0.62 is located?",
+        "answer_type": "multiple_choice",
+        "answer_options": [
+          {
+            "letter": "A",
+            "text": "Number line from 0.5 to 0.7 with the point located slightly to the left of 0.6"
+          },
+          {
+            "letter": "B",
+            "text": "Number line from 0.5 to 0.7 with the point located at 0.6"
+          },
+          {
+            "letter": "C",
+            "text": "Number line from 0.5 to 0.7 with the point located slightly to the right of 0.6"
+          },
+          {
+            "letter": "D",
+            "text": "Number line from 0.5 to 0.7 with the point located about halfway between 0.6 and 0.7"
+          }
+        ],
+        "select_count": null,
+        "has_visual": true,
+        "visual_description": "Four horizontal number lines each labeled 0.5, 0.6, and 0.7 with evenly spaced tick marks; each line has a solid point at a different tick mark to represent a decimal between 0.5 and 0.7."
+      }
+    ],
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Answer grid with columns of bubbles for digits where students fill in a decimal equivalent.",
+    "page": 13,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA803742735",
+    "question_number": "17",
+    "question_text": "A model of 1 whole is shown. Based on the model, which of these models is shaded to represent a fraction that is equivalent to 1 2/3?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "Two rectangles divided into equal vertical parts: the first with some parts shaded and some unshaded, the second with all parts shaded."
+      },
+      {
+        "letter": "B",
+        "text": "Two rectangles divided into equal vertical parts: each with some parts shaded and some unshaded."
+      },
+      {
+        "letter": "C",
+        "text": "Two rectangles divided into equal horizontal rows and columns: the top two rows of each rectangle shaded, and the bottom row unshaded."
+      },
+      {
+        "letter": "D",
+        "text": "Two rectangles divided into equal horizontal rows and columns: the first rectangle fully shaded, the second rectangle partly shaded and partly unshaded."
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "At the top, a single shaded rectangle inside a larger outline labeled \"= 1 whole\". Below, four answer choices (A\u2013D), each showing two rectangular fraction models subdivided into equal parts with different shading patterns to represent mixed-number fractions.",
+    "page": 15,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA803846674_PA",
+    "question_number": "18",
+    "question_text": "Which of these numbers round to 30,000 when rounding to the nearest ten thousand? Select the two correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "34,124"
+      },
+      {
+        "letter": "B",
+        "text": "35,021"
+      },
+      {
+        "letter": "C",
+        "text": "37,826"
+      },
+      {
+        "letter": "D",
+        "text": "32,788"
+      },
+      {
+        "letter": "E",
+        "text": "36,249"
+      }
+    ],
+    "parts": null,
+    "select_count": 2,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 16,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA306993",
+    "question_number": "19",
+    "question_text": "Angle QRS has a measure of 64\u00b0, as shown in this diagram. Angle QRT has a measure of 87\u00b0. What is the measure of angle SRT?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "23\u00b0"
+      },
+      {
+        "letter": "B",
+        "text": "26\u00b0"
+      },
+      {
+        "letter": "C",
+        "text": "64\u00b0"
+      },
+      {
+        "letter": "D",
+        "text": "151\u00b0"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Point R with three rays forming angles: one ray goes upward to point Q, one ray goes to the right to point S, and one ray goes down-right to point T. The angle between rays RQ and RS is labeled 64\u00b0.",
+    "page": 17,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  },
+  {
+    "item_id": "MA803746135_PA",
+    "question_number": "20",
+    "question_text": "A parent bought equal amounts of blue cloth and yellow cloth to make a costume. The parent used 3/6 of the blue cloth and 4/12 of the yellow cloth. Which of these number sentences correctly compare the fractions 3/6 and 4/12? Select the two correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "3/6 > 4/12"
+      },
+      {
+        "letter": "B",
+        "text": "3/6 < 4/12"
+      },
+      {
+        "letter": "C",
+        "text": "4/12 = 3/6"
+      },
+      {
+        "letter": "D",
+        "text": "4/12 > 3/6"
+      },
+      {
+        "letter": "E",
+        "text": "4/12 < 3/6"
+      }
+    ],
+    "parts": null,
+    "select_count": 2,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 18,
+    "source_pdf": "gr4-math_2021_questions.pdf"
+  }
+]

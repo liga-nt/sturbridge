@@ -1,0 +1,712 @@
+[
+  {
+    "item_id": null,
+    "question_number": "1",
+    "question_text": "A student wrote this comparison: [?] > 5/2. Which of these fractions belongs in the [?] to make the student\u2019s comparison true?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "4/2"
+      },
+      {
+        "letter": "B",
+        "text": "10/4"
+      },
+      {
+        "letter": "C",
+        "text": "3/5"
+      },
+      {
+        "letter": "D",
+        "text": "21/6"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Equation showing a box symbol on the left side of a greater-than sign and the fraction 5/2 on the right: [?] > 5/2.",
+    "page": 1,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "2",
+    "question_text": "Which of these numbers are prime numbers? Select the two correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "4"
+      },
+      {
+        "letter": "B",
+        "text": "7"
+      },
+      {
+        "letter": "C",
+        "text": "18"
+      },
+      {
+        "letter": "D",
+        "text": "25"
+      },
+      {
+        "letter": "E",
+        "text": "43"
+      }
+    ],
+    "parts": null,
+    "select_count": 2,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 1,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "3",
+    "question_text": "A cafe owner recorded how many desserts were sold on Saturday.\n- 5/8 of the desserts sold were pies.\n- 1/8 of the desserts sold were cakes.\n- The remaining desserts sold were cookies.",
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "Which equation can be used to find the total fraction of desserts sold that were either pies or cakes? Mark your answer by filling in the correct circle on the next page."
+      },
+      {
+        "label": "B",
+        "text": "Of all the desserts sold on Saturday, what fraction were cookies? Show or explain how you got your answer."
+      },
+      {
+        "label": "C",
+        "text": "Of all the desserts sold on Saturday, 4/10 of the desserts were sold in the first two hours. A worker at the cafe created this equation to represent the fraction of all the desserts sold in the first two hours.\n\n3/4 + 1/6 = 4/10\n\nIs the worker\u2019s equation correct? Show or explain how you got your answer."
+      },
+      {
+        "label": "D",
+        "text": "At the beginning of the day on Saturday, the cafe had 6 1/8 pies to sell. At the end of the day, the cafe had 2 3/8 pies remaining.\n\nWhat is the total amount of pie the cafe sold on Saturday? Show or explain how you got your answer."
+      },
+      {
+        "label": "A",
+        "question_text": "Which equation can be used to find the total fraction of desserts sold that were either pies or cakes? Mark your answer by filling in the correct circle on the next page.",
+        "answer_type": "multiple_choice",
+        "answer_options": [
+          {
+            "letter": "A",
+            "text": "5/8 + 1/8 = 48/16"
+          },
+          {
+            "letter": "B",
+            "text": "5/8 + 1/8 = 6/16"
+          },
+          {
+            "letter": "C",
+            "text": "5/8 + 1/8 = 22/8"
+          },
+          {
+            "letter": "D",
+            "text": "5/8 + 1/8 = 6/8"
+          }
+        ],
+        "select_count": null,
+        "has_visual": false,
+        "visual_description": null
+      },
+      {
+        "label": "A",
+        "question_text": "This page shows only the answer choices for part A of question 3: 5/8 + 1/8 = ?. Select the correct equation that shows this sum.",
+        "answer_type": "multiple_choice",
+        "answer_options": [
+          {
+            "letter": "A",
+            "text": "5/8 + 1/8 = 48/16"
+          },
+          {
+            "letter": "B",
+            "text": "5/8 + 1/8 = 6/16"
+          },
+          {
+            "letter": "C",
+            "text": "5/8 + 1/8 = 22/8"
+          },
+          {
+            "letter": "D",
+            "text": "5/8 + 1/8 = 6/8"
+          }
+        ],
+        "select_count": null,
+        "has_visual": false,
+        "visual_description": null
+      }
+    ],
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 2,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "4",
+    "question_text": "The floor of a room is in the shape of a rectangle. The floor has a length of 15 feet and a width of 12 feet. What is the perimeter of the floor of the room?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "27 feet"
+      },
+      {
+        "letter": "B",
+        "text": "27 square feet"
+      },
+      {
+        "letter": "C",
+        "text": "54 feet"
+      },
+      {
+        "letter": "D",
+        "text": "54 square feet"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 4,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "5",
+    "question_text": "Which of these shapes appear to have at least one pair of parallel sides? Select the three correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "Shape A"
+      },
+      {
+        "letter": "B",
+        "text": "Shape B"
+      },
+      {
+        "letter": "C",
+        "text": "Shape C"
+      },
+      {
+        "letter": "D",
+        "text": "Shape D"
+      },
+      {
+        "letter": "E",
+        "text": "Shape E"
+      }
+    ],
+    "parts": null,
+    "select_count": 3,
+    "has_visual": true,
+    "visual_description": "Five different quadrilaterals labeled A, B, C, D, and E, each drawn separately as outlines for students to inspect for parallel sides.",
+    "page": 4,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "6",
+    "question_text": "Which of these numbers is 231,198 rounded to the nearest thousand?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "230,000"
+      },
+      {
+        "letter": "B",
+        "text": "231,000"
+      },
+      {
+        "letter": "C",
+        "text": "232,000"
+      },
+      {
+        "letter": "D",
+        "text": "240,000"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 5,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "7",
+    "question_text": null,
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "Which of these numbers in expanded form are shown with an equivalent number in word form? Select the three correct answers.",
+        "answer_type": "multiple_select",
+        "answer_options": [
+          {
+            "letter": "A",
+            "text": "(6 \u00d7 10,000) + (3 \u00d7 100) + (8 \u00d7 10) + (1 \u00d7 1) sixty thousand, three hundred eighty-one"
+          },
+          {
+            "letter": "B",
+            "text": "(6 \u00d7 10,000) + (3 \u00d7 100) + (8 \u00d7 10) + (1 \u00d7 1) sixty-three thousand, eight hundred one"
+          },
+          {
+            "letter": "C",
+            "text": "60,000 + 3,000 + 800 + 1 six thousand, three hundred eighty-one"
+          },
+          {
+            "letter": "D",
+            "text": "60,000 + 3,000 + 800 + 1 sixty-three thousand, eight hundred one"
+          },
+          {
+            "letter": "E",
+            "text": "(6 \u00d7 1,000) + (3 \u00d7 100) + (8 \u00d7 10) + (1 \u00d7 1) six thousand, three hundred eighty-one"
+          },
+          {
+            "letter": "F",
+            "text": "(6 \u00d7 1,000) + (3 \u00d7 100) + (8 \u00d7 10) + (1 \u00d7 1) sixty thousand, three hundred eighty-one"
+          }
+        ],
+        "select_count": 3,
+        "has_visual": false,
+        "visual_description": null
+      },
+      {
+        "label": "B",
+        "question_text": "Which of these statements are true? Select the three correct answers.",
+        "answer_type": "multiple_select",
+        "answer_options": [
+          {
+            "letter": "A",
+            "text": "Thirteen thousand, eight hundred thirty-one is less than 13,084."
+          },
+          {
+            "letter": "B",
+            "text": "Thirteen thousand, eight hundred thirty-one is greater than 13,084."
+          },
+          {
+            "letter": "C",
+            "text": "Thirteen thousand, seven is less than 13,084."
+          },
+          {
+            "letter": "D",
+            "text": "Thirteen thousand, seven is greater than 13,084."
+          },
+          {
+            "letter": "E",
+            "text": "Thirteen thousand, one hundred six is less than 13,084."
+          },
+          {
+            "letter": "F",
+            "text": "Thirteen thousand, one hundred six is greater than 13,084."
+          }
+        ],
+        "select_count": 3,
+        "has_visual": false,
+        "visual_description": null
+      }
+    ],
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 6,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "8",
+    "question_text": "A teacher has 36 jars of paint to use in art class. The number of jars is 4 times the number of students in the class. Which of these equations can be used to find y, the number of students in the class? Select the three correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "36 \u00f7 4 = y"
+      },
+      {
+        "letter": "B",
+        "text": "4 \u00d7 y = 36"
+      },
+      {
+        "letter": "C",
+        "text": "y \u00f7 4 = 36"
+      },
+      {
+        "letter": "D",
+        "text": "36 \u00d7 y = 4"
+      },
+      {
+        "letter": "E",
+        "text": "36 \u00f7 y = 4"
+      }
+    ],
+    "parts": null,
+    "select_count": 3,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 7,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "9",
+    "question_text": "What is the measure of an angle that turns through 1/4 of a circle?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "15\u00b0"
+      },
+      {
+        "letter": "B",
+        "text": "90\u00b0"
+      },
+      {
+        "letter": "C",
+        "text": "270\u00b0"
+      },
+      {
+        "letter": "D",
+        "text": "345\u00b0"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 7,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "10",
+    "question_text": "Which of these figures show a line that is a line of symmetry? Select the two correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "A pentagon with a vertical dashed line through its center and arrows pointing up and down along the line."
+      },
+      {
+        "letter": "B",
+        "text": "A right triangle with a horizontal dashed line across it and arrows pointing left and right along the line."
+      },
+      {
+        "letter": "C",
+        "text": "A trapezoid with a horizontal dashed line through its center and arrows pointing left and right along the line."
+      },
+      {
+        "letter": "D",
+        "text": "A diamond-shaped quadrilateral with a vertical dashed line through its center and arrows pointing up and down along the line."
+      },
+      {
+        "letter": "E",
+        "text": "A hexagon-like figure with a horizontal dashed line through its center and arrows pointing left and right along the line."
+      }
+    ],
+    "parts": null,
+    "select_count": 2,
+    "has_visual": true,
+    "visual_description": "Five separate polygon figures, each with a dashed line and arrows indicating a possible line of symmetry: A vertical line through a pentagon, a horizontal line through a right triangle, a horizontal line through a trapezoid, a vertical line through a diamond-shaped quadrilateral, and a horizontal line through a hexagon-like figure.",
+    "page": 8,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "11",
+    "question_text": "There are 5 jugs on a table. Each jug is filled with 3/4 gallon of water. What is the total number of gallons of water in all of the jugs?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "15/4"
+      },
+      {
+        "letter": "B",
+        "text": "23/4"
+      },
+      {
+        "letter": "C",
+        "text": "3/20"
+      },
+      {
+        "letter": "D",
+        "text": "15/20"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 9,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "12",
+    "question_text": "An equation is shown. 70,368 \u2212 2,419 = w What value of w makes the equation true?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "67,849"
+      },
+      {
+        "letter": "B",
+        "text": "67,949"
+      },
+      {
+        "letter": "C",
+        "text": "68,151"
+      },
+      {
+        "letter": "D",
+        "text": "68,949"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 9,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "13",
+    "question_text": "The shaded part of this model represents a decimal number that is less than 1. Write a decimal number that is less than the decimal number represented in the model. Enter your answer in the box.",
+    "answer_type": "short_answer",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Two 10-by-10 square grids of small squares. The first grid on the left has some squares shaded to represent a decimal less than 1. The second, larger outlined rectangle on the right contains a full 10-by-10 shaded grid labeled \"represents 1 whole.\"",
+    "page": 10,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "14",
+    "question_text": "A gardener cut grass with a lawnmower and then raked and bagged leaves.",
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "Before cutting the grass, the gardener added fuel to the lawnmower from a container. This picture shows the amount of fuel, in liters, remaining in the container after adding fuel to the lawnmower. What is the total amount of fuel, in liters, remaining in the container?"
+      },
+      {
+        "label": "B",
+        "text": "The gardener used 2 liters of fuel to cut the grass. What is the total amount of fuel, in milliliters, the gardener used to cut the grass? Show or explain how you got your answer."
+      },
+      {
+        "label": "C",
+        "text": "It took the gardener 3 hours and 45 minutes to rake the leaves. What is the total amount of time, in minutes, it took the gardener to rake the leaves? Show or explain how you got your answer."
+      },
+      {
+        "label": "D",
+        "text": "The gardener placed the leaves into three large plastic bags: a black bag, a green bag, and a white bag.\n\u2022 The mass of the black bag was 8 kilograms.\n\u2022 The mass of the green bag was 7,900 grams.\n\u2022 The mass of the white bag was less than the mass of the black bag but more than the mass of the green bag.\nWhat could be the mass, in grams, of the white bag? Show or explain how you got your answer."
+      }
+    ],
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Drawing of a fuel container with a vertical gauge marked 5, 10, 15, and 20 liters. The shaded fuel level is between 10 and 15, closer to 10.",
+    "page": 11,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "15",
+    "question_text": "Angles PLM and KLP are shown on this protractor. Which of these statements are true? Select the two correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "The measure of angle PLM is 35 degrees."
+      },
+      {
+        "letter": "B",
+        "text": "The measure of angle PLM is 70 degrees."
+      },
+      {
+        "letter": "C",
+        "text": "The measure of angle PLM is 110 degrees."
+      },
+      {
+        "letter": "D",
+        "text": "The measure of angle KLP is 45 degrees."
+      },
+      {
+        "letter": "E",
+        "text": "The measure of angle KLP is 145 degrees."
+      },
+      {
+        "letter": "F",
+        "text": "The measure of angle KLP is 155 degrees."
+      }
+    ],
+    "parts": null,
+    "select_count": 2,
+    "has_visual": true,
+    "visual_description": "A protractor centered at point L with a horizontal ray from L to the right labeled P, an upward-right ray from L labeled M, and an upward-left ray from L labeled K. The protractor shows degree markings for measuring the angles PLM and KLP.",
+    "page": 12,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "16",
+    "question_text": "Which of these numbers are factors of 64? Select the three correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "6"
+      },
+      {
+        "letter": "B",
+        "text": "8"
+      },
+      {
+        "letter": "C",
+        "text": "16"
+      },
+      {
+        "letter": "D",
+        "text": "24"
+      },
+      {
+        "letter": "E",
+        "text": "64"
+      },
+      {
+        "letter": "F",
+        "text": "128"
+      }
+    ],
+    "parts": null,
+    "select_count": 3,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 13,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "17",
+    "question_text": "A decimal number is shown. 0.49 Which fraction is equivalent to the decimal number?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "49/1"
+      },
+      {
+        "letter": "B",
+        "text": "4/9"
+      },
+      {
+        "letter": "C",
+        "text": "49/10"
+      },
+      {
+        "letter": "D",
+        "text": "49/100"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 14,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "18",
+    "question_text": "What is the quotient of this expression? 4,527 \u00f7 3",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "1,509"
+      },
+      {
+        "letter": "B",
+        "text": "1,519"
+      },
+      {
+        "letter": "C",
+        "text": "1,566"
+      },
+      {
+        "letter": "D",
+        "text": "1,590"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 14,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "19",
+    "question_text": "A student wrote this subtraction pattern.\n\n234, 225, 216, 207, . . .\n\nThe student uses the same rule each time to find the next number in the pattern.\n\nWhat is the next number in the student\u2019s pattern?\n\nEnter your answer in the box.",
+    "answer_type": "short_answer",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": null,
+    "page": 15,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  },
+  {
+    "item_id": null,
+    "question_number": "20",
+    "question_text": "Which of these statements are correct?\n\nSelect the three correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "257 \u00d7 5 = 1,235 is true."
+      },
+      {
+        "letter": "B",
+        "text": "257 \u00d7 5 = 1,235 is false."
+      },
+      {
+        "letter": "C",
+        "text": "384 \u00d7 9 = 3,456 is true."
+      },
+      {
+        "letter": "D",
+        "text": "384 \u00d7 9 = 3,456 is false."
+      },
+      {
+        "letter": "E",
+        "text": "601 \u00d7 7 = 4,207 is true."
+      },
+      {
+        "letter": "F",
+        "text": "601 \u00d7 7 = 4,207 is false."
+      }
+    ],
+    "parts": null,
+    "select_count": 3,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 15,
+    "source_pdf": "g4-math_2025_questions.pdf"
+  }
+]

@@ -1,0 +1,1025 @@
+[
+  {
+    "item_id": "MA227383",
+    "question_number": "1",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA227383/showByIdentifier/8f4732b0f0674888872e98ebde8b9d84",
+    "stimulus_intro": "Sonya is thinking of a number. She wrote multiples of her number in a box, as shown.",
+    "stimulus_type": "number_box",
+    "stimulus_params": {
+      "rows": [
+        [
+          16,
+          32
+        ],
+        [
+          24
+        ],
+        [
+          20,
+          12
+        ]
+      ]
+    },
+    "question_text": "Which of the following could be Sonya's number?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "3"
+      },
+      {
+        "letter": "B",
+        "text": "4"
+      },
+      {
+        "letter": "C",
+        "text": "6"
+      },
+      {
+        "letter": "D",
+        "text": "8"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "A square box containing the numbers 16 and 32 in the top row, 24 in the middle, and 20 and 12 in the bottom row.",
+    "page": 1,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA311551",
+    "question_number": "2",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA311551/showByIdentifier/04988ee6bd8e44d2a76a17cac29f9cf1",
+    "stimulus_intro": "Find the sum.",
+    "question_text": null,
+    "math_expression": "[6/100] + [3/10]",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "[36/100]"
+      },
+      {
+        "letter": "B",
+        "text": "[9/110]"
+      },
+      {
+        "letter": "C",
+        "text": "[63/110]"
+      },
+      {
+        "letter": "D",
+        "text": "[36/200]"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 2,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "correct_answer": "A"
+  },
+  {
+    "item_id": "MA311583",
+    "question_number": "3",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA311583/showByIdentifier/e578688d85784296a661e7d149681d51",
+    "question_text": "This table shows the length, in kilometers, of each trail in a park.",
+    "stimulus_type": "data_table",
+    "stimulus_params": {
+      "title": "Park Trails",
+      "headers": [
+        "Trail",
+        "Length\n(kilometers)"
+      ],
+      "rows": [
+        [
+          "Blue",
+          "1.6"
+        ],
+        [
+          "Red",
+          "0.6"
+        ],
+        [
+          "White",
+          "1.65"
+        ],
+        [
+          "Green",
+          "0.8"
+        ],
+        [
+          "Purple",
+          "1.58"
+        ]
+      ]
+    },
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "Which trail has the shortest length?",
+        "answer_type": "short_answer"
+      },
+      {
+        "label": "B",
+        "text": "List the trails in order of length from shortest to longest.",
+        "answer_type": "short_answer"
+      },
+      {
+        "label": "C",
+        "text": "Which trail has a length closest to the length of the Blue Trail? Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      }
+    ],
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Table titled \"Park Trails\" with two columns: Trail and Length (kilometers). Rows: Blue \u2013 1.6, Red \u2013 0.6, White \u2013 1.65, Green \u2013 0.8, Purple \u2013 1.58.",
+    "page": 3,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "correct_answer": {
+      "A": "Red",
+      "B": "Red, Green, Purple, Blue, White",
+      "C": "Purple"
+    }
+  },
+  {
+    "item_id": "MA303319",
+    "question_number": "4",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA303319/showByIdentifier/451f1dea37b143deaf9aad7845a99de1",
+    "stimulus_intro": "Carmen wrote this expression in a notebook.",
+    "math_expression": "1 + 1 + [1/4] + [2/4]",
+    "question_text": "Which of these is <strong>not</strong> equal to Carmen's expression?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "[3/4] + 2"
+      },
+      {
+        "letter": "B",
+        "text": "[3/4] + 2 + [1/4]"
+      },
+      {
+        "letter": "C",
+        "text": "1 + 1 + [2/4] + [1/4]"
+      },
+      {
+        "letter": "D",
+        "text": "1 + 1 + [1/4] + [1/4] + [1/4]"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 4,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA714225971",
+    "question_number": "5",
+    "question_text": "Plot the point that represents where 0.27 is located on this number line.",
+    "answer_type": "number_line_plot",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "stimulus_params": {
+      "min": 0,
+      "max": 1,
+      "small_intervals": 10
+    },
+    "page": 5,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA714225971/showByIdentifier/d2aa0665b96c4d92bdc907a4e73d4649",
+    "correct_answer": "C"
+  },
+  {
+    "item_id": "MA713939739",
+    "question_number": "6",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA713939739/showByIdentifier/198a8d5c7c3942258c1c9c999bebd0bf",
+    "question_text": "A playground has a basketball court and a sandbox. The length of the sandbox is 18 feet.",
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "The length of the basketball court is 5 times the length of the sandbox. Write an equation that can be used to find b, the length in feet of the basketball court.",
+        "answer_type": "short_answer"
+      },
+      {
+        "label": "B",
+        "text": "What is the length, in feet, of the basketball court? Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      },
+      {
+        "label": "C",
+        "text": "The length of the playground is twice the length of the basketball court and the sandbox added together. What is the total length, in feet, of the playground? Show or explain how you got your answer.",
+        "answer_type": "constructed_response"
+      }
+    ],
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 6,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "correct_answer": {
+      "A": "b=5x18",
+      "B": "90",
+      "C": "216"
+    }
+  },
+  {
+    "item_id": "MA704647848",
+    "question_number": "7",
+    "question_text": "Which pairs of models show a correct comparison of [3/5] and [2/3]?",
+    "answer_type": "multiple_select",
+    "layout": "split",
+    "select_count": 2,
+    "answer_options": [
+      {
+        "letter": "A",
+        "model": {
+          "left": {
+            "type": "rect",
+            "numerator": 3,
+            "denominator": 5,
+            "orientation": "h"
+          },
+          "operator": ">",
+          "right": {
+            "type": "rect",
+            "numerator": 2,
+            "denominator": 3,
+            "orientation": "h"
+          }
+        }
+      },
+      {
+        "letter": "B",
+        "model": {
+          "left": {
+            "type": "circle",
+            "numerator": 3,
+            "denominator": 5
+          },
+          "operator": "<",
+          "right": {
+            "type": "circle",
+            "numerator": 2,
+            "denominator": 3
+          }
+        }
+      },
+      {
+        "letter": "C",
+        "model": {
+          "left": {
+            "type": "rect",
+            "numerator": 3,
+            "denominator": 3,
+            "orientation": "h",
+            "rows": 2
+          },
+          "operator": "<",
+          "right": {
+            "type": "rect",
+            "numerator": 2,
+            "denominator": 3,
+            "orientation": "h",
+            "rows": 1
+          }
+        }
+      },
+      {
+        "letter": "D",
+        "model": {
+          "left": {
+            "type": "circle",
+            "numerator": 3,
+            "denominator": 5,
+            "size": 1.4
+          },
+          "operator": ">",
+          "right": {
+            "type": "circle",
+            "numerator": 2,
+            "denominator": 3,
+            "size": 0.65
+          }
+        }
+      },
+      {
+        "letter": "E",
+        "model": {
+          "left": {
+            "type": "rect",
+            "numerator": 3,
+            "denominator": 5,
+            "orientation": "v"
+          },
+          "operator": "<",
+          "right": {
+            "type": "rect",
+            "numerator": 2,
+            "denominator": 3,
+            "orientation": "v"
+          }
+        }
+      },
+      {
+        "letter": "F",
+        "model": {
+          "left": {
+            "type": "circle",
+            "numerator": 3,
+            "denominator": 6
+          },
+          "operator": ">",
+          "right": {
+            "type": "circle",
+            "numerator": 2,
+            "denominator": 3
+          }
+        }
+      }
+    ],
+    "parts": null,
+    "has_visual": true,
+    "page": 7,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA704647848/showByIdentifier/6b0ac226e62b4e37919292db8e9269df",
+    "correct_answer": "B,E"
+  },
+  {
+    "item_id": "MA303329",
+    "question_number": "8",
+    "stimulus_intro": "A carpenter measured the lengths, in inches, of some pieces of wood. The lengths are shown in this line plot.",
+    "stimulus_type": "line_plot",
+    "stimulus_params": {
+      "title": "Wood Pieces",
+      "axis_label": "Length (inches)",
+      "data_points": [
+        {
+          "label": "9",
+          "count": 1
+        },
+        {
+          "label": "9[1/8]",
+          "count": 2
+        },
+        {
+          "label": "9[1/4]",
+          "count": 1
+        },
+        {
+          "label": "9[3/8]",
+          "count": 3
+        },
+        {
+          "label": "9[1/2]",
+          "count": 3
+        }
+      ]
+    },
+    "question_text": "The carpenter collected all the pieces of wood with a length of 9[3/8] inches. Then he placed those pieces end to end in a straight line. What is the total length of the pieces of wood the carpenter placed in a straight line?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "17[1/8] inches"
+      },
+      {
+        "letter": "B",
+        "text": "18[1/8] inches"
+      },
+      {
+        "letter": "C",
+        "text": "27[1/8] inches"
+      },
+      {
+        "letter": "D",
+        "text": "28[1/8] inches"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "page": 8,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA303329/showByIdentifier/669cd58a5eb94ab3869bb486b1a629d5",
+    "correct_answer": "D"
+  },
+  {
+    "item_id": "MA714233266",
+    "question_number": "9",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA714233266/showByIdentifier/2cdf58407bf54870a6234b5a45458a8a",
+    "question_text": "A teacher has two sets of stickers in different shapes to give to students.",
+    "answer_type": "multi_part",
+    "layout": "stacked",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "The first set has five stickers, as shown.\n\nSelect <strong>two</strong> stickers in this set that appear to have at least one obtuse angle.",
+        "answer_type": "hotspot",
+        "select_count": 2,
+        "stimulus_type": "sticker_set",
+        "stimulus_params": {
+          "viewBox": "0 0 470 102",
+          "stickers": [
+            {
+              "id": "1",
+              "shape": "polygon",
+              "points": [
+                [
+                  47.901,
+                  26.844
+                ],
+                [
+                  8.188,
+                  47.799
+                ],
+                [
+                  23.357,
+                  81.705
+                ],
+                [
+                  72.444,
+                  81.705
+                ],
+                [
+                  87.613,
+                  47.799
+                ]
+              ],
+              "label": "Congrats!"
+            },
+            {
+              "id": "2",
+              "shape": "rect",
+              "x": 103.168,
+              "y": 32.574,
+              "w": 94.987,
+              "h": 49.131,
+              "label": "Awesome\nTeamwork!"
+            },
+            {
+              "id": "3",
+              "shape": "polygon",
+              "points": [
+                [
+                  249.329,
+                  20.294
+                ],
+                [
+                  284.785,
+                  81.705
+                ],
+                [
+                  213.874,
+                  81.705
+                ]
+              ],
+              "label": "A+"
+            },
+            {
+              "id": "4",
+              "shape": "polygon",
+              "points": [
+                [
+                  391.394,
+                  81.705
+                ],
+                [
+                  300.505,
+                  81.705
+                ],
+                [
+                  317.119,
+                  39.946
+                ],
+                [
+                  370.871,
+                  48.737
+                ]
+              ],
+              "label": "Great\nJob!"
+            },
+            {
+              "id": "5",
+              "shape": "rect",
+              "x": 406.951,
+              "y": 26.844,
+              "w": 54.861,
+              "h": 54.861,
+              "label": "Way to\nGo!"
+            }
+          ]
+        }
+      },
+      {
+        "label": "B",
+        "text": "The second set has three triangle stickers, as shown.",
+        "instruction": "Select from the drop-down menus to correctly complete the sentence.",
+        "answer_type": "inline_choice",
+        "stimulus_type": "triangle_set",
+        "stimulus_params": {
+          "viewBox": "0 0 413 81",
+          "triangles": [
+            {
+              "id": "yay",
+              "label": "Yay!",
+              "points": [
+                [
+                  47,
+                  3
+                ],
+                [
+                  5,
+                  76
+                ],
+                [
+                  89,
+                  76
+                ]
+              ]
+            },
+            {
+              "id": "great",
+              "label": "Great!",
+              "points": [
+                [
+                  130,
+                  5
+                ],
+                [
+                  130,
+                  76
+                ],
+                [
+                  252,
+                  76
+                ]
+              ]
+            },
+            {
+              "id": "hooray",
+              "label": "Hooray!",
+              "points": [
+                [
+                  283,
+                  5
+                ],
+                [
+                  410,
+                  5
+                ],
+                [
+                  345,
+                  76
+                ]
+              ]
+            }
+          ]
+        },
+        "sentence": "The [RESPONSE_B1] sticker appears to be a right triangle because it has [RESPONSE_B2].",
+        "dropdowns": [
+          {
+            "id": "RESPONSE_B1",
+            "options": [
+              "Yay!",
+              "Great!",
+              "Hooray!"
+            ]
+          },
+          {
+            "id": "RESPONSE_B2",
+            "options": [
+              "one right angle",
+              "two right angles",
+              "three right angles"
+            ]
+          }
+        ]
+      }
+    ],
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Part A: Five stickers of different shapes (pentagon, rectangle, triangle, irregular quadrilateral, square) each with congratulatory text. Part B: Three triangle stickers labeled 'Yay!', 'Great!', and 'Hooray!'.",
+    "page": 9,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "correct_answer": "A,D;B"
+  },
+  {
+    "item_id": "MA222213",
+    "question_number": "10",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA222213/showByIdentifier/a7f2e07fdf2c4f17a58c9e81e833ceb9",
+    "question_text": "An artist bought 5 yards of rope. Which of the following is equivalent to 5 yards?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "3 feet"
+      },
+      {
+        "letter": "B",
+        "text": "15 feet"
+      },
+      {
+        "letter": "C",
+        "text": "60 feet"
+      },
+      {
+        "letter": "D",
+        "text": "180 feet"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 11,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA307033",
+    "question_number": "11",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA307033/showByIdentifier/0be18d5719174b02a411444dffc2f9c9",
+    "stimulus_intro": "A teacher wrote this number on the board.",
+    "math_expression": "24,473",
+    "question_text": "The value of the digit in the thousands place is how many times the value of the digit in the hundreds place?",
+    "answer_type": "short_answer",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 11,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "correct_answer": "10"
+  },
+  {
+    "item_id": "MA307037",
+    "question_number": "12",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA307037/showByIdentifier/2843c54d0f13417bacfc4f6e3b3945d1",
+    "question_text": "What is <em>fourteen thousand, two hundred five</em> written in standard form? Enter your answer in the box.",
+    "answer_type": "short_answer",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 12,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "correct_answer": "14205"
+  },
+  {
+    "item_id": "MA714111699",
+    "question_number": "13",
+    "question_text": "A dashed line is drawn on this figure.",
+    "answer_type": "inline_choice",
+    "stimulus_type": "symmetry_figure",
+    "stimulus_params": {
+      "shape": {
+        "type": "star",
+        "points": 4,
+        "outer_r": 114,
+        "inner_corners": [
+          [
+            44,
+            -46
+          ],
+          [
+            44,
+            46
+          ],
+          [
+            -44,
+            46
+          ],
+          [
+            -44,
+            -46
+          ]
+        ]
+      },
+      "line": {
+        "from": [
+          -96,
+          -100
+        ],
+        "to": [
+          96,
+          100
+        ]
+      },
+      "padding": 5
+    },
+    "instruction": "Select from the drop-down menus to correctly complete each sentence.",
+    "sentences": [
+      "The dashed line [RESPONSE_A1] a line of symmetry for the figure.",
+      "The figure has a total of [RESPONSE_A2] of symmetry."
+    ],
+    "dropdowns": [
+      {
+        "id": "RESPONSE_A1",
+        "options": [
+          "is",
+          "is not"
+        ]
+      },
+      {
+        "id": "RESPONSE_A2",
+        "options": [
+          "0 lines",
+          "1 line",
+          "2 lines",
+          "3 lines",
+          "4 lines",
+          "5 lines"
+        ]
+      }
+    ],
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "4-pointed star figure with a diagonal dashed line from upper-left to lower-right, arrows at both ends.",
+    "page": 13,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA714111699/showByIdentifier/fafa2c460b7244019cce5aca5e5d5138",
+    "correct_answer": "A,E"
+  },
+  {
+    "item_id": "MA306994",
+    "question_number": "14",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA306994/showByIdentifier/7578b60d583c419dae45796037360641",
+    "question_text": "Angle HGL has a measure of 167\u00b0. What is the measure of angle JGK?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "43\u00b0"
+      },
+      {
+        "letter": "B",
+        "text": "79\u00b0"
+      },
+      {
+        "letter": "C",
+        "text": "88\u00b0"
+      },
+      {
+        "letter": "D",
+        "text": "90\u00b0"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Ray diagram centered at point G with rays going to points H, J, K, and L. The angle between rays GH and GJ is labeled 47\u00b0, the angle between rays GJ and GK is labeled with a question mark, and the angle between rays GK and GL is labeled 41\u00b0. Points H, J, K, and L are at the ends of the rays.",
+    "page": 14,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "stimulus_intro": "Some angles are shown in a diagram.",
+    "stimulus_type": "angle_diagram",
+    "stimulus_params": {
+      "center": "G",
+      "rays": [
+        {
+          "label": "H",
+          "angle": 150
+        },
+        {
+          "label": "J",
+          "angle": 103
+        },
+        {
+          "label": "K",
+          "angle": 24
+        },
+        {
+          "label": "L",
+          "angle": -17
+        }
+      ],
+      "arc_labels": [
+        {
+          "between": [
+            "H",
+            "J"
+          ],
+          "text": "47\u00b0",
+          "radius": 45
+        },
+        {
+          "between": [
+            "J",
+            "K"
+          ],
+          "text": "?",
+          "radius": 52
+        },
+        {
+          "between": [
+            "K",
+            "L"
+          ],
+          "text": "41\u00b0",
+          "radius": 62
+        }
+      ]
+    },
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA279791",
+    "question_number": "15",
+    "stimulus_intro": "Abe has 16 pins in one box and 17 pins in another box. He is hanging posters with the pins. Abe uses 4 pins to hang each poster.",
+    "question_text": "What is the total number of posters Abe can hang with the pins?",
+    "answer_type": "short_answer",
+    "input_widget": "text",
+    "answer_suffix": null,
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 15,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA279791/showByIdentifier/2585706222074be7b9bc53847f510fb8",
+    "correct_answer": "C"
+  },
+  {
+    "item_id": "MA713680384",
+    "question_number": "16",
+    "answer_type": "true_false_table",
+    "question_text": "Select \u201cTrue\u201d or \u201cFalse\u201d in the table for each statement.",
+    "statements": [
+      {
+        "text": "32,974 rounded to the nearest ten is 33,000"
+      },
+      {
+        "text": "32,974 rounded to the nearest hundred is 33,000"
+      },
+      {
+        "text": "32,974 rounded to the nearest thousand is 33,000"
+      }
+    ],
+    "parts": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 15,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA713680384/showByIdentifier/491e4dd859a64ee8b71238b5dd8d3078",
+    "correct_answer": "A,D,E"
+  },
+  {
+    "item_id": "MA704650539",
+    "question_number": "17",
+    "question_text": "Two protractors are used to measure angle A and angle B, as shown. Which of these shows the measures of both angles?",
+    "answer_type": "protractor_drag_drop",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "angle A = 40\u00b0, angle B = 120\u00b0"
+      },
+      {
+        "letter": "B",
+        "text": "angle A = 140\u00b0, angle B = 120\u00b0"
+      },
+      {
+        "letter": "C",
+        "text": "angle A = 40\u00b0, angle B = 60\u00b0"
+      },
+      {
+        "letter": "D",
+        "text": "angle A = 140\u00b0, angle B = 60\u00b0"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Two separate semicircular protractors are shown. For Angle A, one ray is horizontal to the right along the baseline and the other ray extends up and to the right; the indicated measure is an acute angle. For Angle B, one ray is horizontal to the right along the baseline and the other ray extends up and to the right with a larger opening than Angle A; the indicated measure is an obtuse angle.",
+    "page": 16,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA704650539/showByIdentifier/d9c4ee661fa24ba28ad41ed082329d35",
+    "stimulus_params": {
+      "angles": [
+        {
+          "label": "A",
+          "degrees": 140
+        },
+        {
+          "label": "B",
+          "degrees": 60
+        }
+      ],
+      "choices": [
+        40,
+        60,
+        90,
+        120,
+        140
+      ]
+    },
+    "correct_answer": "D"
+  },
+  {
+    "item_id": "MA304988",
+    "question_number": "18",
+    "question_text": "Meghan is making 5 loaves of banana bread. She needs [2/3] cup of sugar for each loaf. How many cups of sugar does Meghan need altogether to make the 5 loaves?",
+    "answer_type": "short_answer",
+    "input_widget": "equation_editor",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 17,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA304988/showByIdentifier/b58b9aaa90604c56bf2a497cc4988bed",
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA286777",
+    "question_number": "19",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA286777/showByIdentifier/f705796b68c143d298148835624a2f46",
+    "stimulus_intro": "A student wrote this subtraction problem in his notebook.",
+    "math_expression": "25,000 \u2212 13,476 = {?}",
+    "question_text": "What number belongs in the {?} to make the student's subtraction problem true?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "11,524"
+      },
+      {
+        "letter": "B",
+        "text": "11,636"
+      },
+      {
+        "letter": "C",
+        "text": "12,476"
+      },
+      {
+        "letter": "D",
+        "text": "12,634"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 17,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "correct_answer": "A"
+  },
+  {
+    "item_id": "MA247745",
+    "question_number": "20",
+    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA247745/showByIdentifier/c52a55c992674dfbbc81241df83da1f1",
+    "stimulus_intro": "Anna made a diagram of her room and labeled the length and width, as shown.",
+    "stimulus_type": "rectangle_diagram",
+    "stimulus_params": {
+      "width": 12,
+      "height": 10,
+      "width_label": "12 feet",
+      "height_label": "10 feet"
+    },
+    "question_text": "What is the area of Anna\u2019s room?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "44 square feet"
+      },
+      {
+        "letter": "B",
+        "text": "100 square feet"
+      },
+      {
+        "letter": "C",
+        "text": "120 square feet"
+      },
+      {
+        "letter": "D",
+        "text": "144 square feet"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Rectangle representing Anna\u2019s room with a horizontal side labeled 12 feet and a vertical side labeled 10 feet.",
+    "page": 18,
+    "source_pdf": "g4-math_2019_questions.pdf",
+    "correct_answer": "C"
+  }
+]

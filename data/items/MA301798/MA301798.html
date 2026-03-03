@@ -1,0 +1,598 @@
+<html lang="en" class="full-height"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Preview Modal</title>
+    <link rel="stylesheet" href="./css/previewModal.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700" rel="stylesheet">
+    <script src="./config.js" type="text/javascript"></script>
+    <script src="./js/simulations.js" type="text/javascript"></script>
+    <script src="../items_scoring/js/scoring.js" type="text/javascript"></script>
+    <script src="./js/main.js" type="module"></script>
+    <script src="./js/MathJax/mathjax-startup.js" type="text/javascript"></script>
+    <script src="./js/MathJax/es5/tex-mml-chtml.js" type="text/javascript"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style>
+    <script src="./js/modal-iframe.js" type="module" defer=""></script>
+<style type="text/css" id="sketchpad-widget-custom-cursor-styles"></style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  border-collapse: collapse;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-mn {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+
+mjx-c.mjx-c32::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "2";
+}
+
+mjx-c.mjx-c31::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "1";
+}
+
+mjx-c.mjx-c34::before {
+  padding: 0.677em 0.5em 0 0;
+  content: "4";
+}
+
+mjx-c.mjx-c33::before {
+  padding: 0.665em 0.5em 0.022em 0;
+  content: "3";
+}
+
+mjx-c.mjx-c36::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "6";
+}
+
+mjx-c.mjx-c38::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "8";
+}
+</style></head>
+<body class="full-height" style="visibility: visible;">
+    <div class="dil-modal-loading-spinner" id="globalLoadingSpinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    <div class="dil-modal-container full-height" id="DilModalContainer" style="visibility: visible; display: flex;">
+        <div id="DilModalContent" class="dil-modal-content">
+            <div class="dil-modal-header iframe-default-styles">
+                <div class="dil-modal-title" id="modalItemId">
+                    <span id="lighthouse-itemid" aria-live="polite">Item: MA301798</span>
+                </div>
+                <button class="dil-modal-close" id="modalCloseButton" aria-label="Close modal">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="standardItemWrapper" class="dil-item-content-wrapper" style="overflow: visible; max-height: none; height: auto;">
+                <div id="standardItemContent" class="dil-item-content">
+                    <div id="itemPreview" class="dil-item-preview">
+                        <div class="lighthouse-canvas-container stimuli-wrapper"><div class="lighthouse-canvas layout-flow runtime" ruler="1/8 in.,cm" id="canvas-4f4d4771c32f" qtiname="choiceInteraction" style="overflow: visible; height: unset; min-height: 487.438px;"><style style="">#canvas-4f4d4771c32f  .center {    text-align: center;    padding: 10px;}
+#canvas-4f4d4771c32f  .info {    background-color: #99ccff;}
+#canvas-4f4d4771c32f  .copyright-tm {    font-size: x-small;    padding-top: 20px;}
+#canvas-4f4d4771c32f  .visuallyhidden {    display: none;}
+#canvas-4f4d4771c32f  .boxText {    border: 1px solid #000000;    padding: 8px;}
+#canvas-4f4d4771c32f  .passage-title {    text-align: center;}
+#canvas-4f4d4771c32f  .author {    text-align: center;}
+#canvas-4f4d4771c32f  div[class^="abbi"] p:not(.autoNumPoem),div[class^="abbi"] ul {    margin-bottom: 1em;}</style><div class="row span8 MultipleChoiceItem" widget="MultipleChoiceItem" id="MultipleChoice_sp_1" style="width: 73.5%; overflow: visible; max-height: none; height: auto;"><div widget="TextBox" class="TextBox"><div class="abbi-richtext">
+<p id="undefined_1">Lily made some cookies, as shown.</p>
+</div>
+<div class="abbi-image">
+<p class="center"><img id="undefined_2" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS8AAAB3CAMAAABlqjbEAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAGNQTFRFaWlqNDU1nZ6fqqusxMXHt7i6DQ0NdnZ3kJCSg4OFQUJCgICAQEBATk9Qv7+/GhobJycoW1xdEBAQ7+/vz8/PMDAw39/fICAgn5+fYGBgUFBQcHBwj4+Pr6+vAAAA0dLU////SfzlLAAAGupJREFUeNrsnemy8jjPru04zmAwSZhhQXjO/yg/S/IcB9bqXfvHWwU/uld3EXJbluVBVxT27/v5y4d9TfD/aq/j+c+/sjv89Yrz7s83+buuw3/QdfyjvXan2Xxu973552V7+9lufz7pfMB39xu8cLvd3Lbb6wed5zt+93aBC7f3zXZ7+2S/HXx3/sELT6hr80HXYQPfvXhd9+39+slaW/ju/UaNL+lK7LV7GDNxIaqeK9WoijE1o77N6g2eG3MLVlcV49PYsI5NI16yXW3/8WrM1HSy6hTXw1C1TDdwxf52WHWTjdGlJOjSatZGFyddj3VdP8ZMrdGlQVffO133Vf/Zga6hAl1KN6PRpVDX5edQtNfTdOCgWiEZ617hU1UvMZmrCn2DHThOXW0aIMIVdSXqzjRo+7PUdjTWbTirXi1ro5uIqpZtY1ztsbTZ1XT2oFu51FVpY7Lbs6yLG10dYzJcIY2ufgRdS8eEUdUoJuqFLsGMrrsfMM5eB/REZb7TmXu90k+n1aTmfWaxHXjtDIYyXthnl7RKT8O8zSz2A1c0oL2ZB5leISeujaf9ZI6Cowna0M+zXujSE58vz6WBSddo/Di9om65Al2ZxW5wxQgGMrqym4hJTbrZbxJ7HU6DGYYi/WaFP2E+HEwopzkx2HXWxt3r9BI1M7oJNrIa98dUVi+NX6SfpiHDtcaSsu6be+KP+1EudLWuQ0foYakWumRBV+919aAr8eMThIdMl3AdyqCHazbfInsdtkN0A+mGl3S/QYrb+RB7V9zbnXPjSjrnhz/q8Z54VzxqWzu8atc2UZHOyF0OpzHVRf8lhR/58C+9j71+jgdUv9QFP1EPsRvfmlRXZX88jHx076Oz18+WnPElxkZTTwc3lmHY1I2L+4e7CXYTWn8YoOeGeHhFPdXPzvOv2/2MumplQjf2dDB4HQnmW2/fk9XVjQ3cbIqHlwiGlN7BjtuLDQ2Tidik61XS1XoHQ12g3fipqjEcsVLjX8PN2us4T4pP1Lrw8zUfGGqZ/W3k4OawzcA478jRyW6ohzQyN4wxGF5sWy5Kc9ADoSv059Qo1BJpVG4O281McWaHqtclR9RVzY1vizC6rKeME+eVHao+pHYNh+/qSFc7n6yuvba6TAcGXZp0RY5T8/l+Rns9mlfhUzMyiGjNjzFVYf/OtidPU+kSoRUOws5cWGscOzAfo4nPsyhd0io0iGzNhR3v0RCzDRWbsahrIoNUPeqS1GczLV8urHSJmRZqp0sor8t2Sl3URR0lSFdHfTZv0F53jfGn9sO1WvzEiBG2rtoRR+TBmF22fno3sXJhDEGTmug6agp0igjTu6gqmV9iugPv307UlO0UxR9z88VMYeYKnNFl1ZOuo+kU6eJPWVdH40X0PenaDKjrXeMVzuh11est2mvLzNgln7R2pMDbw43N6qONYjK3uqSxOndN4bRGMHeDG5v4BEPFzxVWl3EWzbnw1qQRKHGiqAZst7Am7Cl+n4wuzl2QY3aNYPocZqOpgfGW6QJnaTl3A3Gw4a9GXZLTSkakuowjmMbLVzStw7d68IaedLmuZWSvTZP0Asp5dXAz0+SJT1FkfQ0U8S/xtGXmLXBbbJGxulSql7Gj7agpyQqtQ+eUJsoMRp9ZtsfuprfLaQvmLdTVkC7N23hSI12HZM42foODBhYEpKsTsaOdafWR6OpJ10C62rTxiuz1LywmJOvdn0L40Aj9qnEQs/3ZLotYaHnlR4z0w9f0q0CXrQc73T1CACPzJgsWGr4UNSobJM1iIrTct8oPsQndmFxW2+nuGBYTfUFXA2HF6MK5/u4WE9JHbB+TRBWGbwdO0+PfT7LX2bfezIajjDYQkuzFYKgJmD/dhu0xyzBOdLyBsJMTKq6hJW5BsfW7hiFeF9AaSuCmQoJZpF+xHn3fm0kg8mjSxTBuWF1uzbZp6hANWa5rAF3GUWEAX9yC4qL9cimaIK2uCn9FgteJ5setV8OIrBSFGOOJtZmn55drN/7R3Pwa76K8t3D6U4EHMlzA1a1rqJ53YSHp/qfUdvaBuGHm6epl201rwNMhLCRdr5hoKelmDGLFkOoKm6hoRFpdtYL5lKHxajdF1SpsPMKIFIpCX8U1hjuZ6GpOfn1/ODXZ3MOaJpta6tHN826jsthy5DsvE2viPefPnM321Tjn6xLYQR+i5X2uYqkLYk20WH/OKtVllqH5usQsM+N92i3ZEVDs7hdz5Lw9RPuh2zxyVhWXIvQTcEGyTTteZq56sXqFbMd5f0u2j4954LqTq5cIs90+beKd3WFrdLXV6hV1b3Tdn+mOs3mviw3z5XZOTwEGPr1pfAW6Hun5xO4HthKj7urS0rWZ74sjwMP1brYSM2el5lRq3i+Pc86b7QkOjfqSzczkfXosTlqepGsq6ZKmHffFcQ7owkOjks0qPl9WdemirtboCo1n6bmcuRP2p9B+FSNYs3+sHWWerz+XudEwUfdKCb+gzpxxcSg5QH9Kxt14lMZat+P6eaFpjuohvNM8bXVdHoe3h5LgzHXvl5YmCs7b51tdIwwyOcW69slxWX4efXjiYSx8zFaMj3jS/P50+fyAQ2I4ixzNipQPcPD5/HAU/3OyN9HKXIIn4O9Pl0kX3KRxui6bD4fLj629CQddzdtTXzfKLnQTbDzHU9/zx/zQYfeAQ/jtz2az2e2Ov8pF7DYbc8XdXPHY/S7LsLtufswlN3PJc/er7MfZ6LqbSzao61fZj+PT67r+TtfB6HKNfy4b/82nffOPX3t97fW119de38/XXl97fe31P2av3Z8poMPuz3TScfdnOunvus6/25z8RdfCXs8LEUOIzGzhc/tw08ODvnuiC+Hz+NCyI/78Zbsn1Ah2LB92nP+e9rt0IXw+cVbnH9J1Cbo+cVZH24a9b/z9Dc903m3MN7l8VT1jmgM3NBFqtLrjPhI39JJVyxjnbedRo92qLz6QG3oJ813Irpp7DbjJva8eguC5iapr+K7ik9FFCNTlsb45Nboa0MVAV291NW91wflE9ao6aDw3DZoGbPwKz3S90BFQxg1J8RJtgvSEWyDPZL7dJTwT5J8qZVpTYOB24B+qBW6I1TEC9ZKQkdoWDo6IZ+qlSHUJo4vNoGtp3xvqqha6jMWN1U4Fzop4JqOLJTyTNLr6BnQteCb0RE2nyC4z4U/PAemZ94/SCMH0zNzY07I64pnYOJ8yZcgNDXSK7IALn8JlHNz551AYIZZnmnJdWrElZ3VFaEpgYtQlVkIOSE1GV8ZZHe4RzzRmNxETZ4GzsvY670ch85Rz507kFWRvajZvUlm6FtXi/H1yiSbTSJHzTE1XL1LO7kQeeKb61VNaIZwuj1LmR8W9axPxTAvOanotdMU8Uwc8U+zHkL5Y6BKOs0Ke6dU2Cc90SngmPYkU6aHMc8YzxbmKXtnh5XLU9tKEZ7olPBNTnRsmr4hSSnimc8IzCafL56iph9k+MVfCM7kkfKor4ZkOKc806S5rvKCUXuCZ7CCBBJrC/ou5oRLPhNQf8Uw0FFOeqS7xTBc7eGuOOU7j+SwOkkkWOYze0SaaljyTLPFMJ5fQn+ahQ108DpIlngmObSUl2/mCZxJlnskmBLs55J5Msxg5cBVxQ3fHM7WWG9LRz1fNkPNMvZ/D9mrieskzUXuGkFgz9906nqm1PFMfIaKmWQueqQk8U2sZjZhn6psh55kmzzPNk9UlYkRU0Q2jH/nIM1n+RoC3EEOkP/FMlr8BkEYqbbmh/TueyfI3GDo7HDuBZ/op80yMElKoSysK655nald01S5jLdT0K56JAATU1Rd4pt5P7/U7nqkv8kxinWeSXWV5pgHxHRG4oVWeqQ88Ux14JlnimSh+1AnPxN7q8jxTFbihLml8QVdDuhzPNAHPpCOeiQIcglQT8kweZQw8U7XkmYjfNo4LmfRaFHgml3GTLswINIjlhhwLY3mmC3JW+pXrQgebaKikusBZeu4zboMdxhINYgbyCs+klzyTQAfrm0RXmWfqPTeE4AFvY4uv8Ey944YAPNC6q2LI+miDUZI3RSeoAZpqYSROsSes8ExI9YAusDqDxWU+Ex3242upS8N6F3imRJflmZ45zyQsYzD2oIvFjXc80z3wTKpdjEXimfgIDZw8z+QDWKtL2B/wTE3GM/nv6UmWh2/bMMcN/Ut5JtUvdGmM+MOIDwB4nom918VRF1rYTRGBZ1JsoatHnkkPtGDekb0OgWdKHiNAehMuYRAzkRtyE/caz9RhuzhGog5sr/zEHXimMeava+TeJPFMLXJDDms5r/BMog08k4A29p4CSnimaFLquoizAmByXPJMr5RnYhHPhCn/Es8kLM/EkGcaKdC1nhuKeCavv/c8E3pIwjPVOizwA89Uawp9FcSzWmFYkq5vRRPzTBFnJb2uaiSeqfUh1288Dvucs5KWs2pRl+OZoo3HM+asOsIGTDyTCl1CBF3bsL4/5c+NtMOCZxpynilzXtXwAjcUbbkfOc8keP5/YOeV8kw5ZzUM+b5lmON92nHP05FbL3W1H3imamwyngnmsHvEM5lrBj6to0Ylbug083eoUYEbus4N129Qow65oUO6ER7foUbw/NQ+PaJCzuqdrsnoSo/ONh84qxjmcucTxzdIT23aUXgM7HqzqNHvuaEHokaqFR+5Id/8H6uryDPN+1uBZ7ohZzVVK7qWz02eH1vSVWq86fd7mWeKkJ4u8EzV9IYbOuB5IaBGde9p8fotN4So0QDODE+kuVGVc0Pp6RScF44t6FJBl54vq+el+PxjA9wcPJHmTo6MrvXnUo+PG3JWEmCuKYK5Nu94JkJ6iAKypNHlA890uN4tAjVY0ugjN3R8OJ5ptKTR/gPP9O95s7oar+vD07Ln633OdN0/6fKcFXe6ssYX80M7pIA2v4eAEDW6ITa02f0y+QEI1B2xoccv4SRAjayu55903Ta/J7Ow8eu6vvm0b/7xa6+vvb72+trr+/na62uvr73+x+xFC+HDHxClMy2Ez39AlI60C/gDonSwuo5/0gW//5fCTrsPuhb2IiridHI802X/qXTSeZNxQ/vTp9JJjmeaLc90mj+VTjpYnunkeKbL/hNnteCZssOikrVOC13PdXsdsdgSpAYsz9Qiz9RkSE9yA3yuqcVsElPIM+n57Wb4jMWWBoFPoVueaUSeabtmZIKm4MAXdU2Ws2rWOSuCppwu4pkU8kyX3boueNhMYpZr4ipwVrfy+QQmxqeuFky3+aOMCdITbuG5IZ0/PEc807PcgbqXNdMsOwcFnum0PNNBGm8AXQ5siPKwQI0tz3Swuhg8z9cudfEyZ3UFngl1qbzxqMtzVs5eVAdpooyVyoCDDpGeffY8GNZBwmNrCyvEBVSY1ozPl4wb8nWQ5OAfFPflc5gCQu2e8UwXzzM1zZRVj+knZdz5Hc/kdHncxOhqF5wVFaeyunhWPUYwPhldC55JvurXB57pJ5WlAyS14JkayKdKlfJMcBxfL5NcgWeSprdynqle3CTmmTToSgyGjz3XC11txDOJBc8kFlfIqG7UAL11j+yVcUPuyc9aZHmCQ+xdLOGGpnpRoQd6+B57V8oNuTx0lWUin/HwjbMXldJFXQnP9EiyF7auS1KeCJM3tzisNHFVNb2mK+GZmldAC1OeSZR4pkvGM/E5NKwu80x7xzMR+5TyTFWJZ9pmPBObhyqGPgs808Ul9DW1YUx4prrAM8HkTjwT6eqahpUab1E2hmUeJsszNQnPpMmBu8AN2Yfk//0MvVKWZwo/b25FPNMQ2ctFvf3UWp5pmIeIZxqWPNPF8Uw9FcqAxJyK6gFYzkpEulzxDe6eiuZzE/FMNsrGPJOLejNjNDZMCAkpQk52boKz1ibq/XeeiZVTaDTnlXimY5ln6iKeqf8dz0R1YSzPhLp+yTNhaRTBdcIzPcs8E9WFIV0t6gLe5Yf4HP2KcGVZtWnuigoBKjJExDMxX6NFVAm5/Kpr7K2WAKHAMwVcua76NHclAzckqohnMrpeK7rkUlfGM1VVWrugJnxQEB0VuKHe141a6BKxrohnmly8Bt/PuKE2goUjnkl5bkjZ8CfxxtLyTHLBMzGuFzwT1qPsKW5Kl98newHPFDJbjmeC5WSFvt4vdCHPpNSCZ0K6TWI1mIUuDqNH5zxThd5g1p06uonjmebEOzpM2VbN3ECEMu2JIqutg/QvmU4BS4i4odp0cBRZPc+UIImiFY5n6tHxqiXB+pNxVr2lXxqIUC3rY10NUp85z0S4BOiaMFrEuso8U4W6BMBcHUaLKqsUCPPj3UMtkq/xTGOzwjMx1Re4IahChkhNPdzdPO/HhtIrPBNVuXE807/tEJblbaGMGbgxIbPK0jZR3SgqiVfimciXmx83PwaeaSrxTD2gIRTBSjxTtBYRRM4R0oMR2a+Nrms8Uxt4JuQ6+UeeiSpuYVOIMI14prbMM7GIZ8KIHPFMMvBMOnbO2vNMMB3VoarRZaVuFMY+yzOhLsRaGN3F80zacUNmZAnV+AqGCHBGC/zTCs80ToiBWIRdRAv8UJurtsuEDgiCWuPNpY2zoop4poSzCjyT4KOvYIjmixb4oW5UT6FPYr25Fom3uq8sJj6ucFaBZ6oVknBeV9fcwvr+lgM8AYZYqYO05Jk0V+/rIMEDIRnPxLN1Se3rILmNSs5Z2bpW8XMYc7wfWuiq1UKX8cxLwjPldaMCArsoTsXcpmt4hxoVuCGzQX9b0kmYPWp23HCF0klvUKNlEajDJ87K7J2z4wbgmd7qWhSBMqH1fUknhLkynsmjRvK33BCUTkLUqFQ6Cbih5bNmDjUqlU4qF4ECzgp19Wu6jiVdq5yV6fdCEShoPOhq13Q9y+erxysiPaY/OzUyt058xw0RamScppYtH10ptrfc0PmJJZ1Mfwo9+pOjnBtKjYacFaBGvRr7oOt0XT+8xpJOxpklG/3J0bsiUP/OyFlBqalKj1Ok63F4dx6dID34wOTp41GxQ40GSxp95IZC6aTRkkafikD92zldjSWNPutKOKv5F0WgTMfkui6/4ZkANcLP47cQEFJAG0tA/S69AKgRfXa/fTL777oQgdpYAuo/6Prm0775x6+9vvb62utrr+/na6+vvb72+h+314GW2+c/FFA600r4+AcEaofL7cMfCih5Xb9HoI60Dfgvus6/tNfhmvFM+/n+sVgv4T97hxrlz38tP8+MG7qUHrVKdT1I18Xr+shZHW/03b3lmU6lR62Kuk5BV17XObYXFjUCbggSEIxPwAIR0rPWfihqdMFXN0jimWzppGHer7WfoCk49RNwE+SGOPFMa762u95IV215JiqdNKzrstBU53R1FXFWw+LlYQVdgWca8SaJLpZ0YMO6WmieIz1Qoqh0bAQdCIdGHc+TC/CKulLppCsWRullHRJ4nmca59IzgMQzsSouAf6Bs9rdqQjUq/UFCWLOqnSWB9VXAOaqQ6ntmLMKA8bZi+ogYXpmHHTOM3HeTotXwQVuiDVjlwEHmqtW5XTa4Q5+hOkZ3vCcZ1J8Mu68zXgmHE34+oxhYJmu1ujSTV43agM3wbyHanjOMxldBc4KG291qayqTcV5xFkxf+y9PCXtmibimV5tzjMVipxMGc80L3imQs0NzzMN8lXlPBMv6Mp5pgRM+5kLUIDnmRrIAUmecFbL1zgQzyQSnmkb2euY8Uy8eMie8Ew5N6SLJ+bqHg/fhGdaDHuXiYxG8e6ikkNuVX5J1j4ZvvGoZVwXz/0TninkX/3z8SVdO2eve8Yzdc0QLokTvCnPpG2ar13wTLLEM7niapYbkkPMDcU8k3ewrasbZV9JyZroYfdIV+0dDEdvS0MCU0s8gD0vmfBMZz96nS6qJdENTVvUxV19gOPcWWTVfFdFdZDe8kwTsRBsHiKeCXPY7dzEyfHAM2nihsaZR3WQBko8F3mmztYIM4Eh5pmmJc9kmbE7d7rUHPq8zDNZXTNrCVkFFDPimcYlz3SxPNNQziIR3CKJZ+r+wjMJCJw4dpoPPFNFPFNNPBP7E8/0su/wwffN0ZRX5plkkWeiQfyJZ6rtO3xynklNgWdKyOW6Cm4tKm55pgow2IhnSmZ6YDKNd3fEFIX3uvVaBZ4pzamhLkv5VCzimdQUeKaEoagjzkp4nslMGJ7zBJ4pCUUwSVaEy9aViHgmrQPPlNaEQWdxuiKeydgw45lqM0ir/DVRnmcSRpeOeKaR1kPM3BgS4fE9gy7T+Jxnqphmnmfyg5jsdUJdbRjZ9LrNHnXx9JW5gWfqtI54ptFCU9rzTAVdzDtLxDPpPmdDVngmqoBVwXtvLDckPvFMVJlrgiTpgmfqyjwT/mhtuSHB2qr6xDNRWbIOMsRrPFNeN4p+FLqTvXJdbZFnQnwFsRtV4JnuND/eIp5pifQw9LcBpxv3XrfktVurPBOUffLvdbvGPNNiuUIcDK3e+iXP1HG2xjPhko6XeKa+zDNVVNDU8UzhPXg1X3JWLfobvcW4hZ5n/97xTNU6zxS9vi+Ky33EMwFhGtVB2o4Rz9RH+fY+55ncsvi8ooveaUY8E+piflkcaK6MZ2oXPJNfRJc5K3zHnKW4UVcVeKbAsknHM8FryMy61ZO1+HbRaCG99Z7fKdKF75XtiLip3PuVI27o7PXX1ic7KN5l1q3CkbVwZfzAQsxZUZGSqdGRLhsN4gKsUd0omirkCC8kbvGOrsiqiAuwRjyTfdVr1/Clrj7hmRavXFtyQ3kdpFF84pnYJ55JLXb2ao4fiPkNz9R94pmKuuIHYjbztNCV3VbmPNMGSie1q0iPbIecG8JXwb1BjQrc0HM/m91u9a4IVH6m8YGzoiJQyR71iJzVui54eVx2pnHdvy3pRDDXMz2fOD9uq0gPcEOFGtWEGpVLOpVfHne4rqNGwA0VDloINSqXdKpU6QDo33OzXtKpLxaBcrpKfVnrJj4ASs5XCemZ+sqstd2yq+recUNQ0glvJKUvZQblPd9wQwcqndRWdaXdrlMsuKF/BV2dMF3tSEjQtV4EyujaWl2T0yWRZzq/16V7eDzRLX4EFKe6vueZwlvaiOj5yA39e95OnhuikvGfuKGzR41GSxp9KgIFhcAyXZ9fMRBxVs3vdD1yXfkjuax8nHv9I2nkUaPHb8sz/Ts4BOr5a2jKo0a/17Xbeczq17qubwiobz7tm3/8//n5PwEGAH0G5SyQS+b5AAAAAElFTkSuQmCC" alt="The tactile graphic for this item is found in the Braille booklet. picture of cookies is shown. There are 4 rows of cookies. There are 6 cookies in each row." width="303" height="119" data-media-guid="10ad8f42-ffd9-4076-84c4-2ce15e932788"></p>
+</div>
+<div class="abbi-richtext">
+<p><span id="undefined_3" class="text-anchor">Lily made </span><mjx-container class="MathJax force-aria-label" jax="CHTML" id="undefined_4" aria-label="2" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="2" aria-hidden="true"><mn>2</mn></math></mjx-assistive-mml></mjx-container><span id="undefined_5" class="text-anchor"> times as many cookies as Tommy made. </span><span id="undefined_6" class="text-anchor">How many cookies did Tommy make?</span></p>
+</div></div><div class="multiplechoice--s1 multiplechoice--alpha multiplechoice--circle multiplechoice--selectoverlay MultipleChoice" widget="MultipleChoice" id="MultipleChoice_sp_1" max="1" numberofcolumns="1"><div class="distractors" role="group"><div class="button-like distractor" letter="A" id="undefined_MultipleChoice_sp_1_distractor_0" role="checkbox" aria-labelledby="undefined_MultipleChoice_sp_1_undefined_bubble_0 undefined_MultipleChoice_sp_1_undefined_distractorContent_0" aria-checked="false" tabindex="0"><span class="bubble force-aria-label" aria-label="Answer Choice A" id="undefined_MultipleChoice_sp_1_undefined_bubble_0"><label class="vhidden" aria-label="Answer Choice A"></label><span id="MultipleChoice_sp_1_1" aria-hidden="true">A</span></span><div class="distractorContent" id="undefined_MultipleChoice_sp_1_undefined_distractorContent_0"><p><mjx-container class="MathJax force-aria-label" jax="CHTML" id="MultipleChoice_sp_1_2" aria-label="12" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="12" aria-hidden="true"><mn>12</mn></math></mjx-assistive-mml></mjx-container></p></div></div><div class="multipleChoiceSpacer" style="height: 20px;"></div><div class="button-like distractor" letter="B" id="undefined_MultipleChoice_sp_1_distractor_1" role="checkbox" aria-labelledby="undefined_MultipleChoice_sp_1_undefined_bubble_1 undefined_MultipleChoice_sp_1_undefined_distractorContent_1" aria-checked="false" tabindex="0"><span class="bubble force-aria-label" aria-label="Answer Choice B" id="undefined_MultipleChoice_sp_1_undefined_bubble_1"><label class="vhidden" aria-label="Answer Choice B"></label><span id="MultipleChoice_sp_1_3" aria-hidden="true">B</span></span><div class="distractorContent" id="undefined_MultipleChoice_sp_1_undefined_distractorContent_1"><p><mjx-container class="MathJax force-aria-label" jax="CHTML" id="MultipleChoice_sp_1_4" aria-label="24" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c34"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="24" aria-hidden="true"><mn>24</mn></math></mjx-assistive-mml></mjx-container></p></div></div><div class="multipleChoiceSpacer" style="height: 20px;"></div><div class="button-like distractor" letter="C" id="undefined_MultipleChoice_sp_1_distractor_2" role="checkbox" aria-labelledby="undefined_MultipleChoice_sp_1_undefined_bubble_2 undefined_MultipleChoice_sp_1_undefined_distractorContent_2" aria-checked="false" tabindex="0"><span class="bubble force-aria-label" aria-label="Answer Choice C" id="undefined_MultipleChoice_sp_1_undefined_bubble_2"><label class="vhidden" aria-label="Answer Choice C"></label><span id="MultipleChoice_sp_1_5" aria-hidden="true">C</span></span><div class="distractorContent" id="undefined_MultipleChoice_sp_1_undefined_distractorContent_2"><p><mjx-container class="MathJax force-aria-label" jax="CHTML" id="MultipleChoice_sp_1_6" aria-label="36" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c33"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="36" aria-hidden="true"><mn>36</mn></math></mjx-assistive-mml></mjx-container></p></div></div><div class="multipleChoiceSpacer" style="height: 20px;"></div><div class="button-like distractor" letter="D" id="undefined_MultipleChoice_sp_1_distractor_3" role="checkbox" aria-labelledby="undefined_MultipleChoice_sp_1_undefined_bubble_3 undefined_MultipleChoice_sp_1_undefined_distractorContent_3" aria-checked="false" tabindex="0"><span class="bubble force-aria-label" aria-label="Answer Choice D" id="undefined_MultipleChoice_sp_1_undefined_bubble_3"><label class="vhidden" aria-label="Answer Choice D"></label><span id="MultipleChoice_sp_1_7" aria-hidden="true">D</span></span><div class="distractorContent" id="undefined_MultipleChoice_sp_1_undefined_distractorContent_3"><p><mjx-container class="MathJax force-aria-label" jax="CHTML" id="MultipleChoice_sp_1_8" aria-label="48" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c38"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="48" aria-hidden="true"><mn>48</mn></math></mjx-assistive-mml></mjx-container></p></div></div><div class="multipleChoiceSpacer" style="height: 20px;"></div><div class="editorObject addbutton-wrapper"><div class="editorObject addbutton"></div></div></div></div></div></div></div>
+                    </div>
+
+                    <!-- References Modal -->
+                    <div id="referencesModal" class="references-modal" style="display: none;">
+                        <div class="references-modal-header">
+                            <h3>References</h3>
+                            <button id="referencesModalClose" class="dil-modal-close" aria-label="Close References">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="references-modal-tabs" id="referencesModalTabs" style="overflow: visible; max-height: none; height: auto;">
+                            <!-- Tabs will be dynamically generated -->
+                        </div>
+                        <div class="references-modal-content" id="referencesModalContent" style="overflow: visible; max-height: none; height: auto;">
+                            <!-- Tab content will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons iframe-default-styles" style="display: flex;">
+                <div id="automaticScoringButtons" class="automatic-scoring-action-buttons" style="align-content: center; display: block;">
+                    <button class="action-button score-button" id="scoreButton" style="display: inline-block;">Score Answer</button>
+                    <button class="action-button answer-button" id="showAnswerButton" style="display: inline-block;">View Correct Answer</button>
+                    <button class="action-button references-button" id="referencesButton" style="display: none;" aria-label="Show References">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2v6h6"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 13H8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17H8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9H8"></path>
+                        </svg>
+                        <span>References</span>
+                    </button>
+                    <button class="action-button reset-button" id="resetButton" style="display: inline-flex;">Reset</button>
+                </div>
+                <div id="humanScoringMessageContainer" class="human-scoring-message-container" style="display: none;">
+                    <span class="human-scoring-message" id="humanScoringText">This question cannot be scored.</span>
+                </div>
+                <button class="action-button copy-button" id="copyUrlButton">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>Copy URL</span>
+                </button>
+                
+                <!-- Answer key selector (populated by JS after "View Correct Answer") -->
+                <div class="answer-key-section" id="answerKeySection" style="display: none;">
+                    <div class="answer-key-content" id="answerKeyContent">
+                        <div class="answer-key-header">
+                            <button class="collapse-button" id="collapseButton" aria-label="Collapse answer key section" aria-expanded="true" aria-controls="segmentedControl">
+                                <span id="collapseIcon">▼</span>
+                            </button>
+                            <span class="answer-key-label">Score Point:</span>
+                            <div class="segmented-control" id="segmentedControl" role="radiogroup" aria-label="Answer key options"></div>
+                        </div>
+                    </div>
+                <div id="answerKeySrAnnouncement" class="sr-only" aria-live="polite" aria-atomic="true"></div></div>                
+            </div>            
+            <div class="item-metadata iframe-default-styles" id="itemMetadata" style="display: block;">
+                <strong>Subject:</strong> Math |
+                <strong>Grade:</strong> 4 |
+                <strong>Type:</strong> SR |
+                <strong>Reporting Category:</strong> Operations and Algebraic Thinking |
+                <strong>Points:</strong> 1
+            </div>
+        </div>
+    </div>
+    
+    <!-- Screen reader feedback for copyUrlButton, resetButton, correctAnswerButton -->
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="copyUrlFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="resetFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="correctAnswerFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="scoreAnswerFeedback"></div>
+
+
+<link type="text/css" rel="stylesheet" href="/authoring/css/lighthouse-editor.css"><link type="text/css" rel="stylesheet" href="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/css/mathquill.css"><link type="text/css" rel="stylesheet" href="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/css/mathkeyboard.css"><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-3.5.0.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-migrate-3.4.1.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-bbq.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.freetile.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.maskedinput.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.autoGrowInput.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.sortable.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/zebra_datepicker.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/shaka-player/dist/shaka-player.compiled.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/hls.js/hls.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/media/output/media.combined.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/dexie.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/MediaStreamRecorder.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/underscore-min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/js/mathquill.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/raphael-min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/raphael.sketchpad.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/lighthouse/editor/jpicker/jpicker-1.1.6.js"></script><script type="text/javascript" src="/authoring/js/lighthouse-en.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/lighthouse/editor/tips.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/mathinput.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/chart.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/fraction.min.js"></script></body></html>

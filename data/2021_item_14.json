@@ -1,0 +1,32 @@
+[
+  {
+    "item_id": null,
+    "question_number": "14",
+    "question_text": "This clock shows the time that Cary woke up this morning.",
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "At what time did Cary wake up? Be sure to label your answer with a.m. or p.m."
+      },
+      {
+        "label": "B",
+        "text": "Cary left for school 1 hour and 15 minutes after he woke up. At what time did Cary leave for school? Show or explain how you got your answer."
+      },
+      {
+        "label": "C",
+        "text": "Cary left school at 3:40. He ate lunch 4 hours before he left school. At what time did Cary eat lunch? Show or explain how you got your answer."
+      },
+      {
+        "label": "D",
+        "text": "Cary has 45 minutes of homework. His favorite TV show is at 5:30. What is the latest time Cary can start his homework to be finished at 5:30? Show or explain how you got your answer."
+      }
+    ],
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Analog clock face showing the time Cary woke up, with hour hand a little past 7 and minute hand on 12.",
+    "page": 1,
+    "source_pdf": "2021_item_14.pdf"
+  }
+]

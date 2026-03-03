@@ -1,0 +1,602 @@
+<html lang="en" class="full-height"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Preview Modal</title>
+    <link rel="stylesheet" href="./css/previewModal.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700" rel="stylesheet">
+    <script src="./config.js" type="text/javascript"></script>
+    <script src="./js/simulations.js" type="text/javascript"></script>
+    <script src="../items_scoring/js/scoring.js" type="text/javascript"></script>
+    <script src="./js/main.js" type="module"></script>
+    <script src="./js/MathJax/mathjax-startup.js" type="text/javascript"></script>
+    <script src="./js/MathJax/es5/tex-mml-chtml.js" type="text/javascript"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style>
+    <script src="./js/modal-iframe.js" type="module" defer=""></script>
+<style type="text/css" id="sketchpad-widget-custom-cursor-styles"></style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  border-collapse: collapse;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-mn {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+
+mjx-c.mjx-c34::before {
+  padding: 0.677em 0.5em 0 0;
+  content: "4";
+}
+
+mjx-c.mjx-c2C::before {
+  padding: 0.121em 0.278em 0.194em 0;
+  content: ",";
+}
+
+mjx-c.mjx-c32::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "2";
+}
+
+mjx-c.mjx-c38::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "8";
+}
+
+mjx-c.mjx-c35::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "5";
+}
+
+mjx-c.mjx-c30::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "0";
+}
+</style></head>
+<body class="full-height" style="visibility: visible;">
+    <div class="dil-modal-loading-spinner" id="globalLoadingSpinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    <div class="dil-modal-container full-height" id="DilModalContainer" style="visibility: visible; display: flex;">
+        <div id="DilModalContent" class="dil-modal-content">
+            <div class="dil-modal-header iframe-default-styles">
+                <div class="dil-modal-title" id="modalItemId">
+                    <span id="lighthouse-itemid" aria-live="polite">Item: MA001851276</span>
+                </div>
+                <button class="dil-modal-close" id="modalCloseButton" aria-label="Close modal">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="standardItemWrapper" class="dil-item-content-wrapper" style="overflow: visible; max-height: none; height: auto;">
+                <div id="standardItemContent" class="dil-item-content">
+                    <div id="itemPreview" class="dil-item-preview">
+                        <div class="lighthouse-canvas-container stimuli-wrapper"><div class="lighthouse-canvas runtime" ruler="1/8 in.,cm" id="canvas-76faa2c2241c" qtiname="matchInteraction" style="overflow: visible; height: unset; min-height: 400px;"><style style="">#canvas-76faa2c2241c  .center {    text-align: center;    padding: 10px;}
+#canvas-76faa2c2241c  .info {    background-color: #99ccff;}
+#canvas-76faa2c2241c  .copyright-tm {    font-size: x-small;    padding-top: 20px;}
+#canvas-76faa2c2241c  .visuallyhidden {    display: none;}
+#canvas-76faa2c2241c  .boxText {    border: 1px solid #000000;    padding: 8px;}
+#canvas-76faa2c2241c  .passage-title {    text-align: center;}
+#canvas-76faa2c2241c  .author {    text-align: center;}
+#canvas-76faa2c2241c  div[class^="abbi"] p:not(.autoNumPoem),div[class^="abbi"] ul {    margin-bottom: 1em;}</style><div widget="TextBox" id="TextBox_sp_1" class="TextBox" style="left: 0px; top: 0px; width: 917px; height: auto; overflow: visible; max-height: none;"><div class="row">
+<div class="span8">
+<div class="abbi-richtext">
+<p><span id="TextBox_sp_1_1" class="text-anchor">Round the number </span><mjx-container class="MathJax force-aria-label" jax="CHTML" id="TextBox_sp_1_2" aria-label="44285" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c34"></mjx-c></mjx-mn><mjx-mtext class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mtext><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c38"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="44285" aria-hidden="true"><mn>44</mn><mtext>,</mtext><mn>285</mn></math></mjx-assistive-mml></mjx-container><span id="TextBox_sp_1_3" class="text-anchor"> to the nearest hundred, the nearest thousand, and the nearest ten thousand.</span></p>
+<p><span id="TextBox_sp_1_4" class="text-anchor">Select “True” </span><span id="TextBox_sp_1_5" class="abbi-ttschunk">or</span><span id="TextBox_sp_1_6" class="text-anchor"> “False” for each statement in the table.</span></p>
+</div>
+</div>
+</div></div><div usecheckboxes="false" rowmaxassociations="1" colmaxassociations="3" tablefontsize="12" tablecellpadding="9" textalignment="center" columnwidthmode="Manual" columnwidthunits="px" columnwidths="[500,100,100]" widget="MatchTable" id="MatchTable_sp_1" answersettings-min="3" class="MatchTable" style="font-size: 12pt; text-align: center; background-color: transparent; min-width: 400px; min-height: 0px; width: 774px; height: auto; left: 0px; top: 89px; overflow: visible; max-height: none;"><table class="connectionRadioTypeTable manualColumnWidth"><tr class="radioRow" id="radio_r0"><td class="radioColumn" id="radio_c0" style="padding: 9px; width: 500px;"><p><strong id="MatchTable_sp_1_1">Statement</strong></p></td><td class="radioColumn cn_r2" id="radio_c1" style="padding: 9px; width: 100px;"><div class="connectionsItem" style="margin-right: 0px; max-width: none;"><p><span class="text-anchor" id="MatchTable_sp_1_20">
+    </span><strong id="MatchTable_sp_1_21">True</strong><span class="text-anchor" id="MatchTable_sp_1_22">
+  </span></p></div></td><td class="radioColumn cn_r2" id="radio_c2" style="padding: 9px; width: 100px;"><div class="connectionsItem" style="margin-right: 0px; max-width: none;"><p><span class="text-anchor" id="MatchTable_sp_1_23">
+    </span><strong id="MatchTable_sp_1_24">False</strong><span class="text-anchor" id="MatchTable_sp_1_25">
+  </span></p></div></td></tr><tr class="radioRow cn_r1" id="radio_r1"><td class="" id="radio_c0" style="padding: 9px"><div class="connectionsItem" style="margin-right: 0px; max-width: none;"><p style="text-align: left;"><mjx-container class="MathJax force-aria-label" jax="CHTML" id="MatchTable_sp_1_2" aria-label="44285" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c34"></mjx-c></mjx-mn><mjx-mtext class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mtext><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c38"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="44285" aria-hidden="true"><mn>44</mn><mtext>,</mtext><mn>285</mn></math></mjx-assistive-mml></mjx-container><span class="text-anchor" id="MatchTable_sp_1_3"> rounded to the nearest </span><span class="abbi-ttschunk"><strong id="MatchTable_sp_1_4">hundred</strong></span><span class="text-anchor" id="MatchTable_sp_1_5"> is </span><mjx-container class="MathJax force-aria-label" jax="CHTML" id="MatchTable_sp_1_6" aria-label="44200" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c34"></mjx-c></mjx-mn><mjx-mtext class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mtext><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="44200" aria-hidden="true"><mn>44</mn><mtext>,</mtext><mn>200</mn></math></mjx-assistive-mml></mjx-container><span class="text-anchor" id="MatchTable_sp_1_7">.</span></p></div></td><td class="" id="radio_c1" style="padding: 9px"><div class="connection-radio-container"><input type="radio" class="button-like" id="radio_1_1" data-row="1" data-col="1" style=""><div class="radio-circle"></div></div></td><td class="" id="radio_c2" style="padding: 9px"><div class="connection-radio-container"><input type="radio" class="button-like" id="radio_1_2" data-row="1" data-col="2" style=""><div class="radio-circle"></div></div></td></tr><tr class="radioRow cn_r1" id="radio_r2"><td class="" id="radio_c0" style="padding: 9px"><div class="connectionsItem" style="margin-right: 0px; max-width: none;"><p style="text-align: left;"><mjx-container class="MathJax force-aria-label" jax="CHTML" id="MatchTable_sp_1_8" aria-label="44285" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c34"></mjx-c></mjx-mn><mjx-mtext class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mtext><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c38"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="44285" aria-hidden="true"><mn>44</mn><mtext>,</mtext><mn>285</mn></math></mjx-assistive-mml></mjx-container><span class="text-anchor" id="MatchTable_sp_1_9"> rounded to the nearest </span><span class="abbi-ttschunk"><strong id="MatchTable_sp_1_10">thousand</strong></span><span class="text-anchor" id="MatchTable_sp_1_11"> is </span><span class="nobreak"><mjx-container class="MathJax force-aria-label" jax="CHTML" id="MatchTable_sp_1_12" aria-label="44000" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c34"></mjx-c></mjx-mn><mjx-mtext class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mtext><mjx-mn class="mjx-n"><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="44000" aria-hidden="true"><mn>44</mn><mtext>,</mtext><mn>000</mn></math></mjx-assistive-mml></mjx-container><span class="text-anchor" id="MatchTable_sp_1_13">.</span></span></p></div></td><td class="" id="radio_c1" style="padding: 9px"><div class="connection-radio-container"><input type="radio" class="button-like" id="radio_2_1" data-row="2" data-col="1" style=""><div class="radio-circle"></div></div></td><td class="" id="radio_c2" style="padding: 9px"><div class="connection-radio-container"><input type="radio" class="button-like" id="radio_2_2" data-row="2" data-col="2" style=""><div class="radio-circle"></div></div></td></tr><tr class="radioRow cn_r1" id="radio_r3"><td class="" id="radio_c0" style="padding: 9px"><div class="connectionsItem" style="margin-right: 0px; max-width: none;"><p style="text-align: left;"><mjx-container class="MathJax force-aria-label" jax="CHTML" id="MatchTable_sp_1_14" aria-label="44285" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c34"></mjx-c></mjx-mn><mjx-mtext class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mtext><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c38"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="44285" aria-hidden="true"><mn>44</mn><mtext>,</mtext><mn>285</mn></math></mjx-assistive-mml></mjx-container><span class="text-anchor" id="MatchTable_sp_1_15"> rounded to the nearest </span><span class="abbi-ttschunk"><strong id="MatchTable_sp_1_16">ten thousand</strong></span><span class="text-anchor" id="MatchTable_sp_1_17"> is </span><mjx-container class="MathJax force-aria-label" jax="CHTML" id="MatchTable_sp_1_18" aria-label="40000" role="math" style="font-size: 111.7%; position: relative;"><mjx-math aria-hidden="true" class="MJX-TEX"><mjx-mn class="mjx-n"><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-mtext class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mtext><mjx-mn class="mjx-n"><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML" alttext="40000" aria-hidden="true"><mn>40</mn><mtext>,</mtext><mn>000</mn></math></mjx-assistive-mml></mjx-container><span class="text-anchor" id="MatchTable_sp_1_19"><span class="text-anchor" id="MatchTable_sp_1_26">.</span>&nbsp;</span></p></div></td><td class="" id="radio_c1" style="padding: 9px"><div class="connection-radio-container"><input type="radio" class="button-like" id="radio_3_1" data-row="3" data-col="1" style=""><div class="radio-circle"></div></div></td><td class="" id="radio_c2" style="padding: 9px"><div class="connection-radio-container"><input type="radio" class="button-like" id="radio_3_2" data-row="3" data-col="2" style=""><div class="radio-circle"></div></div></td></tr></table></div></div></div>
+                    </div>
+
+                    <!-- References Modal -->
+                    <div id="referencesModal" class="references-modal" style="display: none;">
+                        <div class="references-modal-header">
+                            <h3>References</h3>
+                            <button id="referencesModalClose" class="dil-modal-close" aria-label="Close References">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="references-modal-tabs" id="referencesModalTabs" style="overflow: visible; max-height: none; height: auto;">
+                            <!-- Tabs will be dynamically generated -->
+                        </div>
+                        <div class="references-modal-content" id="referencesModalContent" style="overflow: visible; max-height: none; height: auto;">
+                            <!-- Tab content will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons iframe-default-styles" style="display: flex;">
+                <div id="automaticScoringButtons" class="automatic-scoring-action-buttons" style="align-content: center; display: block;">
+                    <button class="action-button score-button" id="scoreButton" style="display: inline-block;">Score Answer</button>
+                    <button class="action-button answer-button" id="showAnswerButton" style="display: inline-block;">View Correct Answer</button>
+                    <button class="action-button references-button" id="referencesButton" style="display: none;" aria-label="Show References">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2v6h6"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 13H8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17H8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9H8"></path>
+                        </svg>
+                        <span>References</span>
+                    </button>
+                    <button class="action-button reset-button" id="resetButton" style="display: inline-flex;">Reset</button>
+                </div>
+                <div id="humanScoringMessageContainer" class="human-scoring-message-container" style="display: none;">
+                    <span class="human-scoring-message" id="humanScoringText">This question cannot be scored.</span>
+                </div>
+                <button class="action-button copy-button" id="copyUrlButton">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>Copy URL</span>
+                </button>
+                
+                <!-- Answer key selector (populated by JS after "View Correct Answer") -->
+                <div class="answer-key-section" id="answerKeySection" style="display: none;">
+                    <div class="answer-key-content" id="answerKeyContent">
+                        <div class="answer-key-header">
+                            <button class="collapse-button" id="collapseButton" aria-label="Collapse answer key section" aria-expanded="true" aria-controls="segmentedControl">
+                                <span id="collapseIcon">▼</span>
+                            </button>
+                            <span class="answer-key-label">Score Point:</span>
+                            <div class="segmented-control" id="segmentedControl" role="radiogroup" aria-label="Answer key options"></div>
+                        </div>
+                    </div>
+                <div id="answerKeySrAnnouncement" class="sr-only" aria-live="polite" aria-atomic="true"></div></div>                
+            </div>            
+            <div class="item-metadata iframe-default-styles" id="itemMetadata" style="display: block;">
+                <strong>Subject:</strong> Math |
+                <strong>Grade:</strong> 4 |
+                <strong>Type:</strong> SR |
+                <strong>Reporting Category:</strong> Number and Operations in Base Ten |
+                <strong>Points:</strong> 1
+            </div>
+        </div>
+    </div>
+    
+    <!-- Screen reader feedback for copyUrlButton, resetButton, correctAnswerButton -->
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="copyUrlFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="resetFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="correctAnswerFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="scoreAnswerFeedback"></div>
+
+
+<link type="text/css" rel="stylesheet" href="/authoring/css/lighthouse-editor.css"><link type="text/css" rel="stylesheet" href="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/css/mathquill.css"><link type="text/css" rel="stylesheet" href="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/css/mathkeyboard.css"><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-3.5.0.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-migrate-3.4.1.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-bbq.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.freetile.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.maskedinput.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.autoGrowInput.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.sortable.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/zebra_datepicker.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/shaka-player/dist/shaka-player.compiled.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/hls.js/hls.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/media/output/media.combined.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/dexie.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/MediaStreamRecorder.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/underscore-min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/js/mathquill.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/raphael-min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/raphael.sketchpad.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/lighthouse/editor/jpicker/jpicker-1.1.6.js"></script><script type="text/javascript" src="/authoring/js/lighthouse-en.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/lighthouse/editor/tips.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/mathinput.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/chart.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/fraction.min.js"></script></body></html>

@@ -1,0 +1,4126 @@
+#contrast-settings-ul .black-cream-bgc,#itemCanvas.black-cream-bgc{color:black;background-color:lemonChiffon}
+.black-cream-bgc .whitebg,.black-cream-bgc .well{background-color:lemonChiffon}
+#contrast-settings-ul .black-lblue-bgc,#itemCanvas.black-lblue-bgc{color:black;background-color:lightBlue}
+.black-lblue-bgc .whitebg,.black-lblue-bgc .well{background-color:lightBlue}
+#contrast-settings-ul .black-lmagenta-bgc,#itemCanvas.black-lmagenta-bgc{color:black;background-color:#EE82EE}
+.black-lmagenta-bgc .whitebg,.black-lmagenta-bgc .well{background-color:#EE82EE}
+#contrast-settings-ul .white-black-bgc,#itemCanvas.white-black-bgc{color:white;background-color:black}
+.white-black-bgc .whitebg,.white-black-bgc .well{background-color:black}
+#contrast-settings-ul .lblue-dblue-bgc,#itemCanvas.lblue-dblue-bgc{color:lightBlue;background-color:darkBlue}
+.lblue-dblue-bgc .whitebg,.lblue-dblue-bgc .well{background-color:darkBlue}
+.parcc #itemCanvasBody {font-size:16px;line-height:24px;}
+.parcc #itemCanvasBody label {font-size:16px;line-height:24px;}
+.parcc .qtip { font-size: 16px; line-height: 24px; }
+.parcc .qtip .qtip-titlebar { font-size: 16px; }
+.parcc #itemCanvasBody input[type="text"] {font-size:16px;line-height:24px;height:24px;margin-bottom:0;margin-top:0;}
+.parcc #itemCanvasBody .int-choice-control {padding-top:5px;}
+.parcc #itemCanvasBody .int-choice-control input[type="checkbox"] {margin-top:2px;}
+.parcc #itemCanvasBody .passage-title {}
+.parcc #itemCanvasBody .author {font-weight:normal;text-align:center;font-style:normal;}
+.parcc #itemCanvasBody .directions-passage {font-weight:normal;text-align:left;}
+.parcc #itemCanvasBody .boxText {border:1px solid #000000;}
+.parcc #itemCanvasBody blockquote.parcc p {margin-bottom:0;font-size:16px;font-weight:normal;line-height:24px;}
+.parcc #itemCanvasBody .copyright-tm {line-height:18px;color:#666666;}
+.parcc #itemCanvasBody .input-append.input-charmap {vertical-align:baseline;}
+.parcc #itemCanvasBody button.btn-input-charmap {padding:4px 6px;border-top-right-radius:4px;border-bottom-right-radius:4px;}
+.parcc #itemCanvasBody .grid-wrapper input[type="text"] {height: 20px;width:16px;line-height: 24px;margin-left:2px;margin-right:2px;padding:2px 1px 2px 8px;}
+
+/* Custom PARCC Large-Font styles */
+.parcc.large-font #itemCanvasBody {font-size:18px;line-height:28px;}
+.parcc.large-font #itemCanvasBody label {font-size:18px;line-height:28px;}
+.parcc.large-font #itemCanvasBody input[type="text"] {font-size:18px;line-height:28px;height:28px;margin-bottom:0;margin-top:0;}
+.parcc.large-font #itemCanvasBody select {font-size:16px;line-height:28px;padding-top:1px;padding-bottom:1px;font-weight:normal;}
+.parcc.large-font #itemCanvasBody .int-choice-control {padding-top:7px;}
+.parcc.large-font #itemCanvasBody .int-choice-control input[type="radio"] {margin-top:5px;}
+body.ie.parcc.large-font #itemCanvasBody .int-choice-control input[type="radio"] {margin-top:2px;}
+.parcc.large-font #itemCanvasBody .int-choice-label {padding-right:7px;}
+.parcc.large-font #itemCanvasBody blockquote.parcc p {margin-bottom:0;font-size:18px;font-weight:normal;line-height:28px;}
+.parcc.large-font #itemCanvasBody .int-extended-text, .parcc.large-font #itemCanvasBody .rte-editbox {font-size:18px;line-height:28px;}
+.parcc.large-font #itemCanvasBody .qtip-bootstrap, .parcc.large-font #itemCanvasBody .qtip-bootstrap .qtip-titlebar {font-size:16px;line-height:24px;}
+.parcc.large-font #itemCanvasBody .gap-choiceList li, .parcc.large-font #itemCanvasBody .choiceList-gap-target li {font-size:16px;}
+.parcc.large-font #itemCanvasBody .tooltip {font-size:14px;line-height:20px;}
+.parcc.large-font #itemCanvasBody .math { font-size: 18px; }
+.parcc.large-font #itemCanvasBody h5 {font-size:16px;}
+.parcc.large-font #itemCanvasBody button.btn-input-charmap {padding:6px 6px;border-top-right-radius:4px;border-bottom-right-radius:4px;}
+
+
+/* Custom PARCC Table Styles */
+.parcc #itemCanvasBody thead tr.info>th, tbody th.info {background-color:#99CCFF;}
+.parcc #itemCanvasBody .table-bblack {border-collapse:collapse;border:1px solid black;}
+.parcc #itemCanvasBody .table-bnone {border-collapse:collapse;border:none;}
+.parcc #itemCanvasBody caption.caption-strong {font-size:17.5px;font-family:inherit;font-weight:bold;line-height:20px;color:inherit;margin-bottom:10px;text-rendering:optimizelegibility;}
+.parcc #itemCanvasBody .table-caption-top caption {caption-side:top;text-align:center;border:1px solid black;border-bottom-style:none;padding:6px;}
+.parcc #itemCanvasBody .table-caption-bnone caption {border:none;text-align:center;padding:6px;}
+.parcc #itemCanvasBody .cell-left td {text-align:left;}
+.parcc #itemCanvasBody .cell-center td {text-align:center;}
+.parcc #itemCanvasBody .cell-right td {text-align:right;}
+.parcc #itemCanvasBody .header-normal th {font-weight:normal;text-align:center;vertical-align:middle;}
+.parcc #itemCanvasBody .cell-bnone td, .parcc #itemCanvasBody .cell-bnone th {border:none;}
+.parcc #itemCanvasBody td.cell-bblack,
+.parcc #itemCanvasBody .cell-bblack th,
+.parcc #itemCanvasBody .cell-bblack td, 
+.parcc #itemCanvasBody .data-bblack td {border:1px solid black;}
+.parcc #itemCanvasBody td.cell-brightblack,
+.parcc #itemCanvasBody th.header-brightblack,
+.parcc #itemCanvasBody .header-brightblack th,
+.parcc #itemCanvasBody .cell-brightblack td {border-right:1px solid black;}
+.parcc #itemCanvasBody td.cell-btopblack, .parcc #itemCanvasBody tr.row-btopblack td {border-top:1px solid black;}
+.parcc #itemCanvasBody td.cell-bbottomblack, .parcc #itemCanvasBody .header-bbottomblack th {border-bottom:1px solid black;}
+.parcc #itemCanvasBody td.cell-bleftblack {border-left:1px solid black;}
+.parcc #itemCanvasBody td.cell-brightnone, .parcc #itemCanvasBody th.cell-brightnone {border-right-style:none;}
+.parcc #itemCanvasBody td.cell-bleftnone, .parcc #itemCanvasBody th.cell-bleftnone {border-left-style:none;}
+.parcc #itemCanvasBody .cell-btopnone td, .parcc #itemCanvasBody .header-btopnone th, .parcc #itemCanvasBody th.cell-btopnone {border-top-style:none;}
+.parcc #itemCanvasBody .cell-bbottomnone td {border-bottom-style:none;}
+.parcc #itemCanvasBody .cell-bleftnone td, .parcc #itemCanvasBody .header-bleftnone th {border-left-style:none;}
+
+/* Base Aspire highlight and large font overrides */
+.aspire #itemCanvasBody .highlightColor { background-color:#FFFF7B; }
+.aspire.large-font #itemCanvasBody {font-size:16px;line-height:24px;}
+.aspire.large-font #itemCanvasBody label {font-size:16px;line-height:24px;}
+.aspire.large-font .qtip { font-size: 16px; line-height: 24px; }
+.aspire.large-font .qtip .qtip-titlebar { font-size: 16px; }
+.aspire.large-font #itemCanvasBody input[type="text"] {font-size:16px;line-height:24px;height:24px;margin-bottom:0;margin-top:0;padding-top:2px;padding-bottom:2px;}
+.aspire.large-font #itemCanvasBody .int-choice-control {padding-top:5px;}
+.aspire.large-font #itemCanvasBody .int-choice-control input[type="checkbox"] {margin-top:2px;}
+
+/* Custom TTS Aspire Styles */
+.aspire #itemCanvasBody span.ttshover:not(.ttsimage), .aspire .qtip span.ttshover:not(.ttsimage), .fcat #itemCanvasBody span.ttshover:not(.ttsimage), .fcat .qtip span.ttshover:not(.ttsimage) { color: white; background-color: blue !important; }
+.aspire #itemCanvasBody span.ttshover span, .aspire .qtip span.ttshover span, .fcat #itemCanvasBody span.ttshover span, .fcat .qtip span.ttshover span { background-color: blue !important; color: inherit; }
+.aspire #itemCanvasBody span.ttshover span.unhighlighted, .aspire .qtip span.ttshover span.unhighlighted, .fcat #itemCanvasBody span.ttshover span.unhighlighted, .fcat .qtip span.ttshover span.unhighlighted { background-color: blue !important; color: inherit; }
+.aspire #itemCanvasBody span.speaking, .aspire #itemCanvasBody span.speaking span, .aspire #itemCanvasBody span.speaking.ttshover:not(.ttsimage), .aspire #itemCanvasBody span.speaking.ttshover:not(.ttsimage) span, .aspire #itemCanvasBody span.ttsAccessElementHighlight, .aspire #itemCanvasBody span.ttsAccessElementHighlight span, .aspire #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage), .aspire #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span, .aspire .qtip span.speaking, .aspire .qtip span.speaking span, .aspire .qtip span.speaking.ttshover:not(.ttsimage), .aspire .qtip span.speaking.ttshover:not(.ttsimage) span, .aspire .qtip span.ttsAccessElementHighlight, .aspire .qtip span.ttsAccessElementHighlight span, .aspire .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage), .aspire .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span, .fcat #itemCanvasBody span.speaking, .fcat #itemCanvasBody span.speaking span, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage), .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage) span, .fcat #itemCanvasBody span.ttsAccessElementHighlight, .fcat #itemCanvasBody span.ttsAccessElementHighlight span, .fcat #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage), .fcat #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span, .fcat .qtip span.speaking, .fcat .qtip span.speaking span, .fcat .qtip span.speaking.ttshover:not(.ttsimage), .fcat .qtip span.speaking.ttshover:not(.ttsimage) span, .fcat .qtip span.ttsAccessElementHighlight, .fcat .qtip span.ttsAccessElementHighlight span, .fcat .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage), .fcat .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span { background-color: yellow !important; color: inherit; border: none; }
+.aspire #itemCanvasBody span.speaking .MathJax_CHTML, .aspire #itemCanvasBody span.speaking span .MathJax_CHTML, .aspire #itemCanvasBody span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML, .aspire #itemCanvasBody span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML, .aspire #itemCanvasBody span.ttsAccessElementHighlight .MathJax_CHTML, .aspire #itemCanvasBody span.ttsAccessElementHighlight span .MathJax_CHTML, .aspire #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML, .aspire #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML, .aspire .qtip span.speaking .MathJax_CHTML, .aspire .qtip span.speaking span .MathJax_CHTML, .aspire .qtip span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML, .aspire .qtip span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML, .aspire .qtip span.ttsAccessElementHighlight .MathJax_CHTML, .aspire .qtip span.ttsAccessElementHighlight span .MathJax_CHTML, .aspire .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML, .aspire .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML, .fcat #itemCanvasBody span.speaking .MathJax_CHTML, .fcat #itemCanvasBody span.speaking span .MathJax_CHTML, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML, .fcat #itemCanvasBody span.ttsAccessElementHighlight .MathJax_CHTML, .fcat #itemCanvasBody span.ttsAccessElementHighlight span .MathJax_CHTML, .fcat #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML, .fcat #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML, .fcat .qtip span.speaking .MathJax_CHTML, .fcat .qtip span.speaking span .MathJax_CHTML, .fcat .qtip span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML, .fcat .qtip span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML, .fcat .qtip span.ttsAccessElementHighlight .MathJax_CHTML, .fcat .qtip span.ttsAccessElementHighlight span .MathJax_CHTML, .fcat .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML, .fcat .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML { background-color: yellow !important; }
+.aspire #itemCanvasBody span.speaking .MathJax_CHTML .mjx-math, .aspire #itemCanvasBody span.speaking span .MathJax_CHTML .mjx-math, .aspire #itemCanvasBody span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math, .aspire #itemCanvasBody span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math, .aspire #itemCanvasBody span.ttsAccessElementHighlight .MathJax_CHTML .mjx-math, .aspire #itemCanvasBody span.ttsAccessElementHighlight span .MathJax_CHTML .mjx-math, .aspire #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math, .aspire #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math, .aspire .qtip span.speaking .MathJax_CHTML .mjx-math, .aspire .qtip span.speaking span .MathJax_CHTML .mjx-math, .aspire .qtip span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math, .aspire .qtip span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math, .aspire .qtip span.ttsAccessElementHighlight .MathJax_CHTML .mjx-math, .aspire .qtip span.ttsAccessElementHighlight span .MathJax_CHTML .mjx-math, .aspire .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math, .aspire .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math, .fcat #itemCanvasBody span.speaking .MathJax_CHTML .mjx-math, .fcat #itemCanvasBody span.speaking span .MathJax_CHTML .mjx-math, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math, .fcat #itemCanvasBody span.ttsAccessElementHighlight .MathJax_CHTML .mjx-math, .fcat #itemCanvasBody span.ttsAccessElementHighlight span .MathJax_CHTML .mjx-math, .fcat #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math, .fcat #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math, .fcat .qtip span.speaking .MathJax_CHTML .mjx-math, .fcat .qtip span.speaking span .MathJax_CHTML .mjx-math, .fcat .qtip span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math, .fcat .qtip span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math, .fcat .qtip span.ttsAccessElementHighlight .MathJax_CHTML .mjx-math, .fcat .qtip span.ttsAccessElementHighlight span .MathJax_CHTML .mjx-math, .fcat .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math, .fcat .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math { background-color: yellow !important; }
+.aspire #itemCanvasBody span.speaking .MathJax_CHTML .mjx-math span, .aspire #itemCanvasBody span.speaking span .MathJax_CHTML .mjx-math span, .aspire #itemCanvasBody span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span, .aspire #itemCanvasBody span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math span, .aspire #itemCanvasBody span.ttsAccessElementHighlight .MathJax_CHTML .mjx-math span, .aspire #itemCanvasBody span.ttsAccessElementHighlight span .MathJax_CHTML .mjx-math span, .aspire #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span, .aspire #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math span, .aspire .qtip span.speaking .MathJax_CHTML .mjx-math span, .aspire .qtip span.speaking span .MathJax_CHTML .mjx-math span, .aspire .qtip span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span, .aspire .qtip span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math span, .aspire .qtip span.ttsAccessElementHighlight .MathJax_CHTML .mjx-math span, .aspire .qtip span.ttsAccessElementHighlight span .MathJax_CHTML .mjx-math span, .aspire .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span, .aspire .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math span, .fcat #itemCanvasBody span.speaking .MathJax_CHTML .mjx-math span, .fcat #itemCanvasBody span.speaking span .MathJax_CHTML .mjx-math span, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math span, .fcat #itemCanvasBody span.ttsAccessElementHighlight .MathJax_CHTML .mjx-math span, .fcat #itemCanvasBody span.ttsAccessElementHighlight span .MathJax_CHTML .mjx-math span, .fcat #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span, .fcat #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math span, .fcat .qtip span.speaking .MathJax_CHTML .mjx-math span, .fcat .qtip span.speaking span .MathJax_CHTML .mjx-math span, .fcat .qtip span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span, .fcat .qtip span.speaking.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math span, .fcat .qtip span.ttsAccessElementHighlight .MathJax_CHTML .mjx-math span, .fcat .qtip span.ttsAccessElementHighlight span .MathJax_CHTML .mjx-math span, .fcat .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span, .fcat .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span .MathJax_CHTML .mjx-math span { background-color: transparent !important; }
+.aspire #itemCanvasBody span.speaking.unhighlighted, .aspire #itemCanvasBody span.speaking span.unhighlighted, .aspire #itemCanvasBody span.speaking.ttshover:not(.ttsimage).unhighlighted, .aspire #itemCanvasBody span.speaking.ttshover:not(.ttsimage) span.unhighlighted, .aspire #itemCanvasBody span.ttsAccessElementHighlight.unhighlighted, .aspire #itemCanvasBody span.ttsAccessElementHighlight span.unhighlighted, .aspire #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage).unhighlighted, .aspire #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span.unhighlighted, .aspire .qtip span.speaking.unhighlighted, .aspire .qtip span.speaking span.unhighlighted, .aspire .qtip span.speaking.ttshover:not(.ttsimage).unhighlighted, .aspire .qtip span.speaking.ttshover:not(.ttsimage) span.unhighlighted, .aspire .qtip span.ttsAccessElementHighlight.unhighlighted, .aspire .qtip span.ttsAccessElementHighlight span.unhighlighted, .aspire .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage).unhighlighted, .aspire .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span.unhighlighted, .fcat #itemCanvasBody span.speaking.unhighlighted, .fcat #itemCanvasBody span.speaking span.unhighlighted, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage).unhighlighted, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage) span.unhighlighted, .fcat #itemCanvasBody span.ttsAccessElementHighlight.unhighlighted, .fcat #itemCanvasBody span.ttsAccessElementHighlight span.unhighlighted, .fcat #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage).unhighlighted, .fcat #itemCanvasBody span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span.unhighlighted, .fcat .qtip span.speaking.unhighlighted, .fcat .qtip span.speaking span.unhighlighted, .fcat .qtip span.speaking.ttshover:not(.ttsimage).unhighlighted, .fcat .qtip span.speaking.ttshover:not(.ttsimage) span.unhighlighted, .fcat .qtip span.ttsAccessElementHighlight.unhighlighted, .fcat .qtip span.ttsAccessElementHighlight span.unhighlighted, .fcat .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage).unhighlighted, .fcat .qtip span.ttsAccessElementHighlight.ttshover:not(.ttsimage) span.unhighlighted { background-color: yellow !important; color: inherit; }
+.aspire #itemCanvasBody span.ttsimage.speaking:after, .aspire .qtip span.ttsimage.speaking:after, .fcat #itemCanvasBody span.ttsimage.speaking:after, .fcat .qtip span.ttsimage.speaking:after { border: 2px solid yellow; }
+
+/* Custom Aspire Table Styles */
+.aspire #itemCanvasBody .table-bblack {border-collapse:collapse;border:1px solid black;}
+.aspire #itemCanvasBody .table-bnone {border-collapse:collapse;border:none;}
+.aspire #itemCanvasBody .table-caption-top caption {caption-side:top;text-align:center;border:1px solid black;border-bottom-style:none;padding:6px;}
+.aspire #itemCanvasBody .table-caption-bnone caption {border:none;text-align:center;padding:6px;}
+.aspire #itemCanvasBody .cell-left td {text-align:left;}
+.aspire #itemCanvasBody .cell-center td {text-align:center;}
+.aspire #itemCanvasBody .header-normal th {font-weight:normal;text-align:center;vertical-align:middle;}
+.aspire #itemCanvasBody .cell-bnone td, .aspire #itemCanvasBody .cell-bnone th {border:none;}
+.aspire #itemCanvasBody .cell-btopnone td, .aspire #itemCanvasBody .header-btopnone th {border-top-style:none;}
+.aspire #itemCanvasBody .cell-bbottomnone td {border-bottom-style:none;}
+.aspire #itemCanvasBody .cell-bleftnone td, .aspire #itemCanvasBody .header-bleftnone th {border-left-style:none;}
+.aspire #itemCanvasBody td.cell-bblack,
+.aspire #itemCanvasBody .cell-bblack th,
+.aspire #itemCanvasBody .cell-bblack td, 
+.aspire #itemCanvasBody .data-bblack td {border:1px solid black;}
+.aspire #itemCanvasBody td.cell-brightblack,
+.aspire #itemCanvasBody th.header-brightblack,
+.aspire #itemCanvasBody .header-brightblack th,
+.aspire #itemCanvasBody .cell-brightblack td {border-right:1px solid black;}
+.aspire #itemCanvasBody td.cell-btopblack, .aspire #itemCanvasBody tr.row-btopblack td {border-top:1px solid black;}
+.aspire #itemCanvasBody td.cell-bbottomblack, .aspire #itemCanvasBody .header-bbottomblack th {border-bottom:1px solid black;}
+.aspire #itemCanvasBody td.cell-bleftblack {border-left:1px solid black;}
+.aspire #itemCanvasBody td.cell-brightnone, .aspire #itemCanvasBody th.cell-brightnone {border-right-style:none;}
+.aspire #itemCanvasBody .sidebysidetable:after {content:".";display:block;height:0;clear:both;visibility:hidden;}
+
+/* Custom FCAT Styles */
+.fcat #itemCanvasBody{font-size:16px;line-height:24px}
+.fcat #itemCanvasBody label{font-size:16px;line-height:24px}
+.fcat .qtip { font-size: 16px; line-height: 24px; }
+.fcat .qtip .qtip-titlebar { font-size: 16px; }
+.fcat #itemCanvasBody input[type=text]{font-size:16px;line-height:24px;height:24px}
+.fcat #itemCanvasBody .int-choice-control{padding-top:5px;}
+.fcat #itemCanvasBody .int-choice-control input[type="checkbox"]{margin-top:2px}
+.fcat #itemCanvasBody .author{font-weight:normal;text-align:center;font-style:normal}
+.fcat #itemCanvasBody .directions-passage{font-weight:normal;text-align:left}
+.fcat #itemCanvasBody .boxText{border:1px solid #000000}
+.fcat #itemCanvasBody blockquote.fcat p{margin-bottom:0;font-size:16px;font-weight:normal;line-height:24px}
+
+/* Custom TTS FCAT Styles */
+.fcat #itemCanvasBody span.speaking, .fcat .qtip span.speaking, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage), .fcat .qtip span.speaking.ttshover:not(.ttsimage) { background-color: yellow !important; color: inherit; border-color: inherit; border-width: inherit; }
+.fcat #itemCanvasBody span.speaking .MathJax_CHTML, .fcat .qtip span.speaking .MathJax_CHTML, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML, .fcat .qtip span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML { background-color: yellow !important; }
+.fcat #itemCanvasBody span.speaking .MathJax_CHTML .mjx-math, .fcat .qtip span.speaking .MathJax_CHTML .mjx-math, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math, .fcat .qtip span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math { background-color: yellow !important; }
+.fcat #itemCanvasBody span.speaking .MathJax_CHTML .mjx-math span, .fcat .qtip span.speaking .MathJax_CHTML .mjx-math span, .fcat #itemCanvasBody span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span, .fcat .qtip span.speaking.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span { background-color: transparent !important; }
+.fcat #itemCanvasBody span.speaking span, .fcat .qtip span.speaking span, .fcat #itemCanvasBody span.speaking.ttshover span, .fcat .qtip span.speaking.ttshover span { background-color: yellow !important; color: inherit; }
+.fcat #itemCanvasBody span.speaking span.unhighlighted, .fcat .qtip span.speaking span.unhighlighted, .fcat #itemCanvasBody span.speaking.ttshover span.unhighlighted, .fcat .qtip span.speaking.ttshover span.unhighlighted { background-color: yellow !important; color: inherit; }
+.fcat #itemCanvasBody .highlightColor { background-color: #FFFF7B; }
+.fcat #itemCanvasBody span.ttshover:not(.ttsimage), .fcat .qtip span.ttshover:not(.ttsimage) { color: white; background-color: blue !important; }
+.fcat #itemCanvasBody span.ttshover:not(.ttsimage) .MathJax_CHTML, .fcat .qtip span.ttshover:not(.ttsimage) .MathJax_CHTML { background-color: blue !important; }
+.fcat #itemCanvasBody span.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math, .fcat .qtip span.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math { background-color: blue !important; }
+.fcat #itemCanvasBody span.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span, .fcat .qtip span.ttshover:not(.ttsimage) .MathJax_CHTML .mjx-math span { background-color: transparent !important; }
+.fcat #itemCanvasBody span.ttsimage.speaking:after, .fcat .qtip span.ttsimage.speaking:after { border: 2px solid yellow; }
+.fcat #itemCanvasBody span.ttshover span, .fcat .qtip span.ttshover span { background-color: blue !important; color: inherit; }
+.fcat #itemCanvasBody span.ttshover span.unhighlighted, .fcat .qtip span.ttshover span.unhighlighted { background-color: blue !important; color: inherit; }
+
+/* Custom PSoC Styles */
+.int-choice-list.psoc .img-label { top: -18px; }
+.int-choice-list.psoc .valign-img-checkbox.img-label { top: -22px; }
+.int-choice-list.psoc .valign-img.img-desc { top: -24px; }
+.int-choice-list.psoc .valign-img-checkbox.img-desc { top: -29px; }
+.int-choice-list.psoc .valign-img-large.img-desc { top: -29px; }
+.int-choice-list.psoc .valign-img-large-checkbox.img-desc { top: -32px; }
+
+/* Custom MN Styles */
+.mn #itemCanvasBody {font-size:16px;line-height:24px;}
+.mn #itemCanvasBody label {font-size:16px;line-height:24px;}
+.mn #itemCanvasBody input[type="text"] {font-size:16px;line-height:24px;height:24px;margin-bottom:0;margin-top:0;}
+.mn #itemCanvasBody .int-choice-control {padding-top:5px;}
+.mn #itemCanvasBody .int-choice-control input[type="checkbox"] {margin-top:2px;}
+.mn #itemCanvasBody .passage-title {}
+.mn #itemCanvasBody .author {font-weight:normal;text-align:center;font-style:normal;}
+.mn #itemCanvasBody .directions-passage {font-weight:normal;text-align:left;}
+.mn #itemCanvasBody .boxText {border:1px solid #000000;}
+.mn #itemCanvasBody blockquote.mn p {margin-bottom:0;font-size:16px;font-weight:normal;line-height:24px;}	
+
+/* Custom NAEP Styles */
+
+.container-fluid.naeptask { 
+	width: 100%; 
+	padding-left:0px; 
+	padding-right:0px;
+	margin-top:-12px;
+}
+
+.itemCanvas.naep {
+	margin: 0 auto;
+	-webkit-box-shadow:none!important;
+    box-shadow: none !important;
+    border: 0;
+	border-radius: 0;
+}
+
+.naep .itemCanvas-body {
+	padding: 0;
+    position: relative;
+}
+
+iframe.naepTask {
+   overflow-y:scroll !important;
+   overflow-x:scroll !important;
+    /* overflow:hidden; */
+    /*height:648px;*/ /* optional */
+    width:100%; /* optional */
+    border:none; /* optional */
+    margin: auto;
+}
+
+/* Custom MathXL Styles */
+.aw .row-fluid.mathxl {
+	height:475px;
+	vertical-align: top;
+	display:block;
+}
+.mathxl hr{
+	border:0;
+	border-top:1px solid #333333;
+	border-bottom:1px solid #ffffff;
+}
+.ui-draggable.mathxl .MathJax_CHTML > nobr > .math {
+	overflow:visible;
+}
+.mxl-controller {
+	padding: 10px 10px 5px;
+    height: 63px;
+}
+.mxl-controller #msgPanel { 
+	width:120px;
+}
+.mxl-controller #msgNotes {
+	margin-top:0px;line-height:30px;font-weight:normal;
+}
+
+.mxl-examplecontroller #msgPanel {
+	position:relative;float:left;margin-top:-14px;
+}
+.mxl-examplecontroller #msgNotes {
+	margin-top:0px;line-height:30px;font-weight:normal;
+}
+.mxl-examplecontroller .progress {
+	margin-bottom:0px;
+}
+.mxl-controller #btnAwNext{margin-left:5px;}
+.mxl-controller #btnAwPrev{margin-left:5px;}
+
+#appMathXlItemPage { padding:0; background: none; }
+#appMathXlItemPage .itemCanvas-body { padding:0 }
+#solveThisModalBody  iframe { border:0 }
+
+/* Custom Aimsweb Styles */
+.aw input[type="radio"] {
+	margin-top: 10px;
+	margin-top: 6px\9;
+	margin-left: -12px!important;
+}
+
+.itemCanvas.aw {
+	width: 801px;
+	height: 562px;
+	margin: 0 auto 20px;
+	box-shadow:none!important;
+	-webkit-box-shadow:none!important;
+    box-shadow: none !important;
+    border: 3px solid #cccccc;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;  
+}
+
+.itemCanvas.aw .row-fluid .span12, .itemCanvas.aw .row-fluid .qti-layout-col12 { width: 100%; }
+
+.aw .itemCanvas-body {
+	padding: 16px 20px 8px;
+    position: relative;
+}
+
+.aw-wrapper {
+    display: table-cell;
+    height: 475px;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.aw .itemCanvas-footer {
+	background-color: #eaeaea;
+	-webkit-border-radius: 0 0 3px 3px;
+	-moz-border-radius: 0 0 3px 3px;
+	border-radius: 0 0 3px 3px;  
+}
+
+/* Grud save old for now 
+.aw-controller {
+	padding: 10px 10px 5px;
+    height: 63px;
+}
+ This is new 7/15/2015 */
+.aw-controller {
+  padding: 10px 10px 5px;
+  height: 63px;
+  position: relative;
+}
+
+.aw-controller #msgNotes {
+	margin-top:8px;line-height:30px;font-weight:bold;
+}
+
+/* The following is NEW 7/15/2015 */
+.aw-controller .aw-feedback {
+  position: absolute;
+}
+
+.aw-feedback .errorText,
+.aw-feedback .successText {
+  display: block;
+  margin-top:8px;
+  line-height:30px;
+  font-weight:bold;
+}
+
+.aw-feedback .feedbackRight {
+  position: absolute;
+  width: 655px;
+  text-align: right;
+}
+
+.aw-feedback .feedbackLarge {
+  font-size: 30px;
+}
+
+.feedbackLarge [class^="icon-"]::before, .feedbackLarge [class*=" icon-"]::before {
+  font-size: 30px !important;
+}
+/* End of NEW 7/15/2015 */
+
+.aw-controller #btnAwNext{margin-left:5px;}
+
+/*
+	+ Class: .makecenter .passage240
+	+ Purpose: To apply vertical alignment middle to container text.
+*/
+.aw .row, .aw .qti-layout-row { display: table-cell; height: 475px; vertical-align: middle; }
+/*
+	+ Class: .makecenter .seq
+	+ Purpose: Horizontal positioning of inner divisions.
+*/
+.aw .row.seq, .aw .qti-layout-row.seq { display: table-header-group; height: 1px; }
+
+.aw #awVolumeHandle { 
+	width:500px;
+}
+
+/*
+	+ Class: .makecenter .phrase
+	+ Purpose: To override span7 width.
+*/ 
+.aw .phrase {
+	width: 75% !important;
+	margin-left: 13.5%;
+	padding-top:30px;
+}
+/*
+	+ Class: .makecenter .obj-questions
+	+ Purpose: To make objective type question center in itemCanvas container.
+	+ 
+*/
+.aw .obj-questions {
+	margin-left: 10.5%;
+	width: auto !important;
+}
+.aw .span7.obj-questions, .aw .qti-layout-col7.obj-questions { width: 520px !important; }
+
+/* For .aw .large-font - override .span5 to max of 416px */
+.aw .row.large-font .span5, .aw .qti-layout-row.large-font .qti-layout-col5 { width: 416px !important; }
+
+/* For .aw .large-font - override .offset1 to 180px of left-margin */
+.aw .row.large-font .offset1, .aw .qti-layout-row.large-font .offset1 { margin-left: 180px; }
+
+.aw .obj-questions label.radio {
+	margin-top: 40px;
+	width: auto !important;
+}
+
+.aw .obj-questions .int-choice-list {
+	margin-left: 38px;
+}
+
+.aw .obj-questions-ca p { 
+	font-size:16px;
+}
+
+.aw .row.large-font p, .aw .qti-layout-row.large-font p { font-size: 24px; line-height: 30px; margin-bottom: 16px; }
+
+.aw .obj-questions-ca .int-choice-desc {
+	font-size:16px;
+	padding-top:10px;
+}
+
+.aw .int-choice-control.control-padding-fraction, body.ie .aw .control-padding-fraction.int-choice-control {
+	padding-top:18px;
+}
+
+/*
+	+ Class: .makecenter .math-question
+	+ Purpose: To make math objective type question center in itemCanvas container.
+*/
+.aw .math-question {
+	margin-left: 13%;
+}
+
+/* remove blue outline on complex hotspots */
+.aw .tei-complexhotspot{outline:none;}
+
+@media all and (max-width: 800px) and (min-width:768px) { 
+	.aw .math-question {
+		margin-left: 28%;
+	}
+	
+	.aw .math-question,  x:-moz-any-link, x:default {
+		margin-left: 22%;
+	}
+}
+
+@media all and (max-width: 1024px) and (min-width:768px) { 
+	.aw .math-question {
+		margin-left: 23%;
+	}
+	
+	.aw .math-question,  .aw x:-moz-any-link, .aw x:default {
+		margin-left: 18%;
+	}
+}
+/*
+	+ Class: .makecenter .prompt, .makecenter .int-choice-desc, .makecenter p
+	+ Purpose: To apply font style to paragraph, prompt title and radio button labels.
+*/
+
+.aw .phrase p, .aw .obj-questions .prompt, .aw .obj-questions .int-choice-desc {
+	font-size:20px;
+	font-weight:normal;
+	line-height:normal;
+}
+
+/*
+	+ Class: .makecenter .math-question .q-block
+	+ Purpose: To properly place 4 block type math questions in item canvas.
+*/
+.aw .math-question .q-block {
+	min-width: 415px;
+}
+.aw .q-choice.multi-view {
+	margin-left: 9px;
+	width: 330px;
+}
+
+/*
+	+ Class: .makecenter .int-choice-control .radio input[type="radio"] > input
+	+ Purpose: To position blank radio button center in 4 block type math question.
+*/
+.aw .multi-view .int-choice-list.three-up.labels-none {
+	margin-left: 10px;
+}
+
+.aw .multi-view .well {
+	padding: 14px;
+}
+
+/* CSS Implementation for new math column */
+
+.aw .mathblock-4 {
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+	margin:8px !important;
+	padding:4px;
+	width:345.6px !important;
+	height: 163px !important;
+	display: block;
+}
+
+.aw .answerText {
+	color: #b94a48;
+}
+
+.aw .mathblock-4 .qprompt{
+	display: table-cell;
+    height: 85px;
+    text-align: center;
+    vertical-align: middle;
+    width: 345px !important;
+}
+
+.aw .mathblock-4 .optioncontainer{
+	display:block;
+}
+
+.aw .mathblock-4 .optioncontainer table {
+	width: 100%;
+}
+
+.aw .mathblock-4 .optioncontainer table td {
+	text-align: center;
+	width: 107.33px;
+}
+
+.aw .mathblock-4 .optioncontainer .int-hotspot-holder, 
+.aw .mathblock-4 .optioncontainer .int-hotspot-holder * {
+ 	outline: 0 !important;
+ 	/*width: 320px !important;*/
+}
+
+
+.aw .mathblock-2 {
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+	/* margin:0 0 25px 23% !important; */
+	margin:0 0 15px 23% !important;
+	padding:5px;
+	width:374.4px !important;
+	height: 211.2px !important
+}
+
+.aw .mathblock-2 .qprompt{
+	display: table-cell;
+    height: 120px;
+    text-align: center;
+    vertical-align: middle;
+    width: 374px !important;
+}
+
+.aw .mathblock-2 .optioncontainer{
+	display:block;
+	padding-top: 5px;
+}
+
+.aw .mathblock-2 .optioncontainer table {
+	width: 100%;
+}
+
+.aw .mathblock-2 .optioncontainer table td {
+ text-align: center;
+ width: 124px;
+ height: 37px;
+}
+
+.aw .mathblock-2 .optioncontainer .int-hotspot-holder, 
+.aw .mathblock-2 .optioncontainer .int-hotspot-holder * {
+ 	outline: 0 !important;
+}
+
+/* Poetry Styles */
+.poem_body, .poem_body_indent, .count_1, .count_2, .count_3, .count_4, .count_5, .count_5_indent, .count_6, .count_7, .count_8, .count_9, .count_10, .count_10_indent, .count_11, .count_12, .count_13, .count_14, .count_15, .count_15_indent, .count_16, .count_17, .count_18, .count_19, .count_20, .count_20_indent, .count_21, .count_22, .count_23, .count_24, .count_25, .count_25_indent, .count_26, .count_27, .count_28, .count_29, .count_30, .count_30_indent, .count_31, .count_32, .count_33, .count_34, .count_35, .count_35_indent, .count_36, .count_37, .count_38, .count_39, .count_40, .count_40_indent, .count_41, .count_42, .count_43, .count_44, .count_45, .count_45_indent, .count_46, .count_47, .count_48, .count_49, .count_50, .count_50_indent, .count_51, .count_52, .count_53, .count_54, .count_55, .count_55_indent, .count_56, .count_57, .count_58, .count_59, .count_60, .count_60_indent, .count_61, .count_62, .count_63, .count_64, .count_65, .count_65_indent, .count_66, .count_67, .count_68, .count_69, .count_70, .count_70_indent, .count_71, .count_72, .count_73, .count_74, .count_75, .count_75_indent, .count_76, .count_77, .count_78, .count_79, .count_80, .count_80_indent, .count_85, .count_85_indent, .count_90, .count_90_indent, .count_95, .count_95_indent, .count_100, .count_100_indent, .count_105, .count_105_indent, .count_110, .count_110_indent, .count_115, .count_115_indent, .count_120, .count_120_indent, .count_125, .count_125_indent, .count_130, .count_130_indent, .count_135, .count_135_indent, .count_140, .count_140_indent, .count_145, .count_145_indent, .count_150, .count_150_indent, .count_155, .count_155_indent, .count_160, .count_160_indent, .count_165, .count_165_indent, .count_170, .count_170_indent, .count_175, .count_175_indent, .count_180, .count_180_indent, .count_185, .count_185_indent, .count_190, .count_190_indent, .count_195, .count_195_indent, .count_200, .count_200_indent, .count_205, .count_205_indent, .count_210, .count_210_indent, .count_215, .count_215_indent, .count_220, .count_220_indent, .count_225, .count_225_indent, .count_230, .count_230_indent, .count_235, .count_235_indent, .count_240, .count_240_indent, .count_245, .count_245_indent, .count_250, .count_250_indent, .count_255, .count_255_indent, .count_260, .count_260_indent, .count_265, .count_265_indent, .count_270, .count_270_indent, .count_275, .count_275_indent, .count_280, .count_280_indent, .count_285, .count_285_indent, .count_290, .count_290_indent, .count_295, .count_295_indent, .count_300, .count_300_indent, .count_305, .count_305_indent, .count_310, .count_310_indent, .count_315, .count_315_indent, .count_320, .count_320_indent, .count_325, .count_325_indent, .count_330, .count_330_indent, .count_335, .count_335_indent, .count_340, .count_340_indent, .count_345, .count_345_indent, .count_350, .count_350_indent, .count_355, .count_355_indent, .count_360, .count_360_indent, .count_365, .count_365_indent, .count_370, .count_370_indent, .count_375, .count_375_indent, .count_380, .count_380_indent, .count_385, .count_385_indent, .count_390, .count_390_indent, .count_395, .count_395_indent, .count_400, .count_400_indent, .count_405, .count_405_indent, .count_410, .count_410_indent, .count_415, .count_415_indent, .count_420, .count_420_indent, .count_425, .count_425_indent, .count_430, .count_430_indent, .count_435, .count_435_indent, .count_440, .count_440_indent, .count_445, .count_445_indent, .count_450, .count_450_indent, .count_455, .count_455_indent, .count_460, .count_460_indent, .count_465, .count_465_indent, .count_470, .count_470_indent, .count_475, .count_475_indent, .count_480, .count_480_indent, .count_485, .count_485_indent, .count_490, .count_490_indent, .count_495, .count_495_indent, .count_500, .count_500_indent, .count_505, .count_505_indent, .count_510, .count_510_indent, .count_515, .count_515_indent, .count_520, .count_520_indent, .count_525, .count_525_indent, .count_530, .count_530_indent, .count_535, .count_535_indent, .count_540, .count_540_indent, .count_545, .count_545_indent, .count_550, .count_550_indent, .count_555, .count_555_indent, .count_560, .count_560_indent, .count_565, .count_565_indent, .count_570, .count_570_indent, .count_575, .count_575_indent, .count_580, .count_580_indent, .count_585, .count_585_indent, .count_590, .count_590_indent, .count_595, .count_595_indent, .count_600, .count_600_indent, .count_605, .count_605_indent, .count_610, .count_610_indent, .count_615, .count_615_indent, .count_620, .count_620_indent, .count_625, .count_625_indent, .count_630, .count_630_indent, .count_635, .count_635_indent, .count_640, .count_640_indent, .count_645, .count_645_indent, .count_650, .count_650_indent, .count_655, .count_655_indent, .count_660, .count_660_indent, .count_665, .count_665_indent, .count_670, .count_670_indent, .count_675, .count_675_indent, .count_680, .count_680_indent, .count_685, .count_685_indent, .count_690, .count_690_indent, .count_695, .count_695_indent, .count_700, .count_700_indent, .count_705, .count_705_indent, .count_710, .count_710_indent, .count_715, .count_715_indent, .count_720, .count_720_indent, .count_725, .count_725_indent, .count_730, .count_730_indent, .count_735, .count_735_indent, .count_740, .count_740_indent, .count_745, .count_745_indent, .count_750, .count_750_indent, .count_755, .count_755_indent, .count_760, .count_760_indent, .count_765, .count_765_indent, .count_770, .count_770_indent, .count_775, .count_775_indent, .count_780, .count_780_indent, .count_785, .count_785_indent, .count_790, .count_790_indent, .count_795, .count_795_indent, .count_800, .count_800_indent, .count_805, .count_805_indent, .count_810, .count_810_indent, .count_815, .count_815_indent, .count_820, .count_820_indent, .count_825, .count_825_indent, .count_830, .count_830_indent, .count_835, .count_835_indent, .count_840, .count_840_indent, .count_845, .count_845_indent, .count_850, .count_850_indent, .count_855, .count_855_indent, .count_860, .count_860_indent, .count_865, .count_865_indent, .count_870, .count_870_indent, .count_875, .count_875_indent, .count_880, .count_880_indent, .count_885, .count_885_indent, .count_890, .count_890_indent, .count_895, .count_895_indent, .count_900, .count_900_indent, .count_905, .count_905_indent, .count_910, .count_910_indent, .count_915, .count_915_indent, .count_920, .count_920_indent, .count_925, .count_925_indent, .count_930, .count_930_indent, .count_935, .count_935_indent, .count_940, .count_940_indent, .count_945, .count_945_indent, .count_950, .count_950_indent, .count_955, .count_955_indent, .count_960, .count_960_indent, .count_965, .count_965_indent, .count_970, .count_970_indent, .count_975, .count_975_indent, .count_980, .count_980_indent, .count_985, .count_985_indent, .count_990, .count_990_indent, .count_995, .count_995_indent, .count_1000, .count_1000_indent { min-height: 18px; vertical-align: middle; width: max-content; padding-right: 10px; }
+.poem_body:before, .poem_body_indent:before, .count_1:before, .count_2:before, .count_3:before, .count_4:before, .count_5:before, .count_5_indent:before, .count_6:before, .count_7:before, .count_8:before, .count_9:before, .count_10:before, .count_10_indent:before, .count_11:before, .count_12:before, .count_13:before, .count_14:before, .count_15:before, .count_15_indent:before, .count_16:before, .count_17:before, .count_18:before, .count_19:before, .count_20:before, .count_20_indent:before, .count_21:before, .count_22:before, .count_23:before, .count_24:before, .count_25:before, .count_25_indent:before, .count_26:before, .count_27:before, .count_28:before, .count_29:before, .count_30:before, .count_30_indent:before, .count_31:before, .count_32:before, .count_33:before, .count_34:before, .count_35:before, .count_35_indent:before, .count_36:before, .count_37:before, .count_38:before, .count_39:before, .count_40:before, .count_40_indent:before, .count_41:before, .count_42:before, .count_43:before, .count_44:before, .count_45:before, .count_45_indent:before, .count_46:before, .count_47:before, .count_48:before, .count_49:before, .count_50:before, .count_50_indent:before, .count_51:before, .count_52:before, .count_53:before, .count_54:before, .count_55:before, .count_55_indent:before, .count_56:before, .count_57:before, .count_58:before, .count_59:before, .count_60:before, .count_60_indent:before, .count_61:before, .count_62:before, .count_63:before, .count_64:before, .count_65:before, .count_65_indent:before, .count_66:before, .count_67:before, .count_68:before, .count_69:before, .count_70:before, .count_70_indent:before, .count_71:before, .count_72:before, .count_73:before, .count_74:before, .count_75:before, .count_75_indent:before, .count_76:before, .count_77:before, .count_78:before, .count_79:before, .count_80:before, .count_80_indent:before, .count_85:before, .count_85_indent:before, .count_90:before, .count_90_indent:before, .count_95:before, .count_95_indent:before, .count_100:before, .count_100_indent:before, .count_105:before, .count_105_indent:before, .count_110:before, .count_110_indent:before, .count_115:before, .count_115_indent:before, .count_120:before, .count_120_indent:before, .count_125:before, .count_125_indent:before, .count_130:before, .count_130_indent:before, .count_135:before, .count_135_indent:before, .count_140:before, .count_140_indent:before, .count_145:before, .count_145_indent:before, .count_150:before, .count_150_indent:before, .count_155:before, .count_155_indent:before, .count_160:before, .count_160_indent:before, .count_165:before, .count_165_indent:before, .count_170:before, .count_170_indent:before, .count_175:before, .count_175_indent:before, .count_180:before, .count_180_indent:before, .count_185:before, .count_185_indent:before, .count_190:before, .count_190_indent:before, .count_195:before, .count_195_indent:before, .count_200:before, .count_200_indent:before, .count_205:before, .count_205_indent:before, .count_210:before, .count_210_indent:before, .count_215:before, .count_215_indent:before, .count_220:before, .count_220_indent:before, .count_225:before, .count_225_indent:before, .count_230:before, .count_230_indent:before, .count_235:before, .count_235_indent:before, .count_240:before, .count_240_indent:before, .count_245:before, .count_245_indent:before, .count_250:before, .count_250_indent:before, .count_255:before, .count_255_indent:before, .count_260:before, .count_260_indent:before, .count_265:before, .count_265_indent:before, .count_270:before, .count_270_indent:before, .count_275:before, .count_275_indent:before, .count_280:before, .count_280_indent:before, .count_285:before, .count_285_indent:before, .count_290:before, .count_290_indent:before, .count_295:before, .count_295_indent:before, .count_300:before, .count_300_indent:before, .count_305:before, .count_305_indent:before, .count_310:before, .count_310_indent:before, .count_315:before, .count_315_indent:before, .count_320:before, .count_320_indent:before, .count_325:before, .count_325_indent:before, .count_330:before, .count_330_indent:before, .count_335:before, .count_335_indent:before, .count_340:before, .count_340_indent:before, .count_345:before, .count_345_indent:before, .count_350:before, .count_350_indent:before, .count_355:before, .count_355_indent:before, .count_360:before, .count_360_indent:before, .count_365:before, .count_365_indent:before, .count_370:before, .count_370_indent:before, .count_375:before, .count_375_indent:before, .count_380:before, .count_380_indent:before, .count_385:before, .count_385_indent:before, .count_390:before, .count_390_indent:before, .count_395:before, .count_395_indent:before, .count_400:before, .count_400_indent:before, .count_405:before, .count_405_indent:before, .count_410:before, .count_410_indent:before, .count_415:before, .count_415_indent:before, .count_420:before, .count_420_indent:before, .count_425:before, .count_425_indent:before, .count_430:before, .count_430_indent:before, .count_435:before, .count_435_indent:before, .count_440:before, .count_440_indent:before, .count_445:before, .count_445_indent:before, .count_450:before, .count_450_indent:before, .count_455:before, .count_455_indent:before, .count_460:before, .count_460_indent:before, .count_465:before, .count_465_indent:before, .count_470:before, .count_470_indent:before, .count_475:before, .count_475_indent:before, .count_480:before, .count_480_indent:before, .count_485:before, .count_485_indent:before, .count_490:before, .count_490_indent:before, .count_495:before, .count_495_indent:before, .count_500:before, .count_500_indent:before, .count_505:before, .count_505_indent:before, .count_510:before, .count_510_indent:before, .count_515:before, .count_515_indent:before, .count_520:before, .count_520_indent:before, .count_525:before, .count_525_indent:before, .count_530:before, .count_530_indent:before, .count_535:before, .count_535_indent:before, .count_540:before, .count_540_indent:before, .count_545:before, .count_545_indent:before, .count_550:before, .count_550_indent:before, .count_555:before, .count_555_indent:before, .count_560:before, .count_560_indent:before, .count_565:before, .count_565_indent:before, .count_570:before, .count_570_indent:before, .count_575:before, .count_575_indent:before, .count_580:before, .count_580_indent:before, .count_585:before, .count_585_indent:before, .count_590:before, .count_590_indent:before, .count_595:before, .count_595_indent:before, .count_600:before, .count_600_indent:before, .count_605:before, .count_605_indent:before, .count_610:before, .count_610_indent:before, .count_615:before, .count_615_indent:before, .count_620:before, .count_620_indent:before, .count_625:before, .count_625_indent:before, .count_630:before, .count_630_indent:before, .count_635:before, .count_635_indent:before, .count_640:before, .count_640_indent:before, .count_645:before, .count_645_indent:before, .count_650:before, .count_650_indent:before, .count_655:before, .count_655_indent:before, .count_660:before, .count_660_indent:before, .count_665:before, .count_665_indent:before, .count_670:before, .count_670_indent:before, .count_675:before, .count_675_indent:before, .count_680:before, .count_680_indent:before, .count_685:before, .count_685_indent:before, .count_690:before, .count_690_indent:before, .count_695:before, .count_695_indent:before, .count_700:before, .count_700_indent:before, .count_705:before, .count_705_indent:before, .count_710:before, .count_710_indent:before, .count_715:before, .count_715_indent:before, .count_720:before, .count_720_indent:before, .count_725:before, .count_725_indent:before, .count_730:before, .count_730_indent:before, .count_735:before, .count_735_indent:before, .count_740:before, .count_740_indent:before, .count_745:before, .count_745_indent:before, .count_750:before, .count_750_indent:before, .count_755:before, .count_755_indent:before, .count_760:before, .count_760_indent:before, .count_765:before, .count_765_indent:before, .count_770:before, .count_770_indent:before, .count_775:before, .count_775_indent:before, .count_780:before, .count_780_indent:before, .count_785:before, .count_785_indent:before, .count_790:before, .count_790_indent:before, .count_795:before, .count_795_indent:before, .count_800:before, .count_800_indent:before, .count_805:before, .count_805_indent:before, .count_810:before, .count_810_indent:before, .count_815:before, .count_815_indent:before, .count_820:before, .count_820_indent:before, .count_825:before, .count_825_indent:before, .count_830:before, .count_830_indent:before, .count_835:before, .count_835_indent:before, .count_840:before, .count_840_indent:before, .count_845:before, .count_845_indent:before, .count_850:before, .count_850_indent:before, .count_855:before, .count_855_indent:before, .count_860:before, .count_860_indent:before, .count_865:before, .count_865_indent:before, .count_870:before, .count_870_indent:before, .count_875:before, .count_875_indent:before, .count_880:before, .count_880_indent:before, .count_885:before, .count_885_indent:before, .count_890:before, .count_890_indent:before, .count_895:before, .count_895_indent:before, .count_900:before, .count_900_indent:before, .count_905:before, .count_905_indent:before, .count_910:before, .count_910_indent:before, .count_915:before, .count_915_indent:before, .count_920:before, .count_920_indent:before, .count_925:before, .count_925_indent:before, .count_930:before, .count_930_indent:before, .count_935:before, .count_935_indent:before, .count_940:before, .count_940_indent:before, .count_945:before, .count_945_indent:before, .count_950:before, .count_950_indent:before, .count_955:before, .count_955_indent:before, .count_960:before, .count_960_indent:before, .count_965:before, .count_965_indent:before, .count_970:before, .count_970_indent:before, .count_975:before, .count_975_indent:before, .count_980:before, .count_980_indent:before, .count_985:before, .count_985_indent:before, .count_990:before, .count_990_indent:before, .count_995:before, .count_995_indent:before, .count_1000:before, .count_1000_indent:before { width: 2em; display: block; float: left; text-align: right; font-weight: bold; font-size: smaller; padding-right: 24px; }
+
+div.count_5_indent:before, div.count_10_indent:before, div.count_15_indent:before, div.count_20_indent:before, div.count_25_indent:before, div.count_30_indent:before, div.count_35_indent:before, div.count_40_indent:before, div.count_45_indent:before, div.count_50_indent:before, div.count_55_indent:before, div.count_60_indent:before, div.count_65_indent:before, div.count_70_indent:before, div.count_75_indent:before, div.count_80_indent:before, div.count_85_indent:before, div.count_90_indent:before, div.count_95_indent:before, div.count_100_indent:before, div.count_105_indent:before, div.count_110_indent:before, div.count_115_indent:before, div.count_120_indent:before, div.count_125_indent:before, div.count_130_indent:before, div.count_135_indent:before, div.count_140_indent:before, div.count_145_indent:before, div.count_150_indent:before, div.count_155_indent:before, div.count_160_indent:before, div.count_165_indent:before, div.count_170_indent:before, div.count_175_indent:before, div.count_180_indent:before, div.count_185_indent:before, div.count_190_indent:before, div.count_195_indent:before, div.count_200_indent:before, div.count_205_indent:before, div.count_210_indent:before, div.count_215_indent:before, div.count_220_indent:before, div.count_225_indent:before, div.count_230_indent:before, div.count_235_indent:before, div.count_240_indent:before, div.count_245_indent:before, div.count_250_indent:before, div.count_255_indent:before, div.count_260_indent:before, div.count_265_indent:before, div.count_270_indent:before, div.count_275_indent:before, div.count_280_indent:before, div.count_285_indent:before, div.count_290_indent:before, div.count_295_indent:before, div.count_300_indent:before, div.count_305_indent:before, div.count_310_indent:before, div.count_315_indent:before, div.count_320_indent:before, div.count_325_indent:before, div.count_330_indent:before, div.count_335_indent:before, div.count_340_indent:before, div.count_345_indent:before, div.count_350_indent:before, div.count_355_indent:before, div.count_360_indent:before, div.count_365_indent:before, div.count_370_indent:before, div.count_375_indent:before, div.count_380_indent:before, div.count_385_indent:before, div.count_390_indent:before, div.count_395_indent:before, div.count_400_indent:before, div.count_405_indent:before, div.count_410_indent:before, div.count_415_indent:before, div.count_420_indent:before, div.count_425_indent:before, div.count_430_indent:before, div.count_435_indent:before, div.count_440_indent:before, div.count_445_indent:before, div.count_450_indent:before, div.count_455_indent:before, div.count_460_indent:before, div.count_465_indent:before, div.count_470_indent:before, div.count_475_indent:before, div.count_480_indent:before, div.count_485_indent:before, div.count_490_indent:before, div.count_495_indent:before, div.count_500_indent:before, div.count_505_indent:before, div.count_510_indent:before, div.count_515_indent:before, div.count_520_indent:before, div.count_525_indent:before, div.count_530_indent:before, div.count_535_indent:before, div.count_540_indent:before, div.count_545_indent:before, div.count_550_indent:before, div.count_555_indent:before, div.count_560_indent:before, div.count_565_indent:before, div.count_570_indent:before, div.count_575_indent:before, div.count_580_indent:before, div.count_585_indent:before, div.count_590_indent:before, div.count_595_indent:before, div.count_600_indent:before, div.count_605_indent:before, div.count_610_indent:before, div.count_615_indent:before, div.count_620_indent:before, div.count_625_indent:before, div.count_630_indent:before, div.count_635_indent:before, div.count_640_indent:before, div.count_645_indent:before, div.count_650_indent:before, div.count_655_indent:before, div.count_660_indent:before, div.count_665_indent:before, div.count_670_indent:before, div.count_675_indent:before, div.count_680_indent:before, div.count_685_indent:before, div.count_690_indent:before, div.count_695_indent:before, div.count_700_indent:before, div.count_705_indent:before, div.count_710_indent:before, div.count_715_indent:before, div.count_720_indent:before, div.count_725_indent:before, div.count_730_indent:before, div.count_735_indent:before, div.count_740_indent:before, div.count_745_indent:before, div.count_750_indent:before, div.count_755_indent:before, div.count_760_indent:before, div.count_765_indent:before, div.count_770_indent:before, div.count_775_indent:before, div.count_780_indent:before, div.count_785_indent:before, div.count_790_indent:before, div.count_795_indent:before, div.count_800_indent:before, div.count_805_indent:before, div.count_810_indent:before, div.count_815_indent:before, div.count_820_indent:before, div.count_825_indent:before, div.count_830_indent:before, div.count_835_indent:before, div.count_840_indent:before, div.count_845_indent:before, div.count_850_indent:before, div.count_855_indent:before, div.count_860_indent:before, div.count_865_indent:before, div.count_870_indent:before, div.count_875_indent:before, div.count_880_indent:before, div.count_885_indent:before, div.count_890_indent:before, div.count_895_indent:before, div.count_900_indent:before, div.count_905_indent:before, div.count_910_indent:before, div.count_915_indent:before, div.count_920_indent:before, div.count_925_indent:before, div.count_930_indent:before, div.count_935_indent:before, div.count_940_indent:before, div.count_945_indent:before, div.count_950_indent:before, div.count_955_indent:before, div.count_960_indent:before, div.count_965_indent:before, div.count_970_indent:before, div.count_975_indent:before, div.count_980_indent:before, div.count_985_indent:before, div.count_990_indent:before, div.count_995_indent:before, div.count_1000_indent:before { padding-right: 60px; }
+
+div.count_1:before { content: "1"; }
+
+div.count_2:before { content: "2"; }
+
+div.count_3:before { content: "3"; }
+
+div.count_4:before { content: "4"; }
+
+div.count_5:before { content: "5"; }
+
+div.count_5_indent:before { content: "5"; }
+
+div.count_6:before { content: "6"; }
+
+div.count_7:before { content: "7"; }
+
+div.count_8:before { content: "8"; }
+
+div.count_9:before { content: "9"; }
+
+div.count_10:before { content: "10"; }
+
+div.count_10_indent:before { content: "10"; }
+
+div.count_11:before { content: "11"; }
+
+div.count_12:before { content: "12"; }
+
+div.count_13:before { content: "13"; }
+
+div.count_14:before { content: "14"; }
+
+div.count_15:before { content: "15"; }
+
+div.count_15_indent:before { content: "15"; }
+
+div.count_16:before { content: "16"; }
+
+div.count_17:before { content: "17"; }
+
+div.count_18:before { content: "18"; }
+
+div.count_19:before { content: "19"; }
+
+div.count_20:before { content: "20"; }
+
+div.count_20_indent:before { content: "20"; }
+
+div.count_21:before { content: "21"; }
+
+div.count_22:before { content: "22"; }
+
+div.count_23:before { content: "23"; }
+
+div.count_24:before { content: "24"; }
+
+div.count_25:before { content: "25"; }
+
+div.count_25_indent:before { content: "25"; }
+
+div.count_26:before { content: "26"; }
+
+div.count_27:before { content: "27"; }
+
+div.count_28:before { content: "28"; }
+
+div.count_29:before { content: "29"; }
+
+div.count_30:before { content: "30"; }
+
+div.count_30_indent:before { content: "30"; }
+
+div.count_31:before { content: "31"; }
+
+div.count_32:before { content: "32"; }
+
+div.count_33:before { content: "33"; }
+
+div.count_34:before { content: "34"; }
+
+div.count_35:before { content: "35"; }
+
+div.count_35_indent:before { content: "35"; }
+
+div.count_36:before { content: "36"; }
+
+div.count_37:before { content: "37"; }
+
+div.count_38:before { content: "38"; }
+
+div.count_39:before { content: "39"; }
+
+div.count_40:before { content: "40"; }
+
+div.count_40_indent:before { content: "40"; }
+
+div.count_41:before { content: "41"; }
+
+div.count_42:before { content: "42"; }
+
+div.count_43:before { content: "43"; }
+
+div.count_44:before { content: "44"; }
+
+div.count_45:before { content: "45"; }
+
+div.count_45_indent:before { content: "45"; }
+
+div.count_46:before { content: "46"; }
+
+div.count_47:before { content: "47"; }
+
+div.count_48:before { content: "48"; }
+
+div.count_49:before { content: "49"; }
+
+div.count_50:before { content: "50"; }
+
+div.count_50_indent:before { content: "50"; }
+
+div.count_51:before { content: "51"; }
+
+div.count_52:before { content: "52"; }
+
+div.count_53:before { content: "53"; }
+
+div.count_54:before { content: "54"; }
+
+div.count_55:before { content: "55"; }
+
+div.count_55_indent:before { content: "55"; }
+
+div.count_56:before { content: "56"; }
+
+div.count_57:before { content: "57"; }
+
+div.count_58:before { content: "58"; }
+
+div.count_59:before { content: "59"; }
+
+div.count_60:before { content: "60"; }
+
+div.count_60_indent:before { content: "60"; }
+
+div.count_61:before { content: "61"; }
+
+div.count_62:before { content: "62"; }
+
+div.count_63:before { content: "63"; }
+
+div.count_64:before { content: "64"; }
+
+div.count_65:before { content: "65"; }
+
+div.count_65_indent:before { content: "65"; }
+
+div.count_66:before { content: "66"; }
+
+div.count_67:before { content: "67"; }
+
+div.count_68:before { content: "68"; }
+
+div.count_69:before { content: "69"; }
+
+div.count_70:before { content: "70"; }
+
+div.count_70_indent:before { content: "70"; }
+
+div.count_71:before { content: "71"; }
+
+div.count_72:before { content: "72"; }
+
+div.count_73:before { content: "73"; }
+
+div.count_74:before { content: "74"; }
+
+div.count_75:before { content: "75"; }
+
+div.count_75_indent:before { content: "75"; }
+
+div.count_76:before { content: "76"; }
+
+div.count_77:before { content: "77"; }
+
+div.count_78:before { content: "78"; }
+
+div.count_79:before { content: "79"; }
+
+div.count_80:before, div.count_80_indent:before { content: "80"; }
+
+div.count_85:before, div.count_85_indent:before { content: "85"; }
+
+div.count_90:before, div.count_90_indent:before { content: "90"; }
+
+div.count_95:before, div.count_95_indent:before { content: "95"; }
+
+div.count_100:before, div.count_100_indent:before { content: "100"; }
+
+div.count_105:before, div.count_105_indent:before { content: "105"; }
+
+div.count_110:before, div.count_110_indent:before { content: "110"; }
+
+div.count_115:before, div.count_115_indent:before { content: "115"; }
+
+div.count_120:before, div.count_120_indent:before { content: "120"; }
+
+div.count_125:before, div.count_125_indent:before { content: "125"; }
+
+div.count_130:before, div.count_130_indent:before { content: "130"; }
+
+div.count_135:before, div.count_135_indent:before { content: "135"; }
+
+div.count_140:before, div.count_140_indent:before { content: "140"; }
+
+div.count_145:before, div.count_145_indent:before { content: "145"; }
+
+div.count_150:before, div.count_150_indent:before { content: "150"; }
+
+div.count_155:before, div.count_155_indent:before { content: "155"; }
+
+div.count_160:before, div.count_160_indent:before { content: "160"; }
+
+div.count_165:before, div.count_165_indent:before { content: "165"; }
+
+div.count_170:before, div.count_170_indent:before { content: "170"; }
+
+div.count_175:before, div.count_175_indent:before { content: "175"; }
+
+div.count_180:before, div.count_180_indent:before { content: "180"; }
+
+div.count_185:before, div.count_185_indent:before { content: "185"; }
+
+div.count_190:before, div.count_190_indent:before { content: "190"; }
+
+div.count_195:before, div.count_195_indent:before { content: "195"; }
+
+div.count_200:before, div.count_200_indent:before { content: "200"; }
+
+div.count_205:before, div.count_205_indent:before { content: "205"; }
+
+div.count_210:before, div.count_210_indent:before { content: "210"; }
+
+div.count_215:before, div.count_215_indent:before { content: "215"; }
+
+div.count_220:before, div.count_220_indent:before { content: "220"; }
+
+div.count_225:before, div.count_225_indent:before { content: "225"; }
+
+div.count_230:before, div.count_230_indent:before { content: "230"; }
+
+div.count_235:before, div.count_235_indent:before { content: "235"; }
+
+div.count_240:before, div.count_240_indent:before { content: "240"; }
+
+div.count_245:before, div.count_245_indent:before { content: "245"; }
+
+div.count_250:before, div.count_250_indent:before { content: "250"; }
+
+div.count_255:before, div.count_255_indent:before { content: "255"; }
+
+div.count_260:before, div.count_260_indent:before { content: "260"; }
+
+div.count_265:before, div.count_265_indent:before { content: "265"; }
+
+div.count_270:before, div.count_270_indent:before { content: "270"; }
+
+div.count_275:before, div.count_275_indent:before { content: "275"; }
+
+div.count_280:before, div.count_280_indent:before { content: "280"; }
+
+div.count_285:before, div.count_285_indent:before { content: "285"; }
+
+div.count_290:before, div.count_290_indent:before { content: "290"; }
+
+div.count_295:before, div.count_295_indent:before { content: "295"; }
+
+div.count_300:before, div.count_300_indent:before { content: "300"; }
+
+div.count_305:before, div.count_305_indent:before { content: "305"; }
+
+div.count_310:before, div.count_310_indent:before { content: "310"; }
+
+div.count_315:before, div.count_315_indent:before { content: "315"; }
+
+div.count_320:before, div.count_320_indent:before { content: "320"; }
+
+div.count_325:before, div.count_325_indent:before { content: "325"; }
+
+div.count_330:before, div.count_330_indent:before { content: "330"; }
+
+div.count_335:before, div.count_335_indent:before { content: "335"; }
+
+div.count_340:before, div.count_340_indent:before { content: "340"; }
+
+div.count_345:before, div.count_345_indent:before { content: "345"; }
+
+div.count_350:before, div.count_350_indent:before { content: "350"; }
+
+div.count_355:before, div.count_355_indent:before { content: "355"; }
+
+div.count_360:before, div.count_360_indent:before { content: "360"; }
+
+div.count_365:before, div.count_365_indent:before { content: "365"; }
+
+div.count_370:before, div.count_370_indent:before { content: "370"; }
+
+div.count_375:before, div.count_375_indent:before { content: "375"; }
+
+div.count_380:before, div.count_380_indent:before { content: "380"; }
+
+div.count_385:before, div.count_385_indent:before { content: "385"; }
+
+div.count_390:before, div.count_390_indent:before { content: "390"; }
+
+div.count_395:before, div.count_395_indent:before { content: "395"; }
+
+div.count_400:before, div.count_400_indent:before { content: "400"; }
+
+div.count_405:before, div.count_405_indent:before { content: "405"; }
+
+div.count_410:before, div.count_410_indent:before { content: "410"; }
+
+div.count_415:before, div.count_415_indent:before { content: "415"; }
+
+div.count_420:before, div.count_420_indent:before { content: "420"; }
+
+div.count_425:before, div.count_425_indent:before { content: "425"; }
+
+div.count_430:before, div.count_430_indent:before { content: "430"; }
+
+div.count_435:before, div.count_435_indent:before { content: "435"; }
+
+div.count_440:before, div.count_440_indent:before { content: "440"; }
+
+div.count_445:before, div.count_445_indent:before { content: "445"; }
+
+div.count_450:before, div.count_450_indent:before { content: "450"; }
+
+div.count_455:before, div.count_455_indent:before { content: "455"; }
+
+div.count_460:before, div.count_460_indent:before { content: "460"; }
+
+div.count_465:before, div.count_465_indent:before { content: "465"; }
+
+div.count_470:before, div.count_470_indent:before { content: "470"; }
+
+div.count_475:before, div.count_475_indent:before { content: "475"; }
+
+div.count_480:before, div.count_480_indent:before { content: "480"; }
+
+div.count_485:before, div.count_485_indent:before { content: "485"; }
+
+div.count_490:before, div.count_490_indent:before { content: "490"; }
+
+div.count_495:before, div.count_495_indent:before { content: "495"; }
+
+div.count_500:before, div.count_500_indent:before { content: "500"; }
+
+div.count_505:before, div.count_505_indent:before { content: "505"; }
+
+div.count_510:before, div.count_510_indent:before { content: "510"; }
+
+div.count_515:before, div.count_515_indent:before { content: "515"; }
+
+div.count_520:before, div.count_520_indent:before { content: "520"; }
+
+div.count_525:before, div.count_525_indent:before { content: "525"; }
+
+div.count_530:before, div.count_530_indent:before { content: "530"; }
+
+div.count_535:before, div.count_535_indent:before { content: "535"; }
+
+div.count_540:before, div.count_540_indent:before { content: "540"; }
+
+div.count_545:before, div.count_545_indent:before { content: "545"; }
+
+div.count_550:before, div.count_550_indent:before { content: "550"; }
+
+div.count_555:before, div.count_555_indent:before { content: "555"; }
+
+div.count_560:before, div.count_560_indent:before { content: "560"; }
+
+div.count_565:before, div.count_565_indent:before { content: "565"; }
+
+div.count_570:before, div.count_570_indent:before { content: "570"; }
+
+div.count_575:before, div.count_575_indent:before { content: "575"; }
+
+div.count_580:before, div.count_580_indent:before { content: "580"; }
+
+div.count_585:before, div.count_585_indent:before { content: "585"; }
+
+div.count_590:before, div.count_590_indent:before { content: "590"; }
+
+div.count_595:before, div.count_595_indent:before { content: "595"; }
+
+div.count_600:before, div.count_600_indent:before { content: "600"; }
+
+div.count_605:before, div.count_605_indent:before { content: "605"; }
+
+div.count_610:before, div.count_610_indent:before { content: "610"; }
+
+div.count_615:before, div.count_615_indent:before { content: "615"; }
+
+div.count_620:before, div.count_620_indent:before { content: "620"; }
+
+div.count_625:before, div.count_625_indent:before { content: "625"; }
+
+div.count_630:before, div.count_630_indent:before { content: "630"; }
+
+div.count_635:before, div.count_635_indent:before { content: "635"; }
+
+div.count_640:before, div.count_640_indent:before { content: "640"; }
+
+div.count_645:before, div.count_645_indent:before { content: "645"; }
+
+div.count_650:before, div.count_650_indent:before { content: "650"; }
+
+div.count_655:before, div.count_655_indent:before { content: "655"; }
+
+div.count_660:before, div.count_660_indent:before { content: "660"; }
+
+div.count_665:before, div.count_665_indent:before { content: "665"; }
+
+div.count_670:before, div.count_670_indent:before { content: "670"; }
+
+div.count_675:before, div.count_675_indent:before { content: "675"; }
+
+div.count_680:before, div.count_680_indent:before { content: "680"; }
+
+div.count_685:before, div.count_685_indent:before { content: "685"; }
+
+div.count_690:before, div.count_690_indent:before { content: "690"; }
+
+div.count_695:before, div.count_695_indent:before { content: "695"; }
+
+div.count_700:before, div.count_700_indent:before { content: "700"; }
+
+div.count_705:before, div.count_705_indent:before { content: "705"; }
+
+div.count_710:before, div.count_710_indent:before { content: "710"; }
+
+div.count_715:before, div.count_715_indent:before { content: "715"; }
+
+div.count_720:before, div.count_720_indent:before { content: "720"; }
+
+div.count_725:before, div.count_725_indent:before { content: "725"; }
+
+div.count_730:before, div.count_730_indent:before { content: "730"; }
+
+div.count_735:before, div.count_735_indent:before { content: "735"; }
+
+div.count_740:before, div.count_740_indent:before { content: "740"; }
+
+div.count_745:before, div.count_745_indent:before { content: "745"; }
+
+div.count_750:before, div.count_750_indent:before { content: "750"; }
+
+div.count_755:before, div.count_755_indent:before { content: "755"; }
+
+div.count_760:before, div.count_760_indent:before { content: "760"; }
+
+div.count_765:before, div.count_765_indent:before { content: "765"; }
+
+div.count_770:before, div.count_770_indent:before { content: "770"; }
+
+div.count_775:before, div.count_775_indent:before { content: "775"; }
+
+div.count_780:before, div.count_780_indent:before { content: "780"; }
+
+div.count_785:before, div.count_785_indent:before { content: "785"; }
+
+div.count_790:before, div.count_790_indent:before { content: "790"; }
+
+div.count_795:before, div.count_795_indent:before { content: "795"; }
+
+div.count_800:before, div.count_800_indent:before { content: "800"; }
+
+div.count_805:before, div.count_805_indent:before { content: "805"; }
+
+div.count_810:before, div.count_810_indent:before { content: "810"; }
+
+div.count_815:before, div.count_815_indent:before { content: "815"; }
+
+div.count_820:before, div.count_820_indent:before { content: "820"; }
+
+div.count_825:before, div.count_825_indent:before { content: "825"; }
+
+div.count_830:before, div.count_830_indent:before { content: "830"; }
+
+div.count_835:before, div.count_835_indent:before { content: "835"; }
+
+div.count_840:before, div.count_840_indent:before { content: "840"; }
+
+div.count_845:before, div.count_845_indent:before { content: "845"; }
+
+div.count_850:before, div.count_850_indent:before { content: "850"; }
+
+div.count_855:before, div.count_855_indent:before { content: "855"; }
+
+div.count_860:before, div.count_860_indent:before { content: "860"; }
+
+div.count_865:before, div.count_865_indent:before { content: "865"; }
+
+div.count_870:before, div.count_870_indent:before { content: "870"; }
+
+div.count_875:before, div.count_875_indent:before { content: "875"; }
+
+div.count_880:before, div.count_880_indent:before { content: "880"; }
+
+div.count_885:before, div.count_885_indent:before { content: "885"; }
+
+div.count_890:before, div.count_890_indent:before { content: "890"; }
+
+div.count_895:before, div.count_895_indent:before { content: "895"; }
+
+div.count_900:before, div.count_900_indent:before { content: "900"; }
+
+div.count_905:before, div.count_905_indent:before { content: "905"; }
+
+div.count_910:before, div.count_910_indent:before { content: "910"; }
+
+div.count_915:before, div.count_915_indent:before { content: "915"; }
+
+div.count_920:before, div.count_920_indent:before { content: "920"; }
+
+div.count_925:before, div.count_925_indent:before { content: "925"; }
+
+div.count_930:before, div.count_930_indent:before { content: "930"; }
+
+div.count_935:before, div.count_935_indent:before { content: "935"; }
+
+div.count_940:before, div.count_940_indent:before { content: "940"; }
+
+div.count_945:before, div.count_945_indent:before { content: "945"; }
+
+div.count_950:before, div.count_950_indent:before { content: "950"; }
+
+div.count_955:before, div.count_955_indent:before { content: "955"; }
+
+div.count_960:before, div.count_960_indent:before { content: "960"; }
+
+div.count_965:before, div.count_965_indent:before { content: "965"; }
+
+div.count_970:before, div.count_970_indent:before { content: "970"; }
+
+div.count_975:before, div.count_975_indent:before { content: "975"; }
+
+div.count_980:before, div.count_980_indent:before { content: "980"; }
+
+div.count_985:before, div.count_985_indent:before { content: "985"; }
+
+div.count_990:before, div.count_990_indent:before { content: "990"; }
+
+div.count_995:before, div.count_995_indent:before { content: "995"; }
+
+div.count_1000:before, div.count_1000_indent:before { content: "1000"; }
+
+div.poem_body:before, div.poem_body_indent:before { content: "\0000a0"; }
+
+div.poem_body_indent:before { width: 4.25em; display: block; float: left; text-align: right; }
+
+.poem_body .glossary-plugin .qtip { white-space: normal; }
+
+/* Paragraph numbering styles: supports auto numbering and explicit numbering (like poetry)*/
+
+div.numbered-paragraphs > p {
+	min-height: 18px;
+	margin-left: 30px;
+}
+
+div.numbered-paragraphs.automatic {
+	counter-reset: paragraph;
+}
+
+div.numbered-paragraphs p:before {
+    margin-left: -30px;
+	display: block;
+	float: left;
+	text-align: left;
+    font-style:italic;
+}
+
+div.numbered-paragraphs.automatic p:before {
+	content: counter(paragraph);
+	counter-increment: paragraph;
+}
+
+/* These styles are only used for explicit paragraph numbering. */
+p.paragraph-count-1:before  { content:"1";  }
+p.paragraph-count-2:before  { content:"2";  }
+p.paragraph-count-3:before  { content:"3";  }
+p.paragraph-count-4:before  { content:"4";  }
+p.paragraph-count-5:before  { content:"5";  }
+p.paragraph-count-6:before  { content:"6";  }
+p.paragraph-count-7:before  { content:"7";  }
+p.paragraph-count-8:before  { content:"8";  }
+p.paragraph-count-9:before  { content:"9";  }
+p.paragraph-count-10:before { content:"10"; }
+p.paragraph-count-11:before { content:"11"; }
+p.paragraph-count-12:before { content:"12"; }
+p.paragraph-count-13:before { content:"13"; }
+p.paragraph-count-14:before { content:"14"; }
+p.paragraph-count-15:before { content:"15"; }
+p.paragraph-count-16:before { content:"16"; }
+p.paragraph-count-17:before { content:"17"; }
+p.paragraph-count-18:before { content:"18"; }
+p.paragraph-count-19:before { content:"19"; }
+p.paragraph-count-20:before { content:"20"; }
+
+
+/* SBAC styles */
+/* This was 2018 font family
+.sbac #itemCanvasBody {
+  font-size: 1.2em;
+  font-family:Times New Roman, Times, serif;
+}
+*/
+
+/***** 2019 font family *****/
+.sbac #itemCanvasBody {
+  font-size: 1.1em;
+  font-family:Verdana, Arial, Helvetica, sans-serif;
+  line-height: normal;
+}
+
+
+.sbac #itemCanvasBody .tei-sbgrid,
+.sbac #itemCanvasBody img,
+.sbac #correctRenderingDiv .tei-sbgrid,
+.sbac #correctRenderingDiv img {
+	background: #fff;
+}
+
+.sbac #itemCanvasBody .layout8.questionCell {
+	padding-bottom: 1em;
+}
+
+.sbac #itemCanvasBody .layout8.answerCell {
+	padding-top: .5em;
+}
+
+/* override bootstrap p margin */
+.sbac #itemCanvasBody .layout8.questionCell p {
+	margin: 0 0 4px 0;
+}
+
+/* override bootstrap ul left-margin of 25px */
+.sbac #itemCanvasBody #stem-content ul {
+	margin-left:0;
+}
+
+.sbac #itemCanvasBody .passage-scrolling p {
+	font-size: 1.0em;
+	line-height:1.2em; 
+}
+
+.sbac #itemCanvasBody .itemId {
+	color: white;
+	background-color: #6CB9D6;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.2em;
+	float: left;
+	display: block;
+	padding: 4px 8px;
+}
+.sbac #itemCanvasBody .itemIdHR {
+	display: block;
+	clear: both;
+	background-color: #6CB9D6;
+	height: 1px;
+	margin: 0px 0px 5px 0px;
+	border: none;
+}
+.sbac #itemCanvasBody .choicePart {
+	color: inherit;
+	background-color: #DBDBDB;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.0em;
+	float: left;
+	display: block;
+	padding: 4px;
+}
+.sbac #itemCanvasBody .choicePartHR {
+	display: block;
+	clear: both;
+	background-color: #DBDBDB;
+	height: 1px;
+	margin: 0px;
+	border: none;
+}
+.sbac .qtip {
+	max-width: 320px;
+}
+.sbac .qtip .qtip-titlebar {
+	padding: 0px 14px;
+}
+.sbac .qtip .qtip-title {
+	line-height: 1.6em;
+	color: #666;
+	background-color: #F5F7F7;
+	font-size: 1.5em ! important;
+	font-stretch: expanded;
+	width: 320px;
+}
+.sbac .qtip .qtip-content {
+	font-family: "Lucida Grande", "Lucida Sans", Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	font-weight: normal;
+}
+.sbac .qtip .qtip-content .glossary-header {
+	color: white;
+	background-color: #00AEEF;
+	border: solid 1px #008FC5;
+	vertical-align: bottom;
+	float: left;
+	display: block;
+	padding: 0 .2em;
+}
+.sbac .qtip-content .glossary-term {
+	display: block;
+	clear: both;
+	border: 1px solid #00AEEF;
+	padding: .25em .5em;
+}
+.sbac .qtip-content .glossary-term p {
+	margin: 0;
+}
+.sbac #itemCanvasBody .int-highlighter-tooltip {
+	position:absolute;
+	border-radius:5px;
+	padding:5px;
+	min-width:100px;
+	z-index:100;
+	border:1px solid black;
+	background-color: #eeeeee;
+	background-image: url("/public/images/global/gradient90.gif");
+	background-repeat: repeat-x;
+}
+.sbac #itemCanvasBody div[data-style=CustomInteraction-texthighlighter],
+.sbac #correctRenderingDiv div[data-style=CustomInteraction-texthighlighter] {
+	line-height: 160%;
+}
+.sbac #itemCanvasBody div[data-style=CustomInteraction-texthighlighter] .selectable,
+.sbac #correctRenderingDiv div[data-style=CustomInteraction-texthighlighter] .selectable {
+	color: inherit;
+	background-color: inherit;
+	border: 0 solid #2871BD;
+	border-radius: 0;
+	padding: 0px;
+}
+.sbac #itemCanvasBody div[data-style=CustomInteraction-texthighlighter] .selectable.hover,
+.sbac #correctRenderingDiv div[data-style=CustomInteraction-texthighlighter] .selectable.hover {
+	color: inherit;
+	background-color: rgba(82, 168, 236, 0.5);
+	border: 0 solid #2871BD;
+	padding: 0px;
+}
+.sbac #itemCanvasBody div[data-style=CustomInteraction-texthighlighter] .selectable.hover a.sbac-glossary-plugin,
+.sbac #itemCanvasBody div[data-style=CustomInteraction-texthighlighter] .selectable.hover span.sbac-glossary-plugin,
+.sbac #correctRenderingDiv div[data-style=CustomInteraction-texthighlighter] .selectable.hover a.sbac-glossary-plugin,
+.sbac #correctRenderingDiv div[data-style=CustomInteraction-texthighlighter] .selectable.hover span.sbac-glossary-plugin {
+	color: #800080;
+}
+.sbac #itemCanvasBody div[data-style=CustomInteraction-texthighlighter] .selectedC,
+.sbac #correctRenderingDiv div[data-style=CustomInteraction-texthighlighter] .selectedC {
+	color: inherit;
+	background-color: #CCE3A9;
+	box-shadow: none;
+	border: 0px;
+	border-radius: 0px;
+	padding: 0px;
+}
+.sbac #itemCanvasBody div[data-style=CustomInteraction-texthighlighter] .selectedC.hover,
+.sbac #correctRenderingDiv div[data-style=CustomInteraction-texthighlighter] .selectedC.hover {
+	color: inherit;
+	background-color: #CCE3A9;
+	box-shadow: none;
+	border: 0px;
+	border-radius: 0px;
+	padding: 0px;
+}
+.sbac #itemCanvasBody div[data-style=CustomInteraction-texthighlighter] .selectedC.hover a.sbac-glossary-plugin,
+.sbac #itemCanvasBody div[data-style=CustomInteraction-texthighlighter] .selectedC.hover span.sbac-glossary-plugin,
+.sbac #correctRenderingDiv div[data-style=CustomInteraction-texthighlighter] .selectedC.hover a.sbac-glossary-plugin,
+.sbac #correctRenderingDiv div[data-style=CustomInteraction-texthighlighter] .selectedC.hover span.sbac-glossary-plugin {
+	color: inherit;
+}
+.sbac #itemCanvasBody div[data-style=CustomInteraction-texthighlighter] .selectable:focus,
+.sbac #correctRenderingDiv div[data-style=CustomInteraction-texthighlighter] .selectable:focus {
+	color: inherit;
+	background-color: #CCE3A9 !important;
+	box-shadow: none;
+	border: 1px dotted #6CB9D6 !important;
+	border-radius: 0px;
+	padding: 0px;
+}
+
+/* SBAC Glossary Styles */
+a.sbac-glossary-plugin, span.sbac-glossary-plugin { text-decoration:none;color:#333333;border-bottom:1px dotted #000000; }
+#sbPopupContentWrapper {width: fit-content;min-width: 280px;z-index: 1040;margin-left: 0;}
+#sbPopupContentWrapper .tn8-draggable-modal-header .close { opacity: 2; border: 1px solid #000000; border-radius: 50%; font-size: 15px; margin-top: 10px; line-height: normal; padding: 0 6px 2.5px 6px; outline: none; }
+#sbPopupContentWrapper .tn8-draggable-modal-header .close:hover, #sbPopupContentWrapper .tn8-draggable-modal-header .close:active, #sbPopupContentWrapper .tn8-draggable-modal-header .close:focus { border-color: #00aeef; color: #00aeef; }
+#sbPopupContentWrapper .tn8-draggable-modal-body .body-title { margin: 10px 0 0 10px; font-size: 1.0em; }
+#sbPopupContentWrapper .tn8-draggable-modal-body .body-title ul { list-style: none; margin: 0; }
+#sbPopupContentWrapper .tn8-draggable-modal-body .body-title ul li { display: inline-block; }
+#sbPopupContentWrapper .tn8-draggable-modal-body .body-title .popup-tab a { background-color: #E7E7E7; color: #000000; padding: .2em; background-image: none; text-decoration: none; border-top: solid 1px #9D9D9D; border-left: solid 1px #9D9D9D; border-right: solid 1px #9D9D9D; border-bottom: solid 1px #1FB8F1; cursor: pointer; }
+#sbPopupContentWrapper .tn8-draggable-modal-body .body-title .popup-tab.active a { background-color: #00aeef; border-color: #1FB8F1; color: #FFFFFF; }
+#sbPopupContentWrapper .tn8-draggable-modal-body .content-panel { margin: 1px 10px 10px 0; border: solid 1px #1FB8F1; }
+#sbPopupContentWrapper .tn8-draggable-modal-body .content-panel .popup-content { margin: 0 5px 0 10px; }
+#sbPopupContentWrapper .tn8-draggable-modal-body .content-panel .popup-content audio, #sbPopupContentWrapper .tn8-draggable-modal-body .content-panel .popup-content img { display: block; }
+
+/* Start of Multiple Choice Styles */
+
+.sbac #itemCanvasBody .choice-widget .int-choice-div {
+    outline: none;
+    border: 1px dashed transparent;
+    display: flex;
+    align-items: baseline;
+}
+
+.sbac #itemCanvasBody .choice-widget .int-choice-div.glow-on {
+    /* outline:thin dotted #333;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px; */
+    border: 1px dashed transparent;
+    display: flex;
+    align-items: baseline;
+    border-color:rgba(82, 168, 236, 0.8);-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 2px rgba(82,168,236,.6);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 2px rgba(82,168,236,.6);box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 2px rgba(82,168,236,.6);
+}
+
+.sbac #itemCanvasBody .choice-widget .int-choice-label {
+	/* since we are hiding the control, shift everything to the left */
+	margin-left: 0;
+}
+
+.sbac #itemCanvasBody .choice-widget .int-choice-desc {
+	/* 2018 font-size: 1.2em; */
+	font-size: 1.1em;
+	padding: 0 0 12px 16px;
+	vertical-align: baseline;
+    display: inline;
+}
+
+.sbac #itemCanvasBody .choice-widget .int-choice-desc p {
+	margin: 0;
+}
+
+.sbac .choice-widget .int-choice-checkbox {
+    border: 1px solid #999;
+    border-radius: 3px;
+    /* box-shadow: 1px 1px 1px 1px #ddd inset; */
+    height: 16px;
+    min-height: 16px;
+    width: 16px;
+    min-width: 16px;
+    display: inline-block;
+    position: relative;
+    text-indent: 0 !important;
+    left: 0;
+    top: 1px;
+}
+
+.sbac .choice-widget .int-choice-div:hover .int-choice-control:not(.option-selected),
+.sbac .choice-widget .int-choice-div:hover .int-choice-checkbox:not(.option-selected) {
+	/* border-color: #00aa55; */
+	background-color: rgba(82, 168, 236, 0.3);
+}
+
+.sbac .choice-widget .int-choice-div.glow-on .int-choice-control:not(.option-selected),
+.sbac .choice-widget .int-choice-div.glow-on .int-choice-checkbox:not(.option-selected) {
+	/* border-color: #00aa55;
+	background-color: #e2ffe2; */
+}
+
+/* .int-choice-control is a radio button */
+.sbac .choice-widget .int-choice-control {
+	display: block;
+    height: 15px;
+    min-height: 15px;
+    width: 15px;
+    min-width: 15px;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px inset;
+    position: relative;
+    float: left;
+    text-indent: 0 !important;
+	margin-top: 3px;
+	padding: 0; /* without this we get ovals */
+}
+
+.sbac .choice-widget input[type="radio" i] {
+    -webkit-appearance: radio;
+    -webkit-writing-mode: horizontal-tb;
+    background-color: initial;
+    cursor: default;
+    border: initial;
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: start;
+    font: 400 13.3333px Arial;
+}
+
+.sbac .choice-widget .int-choice-control.option-selected {
+    background-color: #777;
+    background-image: none;
+    box-shadow: 1px 1px 1px #000 inset;
+}
+
+.sbac .choice-widget .int-choice-control:before {
+	position: absolute;
+    font-size: 11px;
+    font-weight: 600;
+    left: 0;
+    top: 0;
+    width: 16px;
+    min-width: 16px;
+    line-height: 17px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.sbac .choice-widget .int-choice-checkbox.option-selected {
+	background-image: url("../../public/images/global/checkbox.png");
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+.sbac .int-choice-control.choiceA:before {
+    content: "A";
+}
+
+.sbac .int-choice-control.choiceB:before {
+    content: "B";
+}
+
+.sbac .int-choice-control.choiceC:before {
+    content: "C";
+}
+
+.sbac .int-choice-control.choiceD:before {
+    content: "D";
+}
+
+.sbac .int-choice-control.choiceE:before {
+    content: "E";
+}
+
+.sbac .int-choice-control.choiceF:before {
+    content: "F";
+}
+
+/* End Multiple Choice Styles */
+
+.sbac #itemCanvasBody div[data-module=ExtendedTextInteraction] .int-extended-text {
+	padding: .3em;
+	border: 1px solid #bbbbbb;
+	border-radius: .2em;
+	box-sizing: border-box;
+	margin-right: .1em;
+	height: 8em;
+	font-size: 1em;
+	resize: none;
+	overflow: auto;
+	vertical-align: top;
+	margin: 0;
+	font-family: sans-serif;
+	-webkit-locale: "en-us";
+	-webkit-appearance: textarea;
+	background-color: white;
+	-webkit-rtl-ordering: logical;
+	flex-direction: column;
+	cursor: text;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	text-rendering: auto;
+	color: initial;
+	letter-spacing: normal;
+	word-spacing: normal;
+	text-transform: none;
+	text-indent: 0px;
+	text-shadow: none;
+	display: inline-block;
+	text-align: start;
+	font: 400 13.3333px Arial;
+	-webkit-writing-mode: horizontal-tb;
+}
+
+.sbac #itemCanvasBody div[data-module=RTELiteInteraction] div.height-xxxtratall {
+	height: 90em;
+}
+
+.sbac #itemCanvasBody div[data-module=CKEDITORInteraction] .cke {
+	margin-bottom:18px;
+}
+
+.sbac #itemCanvasBody div[data-module=MatchInteraction-tablegrid] table.table-grid td.first-header-cell {
+	/* remove the top and left borders */
+	border-top: 0;
+	border-left: 0;
+}
+
+.sbac #itemCanvasBody div[data-module=MatchInteraction-tablegrid] table.table-grid td.column-header-cell {
+	/* remove the top and left borders */
+	border: 1px solid #cccccc;
+	font-weight: bold;
+}
+
+.sbac #itemCanvasBody div[data-module=MatchInteraction-tablegrid] table.table-grid td.row-header-cell {
+	/* remove the top and left borders */
+	border: 1px solid #cccccc;
+	font-weight: bold;
+	text-align: left;
+}
+
+.sbac #itemCanvasBody div[data-module=MatchInteraction-tablegrid] a:focus { 
+	background-color: #cccccc;
+}
+
+.sbac #itemCanvasBody div[data-module=MatchInteraction-tablegrid] table.table-grid td.row-header-cell img {
+	/* fix bug where images inside SBAC Match table cells are compressed */
+	max-width: none;
+}
+
+/* Custom WIDA styles */
+.wida #itemCanvas #itemCanvasBody .count_1000, .wida #itemCanvas #itemCanvasBody .count_1000_indent, .wida #itemCanvas #itemCanvasBody .count_995, .wida #itemCanvas #itemCanvasBody .count_995_indent, .wida #itemCanvas #itemCanvasBody .count_990, .wida #itemCanvas #itemCanvasBody .count_990_indent, .wida #itemCanvas #itemCanvasBody .count_985, .wida #itemCanvas #itemCanvasBody .count_985_indent, .wida #itemCanvas #itemCanvasBody .count_980, .wida #itemCanvas #itemCanvasBody .count_980_indent, .wida #itemCanvas #itemCanvasBody .count_975, .wida #itemCanvas #itemCanvasBody .count_975_indent, .wida #itemCanvas #itemCanvasBody .count_970, .wida #itemCanvas #itemCanvasBody .count_970_indent, .wida #itemCanvas #itemCanvasBody .count_965, .wida #itemCanvas #itemCanvasBody .count_965_indent, .wida #itemCanvas #itemCanvasBody .count_960, .wida #itemCanvas #itemCanvasBody .count_960_indent, .wida #itemCanvas #itemCanvasBody .count_955, .wida #itemCanvas #itemCanvasBody .count_955_indent, .wida #itemCanvas #itemCanvasBody .count_950, .wida #itemCanvas #itemCanvasBody .count_950_indent, .wida #itemCanvas #itemCanvasBody .count_945, .wida #itemCanvas #itemCanvasBody .count_945_indent, .wida #itemCanvas #itemCanvasBody .count_940, .wida #itemCanvas #itemCanvasBody .count_940_indent, .wida #itemCanvas #itemCanvasBody .count_935, .wida #itemCanvas #itemCanvasBody .count_935_indent, .wida #itemCanvas #itemCanvasBody .count_930, .wida #itemCanvas #itemCanvasBody .count_930_indent, .wida #itemCanvas #itemCanvasBody .count_925, .wida #itemCanvas #itemCanvasBody .count_925_indent, .wida #itemCanvas #itemCanvasBody .count_920, .wida #itemCanvas #itemCanvasBody .count_920_indent, .wida #itemCanvas #itemCanvasBody .count_915, .wida #itemCanvas #itemCanvasBody .count_915_indent, .wida #itemCanvas #itemCanvasBody .count_910, .wida #itemCanvas #itemCanvasBody .count_910_indent, .wida #itemCanvas #itemCanvasBody .count_905, .wida #itemCanvas #itemCanvasBody .count_905_indent, .wida #itemCanvas #itemCanvasBody .count_900, .wida #itemCanvas #itemCanvasBody .count_900_indent, .wida #itemCanvas #itemCanvasBody .count_895, .wida #itemCanvas #itemCanvasBody .count_895_indent, .wida #itemCanvas #itemCanvasBody .count_890, .wida #itemCanvas #itemCanvasBody .count_890_indent, .wida #itemCanvas #itemCanvasBody .count_885, .wida #itemCanvas #itemCanvasBody .count_885_indent, .wida #itemCanvas #itemCanvasBody .count_880, .wida #itemCanvas #itemCanvasBody .count_880_indent, .wida #itemCanvas #itemCanvasBody .count_875, .wida #itemCanvas #itemCanvasBody .count_875_indent, .wida #itemCanvas #itemCanvasBody .count_870, .wida #itemCanvas #itemCanvasBody .count_870_indent, .wida #itemCanvas #itemCanvasBody .count_865, .wida #itemCanvas #itemCanvasBody .count_865_indent, .wida #itemCanvas #itemCanvasBody .count_860, .wida #itemCanvas #itemCanvasBody .count_860_indent, .wida #itemCanvas #itemCanvasBody .count_855, .wida #itemCanvas #itemCanvasBody .count_855_indent, .wida #itemCanvas #itemCanvasBody .count_850, .wida #itemCanvas #itemCanvasBody .count_850_indent, .wida #itemCanvas #itemCanvasBody .count_845, .wida #itemCanvas #itemCanvasBody .count_845_indent, .wida #itemCanvas #itemCanvasBody .count_840, .wida #itemCanvas #itemCanvasBody .count_840_indent, .wida #itemCanvas #itemCanvasBody .count_835, .wida #itemCanvas #itemCanvasBody .count_835_indent, .wida #itemCanvas #itemCanvasBody .count_830, .wida #itemCanvas #itemCanvasBody .count_830_indent, .wida #itemCanvas #itemCanvasBody .count_825, .wida #itemCanvas #itemCanvasBody .count_825_indent, .wida #itemCanvas #itemCanvasBody .count_820, .wida #itemCanvas #itemCanvasBody .count_820_indent, .wida #itemCanvas #itemCanvasBody .count_815, .wida #itemCanvas #itemCanvasBody .count_815_indent, .wida #itemCanvas #itemCanvasBody .count_810, .wida #itemCanvas #itemCanvasBody .count_810_indent, .wida #itemCanvas #itemCanvasBody .count_805, .wida #itemCanvas #itemCanvasBody .count_805_indent, .wida #itemCanvas #itemCanvasBody .count_800, .wida #itemCanvas #itemCanvasBody .count_800_indent, .wida #itemCanvas #itemCanvasBody .count_795, .wida #itemCanvas #itemCanvasBody .count_795_indent, .wida #itemCanvas #itemCanvasBody .count_790, .wida #itemCanvas #itemCanvasBody .count_790_indent, .wida #itemCanvas #itemCanvasBody .count_785, .wida #itemCanvas #itemCanvasBody .count_785_indent, .wida #itemCanvas #itemCanvasBody .count_780, .wida #itemCanvas #itemCanvasBody .count_780_indent, .wida #itemCanvas #itemCanvasBody .count_775, .wida #itemCanvas #itemCanvasBody .count_775_indent, .wida #itemCanvas #itemCanvasBody .count_770, .wida #itemCanvas #itemCanvasBody .count_770_indent, .wida #itemCanvas #itemCanvasBody .count_765, .wida #itemCanvas #itemCanvasBody .count_765_indent, .wida #itemCanvas #itemCanvasBody .count_760, .wida #itemCanvas #itemCanvasBody .count_760_indent, .wida #itemCanvas #itemCanvasBody .count_755, .wida #itemCanvas #itemCanvasBody .count_755_indent, .wida #itemCanvas #itemCanvasBody .count_750, .wida #itemCanvas #itemCanvasBody .count_750_indent, .wida #itemCanvas #itemCanvasBody .count_745, .wida #itemCanvas #itemCanvasBody .count_745_indent, .wida #itemCanvas #itemCanvasBody .count_740, .wida #itemCanvas #itemCanvasBody .count_740_indent, .wida #itemCanvas #itemCanvasBody .count_735, .wida #itemCanvas #itemCanvasBody .count_735_indent, .wida #itemCanvas #itemCanvasBody .count_730, .wida #itemCanvas #itemCanvasBody .count_730_indent, .wida #itemCanvas #itemCanvasBody .count_725, .wida #itemCanvas #itemCanvasBody .count_725_indent, .wida #itemCanvas #itemCanvasBody .count_720, .wida #itemCanvas #itemCanvasBody .count_720_indent, .wida #itemCanvas #itemCanvasBody .count_715, .wida #itemCanvas #itemCanvasBody .count_715_indent, .wida #itemCanvas #itemCanvasBody .count_710, .wida #itemCanvas #itemCanvasBody .count_710_indent, .wida #itemCanvas #itemCanvasBody .count_705, .wida #itemCanvas #itemCanvasBody .count_705_indent, .wida #itemCanvas #itemCanvasBody .count_700, .wida #itemCanvas #itemCanvasBody .count_700_indent, .wida #itemCanvas #itemCanvasBody .count_695, .wida #itemCanvas #itemCanvasBody .count_695_indent, .wida #itemCanvas #itemCanvasBody .count_690, .wida #itemCanvas #itemCanvasBody .count_690_indent, .wida #itemCanvas #itemCanvasBody .count_685, .wida #itemCanvas #itemCanvasBody .count_685_indent, .wida #itemCanvas #itemCanvasBody .count_680, .wida #itemCanvas #itemCanvasBody .count_680_indent, .wida #itemCanvas #itemCanvasBody .count_675, .wida #itemCanvas #itemCanvasBody .count_675_indent, .wida #itemCanvas #itemCanvasBody .count_670, .wida #itemCanvas #itemCanvasBody .count_670_indent, .wida #itemCanvas #itemCanvasBody .count_665, .wida #itemCanvas #itemCanvasBody .count_665_indent, .wida #itemCanvas #itemCanvasBody .count_660, .wida #itemCanvas #itemCanvasBody .count_660_indent, .wida #itemCanvas #itemCanvasBody .count_655, .wida #itemCanvas #itemCanvasBody .count_655_indent, .wida #itemCanvas #itemCanvasBody .count_650, .wida #itemCanvas #itemCanvasBody .count_650_indent, .wida #itemCanvas #itemCanvasBody .count_645, .wida #itemCanvas #itemCanvasBody .count_645_indent, .wida #itemCanvas #itemCanvasBody .count_640, .wida #itemCanvas #itemCanvasBody .count_640_indent, .wida #itemCanvas #itemCanvasBody .count_635, .wida #itemCanvas #itemCanvasBody .count_635_indent, .wida #itemCanvas #itemCanvasBody .count_630, .wida #itemCanvas #itemCanvasBody .count_630_indent, .wida #itemCanvas #itemCanvasBody .count_625, .wida #itemCanvas #itemCanvasBody .count_625_indent, .wida #itemCanvas #itemCanvasBody .count_620, .wida #itemCanvas #itemCanvasBody .count_620_indent, .wida #itemCanvas #itemCanvasBody .count_615, .wida #itemCanvas #itemCanvasBody .count_615_indent, .wida #itemCanvas #itemCanvasBody .count_610, .wida #itemCanvas #itemCanvasBody .count_610_indent, .wida #itemCanvas #itemCanvasBody .count_605, .wida #itemCanvas #itemCanvasBody .count_605_indent, .wida #itemCanvas #itemCanvasBody .count_600, .wida #itemCanvas #itemCanvasBody .count_600_indent, .wida #itemCanvas #itemCanvasBody .count_595, .wida #itemCanvas #itemCanvasBody .count_595_indent, .wida #itemCanvas #itemCanvasBody .count_590, .wida #itemCanvas #itemCanvasBody .count_590_indent, .wida #itemCanvas #itemCanvasBody .count_585, .wida #itemCanvas #itemCanvasBody .count_585_indent, .wida #itemCanvas #itemCanvasBody .count_580, .wida #itemCanvas #itemCanvasBody .count_580_indent, .wida #itemCanvas #itemCanvasBody .count_575, .wida #itemCanvas #itemCanvasBody .count_575_indent, .wida #itemCanvas #itemCanvasBody .count_570, .wida #itemCanvas #itemCanvasBody .count_570_indent, .wida #itemCanvas #itemCanvasBody .count_565, .wida #itemCanvas #itemCanvasBody .count_565_indent, .wida #itemCanvas #itemCanvasBody .count_560, .wida #itemCanvas #itemCanvasBody .count_560_indent, .wida #itemCanvas #itemCanvasBody .count_555, .wida #itemCanvas #itemCanvasBody .count_555_indent, .wida #itemCanvas #itemCanvasBody .count_550, .wida #itemCanvas #itemCanvasBody .count_550_indent, .wida #itemCanvas #itemCanvasBody .count_545, .wida #itemCanvas #itemCanvasBody .count_545_indent, .wida #itemCanvas #itemCanvasBody .count_540, .wida #itemCanvas #itemCanvasBody .count_540_indent, .wida #itemCanvas #itemCanvasBody .count_535, .wida #itemCanvas #itemCanvasBody .count_535_indent, .wida #itemCanvas #itemCanvasBody .count_530, .wida #itemCanvas #itemCanvasBody .count_530_indent, .wida #itemCanvas #itemCanvasBody .count_525, .wida #itemCanvas #itemCanvasBody .count_525_indent, .wida #itemCanvas #itemCanvasBody .count_520, .wida #itemCanvas #itemCanvasBody .count_520_indent, .wida #itemCanvas #itemCanvasBody .count_515, .wida #itemCanvas #itemCanvasBody .count_515_indent, .wida #itemCanvas #itemCanvasBody .count_510, .wida #itemCanvas #itemCanvasBody .count_510_indent, .wida #itemCanvas #itemCanvasBody .count_505, .wida #itemCanvas #itemCanvasBody .count_505_indent, .wida #itemCanvas #itemCanvasBody .count_500, .wida #itemCanvas #itemCanvasBody .count_500_indent, .wida #itemCanvas #itemCanvasBody .count_495, .wida #itemCanvas #itemCanvasBody .count_495_indent, .wida #itemCanvas #itemCanvasBody .count_490, .wida #itemCanvas #itemCanvasBody .count_490_indent, .wida #itemCanvas #itemCanvasBody .count_485, .wida #itemCanvas #itemCanvasBody .count_485_indent, .wida #itemCanvas #itemCanvasBody .count_480, .wida #itemCanvas #itemCanvasBody .count_480_indent, .wida #itemCanvas #itemCanvasBody .count_475, .wida #itemCanvas #itemCanvasBody .count_475_indent, .wida #itemCanvas #itemCanvasBody .count_470, .wida #itemCanvas #itemCanvasBody .count_470_indent, .wida #itemCanvas #itemCanvasBody .count_465, .wida #itemCanvas #itemCanvasBody .count_465_indent, .wida #itemCanvas #itemCanvasBody .count_460, .wida #itemCanvas #itemCanvasBody .count_460_indent, .wida #itemCanvas #itemCanvasBody .count_455, .wida #itemCanvas #itemCanvasBody .count_455_indent, .wida #itemCanvas #itemCanvasBody .count_450, .wida #itemCanvas #itemCanvasBody .count_450_indent, .wida #itemCanvas #itemCanvasBody .count_445, .wida #itemCanvas #itemCanvasBody .count_445_indent, .wida #itemCanvas #itemCanvasBody .count_440, .wida #itemCanvas #itemCanvasBody .count_440_indent, .wida #itemCanvas #itemCanvasBody .count_435, .wida #itemCanvas #itemCanvasBody .count_435_indent, .wida #itemCanvas #itemCanvasBody .count_430, .wida #itemCanvas #itemCanvasBody .count_430_indent, .wida #itemCanvas #itemCanvasBody .count_425, .wida #itemCanvas #itemCanvasBody .count_425_indent, .wida #itemCanvas #itemCanvasBody .count_420, .wida #itemCanvas #itemCanvasBody .count_420_indent, .wida #itemCanvas #itemCanvasBody .count_415, .wida #itemCanvas #itemCanvasBody .count_415_indent, .wida #itemCanvas #itemCanvasBody .count_410, .wida #itemCanvas #itemCanvasBody .count_410_indent, .wida #itemCanvas #itemCanvasBody .count_405, .wida #itemCanvas #itemCanvasBody .count_405_indent, .wida #itemCanvas #itemCanvasBody .count_400, .wida #itemCanvas #itemCanvasBody .count_400_indent, .wida #itemCanvas #itemCanvasBody .count_395, .wida #itemCanvas #itemCanvasBody .count_395_indent, .wida #itemCanvas #itemCanvasBody .count_390, .wida #itemCanvas #itemCanvasBody .count_390_indent, .wida #itemCanvas #itemCanvasBody .count_385, .wida #itemCanvas #itemCanvasBody .count_385_indent, .wida #itemCanvas #itemCanvasBody .count_380, .wida #itemCanvas #itemCanvasBody .count_380_indent, .wida #itemCanvas #itemCanvasBody .count_375, .wida #itemCanvas #itemCanvasBody .count_375_indent, .wida #itemCanvas #itemCanvasBody .count_370, .wida #itemCanvas #itemCanvasBody .count_370_indent, .wida #itemCanvas #itemCanvasBody .count_365, .wida #itemCanvas #itemCanvasBody .count_365_indent, .wida #itemCanvas #itemCanvasBody .count_360, .wida #itemCanvas #itemCanvasBody .count_360_indent, .wida #itemCanvas #itemCanvasBody .count_355, .wida #itemCanvas #itemCanvasBody .count_355_indent, .wida #itemCanvas #itemCanvasBody .count_350, .wida #itemCanvas #itemCanvasBody .count_350_indent, .wida #itemCanvas #itemCanvasBody .count_345, .wida #itemCanvas #itemCanvasBody .count_345_indent, .wida #itemCanvas #itemCanvasBody .count_340, .wida #itemCanvas #itemCanvasBody .count_340_indent, .wida #itemCanvas #itemCanvasBody .count_335, .wida #itemCanvas #itemCanvasBody .count_335_indent, .wida #itemCanvas #itemCanvasBody .count_330, .wida #itemCanvas #itemCanvasBody .count_330_indent, .wida #itemCanvas #itemCanvasBody .count_325, .wida #itemCanvas #itemCanvasBody .count_325_indent, .wida #itemCanvas #itemCanvasBody .count_320, .wida #itemCanvas #itemCanvasBody .count_320_indent, .wida #itemCanvas #itemCanvasBody .count_315, .wida #itemCanvas #itemCanvasBody .count_315_indent, .wida #itemCanvas #itemCanvasBody .count_310, .wida #itemCanvas #itemCanvasBody .count_310_indent, .wida #itemCanvas #itemCanvasBody .count_305, .wida #itemCanvas #itemCanvasBody .count_305_indent, .wida #itemCanvas #itemCanvasBody .count_300, .wida #itemCanvas #itemCanvasBody .count_300_indent, .wida #itemCanvas #itemCanvasBody .count_295, .wida #itemCanvas #itemCanvasBody .count_295_indent, .wida #itemCanvas #itemCanvasBody .count_290, .wida #itemCanvas #itemCanvasBody .count_290_indent, .wida #itemCanvas #itemCanvasBody .count_285, .wida #itemCanvas #itemCanvasBody .count_285_indent, .wida #itemCanvas #itemCanvasBody .count_280, .wida #itemCanvas #itemCanvasBody .count_280_indent, .wida #itemCanvas #itemCanvasBody .count_275, .wida #itemCanvas #itemCanvasBody .count_275_indent, .wida #itemCanvas #itemCanvasBody .count_270, .wida #itemCanvas #itemCanvasBody .count_270_indent, .wida #itemCanvas #itemCanvasBody .count_265, .wida #itemCanvas #itemCanvasBody .count_265_indent, .wida #itemCanvas #itemCanvasBody .count_260, .wida #itemCanvas #itemCanvasBody .count_260_indent, .wida #itemCanvas #itemCanvasBody .count_255, .wida #itemCanvas #itemCanvasBody .count_255_indent, .wida #itemCanvas #itemCanvasBody .count_250, .wida #itemCanvas #itemCanvasBody .count_250_indent, .wida #itemCanvas #itemCanvasBody .count_245, .wida #itemCanvas #itemCanvasBody .count_245_indent, .wida #itemCanvas #itemCanvasBody .count_240, .wida #itemCanvas #itemCanvasBody .count_240_indent, .wida #itemCanvas #itemCanvasBody .count_235, .wida #itemCanvas #itemCanvasBody .count_235_indent, .wida #itemCanvas #itemCanvasBody .count_230, .wida #itemCanvas #itemCanvasBody .count_230_indent, .wida #itemCanvas #itemCanvasBody .count_225, .wida #itemCanvas #itemCanvasBody .count_225_indent, .wida #itemCanvas #itemCanvasBody .count_220, .wida #itemCanvas #itemCanvasBody .count_220_indent, .wida #itemCanvas #itemCanvasBody .count_215, .wida #itemCanvas #itemCanvasBody .count_215_indent, .wida #itemCanvas #itemCanvasBody .count_210, .wida #itemCanvas #itemCanvasBody .count_210_indent, .wida #itemCanvas #itemCanvasBody .count_205, .wida #itemCanvas #itemCanvasBody .count_205_indent, .wida #itemCanvas #itemCanvasBody .count_200, .wida #itemCanvas #itemCanvasBody .count_200_indent, .wida #itemCanvas #itemCanvasBody .count_195, .wida #itemCanvas #itemCanvasBody .count_195_indent, .wida #itemCanvas #itemCanvasBody .count_190, .wida #itemCanvas #itemCanvasBody .count_190_indent, .wida #itemCanvas #itemCanvasBody .count_185, .wida #itemCanvas #itemCanvasBody .count_185_indent, .wida #itemCanvas #itemCanvasBody .count_180, .wida #itemCanvas #itemCanvasBody .count_180_indent, .wida #itemCanvas #itemCanvasBody .count_175, .wida #itemCanvas #itemCanvasBody .count_175_indent, .wida #itemCanvas #itemCanvasBody .count_170, .wida #itemCanvas #itemCanvasBody .count_170_indent, .wida #itemCanvas #itemCanvasBody .count_165, .wida #itemCanvas #itemCanvasBody .count_165_indent, .wida #itemCanvas #itemCanvasBody .count_160, .wida #itemCanvas #itemCanvasBody .count_160_indent, .wida #itemCanvas #itemCanvasBody .count_155, .wida #itemCanvas #itemCanvasBody .count_155_indent, .wida #itemCanvas #itemCanvasBody .count_150, .wida #itemCanvas #itemCanvasBody .count_150_indent, .wida #itemCanvas #itemCanvasBody .count_145, .wida #itemCanvas #itemCanvasBody .count_145_indent, .wida #itemCanvas #itemCanvasBody .count_140, .wida #itemCanvas #itemCanvasBody .count_140_indent, .wida #itemCanvas #itemCanvasBody .count_135, .wida #itemCanvas #itemCanvasBody .count_135_indent, .wida #itemCanvas #itemCanvasBody .count_130, .wida #itemCanvas #itemCanvasBody .count_130_indent, .wida #itemCanvas #itemCanvasBody .count_125, .wida #itemCanvas #itemCanvasBody .count_125_indent, .wida #itemCanvas #itemCanvasBody .count_120, .wida #itemCanvas #itemCanvasBody .count_120_indent, .wida #itemCanvas #itemCanvasBody .count_115, .wida #itemCanvas #itemCanvasBody .count_115_indent, .wida #itemCanvas #itemCanvasBody .count_110, .wida #itemCanvas #itemCanvasBody .count_110_indent, .wida #itemCanvas #itemCanvasBody .count_105, .wida #itemCanvas #itemCanvasBody .count_105_indent, .wida #itemCanvas #itemCanvasBody .count_100, .wida #itemCanvas #itemCanvasBody .count_100_indent, .wida #itemCanvas #itemCanvasBody .count_95, .wida #itemCanvas #itemCanvasBody .count_95_indent, .wida #itemCanvas #itemCanvasBody .count_90, .wida #itemCanvas #itemCanvasBody .count_90_indent, .wida #itemCanvas #itemCanvasBody .count_85, .wida #itemCanvas #itemCanvasBody .count_85_indent, .wida #itemCanvas #itemCanvasBody .count_80, .wida #itemCanvas #itemCanvasBody .count_80_indent, .wida #itemCanvas #itemCanvasBody .count_79, .wida #itemCanvas #itemCanvasBody .count_78, .wida #itemCanvas #itemCanvasBody .count_77, .wida #itemCanvas #itemCanvasBody .count_76, .wida #itemCanvas #itemCanvasBody .count_75_indent, .wida #itemCanvas #itemCanvasBody .count_75, .wida #itemCanvas #itemCanvasBody .count_74, .wida #itemCanvas #itemCanvasBody .count_73, .wida #itemCanvas #itemCanvasBody .count_72, .wida #itemCanvas #itemCanvasBody .count_71, .wida #itemCanvas #itemCanvasBody .count_70_indent, .wida #itemCanvas #itemCanvasBody .count_70, .wida #itemCanvas #itemCanvasBody .count_69, .wida #itemCanvas #itemCanvasBody .count_68, .wida #itemCanvas #itemCanvasBody .count_67, .wida #itemCanvas #itemCanvasBody .count_66, .wida #itemCanvas #itemCanvasBody .count_65_indent, .wida #itemCanvas #itemCanvasBody .count_65, .wida #itemCanvas #itemCanvasBody .count_64, .wida #itemCanvas #itemCanvasBody .count_63, .wida #itemCanvas #itemCanvasBody .count_62, .wida #itemCanvas #itemCanvasBody .count_61, .wida #itemCanvas #itemCanvasBody .count_60_indent, .wida #itemCanvas #itemCanvasBody .count_60, .wida #itemCanvas #itemCanvasBody .count_59, .wida #itemCanvas #itemCanvasBody .count_58, .wida #itemCanvas #itemCanvasBody .count_57, .wida #itemCanvas #itemCanvasBody .count_56, .wida #itemCanvas #itemCanvasBody .count_55_indent, .wida #itemCanvas #itemCanvasBody .count_55, .wida #itemCanvas #itemCanvasBody .count_54, .wida #itemCanvas #itemCanvasBody .count_53, .wida #itemCanvas #itemCanvasBody .count_52, .wida #itemCanvas #itemCanvasBody .count_51, .wida #itemCanvas #itemCanvasBody .count_50_indent, .wida #itemCanvas #itemCanvasBody .count_50, .wida #itemCanvas #itemCanvasBody .count_49, .wida #itemCanvas #itemCanvasBody .count_48, .wida #itemCanvas #itemCanvasBody .count_47, .wida #itemCanvas #itemCanvasBody .count_46, .wida #itemCanvas #itemCanvasBody .count_45_indent, .wida #itemCanvas #itemCanvasBody .count_45, .wida #itemCanvas #itemCanvasBody .count_44, .wida #itemCanvas #itemCanvasBody .count_43, .wida #itemCanvas #itemCanvasBody .count_42, .wida #itemCanvas #itemCanvasBody .count_41, .wida #itemCanvas #itemCanvasBody .count_40_indent, .wida #itemCanvas #itemCanvasBody .count_40, .wida #itemCanvas #itemCanvasBody .count_39, .wida #itemCanvas #itemCanvasBody .count_38, .wida #itemCanvas #itemCanvasBody .count_37, .wida #itemCanvas #itemCanvasBody .count_36, .wida #itemCanvas #itemCanvasBody .count_35_indent, .wida #itemCanvas #itemCanvasBody .count_35, .wida #itemCanvas #itemCanvasBody .count_34, .wida #itemCanvas #itemCanvasBody .count_33, .wida #itemCanvas #itemCanvasBody .count_32, .wida #itemCanvas #itemCanvasBody .count_31, .wida #itemCanvas #itemCanvasBody .count_30_indent, .wida #itemCanvas #itemCanvasBody .count_30, .wida #itemCanvas #itemCanvasBody .count_29, .wida #itemCanvas #itemCanvasBody .count_28, .wida #itemCanvas #itemCanvasBody .count_27, .wida #itemCanvas #itemCanvasBody .count_26, .wida #itemCanvas #itemCanvasBody .count_25_indent, .wida #itemCanvas #itemCanvasBody .count_25, .wida #itemCanvas #itemCanvasBody .count_24, .wida #itemCanvas #itemCanvasBody .count_23, .wida #itemCanvas #itemCanvasBody .count_22, .wida #itemCanvas #itemCanvasBody .count_21, .wida #itemCanvas #itemCanvasBody .count_20_indent, .wida #itemCanvas #itemCanvasBody .count_20, .wida #itemCanvas #itemCanvasBody .count_19, .wida #itemCanvas #itemCanvasBody .count_18, .wida #itemCanvas #itemCanvasBody .count_17, .wida #itemCanvas #itemCanvasBody .count_16, .wida #itemCanvas #itemCanvasBody .count_15_indent, .wida #itemCanvas #itemCanvasBody .count_15, .wida #itemCanvas #itemCanvasBody .count_14, .wida #itemCanvas #itemCanvasBody .count_13, .wida #itemCanvas #itemCanvasBody .count_12, .wida #itemCanvas #itemCanvasBody .count_11, .wida #itemCanvas #itemCanvasBody .count_10_indent, .wida #itemCanvas #itemCanvasBody .count_10, .wida #itemCanvas #itemCanvasBody .count_9, .wida #itemCanvas #itemCanvasBody .count_8, .wida #itemCanvas #itemCanvasBody .count_7, .wida #itemCanvas #itemCanvasBody .count_6, .wida #itemCanvas #itemCanvasBody .count_5_indent, .wida #itemCanvas #itemCanvasBody .count_5, .wida #itemCanvas #itemCanvasBody .count_4, .wida #itemCanvas #itemCanvasBody .count_3, .wida #itemCanvas #itemCanvasBody .count_2, .wida #itemCanvas #itemCanvasBody .count_1, .wida #itemCanvas #itemCanvasBody p, .wida #itemCanvas #itemCanvasBody td, .wida #itemCanvas #itemCanvasBody th, .wida #itemCanvas #itemCanvasBody .poem_body, .wida #itemCanvas #itemCanvasBody .poem_body_indent, .wida #itemCanvas #itemCanvasBody textarea, .wida #itemCanvas #itemCanvasBody input[type=text], .wida #itemCanvas #itemCanvasBody .jet2-contenteditable,
+.wida #itemCanvas #itemCanvasBody span:not(.highlighted):not(.unhighlighted):not([class^=mjx]):not([class*=mjx]),
+.wida #itemCanvas #itemCanvasBody .page-counter,
+.wida #itemCanvas #itemCanvasBody ul label,
+.wida #itemCanvas #itemCanvasBody li:not(:has(p, label)) {
+	font-size: 20px;
+	line-height: 24px;
+}
+.wida #itemCanvas #itemCanvasBody .mjx-math {
+	font-size: 20px;
+}
+.wida #itemCanvas #itemCanvasBody ul label {
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 10px 30px;
+	width: -webkit-fill-available;
+	width: -moz-available;
+	width: fill-available;
+}
+.wida #itemCanvas #itemCanvasBody ul label:has(input:checked) {
+	border-color: #2e5dc8;
+	border-width: 4px;
+}
+.wida #itemCanvas #itemCanvasBody ul[class*=cloze] label {
+	border-width: 0px !important;
+}
+.wida #itemCanvas #itemCanvasBody ul[class*=cloze] label:has(input:checked) {
+	border-width: 0px !important;
+}
+.wida #itemCanvas #itemCanvasBody .ui.int-choice-list {
+	margin: 20px 10px;
+}
+.wida #itemCanvas #itemCanvasBody .radio input[type=radio] {
+	margin-left: -15px;
+	transform: scale(1.5);
+}
+.wida #itemCanvas #itemCanvasBody .abbi-full-width-header {
+	margin-bottom: 10px;
+}
+.wida #itemCanvas #itemCanvasBody .abbi-full-width-header table {
+	border-collapse: collapse;
+	width: 100%;
+	border-width: 4px;
+	border-style: solid;
+	margin: auto;
+}
+.wida #itemCanvas #itemCanvasBody .abbi-full-width-header h3 {
+	font-size: 28px;
+	line-height: normal;
+}
+.wida #itemCanvas #itemCanvasBody div.page-turner:not([class*=passage]) {
+	height: 440px;
+}
+.wida #itemCanvas #itemCanvasBody .boxText {
+	width: fit-content;
+	border-width: 2px;
+	margin: auto;
+	margin-top: 30px;
+	font-size: 28px;
+}
+.wida #timerExpiration-modal .modal-header h2, .wida #timerExpiration-modal .modal-body h2 {
+		display: none;
+}
+.wida #main_panel #notepadContainer #notepad {
+	font-size: 20px;
+	line-height: 24px;
+}
+.wida .jGrowl .jGrowl-notification {
+	font-size: 20px;
+	line-height: 24px;
+}
+
+
+/*
+ * LaTeX Math in pure HTML and CSS -- No images whatsoever
+ * v0.xa
+ * by Jay and Han
+ * Lesser GPL Licensed: http: //www.gnu.org/licenses/lgpl.html
+ *
+ * This file is automatically included by mathquill.js
+ *
+ */
+@font-face {
+  font-family: Symbola-mq;
+  src: url("sbee/font/Symbola-mq.eot");
+  src: local("Symbola-mq"), local("Symbola"), url("sbee/font/Symbola-mq.ttf") format("truetype"), url("sbee/font/Symbola-mq.otf") format("opentype"), url("sbee/font/Symbola-mq.svg#Symbola") format("svg");
+}
+.mathquill-editable {
+  display: -moz-inline-box;
+  display: inline-block;
+}
+.mathquill-editable .mathquill-root-block {
+  display: -moz-inline-box;
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-left: 5px;
+  margin-left: -5px;
+  vertical-align: middle;
+}
+.mathquill-editable .mathquill-root-block:after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+}
+.mathquill-editable .mq-cursor {
+  margin-right: -1px;
+  position: relative;
+  z-index: 1;
+  padding: 0;
+  display: -moz-inline-box;
+  display: inline-block;
+}
+.mathquill-editable .mq-cursor .mq-line {
+  border-left: 1px solid black;
+}
+.mathquill-editable .mq-cursor.mq-blink .mq-line {
+  visibility: hidden;
+}
+.mathquill-editable .mq-handle-anchor {
+  display: -moz-inline-box;
+  display: inline-block;
+  position: relative;
+}
+.mathquill-editable .mq-handle-anchor .mq-handle {
+  display: inline-block;
+  -webkit-transform-origin: 10px -25px;
+  -webkit-transform: translateX(0.5px);
+  opacity: .5;
+  position: absolute;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  background: black;
+  bottom: -40px;
+}
+.mathquill-editable .mq-handle-anchor .mq-handle:before,
+.mathquill-editable .mq-handle-anchor .mq-handle:after {
+  content: '';
+  position: absolute;
+}
+.mathquill-editable .mq-handle-anchor .mq-handle:before {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid black;
+  top: -10px;
+  left: 0;
+  -webkit-transform: translateY(0.2px);
+}
+.mathquill-editable .mq-handle-anchor .mq-handle:after {
+  width: 40px;
+  height: 40px;
+  left: -10px;
+  bottom: -10px;
+}
+.mathquill-rendered-math .mathquill-editable {
+  margin: 1px;
+  border: 1px solid gray;
+  padding: 2px;
+}
+.mathquill-editable .mq-latex-command-input {
+  color: inherit;
+  font-family: "Courier New", monospace;
+  border: 1px solid gray;
+  padding-right: 1px;
+  margin-right: 1px;
+  margin-left: 2px;
+}
+.mathquill-editable .mq-latex-command-input.mq-empty {
+  background: transparent;
+}
+.mathquill-editable .mq-latex-command-input.mq-hasCursor {
+  border-color: ActiveBorder;
+}
+.mathquill-root-block.mq-empty:after,
+.mathquill-textbox:after,
+.mathquill-rendered-math .mq-empty:after {
+  content: '';
+  width: .5em;
+  display: inline-block;
+}
+.mathquill-editable .mq-cursor:only-child:after {
+  width: .5em;
+  display: inline-block;
+  content: '';
+}
+.mathquill-textbox {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.mathquill-rendered-math {
+  font-variant: normal;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 115%;
+  line-height: 1;
+  display: -moz-inline-box;
+  display: inline-block;
+}
+.mathquill-rendered-math * {
+  -moz-box-sizing: content-box !important;
+  -webkit-box-sizing: content-box !important;
+  box-sizing: content-box !important;
+}
+.mathquill-rendered-math .mq-non-leaf,
+.mathquill-rendered-math .mq-scaled {
+  display: -moz-inline-box;
+  display: inline-block;
+}
+.mathquill-rendered-math var,
+.mathquill-rendered-math .mq-text,
+.mathquill-rendered-math .mq-nonSymbola {
+  font-family: "Times New Roman", "Symbola-mq", serif;
+  line-height: .9;
+}
+.mathquill-rendered-math * {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+  border-color: black;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+.mathquill-rendered-math .mq-empty {
+  background: #ccc;
+}
+.mathquill-rendered-math .mq-empty.mathquill-root-block {
+  background: transparent;
+}
+.mathquill-rendered-math.mq-empty {
+  background: transparent;
+}
+.mathquill-rendered-math .mq-text {
+  font-size: 87%;
+}
+.mathquill-rendered-math .mq-font {
+  font: 1em "Times New Roman", "Symbola-mq", serif;
+  line-height: .9;
+}
+.mathquill-rendered-math .mq-font * {
+  font-family: inherit;
+  font-style: inherit;
+}
+.mathquill-rendered-math b,
+.mathquill-rendered-math b.mq-font {
+  font-weight: bolder;
+}
+.mathquill-rendered-math var,
+.mathquill-rendered-math i,
+.mathquill-rendered-math i.mq-font {
+  font-style: italic;
+}
+.mathquill-rendered-math big {
+  font-size: 125%;
+}
+.mathquill-rendered-math .mq-roman {
+  font-style: normal;
+}
+.mathquill-rendered-math .mq-sans-serif {
+  font-family: sans-serif, Symbola-mq, serif;
+}
+.mathquill-rendered-math .mq-monospace {
+  font-family: monospace, Symbola-mq, serif;
+}
+.mathquill-rendered-math .mq-overline {
+  border-top: 1px solid black;
+  margin-top: 1px;
+}
+.mathquill-rendered-math .mq-underline {
+  border-bottom: 1px solid black;
+  margin-bottom: 1px;
+}
+.mathquill-rendered-math .mq-binary-operator {
+  padding: 0 0.1em;
+  display: -moz-inline-box;
+  display: inline-block;
+}
+.mathquill-rendered-math .mq-unary-operator {
+  padding-left: 0.2em;
+}
+.mathquill-rendered-math sup,
+.mathquill-rendered-math sub {
+  position: relative;
+  font-size: 90%;
+  top: 0;
+}
+.mathquill-rendered-math sup .mq-binary-operator,
+.mathquill-rendered-math sub .mq-binary-operator {
+  padding: 0 .1em;
+}
+.mathquill-rendered-math sup .mq-unary-operator,
+.mathquill-rendered-math sub .mq-unary-operator {
+  padding-left: .1em;
+}
+.mathquill-rendered-math sup.mq-int,
+.mathquill-rendered-math sub.mq-int,
+.mathquill-rendered-math sup.mq-nthroot,
+.mathquill-rendered-math sub.mq-nthroot {
+  font-size: 80%;
+}
+.mathquill-rendered-math sup .mq-fraction,
+.mathquill-rendered-math sub .mq-fraction {
+  font-size: 70%;
+  vertical-align: -0.4em;
+}
+.mathquill-rendered-math sup .mq-numerator,
+.mathquill-rendered-math sub .mq-numerator {
+  padding-bottom: 0;
+}
+.mathquill-rendered-math sup .mq-denominator,
+.mathquill-rendered-math sub .mq-denominator {
+  padding-top: 0;
+}
+.mathquill-rendered-math sup {
+  vertical-align: .5em;
+}
+.mathquill-rendered-math sup.mq-int,
+.mathquill-rendered-math sup.mq-nthroot {
+  vertical-align: 0.8em;
+}
+.mathquill-rendered-math sup.mq-nthroot {
+  margin-right: -0.6em;
+  margin-left: .2em;
+  min-width: .5em;
+}
+.mathquill-rendered-math sup .mq-sup {
+  vertical-align: bottom;
+}
+.mathquill-rendered-math sub {
+  vertical-align: -0.4em;
+}
+.mathquill-rendered-math sub.mq-int {
+  vertical-align: -0.6em;
+}
+.mathquill-rendered-math sub .mq-sub {
+  vertical-align: top;
+}
+.mathquill-rendered-math .mq-paren {
+  padding: 0 .1em;
+  vertical-align: bottom;
+  -webkit-transform-origin: bottom center;
+  -moz-transform-origin: bottom center;
+  -ms-transform-origin: bottom center;
+  -o-transform-origin: bottom center;
+  transform-origin: bottom center;
+}
+.mathquill-rendered-math .mq-array {
+  vertical-align: middle;
+  text-align: center;
+}
+.mathquill-rendered-math .mq-array > span {
+  display: block;
+}
+.mathquill-rendered-math .mq-un-italicized {
+  font-family: "Times New Roman", "Symbola-mq", serif;
+  line-height: 1;
+  font-style: normal;
+}
+.mathquill-rendered-math var.mq-un-italicized.mq-last {
+  padding-right: .2em;
+}
+.mathquill-rendered-math .mq-fraction {
+  font-size: 90%;
+  vertical-align: -0.5em;
+  padding: 0 .2em;
+}
+.mathquill-rendered-math .mq-fraction,
+.mathquill-rendered-math .mq-large-operator,
+.mathquill-rendered-math x:-moz-any-link {
+  display: -moz-groupbox;
+}
+.mathquill-rendered-math .mq-fraction,
+.mathquill-rendered-math .mq-large-operator,
+.mathquill-rendered-math x:-moz-any-link,
+.mathquill-rendered-math x:default {
+  display: inline-block;
+}
+.mathquill-rendered-math .mq-numerator,
+.mathquill-rendered-math .mq-denominator {
+  display: block;
+  text-align: center;
+}
+.mathquill-rendered-math .mq-numerator *,
+.mathquill-rendered-math .mq-denominator * {
+  text-align: left;
+}
+.mathquill-rendered-math .mq-numerator {
+  padding: 0 0.1em;
+}
+.mathquill-rendered-math .mq-denominator {
+  border-top: 1px solid;
+  float: right;
+  width: 100%;
+  padding: .1em .1em 0 .1em;
+  margin-right: -0.1em;
+  margin-left: -0.1em;
+}
+.mathquill-rendered-math .mq-sqrt-prefix {
+  padding-top: 0;
+  position: relative;
+  top: .1em;
+  vertical-align: top;
+  -webkit-transform-origin: top;
+  -moz-transform-origin: top;
+  -ms-transform-origin: top;
+  -o-transform-origin: top;
+  transform-origin: top;
+}
+.mathquill-rendered-math .mq-sqrt-stem {
+  border-top: 1px solid;
+  margin-top: 1px;
+  padding-left: .15em;
+  padding-right: .2em;
+  margin-right: .1em;
+}
+.mathquill-rendered-math .mq-large-operator {
+  text-align: center;
+}
+.mathquill-rendered-math .mq-large-operator big {
+  display: inline-block;
+}
+.mathquill-rendered-math .mq-large-operator .mq-from,
+.mathquill-rendered-math .mq-large-operator .mq-to {
+  display: block;
+}
+.mathquill-rendered-math .mq-large-operator .mq-from,
+.mathquill-rendered-math .mq-large-operator .mq-to {
+  font-size: 80%;
+}
+.mathquill-rendered-math .mq-large-operator .mq-from {
+  margin-top: -0.1em;
+  float: right;
+  /* take out of normal flow to manipulate baseline */
+  width: 100%;
+}
+.mathquill-rendered-math,
+.mathquill-rendered-math .mathquill-editable {
+  cursor: text;
+  font-family: "Symbola-mq", "Times New Roman", serif;
+}
+.mathquill-rendered-math .mq-selection,
+.mathquill-editable .mq-selection,
+.mathquill-rendered-math .mq-selection .mq-non-leaf,
+.mathquill-editable .mq-selection .mq-non-leaf,
+.mathquill-rendered-math .mq-selection .mq-scaled,
+.mathquill-editable .mq-selection .mq-scaled {
+  background: #B4D5FE !important;
+  background: Highlight !important;
+  color: HighlightText;
+  border-color: HighlightText;
+}
+.mathquill-rendered-math .mq-selection .mq-matrixed,
+.mathquill-editable .mq-selection .mq-matrixed {
+  background: #39F !important;
+}
+.mathquill-rendered-math .mq-selection .mq-matrixed-container,
+.mathquill-editable .mq-selection .mq-matrixed-container {
+  filter: progid:DXImageTransform.Microsoft.Chroma(color='#3399FF') !important;
+}
+.mathquill-rendered-math .mq-selection.mq-blur,
+.mathquill-editable .mq-selection.mq-blur,
+.mathquill-rendered-math .mq-selection.mq-blur .mq-non-leaf,
+.mathquill-editable .mq-selection.mq-blur .mq-non-leaf,
+.mathquill-rendered-math .mq-selection.mq-blur .mq-matrixed,
+.mathquill-editable .mq-selection.mq-blur .mq-matrixed {
+  background: #D4D4D4 !important;
+  color: black;
+  border-color: black;
+}
+.mathquill-rendered-math .mq-selection.mq-blur .mq-matrixed-container,
+.mathquill-editable .mq-selection.mq-blur .mq-matrixed-container {
+  filter: progid:DXImageTransform.Microsoft.Chroma(color='#D4D4D4') !important;
+}
+.mathquill-editable .mq-textarea,
+.mathquill-rendered-math .mq-textarea {
+  position: relative;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  user-select: text;
+}
+.mathquill-editable .mq-textarea textarea,
+.mathquill-rendered-math .mq-textarea textarea,
+.mathquill-editable .mq-selectable,
+.mathquill-rendered-math .mq-selectable {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  user-select: text;
+  position: absolute;
+  clip: rect(1em 1em 1em 1em);
+  resize: none;
+  height: 1px;
+  width: 1px;
+}
+.mathquill-editable .mq-textarea span,
+.mathquill-rendered-math .mq-textarea span {
+  position: absolute;
+  display: inline-block;
+  height: 1px;
+  width: 1px;
+}
+.mathquill-rendered-math .mq-matrixed {
+  background: white;
+  display: -moz-inline-box;
+  display: inline-block;
+}
+.mathquill-rendered-math .mq-matrixed-container {
+  filter: progid:DXImageTransform.Microsoft.Chroma(color='white');
+  margin-top: -0.1em;
+}
+#itemCanvasBody .tei-sbee .keypad {
+  /* combined from multiple answers to http://stackoverflow.com/questions/826782/css-rule-to-disable-text-selection-highlighting */
+  -webkit-touch-callout: none; /* StackOverflow cargo-culters don't believe in explaining things, but this is the touch-and-hold menu in Safari on iOS: https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariCSSRef/Articles/StandardCSSProperties.html#//apple_ref/doc/uid/TP30001266-_webkit_touch_callout */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#itemCanvasBody .tei-sbee .toolbar {
+  border: solid 1px #ccc;
+  border-bottom: none;
+  background-color: rgba(230,230,230,0.4);
+  line-height: 1.5em;
+}
+
+#itemCanvasBody .tei-sbee .toolbar button {
+  vertical-align: middle;
+  line-height: 1.6;
+}
+
+#itemCanvasBody .tei-sbee .toolbar .keypad-tab-button {
+  line-height: 1em;
+  vertical-align: bottom;
+
+  display: inline-block;
+  font-family: Helvetica, Arial, sans-serif;
+  padding: .2em;
+  border: solid 1px transparent;
+  border-bottom: none;
+  margin-left: .4em;
+}
+#itemCanvasBody .tei-sbee .toolbar .keypad-tab-button:hover {
+  border-color: black;
+  cursor: pointer;
+}
+#itemCanvasBody .tei-sbee .toolbar .keypad-tab-button.selected {
+  border-color: #00abf4;
+  background: white;
+}
+
+#itemCanvasBody .tei-sbee .keypad-body {
+  	border: 1px solid #00abf4;
+  	padding: 2px;
+  	text-align: center;
+   	min-width: 425px;
+	border-radius: 0 0 5px 5px;
+}
+#itemCanvasBody .tei-sbee .keypad-body:after {
+    clear: both;
+    content: "";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+/* Make the keypad look active if the EE is focused */
+#itemCanvasBody .tei-sbee .activeItem.keypad-body{
+	box-shadow: 0 0 0.3em #999;
+}
+#itemCanvasBody .tei-sbee .keypad-tab {
+  display: none;
+}
+#itemCanvasBody .tei-sbee .keypad-tab.selected {
+  	display: block;
+}
+
+#itemCanvasBody .tei-sbee .keypad-item:hover {
+  box-shadow: 0 0 4px #888;
+  -webkit-box-shadow: 0 0 4px #888;
+  -moz-box-shadow: 0 0 4px #888;
+}
+
+#itemCanvasBody .tei-sbee .keypad-item:active {
+  box-shadow: inset 0 0 2px #aaa;
+  -webkit-box-shadow: inset 0 0 2px #aaa;
+  -moz-box-shadow: inset 0 0 2px #aaa;
+}
+/*
+.keypad-rows {
+  	margin-left: 85px;
+}*/
+#itemCanvasBody .tei-sbee .keypad-row {
+  	border-top: solid 1px #ccc;
+ 	margin: 2px;
+}
+#itemCanvasBody .tei-sbee .keypad-row:nth-child(1) {
+	border-top: none;
+}
+#itemCanvasBody .tei-sbee .keypad-rows .keypad-row {
+	padding-left: 5px;
+	padding-top: 3px;
+	margin-left: 0px;
+	height: 33px;
+}
+#itemCanvasBody .tei-sbee .keypad-grid {
+	display: block;
+	float: left;
+	/*width: 85px;*/
+	border-right: solid 1px #ccc;
+	text-align: left;
+	padding-top: 3px;
+	margin: 0 2px 2px;
+}
+#itemCanvasBody .tei-sbee .input {
+  margin: 0px 0px 3px;
+}
+#itemCanvasBody .tei-sbee .input * {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+#itemCanvasBody .tei-sbee .input-box, .mathquill-root-block {
+	display: block;
+}
+#itemCanvasBody .tei-sbee .mathquill-editable {
+ 	min-width: 100px;
+  	width: 100%;
+}
+
+#itemCanvasBody .tei-sbee .widget-body{
+  -webkit-transform-origin: top left;
+  -moz-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#itemCanvasBody .tei-sbee .widget-placeholder{
+  position: relative;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+
+
+#itemCanvasBody .tei-sbee .widget{
+  position: relative;
+}
+
+/* CUSTOM_EQ_EDITOR */
+/* .hidden { display: none; } */
+
+#itemCanvasBody .tei-sbee div.mje_container {
+  	margin-bottom: .5em;
+  	font-family: "Lucida Grande",Lucida,Verdana,sans-serif;
+}
+#itemCanvasBody .tei-sbee .mje_class_label {
+	margin-bottom: 1em;
+}
+/* sets consistent width when switching between tabs*/
+#itemCanvasBody .tei-sbee .mje_controls {
+	min-width: 425px;
+}
+#itemCanvasBody .tei-sbee .mje_row_btn_selected {
+  border-color:blue;
+  border-style:solid;
+  border-width:1px;
+}
+
+#itemCanvasBody .tei-sbee div.mje_selected_row {
+  border-color:green;
+  border-style:solid;
+  border-width:2px;
+}
+
+#itemCanvasBody .tei-sbee .mje_equation {
+  border-color:green;
+  border-style:solid;
+  border-width:1px;
+}
+
+#itemCanvasBody .tei-sbee .mje_equation_selected {
+  border-color:blue;
+  border-style:solid;
+  border-width:1px;
+}
+#itemCanvasBody .tei-sbee .mje_toggle_div {
+  border-style:solid;
+  border-width:1px;
+  z-index: 5;
+}
+#itemCanvasBody .tei-sbee div.mje_configure {
+  border-style:solid;
+  border-width:1px;
+}
+#itemCanvasBody .tei-sbee .mje_config_selector{
+  width: 200px;
+}
+#itemCanvasBody .tei-sbee input.mje_cursor_field {
+  width: 11px;
+}
+#itemCanvasBody .tei-sbee .mje_insert_select {
+  color: #00abf4;
+}
+#itemCanvasBody .tei-sbee .mje_replace_select{
+  color: red;
+}
+#itemCanvasBody .tei-sbee .mje_not_selected {
+  background-color: 'teal';
+}
+#itemCanvasBody .tei-sbee .mje_button_variable, .mje_dynamic_inputbox{
+	font-style:italic;
+}
+
+
+/*.mje_controls_content button{
+	padding: 0px !important;
+	background: url('sbee/images/button_bg.png') transparent repeat-x;
+}
+.row_color_dark button{
+	background: url('sbee/images/button_mid_bg.png') transparent repeat-x;
+}
+.row_color_gold button{
+	background: url('sbee/images/button_brown_bg.png') transparent repeat-x;
+} */
+#itemCanvasBody .tei-sbee .mje_row_Variables button{
+	font-style: italic;
+}
+#itemCanvasBody .tei-sbee .mje_editor_row{
+	width: 100%;
+	display: block;
+	clear:both;
+	overflow: hidden;
+}
+
+#itemCanvasBody .tei-sbee .mje_editor_row.mje_row_has_label .mje_label_span{
+	width: auto;
+	max-width: 50%;
+	text-align: right;
+	line-height: 1.8em;
+	vertical-align: middle;
+	display: inline-block;
+	font-size: 1.6em;
+	float: left;
+	font-family: STIXGeneral;
+    font-style: italic;
+	padding-right: 0.2em;
+	max-height: 1.8em;
+	overflow: hidden;
+	padding-left: 0.4em;
+}
+#itemCanvasBody .tei-sbee .mje_editor_row.mje_row_has_label .MathJax{
+	display:block;
+	float: none;
+	width: auto;
+}
+#itemCanvasBody .tei-sbee .mje_eq_ctl{
+	clear: both;
+	display: block;
+}
+
+#itemCanvasBody .tei-sbee .mje_editor_row .MathJax{
+}
+
+#itemCanvasBody .tei-sbee .keypad-row{
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	margin: 0;
+	padding: 0;
+}
+#itemCanvasBody .tei-sbee .keypad-grid-row{
+	/* Grud Override this style margin-bottom: 4px; */
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+#itemCanvasBody .tei-sbee .mje_simple_row:nth-child(2) {
+    border-top: medium none;
+}
+#itemCanvasBody .tei-sbee .keypad-rows .keypad-row{
+	margin-left: 94px;
+}
+#itemCanvasBody .tei-sbee .keypad-item {
+	background-color: transparent;
+	border: 1px solid #808080;
+	border-radius: 2px;
+  	-moz-border-radius: 2px;
+  	-webkit-border-radius: 2px;
+	display: inline-block;
+	height: 30px;
+	min-width: 19px;
+	overflow: hidden;
+	margin-right: 3px;
+	margin-bottom: 0px;
+	cursor: pointer;
+	text-align: center;
+	-webkit-transition: color .2s ease-in, background-color .2s ease-in, -webkit-box-shadow .2s ease-in;
+	-moz-transition: color .2s ease-in, background-color .2s ease-in, -moz-box-shadow .2s ease-in;
+	transition: color .2s ease-in, background-color .2s ease-in, box-shadow .2s ease-in;
+	padding: 0 0.2em;
+	/* Grud Override this line-height: normal; */
+	line-height: 30px;
+	font-family: STIXGeneral,Arial,Helvetica,sans-serif;
+	vertical-align: top;
+}
+#itemCanvasBody .tei-sbee .TDS_PS_L0 .keypad-item{
+	line-height: 30px;
+}
+#itemCanvasBody .tei-sbee .mje_button:hover, #itemCanvasBody .tei-sbee .mje_button:focus {
+    border-color: #0785AB;
+    -webkit-box-shadow: 0em 0em .3em #666;
+	-moz-box-shadow: 0em 0em .3em #666;
+	box-shadow: 0em 0em .3em #666;
+}
+#itemCanvasBody .tei-sbee .mje_nav_next, #itemCanvasBody .tei-sbee .mje_nav_prev {
+	text-indent: -9999px;
+	background: url(sbee/images/next_back.png) no-repeat 6px 5px;
+	width: 30px;
+}
+#itemCanvasBody .tei-sbee .mje_nav_next:hover,
+#itemCanvasBody .tei-sbee .mje_nav_next:active,
+#itemCanvasBody .tei-sbee .TDS_CCYellowB .mje_nav_next:hover,
+#itemCanvasBody .tei-sbee .TDS_CCWhiteN .mje_nav_next:hover,
+#itemCanvasBody .tei-sbee .TDS_CCInvert .mje_nav_next:hover{
+	background-position: -94px 5px;
+}
+#itemCanvasBody .tei-sbee .TDS_CCYellowB .mje_nav_next{
+	background-position: 6px -45px;
+}
+.TDS_CCYellowB .mje_nav_next:hover{
+	background-position: -94px 5px;
+}
+.TDS_CCInvert .mje_nav_next,
+.TDS_CCWhiteN .mje_nav_next{
+	background-position: 6px -20px;
+}
+.TDS_CCInvert .mje_nav_next:hover,
+.TDS_CCWhiteN .mje_nav_next:hover{
+	background-position: -94px 5px;
+}
+#itemCanvasBody .tei-sbee .mje_nav_prev {
+	background-position: -194px 5px;
+}
+.TDS_CCYellowB .mje_nav_prev {
+	background-position: -194px -45px;
+}
+.TDS_CCInvert .mje_nav_prev,
+.TDS_CCWhiteN .mje_nav_prev {
+	background-position: -194px -20px;
+}
+#itemCanvasBody .tei-sbee .mje_nav_prev:hover,
+#itemCanvasBody .tei-sbee .mje_nav_prev:active {
+	background-position: -294px 5px;
+}
+
+
+
+/*Icons for Undo, Redo, and Delete*/
+#itemCanvasBody .tei-sbee .mje_nav_undo,
+#itemCanvasBody .tei-sbee .mje_nav_redo,
+#itemCanvasBody .tei-sbee .mje_nav_del{
+/*.mje_nav_undo, .mje_nav_redo{*/
+	background: url(sbee/images/undo_redo_delete.png) no-repeat 6px center;
+	text-indent: -9999px;
+	width: 30px;
+}
+#itemCanvasBody .tei-sbee .mje_nav_undo{
+	background-position: 7px center;
+}
+#itemCanvasBody .tei-sbee .mje_nav_undo:hover,
+#itemCanvasBody .tei-sbee .mje_nav_undo:active{
+	background-position: -92px center;
+}
+#itemCanvasBody .tei-sbee .mje_nav_redo{
+	background-position: -192px center;
+}
+#itemCanvasBody .tei-sbee .mje_nav_redo:hover,
+#itemCanvasBody .tei-sbee .mje_nav_redo:active{
+	background-position: -292px center;
+}
+#itemCanvasBody .tei-sbee .mje_nav_del{
+	background-position: -357px center;
+}
+#itemCanvasBody .tei-sbee .mje_nav_del:hover,
+#itemCanvasBody .tei-sbee .mje_nav_del:active{
+	background-position: -451px center;
+}
+
+#itemCanvasBody .tei-sbee .mje_button_grid_row {
+	display: block;
+	padding-bottom: 4px;
+}
+#itemCanvasBody .tei-sbee .mje_grid_row {
+	display: block;
+	float: left;
+	width: 85px;
+	border-right: solid 1px #ccc;
+	text-align: left;
+	padding-top: 3px;
+}
+
+#itemCanvasBody .tei-sbee .keypad-row{
+	border-left: 1px solid #CCCCCC;
+	border-top: 1px solid #CCCCCC;
+	display: block;
+	margin-left: 85px;
+	padding-left: 5px;
+	padding-top: 3px;
+	text-align: left;
+}
+
+#itemCanvasBody .tei-sbee .mje_simple_row:nth-child(2) {
+	border-top: none;
+}
+#itemCanvasBody .tei-sbee .mje_controls_content_el:after {
+	content: "";  
+	display: block;  
+	clear: both;  
+	visibility: hidden;  
+	font-size: 0;  
+	height: 0;
+}
+#itemCanvasBody .tei-sbee .mje_controls_content {
+	border: solid 1px #00abf4;
+  	-moz-border-radius: 0px 0px 5px 5px;
+  	-webkit-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+  	padding: 3px;
+}
+#itemCanvasBody .tei-sbee .activeItem .mje_controls_content {
+	-webkit-box-shadow: 0em 0em .3em #999;
+	-moz-box-shadow: 0em 0em .3em #999;
+	box-shadow: 0em 0em .3em #999;
+}
+#itemCanvasBody .tei-sbee .mje_simple_row_title, .tei-sbee .mje_grid_row_title {
+	display: block;
+    font-size: 0.5em;
+    padding-bottom: 0.2em;
+}
+#itemCanvasBody .tei-sbee .mje_grid_row_title {
+	padding-top:3px;
+}
+
+/* tabs */
+#itemCanvasBody .tei-sbee .mje_controls_tabs {
+	background-color: #e4e6e6;
+	background-color: rgba(230, 230, 230, .3);
+	margin-top: 3px;
+	padding: 0 3px;
+	border-top: solid 1px #ccc;
+	border-right: solid 1px #ccc;
+	border-left: solid 1px #ccc;
+	min-height: 30px;
+}
+#itemCanvasBody .tei-sbee .mje_controls_tabs:after {
+	content: "";  
+	display: block;  
+	clear: both;  
+	visibility: hidden;  
+	font-size: 0;  
+	height: 0;
+}
+#itemCanvasBody .tei-sbee .editor_controls_tabs_el {
+	float: left;
+	margin: 7px 2px -1px;
+	cursor: pointer;
+	border-top: solid 1px transparent;
+  	border-right: solid 1px transparent;
+  	border-left: solid 1px transparent;
+	padding: 2px 5px;
+}
+#itemCanvasBody .tei-sbee .editor_controls_tabs_el:hover {
+	border-color: #000;
+	background-color: #f0f2f2;
+}
+#itemCanvasBody .tei-sbee .mje_single_tab .editor_controls_tabs_el {
+	display: none;
+}
+#itemCanvasBody .tei-sbee .mje_nav {
+	float: left;
+	padding-left: 3px;
+}
+#itemCanvasBody .tei-sbee .mje_nav button {
+	background-color: transparent;
+	border: 1px solid #808080;
+	border-radius: 25px;
+  	-moz-border-radius: 25px;
+  	-webkit-border-radius: 25px;
+	display: block;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 5px;
+	overflow: hidden;
+	margin-right: 3px;
+	margin-top: 3px;
+	float: left;
+	cursor: pointer;
+	text-align: center;
+	font-size: 20px;
+	min-width: 25px;
+	-webkit-transition: color .2s ease-in, background-color .2s ease-in, -webkit-box-shadow .2s ease-in;
+	-moz-transition: color .2s ease-in, background-color .2s ease-in, -moz-box-shadow .2s ease-in;
+	transition: color .2s ease-in, background-color .2s ease-in, box-shadow .2s ease-in;
+}
+#itemCanvasBody .tei-sbee .mje_nav button:hover,
+#itemCanvasBody .tei-sbee .mje_nav button:focus {
+	background-color: #fff;
+	border-color: #00abf4;
+	color: #00abf4;
+	 -webkit-box-shadow: 0em 0em .1em #000;
+	-moz-box-shadow: 0em 0em .1em #000;
+	box-shadow: 0em 0em .1em #000;
+}
+
+#itemCanvasBody .tei-sbee .mje_numpad_input{
+  width: 60px;
+}
+
+#itemCanvasBody .tei-sbee div.mje_selected_tab,
+#itemCanvasBody .tei-sbee div.mje_selected_tab:hover {
+  	background-color: #fff;
+  	border-color: #00abf4;
+}
+#itemCanvasBody .tei-sbee .mje_question {
+  float: right;
+}
+
+
+.mje_button_fraction, .mje_button_sqrt, .mje_button_nrt, .mje_button_sup, .mje_button_sub, .mje_button_subsup, .mje_button_dot {
+	background: url(sbee/images/equations_level1.png) no-repeat center 200px;
+	width: 32px;
+	text-indent: -9999px;
+}
+.TDS_CCInvert .mje_button_fraction, .TDS_CCInvert .mje_button_sqrt, .TDS_CCInvert .mje_button_nrt, .TDS_CCInvert .mje_button_sup, .TDS_CCInvert .mje_button_sub, .TDS_CCInvert .mje_button_subsup, 
+.TDS_CCWhiteN .mje_button_fraction, .TDS_CCWhiteN .mje_button_sqrt, .TDS_CCWhiteN .mje_button_nrt, .TDS_CCWhiteN .mje_button_sup, .TDS_CCWhiteN .mje_button_sub, .TDS_CCWhiteN .mje_button_subsup {
+	background-image: url(sbee/images/equations_level1_white.png);
+}
+.TDS_CCYellowB .mje_button_fraction, .TDS_CCYellowB .mje_button_sqrt, .TDS_CCYellowB .mje_button_nrt, .TDS_CCYellowB .mje_button_sup, .TDS_CCYellowB .mje_button_sub, .TDS_CCYellowB .mje_button_subsup {
+	background-image: url(sbee/images/equations_level1_yellow.png);
+}
+.mje_button_fraction {
+	background-position: center -154px;
+    width: 20px;
+}
+.mje_button_sqrt {
+	background-position: center -194px;
+}
+.mje_button_nrt {
+	background-position: center -233px;
+	width: 36px;
+}
+.mje_button_sup {
+	background-position: center -272px;
+	width: 27px;
+}
+.mje_button_sub {
+	background-position: center -311px;
+	width: 27px;
+}
+.mje_button_subsup {
+	background-position: center -350px;
+	width: 28px;
+}
+.mje_button_dot{
+	background-position: center -460px;
+    width: 20px;
+}
+
+.TDS_PS_L1 .mje_button_fraction {
+	background-position: center -151px;
+    width: 20px;
+}
+.TDS_PS_L1 .mje_button_sqrt {
+	background-position: center -191px;
+}
+.TDS_PS_L1 .mje_button_nrt {
+	background-position: center -230px;
+	width: 36px;
+}
+.TDS_PS_L1 .mje_button_sup {
+	background-position: center -269px;
+	width: 27px;
+}
+.TDS_PS_L1 .mje_button_sub {
+	background-position: center -308px;
+	width: 27px;
+}
+.TDS_PS_L1 .mje_button_subsup {
+	background-position: center -347px;
+	width: 28px;
+}
+.TDS_PS_L1 .mje_button_dot {
+	background-position: center -457px;
+	width: 28px;
+}
+
+.TDS_PS_L2 .mje_button_fraction, .TDS_PS_L2 .mje_button_sqrt, .TDS_PS_L2 .mje_button_nrt, .TDS_PS_L2 .mje_button_sup, .TDS_PS_L2 .mje_button_sub, .TDS_PS_L2 .mje_button_subsup, .TDS_PS_L2 .mje_button_dot  {
+	background-image: url(sbee/images/equations_level2.png);
+}
+.TDS_CCInvert.TDS_PS_L2 .mje_button_fraction, .TDS_CCInvert.TDS_PS_L2 .mje_button_sqrt, .TDS_CCInvert.TDS_PS_L2 .mje_button_nrt, .TDS_CCInvert.TDS_PS_L2 .mje_button_sup, .TDS_CCInvert.TDS_PS_L2 .mje_button_sub, .TDS_CCInvert.TDS_PS_L2 .mje_button_subsup, 
+.TDS_CCWhiteN.TDS_PS_L2 .mje_button_fraction, .TDS_CCWhiteN.TDS_PS_L2 .mje_button_sqrt, .TDS_CCWhiteN.TDS_PS_L2 .mje_button_nrt, .TDS_CCWhiteN.TDS_PS_L2 .mje_button_sup, .TDS_CCWhiteN.TDS_PS_L2 .mje_button_sub, .TDS_CCWhiteN.TDS_PS_L2 .mje_button_subsup {
+	background-image: url(sbee/images/equations_level2_white.png);
+}
+.TDS_CCInvert .mje_controls_content_el button,
+.TDS_CCWhiteN .mje_controls_content_el button{
+	color: white;
+}
+
+.TDS_CCYellowB.TDS_PS_L2 .mje_button_fraction, .TDS_CCYellowB.TDS_PS_L2 .mje_button_sqrt, .TDS_CCYellowB.TDS_PS_L2 .mje_button_nrt, .TDS_CCYellowB.TDS_PS_L2 .mje_button_sup, .TDS_CCYellowB.TDS_PS_L2 .mje_button_sub, .TDS_CCYellowB.TDS_PS_L2 .mje_button_subsup {
+	background-image: url(sbee/images/equations_level2_yellow.png);
+}
+.TDS_CCYellowB .mje_controls_content_el button{
+	color: #FFCC00;
+}
+
+.TDS_PS_L2 .mje_button_fraction {
+	background-position: center -190px;
+}
+.TDS_PS_L2 .mje_button_sqrt {
+	background-position: center -242px;
+	width: 42px;
+}
+.TDS_PS_L2 .mje_button_nrt {
+	background-position: center -292px;
+	width: 46px;
+}
+.TDS_PS_L2 .mje_button_sup {
+	background-position: center -341px;
+}
+.TDS_PS_L2 .mje_button_sub {
+	background-position: center -392px;
+}
+.TDS_PS_L2 .mje_button_subsup {
+	background-position: center -441px;
+}
+.TDS_PS_L2 .mje_button_dot {
+	background-position: center -619px;
+}
+
+.TDS_PS_L3 .mje_button_fraction, .TDS_PS_L3 .mje_button_sqrt, .TDS_PS_L3 .mje_button_nrt, .TDS_PS_L3 .mje_button_sup, .TDS_PS_L3 .mje_button_sub, .TDS_PS_L3 .mje_button_subsup, .TDS_PS_L3 .mje_button_dot, 
+.TDS_PS_L4 .mje_button_fraction, .TDS_PS_L4 .mje_button_sqrt, .TDS_PS_L4 .mje_button_nrt, .TDS_PS_L4 .mje_button_sup, .TDS_PS_L4 .mje_button_sub, .TDS_PS_L4 .mje_button_subsup , .TDS_PS_L4 .mje_button_dot{
+	background-image: url(sbee/images/equations_level3.png);
+}
+.TDS_CCInvert.TDS_PS_L3 .mje_button_fraction, .TDS_CCInvert.TDS_PS_L3 .mje_button_sqrt, .TDS_CCInvert.TDS_PS_L3 .mje_button_nrt, .TDS_CCInvert.TDS_PS_L3 .mje_button_sup, .TDS_CCInvert.TDS_PS_L3 .mje_button_sub, .TDS_CCInvert.TDS_PS_L3 .mje_button_subsup, 
+.TDS_CCInvert.TDS_PS_L4 .mje_button_fraction, .TDS_CCInvert.TDS_PS_L4 .mje_button_sqrt, .TDS_CCInvert.TDS_PS_L4 .mje_button_nrt, .TDS_CCInvert.TDS_PS_L4 .mje_button_sup, .TDS_CCInvert.TDS_PS_L4 .mje_button_sub, .TDS_CCInvert.TDS_PS_L4 .mje_button_subsup, 
+.TDS_CCWhiteN.TDS_PS_L3 .mje_button_fraction, .TDS_CCWhiteN.TDS_PS_L3 .mje_button_sqrt, .TDS_CCWhiteN.TDS_PS_L3 .mje_button_nrt, .TDS_CCWhiteN.TDS_PS_L3 .mje_button_sup, .TDS_CCWhiteN.TDS_PS_L3 .mje_button_sub, .TDS_CCWhiteN.TDS_PS_L3 .mje_button_subsup, 
+.TDS_CCWhiteN.TDS_PS_L4 .mje_button_fraction, .TDS_CCWhiteN.TDS_PS_L4 .mje_button_sqrt, .TDS_CCWhiteN.TDS_PS_L4 .mje_button_nrt, .TDS_CCWhiteN.TDS_PS_L4 .mje_button_sup, .TDS_CCWhiteN.TDS_PS_L4 .mje_button_sub, .TDS_CCWhiteN.TDS_PS_L4 .mje_button_subsup {
+	background-image: url(sbee/images/equations_level3_white.png);
+}
+
+.TDS_CCYellowB.TDS_PS_L3 .mje_button_fraction, .TDS_CCYellowB.TDS_PS_L3 .mje_button_sqrt, .TDS_CCYellowB.TDS_PS_L3 .mje_button_nrt, .TDS_CCYellowB.TDS_PS_L3 .mje_button_sup, .TDS_CCYellowB.TDS_PS_L3 .mje_button_sub, .TDS_CCYellowB.TDS_PS_L3 .mje_button_subsup, 
+.TDS_CCYellowB.TDS_PS_L4 .mje_button_fraction, .TDS_CCYellowB.TDS_PS_L4 .mje_button_sqrt, .TDS_CCYellowB.TDS_PS_L4 .mje_button_nrt, .TDS_CCYellowB.TDS_PS_L4 .mje_button_sup, .TDS_CCYellowB.TDS_PS_L4 .mje_button_sub, .TDS_CCYellowB.TDS_PS_L4 .mje_button_subsup {
+	background-image: url(sbee/images/equations_level3_yellow.png);
+}
+
+.TDS_PS_L3 .mje_button_fraction {
+	background-position: center -287px;
+}
+.TDS_PS_L3 .mje_button_sqrt {
+	background-position: center -362px;
+	width: 50px;
+}
+.TDS_PS_L3 .mje_button_nrt {
+	background-position: center -437px;
+	width: 56px;
+}
+.TDS_PS_L3 .mje_button_sup {
+	background-position: center -512px;
+}
+.TDS_PS_L3 .mje_button_sub {
+	background-position: center -587px;
+}
+.TDS_PS_L3 .mje_button_subsup {
+	background-position: center -662px;
+}
+.TDS_PS_L3 .mje_button_dot {
+	background-position: center -865px;
+}
+
+.TDS_PS_L4 .mje_button_fraction {
+	background-position: center -279px;
+}
+.TDS_PS_L4 .mje_button_sqrt {
+	background-position: center -354px;
+	width: 50px;
+}
+.TDS_PS_L4 .mje_button_nrt {
+	background-position: center -429px;
+	width: 56px;
+}
+.TDS_PS_L4 .mje_button_sup {
+	background-position: center -504px;
+}
+.TDS_PS_L4 .mje_button_sub {
+	background-position: center -579px;
+}
+.TDS_PS_L4 .mje_button_subsup {
+	background-position: center -654px;
+}
+.TDS_PS_L4 .mje_button_dot {
+	background-position: center -857px;
+}
+
+
+/* temp style for SBAC, hide labels */
+.mje_simple_row_title, .mje_grid_row_title {
+	display: none;
+}
+
+
+/* more bigger! */
+/*firefox/gecko doesn't handle zoom yet
+.browser_firefox .mje_container .MathJax, 
+.browser_airsecurebrowser.platform_windows .mje_container .MathJax, 
+.browser_airsecurebrowser.platform_osx .mje_container .MathJax, 
+.browser_airsecurebrowser.platform_linux .mje_container .MathJax, 
+.browser_airsecurebrowser.platform_unix .mje_container .MathJax {
+	-moz-transform: scale(1.5);
+    transform: scale(1.5);
+    margin-left: 17%;
+    margin-bottom: 1.5em;
+    margin-top: .5em;
+    width: 66%;
+}
+.mje_container .MathJax {
+    zoom:1.5;
+}*/
+  
+#itemCanvasBody .tei-sbee .mje_container {
+    min-height: 1.8em;
+    padding-top: .4em;
+}
+
+.MathJax * {
+	-moz-user-select: element !important;
+	-webkit-user-select: auto !important;
+	-ms-user-select: element !important;
+	user-select: element !important;
+}
+
+.noColumns .mje_container .MathJax {
+    /*max-width: 40em; going to try and disable for bug 93347 */
+}
+.noColumns layout1 .mje_container .MathJax {
+    max-width: inherit;
+}
+/*.platform_ios .mje_container .MathJax, 
+.platform_android .mje_container .MathJax {
+    -webkit-text-size-adjust: 150%;
+}*/
+.platform_android .mje_container input {
+	-webkit-user-modify: read-write-plaintext-only;
+}
+/* focus styles */
+.mje_container .MathJax {
+	min-height: 2.2em;
+	padding: .8em;
+}
+@-webkit-keyframes color_change {
+  from { color: #98e0ff; }
+  to { color: #00abf4; }
+}
+@-moz-keyframes color_change {
+  from { color: #98e0ff; }
+  to { color: #00abf4; }
+}
+@-ms-keyframes color_change {
+  from { color: #98e0ff; }
+  to { color: #00abf4; }
+}
+@keyframes color_change {
+  from { color: #98e0ff; }
+  to { color: #00abf4; }
+}
+#itemCanvasBody .tei-sbee .mje_insert_select {
+    -webkit-animation: color_change 1s infinite alternate;
+  	-moz-animation: color_change 1s infinite alternate;
+  	-ms-animation: color_change 1s infinite alternate;
+  	animation: color_change 1s infinite alternate;
+}
+/*Bug 74097 asked to get rid of the Arrow*/
+/*
+.mje_container .mje_insert_select:after {
+	display: inline-block;
+    content: "";
+    width: 15px;
+    height: .8em;
+    background: url(sbee/images/arrow.png) no-repeat center center;
+}*/
+#itemCanvasBody .tei-sbee .mje_box_selection.mje_insert_select
+{
+    display: none;
+}
+#itemCanvasBody .tei-sbee .mje_cursor_field.mje_allow_edit.mje_box_input 
+{
+    margin: 0;
+    
+}
+#itemCanvasBody .tei-sbee .math .mje_cursor_field.mje_allow_edit.mje_box_input 
+{
+    -moz-transform: translateY(2px);
+    max-height: 0.7em;
+    font-size: 0.6em;
+}
+
+
+
+#itemCanvasBody .tei-sbee .mje_cursor_field.mje_allow_edit {
+	border: solid 1px #00abf4;
+	color: #00abf4;
+    height: 1.5em !important;
+    padding: 0px !important;
+    margin: 0px 4px 3px;
+    -moz-transform: translateY(-5px);
+    transform: translateY(-5px);
+}
+#itemCanvasBody .tei-sbee .math .mje_cursor_field.mje_allow_edit {
+	font-size: 0.8em !important;
+    height: 0.8em !important;
+    -moz-transform: translateY(2px);
+    transform: translateY(2px);
+}
+.platform_ios .math .mje_cursor_field.mje_allow_edit, 
+.platform_android .math .mje_cursor_field.mje_allow_edit {
+	height: 1em !important;
+}
+/* for fake text box to be positioned by Justin */
+#itemCanvasBody .tei-sbee .mje_cursor_field2 {
+	border: solid 3px red;
+	pointer-events:none;
+	position: absolute;
+	display: block;
+}
+
+/* Removing CLIP from spans inside MathJax because it is cutting off our input boxes.  Fix for Bugs 74823, 74124, 74681 */
+/* Dear god I hope this works - Adam  
+ *
+ * (Unfortunately prevents selection of the numerator / denominator of functions." ~jcarlson.
+ * The suffering continues.
+.MathJax span{
+	clip: auto !important;
+}
+*/
+
+#itemCanvasBody .tei-sbee .mje_cursor_field.mje_allow_edit{
+	height: 1.3em !important;
+}
+#itemCanvasBody .tei-sbee .math .mje_cursor_field.mje_allow_edit{
+}
+#itemCanvasBody .tei-sbee .mje_cursor_field.mje_allow_edit, .math .mje_cursor_field.mje_allow_edit{
+	background: #00ABF4;
+    color: #FFFFFF;
+}
+
+
+/*Zoom level fixing for bug 75318  This stuff can be safely removed in any non-tds / AIR project */
+.TDS_PS_L1 .answerCell input.mje_cursor_field.mje_allow_edit, .TDS_PS_L1 .answerContainer input.mje_cursor_field.mje_allow_edit, .TDS_PS_L2 .answerCell input.mje_cursor_field.mje_allow_edit, .TDS_PS_L2 .answerContainer input.mje_cursor_field.mje_allow_edit, .TDS_PS_L3 .answerCell input.mje_cursor_field.mje_allow_edit, .TDS_PS_L3 .answerContainer input.mje_cursor_field.mje_allow_edit, .TDS_PS_L4 .answerCell input, .TDS_PS_L4 .answerContainer input.mje_cursor_field.mje_allow_edit{
+        margin-right: 0.2em;
+}
+
+/*(FogBugz:102615) bug fix to display the EQ editor textbox properly in IE10*/
+#itemCanvasBody .tei-sbee span.MathJax
+{
+	width:100%;
+}
+
+#itemCanvasBody .tei-sbee .keypad-row, 
+#itemCanvasBody .tei-sbee .keypad-grid {
+    text-align:left;
+}
+
+/* Brought over from eq_editor.css */
+
+/* AIR Custom Styles*/
+#itemCanvasBody .tei-sbee .mathquill-rendered-math .mathquill-editable{
+	border: none;
+	
+}
+#itemCanvasBody .tei-sbee .mathquill-editable .mathquill-root-block,
+#itemCanvasBody .tei-sbee .input-box.mathquill-rendered-math.readOnly{
+	font-size: 1.5em;
+	border: 1px solid #bbb;
+	border-radius: 6px;
+	box-sizing: border-box;
+	margin: 0px !important;
+	padding: .2em !important;
+	/*text-indent: .2em;  This was causing issues, removing*/
+	text-indent: 0em;
+	overflow:auto;
+    width: auto;
+    display: block;
+	max-height: 3em;
+}
+#itemCanvasBody .tei-sbee .input-box.mathquill-rendered-math.readOnly {
+     background-color: #ccc;
+} 
+
+
+#itemCanvasBody .tei-sbee .mje_dynamic_inputbox .mathquill-editable
+{
+    width: auto;
+    min-width: 15em;
+	max-width: 100%;
+}
+/* Adding pading to the left side because of italics fonts*/
+#itemCanvasBody .tei-sbee .input.mje_dynamic_inputbox{
+	padding-left: 0.5em;
+}
+
+/*.mathquill-editable .mathquill-root-block.mq-hasCursor{
+	-moz-box-shadow:inset 0 0 5px 2px rgba(0,174,239,.3);
+   -webkit-box-shadow:inset 0 0 5px 2px rgba(0,174,239,.3);
+	box-shadow:inset 0 0 5px 2px rgba(0,174,239,.3);
+	border-color: #0089d1;
+}*/
+
+#itemCanvasBody .tei-sbee .mathquill-editable .mq-cursor{
+	min-width: 0.2em; /*Windows Chrome cursor appearance fix*/
+}
+#itemCanvasBody .tei-sbee .mathquill-editable .mq-cursor .mq-line{
+	border-color: #000000;
+}
+#itemCanvasBody .tei-sbee .mje_button_fraction, 
+#itemCanvasBody .tei-sbee .mje_button_sqrt, 
+#itemCanvasBody .tei-sbee .mje_button_nrt, 
+#itemCanvasBody .tei-sbee .mje_button_sup, 
+#itemCanvasBody .tei-sbee .mje_button_sub, 
+#itemCanvasBody .tei-sbee .mje_button_subsup,
+#itemCanvasBody .tei-sbee .mje_button_dot {
+	background: url(sbee/images/equations_level1.png) no-repeat center 200px;
+}
+
+#itemCanvasBody .tei-sbee .mje_button_dot{
+	background-position: center -460px;
+}
+
+#itemCanvasBody .tei-sbee .mje_button_fraction {
+	background-position: center -154px;
+}
+#itemCanvasBody .tei-sbee .mje_button_sqrt {
+	background-position: center -194px;
+}
+#itemCanvasBody .tei-sbee .mje_button_nrt {
+	background-position: center -233px;
+}
+#itemCanvasBody .tei-sbee .mje_button_sup {
+	background-position: center -272px;
+}
+#itemCanvasBody .tei-sbee .mje_button_sub {
+	background-position: center -311px;
+}
+#itemCanvasBody .tei-sbee .mje_button_subsup {
+	background-position: center -350px;
+}
+#itemCanvasBody .tei-sbee .mje_button_dot{
+	background-position: center -460px;
+}
+#itemCanvasBody .tei-sbee .mje_button:hover, .mje_button:focus, .keypad-item:hover {
+    border-color: #0785AB;
+    box-shadow: 0 0 0.3em #666666;
+}
+#itemCanvasBody .tei-sbee .mathquill-rendered-math, 
+#itemCanvasBody .tei-sbee .mathquill-root-block, 
+#itemCanvasBody .tei-sbee .mathquill-editable{
+	/*width: 100%;*/
+}
+
+/*Toolbar Styles*/
+#itemCanvasBody .tei-sbee .toolbar {
+	padding-bottom: 3px;
+	padding-left: 3px;
+}
+#itemCanvasBody .tei-sbee .toolbar button {
+	background-color: transparent;
+	border: 1px solid #808080;
+	border-radius: 25px;
+	display: inline-block;
+  	-moz-border-radius: 25px;
+  	-webkit-border-radius: 25px;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 5px;
+	overflow: hidden;
+	margin-right: 3px;
+	margin-top: 3px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 20px;
+	min-width: 25px;
+	-webkit-transition: color .2s ease-in, background-color .2s ease-in, -webkit-box-shadow .2s ease-in;
+	-moz-transition: color .2s ease-in, background-color .2s ease-in, -moz-box-shadow .2s ease-in;
+	transition: color .2s ease-in, background-color .2s ease-in, box-shadow .2s ease-in;
+}
+#itemCanvasBody .tei-sbee .toolbar button:hover, .toolbar button:focus {
+	background-color: #fff;
+	border-color: #00abf4;
+	color: #00abf4;
+	 -webkit-box-shadow: 0em 0em .1em #000;
+	-moz-box-shadow: 0em 0em .1em #000;
+	box-shadow: 0em 0em .1em #000;
+}
+
+#itemCanvasBody .tei-sbee .mje_numpad_input{
+  width: 60px;
+}
+
+#itemCanvasBody .tei-sbee div.mje_selected_tab, 
+#itemCanvasBody .tei-sbee div.mje_selected_tab:hover {
+  	background-color: #fff;
+  	border-color: #00abf4;
+}
+#itemCanvasBody .tei-sbee .mje_question {
+  float: right;
+}
+
+/*Icons for Undo, Redo, and Delete*/
+#itemCanvasBody .tei-sbee .mje_nav_undo,
+#itemCanvasBody .tei-sbee .mje_nav_redo, .mje_nav_del{
+	background: url(sbee/images/undo_redo_delete.png) no-repeat 6px center;
+	text-indent: -9999px;
+	width: 30px;
+}
+#itemCanvasBody .tei-sbee .mje_nav_undo{
+	background-position: 7px 5px;
+}
+#itemCanvasBody .tei-sbee .mje_nav_undo:hover, 
+.sbac #itemCanvasBody .mje_nav_undo:active{
+	background-position: -92px 5px;
+}
+#itemCanvasBody .tei-sbee .mje_nav_redo{
+	background-position: -192px 5px;
+}
+#itemCanvasBody .tei-sbee .mje_nav_redo:hover, 
+#itemCanvasBody .tei-sbee .mje_nav_redo:active{
+	background-position: -292px 5px;
+}
+#itemCanvasBody .tei-sbee .mje_nav_del{
+	background-position: -357px 5px;
+}
+#itemCanvasBody .tei-sbee .mje_nav_del:hover, 
+#itemCanvasBody .tei-sbee .mje_nav_del:active{
+	background-position: -451px 5px;
+}
+.TDS_CCInvert .mje_nav_undo,
+.TDS_CCWhiteN .mje_nav_undo{
+	background-position: 7px -19px;
+}
+.TDS_CCInvert .mje_nav_undo:hover, .TDS_CCInvert .mje_nav_undo:active,
+.TDS_CCWhiteN .mje_nav_undo:hover, .TDS_CCWhiteN .mje_nav_undo:active{
+	background-position: -92px -19px;
+}
+.TDS_CCInvert .mje_nav_redo,
+.TDS_CCWhiteN .mje_nav_redo{
+	background-position: -192px -19px;
+}
+.TDS_CCInvert .mje_nav_redo:hover, .TDS_CCInvert .mje_nav_redo:active,
+.TDS_CCWhiteN .mje_nav_redo:hover, .TDS_CCWhiteN .mje_nav_redo:active{
+	background-position: -292px -19px;
+}
+.TDS_CCInvert .mje_nav_del,
+.TDS_CCWhiteN .mje_nav_del{
+	background-position: -357px -19px;
+}
+.TDS_CCInvert .mje_nav_del:hover, .TDS_CCInvert .mje_nav_del:active,
+.TDS_CCWhiteN .mje_nav_del:hover, .TDS_CCWhiteN .mje_nav_del:active{
+	background-position: -451px -19px;
+}
+.TDS_CCYellowB .mje_nav_undo{
+	background-position: 7px -45px;
+}
+.TDS_CCYellowB .mje_nav_undo:hover, .TDS_CCYellowB .mje_nav_undo:active{
+	background-position: -92px -45px;
+}
+.TDS_CCYellowB .mje_nav_redo{
+	background-position: -192px -45px;
+}
+.TDS_CCYellowB .mje_nav_redo:hover, .TDS_CCYellowB .mje_nav_redo:active{
+	background-position: -292px -45px;
+}
+.TDS_CCYellowB .mje_nav_del{
+	background-position: -357px -45px;
+}
+.TDS_CCYellowB .mje_nav_del:hover, .TDS_CCYellowB .mje_nav_del:active{
+	background-position: -451px -45px;
+}
+
+/* @group zooming */
+/*1*/
+.TDS_PS_L1 .keypad-item {
+	height: 35px;
+	min-width: 19px;
+	line-height: 35px;
+}
+.TDS_PS_L1 .mje_grid_row {
+	width: 100px;
+}
+.browser_ie.browserVer_10.TDS_PS_L1 .mje_grid_row{
+	width: 103px;
+}
+.TDS_PS_L1 .mje_button_grid_row {
+	min-height: 40px;
+}
+.TDS_PS_L1 .keypad-row{
+	margin-left: 100px;
+	min-height: 40px;
+}
+.browser_ie.browserVer_10.TDS_PS_L1 .mje_simple_row{
+	margin-left: 103px;
+}
+.TDS_PS_L1 .mje_controls {
+	min-width: 460px;
+}
+.TDS_PS_L1 .toolbar button {
+	border-radius: 25px;
+  	-moz-border-radius: 25px;
+  	-webkit-border-radius: 25px;
+	height: 25px;
+	line-height: 25px;
+	margin-top: 5px;
+	font-size: 25px;
+	min-width: 25px;
+}
+.TDS_PS_L1 .toolbar .mje_nav_del, 
+.TDS_PS_L1 .toolbar .mje_nav_next, 
+.TDS_PS_L1 .toolbar .mje_nav_prev,
+.TDS_PS_L1 .toolbar .mje_nav_redo,
+.TDS_PS_L1 .toolbar .mje_nav_undo {
+	margin-top: 3px;
+}
+
+/*2*/
+.TDS_PS_L2 .keypad-item {
+	height: 42px;
+	min-width: 25px;
+	line-height: 42px;
+}
+.TDS_PS_L2 .mje_grid_row {
+	width: 115px;
+}
+.browser_ie.browserVer_10.TDS_PS_L2 .mje_grid_row{
+	width: 115px;
+}
+.TDS_PS_L2 .mje_button_grid_row {
+	min-height: 45px;
+}
+.TDS_PS_L2 .keypad-row{
+	margin-left: 125px;
+	min-height: 45px;
+}
+.browser_ie.browserVer_10.TDS_PS_L2 .mje_simple_row{
+	margin-left: 115px;
+}
+.TDS_PS_L2 .mje_controls {
+	min-width: 530px;
+}
+.TDS_PS_L2 .toolbar button {
+	border-radius: 30px;
+  	-moz-border-radius: 30px;
+  	-webkit-border-radius: 30px;
+	height: 35px;
+	line-height: 30px;
+	margin-top: 6px;
+	font-size: 30px;
+	min-width: 42px;
+}
+.TDS_PS_L2 .toolbar .mje_nav_del, 
+.TDS_PS_L2 .toolbar .mje_nav_next, 
+.TDS_PS_L2 .toolbar .mje_nav_prev,
+.TDS_PS_L2 .toolbar .mje_nav_redo,
+.TDS_PS_L2 .toolbar .mje_nav_undo {
+	margin-top: 2px;
+}
+
+.TDS_PS_L2 .mje_nav_next, .TDS_PS_L2 .mje_nav_prev,
+.TDS_CCInvert.TDS_PS_L2 .mje_nav_next, .TDS_CCInvert.TDS_PS_L2 .mje_nav_prev,
+.TDS_CCYellowB.TDS_PS_L2 .mje_nav_next, .TDS_CCYellowB.TDS_PS_L2 .mje_nav_prev,
+.TDS_CCWhiteN.TDS_PS_L2 .mje_nav_next, .TDS_CCWhiteN.TDS_PS_L2 .mje_nav_prev{
+	background-image:  url("sbee/images/next_back_L2.png"); 
+}
+.TDS_PS_L2 .mje_nav_next, .TDS_PS_L2 .mje_nav_prev{
+	background-position: 6px 7px;
+}
+
+.TDS_PS_L2 .mje_nav_next:hover, .TDS_PS_L2 .mje_nav_next:active {
+	background-position: -94px 7px;
+}
+.TDS_PS_L2 .mje_nav_prev {
+	background-position: -194px 7px;
+}
+.TDS_PS_L2 .mje_nav_prev:hover, .TDS_PS_L2 .mje_nav_prev:active {
+	background-position: -294px 7px;
+}
+
+.TDS_PS_L2.TDS_CCInvert .mje_nav_next, .TDS_PS_L2.TDS_CCInvert .mje_nav_prev,
+.TDS_PS_L2.TDS_CCWhiteN .mje_nav_next, .TDS_PS_L2.TDS_CCWhiteN .mje_nav_prev {
+	background-position: 6px -23px
+}
+.TDS_PS_L2.TDS_CCInvert .mje_nav_next:hover, .TDS_PS_L2.TDS_CCInvert .mje_nav_next:active,
+.TDS_PS_L2.TDS_CCWhiteN .mje_nav_next:hover, .TDS_PS_L2.TDS_CCWhiteN .mje_nav_next:active {
+	background-position: -94px -23px;
+}
+.TDS_PS_L2.TDS_CCInvert .mje_nav_prev,
+.TDS_PS_L2.TDS_CCWhiteN .mje_nav_prev {
+	background-position: -194px -23px;
+}
+.TDS_PS_L2.TDS_CCInvert .mje_nav_prev:hover, .TDS_PS_L2.TDS_CCInvert .mje_nav_prev:active,
+.TDS_PS_L2.TDS_CCWhiteN .mje_nav_prev:hover, .TDS_PS_L2.TDS_CCWhiteN .mje_nav_prev:active {
+	background-position: -294px -23px;
+}
+
+.TDS_PS_L2.TDS_CCYellowB .mje_nav_next, .TDS_PS_L2.TDS_CCYellowB .mje_nav_prev{
+	background-position: 6px -53px
+}
+.TDS_PS_L2.TDS_CCYellowB .mje_nav_next:hover, .TDS_PS_L2.TDS_CCYellowB .mje_nav_next:active {
+	background-position: -94px -53px;
+}
+.TDS_PS_L2.TDS_CCYellowB .mje_nav_prev{
+	background-position: -194px -53px;
+}
+.TDS_PS_L2.TDS_CCYellowB .mje_nav_prev:hover, .TDS_PS_L2.TDS_CCYellowB .mje_nav_prev:active{
+	background-position: -294px -53px;
+}
+
+.TDS_PS_L2 .mje_nav_undo, .TDS_PS_L2 .mje_nav_redo, .TDS_PS_L2 .mje_nav_del{
+	background-image: url(sbee/images/undo_redo_delete_L2.png);	
+}
+.TDS_PS_L2.TDS_CCInvert .mje_nav_undo,
+.TDS_PS_L2.TDS_CCWhiteN .mje_nav_undo{
+	background-position: 7px -23px;
+}
+.TDS_PS_L2.TDS_CCInvert .mje_nav_undo:hover, .TDS_PS_L2.TDS_CCInvert .mje_nav_undo:active,
+.TDS_PS_L2.TDS_CCWhiteN .mje_nav_undo:hover, .TDS_PS_L2.TDS_CCWhiteN .mje_nav_undo:active{
+	background-position: -92px -23px;
+}
+.TDS_PS_L2.TDS_CCInvert .mje_nav_redo,
+.TDS_PS_L2.TDS_CCWhiteN .mje_nav_redo{
+	background-position: -192px -23px;
+}
+.TDS_PS_L2.TDS_CCInvert .mje_nav_redo:hover, .TDS_PS_L2.TDS_CCInvert .mje_nav_redo:active,
+.TDS_PS_L2.TDS_CCWhiteN .mje_nav_redo:hover, .TDS_PS_L2.TDS_CCWhiteN .mje_nav_redo:active{
+	background-position: -292px -23px;
+}
+.TDS_PS_L2.TDS_CCInvert .mje_nav_del,
+.TDS_PS_L2.TDS_CCWhiteN .mje_nav_del{
+	background-position: -357px -23px;
+}
+.TDS_PS_L2.TDS_CCInvert .mje_nav_del:hover, .TDS_PS_L2.TDS_CCInvert .mje_nav_del:active,
+.TDS_PS_L2.TDS_CCWhiteN .mje_nav_del:hover, .TDS_PS_L2.TDS_CCWhiteN .mje_nav_del:active{
+	background-position: -451px -23px;
+}
+.TDS_PS_L2.TDS_CCYellowB .mje_nav_undo{
+	background-position: 7px -53px;
+}
+.TDS_PS_L2.TDS_CCYellowB .mje_nav_undo:hover, .TDS_PS_L2.TDS_CCYellowB .mje_nav_undo:active{
+	background-position: -92px -53px;
+}
+.TDS_PS_L2.TDS_CCYellowB .mje_nav_redo{
+	background-position: -192px -53px;
+}
+.TDS_PS_L2.TDS_CCYellowB .mje_nav_redo:hover, .TDS_PS_L2.TDS_CCYellowB .mje_nav_redo:active{
+	background-position: -292px -53px;
+}
+.TDS_PS_L2.TDS_CCYellowB .mje_nav_del{
+	background-position: -357px -53px;
+}
+.TDS_PS_L2.TDS_CCYellowB .mje_nav_del:hover, .TDS_PS_L2.TDS_CCYellowB .mje_nav_del:active{
+	background-position: -451px -53px;
+}
+
+
+/*3*/
+.TDS_PS_L3 .keypad-body {
+	min-width: 640px;
+}
+.TDS_PS_L3 .keypad-item {
+	height: 52px;
+	min-width: 29px;
+	line-height: 52px;
+}
+.TDS_PS_L3 .mje_grid_row {
+	width: 132px;
+}
+.TDS_PS_L3 .mje_button_grid_row {
+	min-height: 55px;
+}
+.TDS_PS_L3 .keypad-row{
+	margin-left: 141px;
+	min-height: 55px;
+}
+.TDS_PS_L3 .mje_controls {
+	min-width: 640px;
+}
+.TDS_PS_L3 .toolbar button {
+	border-radius: 35px;
+  	-moz-border-radius: 35px;
+  	-webkit-border-radius: 35px;
+	height: 35px;
+	line-height: 35px;
+	margin-top: 6px;
+	font-size: 35px;
+	min-width: 42px;
+}
+.TDS_PS_L3 .toolbar .mje_nav_del, 
+.TDS_PS_L3 .toolbar .mje_nav_next, 
+.TDS_PS_L3 .toolbar .mje_nav_prev,
+.TDS_PS_L3 .toolbar .mje_nav_redo,
+.TDS_PS_L3 .toolbar .mje_nav_undo {
+	margin-top: 2px;
+}
+.TDS_PS_L3 .mje_nav_next, .TDS_PS_L3 .mje_nav_prev,
+.TDS_CCInvert.TDS_PS_L3 .mje_nav_next, .TDS_CCInvert.TDS_PS_L3 .mje_nav_prev,
+.TDS_CCYellowB.TDS_PS_L3 .mje_nav_next, .TDS_CCYellowB.TDS_PS_L3 .mje_nav_prev,
+.TDS_CCWhiteN.TDS_PS_L3 .mje_nav_next, .TDS_CCWhiteN.TDS_PS_L3 .mje_nav_prev{
+	background-image:  url("sbee/images/next_back_L2.png"); 
+}
+.TDS_PS_L3 .mje_nav_next, .TDS_PS_L3 .mje_nav_prev{
+	background-position: 6px 7px;
+}
+
+.TDS_PS_L3 .mje_nav_next:hover, .TDS_PS_L3 .mje_nav_next:active {
+	background-position: -94px 7px;
+}
+.TDS_PS_L3 .mje_nav_prev {
+	background-position: -194px 7px;
+}
+.TDS_PS_L3 .mje_nav_prev:hover, .TDS_PS_L3 .mje_nav_prev:active {
+	background-position: -294px 7px;
+}
+
+.TDS_PS_L3.TDS_CCInvert .mje_nav_next, .TDS_PS_L3.TDS_CCInvert .mje_nav_prev,
+.TDS_PS_L3.TDS_CCWhiteN .mje_nav_next, .TDS_PS_L3.TDS_CCWhiteN .mje_nav_prev {
+	background-position: 6px -23px
+}
+.TDS_PS_L3.TDS_CCInvert .mje_nav_next:hover, .TDS_PS_L3.TDS_CCInvert .mje_nav_next:active,
+.TDS_PS_L3.TDS_CCWhiteN .mje_nav_next:hover, .TDS_PS_L3.TDS_CCWhiteN .mje_nav_next:active {
+	background-position: -94px -23px;
+}
+.TDS_PS_L3.TDS_CCInvert .mje_nav_prev,
+.TDS_PS_L3.TDS_CCWhiteN .mje_nav_prev {
+	background-position: -194px -23px;
+}
+.TDS_PS_L3.TDS_CCInvert .mje_nav_prev:hover, .TDS_PS_L3.TDS_CCInvert .mje_nav_prev:active,
+.TDS_PS_L3.TDS_CCWhiteN .mje_nav_prev:hover, .TDS_PS_L3.TDS_CCWhiteN .mje_nav_prev:active {
+	background-position: -294px -23px;
+}
+
+.TDS_PS_L3.TDS_CCYellowB .mje_nav_next, .TDS_PS_L3.TDS_CCYellowB .mje_nav_prev{
+	background-position: 6px -53px
+}
+.TDS_PS_L3.TDS_CCYellowB .mje_nav_next:hover, .TDS_PS_L3.TDS_CCYellowB .mje_nav_next:active {
+	background-position: -94px -53px;
+}
+.TDS_PS_L3.TDS_CCYellowB .mje_nav_prev{
+	background-position: -194px -53px;
+}
+.TDS_PS_L3.TDS_CCYellowB .mje_nav_prev:hover, .TDS_PS_L3.TDS_CCYellowB .mje_nav_prev:active{
+	background-position: -294px -53px;
+}
+
+.TDS_PS_L3 .mje_nav_undo, .TDS_PS_L3 .mje_nav_redo, .TDS_PS_L3 .mje_nav_del{
+	background-image: url(sbee/images/undo_redo_delete_L2.png);	
+}
+.TDS_PS_L3.TDS_CCInvert .mje_nav_undo,
+.TDS_PS_L3.TDS_CCWhiteN .mje_nav_undo{
+	background-position: 7px -23px;
+}
+.TDS_PS_L3.TDS_CCInvert .mje_nav_undo:hover, .TDS_PS_L3.TDS_CCInvert .mje_nav_undo:active,
+.TDS_PS_L3.TDS_CCWhiteN .mje_nav_undo:hover, .TDS_PS_L3.TDS_CCWhiteN .mje_nav_undo:active{
+	background-position: -92px -23px;
+}
+.TDS_PS_L3.TDS_CCInvert .mje_nav_redo,
+.TDS_PS_L3.TDS_CCWhiteN .mje_nav_redo{
+	background-position: -192px -23px;
+}
+.TDS_PS_L3.TDS_CCInvert .mje_nav_redo:hover, .TDS_PS_L3.TDS_CCInvert .mje_nav_redo:active,
+.TDS_PS_L3.TDS_CCWhiteN .mje_nav_redo:hover, .TDS_PS_L3.TDS_CCWhiteN .mje_nav_redo:active{
+	background-position: -292px -23px;
+}
+.TDS_PS_L3.TDS_CCInvert .mje_nav_del,
+.TDS_PS_L3.TDS_CCWhiteN .mje_nav_del{
+	background-position: -357px -23px;
+}
+.TDS_PS_L3.TDS_CCInvert .mje_nav_del:hover, .TDS_PS_L3.TDS_CCInvert .mje_nav_del:active,
+.TDS_PS_L3.TDS_CCWhiteN .mje_nav_del:hover, .TDS_PS_L3.TDS_CCWhiteN .mje_nav_del:active{
+	background-position: -451px -23px;
+}
+.TDS_PS_L3.TDS_CCYellowB .mje_nav_undo{
+	background-position: 7px -53px;
+}
+.TDS_PS_L3.TDS_CCYellowB .mje_nav_undo:hover, .TDS_PS_L3.TDS_CCYellowB .mje_nav_undo:active{
+	background-position: -92px -53px;
+}
+.TDS_PS_L3.TDS_CCYellowB .mje_nav_redo{
+	background-position: -192px -53px;
+}
+.TDS_PS_L3.TDS_CCYellowB .mje_nav_redo:hover, .TDS_PS_L3.TDS_CCYellowB .mje_nav_redo:active{
+	background-position: -292px -53px;
+}
+.TDS_PS_L3.TDS_CCYellowB .mje_nav_del{
+	background-position: -357px -53px;
+}
+.TDS_PS_L3.TDS_CCYellowB .mje_nav_del:hover, .TDS_PS_L3.TDS_CCYellowB .mje_nav_del:active{
+	background-position: -451px -53px;
+}
+
+
+/*4*/
+.TDS_PS_L4 .keypad-body {
+	min-width: 800px;
+}
+.TDS_PS_L4 .keypad-item {
+	height: 68px;
+	min-width: 34px;
+	line-height: 68px;
+}
+.TDS_PS_L4 .mje_grid_row {
+	width: 163px;
+}
+.TDS_PS_L4 .mje_button_grid_row {
+	min-height: 72px;
+}
+.TDS_PS_L4 .keypad-grid-row{
+	min-width: 158px;
+}
+.TDS_PS_L4 .keypad-row{
+	margin-left: 163px;
+	min-height: 72px;
+}
+.TDS_PS_L4 .mje_controls {
+	min-width: 770px;
+}
+.TDS_PS_L4 .toolbar button {
+	border-radius: 40px;
+  	-moz-border-radius: 40px;
+  	-webkit-border-radius: 40px;
+	height: 40px;
+	line-height: 40px;
+	margin-top: 7px;
+	font-size: 40px;
+	min-width: 48px;
+}
+.TDS_PS_L4 .toolbar .mje_nav_del, 
+.TDS_PS_L4 .toolbar .mje_nav_next, 
+.TDS_PS_L4 .toolbar .mje_nav_prev,
+.TDS_PS_L4 .toolbar .mje_nav_redo,
+.TDS_PS_L4 .toolbar .mje_nav_undo{
+	margin-top: 3px;
+}
+.TDS_PS_L4 .mje_nav_next, .TDS_PS_L4 .mje_nav_prev,
+.TDS_CCInvert.TDS_PS_L4 .mje_nav_next, .TDS_CCInvert.TDS_PS_L4 .mje_nav_prev,
+.TDS_CCYellowB.TDS_PS_L4 .mje_nav_next, .TDS_CCYellowB.TDS_PS_L4 .mje_nav_prev,
+.TDS_CCWhiteN.TDS_PS_L4 .mje_nav_next, .TDS_CCWhiteN.TDS_PS_L4 .mje_nav_prev{
+	background-image:  url("sbee/images/next_back_L2.png"); 
+}
+.TDS_PS_L4 .mje_nav_next, .TDS_PS_L4 .mje_nav_prev{
+	background-position: 9px 9px;
+}
+
+.TDS_PS_L4 .mje_nav_next:hover, .TDS_PS_L4 .mje_nav_next:active {
+	background-position: -91px 9px;
+}
+.TDS_PS_L4 .mje_nav_prev {
+	background-position: -191px 9px;
+}
+.TDS_PS_L4 .mje_nav_prev:hover, .TDS_PS_L3 .mje_nav_prev:active {
+	background-position: -291px 9px;
+}
+
+.TDS_PS_L4.TDS_CCInvert .mje_nav_next, .TDS_PS_L4.TDS_CCInvert .mje_nav_prev,
+.TDS_PS_L4.TDS_CCWhiteN .mje_nav_next, .TDS_PS_L4.TDS_CCWhiteN .mje_nav_prev {
+	background-position: 9px -21px
+}
+.TDS_PS_L4.TDS_CCInvert .mje_nav_next:hover, .TDS_PS_L4.TDS_CCInvert .mje_nav_next:active,
+.TDS_PS_L4.TDS_CCWhiteN .mje_nav_next:hover, .TDS_PS_L4.TDS_CCWhiteN .mje_nav_next:active {
+	background-position: -91px -21px;
+}
+.TDS_PS_L4.TDS_CCInvert .mje_nav_prev,
+.TDS_PS_L4.TDS_CCWhiteN .mje_nav_prev {
+	background-position: -191px -21px;
+}
+.TDS_PS_L4.TDS_CCInvert .mje_nav_prev:hover, .TDS_PS_L4.TDS_CCInvert .mje_nav_prev:active,
+.TDS_PS_L4.TDS_CCWhiteN .mje_nav_prev:hover, .TDS_PS_L4.TDS_CCWhiteN .mje_nav_prev:active {
+	background-position: -291px -21px;
+}
+
+.TDS_PS_L4.TDS_CCYellowB .mje_nav_next, .TDS_PS_L4.TDS_CCYellowB .mje_nav_prev{
+	background-position: 9px -51px
+}
+.TDS_PS_L4.TDS_CCYellowB .mje_nav_next:hover, .TDS_PS_L4.TDS_CCYellowB .mje_nav_next:active {
+	background-position: -91px -51px;
+}
+.TDS_PS_L4.TDS_CCYellowB .mje_nav_prev{
+	background-position: -191px -51px;
+}
+.TDS_PS_L4.TDS_CCYellowB .mje_nav_prev:hover, .TDS_PS_L4.TDS_CCYellowB .mje_nav_prev:active{
+	background-position: -291px -51px;
+}
+
+.TDS_PS_L4 .mje_nav_undo, .TDS_PS_L4 .mje_nav_redo, .TDS_PS_L4 .mje_nav_del{
+	background-image: url(sbee/images/undo_redo_delete_L2.png);	
+}
+.TDS_PS_L4 .mje_nav_undo{
+	background-position: 12px 9px;
+}
+.TDS_PS_L4 .mje_nav_undo:hover, .TDS_PS_L4 .mje_nav_undo:active{
+	background-position: -87px 9px;
+}
+.TDS_PS_L4 .mje_nav_redo{
+	background-position: -187px 9px;
+}
+.TDS_PS_L4 .mje_nav_redo:hover, .TDS_PS_L4 .mje_nav_redo:active{
+	background-position: -287px 9px;
+}
+.TDS_PS_L4 .mje_nav_del{
+	background-position: -352px 9px;
+}
+.TDS_PS_L4 .mje_nav_del:hover, .TDS_PS_L4 .mje_nav_del:active{
+	background-position: -446px 9px;
+}
+.TDS_PS_L4.TDS_CCInvert .mje_nav_undo,
+.TDS_PS_L4.TDS_CCWhiteN .mje_nav_undo{
+	background-position: 12px -21px;
+}
+.TDS_PS_L4.TDS_CCInvert .mje_nav_undo:hover, .TDS_PS_L4.TDS_CCInvert .mje_nav_undo:active,
+.TDS_PS_L4.TDS_CCWhiteN .mje_nav_undo:hover, .TDS_PS_L4.TDS_CCWhiteN .mje_nav_undo:active{
+	background-position: -87px -21px;
+}
+.TDS_PS_L4.TDS_CCInvert .mje_nav_redo,
+.TDS_PS_L4.TDS_CCWhiteN .mje_nav_redo{
+	background-position: -187px -21px;
+}
+.TDS_PS_L4.TDS_CCInvert .mje_nav_redo:hover, .TDS_PS_L4.TDS_CCInvert .mje_nav_redo:active,
+.TDS_PS_L4.TDS_CCWhiteN .mje_nav_redo:hover, .TDS_PS_L4.TDS_CCWhiteN .mje_nav_redo:active{
+	background-position: -287px -21px;
+}
+.TDS_PS_L4.TDS_CCInvert .mje_nav_del,
+.TDS_PS_L4.TDS_CCWhiteN .mje_nav_del{
+	background-position: -354px -20px;
+}
+.TDS_PS_L4.TDS_CCInvert .mje_nav_del:hover, .TDS_PS_L4.TDS_CCInvert .mje_nav_del:active,
+.TDS_PS_L4.TDS_CCWhiteN .mje_nav_del:hover, .TDS_PS_L4.TDS_CCWhiteN .mje_nav_del:active{
+	background-position: -448px -20px;
+}
+.TDS_PS_L4.TDS_CCYellowB .mje_nav_undo{
+	background-position: 12px -51px;
+}
+.TDS_PS_L4.TDS_CCYellowB .mje_nav_undo:hover, .TDS_PS_L4.TDS_CCYellowB .mje_nav_undo:active{
+	background-position: -87px -51px;
+}
+.TDS_PS_L4.TDS_CCYellowB .mje_nav_redo{
+	background-position: -187px -51px;
+}
+.TDS_PS_L4.TDS_CCYellowB .mje_nav_redo:hover, .TDS_PS_L4.TDS_CCYellowB .mje_nav_redo:active{
+	background-position: -287px -51px;
+}
+.TDS_PS_L4.TDS_CCYellowB .mje_nav_del{
+	background-position: -352px -51px;
+}
+.TDS_PS_L4.TDS_CCYellowB .mje_nav_del:hover, .TDS_PS_L4.TDS_CCYellowB .mje_nav_del:active{
+	background-position: -447px -51px;
+}
+
+/* @end */
+
+#itemCanvasBody .tei-sbee .mje_button_fraction,
+#itemCanvasBody .tei-sbee .mje_button_sqrt,
+#itemCanvasBody .tei-sbee .mje_button_nrt,
+#itemCanvasBody .tei-sbee .mje_button_sup,
+#itemCanvasBody .tei-sbee .mje_button_sub,
+#itemCanvasBody .tei-sbee .mje_button_subsup,
+#itemCanvasBody .tei-sbee .mje_button_dot {
+	background: url(sbee/images/equations_level1.png) no-repeat center 200px;
+	width: 32px;
+	text-indent: -9999px;
+}
+
+/*Bug 142302 & 143556*/
+.browser_safari .keypad-item,
+.platform_ios .keypad-item,
+.platform_android.browser_airsecurebrowser .keypad-item
+{
+    vertical-align: middle;
+}
+.TDS_CCInvert .mje_button_fraction, .TDS_CCInvert .mje_button_sqrt, .TDS_CCInvert .mje_button_nrt, .TDS_CCInvert .mje_button_sup, .TDS_CCInvert .mje_button_sub, .TDS_CCInvert .mje_button_subsup, 
+.TDS_CCWhiteN .mje_button_fraction, .TDS_CCWhiteN .mje_button_sqrt, .TDS_CCWhiteN .mje_button_nrt, .TDS_CCWhiteN .mje_button_sup, .TDS_CCWhiteN .mje_button_sub, .TDS_CCWhiteN .mje_button_subsup, .TDS_CCInvert .mje_button_dot, .TDS_CCWhiteN .mje_button_dot{
+	background-image: url(sbee/images/equations_level1_white.png);
+}
+.TDS_CCYellowB .mje_button_fraction, .TDS_CCYellowB .mje_button_sqrt, .TDS_CCYellowB .mje_button_nrt, .TDS_CCYellowB .mje_button_sup, .TDS_CCYellowB .mje_button_sub, .TDS_CCYellowB .mje_button_subsup, .TDS_CCYellowB .mje_button_dot {
+	background-image: url(sbee/images/equations_level1_yellow.png);
+}
+#itemCanvasBody .tei-sbee .mje_button_fraction {
+	background-position: center -154px;
+    width: 20px;
+}
+#itemCanvasBody .tei-sbee .mje_button_sqrt {
+	background-position: center -194px;
+}
+#itemCanvasBody .tei-sbee .mje_button_nrt {
+	background-position: center -233px;
+	width: 36px;
+}
+#itemCanvasBody .tei-sbee .mje_button_sup {
+	background-position: center -272px;
+	width: 27px;
+}
+#itemCanvasBody .tei-sbee .mje_button_sub {
+	background-position: center -311px;
+	width: 27px;
+}
+#itemCanvasBody .tei-sbee .mje_button_subsup {
+	background-position: center -350px;
+	width: 28px;
+}
+#itemCanvasBody .tei-sbee .mje_button_dot{
+	background-position: center -460px;
+    width: 20px;
+}
+
+.TDS_PS_L1 .mje_button_fraction {
+	background-position: center -151px;
+    width: 20px;
+}
+.TDS_PS_L1 .mje_button_sqrt {
+	background-position: center -191px;
+}
+.TDS_PS_L1 .mje_button_nrt {
+	background-position: center -230px;
+	width: 36px;
+}
+.TDS_PS_L1 .mje_button_sup {
+	background-position: center -269px;
+	width: 27px;
+}
+.TDS_PS_L1 .mje_button_sub {
+	background-position: center -308px;
+	width: 27px;
+}
+.TDS_PS_L1 .mje_button_subsup {
+	background-position: center -347px;
+	width: 28px;
+}
+.TDS_PS_L1 .mje_button_dot {
+	background-position: center -457px;
+	width: 28px;
+}
+
+.TDS_PS_L2 .mje_button_fraction, .TDS_PS_L2 .mje_button_sqrt, .TDS_PS_L2 .mje_button_nrt, .TDS_PS_L2 .mje_button_sup, .TDS_PS_L2 .mje_button_sub, .TDS_PS_L2 .mje_button_subsup, .TDS_PS_L2 .mje_button_dot  {
+	background-image: url(sbee/images/equations_level2.png);
+}
+.TDS_CCInvert.TDS_PS_L2 .mje_button_fraction, .TDS_CCInvert.TDS_PS_L2 .mje_button_sqrt, .TDS_CCInvert.TDS_PS_L2 .mje_button_nrt, .TDS_CCInvert.TDS_PS_L2 .mje_button_sup, .TDS_CCInvert.TDS_PS_L2 .mje_button_sub, .TDS_CCInvert.TDS_PS_L2 .mje_button_subsup, .TDS_CCInvert.TDS_PS_L2 .mje_button_dot,
+.TDS_CCWhiteN.TDS_PS_L2 .mje_button_fraction, .TDS_CCWhiteN.TDS_PS_L2 .mje_button_sqrt, .TDS_CCWhiteN.TDS_PS_L2 .mje_button_nrt, .TDS_CCWhiteN.TDS_PS_L2 .mje_button_sup, .TDS_CCWhiteN.TDS_PS_L2 .mje_button_sub, .TDS_CCWhiteN.TDS_PS_L2 .mje_button_subsup, .TDS_CCWhiteN.TDS_PS_L2 .mje_button_dot{
+	background-image: url(sbee/images/equations_level2_white.png);
+}
+.TDS_CCInvert .mje_controls_content_el button,
+.TDS_CCWhiteN .mje_controls_content_el button{
+	color: white;
+}
+
+.TDS_CCYellowB.TDS_PS_L2 .mje_button_fraction, .TDS_CCYellowB.TDS_PS_L2 .mje_button_sqrt, .TDS_CCYellowB.TDS_PS_L2 .mje_button_nrt, .TDS_CCYellowB.TDS_PS_L2 .mje_button_sup, .TDS_CCYellowB.TDS_PS_L2 .mje_button_sub, .TDS_CCYellowB.TDS_PS_L2 .mje_button_subsup,
+.TDS_CCYellowB.TDS_PS_L2 .mje_button_dot {
+	background-image: url(sbee/images/equations_level2_yellow.png);
+}
+.TDS_CCYellowB .mje_controls_content_el button{
+	color: #FFCC00;
+}
+
+.TDS_PS_L2 .mje_button_fraction {
+	background-position: center -190px;
+}
+.TDS_PS_L2 .mje_button_sqrt {
+	background-position: center -242px;
+	width: 42px;
+}
+.TDS_PS_L2 .mje_button_nrt {
+	background-position: center -292px;
+	width: 46px;
+}
+.TDS_PS_L2 .mje_button_sup {
+	background-position: center -341px;
+}
+.TDS_PS_L2 .mje_button_sub {
+	background-position: center -392px;
+}
+.TDS_PS_L2 .mje_button_subsup {
+	background-position: center -441px;
+}
+.TDS_PS_L2 .mje_button_dot {
+	background-position: center -619px;
+}
+
+.TDS_PS_L3 .mje_button_fraction, .TDS_PS_L3 .mje_button_sqrt, .TDS_PS_L3 .mje_button_nrt, .TDS_PS_L3 .mje_button_sup, .TDS_PS_L3 .mje_button_sub, .TDS_PS_L3 .mje_button_subsup, .TDS_PS_L3 .mje_button_dot, 
+.TDS_PS_L4 .mje_button_fraction, .TDS_PS_L4 .mje_button_sqrt, .TDS_PS_L4 .mje_button_nrt, .TDS_PS_L4 .mje_button_sup, .TDS_PS_L4 .mje_button_sub, .TDS_PS_L4 .mje_button_subsup , .TDS_PS_L4 .mje_button_dot{
+	background-image: url(sbee/images/equations_level3.png);
+}
+.TDS_CCInvert.TDS_PS_L3 .mje_button_fraction, .TDS_CCInvert.TDS_PS_L3 .mje_button_sqrt, .TDS_CCInvert.TDS_PS_L3 .mje_button_nrt,
+.TDS_CCInvert.TDS_PS_L3 .mje_button_sup, .TDS_CCInvert.TDS_PS_L3 .mje_button_sub, .TDS_CCInvert.TDS_PS_L3 .mje_button_subsup, 
+.TDS_CCInvert.TDS_PS_L3 .mje_button_dot,
+.TDS_CCInvert.TDS_PS_L4 .mje_button_fraction, .TDS_CCInvert.TDS_PS_L4 .mje_button_sqrt, .TDS_CCInvert.TDS_PS_L4 .mje_button_nrt, 
+.TDS_CCInvert.TDS_PS_L4 .mje_button_sup, .TDS_CCInvert.TDS_PS_L4 .mje_button_sub, .TDS_CCInvert.TDS_PS_L4 .mje_button_subsup, 
+.TDS_CCInvert.TDS_PS_L4 .mje_button_dot,
+.TDS_CCWhiteN.TDS_PS_L3 .mje_button_fraction, .TDS_CCWhiteN.TDS_PS_L3 .mje_button_sqrt, .TDS_CCWhiteN.TDS_PS_L3 .mje_button_nrt,
+.TDS_CCWhiteN.TDS_PS_L3 .mje_button_sup, .TDS_CCWhiteN.TDS_PS_L3 .mje_button_sub, .TDS_CCWhiteN.TDS_PS_L3 .mje_button_subsup, 
+.TDS_CCWhiteN.TDS_PS_L3 .mje_button_dot,
+.TDS_CCWhiteN.TDS_PS_L4 .mje_button_fraction, .TDS_CCWhiteN.TDS_PS_L4 .mje_button_sqrt, .TDS_CCWhiteN.TDS_PS_L4 .mje_button_nrt,
+.TDS_CCWhiteN.TDS_PS_L4 .mje_button_sup, .TDS_CCWhiteN.TDS_PS_L4 .mje_button_sub, .TDS_CCWhiteN.TDS_PS_L4 .mje_button_subsup, 
+.TDS_CCWhiteN.TDS_PS_L4 .mje_button_dot{
+	background-image: url(sbee/images/equations_level3_white.png);
+}
+
+.TDS_CCYellowB.TDS_PS_L3 .mje_button_fraction, .TDS_CCYellowB.TDS_PS_L3 .mje_button_sqrt, .TDS_CCYellowB.TDS_PS_L3 .mje_button_nrt, .TDS_CCYellowB.TDS_PS_L3 .mje_button_sup, .TDS_CCYellowB.TDS_PS_L3 .mje_button_sub, .TDS_CCYellowB.TDS_PS_L3 .mje_button_subsup, 
+.TDS_CCYellowB.TDS_PS_L3 .mje_button_dot,
+.TDS_CCYellowB.TDS_PS_L4 .mje_button_fraction, .TDS_CCYellowB.TDS_PS_L4 .mje_button_sqrt, .TDS_CCYellowB.TDS_PS_L4 .mje_button_nrt, .TDS_CCYellowB.TDS_PS_L4 .mje_button_sup, .TDS_CCYellowB.TDS_PS_L4 .mje_button_sub, .TDS_CCYellowB.TDS_PS_L4 .mje_button_subsup, 
+.TDS_CCYellowB.TDS_PS_L4 .mje_button_dot {
+	background-image: url(sbee/images/equations_level3_yellow.png);
+}
+
+.TDS_PS_L3 .mje_button_fraction {
+	background-position: center -287px;
+}
+.TDS_PS_L3 .mje_button_sqrt {
+	background-position: center -362px;
+	width: 50px;
+}
+.TDS_PS_L3 .mje_button_nrt {
+	background-position: center -437px;
+	width: 56px;
+}
+.TDS_PS_L3 .mje_button_sup {
+	background-position: center -512px;
+}
+.TDS_PS_L3 .mje_button_sub {
+	background-position: center -587px;
+}
+.TDS_PS_L3 .mje_button_subsup {
+	background-position: center -662px;
+}
+.TDS_PS_L3 .mje_button_dot {
+	background-position: center -865px;
+}
+
+.TDS_PS_L4 .mje_button_fraction {
+	background-position: center -279px;
+}
+.TDS_PS_L4 .mje_button_sqrt {
+	background-position: center -354px;
+	width: 50px;
+}
+.TDS_PS_L4 .mje_button_nrt {
+	background-position: center -429px;
+	width: 56px;
+}
+.TDS_PS_L4 .mje_button_sup {
+	background-position: center -504px;
+}
+.TDS_PS_L4 .mje_button_sub {
+	background-position: center -579px;
+}
+.TDS_PS_L4 .mje_button_subsup {
+	background-position: center -654px;
+}
+.TDS_PS_L4 .mje_button_dot {
+	background-position: center -857px;
+}
+
+/* @end */
+
+/* prevent EQ from expanding beyond the rest of the item */
+
+
+/* If "input" then we want 100% width */
+.sbac #itemCanvasBody .widget-body .input
+{
+    width: auto;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    display: block;
+}
+.sbac #itemCanvasBody .noColumns .layout1 .widget-body .input {
+	max-width: 52em;
+}
+.sbac #itemCanvasBody .noColumns .widget-body .input
+{
+    max-width: 40em;
+}
+
+.sbac #itemCanvasBody .layout_8 .noColumns  .widget-body .input
+{
+    max-width: 60em;
+}
+
+/*limiting max width on iOS and Android items */
+
+.platform_ios .widget-body .input, .platform_ios .layout_8 .noColumns  .widget-body .input,
+.platform_android .widget-body .input, .platform_android .layout_8 .noColumns  .widget-body .input
+{
+    /*max-width: 49em; Was 40em, expanded to 50em because of bug 148814 - now REMOVED by the same bug */
+}
+
+/* if "mje-dynamic-inputbox" then we want width to be auto with a minimum*/
+#itemCanvasBody .tei-sbee .widget-body .input.mje-dynamic-inputbox .mathquill-root-block
+    {
+        width: auto;
+        min-width: 10em;
+        max-width: 15em;
+        display: block;
+    }
+/* force left alignment of EQ item.  Also force minimum width for bug 145615 */
+.sbac #itemCanvasBody .widget{
+	text-align: left !important;
+	/*min-width: 23em;*/
+}
+
+/* Add Square root style improvements */
+#itemCanvasBody .tei-sbee .mathquill-rendered-math sup.mq-nthroot{
+	margin-right: -0.7em !important;
+}
+#itemCanvasBody .tei-sbee .mathquill-rendered-math .mq-sqrt-prefix{
+	top: 0;
+}
+
+/*non-editable element display improvements*/
+#itemCanvasBody .tei-sbee .mathquill-root-block {
+    font-size: 1.5em;
+    vertical-align: middle;
+}
+#itemCanvasBody .tei-sbee .mathquill-editable {
+    font-size: 0.7em;
+    vertical-align: middle;
+}
+
+/*bug 143812 fix */
+#itemCanvasBody .tei-sbee .hiding span.mathquill-root-block {
+	overflow: hidden;  /*force overflow hide when the widget is being hidden*/
+}
+/*bug 146144 fix*/
+#itemCanvasBody .tei-sbee .mathquill-rendered-math .mq-fraction{
+	vertical-align: middle;
+}
+
+#itemCanvasBody .tei-sbee .mathquill-editable .mq-empty {
+    min-height: 1em;
+}
+
+/* @group Essential styles */
+
+/* SBAC TableItem styles */
+
+.sbac table.tableItem .ti-editable .ti-input {
+    width: 100%;
+    line-height: 1.1em;
+	background-color: rgba(174,219,232,0.3);
+    -moz-border-radius:  .2em !important;
+	-webkit-border-radius:  .2em !important;
+	border-radius: .2em !important;
+	border: solid 1px #7A7A7A;
+	-webkit-box-shadow: inset 0em 0em .1em #ccc;
+	-moz-box-shadow: inset 0em 0em .1em #ccc;
+	box-shadow: inset 0em 0em .1em #ccc;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	text-align: center;
+	padding: 0;
+}
+/*make textareas slightly taller by default, provide better spacing*/
+.sbac table.tableItem .ti-editable textarea.ti-input {
+    min-height: 4em;
+    margin-bottom: 1em;
+	resize: none;
+}
+
+.sbac table.tableItem .ti-editable .ti-input:focus {
+    border-color: #00ABF4;
+    box-shadow: 0 0 0.4em #666666;
+    background-color: transparent;
+}
+
+.sbac table.tableItem .ti-invalid .ti-input,
+.sbac table.tableItem .ti-invalid .ti-input:focus {
+    background-color: rgba(255,39,0,0.1) !important;
+	border: 1px dashed #b94a48;
+}
+
+/* @end */
+
+/* @group default table styles */
+
+.sbac table.tableItem {
+    width: 100%;
+    border: 1px solid #666666;
+    padding: 0px;
+	text-align: center;
+}
+.sbac .tableItem th, 
+.sbac .tableItem td {
+    padding: 1px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+
+/* @end */
+
+/* @group color choices */
+
+.TDS_CCBlue2 .tableItem .ti-editable .ti-input,
+.TDS_CCBlue .tableItem .ti-editable .ti-input {
+	background-color: rgba(231,231,231,0.3) !important;
+}
+.TDS_CCBlue2 .tableItem .ti-editable .ti-input:focus,
+.TDS_CCBlue .tableItem .ti-editable .ti-input:focus {
+	background-color: transparent !important;
+}
+.TDS_CCInvert .tableItem th, 
+.TDS_CCInvert .tableItem td {
+	border-color: #ccc !important;
+}
+
+/* @end */
+
+/* prevent clear button from showing up in IE */
+.sbac table.tableItem input.ti-input::-ms-clear {
+    display: none;
+}
+/* End SBAC Table Interaction */
+/* SB TTS styles */
+.tts-highlight { background-color: blue !important; color: whitesmoke !important; }
+.tts-highlight.glossary-plugin { color: whitesmoke; border-color: whitesmoke; }
+.tts-highlight.sbac-glossary-plugin { color: whitesmoke; border-color: whitesmoke; }
+.tts-highlight.MathJax_CHTML { background-color: blue !important; }
+.tts-highlight.MathJax_CHTML .mjx-math { background-color: blue !important; }
+
+img.tts-img { border: 2px solid transparent; position: relative; top: -2px; left: -2px; }
+
+img.tts-highlight { border-color: blue; background-color: transparent; }
+
+#_tts_toolbar.mynajr #_tts_playButton i:before { content: "\f04b"; }
+#_tts_toolbar.mynajr #_tts_playButton.playing i:before { content: "\f04c"; }
+#_tts_toolbar.mynajr #_tts_settings #_tts_voiceControls { margin-top: 5px; margin-bottom: 5px; }
+#_tts_toolbar.mynajr #_tts_settings #_tts_voiceControls select { width: 128px; margin-bottom: 0px; }
+
+#highlighterTool button#ttsSelect { padding: 5px 12px 7px; }
+#highlighterTool button#ttsSelect .icon-volume-up { font-size: 18px; position: relative; top: 3px; margin-right: 5px; }
+#highlighterTool.iosHighlighter button#ttsSelect { color: #cccccc; text-shadow: none; padding: 5px 12px 6px; }
+
+/* Start of Sbac Audio Controls*/
+.sbaudioControls { background-color: #dfdfdf; border: 1px solid #ababab; display: inline-block; border-radius: 5px; height: 51px; width: auto; padding: 0 0.5em; -webkit-box-shadow: 0em 0em 0.1em #ccc; -moz-box-shadow: 0em 0em .1em #ccc; box-shadow: 0em 0em 0.1em #ccc; vertical-align: middle; margin-bottom: 5px; flex-direction: row; }
+
+.sbslide_controls_slider { #background-color: red; display: inline-block; height: 35px }
+
+.sbplayPause { background: url("sbaudio/images/newSound-2014.png") no-repeat center -925px rgba(0, 0, 0, 0); height: 0px; width: 0px; display: inline-block; padding: 40px 40px 0 0; overflow: hidden; margin-top: 5px; }
+
+.sbplayPause:focus { outline-width: thin; }
+
+.sbplayPos { background-position: center -925px; }
+
+.sbplayPosFocus { background-position: center -992px; }
+
+.sbpausePos { background-position: center -1126px; }
+
+.sbpausePosFocus { background-position: center -1194px; }
+
+.sbslide_controls_slider_bg:focus { outline: none; }
+
+.sbslide_controls_slider_timeline { background: url("sbaudio/images/slider_back.gif") repeat-x center center; position: absolute; height: 23px; float: left; margin-top: 5px; z-index: 0; }
+
+.sbaudio-layout-scrubber { min-width: 250px; /*BUG 186853 zooming issue + BUG 186960 rule change to be more specific*/ }
+
+.sbslide_controls_img { width: 23px; height: 23px; background: url("sbaudio/images/slider_thumb.png") no-repeat center center !important; display: block; }
+
+.sbslide_controls_slider_bg { background: transparent; position: relative; height: 23px; float: left; margin-top: 5px; z-index: 2; }
+
+.slide_controls_contain { margin-top: .3em; display: block; height: 31px; width: 302px; }
+
+.slide_controls_contain.controls-disabled { opacity: .2; pointer-events: none; }
+
+.sbslide_controls_btn { height: 28px; width: 28px; padding: 0px !important; float: left; font-weight:bold; font-size: 0.9em; color: #333333; cursor: pointer; -webkit-border-radius: 99px; -moz-border-radius: 99px; border-radius: 99px; border:1px solid #fff; font-weight: bold; margin-left: 1px; -webkit-box-shadow: 0em 0em .2em #666; -moz-box-shadow: 0em 0em .2em #666; box-shadow: 0em 0em .2em #666; margin-right: .2em; -webkit-transition: background-color .3s ease-in; -moz-transition: background-color .3s ease-in; transition: background-color .3s ease-in; text-indent: -9999px; overflow: hidden; background: #f6f5f7 url("sbaudio/images/controls.png") no-repeat center 4px; }
+
+.sbslide_controls_next_btn { background-position: center -76px; }
+
+.sbslide_controls_play_btn { background-position: center -156px; }
+
+.sbslide_controls_stop_btn { background-position: center -236px; }
+
+.sbslide_controls_play_btn_hover { background-color: #00AEEF; background-position: center -1155px; }
+
+.sbslide_controls_stop_btn_hover { background-color: #00AEEF; background-position: center -1235px; }
+
+.sbslide_controls_btn_hover { background-color: #00AEEF; background-position:center -995px; }
+
+.sbslide_controls_next_btn_hover { background-position: center -1075px; }
+
+.sbhidden { display: none; }
+
+.slides_parsed .hidden, .sbslides_config .sbhidden, .sbslides_container .sbhidden, .slides_audio { display: none; }
+
+.slide { width: 300px; height: 300px; border: 1px solid #fff; -webkit-box-shadow: 0em 0em 0.2em #666; -moz-box-shadow: 0em 0em .2em #666; box-shadow: 0em 0em 0.2em #666; overflow: hidden; position: relative; display: inline-block; margin-bottom: 10px;}
+
+.slides_container .hidden { display: none;}
+
+.tdsClosedCaptioning { display: none; }
+
+.tdsClosedCaptioning .ccWrapper * { display: none; }
+
+.tdsClosedCaptioning.tdsClosedCaptioningActive { display: block; }
+
+.ccWrapper .currentText { display: inherit; }
+
+.ccWrapper .currentText * { display: inline; }
+
+.tdsClosedCaptioning { display: none; width: 80%; min-height: 4em; height: auto !important; font-size: 2.5em; line-height: 1.3em; overflow: hidden; background-color: #000; color: #fff; position: absolute; z-index: 15; left: 50%; top: 50%; margin-left: -40%; pointer-events: none; -moz-box-sizing: border-box; box-sizing: border-box; padding: .6em; text-shadow: 2px 2px 0 #000, -1px -1px 0 #000,   1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
+
+.sbac #itemCanvas #itemCanvasBody .tdsClosedCaptioning p { color: #FFF !important; }
+
+#itemCanvasBody .tdsClosedCaptioning, #correctRenderingDiv .tdsClosedCaptioning { font-size: 2.0em; min-height: 4em; height: auto !important; font-family: Verdana, Arial, Helvetica, sans-serif; }
+
+.PS_L1 .tdsClosedCaptioning { font-size: 2.5em; }
+
+.PS_L2 .tdsClosedCaptioning, .PS_L3 .tdsClosedCaptioning { min-height: 130px; }
+
+.PS_L4 .tdsClosedCaptioning { min-height: 150px; }
+
+.CCYellowB .tdsClosedCaptioning { color: #FC0; background-color: #002a83; border: solid 1px #FC0; -moz-box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.7); -webkit-box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.7); box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.7); }
+
+.CCInvert .tdsClosedCaptioning { background-color: #1c1a1b; border: solid 1px #FFF; -moz-box-shadow: 0 0 3px 2px rgba(209, 209, 209, 0.7); -webkit-box-shadow: 0 0 3px 2px rgba(209, 209, 209, 0.7); box-shadow: 0 0 3px 2px rgba(209, 209, 209, 0.7); }
+
+.CCWhiteN .tdsClosedCaptioning { background-color: #002248; border: solid 1px #FFF; -moz-box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.7); -webkit-box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.7); box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.7); }
+
+/* End SBAC Audio Controls */

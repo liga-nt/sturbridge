@@ -1,0 +1,509 @@
+<html lang="en" class="full-height"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Preview Modal</title>
+    <link rel="stylesheet" href="./css/previewModal.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700" rel="stylesheet">
+    <script src="./config.js" type="text/javascript"></script>
+    <script src="./js/simulations.js" type="text/javascript"></script>
+    <script src="../items_scoring/js/scoring.js" type="text/javascript"></script>
+    <script src="./js/main.js" type="module"></script>
+    <script src="./js/MathJax/mathjax-startup.js" type="text/javascript"></script>
+    <script src="./js/MathJax/es5/tex-mml-chtml.js" type="text/javascript"></script><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style>
+    <script src="./js/modal-iframe.js" type="module" defer=""></script>
+<style type="text/css" id="sketchpad-widget-custom-cursor-styles"></style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://mcas.cognia.org/item-catalog/items_rendering/js/MathJax/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+</style></head>
+<body class="full-height" style="visibility: visible;">
+    <div class="dil-modal-loading-spinner" id="globalLoadingSpinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    <div class="dil-modal-container full-height" id="DilModalContainer" style="visibility: visible; display: flex;">
+        <div id="DilModalContent" class="dil-modal-content">
+            <div class="dil-modal-header iframe-default-styles">
+                <div class="dil-modal-title" id="modalItemId">
+                    <span id="lighthouse-itemid" aria-live="polite">Item: MA002145158</span>
+                </div>
+                <button class="dil-modal-close" id="modalCloseButton" aria-label="Close modal">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="standardItemWrapper" class="dil-item-content-wrapper" style="overflow: visible; max-height: none; height: auto;">
+                <div id="standardItemContent" class="dil-item-content">
+                    <div id="itemPreview" class="dil-item-preview">
+                        <div class="lighthouse-canvas-container stimuli-wrapper"><div class="lighthouse-canvas layout-flow runtime" ruler="1/8 in.,cm" id="canvas-685111f8eabe" qtiname="graphicGapMatchInteraction" style="overflow: visible; height: unset; min-height: 400px;"><style style="">#canvas-685111f8eabe  .center {    text-align: center;    padding: 10px;}
+#canvas-685111f8eabe  .info {    background-color: #99ccff;}
+#canvas-685111f8eabe  .copyright-tm {    font-size: x-small;    padding-top: 20px;}
+#canvas-685111f8eabe  .visuallyhidden {    display: none;}
+#canvas-685111f8eabe  .boxText {    border: 1px solid #000000;    padding: 8px;}
+#canvas-685111f8eabe  .passage-title {    text-align: center;}
+#canvas-685111f8eabe  .author {    text-align: center;}
+#canvas-685111f8eabe  div[class^="abbi"] p:not(.autoNumPoem),div[class^="abbi"] ul {    margin-bottom: 1em;}</style><div class="row span8 choices-top GraphicGapMatch" centergapbackground="center" gapgroupsenabled="true" answersposition="0" centeranswerchoices="auto" stackdirection="Horizontal" stackbehavior="Overlap" widget="GraphicGapMatch" id="GraphicGapMatch_sp_1" answeruses="Single" stackanswers="Center" numanswers="3" numgaps="3" answerspergap="1" allowgapsizes="true" answersettings-min="3" style="display: grid; grid-auto-rows: minmax(min-content, max-content); width: 77.6%;"><div class="GraphicStem"><div class="abbi-richtext">
+<p id="GraphicGapMatch_sp_1_1">Use these decimal numbers to create three comparison statements that are true.</p>
+<p><span id="GraphicGapMatch_sp_1_2" class="text-anchor">Drag and drop a decimal number into each box so that </span><span id="ai6Sn" class="ssml-emphasis:moderate"><strong id="GraphicGapMatch_sp_1_3">all</strong></span><span id="GraphicGapMatch_sp_1_4" class="text-anchor"> three comparison statements are true.</span></p>
+</div></div><div class="GraphicAnswers" style="justify-self: auto; order: 0;"><div class="GraphicAnswer" id=""><img data-media-guid="1aae9153-5e82-4198-9bea-ac823e00e1b9" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjQuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjQ2cHgiIGhlaWdodD0iMzBweCIgdmlld0JveD0iMCAwIDQ2IDMwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NiAzMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGcgaWQ9ImRfeDVGXzAxIj4NCgk8Zz4NCgkJPGc+DQoJCQk8cmVjdCB4PSIwLjUiIHk9IjAuNSIgc3R5bGU9ImZpbGw6I0ZGRkZGRjsiIHdpZHRoPSI0NSIgaGVpZ2h0PSIyOSIvPg0KCQkJPHBhdGggZD0iTTQ1LDF2MjhIMVYxSDQ1IE00NiwwSDB2MzBoNDZWMEw0NiwweiIvPg0KCQk8L2c+DQoJCTxnIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgICAgOyI+DQoJCQk8cGF0aCBkPSJNMTMuOTUsMTMuNjYyYzAsMi4wODktMC4zMjcsMy42MjEtMC45OCw0LjU5OGMtMC42NTQsMC45NzctMS42NjgsMS40NjUtMy4wNDMsMS40NjVjLTEuMzk2LDAtMi40MTYtMC40OTUtMy4wNTktMS40ODQNCgkJCQljLTAuNjQ0LTAuOTg5LTAuOTY1LTIuNTExLTAuOTY1LTQuNTYzYzAtMi4wNjcsMC4zMjUtMy41OTUsMC45NzctNC41ODJjMC42NTEtMC45ODcsMS42NjctMS40OCwzLjA0Ny0xLjQ4DQoJCQkJYzEuMzk2LDAsMi40MTUsMC41MDEsMy4wNTksMS41MDRDMTMuNjI4LDEwLjEyMiwxMy45NSwxMS42MzUsMTMuOTUsMTMuNjYyeiBNMTEuODk1LDE3LjIwOWMwLjE4Mi0wLjQyMiwwLjMwNi0wLjkxOCwwLjM3MS0xLjQ4OA0KCQkJCWMwLjA2NS0wLjU3LDAuMDk4LTEuMjU3LDAuMDk4LTIuMDU5YzAtMC43OTItMC4wMzMtMS40NzktMC4wOTgtMi4wNjNjLTAuMDY1LTAuNTgzLTAuMTkxLTEuMDc4LTAuMzc5LTEuNDg0DQoJCQkJYy0wLjE4My0wLjQwMS0wLjQzMS0wLjcwMy0wLjc0Ni0wLjkwNmMtMC4zMTUtMC4yMDMtMC43Mi0wLjMwNS0xLjIxNS0wLjMwNWMtMC40OSwwLTAuODk1LDAuMTAyLTEuMjE1LDAuMzA1DQoJCQkJUzguMTM3LDkuNzE5LDcuOTUsMTAuMTNjLTAuMTc3LDAuMzg2LTAuMjk4LDAuODg4LTAuMzYzLDEuNTA4Yy0wLjA2NSwwLjYyLTAuMDk4LDEuMy0wLjA5OCwyLjAzOQ0KCQkJCWMwLDAuODEzLDAuMDI4LDEuNDkyLDAuMDg2LDIuMDM5YzAuMDU3LDAuNTQ3LDAuMTgsMS4wMzYsMC4zNjcsMS40NjljMC4xNzIsMC40MDYsMC40MTUsMC43MTYsMC43MywwLjkzDQoJCQkJYzAuMzE1LDAuMjE0LDAuNzMzLDAuMzIsMS4yNTQsMC4zMmMwLjQ4OSwwLDAuODk2LTAuMTAyLDEuMjE5LTAuMzA1QzExLjQ2OCwxNy45MjcsMTEuNzE4LDE3LjYyLDExLjg5NSwxNy4yMDl6Ii8+DQoJCQk8cGF0aCBkPSJNMTguODQ4LDE5LjQ4MmgtMS44Njd2LTIuMjI3aDEuODY3VjE5LjQ4MnoiLz4NCgkJCTxwYXRoIGQ9Ik0zMC4xMywxNS43MDljMCwxLjE4My0wLjM5LDIuMTQ3LTEuMTY4LDIuODk1Yy0wLjc3OSwwLjc0Ny0xLjczMywxLjEyMS0yLjg2MywxLjEyMWMtMC41NzMsMC0xLjA5NC0wLjA4OS0xLjU2My0wLjI2Ng0KCQkJCXMtMC44ODMtMC40NC0xLjI0Mi0wLjc4OWMtMC40NDgtMC40MzMtMC43OTMtMS4wMDUtMS4wMzUtMS43MTlzLTAuMzYzLTEuNTczLTAuMzYzLTIuNTc4YzAtMS4wMzEsMC4xMS0xLjk0NSwwLjMzMi0yLjc0Mg0KCQkJCWMwLjIyMS0wLjc5NywwLjU3NC0xLjUwNSwxLjA1OS0yLjEyNWMwLjQ1OC0wLjU4OSwxLjA0OS0xLjA0OCwxLjc3My0xLjM3OWMwLjcyNC0wLjMzMSwxLjU2Ny0wLjQ5NiwyLjUzMS0wLjQ5Ng0KCQkJCWMwLjMwNywwLDAuNTY1LDAuMDEzLDAuNzczLDAuMDM5YzAuMjA4LDAuMDI2LDAuNDE5LDAuMDczLDAuNjMzLDAuMTQxdjEuNDkyaC0wLjA3OGMtMC4xNDYtMC4wNzgtMC4zNjYtMC4xNTItMC42Ni0wLjIyMw0KCQkJCWMtMC4yOTQtMC4wNy0wLjU5NS0wLjEwNS0wLjkwMi0wLjEwNWMtMS4xMiwwLTIuMDEzLDAuMzUxLTIuNjgsMS4wNTFjLTAuNjY3LDAuNy0xLjA1NSwxLjY0Ny0xLjE2NCwyLjg0DQoJCQkJYzAuNDM4LTAuMjY2LDAuODY4LTAuNDY4LDEuMjkzLTAuNjA1YzAuNDI0LTAuMTM4LDAuOTE1LTAuMjA3LDEuNDczLTAuMjA3YzAuNDk1LDAsMC45MzEsMC4wNDYsMS4zMDksMC4xMzcNCgkJCQljMC4zNzcsMC4wOTEsMC43NjQsMC4yNzQsMS4xNiwwLjU1MWMwLjQ1OCwwLjMxNywwLjgwMywwLjcxOSwxLjAzNSwxLjIwM0MzMC4wMTMsMTQuNDI3LDMwLjEzLDE1LjAxNiwzMC4xMywxNS43MDl6DQoJCQkJIE0yOC41NDQsMTUuNzcxYzAtMC40ODQtMC4wNzItMC44ODYtMC4yMTUtMS4yMDNjLTAuMTQ0LTAuMzE3LTAuMzc5LTAuNTk0LTAuNzA3LTAuODI4Yy0wLjI0LTAuMTY3LTAuNTA1LTAuMjc2LTAuNzk3LTAuMzI4DQoJCQkJYy0wLjI5Mi0wLjA1Mi0wLjU5Ny0wLjA3OC0wLjkxNC0wLjA3OGMtMC40NDMsMC0wLjg1NCwwLjA1Mi0xLjIzNCwwLjE1NmMtMC4zOCwwLjEwNC0wLjc3MSwwLjI2Ni0xLjE3MiwwLjQ4NA0KCQkJCWMtMC4wMTEsMC4xMTQtMC4wMTksMC4yMjYtMC4wMjMsMC4zMzJjLTAuMDA1LDAuMTA2LTAuMDA4LDAuMjQxLTAuMDA4LDAuNDAyYzAsMC44MjMsMC4wODQsMS40NzMsMC4yNTQsMS45NDkNCgkJCQljMC4xNjksMC40NzcsMC40MDIsMC44NTMsMC42OTksMS4xMjljMC4yMzksMC4yMjksMC40OTksMC4zOTcsMC43NzcsMC41MDRjMC4yNzgsMC4xMDYsMC41ODIsMC4xNiwwLjkxLDAuMTYNCgkJCQljMC43NTUsMCwxLjM0OS0wLjIzLDEuNzgxLTAuNjkxQzI4LjMyNywxNy4yOTgsMjguNTQ0LDE2LjYzNSwyOC41NDQsMTUuNzcxeiIvPg0KCQkJPHBhdGggZD0iTTQwLjAzNiwxNS43ODdjMCwwLjU0Mi0wLjA5OSwxLjA2LTAuMjk3LDEuNTU1Yy0wLjE5OCwwLjQ5NS0wLjQ2OSwwLjkxMS0wLjgxMywxLjI1Yy0wLjM3NSwwLjM2NC0wLjgyMiwwLjY0NS0xLjM0LDAuODQNCgkJCQljLTAuNTE5LDAuMTk1LTEuMTE5LDAuMjkzLTEuODAxLDAuMjkzYy0wLjYzNiwwLTEuMjQ4LTAuMDY2LTEuODM2LTAuMTk5Yy0wLjU4OS0wLjEzMy0xLjA4Ni0wLjI5My0xLjQ5Mi0wLjQ4di0xLjY0OGgwLjEwOQ0KCQkJCWMwLjQyNywwLjI3MSwwLjkyNywwLjUwMSwxLjUsMC42OTFjMC41NzMsMC4xOSwxLjEzNSwwLjI4NSwxLjY4OCwwLjI4NWMwLjM3LDAsMC43MjgtMC4wNTIsMS4wNzQtMC4xNTYNCgkJCQljMC4zNDYtMC4xMDQsMC42NTUtMC4yODYsMC45MjYtMC41NDdjMC4yMjktMC4yMjQsMC40MDItMC40OTIsMC41Mi0wLjgwNXMwLjE3Ni0wLjY3NSwwLjE3Ni0xLjA4Ng0KCQkJCWMwLTAuNDAxLTAuMDY5LTAuNzM5LTAuMjA3LTEuMDE2Yy0wLjEzOC0wLjI3Ni0wLjMzLTAuNDk3LTAuNTc0LTAuNjY0Yy0wLjI3MS0wLjE5OC0wLjYwMS0wLjMzNy0wLjk4OC0wLjQxOA0KCQkJCWMtMC4zODgtMC4wODEtMC44MjItMC4xMjEtMS4zMDEtMC4xMjFjLTAuNDU4LDAtMC45LDAuMDMxLTEuMzI0LDAuMDk0Yy0wLjQyNSwwLjA2My0wLjc5MSwwLjEyNS0xLjA5OCwwLjE4OFY3Ljg0OWg3djEuMzY3DQoJCQkJaC01LjQ5MnYzLjA5NGMwLjIyNC0wLjAyMSwwLjQ1My0wLjAzNiwwLjY4OC0wLjA0N3MwLjQzOC0wLjAxNiwwLjYwOS0wLjAxNmMwLjYzLDAsMS4xODIsMC4wNTQsMS42NTYsMC4xNg0KCQkJCWMwLjQ3NCwwLjEwNiwwLjkwOSwwLjI5NiwxLjMwNSwwLjU2NmMwLjQxNywwLjI4NiwwLjczOSwwLjY1NiwwLjk2OSwxLjEwOUMzOS45MjEsMTQuNTM3LDQwLjAzNiwxNS4xMDQsNDAuMDM2LDE1Ljc4N3oiLz4NCgkJPC9nPg0KCTwvZz4NCjwvZz4NCjwvc3ZnPg0K" width="46" height="30" id="GraphicGapMatch_sp_1_5"></div><div class="GraphicAnswer" id=""><img data-media-guid="7f114b6f-52e0-488a-b1f4-1428685e3a4b" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjQuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjQ2cHgiIGhlaWdodD0iMzBweCIgdmlld0JveD0iMCAwIDQ2IDMwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NiAzMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGcgaWQ9ImRfeDVGXzAyIj4NCgk8Zz4NCgkJPGc+DQoJCQk8cmVjdCB4PSIwLjUiIHk9IjAuNSIgc3R5bGU9ImZpbGw6I0ZGRkZGRjsiIHdpZHRoPSI0NSIgaGVpZ2h0PSIyOSIvPg0KCQkJPHBhdGggZD0iTTQ1LDF2MjhIMVYxSDQ1IE00NiwwSDB2MzBoNDZWMEw0NiwweiIvPg0KCQk8L2c+DQoJCTxnIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgICAgOyI+DQoJCQk8cGF0aCBkPSJNMTMuOTUsMTMuNjYyYzAsMi4wODktMC4zMjcsMy42MjEtMC45OCw0LjU5OGMtMC42NTQsMC45NzctMS42NjgsMS40NjUtMy4wNDMsMS40NjVjLTEuMzk2LDAtMi40MTYtMC40OTUtMy4wNTktMS40ODQNCgkJCQljLTAuNjQ0LTAuOTg5LTAuOTY1LTIuNTExLTAuOTY1LTQuNTYzYzAtMi4wNjcsMC4zMjUtMy41OTUsMC45NzctNC41ODJjMC42NTEtMC45ODcsMS42NjctMS40OCwzLjA0Ny0xLjQ4DQoJCQkJYzEuMzk2LDAsMi40MTUsMC41MDEsMy4wNTksMS41MDRDMTMuNjI4LDEwLjEyMiwxMy45NSwxMS42MzUsMTMuOTUsMTMuNjYyeiBNMTEuODk1LDE3LjIwOWMwLjE4Mi0wLjQyMiwwLjMwNi0wLjkxOCwwLjM3MS0xLjQ4OA0KCQkJCWMwLjA2NS0wLjU3LDAuMDk4LTEuMjU3LDAuMDk4LTIuMDU5YzAtMC43OTItMC4wMzMtMS40NzktMC4wOTgtMi4wNjNjLTAuMDY1LTAuNTgzLTAuMTkxLTEuMDc4LTAuMzc5LTEuNDg0DQoJCQkJYy0wLjE4My0wLjQwMS0wLjQzMS0wLjcwMy0wLjc0Ni0wLjkwNmMtMC4zMTUtMC4yMDMtMC43Mi0wLjMwNS0xLjIxNS0wLjMwNWMtMC40OSwwLTAuODk1LDAuMTAyLTEuMjE1LDAuMzA1DQoJCQkJUzguMTM3LDkuNzE5LDcuOTUsMTAuMTNjLTAuMTc3LDAuMzg2LTAuMjk4LDAuODg4LTAuMzYzLDEuNTA4Yy0wLjA2NSwwLjYyLTAuMDk4LDEuMy0wLjA5OCwyLjAzOQ0KCQkJCWMwLDAuODEzLDAuMDI4LDEuNDkyLDAuMDg2LDIuMDM5YzAuMDU3LDAuNTQ3LDAuMTgsMS4wMzYsMC4zNjcsMS40NjljMC4xNzIsMC40MDYsMC40MTUsMC43MTYsMC43MywwLjkzDQoJCQkJYzAuMzE1LDAuMjE0LDAuNzMzLDAuMzIsMS4yNTQsMC4zMmMwLjQ4OSwwLDAuODk2LTAuMTAyLDEuMjE5LTAuMzA1QzExLjQ2OCwxNy45MjcsMTEuNzE4LDE3LjYyLDExLjg5NSwxNy4yMDl6Ii8+DQoJCQk8cGF0aCBkPSJNMTguODQ4LDE5LjQ4MmgtMS44Njd2LTIuMjI3aDEuODY3VjE5LjQ4MnoiLz4NCgkJCTxwYXRoIGQ9Ik0yOS44NjQsMTUuNzg3YzAsMC41NDItMC4wOTksMS4wNi0wLjI5NywxLjU1NWMtMC4xOTgsMC40OTUtMC40NjksMC45MTEtMC44MTMsMS4yNWMtMC4zNzUsMC4zNjQtMC44MjIsMC42NDUtMS4zNCwwLjg0DQoJCQkJYy0wLjUxOSwwLjE5NS0xLjExOSwwLjI5My0xLjgwMSwwLjI5M2MtMC42MzYsMC0xLjI0OC0wLjA2Ni0xLjgzNi0wLjE5OWMtMC41ODktMC4xMzMtMS4wODYtMC4yOTMtMS40OTItMC40OHYtMS42NDhoMC4xMDkNCgkJCQljMC40MjcsMC4yNzEsMC45MjcsMC41MDEsMS41LDAuNjkxYzAuNTczLDAuMTksMS4xMzUsMC4yODUsMS42ODgsMC4yODVjMC4zNywwLDAuNzI4LTAuMDUyLDEuMDc0LTAuMTU2DQoJCQkJYzAuMzQ2LTAuMTA0LDAuNjU1LTAuMjg2LDAuOTI2LTAuNTQ3YzAuMjI5LTAuMjI0LDAuNDAyLTAuNDkyLDAuNTItMC44MDVzMC4xNzYtMC42NzUsMC4xNzYtMS4wODYNCgkJCQljMC0wLjQwMS0wLjA2OS0wLjczOS0wLjIwNy0xLjAxNmMtMC4xMzgtMC4yNzYtMC4zMy0wLjQ5Ny0wLjU3NC0wLjY2NGMtMC4yNzEtMC4xOTgtMC42MDEtMC4zMzctMC45ODgtMC40MTgNCgkJCQljLTAuMzg4LTAuMDgxLTAuODIyLTAuMTIxLTEuMzAxLTAuMTIxYy0wLjQ1OCwwLTAuOSwwLjAzMS0xLjMyNCwwLjA5NGMtMC40MjUsMC4wNjMtMC43OTEsMC4xMjUtMS4wOTgsMC4xODhWNy44NDloN3YxLjM2Nw0KCQkJCWgtNS40OTJ2My4wOTRjMC4yMjQtMC4wMjEsMC40NTMtMC4wMzYsMC42ODgtMC4wNDdzMC40MzgtMC4wMTYsMC42MDktMC4wMTZjMC42MywwLDEuMTgyLDAuMDU0LDEuNjU2LDAuMTYNCgkJCQljMC40NzQsMC4xMDYsMC45MDksMC4yOTYsMS4zMDUsMC41NjZjMC40MTcsMC4yODYsMC43MzksMC42NTYsMC45NjksMS4xMDlDMjkuNzQ5LDE0LjUzNywyOS44NjQsMTUuMTA0LDI5Ljg2NCwxNS43ODd6Ii8+DQoJCQk8cGF0aCBkPSJNNDAuMTMsMTkuNDgyaC03Ljg3NXYtMS42MzNjMC41NDctMC40NjksMS4wOTUtMC45MzgsMS42NDUtMS40MDZjMC41NDktMC40NjksMS4wNjEtMC45MzUsMS41MzUtMS4zOTgNCgkJCQljMS0wLjk2OSwxLjY4NS0xLjczOCwyLjA1NS0yLjMwOWMwLjM3LTAuNTcsMC41NTUtMS4xODcsMC41NTUtMS44NDhjMC0wLjYwNC0wLjE5OS0xLjA3Ny0wLjU5OC0xLjQxOHMtMC45NTUtMC41MTItMS42NjgtMC41MTINCgkJCQljLTAuNDc0LDAtMC45ODcsMC4wODMtMS41MzksMC4yNWMtMC41NTIsMC4xNjctMS4wOTEsMC40MjItMS42MTcsMC43NjZoLTAuMDc4VjguMzM0YzAuMzctMC4xODMsMC44NjMtMC4zNDksMS40OC0wLjUNCgkJCQlzMS4yMTUtMC4yMjcsMS43OTMtMC4yMjdjMS4xOTIsMCwyLjEyNywwLjI4OCwyLjgwNSwwLjg2M2MwLjY3NywwLjU3NSwxLjAxNiwxLjM1NSwxLjAxNiwyLjM0YzAsMC40NDItMC4wNTYsMC44NTUtMC4xNjgsMS4yMzgNCgkJCQljLTAuMTEyLDAuMzgzLTAuMjc3LDAuNzQ2LTAuNDk2LDEuMDljLTAuMjAzLDAuMzIzLTAuNDQxLDAuNjQxLTAuNzE1LDAuOTUzcy0wLjYwNSwwLjY1OS0wLjk5NiwxLjAzOQ0KCQkJCWMtMC41NTgsMC41NDctMS4xMzMsMS4wNzctMS43MjcsMS41OXMtMS4xNDgsMC45ODgtMS42NjQsMS40MjZoNi4yNThWMTkuNDgyeiIvPg0KCQk8L2c+DQoJPC9nPg0KPC9nPg0KPC9zdmc+DQo=" width="46" height="30" id="GraphicGapMatch_sp_1_6"></div><div class="GraphicAnswer" id=""><img data-media-guid="e9e02aef-3339-4989-a5e6-6a6943a06211" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjQuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjQ2cHgiIGhlaWdodD0iMzBweCIgdmlld0JveD0iMCAwIDQ2IDMwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NiAzMDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGcgaWQ9ImRfeDVGXzAzIj4NCgk8Zz4NCgkJPGc+DQoJCQk8cmVjdCB4PSIwLjUiIHk9IjAuNDk5IiBzdHlsZT0iZmlsbDojRkZGRkZGOyIgd2lkdGg9IjQ1IiBoZWlnaHQ9IjI5Ii8+DQoJCQk8cGF0aCBkPSJNNDUsMXYyOEgxVjFINDUgTTQ2LDBIMHYzMGg0NlYwTDQ2LDB6Ii8+DQoJCTwvZz4NCgkJPGcgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAgICA7Ij4NCgkJCTxwYXRoIGQ9Ik0xMy45NSwxMy42NjFjMCwyLjA4OS0wLjMyNywzLjYyMS0wLjk4LDQuNTk4Yy0wLjY1NCwwLjk3Ny0xLjY2OCwxLjQ2NS0zLjA0MywxLjQ2NWMtMS4zOTYsMC0yLjQxNi0wLjQ5NS0zLjA1OS0xLjQ4NA0KCQkJCWMtMC42NDQtMC45ODktMC45NjUtMi41MTEtMC45NjUtNC41NjNjMC0yLjA2NywwLjMyNS0zLjU5NSwwLjk3Ny00LjU4MmMwLjY1MS0wLjk4NywxLjY2Ny0xLjQ4LDMuMDQ3LTEuNDgNCgkJCQljMS4zOTYsMCwyLjQxNSwwLjUwMSwzLjA1OSwxLjUwNEMxMy42MjgsMTAuMTIxLDEzLjk1LDExLjYzNSwxMy45NSwxMy42NjF6IE0xMS44OTUsMTcuMjA4YzAuMTgyLTAuNDIyLDAuMzA2LTAuOTE4LDAuMzcxLTEuNDg4DQoJCQkJYzAuMDY1LTAuNTcsMC4wOTgtMS4yNTcsMC4wOTgtMi4wNTljMC0wLjc5Mi0wLjAzMy0xLjQ3OS0wLjA5OC0yLjA2M2MtMC4wNjUtMC41ODMtMC4xOTEtMS4wNzgtMC4zNzktMS40ODQNCgkJCQljLTAuMTgzLTAuNDAxLTAuNDMxLTAuNzAzLTAuNzQ2LTAuOTA2Yy0wLjMxNS0wLjIwMy0wLjcyLTAuMzA1LTEuMjE1LTAuMzA1Yy0wLjQ5LDAtMC44OTUsMC4xMDItMS4yMTUsMC4zMDUNCgkJCQlTOC4xMzcsOS43MTksNy45NSwxMC4xM2MtMC4xNzcsMC4zODYtMC4yOTgsMC44ODgtMC4zNjMsMS41MDhjLTAuMDY1LDAuNjItMC4wOTgsMS4zLTAuMDk4LDIuMDM5DQoJCQkJYzAsMC44MTMsMC4wMjgsMS40OTIsMC4wODYsMi4wMzljMC4wNTcsMC41NDcsMC4xOCwxLjAzNiwwLjM2NywxLjQ2OWMwLjE3MiwwLjQwNiwwLjQxNSwwLjcxNiwwLjczLDAuOTMNCgkJCQljMC4zMTUsMC4yMTQsMC43MzMsMC4zMiwxLjI1NCwwLjMyYzAuNDg5LDAsMC44OTYtMC4xMDIsMS4yMTktMC4zMDVDMTEuNDY4LDE3LjkyNywxMS43MTgsMTcuNjE5LDExLjg5NSwxNy4yMDh6Ii8+DQoJCQk8cGF0aCBkPSJNMTguODQ4LDE5LjQ4MmgtMS44Njd2LTIuMjI3aDEuODY3VjE5LjQ4MnoiLz4NCgkJCTxwYXRoIGQ9Ik0yOS45ODksOS41OTFsLTUuMjY2LDkuODkxaC0xLjY3Mmw1LjYwMi0xMC4yNjZoLTYuNjI1VjcuODQ5aDcuOTYxVjkuNTkxeiIvPg0KCQkJPHBhdGggZD0iTTQwLjIxNiwxNi4yMzljMCwxLjAwNS0wLjM5MiwxLjg0MS0xLjE3NiwyLjUwOGMtMC43ODQsMC42NjctMS43NywxLTIuOTU3LDFjLTEuMjYxLDAtMi4yNjUtMC4zMjUtMy4wMTItMC45NzcNCgkJCQljLTAuNzQ4LTAuNjUxLTEuMTIxLTEuNDg0LTEuMTIxLTIuNWMwLTAuNjQ2LDAuMTg4LTEuMjMsMC41NjMtMS43NTRzMC45MDMtMC45MzgsMS41ODYtMS4yNDZ2LTAuMDQ3DQoJCQkJYy0wLjYyNS0wLjMzMy0xLjA4Ny0wLjY5OC0xLjM4Ny0xLjA5NGMtMC4zLTAuMzk2LTAuNDQ5LTAuODkxLTAuNDQ5LTEuNDg0YzAtMC44NzUsMC4zNTktMS42MDQsMS4wNzgtMi4xODgNCgkJCQlzMS42MzMtMC44NzUsMi43NDItMC44NzVjMS4xNjEsMCwyLjA4OCwwLjI3OCwyLjc4MSwwLjgzNmMwLjY5MiwwLjU1OCwxLjAzOSwxLjI2NiwxLjAzOSwyLjEyNWMwLDAuNTI2LTAuMTY0LDEuMDQzLTAuNDkyLDEuNTUxDQoJCQkJcy0wLjgxLDAuOTA1LTEuNDQ1LDEuMTkxdjAuMDQ3YzAuNzI5LDAuMzEzLDEuMjg2LDAuNjk4LDEuNjcyLDEuMTU2QzQwLjAyMywxNC45NDcsNDAuMjE2LDE1LjUzMSw0MC4yMTYsMTYuMjM5eiBNMzguNjA2LDE2LjM4OA0KCQkJCWMwLTAuNDc5LTAuMTA1LTAuODYzLTAuMzE2LTEuMTUycy0wLjYyNC0wLjU3OS0xLjIzOC0wLjg3MWMtMC4yNDUtMC4xMTQtMC41MTMtMC4yMjItMC44MDUtMC4zMg0KCQkJCWMtMC4yOTItMC4wOTktMC42OC0wLjIzNy0xLjE2NC0wLjQxNGMtMC40NjksMC4yNTUtMC44NDUsMC42MDItMS4xMjksMS4wMzljLTAuMjg0LDAuNDM4LTAuNDI2LDAuOTMzLTAuNDI2LDEuNDg0DQoJCQkJYzAsMC43MDMsMC4yNDIsMS4yODQsMC43MjcsMS43NDJzMS4wOTksMC42ODgsMS44NDQsMC42ODhjMC43NiwwLDEuMzY4LTAuMTk1LDEuODI0LTAuNTg2DQoJCQkJQzM4LjM3OCwxNy42MDcsMzguNjA2LDE3LjA3LDM4LjYwNiwxNi4zODh6IE0zOC4zNjQsMTAuNTZjMC0wLjU1OC0wLjIxNS0xLjAwMS0wLjY0NS0xLjMzMnMtMC45NzgtMC40OTYtMS42NDUtMC40OTYNCgkJCQljLTAuNjU2LDAtMS4xOTQsMC4xNTYtMS42MTMsMC40NjljLTAuNDE5LDAuMzEzLTAuNjI5LDAuNzM0LTAuNjI5LDEuMjY2YzAsMC4zNzUsMC4xMDUsMC42OTksMC4zMTYsMC45NzNzMC41MywwLjUxNywwLjk1NywwLjczDQoJCQkJYzAuMTkyLDAuMDk0LDAuNDcsMC4yMTYsMC44MzIsMC4zNjdjMC4zNjIsMC4xNTEsMC43MTUsMC4yNzYsMS4wNTksMC4zNzVjMC41MTYtMC4zNDQsMC44NzItMC43LDEuMDctMS4wNw0KCQkJCUMzOC4yNjUsMTEuNDcxLDM4LjM2NCwxMS4wNDQsMzguMzY0LDEwLjU2eiIvPg0KCQk8L2c+DQoJPC9nPg0KPC9nPg0KPC9zdmc+DQo=" width="46" height="30" id="GraphicGapMatch_sp_1_7"></div></div><div class="GraphicGaps" style="justify-self: center;"><div class="GraphicGap" id="GraphicGap_0" style="width: 46px; height: 30px; top: 9px; left: 75px; border-width: 1.77778px; border-style: solid; border-color: rgb(85, 85, 85); background-color: rgb(247, 247, 247);"></div><div class="GraphicGap" id="GraphicGap_1" style="width: 46px; height: 30px; top: 55px; left: 75px; border-width: 1.77778px; border-style: solid; border-color: rgb(85, 85, 85); background-color: rgb(247, 247, 247);"></div><div class="GraphicGap" id="GraphicGap_2" style="width: 46px; height: 30px; top: 101px; left: 75px; border-width: 1.77778px; border-style: solid; border-color: rgb(85, 85, 85); background-color: rgb(247, 247, 247);"></div><div class="GraphicBackground"><img data-media-guid="25a386f4-264c-4a27-b717-0d067aa359ef" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjQuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCINCgkgd2lkdGg9IjEzMHB4IiBoZWlnaHQ9IjE0MHB4IiB2aWV3Qm94PSIwIDAgMTMwIDE0MCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTMwIDE0MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGcgaWQ9ImJhY2tncm91bmQiPg0KCTxyZWN0IHN0eWxlPSJmaWxsOiNGRkZGRkY7IiB3aWR0aD0iMTMwIiBoZWlnaHQ9IjE0MCIvPg0KCTxnIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgICAgOyI+DQoJCTxwYXRoIGQ9Ik0xOC41OSwyMi42NjJjMCwyLjA4OS0wLjMyOCwzLjYyMS0wLjk4LDQuNTk4Yy0wLjY1NCwwLjk3Ny0xLjY2OCwxLjQ2NS0zLjA0MywxLjQ2NWMtMS4zOTYsMC0yLjQxNi0wLjQ5NS0zLjA1OS0xLjQ4NA0KCQkJYy0wLjY0NS0wLjk4OS0wLjk2NS0yLjUxMS0wLjk2NS00LjU2M2MwLTIuMDY3LDAuMzI0LTMuNTk1LDAuOTc3LTQuNTgyYzAuNjUtMC45ODcsMS42NjYtMS40OCwzLjA0Ny0xLjQ4DQoJCQljMS4zOTUsMCwyLjQxNCwwLjUwMSwzLjA1OSwxLjUwNEMxOC4yNjgsMTkuMTIyLDE4LjU5LDIwLjYzNiwxOC41OSwyMi42NjJ6IE0xNi41MzUsMjYuMjA5YzAuMTgyLTAuNDIyLDAuMzA1LTAuOTE4LDAuMzcxLTEuNDg4DQoJCQljMC4wNjQtMC41NywwLjA5OC0xLjI1NywwLjA5OC0yLjA1OWMwLTAuNzkyLTAuMDMzLTEuNDc5LTAuMDk4LTIuMDYzYy0wLjA2Ni0wLjU4My0wLjE5MS0xLjA3OC0wLjM3OS0xLjQ4NA0KCQkJYy0wLjE4NC0wLjQwMS0wLjQzMi0wLjcwMy0wLjc0Ni0wLjkwNmMtMC4zMTYtMC4yMDMtMC43MjEtMC4zMDUtMS4yMTUtMC4zMDVjLTAuNDksMC0wLjg5NSwwLjEwMi0xLjIxNSwwLjMwNQ0KCQkJcy0wLjU3NCwwLjUxMS0wLjc2MiwwLjkyMmMtMC4xNzgsMC4zODYtMC4yOTksMC44ODgtMC4zNjMsMS41MDhjLTAuMDY2LDAuNjItMC4wOTgsMS4zLTAuMDk4LDIuMDM5DQoJCQljMCwwLjgxMywwLjAyNywxLjQ5MiwwLjA4NiwyLjAzOWMwLjA1NywwLjU0NywwLjE4LDEuMDM2LDAuMzY3LDEuNDY5YzAuMTcyLDAuNDA2LDAuNDE0LDAuNzE2LDAuNzMsMC45Mw0KCQkJYzAuMzE0LDAuMjE0LDAuNzMyLDAuMzIsMS4yNTQsMC4zMmMwLjQ4OCwwLDAuODk1LTAuMTAyLDEuMjE5LTAuMzA1QzE2LjEwOCwyNi45MjgsMTYuMzU4LDI2LjYyLDE2LjUzNSwyNi4yMDl6Ii8+DQoJCTxwYXRoIGQ9Ik0yMy40ODgsMjguNDgyaC0xLjg2N3YtMi4yMjdoMS44NjdWMjguNDgyeiIvPg0KCQk8cGF0aCBkPSJNMzQuNTA0LDI0Ljc4N2MwLDAuNTQyLTAuMSwxLjA2LTAuMjk3LDEuNTU1Yy0wLjE5OSwwLjQ5NS0wLjQ2OSwwLjkxMS0wLjgxMywxLjI1Yy0wLjM3NSwwLjM2NC0wLjgyMiwwLjY0NS0xLjM0LDAuODQNCgkJCWMtMC41MiwwLjE5NS0xLjExOSwwLjI5My0xLjgwMSwwLjI5M2MtMC42MzcsMC0xLjI0OC0wLjA2Ni0xLjgzNi0wLjE5OWMtMC41OS0wLjEzMy0xLjA4Ni0wLjI5My0xLjQ5Mi0wLjQ4di0xLjY0OGgwLjEwOQ0KCQkJYzAuNDI2LDAuMjcxLDAuOTI2LDAuNTAxLDEuNSwwLjY5MWMwLjU3MiwwLjE5LDEuMTM1LDAuMjg1LDEuNjg4LDAuMjg1YzAuMzY5LDAsMC43MjctMC4wNTIsMS4wNzQtMC4xNTYNCgkJCWMwLjM0Ni0wLjEwNCwwLjY1NC0wLjI4NiwwLjkyNi0wLjU0N2MwLjIyOS0wLjIyNCwwLjQwMi0wLjQ5MiwwLjUyLTAuODA1czAuMTc2LTAuNjc1LDAuMTc2LTEuMDg2DQoJCQljMC0wLjQwMS0wLjA3LTAuNzM5LTAuMjA3LTEuMDE2Yy0wLjEzOS0wLjI3Ni0wLjMzLTAuNDk3LTAuNTc0LTAuNjY0Yy0wLjI3MS0wLjE5OC0wLjYwMi0wLjMzNy0wLjk4OC0wLjQxOA0KCQkJYy0wLjM4OS0wLjA4MS0wLjgyMi0wLjEyMS0xLjMwMS0wLjEyMWMtMC40NTksMC0wLjksMC4wMzEtMS4zMjQsMC4wOTRjLTAuNDI2LDAuMDYzLTAuNzkxLDAuMTI1LTEuMDk4LDAuMTg4VjE2Ljg1aDd2MS4zNjcNCgkJCWgtNS40OTJ2My4wOTRjMC4yMjMtMC4wMjEsMC40NTMtMC4wMzYsMC42ODgtMC4wNDdzMC40MzgtMC4wMTYsMC42MDktMC4wMTZjMC42MjksMCwxLjE4MiwwLjA1NCwxLjY1NiwwLjE2DQoJCQljMC40NzMsMC4xMDYsMC45MDgsMC4yOTYsMS4zMDUsMC41NjZjMC40MTYsMC4yODYsMC43MzgsMC42NTYsMC45NjksMS4xMDlDMzQuMzg5LDIzLjUzNywzNC41MDQsMjQuMTA1LDM0LjUwNCwyNC43ODd6Ii8+DQoJCTxwYXRoIGQ9Ik00NS4wMzUsMjUuMjA5aC0xLjcyN3YzLjI3M2gtMS41di0zLjI3M2gtNS41N3YtMS43OTdsNS42MzMtNi41NjNoMS40Mzh2Ny4xMDloMS43MjdWMjUuMjA5eiBNNDEuODA5LDIzLjk1OXYtNS4yNQ0KCQkJbC00LjUwOCw1LjI1SDQxLjgwOXoiLz4NCgk8L2c+DQoJPGcgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAgICA7Ij4NCgkJPHBhdGggZD0iTTY0LjczLDIzLjg3M2wtOS4wMTYsNC4wMDh2LTEuNDA2bDcuMTA5LTMuMDg2bC03LjEwOS0zLjA4NnYtMS40MDZsOS4wMTYsNC4wMDhWMjMuODczeiIvPg0KCTwvZz4NCgk8ZyBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3ICAgIDsiPg0KCQk8cGF0aCBkPSJNMTguNTksNjguNjYyYzAsMi4wODktMC4zMjgsMy42MjEtMC45OCw0LjU5OGMtMC42NTQsMC45NzctMS42NjgsMS40NjQtMy4wNDMsMS40NjRjLTEuMzk2LDAtMi40MTYtMC40OTUtMy4wNTktMS40ODQNCgkJCWMtMC42NDUtMC45ODktMC45NjUtMi41MTEtMC45NjUtNC41NjNjMC0yLjA2NywwLjMyNC0zLjU5NSwwLjk3Ny00LjU4MmMwLjY1LTAuOTg3LDEuNjY2LTEuNDgsMy4wNDctMS40OA0KCQkJYzEuMzk1LDAsMi40MTQsMC41MDEsMy4wNTksMS41MDRDMTguMjY4LDY1LjEyMiwxOC41OSw2Ni42MzYsMTguNTksNjguNjYyeiBNMTYuNTM1LDcyLjIwOWMwLjE4Mi0wLjQyMiwwLjMwNS0wLjkxOCwwLjM3MS0xLjQ4OA0KCQkJYzAuMDY0LTAuNTcsMC4wOTgtMS4yNTcsMC4wOTgtMi4wNTljMC0wLjc5Mi0wLjAzMy0xLjQ3OS0wLjA5OC0yLjA2M2MtMC4wNjYtMC41ODMtMC4xOTEtMS4wNzgtMC4zNzktMS40ODQNCgkJCWMtMC4xODQtMC40MDEtMC40MzItMC43MDMtMC43NDYtMC45MDZjLTAuMzE2LTAuMjAzLTAuNzIxLTAuMzA1LTEuMjE1LTAuMzA1Yy0wLjQ5LDAtMC44OTUsMC4xMDItMS4yMTUsMC4zMDUNCgkJCXMtMC41NzQsMC41MTEtMC43NjIsMC45MjJjLTAuMTc4LDAuMzg2LTAuMjk5LDAuODg4LTAuMzYzLDEuNTA4Yy0wLjA2NiwwLjYyLTAuMDk4LDEuMy0wLjA5OCwyLjAzOQ0KCQkJYzAsMC44MTMsMC4wMjcsMS40OTIsMC4wODYsMi4wMzljMC4wNTcsMC41NDcsMC4xOCwxLjAzNiwwLjM2NywxLjQ2OWMwLjE3MiwwLjQwNiwwLjQxNCwwLjcxNiwwLjczLDAuOTMNCgkJCWMwLjMxNCwwLjIxNCwwLjczMiwwLjMyLDEuMjU0LDAuMzJjMC40ODgsMCwwLjg5NS0wLjEwMiwxLjIxOS0wLjMwNUMxNi4xMDgsNzIuOTI4LDE2LjM1OCw3Mi42MiwxNi41MzUsNzIuMjA5eiIvPg0KCQk8cGF0aCBkPSJNMjMuNDg4LDc0LjQ4MmgtMS44Njd2LTIuMjI3aDEuODY3Vjc0LjQ4MnoiLz4NCgkJPHBhdGggZD0iTTM0Ljc3LDcwLjcwOWMwLDEuMTgzLTAuMzkxLDIuMTQ3LTEuMTY4LDIuODk1Yy0wLjc3OSwwLjc0Ny0xLjczNCwxLjEyMS0yLjg2MywxLjEyMWMtMC41NzQsMC0xLjA5NC0wLjA4OS0xLjU2My0wLjI2NQ0KCQkJYy0wLjQ2OS0wLjE3Ny0wLjg4My0wLjQ0LTEuMjQyLTAuNzg5Yy0wLjQ0OS0wLjQzMy0wLjc5My0xLjAwNS0xLjAzNS0xLjcxOXMtMC4zNjMtMS41NzMtMC4zNjMtMi41NzgNCgkJCWMwLTEuMDMxLDAuMTA5LTEuOTQ1LDAuMzMyLTIuNzQyYzAuMjIxLTAuNzk3LDAuNTc0LTEuNTA1LDEuMDU5LTIuMTI1YzAuNDU3LTAuNTg5LDEuMDQ5LTEuMDQ4LDEuNzczLTEuMzc5DQoJCQljMC43MjMtMC4zMzEsMS41NjYtMC40OTYsMi41MzEtMC40OTZjMC4zMDcsMCwwLjU2NCwwLjAxMywwLjc3MywwLjAzOWMwLjIwNywwLjAyNiwwLjQxOCwwLjA3MywwLjYzMywwLjE0MXYxLjQ5MmgtMC4wNzgNCgkJCWMtMC4xNDYtMC4wNzgtMC4zNjctMC4xNTItMC42Ni0wLjIyM2MtMC4yOTUtMC4wNy0wLjU5Ni0wLjEwNS0wLjkwMi0wLjEwNWMtMS4xMjEsMC0yLjAxNCwwLjM1MS0yLjY4LDEuMDUxDQoJCQljLTAuNjY4LDAuNy0xLjA1NSwxLjY0Ny0xLjE2NCwyLjg0YzAuNDM4LTAuMjY2LDAuODY3LTAuNDY4LDEuMjkzLTAuNjA1YzAuNDI0LTAuMTM4LDAuOTE0LTAuMjA3LDEuNDczLTAuMjA3DQoJCQljMC40OTQsMCwwLjkzLDAuMDQ2LDEuMzA5LDAuMTM3YzAuMzc3LDAuMDkxLDAuNzY0LDAuMjc0LDEuMTYsMC41NTFjMC40NTcsMC4zMTcsMC44MDMsMC43MTksMS4wMzUsMS4yMDMNCgkJCUMzNC42NTIsNjkuNDI4LDM0Ljc3LDcwLjAxNywzNC43Nyw3MC43MDl6IE0zMy4xODQsNzAuNzcyYzAtMC40ODQtMC4wNzItMC44ODYtMC4yMTUtMS4yMDNjLTAuMTQ1LTAuMzE3LTAuMzc5LTAuNTk0LTAuNzA3LTAuODI4DQoJCQljLTAuMjQtMC4xNjctMC41MDYtMC4yNzYtMC43OTctMC4zMjhjLTAuMjkzLTAuMDUyLTAuNTk4LTAuMDc4LTAuOTE0LTAuMDc4Yy0wLjQ0MywwLTAuODU1LDAuMDUyLTEuMjM0LDAuMTU2DQoJCQljLTAuMzgxLDAuMTA0LTAuNzcxLDAuMjY2LTEuMTcyLDAuNDg0Yy0wLjAxMiwwLjExNC0wLjAyLDAuMjI2LTAuMDIzLDAuMzMyYy0wLjAwNiwwLjEwNi0wLjAwOCwwLjI0MS0wLjAwOCwwLjQwMg0KCQkJYzAsMC44MjMsMC4wODQsMS40NzMsMC4yNTQsMS45NDljMC4xNjgsMC40NzcsMC40MDIsMC44NTMsMC42OTksMS4xMjljMC4yMzgsMC4yMjksMC40OTgsMC4zOTcsMC43NzcsMC41MDQNCgkJCWMwLjI3NywwLjEwNiwwLjU4MiwwLjE2LDAuOTEsMC4xNmMwLjc1NCwwLDEuMzQ4LTAuMjMsMS43ODEtMC42OTFDMzIuOTY3LDcyLjI5OSwzMy4xODQsNzEuNjM2LDMzLjE4NCw3MC43NzJ6Ii8+DQoJPC9nPg0KCTxnIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgICAgOyI+DQoJCTxwYXRoIGQ9Ik02NC42Miw3My44ODFsLTkuMDE2LTQuMDA4di0wLjk2OWw5LjAxNi00LjAwOHYxLjQwNmwtNy4xMDksMy4wODZsNy4xMDksMy4wODZWNzMuODgxeiIvPg0KCTwvZz4NCgk8ZyBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3ICAgIDsiPg0KCQk8cGF0aCBkPSJNMTguNTksMTE1LjY5NmMwLDIuMDg5LTAuMzI4LDMuNjIxLTAuOTgsNC41OThjLTAuNjU0LDAuOTc3LTEuNjY4LDEuNDY1LTMuMDQzLDEuNDY1Yy0xLjM5NiwwLTIuNDE2LTAuNDk1LTMuMDU5LTEuNDg0DQoJCQljLTAuNjQ1LTAuOTg5LTAuOTY1LTIuNTExLTAuOTY1LTQuNTYzYzAtMi4wNjcsMC4zMjQtMy41OTUsMC45NzctNC41ODJjMC42NS0wLjk4NywxLjY2Ni0xLjQ4LDMuMDQ3LTEuNDgNCgkJCWMxLjM5NSwwLDIuNDE0LDAuNTAxLDMuMDU5LDEuNTA0QzE4LjI2OCwxMTIuMTU2LDE4LjU5LDExMy42NjksMTguNTksMTE1LjY5NnogTTE2LjUzNSwxMTkuMjQzDQoJCQljMC4xODItMC40MjIsMC4zMDUtMC45MTgsMC4zNzEtMS40ODhjMC4wNjQtMC41NywwLjA5OC0xLjI1NywwLjA5OC0yLjA1OWMwLTAuNzkyLTAuMDMzLTEuNDc5LTAuMDk4LTIuMDYzDQoJCQljLTAuMDY2LTAuNTgzLTAuMTkxLTEuMDc4LTAuMzc5LTEuNDg0Yy0wLjE4NC0wLjQwMS0wLjQzMi0wLjcwMy0wLjc0Ni0wLjkwNmMtMC4zMTYtMC4yMDMtMC43MjEtMC4zMDUtMS4yMTUtMC4zMDUNCgkJCWMtMC40OSwwLTAuODk1LDAuMTAyLTEuMjE1LDAuMzA1cy0wLjU3NCwwLjUxMS0wLjc2MiwwLjkyMmMtMC4xNzgsMC4zODYtMC4yOTksMC44ODgtMC4zNjMsMS41MDgNCgkJCWMtMC4wNjYsMC42Mi0wLjA5OCwxLjMtMC4wOTgsMi4wMzljMCwwLjgxMywwLjAyNywxLjQ5MiwwLjA4NiwyLjAzOWMwLjA1NywwLjU0NywwLjE4LDEuMDM2LDAuMzY3LDEuNDY5DQoJCQljMC4xNzIsMC40MDYsMC40MTQsMC43MTYsMC43MywwLjkzYzAuMzE0LDAuMjE0LDAuNzMyLDAuMzIsMS4yNTQsMC4zMmMwLjQ4OCwwLDAuODk1LTAuMTAyLDEuMjE5LTAuMzA1DQoJCQlDMTYuMTA4LDExOS45NjEsMTYuMzU4LDExOS42NTQsMTYuNTM1LDExOS4yNDN6Ii8+DQoJCTxwYXRoIGQ9Ik0yMy40ODgsMTIxLjUxNmgtMS44Njd2LTIuMjI3aDEuODY3VjEyMS41MTZ6Ii8+DQoJCTxwYXRoIGQ9Ik0zNC42MjksMTExLjYyNmwtNS4yNjYsOS44OTFoLTEuNjcybDUuNjAyLTEwLjI2NmgtNi42MjV2LTEuMzY3aDcuOTYxVjExMS42MjZ6Ii8+DQoJCTxwYXRoIGQ9Ik00NC45NDIsMTE3Ljc0M2MwLDEuMTgzLTAuMzkxLDIuMTQ3LTEuMTY4LDIuODk1Yy0wLjc3OSwwLjc0Ny0xLjczNCwxLjEyMS0yLjg2MywxLjEyMWMtMC41NzQsMC0xLjA5NC0wLjA4OS0xLjU2My0wLjI2Ng0KCQkJcy0wLjg4My0wLjQ0LTEuMjQyLTAuNzg5Yy0wLjQ0OS0wLjQzMy0wLjc5My0xLjAwNS0xLjAzNS0xLjcxOXMtMC4zNjMtMS41NzMtMC4zNjMtMi41NzhjMC0xLjAzMSwwLjEwOS0xLjk0NSwwLjMzMi0yLjc0Mg0KCQkJYzAuMjIxLTAuNzk3LDAuNTc0LTEuNTA1LDEuMDU5LTIuMTI1YzAuNDU3LTAuNTg5LDEuMDQ5LTEuMDQ4LDEuNzczLTEuMzc5YzAuNzIzLTAuMzMxLDEuNTY2LTAuNDk2LDIuNTMxLTAuNDk2DQoJCQljMC4zMDcsMCwwLjU2NCwwLjAxMywwLjc3MywwLjAzOWMwLjIwNywwLjAyNiwwLjQxOCwwLjA3MywwLjYzMywwLjE0MXYxLjQ5MmgtMC4wNzhjLTAuMTQ2LTAuMDc4LTAuMzY3LTAuMTUyLTAuNjYtMC4yMjMNCgkJCWMtMC4yOTUtMC4wNy0wLjU5Ni0wLjEwNS0wLjkwMi0wLjEwNWMtMS4xMjEsMC0yLjAxNCwwLjM1MS0yLjY4LDEuMDUxYy0wLjY2OCwwLjctMS4wNTUsMS42NDctMS4xNjQsMi44NA0KCQkJYzAuNDM4LTAuMjY2LDAuODY3LTAuNDY4LDEuMjkzLTAuNjA1YzAuNDI0LTAuMTM4LDAuOTE0LTAuMjA3LDEuNDczLTAuMjA3YzAuNDk0LDAsMC45MywwLjA0NiwxLjMwOSwwLjEzNw0KCQkJYzAuMzc3LDAuMDkxLDAuNzY0LDAuMjc0LDEuMTYsMC41NTFjMC40NTcsMC4zMTcsMC44MDMsMC43MTksMS4wMzUsMS4yMDNDNDQuODI0LDExNi40NjEsNDQuOTQyLDExNy4wNSw0NC45NDIsMTE3Ljc0M3oNCgkJCSBNNDMuMzU2LDExNy44MDVjMC0wLjQ4NC0wLjA3Mi0wLjg4Ni0wLjIxNS0xLjIwM2MtMC4xNDUtMC4zMTctMC4zNzktMC41OTQtMC43MDctMC44MjhjLTAuMjQtMC4xNjctMC41MDYtMC4yNzYtMC43OTctMC4zMjgNCgkJCWMtMC4yOTMtMC4wNTItMC41OTgtMC4wNzgtMC45MTQtMC4wNzhjLTAuNDQzLDAtMC44NTUsMC4wNTItMS4yMzQsMC4xNTZjLTAuMzgxLDAuMTA0LTAuNzcxLDAuMjY2LTEuMTcyLDAuNDg0DQoJCQljLTAuMDEyLDAuMTE0LTAuMDIsMC4yMjYtMC4wMjMsMC4zMzJjLTAuMDA2LDAuMTA2LTAuMDA4LDAuMjQxLTAuMDA4LDAuNDAyYzAsMC44MjMsMC4wODQsMS40NzMsMC4yNTQsMS45NDkNCgkJCWMwLjE2OCwwLjQ3NywwLjQwMiwwLjg1MywwLjY5OSwxLjEyOWMwLjIzOCwwLjIyOSwwLjQ5OCwwLjM5NywwLjc3NywwLjUwNGMwLjI3NywwLjEwNiwwLjU4MiwwLjE2LDAuOTEsMC4xNg0KCQkJYzAuNzU0LDAsMS4zNDgtMC4yMywxLjc4MS0wLjY5MUM0My4xMzksMTE5LjMzMyw0My4zNTYsMTE4LjY2OSw0My4zNTYsMTE3LjgwNXoiLz4NCgk8L2c+DQoJPGcgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAgICA7Ij4NCgkJPHBhdGggZD0iTTY0LjczLDExNC44MzlsLTkuMDE2LDQuMDA4di0xLjQwNmw3LjEwOS0zLjA4NmwtNy4xMDktMy4wODZ2LTEuNDA2bDkuMDE2LDQuMDA4VjExNC44Mzl6Ii8+DQoJPC9nPg0KPC9nPg0KPGcgaWQ9ImJfeDVGXzAzIj4NCgk8cmVjdCB4PSI3NC41MjciIHk9IjEwMSIgc3R5bGU9ImZpbGw6bm9uZTsiIHdpZHRoPSI0NiIgaGVpZ2h0PSIzMCIvPg0KPC9nPg0KPGcgaWQ9ImJfeDVGXzAyIj4NCgk8cmVjdCB4PSI3NC41MjciIHk9IjU1IiBzdHlsZT0iZmlsbDpub25lOyIgd2lkdGg9IjQ2IiBoZWlnaHQ9IjMwIi8+DQo8L2c+DQo8ZyBpZD0iYl94NUZfMDEiPg0KCTxyZWN0IHg9Ijc0LjUyNyIgeT0iOSIgc3R5bGU9ImZpbGw6bm9uZTsiIHdpZHRoPSI0NiIgaGVpZ2h0PSIzMCIvPg0KPC9nPg0KPC9zdmc+DQo=" width="130" height="140" id="GraphicGapMatch_sp_1_8"></div></div></div></div></div>
+                    </div>
+
+                    <!-- References Modal -->
+                    <div id="referencesModal" class="references-modal" style="display: none;">
+                        <div class="references-modal-header">
+                            <h3>References</h3>
+                            <button id="referencesModalClose" class="dil-modal-close" aria-label="Close References">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="references-modal-tabs" id="referencesModalTabs" style="overflow: visible; max-height: none; height: auto;">
+                            <!-- Tabs will be dynamically generated -->
+                        </div>
+                        <div class="references-modal-content" id="referencesModalContent" style="overflow: visible; max-height: none; height: auto;">
+                            <!-- Tab content will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons iframe-default-styles" style="display: flex;">
+                <div id="automaticScoringButtons" class="automatic-scoring-action-buttons" style="align-content: center; display: block;">
+                    <button class="action-button score-button" id="scoreButton" style="display: inline-block;">Score Answer</button>
+                    <button class="action-button answer-button" id="showAnswerButton" style="display: inline-block;">View Correct Answer</button>
+                    <button class="action-button references-button" id="referencesButton" style="display: none;" aria-label="Show References">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2v6h6"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 13H8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17H8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9H8"></path>
+                        </svg>
+                        <span>References</span>
+                    </button>
+                    <button class="action-button reset-button" id="resetButton" style="display: inline-flex;">Reset</button>
+                </div>
+                <div id="humanScoringMessageContainer" class="human-scoring-message-container" style="display: none;">
+                    <span class="human-scoring-message" id="humanScoringText">This question cannot be scored.</span>
+                </div>
+                <button class="action-button copy-button" id="copyUrlButton">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    </svg>
+                    <span>Copy URL</span>
+                </button>
+                
+                <!-- Answer key selector (populated by JS after "View Correct Answer") -->
+                <div class="answer-key-section" id="answerKeySection" style="display: none;">
+                    <div class="answer-key-content" id="answerKeyContent">
+                        <div class="answer-key-header">
+                            <button class="collapse-button" id="collapseButton" aria-label="Collapse answer key section" aria-expanded="true" aria-controls="segmentedControl">
+                                <span id="collapseIcon">▼</span>
+                            </button>
+                            <span class="answer-key-label">Score Point:</span>
+                            <div class="segmented-control" id="segmentedControl" role="radiogroup" aria-label="Answer key options"></div>
+                        </div>
+                    </div>
+                <div id="answerKeySrAnnouncement" class="sr-only" aria-live="polite" aria-atomic="true"></div></div>                
+            </div>            
+            <div class="item-metadata iframe-default-styles" id="itemMetadata" style="display: block;">
+                <strong>Subject:</strong> Math |
+                <strong>Grade:</strong> 4 |
+                <strong>Type:</strong> SR |
+                <strong>Reporting Category:</strong> Number and Operations-Fractions |
+                <strong>Points:</strong> 1
+            </div>
+        </div>
+    </div>
+    
+    <!-- Screen reader feedback for copyUrlButton, resetButton, correctAnswerButton -->
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="copyUrlFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="resetFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="correctAnswerFeedback"></div>
+    <div aria-live="assertive" aria-atomic="true" class="sr-only" id="scoreAnswerFeedback"></div>
+
+
+<link type="text/css" rel="stylesheet" href="/authoring/css/lighthouse-editor.css"><link type="text/css" rel="stylesheet" href="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/css/mathquill.css"><link type="text/css" rel="stylesheet" href="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/css/mathkeyboard.css"><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-3.5.0.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-migrate-3.4.1.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery-bbq.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.freetile.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.maskedinput.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.autoGrowInput.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/jquery.sortable.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/zebra_datepicker.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/shaka-player/dist/shaka-player.compiled.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/hls.js/hls.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/media/output/media.combined.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/dexie.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/MediaStreamRecorder.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/underscore-min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/tinymce/js/tinymce/plugins/mathquill/js/mathquill.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/raphael-min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/raphael.sketchpad.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/lighthouse/editor/jpicker/jpicker-1.1.6.js"></script><script type="text/javascript" src="/authoring/js/lighthouse-en.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/lighthouse/editor/tips.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/mathinput.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/chart.min.js"></script><script type="text/javascript" src="/authoring/Assets/default/Js/fraction.min.js"></script></body></html>

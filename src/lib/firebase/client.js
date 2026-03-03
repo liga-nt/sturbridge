@@ -1,8 +1,11 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getFunctions } from 'firebase/functions';
 import { browser } from '$app/environment';
 
+let app;
 let auth;
+let functions;
 
 const getConfig = () => ({
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -15,13 +18,17 @@ const getConfig = () => ({
 });
 
 export const initializeFirebase = () => {
-    if (!browser) {
-        return null;
+    if (!browser) return null;
+
+    if (!getApps().length) {
+        app = initializeApp(getConfig());
+    } else {
+        app = getApps()[0];
     }
 
-    const app = initializeApp(getConfig());
     auth = getAuth(app);
+    functions = getFunctions(app);
     return app;
 };
 
-export { auth };
+export { auth, functions };

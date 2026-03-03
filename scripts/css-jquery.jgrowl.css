@@ -1,0 +1,130 @@
+/** jGrowl Styling **/
+.jGrowl {
+  z-index:      9999;
+  color:        #fff;
+  font-size:      12px;
+  position:     fixed;
+}
+
+.jGrowl.top-left {
+  left:         0;
+  top:        0;
+}
+
+.jGrowl.top-right {
+  right:        0;
+  top:        0;
+}
+
+.jGrowl.bottom-left {
+  left:         0;
+  bottom:       0;
+}
+
+.jGrowl.bottom-right {
+  right:        0;
+  bottom:       0;
+}
+
+.jGrowl.center {
+  top:        0;
+  width:        50%;
+  left:         25%;
+}
+
+/** Cross Browser Styling **/
+.center .jGrowl-notification, .center .jGrowl-closer {
+  margin-left:    auto;
+  margin-right:     auto;
+}
+
+.jGrowl .jGrowl-notification, .jGrowl .jGrowl-closer {
+  background-color:     #000;
+  opacity:        .85;
+  -ms-filter:       "progid:DXImageTransform.Microsoft.Alpha(Opacity=85)"; 
+  filter:         progid:DXImageTransform.Microsoft.Alpha(Opacity=85); 
+  zoom:           1;
+  width:          235px;
+  padding:        10px;
+  margin-top:       5px;
+  margin-bottom:      5px;
+  font-family:      Tahoma, Arial, Helvetica, sans-serif;
+  font-size:        1em;
+  text-align:       left;
+  display:        none;
+  border-radius:      5px;
+}
+
+.jGrowl .jGrowl-notification {
+  min-height:       40px;
+}
+
+.jGrowl .jGrowl-notification,
+.jGrowl .jGrowl-closer {
+  margin:         5px;
+  text-shadow: none !important;
+}
+
+.jGrowl .jGrowl-notification .jGrowl-header {
+  font-weight:      bold;
+  font-size:        .85em;
+}
+
+.jGrowl .jGrowl-notification .jGrowl-close {
+  font-family:      Tahoma, Arial, Helvetica, sans-serif;
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  z-index:        99;
+  float:          right;
+  font-weight:      bold;
+  font-size:        1em;
+  cursor:         pointer;
+  padding: 0px;
+}
+
+.jGrowl .jGrowl-closer {
+  padding-top:      4px;
+  padding-bottom:     4px;
+  cursor:         pointer;
+  font-size:        .9em;
+  font-weight:      bold;
+  text-align:       center;
+    border: 1px solid #fed22f;
+    background: #ffe45c url(images/ui-bg_highlight-soft_75_ffe45c_1x100.png) 50% top repeat-x;
+    color: #363636;
+}
+
+/** Hide jGrowl when printing **/
+@media print {
+  .jGrowl {
+    display:      none;
+  }
+}
+
+
+/* Warnings */
+.jGrowl .warning {
+    background: #fc9200 !important;
+    color: #000;
+    border: none !important;
+}
+
+.jGrowl .warning small { color: #d17200; }
+
+/* Errors */
+.jGrowl .error {
+    background: #B30600 !important;
+    color: #fff;
+    border: none !important;
+}
+
+/* Success */
+.jGrowl .success {
+    background: #a5c941 !important;
+    color: #fff;
+    border: none !important;
+}
+.jGrowl .success strong { color: #fff; }
+.jGrowl .success small { color: #360; }
+

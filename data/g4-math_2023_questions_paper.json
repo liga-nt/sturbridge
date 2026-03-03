@@ -1,0 +1,633 @@
+[
+  {
+    "item_id": "MA301798",
+    "question_number": "1",
+    "question_text": "Lily made some cookies, as shown. Lily made 2 times as many cookies as Tommy made. How many cookies did Tommy make?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "12"
+      },
+      {
+        "letter": "B",
+        "text": "24"
+      },
+      {
+        "letter": "C",
+        "text": "36"
+      },
+      {
+        "letter": "D",
+        "text": "48"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Picture showing 20 cookies arranged in 4 rows of 5 cookies each.",
+    "page": 1,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA301798",
+    "question_number": "2",
+    "question_text": "Diego solved math problems each day for one week. On the first day, he solved 10 math problems. On the second day, he solved 15 math problems. On the third day, he solved 20 math problems. Each day, Diego continued to solve 5 more math problems than the day before. On which day did he solve 35 math problems?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "the fourth day"
+      },
+      {
+        "letter": "B",
+        "text": "the fifth day"
+      },
+      {
+        "letter": "C",
+        "text": "the sixth day"
+      },
+      {
+        "letter": "D",
+        "text": "the seventh day"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 1,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA247705",
+    "question_number": "3",
+    "question_text": "Which of the following shapes has more than one line of symmetry?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "a scalene triangle"
+      },
+      {
+        "letter": "B",
+        "text": "a semicircle"
+      },
+      {
+        "letter": "C",
+        "text": "a parallelogram"
+      },
+      {
+        "letter": "D",
+        "text": "a circle"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Four unlabeled shapes shown as options: A is an irregular scalene triangle; B is a semicircle with a flat horizontal base; C is a slanted parallelogram; D is a circle.",
+    "page": 2,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA801035466",
+    "question_number": "4",
+    "question_text": "Four friends live in different towns. They each placed a bucket outside to collect rainwater on the same night. The four buckets were labeled A, B, C, and D.",
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "Bucket A and Bucket B are the same size. This diagram shows the fraction of each bucket that was filled with rainwater. Write a number sentence using >, <, or = to compare the fraction of Bucket A that was filled to the fraction of Bucket B that was filled. Show or explain how you got your answer."
+      },
+      {
+        "label": "B",
+        "text": "Bucket C and Bucket D are the same size. This diagram shows the fraction of each bucket that was filled with rainwater. Which bucket, Bucket C or Bucket D, was filled with more rainwater? Explain how you got your answer."
+      },
+      {
+        "label": "C",
+        "text": "One of the friends says that Bucket B and Bucket C were filled with the same amount of rainwater since 5/6 of each bucket was filled with rainwater. Is the friend correct? Explain your reasoning."
+      },
+      {
+        "label": "D",
+        "text": "A weatherman in another town says that his town received less than 1/2 inch of rainwater. Write a fraction that represents the amount of rainwater, in inches, this town could have received. Explain how you know your answer is correct."
+      }
+    ],
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Four buckets labeled A, B, C, and D. Bucket A is marked 7/8 full, Bucket B 5/6 full, Bucket C 5/6 full, and Bucket D 1/2 full.",
+    "page": 3,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA002128911",
+    "question_number": "5",
+    "question_text": "A triangle is shown. What is the total number of acute angles the triangle appears to have? Enter your answer in the box.",
+    "answer_type": "short_answer",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "An irregular triangle drawn with one vertex at the top left, one lower left, and one to the right, forming a scalene triangle.",
+    "page": 5,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA002334462_PA",
+    "question_number": "6",
+    "question_text": "Which of these number lines shows a point that represents the location of 91/100?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "Number line from 0.8 to 1 with evenly spaced tick marks; a point is directly above the tick mark labeled 0.8."
+      },
+      {
+        "letter": "B",
+        "text": "Number line from 0.8 to 1 with evenly spaced tick marks; a point is slightly to the right of the tick mark labeled 0.9."
+      },
+      {
+        "letter": "C",
+        "text": "Number line from 0.8 to 1 with evenly spaced tick marks; a point is slightly to the left of the tick mark labeled 0.9."
+      },
+      {
+        "letter": "D",
+        "text": "Number line from 0.8 to 1 with evenly spaced tick marks; a point is between 0.8 and 0.9, closer to 0.9."
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Four horizontal number lines each ranging from 0.8 to 1 with evenly spaced tick marks and an arrow on the right; each line has a single solid point at a different location relative to 0.8, 0.9, and 1, corresponding to options A\u2013D.",
+    "page": 6,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA307060",
+    "question_number": "7",
+    "question_text": "Which of these shapes appears to be a quadrilateral with perpendicular sides?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "A slanted quadrilateral (parallelogram-like shape) with no right angles"
+      },
+      {
+        "letter": "B",
+        "text": "A square"
+      },
+      {
+        "letter": "C",
+        "text": "A pentagon shaped like a house"
+      },
+      {
+        "letter": "D",
+        "text": "A kite-shaped pentagon"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Four outlined shapes labeled A, B, C, and D: A is a slanted four-sided figure; B is a square; C is a five-sided house-shaped polygon; D is a five-sided kite-shaped polygon.",
+    "page": 7,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA002139080",
+    "question_number": "8",
+    "question_text": "This dot plot shows the amounts of time, in hours, it took a student to complete ten different puzzles last week. The three puzzles that took the greatest amount of time were completed by the student on Saturday. What was the total amount of time, in hours, it took the student to complete the three puzzles on Saturday?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "2 1/2 hours"
+      },
+      {
+        "letter": "B",
+        "text": "2 hours"
+      },
+      {
+        "letter": "C",
+        "text": "3/4 hour"
+      },
+      {
+        "letter": "D",
+        "text": "1/4 hour"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Dot plot titled \"Completed Puzzles\" showing time in hours on a horizontal scale labeled 0, 1/4, 2/4, 3/4, 1 with stacks of dots above each tick representing ten puzzle completion times.",
+    "page": 8,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA002034926",
+    "question_number": "9",
+    "question_text": "An expression is shown.\n\n372,068 \u2212 8,329\n\nWhich of these numbers is the difference of the expression?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "363,739"
+      },
+      {
+        "letter": "B",
+        "text": "364,341"
+      },
+      {
+        "letter": "C",
+        "text": "364,749"
+      },
+      {
+        "letter": "D",
+        "text": "366,341"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 9,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA002034926",
+    "question_number": "10",
+    "question_text": "Which of these is the measure of an angle that turns through 1/3 of a circle?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "45\u00b0"
+      },
+      {
+        "letter": "B",
+        "text": "90\u00b0"
+      },
+      {
+        "letter": "C",
+        "text": "120\u00b0"
+      },
+      {
+        "letter": "D",
+        "text": "180\u00b0"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 9,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA002145158_PA",
+    "question_number": "11",
+    "question_text": "Which of these shows three comparison statements that are all true?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "0.54 > 0.65; 0.6 < 0.52; 0.76 > 0.78"
+      },
+      {
+        "letter": "B",
+        "text": "0.54 > 0.52; 0.6 < 0.78; 0.76 > 0.65"
+      },
+      {
+        "letter": "C",
+        "text": "0.54 > 0.52; 0.6 < 0.65; 0.76 > 0.78"
+      },
+      {
+        "letter": "D",
+        "text": "0.54 > 0.78; 0.6 < 0.52; 0.76 > 0.65"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Four boxed answer choices, each listing three decimal comparison statements using > or < symbols.",
+    "page": 10,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA002140372",
+    "question_number": "12",
+    "question_text": "Some angle measures are shown in this diagram.\n\nAngle QVR has a measure of 41\u00b0.\nAngle RVS has a measure of 54\u00b0.\nAngle SVT has a measure of 29\u00b0.\nWhich of the following is the measure, in degrees, of angle QVT?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "124\u00b0"
+      },
+      {
+        "letter": "B",
+        "text": "114\u00b0"
+      },
+      {
+        "letter": "C",
+        "text": "95\u00b0"
+      },
+      {
+        "letter": "D",
+        "text": "83\u00b0"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Diagram of rays from point V: ray VQ up-left, ray VR straight up, ray VS up-right, ray VT right. The angle between VQ and VR is labeled 41\u00b0, between VR and VS is labeled 54\u00b0, and between VS and VT is labeled 29\u00b0. Points on the rays are labeled Q, R, S, and T respectively.",
+    "page": 11,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA307317",
+    "question_number": "13",
+    "question_text": "A doctor works in her office 5 days each week. Each day she works, she drives a total of 19 miles to and from her office.",
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "What is the total distance, in miles, the doctor drives to and from her office each week? Show or explain how you got your answer."
+      },
+      {
+        "label": "B",
+        "text": "The doctor worked 48 weeks last year. What is the total distance, in miles, she drove to and from her office last year? Show or explain how you got your answer."
+      },
+      {
+        "label": "C",
+        "text": "The doctor worked the same number of weeks each year for the last 7 years. What is the total distance, in miles, the doctor drove to and from her office over the last 7 years? Show or explain how you got your answer."
+      }
+    ],
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "A boxed reminder that says, \"Write your answers on the next page.\"",
+    "page": 12,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA002135528",
+    "question_number": "14",
+    "question_text": "A metal bar has a mass of 5 kilograms. Which of these is the mass, in grams, of the bar?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "50 grams"
+      },
+      {
+        "letter": "B",
+        "text": "500 grams"
+      },
+      {
+        "letter": "C",
+        "text": "5,000 grams"
+      },
+      {
+        "letter": "D",
+        "text": "50,000 grams"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 13,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA002135528",
+    "question_number": "15",
+    "question_text": "A rectangle has a width of 5 inches and a length of 4 inches. Which of these equations shows the perimeter, in inches, of the rectangle?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "5 + 4 = 9"
+      },
+      {
+        "letter": "B",
+        "text": "5 \u00d7 4 = 20"
+      },
+      {
+        "letter": "C",
+        "text": "2 + 5 \u00d7 2 + 4 = 16"
+      },
+      {
+        "letter": "D",
+        "text": "2 \u00d7 5 + 2 \u00d7 4 = 18"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 13,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA002135528",
+    "question_number": "16",
+    "question_text": "Which of these statements about rounding the number 44,285 are true? Select the three correct answers.",
+    "answer_type": "multiple_select",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "44,285 rounded to the nearest hundred is 44,200."
+      },
+      {
+        "letter": "B",
+        "text": "44,285 rounded to the nearest hundred is 44,300."
+      },
+      {
+        "letter": "C",
+        "text": "44,285 rounded to the nearest thousand is 44,000."
+      },
+      {
+        "letter": "D",
+        "text": "44,285 rounded to the nearest thousand is 45,000."
+      },
+      {
+        "letter": "E",
+        "text": "44,285 rounded to the nearest ten thousand is 40,000."
+      },
+      {
+        "letter": "F",
+        "text": "44,285 rounded to the nearest ten thousand is 50,000."
+      }
+    ],
+    "parts": null,
+    "select_count": 3,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 13,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA001750121",
+    "question_number": "17",
+    "question_text": "A group of friends are going to eat lunch in the cafeteria. At the cafeteria, a boxed lunch costs $7. Each friend in the group will buy a boxed lunch. Which of these could be the total cost to buy boxed lunches for all the friends in the group?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "$62"
+      },
+      {
+        "letter": "B",
+        "text": "$84"
+      },
+      {
+        "letter": "C",
+        "text": "$93"
+      },
+      {
+        "letter": "D",
+        "text": "$97"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 14,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA704653374_PA",
+    "question_number": "18",
+    "question_text": "A teacher is using multiplication to compare numbers.",
+    "answer_type": "multi_part",
+    "answer_options": null,
+    "parts": [
+      {
+        "label": "A",
+        "text": "The teacher says that 14 is 7 times as many as 2. Which multiplication equation shows the teacher\u2019s comparison?"
+      },
+      {
+        "label": "B",
+        "text": "The teacher uses a comparison to describe this equation: 30 = 6 \u00d7 5. Which of these could be the comparison the teacher used?"
+      },
+      {
+        "label": "A",
+        "question_text": "The teacher says that 14 is 7 times as many as 2. Which multiplication equation shows the teacher\u2019s comparison?",
+        "answer_type": "multiple_choice",
+        "answer_options": [
+          {
+            "letter": "A",
+            "text": "14 = 7 \u00d7 2"
+          },
+          {
+            "letter": "B",
+            "text": "7 = 14 \u00d7 2"
+          },
+          {
+            "letter": "C",
+            "text": "2 = 7 \u00d7 14"
+          },
+          {
+            "letter": "D",
+            "text": "2 = 14 \u00d7 7"
+          }
+        ],
+        "select_count": null,
+        "has_visual": false,
+        "visual_description": null
+      },
+      {
+        "label": "B",
+        "question_text": "The teacher uses a comparison to describe this equation: 30 = 6 \u00d7 5. Which of these could be the comparison the teacher used?",
+        "answer_type": "multiple_choice",
+        "answer_options": [
+          {
+            "letter": "A",
+            "text": "The number 5 is 6 times as many as the number 30."
+          },
+          {
+            "letter": "B",
+            "text": "The number 6 is 6 times as many as the number 30."
+          },
+          {
+            "letter": "C",
+            "text": "The number 30 is 6 times as many as the number 5."
+          },
+          {
+            "letter": "D",
+            "text": "The number 30 is 6 times as many as the number 6."
+          }
+        ],
+        "select_count": null,
+        "has_visual": false,
+        "visual_description": null
+      }
+    ],
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 15,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA900846441_PA",
+    "question_number": "19",
+    "question_text": "Two friends bought a chocolate bar.\n\n\u2022 One friend ate 2/8 of the chocolate bar.\n\u2022 The other friend ate 1/8 of the chocolate bar.\n\nIn which fraction model does the shaded part represent the fraction of the chocolate bar that remains?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "A rectangle divided into 8 equal horizontal parts with 2 parts shaded at the bottom"
+      },
+      {
+        "letter": "B",
+        "text": "A rectangle divided into 8 equal horizontal parts with 3 parts shaded at the bottom"
+      },
+      {
+        "letter": "C",
+        "text": "A rectangle divided into 8 equal horizontal parts with 5 parts shaded at the bottom"
+      },
+      {
+        "letter": "D",
+        "text": "A rectangle divided into 8 equal horizontal parts with 6 parts shaded at the bottom"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Four separate rectangular fraction models, each divided into 8 equal horizontal strips, with different numbers of bottom strips shaded in gray for options A, B, C, and D.",
+    "page": 16,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  },
+  {
+    "item_id": "MA303324",
+    "question_number": "20",
+    "question_text": "A market sells beans in bags. Each bag has 3/4 pound of beans. How many pounds of beans are in 8 bags altogether?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "2 3/4"
+      },
+      {
+        "letter": "B",
+        "text": "6"
+      },
+      {
+        "letter": "C",
+        "text": "8 3/4"
+      },
+      {
+        "letter": "D",
+        "text": "15"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "page": 17,
+    "source_pdf": "g4-math_2023_questions.pdf"
+  }
+]
