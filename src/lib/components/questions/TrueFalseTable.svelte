@@ -1,27 +1,46 @@
 <script>
   import { renderMath } from '$lib/utils/math.js';
+  import SymmetryFigure from '$lib/components/questions/stimuli/SymmetryFigure.svelte';
 
   export let question_text;
-  export let statements; // array of { text: string }
+  export let statements; // array of { text?: string, shape?: object }
+  export let column_label = 'Statement'; // first column header, e.g. "Equation", "Figure"
+  export let true_label = 'True';   // second column header
+  export let false_label = 'False'; // third column header
+  export let stimulus_intro = null; // optional HTML shown above question text
+  export let stimulus_type = null;  // reserved for future stimulus components
+  export let instruction = null;    // optional instruction line shown below question_text
 
   let answers = statements.map(() => null);
 </script>
 
 <div class="question-body">
+  {#if stimulus_intro}
+    <div class="stimulus-intro">{@html stimulus_intro}</div>
+  {/if}
   <p class="q-text">{@html renderMath(question_text)}</p>
+  {#if instruction}
+    <p class="q-instruction">{@html renderMath(instruction)}</p>
+  {/if}
 
   <table class="tf-table">
     <thead>
       <tr>
-        <th class="stmt-header">Statement</th>
-        <th class="tf-header">True</th>
-        <th class="tf-header">False</th>
+        <th class="stmt-header">{column_label}</th>
+        <th class="tf-header">{true_label}</th>
+        <th class="tf-header">{false_label}</th>
       </tr>
     </thead>
     <tbody>
       {#each statements as stmt, i}
         <tr>
-          <td class="stmt-cell"><p>{@html renderMath(stmt.text)}</p></td>
+          <td class="stmt-cell {stmt.shape ? 'figure-cell' : ''}">
+            {#if stmt.shape}
+              <SymmetryFigure params={stmt.shape} />
+            {:else}
+              <p>{@html renderMath(stmt.text ?? '')}</p>
+            {/if}
+          </td>
           <td class="radio-cell">
             <input type="radio" name="row-{i}" bind:group={answers[i]} value="true" />
           </td>
@@ -45,7 +64,15 @@
     max-width: 640px;
   }
 
+  .stimulus-intro {
+    margin: 0 0 12px;
+  }
+
   .q-text {
+    margin: 0 0 6px;
+  }
+
+  .q-instruction {
     margin: 0 0 10px;
   }
 
@@ -84,6 +111,11 @@
 
   .stmt-cell p {
     margin: 0;
+  }
+
+  .figure-cell {
+    text-align: center;
+    padding: 12px 8px;
   }
 
   .radio-cell {

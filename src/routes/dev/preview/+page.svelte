@@ -1,5 +1,7 @@
 <script>
   import questions2019 from '../../../../data/g4-math_2019_questions.json';
+  import questions2021 from '../../../../data/g4-math_2021_questions.json';
+  import questions2022 from '../../../../data/g4-math_2022_questions.json';
   import questions2023 from '../../../../data/g4-math_2023_questions.json';
   import questions2025 from '../../../../data/g4-math_2025_questions.json';
   import MultipleChoice from '$lib/components/questions/MultipleChoice.svelte';
@@ -10,8 +12,12 @@
   import InlineChoice from '$lib/components/questions/InlineChoice.svelte';
   import TrueFalseTable from '$lib/components/questions/TrueFalseTable.svelte';
   import ProtractorDragDrop from '$lib/components/questions/ProtractorDragDrop.svelte';
+  import DragDropInequality from '$lib/components/questions/DragDropInequality.svelte';
+  import CategorySort from '$lib/components/questions/CategorySort.svelte';
+  import FractionModel from '$lib/components/questions/FractionModel.svelte';
+  import DragDropMatch from '$lib/components/questions/DragDropMatch.svelte';
 
-  const years = { '2019': questions2019, '2023': questions2023, '2025': questions2025 };
+  const years = { '2019': questions2019, '2021': questions2021, '2022': questions2022, '2023': questions2023, '2025': questions2025 };
   let year = '2019';
   let index = 0;
   let showJson = false;
@@ -29,6 +35,8 @@
   <h1 class="text-2xl font-bold">Question Preview</h1>
   <select bind:value={year} on:change={() => index = 0} class="rounded border border-gray-300 px-2 py-1 text-sm">
     <option value="2019">2019</option>
+    <option value="2021">2021</option>
+    <option value="2022">2022</option>
     <option value="2023">2023</option>
     <option value="2025">2025</option>
   </select>
@@ -75,6 +83,7 @@
       {:else if q.answer_type === 'multi_part'}
         <MultiPart
           question_text={q.question_text}
+          stimulus_list={q.stimulus_list ?? null}
           stimulus_type={q.stimulus_type ?? null}
           stimulus_params={q.stimulus_params ?? null}
           parts={q.parts}
@@ -83,6 +92,8 @@
       {:else if q.answer_type === 'short_answer'}
         <ShortAnswer
           stimulus_intro={q.stimulus_intro ?? null}
+          stimulus_type={q.stimulus_type ?? null}
+          stimulus_params={q.stimulus_params ?? null}
           math_expression={q.math_expression ?? null}
           question_text={q.question_text}
           input_widget={q.input_widget ?? 'text'}
@@ -106,9 +117,16 @@
         <TrueFalseTable
           question_text={q.question_text}
           statements={q.statements ?? []}
+          column_label={q.column_label ?? 'Statement'}
+          true_label={q.true_label ?? 'True'}
+          false_label={q.false_label ?? 'False'}
+          stimulus_intro={q.stimulus_intro ?? null}
+          stimulus_type={q.stimulus_type ?? null}
+          instruction={q.instruction ?? null}
         />
       {:else if q.answer_type === 'inline_choice'}
         <InlineChoice
+          stimulus_intro={q.stimulus_intro ?? null}
           question_text={q.question_text}
           stimulus_type={q.stimulus_type ?? null}
           stimulus_params={q.stimulus_params ?? null}
@@ -120,6 +138,36 @@
         <ProtractorDragDrop
           question_text={q.question_text}
           stimulus_params={q.stimulus_params}
+        />
+      {:else if q.answer_type === 'drag_drop_inequality'}
+        <DragDropInequality
+          question_text={q.question_text}
+          instruction2={q.instruction2 ?? ''}
+          tiles={q.tiles ?? []}
+          rows={q.rows ?? []}
+          correct_answer={q.correct_answer ?? {}}
+        />
+      {:else if q.answer_type === 'category_sort'}
+        <CategorySort
+          question_text={q.question_text}
+          tiles={q.tiles ?? []}
+          categories={q.categories ?? []}
+        />
+      {:else if q.answer_type === 'fraction_model'}
+        <FractionModel
+          question_text={q.question_text}
+          math_expression={q.math_expression ?? null}
+          instruction={q.instruction ?? null}
+          numerator={q.model_params?.numerator ?? 1}
+          denominator={q.model_params?.denominator ?? 4}
+          models={q.models ?? null}
+        />
+      {:else if q.answer_type === 'drag_drop_match'}
+        <DragDropMatch
+          question_text={q.question_text}
+          instruction={q.instruction ?? ''}
+          tiles={q.tiles ?? []}
+          rows={q.rows ?? []}
         />
       {:else}
         <div class="bg-white p-4 text-sm text-gray-400 italic rounded">

@@ -1,0 +1,535 @@
+[
+  {
+    "item_id": "MA704649496",
+    "question_number": "1",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "question_text": "Create a fraction model in which the shaded part represents the sum of this expression.\n\n[1/10] + [7/10]\n\nDivide the figure into the correct number of equal parts by using the More and Fewer buttons. Then shade by selecting the part or parts.",
+    "math_expression": null,
+    "answer_type": "fraction_model",
+    "model_params": {
+      "numerator": 8,
+      "denominator": 10
+    },
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Circle divided into 10 equal parts with 8 parts shaded (8/10, the sum of 1/10 + 7/10). Fewer, More, and Reset buttons shown below.",
+    "correct_answer": "[8/10]"
+  },
+  {
+    "item_id": "MA307079",
+    "question_number": "2",
+    "stimulus_intro": "Takara is 4 years old. Her brother is 2 times as old as Takara.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "question_text": "Which equation can be used to find b, the age in years of Takara's brother?",
+    "answer_options": [
+      { "letter": "A", "text": "b = 1 × 2" },
+      { "letter": "B", "text": "b = 2 × 2" },
+      { "letter": "C", "text": "b = 4 × 2" },
+      { "letter": "D", "text": "b = 8 × 2" }
+    ],
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "C"
+  },
+  {
+    "item_id": "MA800628900",
+    "question_number": "5",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "multiple_select",
+    "select_count": 2,
+    "question_text": "Which of these numbers are prime numbers?",
+    "answer_options": [
+      { "letter": "A", "text": "27" },
+      { "letter": "B", "text": "43" },
+      { "letter": "C", "text": "52" },
+      { "letter": "D", "text": "67" },
+      { "letter": "E", "text": "95" }
+    ],
+    "parts": null,
+    "correct_answer": "B,D"
+  },
+  {
+    "item_id": "MA297973",
+    "question_number": "4",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "question_text": "Ms. Lewis bought 5 sticks of butter. Each stick of butter weighs [1/4] pound.\n\nWhat is the total weight, in pounds, of the 5 sticks of butter?",
+    "answer_options": [
+      { "letter": "A", "text": "[5/4]" },
+      { "letter": "B", "text": "[6/4]" },
+      { "letter": "C", "text": "[1/20]" },
+      { "letter": "D", "text": "[5/20]" }
+    ],
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "A"
+  },
+  {
+    "item_id": "MA800780932",
+    "question_number": "6",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "multi_part",
+    "layout": "stacked",
+    "question_text": "This question has four parts.",
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "Write this number in standard form.",
+        "stimulus_type": "number_box",
+        "stimulus_params": {
+          "rows": [["one hundred sixty-eight thousand, twenty-one"]]
+        },
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer in the box."
+      },
+      {
+        "label": "B",
+        "question_text": "Write the number 168,201 in expanded form.",
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer in the space provided."
+      },
+      {
+        "label": "C",
+        "question_text": "Use >, <, or = to write a comparison of the two numbers in Part A and Part B. Explain how you got your answer.",
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer and your explanation in the space provided."
+      },
+      {
+        "label": "D",
+        "question_text": "Write a number that is 1,000 greater than the number 169,201. Explain how you got your answer.",
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer and your explanation in the space provided."
+      }
+    ],
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": null
+  },
+  {
+    "item_id": "MA306940",
+    "question_number": "7",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "question_text": "A sign is in the shape of a square. Each side of the sign has a length of 6 inches.\n\nWhat is the area of the sign?",
+    "answer_options": [
+      { "letter": "A", "text": "12 square inches" },
+      { "letter": "B", "text": "24 square inches" },
+      { "letter": "C", "text": "36 square inches" },
+      { "letter": "D", "text": "48 square inches" }
+    ],
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "C"
+  },
+  {
+    "item_id": "MA800629956",
+    "question_number": "8",
+    "answer_type": "category_sort",
+    "question_text": "Determine the number of lines of symmetry for each shape.\n\nDrag and drop each shape into the correct box to show the number of lines of symmetry the shape has.",
+    "tiles": [
+      {
+        "label": "trapezoid",
+        "shape": { "shape": { "type": "polygon", "vertices": [[-30,-35],[30,-35],[50,35],[-50,35]] }, "padding": 12 }
+      },
+      {
+        "label": "parallelogram",
+        "shape": { "shape": { "type": "polygon", "vertices": [[-50,-30],[30,-30],[50,30],[-30,30]] }, "padding": 12 }
+      },
+      {
+        "label": "rectangle",
+        "shape": { "shape": { "type": "rect", "width": 100, "height": 60 }, "padding": 12 }
+      },
+      {
+        "label": "square",
+        "shape": { "shape": { "type": "square", "size": 70 }, "padding": 12 }
+      }
+    ],
+    "categories": [
+      {
+        "label": "0 lines of symmetry",
+        "correct_tiles": [
+          { "label": "trapezoid", "shape": { "shape": { "type": "polygon", "vertices": [[-30,-35],[30,-35],[50,35],[-50,35]] }, "padding": 12 } },
+          { "label": "parallelogram", "shape": { "shape": { "type": "polygon", "vertices": [[-50,-30],[30,-30],[50,30],[-30,30]] }, "padding": 12 } }
+        ]
+      },
+      {
+        "label": "1 line of symmetry",
+        "correct_tiles": []
+      },
+      {
+        "label": "2 lines of symmetry",
+        "correct_tiles": [
+          { "label": "rectangle", "shape": { "shape": { "type": "rect", "width": 100, "height": 60 }, "padding": 12 } }
+        ]
+      },
+      {
+        "label": "4 lines of symmetry",
+        "correct_tiles": [
+          { "label": "square", "shape": { "shape": { "type": "square", "size": 70 }, "padding": 12 } }
+        ]
+      }
+    ],
+    "correct_answer": "A,C,D",
+    "parts": null,
+    "select_count": null
+  },
+  {
+    "item_id": "MA229063",
+    "question_number": "3",
+    "stimulus_intro": "The shaded portion of this model represents a fraction less than 1.",
+    "stimulus_type": "decimal_grid",
+    "stimulus_params": {
+      "shaded": 80,
+      "show_whole": true
+    },
+    "math_expression": null,
+    "answer_type": "multiple_select",
+    "select_count": 2,
+    "question_text": "Which of these decimals are equivalent to the fraction represented in the model?",
+    "answer_options": [
+      { "letter": "A", "text": "0.80" },
+      { "letter": "B", "text": "8.0" },
+      { "letter": "C", "text": "0.08" },
+      { "letter": "D", "text": "80.0" },
+      { "letter": "E", "text": "0.8" }
+    ],
+    "parts": null,
+    "correct_answer": "A,E"
+  },
+  {
+    "item_id": "MA736379417",
+    "question_number": "12",
+    "stimulus_intro": "What value of x makes this equation true?",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": "[7/10] = [x/100]",
+    "answer_type": "short_answer",
+    "question_text": null,
+    "input_widget": "text",
+    "answer_suffix": null,
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "70"
+  },
+  {
+    "item_id": "MA803730594",
+    "question_number": "11",
+    "stimulus_intro": "The rule for a pattern is \u201cmultiply by 3.\u201d The first number in the pattern is 2.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "short_answer",
+    "question_text": "What is the <strong>fifth</strong> number in the pattern?",
+    "input_widget": "text",
+    "answer_suffix": null,
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "162"
+  },
+  {
+    "item_id": "MA270627",
+    "question_number": "10",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": "325 = 147 + {?}",
+    "answer_type": "multiple_choice",
+    "question_text": "What is the value of {?} that makes this number sentence true?",
+    "answer_options": [
+      { "letter": "A", "text": "178" },
+      { "letter": "B", "text": "188" },
+      { "letter": "C", "text": "222" },
+      { "letter": "D", "text": "472" }
+    ],
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "A"
+  },
+  {
+    "item_id": "MA800763292",
+    "question_number": "9",
+    "stimulus_intro": "This list shows the snowfall amounts, in inches, for eight towns during a storm.",
+    "stimulus_type": "line_plot",
+    "stimulus_params": {
+      "title": "Snowfall Amounts",
+      "axis_label": "Snowfall (inches)",
+      "data_points": [
+        { "label": "[3/4]",   "count": 1 },
+        { "label": "1[1/4]",  "count": 1 },
+        { "label": "1[1/2]",  "count": 2 },
+        { "label": "2",       "count": 1 },
+        { "label": "2[1/4]",  "count": 1 },
+        { "label": "2[3/4]",  "count": 2 }
+      ],
+      "tick_spacing": 60
+    },
+    "math_expression": "2[1/4],  1[1/2],  2,  2[3/4],  1[1/2],  [3/4],  2[3/4],  1[1/4]",
+    "answer_type": "short_answer",
+    "question_text": "This line plot also shows some of the snowfall amounts. One of the snowfall amounts is missing from the line plot.\n\nDrag and drop the X into the correct box above the number line to complete the line plot.",
+    "input_widget": "text",
+    "answer_suffix": null,
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "2[3/4]"
+  },
+  {
+    "item_id": "MA287484",
+    "question_number": "14",
+    "answer_type": "multi_part",
+    "layout": "stacked",
+    "question_text": "This clock shows the time that Cary woke up this morning.",
+    "stimulus_type": "clock_face",
+    "stimulus_params": {
+      "hour": 7,
+      "minute": 0
+    },
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "At what time did Cary wake up? Be sure to label your answer with a.m. or p.m.",
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer in the space provided.",
+        "correct_answer": "7:00 a.m."
+      },
+      {
+        "label": "B",
+        "question_text": "Cary left for school 1 hour and 15 minutes after he woke up. At what time did Cary leave for school? Show or explain how you got your answer.",
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer and your work or explanation in the space provided.",
+        "correct_answer": "8:15 a.m."
+      },
+      {
+        "label": "C",
+        "question_text": "Cary left school at 3:40. He ate lunch 4 hours before he left school. At what time did Cary eat lunch? Show or explain how you got your answer.",
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer and your work or explanation in the space provided.",
+        "correct_answer": "11:40 a.m."
+      },
+      {
+        "label": "D",
+        "question_text": "Cary has 45 minutes of homework. His favorite TV show is at 5:30. What is the <strong>latest</strong> time Cary can start his homework to be finished at 5:30? Show or explain how you got your answer.",
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer and your work or explanation in the space provided.",
+        "correct_answer": "4:45 p.m."
+      }
+    ],
+    "select_count": null,
+    "correct_answer": null
+  },
+  {
+    "item_id": "MA713629341",
+    "question_number": "15",
+    "stimulus_intro": "<p>Alonzo and Mindy are buying pretzels to share with their class. They will put all the pretzels into bags.</p><ul><li>Alonzo buys 8 pretzels.</li><li>Mindy buys 3 times as many pretzels as Alonzo.</li><li>Each bag will hold up to 5 pretzels.</li></ul>",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "inline_choice",
+    "instruction": "Choose from the drop-down menus to correctly complete each statement.",
+    "question_text": "Alonzo and Mindy want to know the least number of bags they need to hold all the pretzels.",
+    "sentences": [
+      "Alonzo and Mindy have a total of [RESPONSE_A1] pretzels.",
+      "Alonzo and Mindy need [RESPONSE_A2] bags to hold all the pretzels."
+    ],
+    "dropdowns": [
+      { "id": "RESPONSE_A1", "options": ["12", "24", "32", "38", "46"] },
+      { "id": "RESPONSE_A2", "options": ["4", "5", "6", "7", "8"] }
+    ],
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "C,D"
+  },
+  {
+    "item_id": "MA714226701",
+    "question_number": "16",
+    "answer_type": "multi_part",
+    "layout": "stacked",
+    "question_text": "A shopper bought peppers and grapes.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "The shopper bought [54/100] pound of peppers.\n\nWhat is the decimal equivalent of the fraction [54/100]?\n\nEnter your answer in the box.",
+        "answer_type": "short_answer",
+        "math_expression_prefix": "[54/100] =",
+        "correct_answer": "0.54"
+      },
+      {
+        "label": "B",
+        "question_text": "The shopper bought 0.62 pound of grapes.\n\nPlot the point that represents where 0.62 is located on this number line.\n\nSelect a place on the number line to plot the point.",
+        "answer_type": "number_line_plot",
+        "stimulus_params": {
+          "min": 0,
+          "max": 1,
+          "small_intervals": 10
+        },
+        "correct_answer": "0.62"
+      }
+    ],
+    "select_count": null,
+    "correct_answer": "0.54;0.62"
+  },
+  {
+    "item_id": "MA803742735",
+    "question_number": "17",
+    "stimulus_intro": "A model of 1 whole is shown.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "question_text": "Based on the model, which of these models is shaded to represent a fraction that is equivalent to 1[2/3]?",
+    "answer_options": [
+      {
+        "letter": "A",
+        "model": {
+          "left":  { "type": "rect", "numerator": 6, "denominator": 6 },
+          "operator": "",
+          "right": { "type": "rect", "numerator": 3, "denominator": 6 }
+        }
+      },
+      {
+        "letter": "B",
+        "model": {
+          "left":  { "type": "rect", "numerator": 6, "denominator": 3, "rows": 2 },
+          "operator": "",
+          "right": { "type": "rect", "numerator": 1, "denominator": 3, "rows": 2 }
+        }
+      },
+      {
+        "letter": "C",
+        "model": {
+          "left":  { "type": "rect", "numerator": 6, "denominator": 3, "rows": 2 },
+          "operator": "",
+          "right": { "type": "rect", "numerator": 2, "denominator": 3, "rows": 2 }
+        }
+      },
+      {
+        "letter": "D",
+        "model": {
+          "left":  { "type": "rect", "numerator": 6, "denominator": 3, "rows": 2 },
+          "operator": "",
+          "right": { "type": "rect", "numerator": 4, "denominator": 3, "rows": 2 }
+        }
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Stem: gray rectangle = 1 whole. Options A–D each show two rectangles. A: 6 vertical strips, left all shaded, right 3/6 shaded (= 9/6 = 3/2). B: 3×2 grid, left all shaded, right 1/6 shaded (= 7/6). C: 3×2 grid, left all shaded, right 2/6 shaded (= 8/6 = 4/3). D: 3×2 grid, left all shaded, right 4/6 shaded (= 10/6 = 5/3 = 1 2/3). Correct answer D.",
+    "correct_answer": "D"
+  },
+  {
+    "item_id": "MA803846674",
+    "question_number": "18",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "true_false_table",
+    "question_text": "Round each number to the nearest <strong>ten thousand</strong>.\n\nSelect \u201cRounds to 30,000\u201d or \u201cRounds to 40,000\u201d for each number in the table.",
+    "column_label": "Number",
+    "true_label": "Rounds to 30,000",
+    "false_label": "Rounds to 40,000",
+    "statements": [
+      { "text": "34,124" },
+      { "text": "35,021" },
+      { "text": "37,826" },
+      { "text": "32,788" }
+    ],
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "A,D,F,G"
+  },
+  {
+    "item_id": "MA803746135",
+    "question_number": "20",
+    "stimulus_intro": "A parent bought equal amounts of blue cloth and yellow cloth to make a costume. The parent used [3/6] of the blue cloth and [4/12] of the yellow cloth.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "short_answer",
+    "question_text": "Write a comparison using >, <, or = to correctly compare the fractions [3/6] and [4/12].\n\nEnter your comparison in the space provided. Enter <strong>only</strong> your comparison.",
+    "input_widget": "text",
+    "answer_suffix": null,
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": ">"
+  },
+  {
+    "item_id": "MA306993",
+    "question_number": "19",
+    "stimulus_intro": "Angle QRS has a measure of 64°, as shown in this diagram.",
+    "stimulus_type": "angle_diagram",
+    "stimulus_params": {
+      "center": "R",
+      "rays": [
+        { "label": "Q", "angle": 64 },
+        { "label": "S", "angle": 0 },
+        { "label": "T", "angle": -23 }
+      ],
+      "arc_labels": [
+        { "between": ["Q", "S"], "text": "64°", "radius": 48 }
+      ]
+    },
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "question_text": "Angle QRT has a measure of 87°. What is the measure of angle SRT?",
+    "answer_options": [
+      { "letter": "A", "text": "23°" },
+      { "letter": "B", "text": "26°" },
+      { "letter": "C", "text": "64°" },
+      { "letter": "D", "text": "151°" }
+    ],
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "A"
+  },
+  {
+    "item_id": "MA311574",
+    "question_number": "13",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "multiple_select",
+    "select_count": 2,
+    "question_text": "Which of these triangles have at least one obtuse angle?",
+    "answer_options": [
+      { "letter": "A", "shape": { "type": "polygon", "vertices": [[-38,-48],[32,60],[32,-48]] } },
+      { "letter": "B", "shape": { "type": "polygon", "vertices": [[-120,22],[120,22],[0,-22]] } },
+      { "letter": "C", "shape": { "type": "polygon", "vertices": [[0,-52],[46,36],[-46,36]] } },
+      { "letter": "D", "shape": { "type": "polygon", "vertices": [[-70,-28],[70,-28],[0,32]] } },
+      { "letter": "E", "shape": { "type": "polygon", "vertices": [[-70,-60],[70,80],[-70,80]] } }
+    ],
+    "parts": null,
+    "correct_answer": "B,E"
+  }
+]

@@ -1,10 +1,12 @@
 <script>
   import NumberBox from './stimuli/NumberBox.svelte';
   import LinePlot from './stimuli/LinePlot.svelte';
+  import DotPlot from './stimuli/DotPlot.svelte';
   import AngleDiagram from './stimuli/AngleDiagram.svelte';
   import RectangleDiagram from './stimuli/RectangleDiagram.svelte';
   import ItemArray from './stimuli/ItemArray.svelte';
   import SymmetryFigure from './stimuli/SymmetryFigure.svelte';
+  import FractionComparison from './stimuli/FractionComparison.svelte';
   import { renderMath } from '$lib/utils/math.js';
 
   export let stimulus_intro = null;
@@ -20,7 +22,7 @@
 
 <div class="question-body">
   {#if stimulus_intro}
-    <p class="q-text">{stimulus_intro}</p>
+    <p class="q-text">{@html renderMath(stimulus_intro)}</p>
   {/if}
 
   {#if stimulus_list}
@@ -39,6 +41,10 @@
     <div class="stimulus">
       <LinePlot params={stimulus_params} />
     </div>
+  {:else if stimulus_type === 'dot_plot'}
+    <div class="stimulus">
+      <DotPlot params={stimulus_params} />
+    </div>
   {:else if stimulus_type === 'angle_diagram'}
     <div class="stimulus">
       <AngleDiagram params={stimulus_params} />
@@ -50,6 +56,14 @@
   {:else if stimulus_type === 'item_array'}
     <div class="stimulus">
       <ItemArray params={stimulus_params} />
+    </div>
+  {:else if stimulus_type === 'fraction_comparison'}
+    <div class="stimulus">
+      <FractionComparison
+        left={{ type: stimulus_params.type, numerator: stimulus_params.left_numerator, denominator: stimulus_params.left_denominator }}
+        operator={stimulus_params.operator ?? ''}
+        right={{ type: stimulus_params.type, numerator: stimulus_params.right_numerator, denominator: stimulus_params.right_denominator }}
+      />
     </div>
   {/if}
 
@@ -79,6 +93,8 @@
         <div class="distractorContent">
           {#if opt.shape}
             <SymmetryFigure params={{ shape: opt.shape, line: null }} />
+          {:else if opt.model}
+            <FractionComparison left={opt.model.left} operator={opt.model.operator} right={opt.model.right} />
           {:else}
             <p>{@html renderMath(opt.text)}</p>
           {/if}

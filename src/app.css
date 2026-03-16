@@ -25,6 +25,20 @@
   line-height: 1.3;
 }
 
+/* Inline Save button pill — used in TestNav math-equation instructions */
+.save-pill {
+  display: inline-block;
+  background: #5bc0de;
+  color: white;
+  font-size: 0.85em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 1px 10px;
+  border-radius: 10px;
+  vertical-align: middle;
+  margin: 0 2px;
+  white-space: nowrap;
+}
+
 /* Boxed question mark — used in equations like 25,000 − 13,476 = {?} */
 .box-q {
   display: inline-block;

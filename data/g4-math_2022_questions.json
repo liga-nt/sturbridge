@@ -1,0 +1,628 @@
+[
+  {
+    "item_id": "MA900845776",
+    "question_number": "1",
+    "stimulus_intro": "A family ordered two pizzas for dinner. Both pizzas were the same size. Each slice of pizza was the same size.<br><br>This diagram shows the amount of pizza remaining after dinner.",
+    "stimulus_type": "fraction_comparison",
+    "stimulus_params": {
+      "type": "circle",
+      "left_numerator": 3,
+      "left_denominator": 8,
+      "right_numerator": 2,
+      "right_denominator": 8
+    },
+    "stimulus_list": null,
+    "math_expression": null,
+    "question_text": "Which of these equations shows how to find the fraction of a whole pizza that was <strong>remaining</strong> after dinner?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "[3/5] + [2/6] = [5/11]"
+      },
+      {
+        "letter": "B",
+        "text": "[3/8] + [2/8] = [5/8]"
+      },
+      {
+        "letter": "C",
+        "text": "[5/8] + [6/8] = [11/8]"
+      },
+      {
+        "letter": "D",
+        "text": "[3/8] + [2/8] = [5/16]"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Two circles each divided into 8 equal parts. One circle has 3 parts shaded (remaining), the other has 2 parts shaded (remaining).",
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA307692",
+    "question_number": "2",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": null,
+    "question_text": "Claire correctly worked out the answer to a subtraction problem. Which of these could be Claire's problem and work?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "3012 \u2212 176 = 3164"
+      },
+      {
+        "letter": "B",
+        "text": "3012 \u2212 176 = 2836"
+      },
+      {
+        "letter": "C",
+        "text": "3012 \u2212 176 = 3836"
+      },
+      {
+        "letter": "D",
+        "text": "3012 \u2212 176 = 2826"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "Four boxes each showing handwritten subtraction work for 3012 \u2212 176. Option A shows no regrouping marks and the incorrect answer 3164. Option B shows correct regrouping marks (2, 9, 10 above) and the correct answer 2836. Option C shows partial regrouping (9, 10 above) and incorrect answer 3836. Option D shows incorrect regrouping marks (2, 9, 9 above) and incorrect answer 2826.",
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA704652242",
+    "question_number": "3",
+    "stimulus_intro": "<p>A student created this figure by drawing line segments and angles.</p><p style=\"text-align:center;\"><svg width=\"230\" height=\"145\" viewBox=\"0 0 230 145\" xmlns=\"http://www.w3.org/2000/svg\" style=\"font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;\"><polygon points=\"30,20 160,20 195,120 25,120\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.5\"/><text x=\"22\" y=\"14\" font-size=\"14\" font-style=\"italic\">P</text><text x=\"163\" y=\"14\" font-size=\"14\" font-style=\"italic\">S</text><text x=\"199\" y=\"130\" font-size=\"14\" font-style=\"italic\">R</text><text x=\"12\" y=\"130\" font-size=\"14\" font-style=\"italic\">Q</text></svg></p>",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": null,
+    "question_text": "Did the student use the line segments and angles in the table to create the figure?",
+    "instruction": "Select \u201cYes\u201d or \u201cNo\u201d for each line segment or angle.",
+    "answer_type": "true_false_table",
+    "column_label": "Line Segment or Angle",
+    "true_label": "Yes",
+    "false_label": "No",
+    "statements": [
+      {
+        "text": "line segment <em>PR</em>"
+      },
+      {
+        "text": "line segment <em>PQ</em>"
+      },
+      {
+        "text": "angle <em>SPQ</em>"
+      },
+      {
+        "text": "angle <em>SQR</em>"
+      }
+    ],
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "has_visual": true,
+    "visual_description": "An irregular quadrilateral with vertices labeled P (top-left), S (top-right), R (bottom-right), Q (bottom-left). The right side SR is slightly diagonal.",
+    "correct_answer": "B,C,E,H"
+  },
+  {
+    "item_id": "MA307310",
+    "question_number": "4",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": null,
+    "question_text": "In which of these numbers does the 7 have a value that is <strong>ten</strong> times the value of the 7 in 9,176?",
+    "answer_type": "multiple_choice",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "2,473"
+      },
+      {
+        "letter": "B",
+        "text": "3,724"
+      },
+      {
+        "letter": "C",
+        "text": "4,327"
+      },
+      {
+        "letter": "D",
+        "text": "7,432"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA900775955",
+    "question_number": "5",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": null,
+    "answer_type": "short_answer",
+    "question_text": "Write a comparison using >, <, or = to compare the numbers 0.29 and 0.8.\n\nEnter your comparison in the space provided. Enter <strong>only</strong> your comparison.",
+    "input_widget": "text",
+    "answer_suffix": null,
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "0.29 < 0.8"
+  },
+  {
+    "item_id": "MA307066",
+    "question_number": "6",
+    "stimulus_intro": "A triangle is shown.<br><br><p style=\"text-align:center;\"><svg width=\"176\" height=\"100\" viewBox=\"0 0 176 100\" xmlns=\"http://www.w3.org/2000/svg\" style=\"font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;\"><polygon points=\"88,5 10,90 166,90\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.5\"/><rect x=\"81\" y=\"5\" width=\"10\" height=\"10\" fill=\"none\" stroke=\"#333\" stroke-width=\"1.2\"/><text x=\"22\" y=\"88\" font-size=\"13\" fill=\"#333\" text-anchor=\"start\">45\u00b0</text><text x=\"140\" y=\"88\" font-size=\"13\" fill=\"#333\" text-anchor=\"start\">45\u00b0</text></svg></p>",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": null,
+    "answer_type": "short_answer",
+    "question_text": "How many lines of symmetry does the triangle have?",
+    "input_widget": "text",
+    "answer_suffix": null,
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "1"
+  },
+  {
+    "item_id": "MA623833763",
+    "question_number": "7",
+    "answer_type": "drag_drop_match",
+    "question_text": "Match each division equation with a related multiplication equation.",
+    "instruction": "Drag and drop numbers and variables into the boxes to match each division equation with a related multiplication equation.",
+    "tiles": [
+      "a",
+      "p",
+      "s",
+      "4",
+      "5",
+      "7",
+      "12",
+      "36",
+      "72"
+    ],
+    "rows": [
+      {
+        "division": "36 \u00f7 p = 4",
+        "slots": [
+          "p",
+          "4",
+          "36"
+        ]
+      },
+      {
+        "division": "s \u00f7 7 = 5",
+        "slots": [
+          "7",
+          "5",
+          "s"
+        ]
+      },
+      {
+        "division": "72 \u00f7 12 = a",
+        "slots": [
+          "12",
+          "a",
+          "72"
+        ]
+      }
+    ],
+    "correct_answer": "p\u00d74=36, 7\u00d75=s, 12\u00d7a=72"
+  },
+  {
+    "item_id": "MA903574399",
+    "question_number": "8",
+    "answer_type": "multi_part",
+    "layout": "stacked",
+    "question_text": "There is a garden, a patio, and a flower bed in the backyard of a house. The garden, the patio, and the flower bed are each in the shape of a rectangle.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "The garden has a length of 4 feet and a width of 8 feet, as shown in this diagram.",
+        "stimulus_type": "rectangle_diagram",
+        "stimulus_params": {
+          "width": 8,
+          "height": 4,
+          "width_label": "8 ft.",
+          "height_label": "4 ft."
+        },
+        "answer_prompt": "What is the area, in square feet, of the garden?\n\nEnter your answer in the box.",
+        "answer_type": "short_answer",
+        "answer_suffix": "square feet",
+        "correct_answer": "32"
+      },
+      {
+        "label": "B",
+        "question_text": "The patio has a length of 5 feet and an area of 35 square feet.\n\nWhat is the width, in feet, of the patio? Show or explain how you got your answer.\n\nEnter your answer and your work or explanation in the space provided.",
+        "answer_type": "constructed_response",
+        "correct_answer": "7"
+      },
+      {
+        "label": "C",
+        "question_text": "The owner of the house thinks the garden and the patio have the same perimeter.\n\nIs the owner correct? Explain your reasoning.\n\nEnter your answer and your explanation in the space provided.",
+        "answer_type": "constructed_response",
+        "correct_answer": "Yes. Garden perimeter = 2\u00d74 + 2\u00d78 = 24 ft. Patio perimeter = 2\u00d75 + 2\u00d77 = 24 ft. Both perimeters are equal."
+      },
+      {
+        "label": "D",
+        "question_text": "The area of the flower bed is <strong>less than</strong> the area of the garden. The perimeter of the flower bed is <strong>equal</strong> to the perimeter of the patio.\n\nWhat could be the length <strong>and</strong> the width of the flower bed? Explain how you know your answer is correct.\n\nEnter your answer and your explanation in the space provided.",
+        "answer_type": "constructed_response",
+        "correct_answer": "Any rectangle with perimeter = 24 ft and area < 32 sq ft. Example: length = 9 ft, width = 3 ft (perimeter = 24, area = 27 < 32)."
+      }
+    ],
+    "correct_answer": null
+  },
+  {
+    "item_id": "MA800633803",
+    "question_number": "9",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": null,
+    "answer_type": "short_answer",
+    "question_text": "A student drinks [2/5] liter of water each morning.\n\nWhat is the total amount of water, in liters, the student drinks over 4 mornings?\n\nEnter your answer in the space provided. Enter <strong>only</strong> your answer.",
+    "input_widget": "text",
+    "answer_suffix": null,
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "[8/5]"
+  },
+  {
+    "item_id": "MA903537924",
+    "question_number": "13",
+    "stimulus_intro": "A protractor is used to measure angle <em>A</em>, as shown.",
+    "stimulus_type": "protractor_image",
+    "stimulus_params": {
+      "rays": [
+        {
+          "label": "A",
+          "angle": 45
+        }
+      ],
+      "center_label": "",
+      "base_label": ""
+    },
+    "stimulus_list": null,
+    "math_expression": null,
+    "answer_type": "short_answer",
+    "question_text": "What is the measure, in degrees, of angle <em>A</em>?",
+    "input_widget": "text",
+    "answer_suffix": "degrees",
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "45"
+  },
+  {
+    "item_id": "MA279790",
+    "question_number": "12",
+    "stimulus_intro": "Lashawn knows this number sentence is true.<br><br><p style=\"text-align:center;\">4 \u00d7 7 = 28</p>",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": null,
+    "answer_type": "short_answer",
+    "question_text": "What is the value of {?} that makes this number sentence true?<br><br><p style=\"text-align:center;\">4 \u00d7 700 = {?}</p>",
+    "input_widget": "text",
+    "answer_suffix": null,
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "2800"
+  },
+  {
+    "item_id": "MA803738583",
+    "question_number": "11",
+    "answer_type": "multi_part",
+    "layout": "stacked",
+    "question_text": "On field day, a student recorded his finish times for three different races. He also recorded the distances of four of his softball throws.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "This table shows the student's finish times for the three races.\n\nWhat is the student's finish time, in <strong>seconds</strong>, for each race?\n\nEnter a number into each box to complete the table.",
+        "answer_type": "table_fill",
+        "table_params": {
+          "title": "Finish Times",
+          "headers": [
+            "Time",
+            "Time in Seconds"
+          ],
+          "rows": [
+            [
+              "3 minutes",
+              ""
+            ],
+            [
+              "4 minutes, 39 seconds",
+              ""
+            ],
+            [
+              "10 minutes, 17 seconds",
+              ""
+            ]
+          ]
+        },
+        "correct_answer": "180,279,617"
+      },
+      {
+        "label": "B",
+        "question_text": "The distances of the student's four softball throws were recorded using different units of measurement.\n\nOrder the distances from <strong>least to greatest</strong>.\n\nDrag and drop the distances into the boxes in the correct order.",
+        "answer_type": "ordering",
+        "tiles": [
+          "120 inches",
+          "3 yards",
+          "8 feet",
+          "100 inches"
+        ],
+        "correct_order": [
+          "8 feet",
+          "100 inches",
+          "3 yards",
+          "120 inches"
+        ],
+        "correct_answer": "8 feet, 100 inches, 3 yards, 120 inches"
+      }
+    ],
+    "correct_answer": null
+  },
+  {
+    "item_id": "MA900751683",
+    "question_number": "10",
+    "stimulus_intro": "A teacher has 8 sheets of stickers for decorating posters.",
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": [
+      "Each sheet has 10 stickers.",
+      "Each poster will have exactly 3 stickers."
+    ],
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "question_text": "What is the <strong>greatest</strong> number of posters the teacher can decorate?",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "25 posters"
+      },
+      {
+        "letter": "B",
+        "text": "26 posters"
+      },
+      {
+        "letter": "C",
+        "text": "27 posters"
+      },
+      {
+        "letter": "D",
+        "text": "28 posters"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "B"
+  },
+  {
+    "item_id": "MA800767155",
+    "question_number": "14",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": "<span class=\"frac\"><span class=\"frac-num\">4</span><span class=\"frac-den\">6</span></span> = <span class=\"frac\"><span class=\"frac-num\">8</span><span class=\"frac-den\"><em>c</em></span></span>",
+    "answer_type": "short_answer",
+    "question_text": "What value of <em>c</em> makes this equation true?",
+    "input_widget": "text",
+    "answer_suffix": null,
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "12"
+  },
+  {
+    "item_id": "MA311579A",
+    "question_number": "15",
+    "stimulus_intro": "A student uses squares and triangles to make a pattern. In each step of the pattern, the student adds 1 square and 2 triangles, as shown.",
+    "stimulus_type": "step_pattern",
+    "stimulus_params": {
+      "steps": 3
+    },
+    "stimulus_list": null,
+    "math_expression": null,
+    "answer_type": "multi_part",
+    "question_text": "The student continues the pattern.",
+    "layout": null,
+    "parts": [
+      {
+        "label": "A",
+        "question_text": "What is the total number of triangles in Step 4 of the pattern?",
+        "answer_type": "short_answer",
+        "answer_suffix": "triangles",
+        "correct_answer": "8"
+      },
+      {
+        "label": "B",
+        "question_text": "What is the total number of <strong>squares</strong> in Step 6 of the pattern? Explain how you know your answer is correct.",
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer and your explanation in the space provided.",
+        "correct_answer": "6"
+      },
+      {
+        "label": "C",
+        "question_text": "What is the total number of triangles in Step 9 of the pattern? Explain how you can get your answer by using multiplication.",
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer and your explanation in the space provided.",
+        "correct_answer": "18"
+      },
+      {
+        "label": "D",
+        "question_text": "One step in the pattern will have a total of 64 triangles. What is the total number of squares in that step? Show or explain how you got your answer.",
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer and your work or explanation in the space provided.",
+        "correct_answer": "32"
+      }
+    ],
+    "answer_options": null,
+    "select_count": null,
+    "correct_answer": null
+  },
+  {
+    "item_id": "MA903134963",
+    "question_number": "17",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": null,
+    "answer_type": "multiple_select",
+    "question_text": "Which two fractions are equivalent?",
+    "select_count": 2,
+    "answer_options": [
+      { "letter": "A", "text": "[4/1]" },
+      { "letter": "B", "text": "[40/1]" },
+      { "letter": "C", "text": "[4/10]" },
+      { "letter": "D", "text": "[44/10]" },
+      { "letter": "E", "text": "[4/100]" },
+      { "letter": "F", "text": "[40/100]" },
+      { "letter": "G", "text": "[44/100]" }
+    ],
+    "parts": null,
+    "correct_answer": "C,F"
+  },
+  {
+    "item_id": "MA903757124",
+    "question_number": "18",
+    "answer_type": "multiple_select",
+    "question_text": "Which of these shapes appear to have at least one pair of parallel sides <strong>and</strong> at least one pair of perpendicular sides?",
+    "select_count": 3,
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": null,
+    "answer_options": [
+      {
+        "letter": "A",
+        "shape": {
+          "type": "polygon",
+          "vertices": [[-50, -45], [50, -45], [50, 45], [-70, 45]]
+        }
+      },
+      {
+        "letter": "B",
+        "shape": {
+          "type": "polygon",
+          "vertices": [[-30, -30], [70, -30], [30, 30], [-70, 30]]
+        }
+      },
+      {
+        "letter": "C",
+        "shape": {
+          "type": "square",
+          "size": 90
+        }
+      },
+      {
+        "letter": "D",
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [-55, -10], [10, -55], [55, 10], [-10, 55]
+          ]
+        }
+      },
+      {
+        "letter": "E",
+        "shape": {
+          "type": "polygon",
+          "vertices": [[-30, -40], [30, -40], [60, 40], [-60, 40]]
+        }
+      }
+    ],
+    "parts": null,
+    "correct_answer": "A,C,D"
+  },
+  {
+    "item_id": "MA900842465",
+    "question_number": "16",
+    "answer_type": "inline_choice",
+    "question_text": "Round this number to the nearest thousand, the nearest ten thousand, and the nearest hundred thousand.\n\n<p style=\"text-align:center;\">142,839</p>",
+    "instruction": "Drag and drop the correct number into each box. Each number may be used once, more than once, or not at all.",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": null,
+    "sentences": [
+      "The number 142,839 rounded to the nearest <strong>thousand</strong> is [RESPONSE_1].",
+      "The number 142,839 rounded to the nearest <strong>ten thousand</strong> is [RESPONSE_2].",
+      "The number 142,839 rounded to the nearest <strong>hundred thousand</strong> is [RESPONSE_3]."
+    ],
+    "dropdowns": [
+      { "id": "RESPONSE_1", "options": ["100,000", "140,000", "142,000", "142,800", "142,900", "143,000", "150,000", "200,000"] },
+      { "id": "RESPONSE_2", "options": ["100,000", "140,000", "142,000", "142,800", "142,900", "143,000", "150,000", "200,000"] },
+      { "id": "RESPONSE_3", "options": ["100,000", "140,000", "142,000", "142,800", "142,900", "143,000", "150,000", "200,000"] }
+    ],
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "143,000|140,000|100,000"
+  },
+  {
+    "item_id": "MA704650142",
+    "question_number": "20",
+    "answer_type": "fraction_model",
+    "question_text": "Create a fraction model to show the product of this expression.",
+    "math_expression": "4 &times; [1/3]",
+    "instruction": "Each figure represents one whole. Shade the fraction of the model that represents the product of the expression.<br><br>Divide each figure into the correct number of equal parts by using the More and Fewer buttons. Then shade by selecting the part or parts.",
+    "models": [
+      { "numerator": 3, "denominator": 3, "label": "One Whole" },
+      { "numerator": 1, "denominator": 3, "label": "One Whole" }
+    ],
+    "model_params": { "numerator": 4, "denominator": 3 },
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "answer_options": null,
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "3/3 in first whole, 1/3 in second whole (product = 4/3)"
+  },
+  {
+    "item_id": "MA286765",
+    "question_number": "19",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "stimulus_list": null,
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "question_text": "Which of these fractions is equivalent to 0.3?",
+    "answer_options": [
+      { "letter": "A", "text": "[1/3]" },
+      { "letter": "B", "text": "[1/30]" },
+      { "letter": "C", "text": "[3/10]" },
+      { "letter": "D", "text": "[3/100]" }
+    ],
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "C"
+  }
+]

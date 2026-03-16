@@ -1,6 +1,9 @@
 <script>
   import SymmetryFigure from './stimuli/SymmetryFigure.svelte';
+  import ProtractorImage from './stimuli/ProtractorImage.svelte';
+  import { renderMath } from '$lib/utils/math.js';
 
+  export let stimulus_intro = null;
   export let question_text;
   export let stimulus_type = null;
   export let stimulus_params = null;
@@ -26,13 +29,21 @@
 </script>
 
 <div class="question-body">
-  <p class="q-text">{question_text}</p>
+  {#if stimulus_intro}
+    <p class="q-text">{@html renderMath(stimulus_intro)}</p>
+  {/if}
 
   {#if stimulus_type === 'symmetry_figure'}
     <div class="stimulus-wrap">
       <SymmetryFigure params={stimulus_params} />
     </div>
+  {:else if stimulus_type === 'protractor_image'}
+    <div class="stimulus-wrap">
+      <ProtractorImage params={stimulus_params} />
+    </div>
   {/if}
+
+  <p class="q-text">{@html renderMath(question_text)}</p>
 
   {#if instruction}
     <p class="instruction">{instruction}</p>
@@ -42,7 +53,7 @@
     <p class="inline-sentence">
       {#each parseSentence(sentence) as token}
         {#if token.type === 'text'}
-          {token.value}
+          {@html renderMath(token.value)}
         {:else}
           {@const dd = dropdowns.find(d => d.id === token.id)}
           {#if dd}

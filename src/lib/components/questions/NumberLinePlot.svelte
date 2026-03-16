@@ -9,6 +9,9 @@
   const small_intervals = stimulus_params.small_intervals ?? 10;
   const range          = max - min;
 
+  // ── Colors ───────────────────────────────────────────────────────────
+  const LINE_COLOR = '#3a7abf';   // TestNav blue for number line
+
   // ── SVG layout constants ─────────────────────────────────────────────
   const W    = 650;   // viewBox width
 
@@ -117,33 +120,7 @@
     style="width:100%;max-width:{W}px;height:auto;cursor:crosshair;display:block;user-select:none;"
     on:click={handleClick}
   >
-    <defs>
-      <!-- LEFT ARROW: Points left (outward from left end) -->
-      <marker 
-        id="arrow-left" 
-        markerWidth="10" 
-        markerHeight="10" 
-        refX="1" 
-        refY="5" 
-        orient="auto"
-        markerUnits="strokeWidth"
-      >
-        <path d="M9,5 L1,2 L1,8 L9,5" fill="#333" stroke="#333" stroke-width="0.5" />
-      </marker>
-      
-      <!-- RIGHT ARROW: Points right (outward from right end) -->
-      <marker 
-        id="arrow-right" 
-        markerWidth="10" 
-        markerHeight="10" 
-        refX="9" 
-        refY="5" 
-        orient="auto"
-        markerUnits="strokeWidth"
-      >
-        <path d="M1,5 L9,2 L9,8 L1,5" fill="#333" stroke="#333" stroke-width="0.5" />
-      </marker>
-    </defs>
+    <defs></defs>
 
     <!-- ── Trapezoid fan ── -->
     {#if zoomedTenth !== null}
@@ -161,26 +138,26 @@
         stroke-width="1"
       />
 
-      <!-- Zoom line with arrows pointing OUTWARD -->
-      <line 
-        x1={ZLL - ARROW_EXT} 
-        y1={ZLY} 
-        x2={ZLR + ARROW_EXT} 
+      <!-- Zoom line -->
+      <line
+        x1={ZLL}
+        y1={ZLY}
+        x2={ZLR}
         y2={ZLY}
-        stroke="#333" 
+        stroke={LINE_COLOR}
         stroke-width="1.5"
-        marker-start="url(#arrow-left)" 
-        marker-end="url(#arrow-right)" 
       />
+      <!-- Zoom endpoint circles -->
+      <circle cx={ZLL} cy={ZLY} r="4" fill="white" stroke={LINE_COLOR} stroke-width="1.5" />
+      <circle cx={ZLR} cy={ZLY} r="4" fill="white" stroke={LINE_COLOR} stroke-width="1.5" />
 
-      <!-- Zoom tick marks -->
-      {#each Array(small_intervals + 1) as _, k}
-        {@const tx = ZLL + (k / small_intervals) * ZLEN}
-        {@const big = k === 0 || k === small_intervals}
+      <!-- Zoom tick marks (interior only) -->
+      {#each Array(small_intervals - 1) as _, k}
+        {@const tx = ZLL + ((k + 1) / small_intervals) * ZLEN}
         <line
-          x1={tx} y1={ZLY - (big ? 14 : 7)}
-          x2={tx} y2={ZLY + (big ? 14 : 7)}
-          stroke="#333" stroke-width="1.5"
+          x1={tx} y1={ZLY - 7}
+          x2={tx} y2={ZLY + 7}
+          stroke={LINE_COLOR} stroke-width="1.5"
         />
       {/each}
 
@@ -188,10 +165,12 @@
       <text x={ZLL} y={ZP_BOT - 4}
         font-size="13" text-anchor="middle"
         font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-weight="bold"
         fill="#333">{zLabelL}</text>
       <text x={ZLR} y={ZP_BOT - 4}
         font-size="13" text-anchor="middle"
         font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-weight="bold"
         fill="#333">{zLabelR}</text>
 
       <!-- Placed point in zoom panel -->
@@ -214,37 +193,39 @@
       />
     {/if}
 
-    <!-- Main horizontal line with arrows pointing OUTWARD -->
-    <line 
-      x1={ML - ARROW_EXT} 
-      y1={MY} 
-      x2={MR + ARROW_EXT} 
+    <!-- Main horizontal line (no arrows — open circles at endpoints) -->
+    <line
+      x1={ML}
+      y1={MY}
+      x2={MR}
       y2={MY}
-      stroke="#333" 
+      stroke={LINE_COLOR}
       stroke-width="1.5"
-      marker-start="url(#arrow-left)" 
-      marker-end="url(#arrow-right)" 
     />
+    <!-- Open circles at endpoints -->
+    <circle cx={ML} cy={MY} r="4" fill="white" stroke={LINE_COLOR} stroke-width="1.5" />
+    <circle cx={MR} cy={MY} r="4" fill="white" stroke={LINE_COLOR} stroke-width="1.5" />
 
-    <!-- Main tick marks -->
-    {#each Array(small_intervals + 1) as _, k}
-      {@const tx = ML + (k / small_intervals) * MLEN}
-      {@const big = k === 0 || k === small_intervals}
+    <!-- Main tick marks (interior only — endpoints have circles) -->
+    {#each Array(small_intervals - 1) as _, k}
+      {@const tx = ML + ((k + 1) / small_intervals) * MLEN}
       <line
-        x1={tx} y1={MY - (big ? 14 : 7)}
-        x2={tx} y2={MY + (big ? 14 : 7)}
-        stroke="#333" stroke-width="1.5"
+        x1={tx} y1={MY - 7}
+        x2={tx} y2={MY + 7}
+        stroke={LINE_COLOR} stroke-width="1.5"
       />
     {/each}
 
-    <!-- Labels: min and max, above line -->
-    <text x={ML} y={MY - 22}
+    <!-- Labels: min and max, below line -->
+    <text x={ML} y={MY + 22}
       font-size="14" text-anchor="middle"
       font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+      font-weight="bold"
       fill="#333">{fmt(min)}</text>
-    <text x={MR} y={MY - 22}
+    <text x={MR} y={MY + 22}
       font-size="14" text-anchor="middle"
       font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+      font-weight="bold"
       fill="#333">{fmt(max)}</text>
 
     <!-- Placed point on main line -->

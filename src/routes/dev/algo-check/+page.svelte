@@ -1,5 +1,7 @@
 <script>
   import questions2019 from '../../../../data/g4-math_2019_questions.json';
+  import questions2021 from '../../../../data/g4-math_2021_questions.json';
+  import questions2022 from '../../../../data/g4-math_2022_questions.json';
   import questions2023 from '../../../../data/g4-math_2023_questions.json';
   import questions2025 from '../../../../data/g4-math_2025_questions.json';
   import { generators, generate } from '$lib/utils/generators.js';
@@ -11,8 +13,12 @@
   import InlineChoice from '$lib/components/questions/InlineChoice.svelte';
   import TrueFalseTable from '$lib/components/questions/TrueFalseTable.svelte';
   import ProtractorDragDrop from '$lib/components/questions/ProtractorDragDrop.svelte';
+  import DragDropMatch from '$lib/components/questions/DragDropMatch.svelte';
+  import DragDropInequality from '$lib/components/questions/DragDropInequality.svelte';
+  import CategorySort from '$lib/components/questions/CategorySort.svelte';
+  import FractionModel from '$lib/components/questions/FractionModel.svelte';
 
-  const allQuestions = { '2019': questions2019, '2023': questions2023, '2025': questions2025 };
+  const allQuestions = { '2019': questions2019, '2021': questions2021, '2022': questions2022, '2023': questions2023, '2025': questions2025 };
 
   let year = '2019';
   let index = 0;
@@ -38,7 +44,7 @@
 
 <!-- Year selector -->
 <div class="flex gap-2 mb-4">
-  {#each ['2019', '2023', '2025'] as y}
+  {#each ['2019', '2021', '2022', '2023', '2025'] as y}
     <button
       on:click={() => year = y}
       class="px-4 py-1.5 rounded-full text-sm font-medium border transition-colors
@@ -100,6 +106,8 @@
       {:else if q.answer_type === 'short_answer'}
         <ShortAnswer
           stimulus_intro={q.stimulus_intro ?? null}
+          stimulus_type={q.stimulus_type ?? null}
+          stimulus_params={q.stimulus_params ?? null}
           math_expression={q.math_expression ?? null}
           question_text={q.question_text}
           input_widget={q.input_widget ?? 'text'}
@@ -129,6 +137,36 @@
         />
       {:else if q.answer_type === 'protractor_drag_drop'}
         <ProtractorDragDrop question_text={q.question_text} stimulus_params={q.stimulus_params} />
+      {:else if q.answer_type === 'drag_drop_match'}
+        <DragDropMatch
+          question_text={q.question_text}
+          instruction={q.instruction ?? ''}
+          tiles={q.tiles ?? []}
+          rows={q.rows ?? []}
+        />
+      {:else if q.answer_type === 'fraction_model'}
+        <FractionModel
+          question_text={q.question_text}
+          math_expression={q.math_expression ?? null}
+          instruction={q.instruction ?? null}
+          numerator={q.model_params?.numerator ?? 1}
+          denominator={q.model_params?.denominator ?? 4}
+          models={q.models ?? null}
+        />
+      {:else if q.answer_type === 'category_sort'}
+        <CategorySort
+          question_text={q.question_text}
+          tiles={q.tiles ?? []}
+          categories={q.categories ?? []}
+        />
+      {:else if q.answer_type === 'drag_drop_inequality'}
+        <DragDropInequality
+          question_text={q.question_text}
+          instruction2={q.instruction2 ?? ''}
+          tiles={q.tiles ?? []}
+          rows={q.rows ?? []}
+          correct_answer={q.correct_answer ?? {}}
+        />
       {:else}
         <div class="bg-white p-4 text-sm text-gray-400 italic rounded">
           No component for: <strong>{q.answer_type}</strong>
@@ -191,6 +229,8 @@
         {:else if generated.answer_type === 'short_answer'}
           <ShortAnswer
             stimulus_intro={generated.stimulus_intro ?? null}
+            stimulus_type={generated.stimulus_type ?? null}
+            stimulus_params={generated.stimulus_params ?? null}
             math_expression={generated.math_expression ?? null}
             question_text={generated.question_text}
             input_widget={generated.input_widget ?? 'text'}
@@ -220,6 +260,36 @@
           />
         {:else if generated.answer_type === 'protractor_drag_drop'}
           <ProtractorDragDrop question_text={generated.question_text} stimulus_params={generated.stimulus_params} />
+        {:else if generated.answer_type === 'drag_drop_match'}
+          <DragDropMatch
+            question_text={generated.question_text}
+            instruction={generated.instruction ?? ''}
+            tiles={generated.tiles ?? []}
+            rows={generated.rows ?? []}
+          />
+        {:else if generated.answer_type === 'fraction_model'}
+          <FractionModel
+            question_text={generated.question_text}
+            math_expression={generated.math_expression ?? null}
+            instruction={generated.instruction ?? null}
+            numerator={generated.model_params?.numerator ?? 1}
+            denominator={generated.model_params?.denominator ?? 4}
+            models={generated.models ?? null}
+          />
+        {:else if generated.answer_type === 'category_sort'}
+          <CategorySort
+            question_text={generated.question_text}
+            tiles={generated.tiles ?? []}
+            categories={generated.categories ?? []}
+          />
+        {:else if generated.answer_type === 'drag_drop_inequality'}
+          <DragDropInequality
+            question_text={generated.question_text}
+            instruction2={generated.instruction2 ?? ''}
+            tiles={generated.tiles ?? []}
+            rows={generated.rows ?? []}
+            correct_answer={generated.correct_answer ?? {}}
+          />
         {:else}
           <div class="bg-white p-4 text-sm text-gray-400 italic rounded">
             No component for: <strong>{generated.answer_type}</strong>

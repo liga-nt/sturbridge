@@ -1,8 +1,18 @@
 <script>
   import { renderMath } from '$lib/utils/math.js';
   import MathInput from './MathInput.svelte';
+  import SymmetryFigure from './stimuli/SymmetryFigure.svelte';
+  import AngleDiagram from './stimuli/AngleDiagram.svelte';
+  import RectangleDiagram from './stimuli/RectangleDiagram.svelte';
+  import NumberBox from './stimuli/NumberBox.svelte';
+  import LinePlot from './stimuli/LinePlot.svelte';
+  import DataTable from './stimuli/DataTable.svelte';
+  import DecimalGrid from './stimuli/DecimalGrid.svelte';
+  import ProtractorImage from './stimuli/ProtractorImage.svelte';
 
   export let stimulus_intro = null;
+  export let stimulus_type = null;
+  export let stimulus_params = null;
   export let math_expression = null;
   export let question_text;
   export let input_widget = 'text';   // 'text' | 'equation_editor'
@@ -14,6 +24,40 @@
 <div class="question-body">
   {#if stimulus_intro}
     <p class="q-text">{@html renderMath(stimulus_intro)}</p>
+  {/if}
+
+  {#if stimulus_type === 'symmetry_figure'}
+    <div class="stimulus">
+      <SymmetryFigure params={stimulus_params} />
+    </div>
+  {:else if stimulus_type === 'angle_diagram'}
+    <div class="stimulus">
+      <AngleDiagram params={stimulus_params} />
+    </div>
+  {:else if stimulus_type === 'rectangle_diagram'}
+    <div class="stimulus">
+      <RectangleDiagram params={stimulus_params} />
+    </div>
+  {:else if stimulus_type === 'number_box'}
+    <div class="stimulus">
+      <NumberBox params={stimulus_params} />
+    </div>
+  {:else if stimulus_type === 'line_plot'}
+    <div class="stimulus">
+      <LinePlot params={stimulus_params} />
+    </div>
+  {:else if stimulus_type === 'data_table'}
+    <div class="stimulus">
+      <DataTable params={stimulus_params} />
+    </div>
+  {:else if stimulus_type === 'decimal_grid'}
+    <div class="stimulus">
+      <DecimalGrid params={stimulus_params} />
+    </div>
+  {:else if stimulus_type === 'protractor_image'}
+    <div class="stimulus">
+      <ProtractorImage params={stimulus_params} />
+    </div>
   {/if}
 
   {#if math_expression}
@@ -29,13 +73,18 @@
     <MathInput answer_suffix={answer_suffix} />
   {:else}
     <p class="q-text">Enter your answer in the box.</p>
-    <input
-      type="text"
-      bind:value={answer}
-      class="answer-box"
-      spellcheck="false"
-      autocomplete="off"
-    />
+    <div class="answer-row">
+      <input
+        type="text"
+        bind:value={answer}
+        class="answer-box"
+        spellcheck="false"
+        autocomplete="off"
+      />
+      {#if answer_suffix}
+        <span class="answer-suffix">{answer_suffix}</span>
+      {/if}
+    </div>
   {/if}
 </div>
 
@@ -52,6 +101,11 @@
 
   .q-text {
     margin: 0 0 10px;
+  }
+
+  .stimulus {
+    margin: 10px 0 14px;
+    text-align: center;
   }
 
   .math-expr {
@@ -82,5 +136,16 @@
   .answer-box:focus {
     border-color: #66afe9;
     box-shadow: 0 0 0 2px rgba(102, 175, 233, 0.35);
+  }
+
+  .answer-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .answer-suffix {
+    font-size: 16px;
+    color: #333;
   }
 </style>

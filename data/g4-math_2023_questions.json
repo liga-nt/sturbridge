@@ -113,63 +113,89 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "Students collected rainwater in buckets.",
+    "question_text": "Four friends live in different towns. They each placed a bucket outside to collect rainwater on the same night. The four buckets were labeled A, B, C, and D.",
     "math_expression": null,
     "answer_type": "multi_part",
+    "layout": "stacked",
     "answer_options": null,
     "parts": [
       {
         "label": "A",
-        "question_text": "Bucket A is [3/4] full and Bucket B is [2/4] full. Both buckets are the same size. Write a number sentence to compare the total amount of water in Bucket A to the total amount in Bucket B. Show or explain how you got your answer.",
-        "answer_type": "constructed_response"
+        "question_text": "Bucket A and Bucket B are the same size. This diagram shows the fraction of each bucket that was filled with rainwater.",
+        "stimulus_type": "bucket_diagram",
+        "stimulus_params": {
+          "buckets": [
+            { "label": "Bucket A", "numerator": 7, "denominator": 8 },
+            { "label": "Bucket B", "numerator": 5, "denominator": 6 }
+          ]
+        },
+        "answer_type": "constructed_response",
+        "answer_instruction": "Write a number sentence using >, <, or = to compare the fraction of Bucket A that was filled to the fraction of Bucket B that was filled. Show or explain how you got your answer.\n\nEnter your number sentence and your work or explanation in the space provided."
       },
       {
         "label": "B",
-        "question_text": "Bucket C is [5/6] full and Bucket D is [4/6] full. Both buckets are the same size. Which bucket has more water? Show or explain how you got your answer.",
-        "answer_type": "constructed_response"
+        "question_text": "Bucket C and Bucket D are the same size. This diagram shows the fraction of each bucket that was filled with rainwater.",
+        "stimulus_type": "bucket_diagram",
+        "stimulus_params": {
+          "buckets": [
+            { "label": "Bucket C", "numerator": 5, "denominator": 6 },
+            { "label": "Bucket D", "numerator": 1, "denominator": 2 }
+          ]
+        },
+        "answer_type": "constructed_response",
+        "answer_instruction": "Which bucket, Bucket C or Bucket D, was filled with more rainwater? Explain how you got your answer.\n\nEnter your answer and your explanation in the space provided."
       },
       {
         "label": "C",
-        "question_text": "A student says Bucket A has more water than Bucket C because [3/4] > [5/6]. Is the student correct? Show or explain how you got your answer.",
-        "answer_type": "constructed_response"
+        "question_text": "This diagram shows all of the friends' buckets and the fraction of each bucket that was filled with rainwater.",
+        "stimulus_type": "bucket_diagram",
+        "stimulus_params": {
+          "buckets": [
+            { "label": "Bucket A", "numerator": 7, "denominator": 8 },
+            { "label": "Bucket B", "numerator": 5, "denominator": 6 },
+            { "label": "Bucket C", "numerator": 5, "denominator": 6 },
+            { "label": "Bucket D", "numerator": 1, "denominator": 2 }
+          ]
+        },
+        "answer_type": "constructed_response",
+        "answer_instruction": "One of the friends says that Bucket B and Bucket C were filled with the same amount of rainwater since [5/6] of each bucket was filled with rainwater.\n\nIs the friend correct? Explain your reasoning.\n\nEnter your answer and your explanation in the space provided."
       },
       {
         "label": "D",
-        "question_text": "Write a fraction to describe how much rainwater is in one of the buckets. Show or explain how you got your answer.",
-        "answer_type": "constructed_response"
+        "question_text": "A weatherman in another town says that his town received <strong>less than</strong> [1/2] inch of rainwater.\n\nWrite a fraction that represents the amount of rainwater, in inches, this town could have received. Explain how you know your answer is correct.",
+        "stimulus_type": null,
+        "stimulus_params": null,
+        "answer_type": "constructed_response",
+        "answer_instruction": "Enter your answer and your explanation in the space provided."
       }
     ],
     "select_count": null,
     "has_visual": true,
-    "visual_description": "Fraction bar/circle diagrams showing fill levels for Buckets A, B, C, D.",
-    "correct_answer": null,
-    "_stub": true,
-    "_needs": "FractionDiagram stimulus + MultiPart extended to 4 parts"
+    "visual_description": "Bucket diagrams showing fill levels: Part A has Buckets A (7/8) and B (5/6); Part B has Buckets C (5/6) and D (1/2); Part C shows all four buckets.",
+    "correct_answer": null
   },
   {
     "item_id": "MA002128911",
     "question_number": "5",
-    "stimulus_intro": "A figure is shown.",
+    "stimulus_intro": "A triangle is shown.",
     "stimulus_type": "symmetry_figure",
     "stimulus_params": {
       "shape": {
-        "type": "triangle",
-        "kind": "scalene",
-        "base": 180,
-        "height": 120
-      }
+        "type": "polygon",
+        "vertices": [[55, -52], [-90, 52], [90, 52]]
+      },
+      "padding": 16
     },
-    "question_text": "How many acute angles does this figure have?",
+    "question_text": "What is the total number of acute angles the triangle appears to have?",
     "math_expression": null,
     "answer_type": "short_answer",
+    "input_widget": "text",
     "answer_options": null,
     "parts": null,
     "select_count": null,
     "has_visual": true,
-    "visual_description": "A scalene triangle.",
-    "correct_answer": "2",
-    "_stub": true,
-    "_needs": "ShortAnswer+Stimulus slot (ShortAnswer currently has no stimulus support)"
+    "visual_description": "A scalene triangle with one obtuse angle at lower-left and two acute angles (top and lower-right).",
+    "correct_answer": "2"
   },
   {
     "item_id": "MA002334462",
@@ -197,50 +223,52 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "Which of the following shapes is a quadrilateral with only one pair of perpendicular sides?",
+    "question_text": "Which of these shapes appears to be a quadrilateral with perpendicular sides?",
     "math_expression": null,
     "answer_type": "multiple_choice",
     "answer_options": [
       {
         "letter": "A",
-        "text": "parallelogram"
+        "shape": { "type": "polygon", "vertices": [[-65, 38], [55, 38], [85, -38], [-35, -38]] }
       },
       {
         "letter": "B",
-        "text": "right trapezoid"
+        "shape": { "type": "rect", "width": 110, "height": 90 }
       },
       {
         "letter": "C",
-        "text": "rectangle"
+        "shape": { "type": "polygon", "vertices": [[-55, 72], [55, 72], [55, -20], [0, -72], [-55, -20]] }
       },
       {
         "letter": "D",
-        "text": "square"
+        "shape": { "type": "polygon", "vertices": [[0, -95], [55, 0], [0, 95], [-55, 0]] }
       }
     ],
     "parts": null,
     "select_count": null,
     "has_visual": true,
-    "visual_description": "Four quadrilateral shapes shown as SVG answer options.",
-    "correct_answer": "B",
-    "_stub": true,
-    "_needs": "Polygon/shape SVG answer options in MultipleChoice"
+    "visual_description": "Four shapes: A=parallelogram (no right angles), B=rectangle (perpendicular sides — correct), C=pentagon/house (5 sides, not a quadrilateral), D=kite (quadrilateral but no right angles between sides).",
+    "correct_answer": "B"
   },
   {
     "item_id": "MA002139080",
     "question_number": "8",
-    "stimulus_intro": "The dot plot shows the distances, in miles, students ran on Saturday.",
+    "stimulus_intro": "This dot plot shows the amounts of time, in hours, it took a student to complete ten different puzzles last week.",
     "stimulus_type": "dot_plot",
     "stimulus_params": {
-      "title": "Distances Students Ran on Saturday",
-      "axis_label": "Distance (in miles)",
+      "title": "Completed Puzzles",
+      "axis_label": "Time (hours)",
       "data_points": [
+        {
+          "label": "0",
+          "count": 0
+        },
         {
           "label": "[1/4]",
           "count": 3
         },
         {
-          "label": "[1/2]",
+          "label": "[2/4]",
           "count": 4
         },
         {
@@ -253,34 +281,32 @@
         }
       ]
     },
-    "question_text": "What is the total distance, in miles, run by the students who ran [1/2] mile or more?",
+    "question_text": "The three puzzles that took the greatest amount of time were completed by the student on Saturday.\n\nWhat was the total amount of time, in hours, it took the student to complete the three puzzles on Saturday?",
     "math_expression": null,
     "answer_type": "multiple_choice",
     "answer_options": [
       {
         "letter": "A",
-        "text": "[13/4]"
+        "text": "2[1/2] hours"
       },
       {
         "letter": "B",
-        "text": "[9/4]"
+        "text": "2 hours"
       },
       {
         "letter": "C",
-        "text": "[7/4]"
+        "text": "[3/4] hour"
       },
       {
         "letter": "D",
-        "text": "[5/4]"
+        "text": "[1/4] hour"
       }
     ],
     "parts": null,
     "select_count": null,
     "has_visual": true,
-    "visual_description": "Dot plot with filled circles above a fractional number line.",
-    "correct_answer": "A",
-    "_stub": true,
-    "_needs": "DotPlot stimulus (LinePlot variant with filled circles/dots)"
+    "visual_description": "Dot plot titled 'Completed Puzzles' showing time in hours on x-axis. 3 dots at 1/4, 4 dots at 2/4, 2 dots at 3/4, 1 dot at 1.",
+    "correct_answer": "A"
   },
   {
     "item_id": "MA002034926",
@@ -354,17 +380,22 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "Drag each decimal to complete the comparison statements.",
+    "question_text": "Use these decimal numbers to create three comparison statements that are true.",
+    "instruction2": "Drag and drop a decimal number into each box so that <strong>all</strong> three comparison statements are true.",
     "math_expression": null,
     "answer_type": "drag_drop_inequality",
+    "tiles": ["0.65", "0.52", "0.78"],
+    "rows": [
+      { "left": "0.54", "op": ">", "id": "slot1" },
+      { "left": "0.6",  "op": "<", "id": "slot2" },
+      { "left": "0.76", "op": ">", "id": "slot3" }
+    ],
     "answer_options": null,
     "parts": null,
     "select_count": null,
     "has_visual": true,
-    "visual_description": "Three inequality blanks: ___ > 0.52, 0.65 > ___ > 0.52, 0.78 > ___. Tile bank with 0.65, 0.52, 0.78.",
-    "correct_answer": null,
-    "_stub": true,
-    "_needs": "DragDropInequality component \u2014 drag decimal tiles into inequality blanks"
+    "visual_description": "Tile bank: 0.65, 0.52, 0.78. Three rows: 0.54 > [blank], 0.6 < [blank], 0.76 > [blank].",
+    "correct_answer": { "slot1": "0.52", "slot2": "0.65", "slot3": "0.78" }
   },
   {
     "item_id": "MA002140372",
@@ -451,33 +482,32 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "A store sells boxes of crayons.",
+    "question_text": "A doctor works in her office 5 days each week. Each day she works, she drives a total of 19 miles to and from her office.",
     "math_expression": null,
     "answer_type": "multi_part",
+    "layout": "stacked",
     "answer_options": null,
     "parts": [
       {
         "label": "A",
-        "question_text": "There are 24 crayons in each box. The store has 16 boxes. How many crayons does the store have in all? Show or explain how you got your answer.",
+        "question_text": "What is the total distance, in miles, the doctor drives to and from her office each week? Show or explain how you got your answer.",
         "answer_type": "constructed_response"
       },
       {
         "label": "B",
-        "question_text": "The store also sells markers. There are 12 markers in each pack and 23 packs. How many markers are there in all? Show or explain how you got your answer.",
+        "question_text": "The doctor worked 48 weeks last year.\n\nWhat is the total distance, in miles, she drove to and from her office last year? Show or explain how you got your answer.",
         "answer_type": "constructed_response"
       },
       {
         "label": "C",
-        "question_text": "A teacher buys 4 boxes of crayons and 3 packs of markers. How many total items did the teacher buy? Show or explain how you got your answer.",
+        "question_text": "The doctor worked the same number of weeks each year for the last 7 years.\n\nWhat is the total distance, in miles, the doctor drove to and from her office over the last 7 years? Show or explain how you got your answer.",
         "answer_type": "constructed_response"
       }
     ],
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": null,
-    "_stub": true,
-    "_needs": "MultiPart extended to support 3 parts (currently 2-part max)"
+    "correct_answer": null
   },
   {
     "item_id": "MA002135528",
@@ -485,7 +515,7 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "A metal bar has a mass of 5 kilograms. Which of these is the mass, in grams, of the bar?",
+    "question_text": "A metal bar has a mass of 5 kilograms.\n\n Which of these is the mass, in <strong>grams</strong>, of the bar?",
     "math_expression": null,
     "answer_type": "multiple_choice",
     "answer_options": [
@@ -518,7 +548,7 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "A rectangle has a width of 5 inches and a length of 4 inches. Which of these equations shows the perimeter, in inches, of the rectangle?",
+    "question_text": "A rectangle has a width of 5 inches and a length of 4 inches.\n\n Which of these equations shows the perimeter, in inches, of the rectangle?",
     "math_expression": null,
     "answer_type": "multiple_choice",
     "answer_options": [
@@ -548,22 +578,22 @@
   {
     "item_id": "MA001851276",
     "question_number": "16",
-    "stimulus_intro": null,
+    "stimulus_intro": "Round the number 44,285 to the nearest hundred, the nearest thousand, and the nearest ten thousand.",
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "Select \u201cTrue\u201d or \u201cFalse\u201d in the table for each statement.",
+    "question_text": "Select \u201cTrue\u201d or \u201cFalse\u201d for each statement in the table.",
     "math_expression": null,
     "answer_type": "true_false_table",
     "answer_options": null,
     "statements": [
       {
-        "text": "44,285 rounded to the nearest hundred is 44,200."
+        "text": "44,285 rounded to the nearest <strong>hundred</strong> is 44,200."
       },
       {
-        "text": "44,285 rounded to the nearest thousand is 44,000."
+        "text": "44,285 rounded to the nearest <strong>thousand</strong> is 44,000."
       },
       {
-        "text": "44,285 rounded to the nearest ten thousand is 40,000."
+        "text": "44,285 rounded to the nearest <strong>ten thousand</strong> is 40,000."
       }
     ],
     "parts": null,
@@ -575,10 +605,14 @@
   {
     "item_id": "MA001750121",
     "question_number": "17",
-    "stimulus_intro": null,
+    "stimulus_intro": "A group of friends are going to eat lunch in the cafeteria.",
+    "stimulus_list": [
+      "At the cafeteria, a boxed lunch costs $7.",
+      "Each friend in the group will buy a boxed lunch."
+    ],
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "A group of friends are going to eat lunch in the cafeteria. At the cafeteria, a boxed lunch costs $7. Each friend in the group will buy a boxed lunch. Which of these could be the total cost to buy boxed lunches for all the friends in the group?",
+    "question_text": "Which of these could be the <strong>total</strong> cost to buy boxed lunches for all the friends in the group?",
     "math_expression": null,
     "answer_type": "multiple_choice",
     "answer_options": [
@@ -611,40 +645,35 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "There are 5 times as many students in fourth grade as there are teachers.",
+    "question_text": "A teacher is using multiplication to compare numbers.",
     "math_expression": null,
     "answer_type": "multi_part",
+    "layout": "stacked",
     "answer_options": null,
     "parts": [
       {
         "label": "A",
-        "question_text": "There are 6 teachers. Write a multiplication equation to find s, the number of fourth-grade students.",
-        "answer_type": "short_answer"
+        "question_text": "The teacher says that 14 is 7 times as many as 2.\n\nWrite a multiplication equation to show the teacher\u2019s comparison.\n\nEnter your equation in the space provided. Enter <strong>only</strong> your equation. Click [Save] after entering your answer.",
+        "answer_type": "short_answer",
+        "input_widget": "math"
       },
       {
         "label": "B",
-        "question_text": "Select from the drop-down menus to complete the sentence.",
+        "question_text": "The teacher uses a comparison to describe this equation.",
+        "math_expression": "30 = 6 \u00d7 5",
         "answer_type": "inline_choice",
+        "instruction": "Select from the drop-down menus to correctly complete the teacher\u2019s comparison.",
         "sentences": [
-          "The number of fourth-grade students is [RESPONSE_A1] times [RESPONSE_A2] the number of teachers."
+          "The number [RESPONSE_B1] is 6 times as many as the number [RESPONSE_B2]."
         ],
         "dropdowns": [
           {
-            "id": "RESPONSE_A1",
-            "options": [
-              "3",
-              "4",
-              "5",
-              "6"
-            ]
+            "id": "RESPONSE_B1",
+            "options": ["5", "6", "30"]
           },
           {
-            "id": "RESPONSE_A2",
-            "options": [
-              "greater than",
-              "less than",
-              "equal to"
-            ]
+            "id": "RESPONSE_B2",
+            "options": ["5", "6", "30"]
           }
         ]
       }
@@ -652,9 +681,7 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "A;C",
-    "_stub": true,
-    "_needs": "MultiPart with mixed part types (short_answer + inline_choice); pattern similar to Q9 2019"
+    "correct_answer": "RESPONSE_B1=30;RESPONSE_B2=5"
   },
   {
     "item_id": "MA900846441",
@@ -662,17 +689,19 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "Two friends bought a chocolate bar. One friend ate [2/8] of the chocolate bar. The other friend ate [1/8] of the chocolate bar. Create a fraction model in which the shaded part represents the fraction of the chocolate bar that remains. Divide the figure into the correct number of equal parts by using the More and Fewer buttons. Then shade by selecting the part or parts.",
+    "question_text": "Two friends bought a chocolate bar.<ul><li>One friend ate [2/8] of the chocolate bar.</li><li>The other friend ate [1/8] of the chocolate bar.</li></ul>Create a fraction model in which the shaded part represents the fraction of the chocolate bar that <strong>remains</strong>.\n\nDivide the figure into the correct number of equal parts by using the More and Fewer buttons. Then shade by selecting the part or parts.",
     "math_expression": null,
-    "answer_type": "interactive_fraction_model",
+    "answer_type": "fraction_model",
+    "model_params": {
+      "numerator": 5,
+      "denominator": 8
+    },
     "answer_options": null,
     "parts": null,
     "select_count": null,
     "has_visual": true,
-    "visual_description": "Interactive rectangle with More/Fewer/Reset buttons to partition and click-to-shade. Answer: 8 parts, 5 shaded (5/8 remaining).",
-    "correct_answer": "[5/8]",
-    "_stub": true,
-    "_needs": "InteractiveFractionModel component \u2014 More/Fewer buttons to divide rectangle + click-to-shade"
+    "visual_description": "Rectangle divided into 8 equal vertical parts with 5 parts shaded (5/8 remaining after 2/8 + 1/8 = 3/8 was eaten). Fewer, More, and Reset buttons shown below.",
+    "correct_answer": "[5/8]"
   },
   {
     "item_id": "MA303324",

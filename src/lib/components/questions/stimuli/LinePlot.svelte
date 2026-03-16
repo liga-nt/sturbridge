@@ -13,7 +13,12 @@
   const { title, axis_label, data_points, tick_spacing = 50 } = params;
 
   // ── Parse label strings ──────────────────────────────────────────────
+  // Supports: "9", "9[1/8]", "[3/4]" (pure fraction, whole omitted)
   function parseLabel(s) {
+    // Pure fraction: "[3/4]"
+    const pure = s.match(/^\[(\d+)\/(\d+)\]$/);
+    if (pure) return { whole: '', num: pure[1], den: pure[2] };
+    // Mixed number or integer: "9[1/8]" or "9"
     const m = s.match(/^(-?\d+(?:\.\d+)?)\[(\d+)\/(\d+)\]$|^(-?\d+(?:\.\d+)?)$/);
     if (!m) return { whole: s };
     if (m[4] !== undefined) return { whole: m[4] };

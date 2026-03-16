@@ -9,5 +9,6 @@ export function renderMath(text) {
         .replace(/\[(\d+)\/(\d+)\]/g, (_, num, den) =>
             `<span class="frac"><span class="frac-num">${num}</span><span class="frac-den">${den}</span></span>`
         )
-        .replace(/\{\?\}/g, `<span class="box-q">?</span>`);
+        .replace(/\{\?\}/g, `<span class="box-q">?</span>`)
+        .replace(/\[Save\]/g, `<span class="save-pill">Save</span>`);
 }

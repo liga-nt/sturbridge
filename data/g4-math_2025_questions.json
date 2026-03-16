@@ -38,32 +38,41 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "Drag each number into the correct box to show whether it is prime or composite.",
+    "question_text": "Identify whether each of these numbers is a composite number or a prime number.\n\nDrag and drop each number into the correct box.",
     "math_expression": null,
     "answer_type": "category_sort",
+    "tiles": ["4", "7", "18", "25", "43"],
+    "categories": [
+      { "label": "Composite", "correct_tiles": ["4", "18", "25"] },
+      { "label": "Prime",     "correct_tiles": ["7", "43"] }
+    ],
     "answer_options": null,
     "parts": null,
     "select_count": null,
-    "has_visual": true,
-    "visual_description": "Tile bank with numbers 4, 7, 18, 25, 43. Two drop boxes labeled Composite and Prime.",
-    "correct_answer": "Prime: 7, 43; Composite: 4, 18, 25",
-    "_stub": true,
-    "_needs": "CategorySort component \u2014 drag tiles into labeled category boxes"
+    "has_visual": false,
+    "visual_description": null,
+    "correct_answer": "Composite: 4, 18, 25; Prime: 7, 43"
   },
   {
     "item_id": "MA800780887",
     "question_number": "3",
-    "stimulus_intro": "A cafe owner recorded how many desserts were sold on Saturday.\n\u2022 [5/8] of the desserts sold were pies.\n\u2022 [1/8] of the desserts sold were cakes.\n\u2022 The remaining desserts sold were cookies.",
+    "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": null,
+    "question_text": "A cafe owner recorded how many desserts were sold on Saturday.",
+    "stimulus_list": [
+      "[5/8] of the desserts sold were pies.",
+      "[1/8] of the desserts sold were cakes.",
+      "The remaining desserts sold were cookies."
+    ],
     "math_expression": null,
     "answer_type": "multi_part",
+    "layout": null,
     "answer_options": null,
     "parts": [
       {
         "label": "A",
-        "question_text": "Which equation can be used to find the total fraction of desserts sold that were either pies or cakes?",
+        "question_text": "Which equation can be used to find the <strong>total</strong> fraction of desserts sold that were either pies or cakes?",
         "answer_type": "multiple_choice",
         "answer_options": [
           {
@@ -82,30 +91,33 @@
             "letter": "D",
             "text": "[5/8] + [1/8] = [6/8]"
           }
-        ]
+        ],
+        "correct_answer": "D"
       },
       {
         "label": "B",
-        "question_text": "Of all the desserts sold on Saturday, what fraction were cookies? Show or explain how you got your answer.",
-        "answer_type": "constructed_response"
+        "question_text": "Of <strong>all</strong> the desserts sold on Saturday, what fraction were <strong>cookies</strong>? Show or explain how you got your answer.",
+        "answer_type": "constructed_response",
+        "correct_answer": "[2/8] or [1/4]"
       },
       {
         "label": "C",
-        "question_text": "Of all the desserts sold on Saturday, [4/10] of the desserts were sold in the first two hours. A worker created this equation: [3/4] + [1/6] = [4/10]. Is the worker's equation correct? Show or explain how you got your answer.",
-        "answer_type": "constructed_response"
+        "question_text": "Of all the desserts sold on Saturday, [4/10] of the desserts were sold in the first two hours.\n\nA worker at the cafe created this equation to represent the fraction of all the desserts sold in the first two hours.\n\nIs the worker's equation correct? Show or explain how you got your answer.",
+        "math_expression": "[3/4] + [1/6] = [4/10]",
+        "answer_type": "constructed_response",
+        "correct_answer": "No; [3/4] + [1/6] = [11/12], not [4/10]"
       },
       {
         "label": "D",
-        "question_text": "At the beginning of Saturday the cafe had 6[1/8] pies. At the end they had 2[3/8] pies remaining. What is the total amount of pie the cafe sold? Show or explain how you got your answer.",
-        "answer_type": "constructed_response"
+        "question_text": "At the beginning of the day on Saturday, the cafe had 6[1/8] pies to sell. At the end of the day, the cafe had 2[3/8] pies remaining.\n\nWhat is the total amount of pie the cafe sold on Saturday? Show or explain how you got your answer.",
+        "answer_type": "constructed_response",
+        "correct_answer": "3[6/8] or 3[3/4]"
       }
     ],
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": null,
-    "_stub": true,
-    "_needs": "MultiPart extended to 4 parts; Part A is MC, Parts B/C/D are constructed response"
+    "correct_answer": null
   },
   {
     "item_id": "MA010534486",
@@ -155,38 +167,140 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "Which of these shapes have at least one pair of parallel sides? Select the three correct answers.",
+    "question_text": "Which of these shapes appear to have <strong>at least</strong> one pair of parallel sides?",
     "math_expression": null,
     "answer_type": "multiple_select",
     "answer_options": [
       {
         "letter": "A",
-        "text": "irregular quadrilateral 1"
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -28,
+              38
+            ],
+            [
+              28,
+              38
+            ],
+            [
+              28,
+              -18
+            ],
+            [
+              -2,
+              -38
+            ]
+          ]
+        }
       },
       {
         "letter": "B",
-        "text": "irregular quadrilateral 2"
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -10,
+              38
+            ],
+            [
+              28,
+              38
+            ],
+            [
+              20,
+              -38
+            ],
+            [
+              -28,
+              -10
+            ]
+          ]
+        }
       },
       {
         "letter": "C",
-        "text": "irregular quadrilateral 3"
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -30,
+              25
+            ],
+            [
+              -5,
+              38
+            ],
+            [
+              30,
+              5
+            ],
+            [
+              20,
+              -35
+            ],
+            [
+              -15,
+              -30
+            ]
+          ]
+        }
       },
       {
         "letter": "D",
-        "text": "irregular quadrilateral 4"
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -28,
+              18
+            ],
+            [
+              8,
+              38
+            ],
+            [
+              28,
+              -18
+            ],
+            [
+              -8,
+              -38
+            ]
+          ]
+        }
       },
       {
         "letter": "E",
-        "text": "irregular quadrilateral 5"
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -35,
+              30
+            ],
+            [
+              35,
+              30
+            ],
+            [
+              25,
+              -30
+            ],
+            [
+              -25,
+              -30
+            ]
+          ]
+        }
       }
     ],
     "parts": null,
     "select_count": 3,
     "has_visual": true,
-    "visual_description": "Five irregular quadrilateral shapes shown as answer options (SVG polygons).",
-    "correct_answer": "A,D,E",
-    "_stub": true,
-    "_needs": "Polygon/shape SVG answer options in MultipleSelect"
+    "visual_description": "Five polygon shapes shown as answer options. A: right-trapezoid-like quadrilateral (top and bottom parallel). B: irregular quadrilateral (no parallel sides). C: irregular pentagon (no parallel sides). D: parallelogram (two pairs of parallel sides). E: trapezoid (top and bottom parallel).",
+    "correct_answer": "A,D,E"
   },
   {
     "item_id": "MA202029218",
@@ -230,51 +344,50 @@
     "question_text": null,
     "math_expression": null,
     "answer_type": "multi_part",
+    "layout": "stacked",
     "answer_options": null,
     "parts": [
       {
         "label": "A",
-        "question_text": "Drag each expression to match the number it represents.",
+        "question_text": "Match the numbers in expanded form to their equivalent numbers in word form.\n\nDrag and drop each number in expanded form into the box with the matching word form.",
         "answer_type": "drag_drop_match",
         "tiles": [
           "(6 \u00d7 10,000) + (3 \u00d7 100) + (8 \u00d7 10) + (1 \u00d7 1)",
-          "(1 \u00d7 10,000) + (3 \u00d7 1,000) + (8 \u00d7 100) + (4 \u00d7 1)",
-          "(6 \u00d7 10,000) + (1 \u00d7 1,000) + (8 \u00d7 100) + (4 \u00d7 10)"
+          "60,000 + 3,000 + 800 + 1",
+          "(6 \u00d7 1,000) + (3 \u00d7 100) + (8 \u00d7 10) + (1 \u00d7 1)"
         ],
         "targets": [
           "sixty-three thousand, eight hundred one",
-          "thirteen thousand, eight hundred four",
-          "sixty-one thousand, eight hundred forty"
-        ]
+          "six thousand, three hundred eighty-one",
+          "sixty thousand, three hundred eighty-one"
+        ],
+        "correct_matches": [2, 0, 1]
       },
       {
         "label": "B",
-        "question_text": "Select 'Less Than 13,084' or 'Greater Than 13,084' for each number.",
+        "question_text": "Three different numbers in word form are shown in this table. Compare the value of each number in the table to 13,084.\n\nFor each number in word form, select \u201cLess Than 13,084\u201d or \u201cGreater Than 13,084.\u201d",
         "answer_type": "true_false_table",
-        "column_labels": [
-          "Number",
-          "Less Than 13,084",
-          "Greater Than 13,084"
-        ],
+        "column_label": "Number",
+        "true_label": "Less Than 13,084",
+        "false_label": "Greater Than 13,084",
         "statements": [
           {
-            "text": "thirteen thousand, eight hundred forty"
+            "text": "thirteen thousand, eight hundred thirty-one"
           },
           {
-            "text": "thirteen thousand, four hundred eighty"
+            "text": "thirteen thousand, seven"
           },
           {
-            "text": "thirteen thousand, eighty-four"
+            "text": "thirteen thousand, one hundred six"
           }
-        ]
+        ],
+        "correct_answer": "B,C,F"
       }
     ],
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "A,D,E; B,C,F",
-    "_stub": true,
-    "_needs": "DragDropMatch component (Part A) + TrueFalseTable with custom column labels (Part B)"
+    "correct_answer": null
   },
   {
     "item_id": "MA900741771",
@@ -352,34 +465,140 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "Select 'Line of Symmetry' or 'Not a Line of Symmetry' for each figure.",
+    "question_text": "Determine whether the line shown on each figure in the table is a line of symmetry.\n\nSelect \u201cLine of Symmetry\u201d or \u201cNot a Line of Symmetry\u201d for each figure.",
     "math_expression": null,
     "answer_type": "true_false_table",
+    "column_label": "Figure",
+    "true_label": "Line of Symmetry",
+    "false_label": "Not a Line of Symmetry",
     "answer_options": null,
     "statements": [
       {
-        "text": "Figure A \u2014 square with vertical dashed line"
+        "shape": {
+          "shape": {
+            "type": "polygon",
+            "vertices": [
+              [
+                0,
+                -50
+              ],
+              [
+                42,
+                10
+              ],
+              [
+                20,
+                48
+              ],
+              [
+                -20,
+                48
+              ],
+              [
+                -42,
+                10
+              ]
+            ]
+          },
+          "line": {
+            "from": [
+              0,
+              -66
+            ],
+            "to": [
+              0,
+              64
+            ]
+          },
+          "padding": 20
+        }
       },
       {
-        "text": "Figure B \u2014 rectangle with diagonal dashed line"
+        "shape": {
+          "shape": {
+            "type": "polygon",
+            "vertices": [
+              [
+                -52,
+                -18
+              ],
+              [
+                16,
+                -18
+              ],
+              [
+                52,
+                18
+              ],
+              [
+                -16,
+                18
+              ]
+            ]
+          },
+          "line": {
+            "from": [
+              -72,
+              0
+            ],
+            "to": [
+              72,
+              0
+            ]
+          },
+          "padding": 20
+        }
       },
       {
-        "text": "Figure C \u2014 circle with horizontal dashed line"
-      },
-      {
-        "text": "Figure D \u2014 irregular quadrilateral with vertical dashed line"
-      },
-      {
-        "text": "Figure E \u2014 regular pentagon with vertical dashed line"
+        "shape": {
+          "shape": {
+            "type": "polygon",
+            "vertices": [
+              [
+                -54,
+                0
+              ],
+              [
+                -30,
+                -26
+              ],
+              [
+                30,
+                -26
+              ],
+              [
+                54,
+                0
+              ],
+              [
+                30,
+                26
+              ],
+              [
+                -30,
+                26
+              ]
+            ]
+          },
+          "line": {
+            "from": [
+              -72,
+              0
+            ],
+            "to": [
+              72,
+              0
+            ]
+          },
+          "padding": 20
+        }
       }
     ],
     "parts": null,
     "select_count": null,
     "has_visual": true,
-    "visual_description": "5 geometric figures each with a dashed line drawn on them. Columns: Line of Symmetry / Not a Line of Symmetry.",
-    "correct_answer": "A,E",
-    "_stub": true,
-    "_needs": "FigureSymmetryTable \u2014 TrueFalseTable variant with SVG figures in first column and custom column headers"
+    "visual_description": "3 figures with dashed symmetry lines. Row 1: kite/arrowhead shape with vertical line (is symmetric). Row 2: asymmetric trapezoid with horizontal line (not symmetric). Row 3: regular hexagon with horizontal line (is symmetric).",
+    "correct_answer": "A,D,E"
   },
   {
     "item_id": "MA233051799",
@@ -450,23 +669,21 @@
   {
     "item_id": "MA900776517",
     "question_number": "13",
-    "stimulus_intro": "The shaded part of this model represents a decimal number.",
+    "stimulus_intro": "The shaded part of this model represents a decimal number that is less than 1.",
     "stimulus_type": "decimal_grid",
     "stimulus_params": {
-      "shaded": 9,
-      "total": 100
+      "shaded": 71,
+      "show_whole": true
     },
-    "question_text": "Write a decimal number that is less than the decimal number represented in the model.",
+    "question_text": "Write a decimal number that is <strong>less than</strong> the decimal number represented in the model.",
     "math_expression": null,
     "answer_type": "short_answer",
     "answer_options": null,
     "parts": null,
     "select_count": null,
     "has_visual": true,
-    "visual_description": "10\u00d710 grid with 9 squares shaded (representing 0.09).",
-    "correct_answer": "Any decimal less than 0.09",
-    "_stub": true,
-    "_needs": "DecimalGrid stimulus + ShortAnswer+Stimulus slot"
+    "visual_description": "Two 10\u00d710 grids: left grid has 71 cells shaded (representing 0.71); right grid is fully shaded labeled \u201crepresents 1 whole\u201d.",
+    "correct_answer": "Any decimal less than 0.71"
   },
   {
     "item_id": "MA231875780",
@@ -474,73 +691,95 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": null,
+    "question_text": "A gardener cut grass with a lawnmower and then raked and bagged leaves.",
     "math_expression": null,
     "answer_type": "multi_part",
+    "layout": "stacked",
     "answer_options": null,
     "parts": [
       {
         "label": "A",
-        "question_text": "Read the graduated cylinder and write the measurement in liters.",
-        "answer_type": "short_answer"
+        "question_text": "Before cutting the grass, the gardener added fuel to the lawnmower from a container. This picture shows the amount of fuel, in liters, <strong>remaining</strong> in the container after adding fuel to the lawnmower.",
+        "stimulus_type": "graduated_cylinder",
+        "stimulus_params": {
+          "min": 0,
+          "max": 20,
+          "interval": 5,
+          "value": 8,
+          "unit": "liters"
+        },
+        "answer_type": "short_answer",
+        "answer_suffix": "liters",
+        "correct_answer": "8"
       },
       {
         "label": "B",
-        "question_text": "Convert the measurement from Part A to milliliters. Show or explain how you got your answer.",
-        "answer_type": "constructed_response"
+        "question_text": "The gardener used 2 liters of fuel to cut the grass.\n\nWhat is the total amount of fuel, in <strong>milliliters</strong>, the gardener used to cut the grass? Show or explain how you got your answer.",
+        "answer_type": "constructed_response",
+        "correct_answer": "2,000"
       },
       {
         "label": "C",
-        "question_text": "Convert the time 1 hour and 45 minutes to only minutes. Show or explain how you got your answer.",
-        "answer_type": "constructed_response"
+        "question_text": "It took the gardener 3 hours and 45 minutes to rake the leaves.\n\nWhat is the total amount of time, in <strong>minutes</strong>, it took the gardener to rake the leaves? Show or explain how you got your answer.",
+        "answer_type": "constructed_response",
+        "correct_answer": "225"
       },
       {
         "label": "D",
-        "question_text": "Compare two masses given in different metric units. Show or explain how you got your answer.",
-        "answer_type": "constructed_response"
+        "question_text": "The gardener placed the leaves into three large plastic bags: a black bag, a green bag, and a white bag.\n\n<ul><li>The mass of the black bag was 8 kilograms.</li><li>The mass of the green bag was 7,900 grams.</li><li>The mass of the white bag was <strong>less than</strong> the mass of the black bag but <strong>more than</strong> the mass of the green bag.</li></ul>\n\nWhat could be the mass, in <strong>grams</strong>, of the <strong>white</strong> bag? Show or explain how you got your answer.",
+        "answer_type": "constructed_response",
+        "correct_answer": "Any value between 7,900 and 8,000 grams (exclusive)"
       }
     ],
     "select_count": null,
     "has_visual": true,
-    "visual_description": "Graduated cylinder diagram for Part A. Parts B/C/D are text-only constructed response.",
-    "correct_answer": null,
-    "_stub": true,
-    "_needs": "GraduatedCylinder stimulus + MultiPart extended to 4 parts"
+    "visual_description": "Graduated cylinder showing 8 liters of fuel remaining (scale 0\u201320L). Parts B/C/D are text-only constructed response.",
+    "correct_answer": null
   },
   {
     "item_id": "MA000732007",
     "question_number": "15",
-    "stimulus_intro": "A protractor is shown.",
+    "stimulus_intro": "Angles <i>PLM</i> and <i>KLP</i> are shown on this protractor.",
     "stimulus_type": "protractor_image",
     "stimulus_params": {
-      "angle_PLM": 130,
-      "angle_KLP": 50
+      "rays": [
+        {
+          "label": "M",
+          "angle": 70
+        },
+        {
+          "label": "K",
+          "angle": 145
+        }
+      ],
+      "center_label": "L",
+      "base_label": "P"
     },
-    "question_text": "Use the protractor to find the measures of the angles.",
+    "question_text": "What is the measure of each angle?",
     "math_expression": null,
     "answer_type": "inline_choice",
     "instruction": "Select from the drop-down menus to correctly complete each sentence.",
     "sentences": [
-      "The measure of angle PLM is [RESPONSE_A1] degrees.",
-      "The measure of angle KLP is [RESPONSE_A2] degrees."
+      "The measure of angle <i>PLM</i> is [RESPONSE_A1] degrees.",
+      "The measure of angle <i>KLP</i> is [RESPONSE_A2] degrees."
     ],
     "dropdowns": [
       {
         "id": "RESPONSE_A1",
         "options": [
-          "50",
-          "100",
-          "130",
-          "140"
+          "35",
+          "70",
+          "110",
+          "145"
         ]
       },
       {
         "id": "RESPONSE_A2",
         "options": [
-          "40",
-          "50",
-          "60",
-          "80"
+          "35",
+          "45",
+          "145",
+          "155"
         ]
       }
     ],
@@ -548,10 +787,7 @@
     "parts": null,
     "select_count": null,
     "has_visual": true,
-    "visual_description": "A dual-scale protractor with rays forming angles PLM and KLP. Student reads the degree measures.",
-    "correct_answer": "B,E",
-    "_stub": true,
-    "_needs": "ProtractorImage stimulus (static read-only SVG protractor) + InlineChoice"
+    "correct_answer": "B,C"
   },
   {
     "item_id": "MA900750085",
@@ -665,33 +901,26 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "Select \u201cTrue\u201d or \u201cFalse\u201d in the table for each equation.",
+    "question_text": "Identify whether or not each equation in the table is true.\n\nSelect \u201cTrue\u201d or \u201cFalse\u201d for each equation.",
     "math_expression": null,
     "answer_type": "true_false_table",
+    "column_label": "Equation",
     "answer_options": null,
     "statements": [
       {
-        "text": "4 \u00d7 318 = 1,262"
+        "text": "257 \u00d7 5 = 1,235"
       },
       {
-        "text": "3 \u00d7 286 = 858"
+        "text": "384 \u00d7 9 = 3,456"
       },
       {
-        "text": "5 \u00d7 174 = 870"
-      },
-      {
-        "text": "6 \u00d7 253 = 1,508"
-      },
-      {
-        "text": "2 \u00d7 447 = 894"
+        "text": "601 \u00d7 7 = 4,207"
       }
     ],
     "parts": null,
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "B,C,E",
-    "_stub": true,
-    "_needs": "TrueFalseTable with 'Equation' column label instead of 'Statement' (minor prop extension)"
+    "correct_answer": "B,C,E"
   }
 ]

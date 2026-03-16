@@ -8,7 +8,7 @@ if (!itemId) {
     process.exit(1);
 }
 
-const OUTPUT_DIR = resolve('scripts/items');
+const OUTPUT_DIR = resolve('data/items');
 const itemDir = join(OUTPUT_DIR, itemId);
 mkdirSync(itemDir, { recursive: true });
 
