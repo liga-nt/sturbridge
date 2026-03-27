@@ -1,0 +1,94 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helpers ────────────────────────────────────────────────────────────
+    function role() {
+      return request.auth.token.role;
+    }
+    function isStudent()  { return role() == 'student'; }
+    function isTeacher()  { return role() == 'teacher'; }
+    function isAdmin()    { return role() == 'admin'; }
+    function isDev()      { return role() == 'dev'; }
+    function isPriv()     { return isAdmin() || isDev(); }
+    function isAuth()     { return request.auth != null; }
+
+    // ── standards — read by anyone authenticated ───────────────────────────
+    match /standards/{standardId} {
+      allow read: if isAuth();
+      allow write: if isDev();
+    }
+
+    // ── tips — read by anyone authenticated; write by dev ─────────────────
+    match /tips/{itemId} {
+      allow read: if isAuth();
+      allow write: if isDev();
+    }
+
+    // ── users — read own; teacher reads class members; admin/dev all ──────
+    match /users/{uid} {
+      allow read: if isAuth() && (
+        request.auth.uid == uid || isTeacher() || isPriv()
+      );
+      allow write: if isAuth() && (
+        request.auth.uid == uid || isPriv()
+      );
+    }
+
+    // ── classes — read by teacher (own) + student; write by admin/dev ─────
+    match /classes/{classId} {
+      allow read: if isAuth();
+      allow write: if isPriv() || (
+        isTeacher() && request.auth.token.classIds.hasAny([classId])
+      );
+    }
+
+    // ── studentProgress — student owns; teacher reads class; admin/dev all ─
+    match /studentProgress/{uid} {
+      allow read, write: if isAuth() && request.auth.uid == uid;
+      allow read: if isTeacher() || isPriv();
+
+      match /standards/{standardId} {
+        allow read, write: if isAuth() && request.auth.uid == uid;
+        allow read: if isTeacher() || isPriv();
+      }
+    }
+
+    // ── assignments — teacher writes own class; students read ─────────────
+    match /assignments/{classId} {
+      allow read: if isAuth();
+      allow write: if isPriv() || (
+        isTeacher() && request.auth.token.classIds.hasAny([classId])
+      );
+    }
+
+    // ── responses — students write own; teacher/admin/dev read ────────────
+    match /responses/{responseId} {
+      allow create: if isAuth() && request.resource.data.studentId == request.auth.uid;
+      allow read: if isTeacher() || isPriv();
+    }
+
+    // ── invites — written by admin/dev; read only by admin/dev ────────────
+    // (activation reads via Admin SDK, which bypasses rules)
+    match /invites/{email} {
+      allow read, write: if isPriv();
+    }
+
+    // ── questionVariants — read by anyone authenticated; write by dev ─────
+    match /questionVariants/{variantId} {
+      allow read: if isAuth();
+      allow write: if isDev();
+    }
+
+    // ── questionTemplates — read by anyone authenticated; write by dev ────
+    match /questionTemplates/{itemId} {
+      allow read: if isAuth();
+      allow write: if isDev();
+    }
+
+    // ── prompts (existing dev feature) ────────────────────────────────────
+    match /prompts/{promptId} {
+      allow read, write: if isDev();
+    }
+  }
+}

@@ -42,6 +42,8 @@
   // ── State ────────────────────────────────────────────────────────────
   let zoomedTenth  = null;   // 0..(small_intervals-1), or null
   let placedValue  = null;   // float or null
+  export let value = null;
+  $: value = placedValue;
 
   // ── Helpers ──────────────────────────────────────────────────────────
   function fmt(v) {

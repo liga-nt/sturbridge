@@ -1,11 +1,38 @@
 <script>
   export let answer_suffix = null;
   export let keepKeyboardOpen = false;
+  export let value = '';
 
   let el;
   let wrapper;
   let keyboardOpen = false;
   let redoStack = [];
+
+  // Extract a canonical text value from the contenteditable DOM.
+  // Plain text → as-is. Fraction widget → "num/den". Mixed → "whole num/den".
+  function extractValue() {
+    if (!el) return '';
+    const parts = [];
+    for (const node of el.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const t = node.textContent.replace(/\u200B/g, '').trim();
+        if (t) parts.push(t);
+      } else if (node.classList?.contains('frac-rendered')) {
+        // Widget in render mode — read from rendered spans
+        const whole = node.querySelector('.frac-r-whole')?.textContent?.trim();
+        const num   = node.querySelector('.frac-r-num')?.textContent?.trim();
+        const den   = node.querySelector('.frac-r-den')?.textContent?.trim();
+        if (num && den) parts.push(whole ? `${whole} ${num}/${den}` : `${num}/${den}`);
+      } else if (node.classList?.contains('frac-widget')) {
+        // Widget still in edit mode — read directly from inputs
+        const whole = node.querySelector('.frac-whole')?.value?.trim();
+        const num   = node.querySelector('.frac-num')?.value?.trim();
+        const den   = node.querySelector('.frac-den')?.value?.trim();
+        if (num && den) parts.push(whole ? `${whole} ${num}/${den}` : `${num}/${den}`);
+      }
+    }
+    value = parts.join(' ');
+  }
 
   // ── Public API (used by ShortAnswerInput popout) ───────────────
   export function getHTML()     { return el ? el.innerHTML : ''; }
@@ -64,6 +91,13 @@
   }
 
   // ── Focus / blur for keyboard open/close ───────────────────────
+  let _observer;
+  function mountObserver(node) {
+    _observer = new MutationObserver(extractValue);
+    _observer.observe(node, { childList: true, subtree: true, characterData: true });
+    return { destroy() { _observer?.disconnect(); } };
+  }
+
   function handleFocus() {
     keyboardOpen = true;
   }
@@ -223,6 +257,7 @@
       currentInputs.forEach((inp, i) => {
         inp.addEventListener('input', () => {
           inp.style.borderColor = inp.value.length > 0 ? 'transparent' : '';
+          extractValue();
         });
         inp.addEventListener('keydown', (e) => {
           const atStart = inp.selectionStart === 0;
@@ -555,7 +590,9 @@
       aria-multiline="false"
       tabindex="0"
       spellcheck="false"
+      use:mountObserver
       on:focus={handleFocus}
+      on:input={extractValue}
       on:keydown={handleKeydown}
     ></div>
     {#if answer_suffix}

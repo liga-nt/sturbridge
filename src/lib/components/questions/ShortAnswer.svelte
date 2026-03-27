@@ -19,6 +19,8 @@
   export let answer_suffix = null;
 
   let answer = '';
+  export let value = null;
+  $: value = answer;
 </script>
 
 <div class="question-body">
@@ -70,7 +72,7 @@
 
   {#if input_widget === 'equation_editor'}
     <p class="q-text">Enter your answer in the space provided. Enter <strong>only</strong> your answer.</p>
-    <MathInput answer_suffix={answer_suffix} />
+    <MathInput bind:value={answer} answer_suffix={answer_suffix} />
   {:else}
     <p class="q-text">Enter your answer in the box.</p>
     <div class="answer-row">

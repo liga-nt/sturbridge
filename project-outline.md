@@ -1,32 +1,140 @@
-# MathMastery App — Claude Code Project Outline
+# Sturbridge — Project Outline
 
 ## Project Overview
-A mastery-based, individualized math curriculum app for K-12 classrooms. Students progress at their own pace through standards-aligned questions. Teachers monitor progress and assign questions in real time. Administrators oversee all classes in their purview. A developer dashboard manages the question bank and AI generation pipeline.
+A mastery-based, individualized math curriculum app for K-12 classrooms. Students progress at their own pace through standards-aligned questions. Teachers monitor progress and assign questions in real time. Administrators oversee all classes in their purview.
+
+The question bank is built by reverse-engineering official MCAS TestNav items — not by generating questions with AI. Each question type is implemented as a parametric Svelte component driven by an algorithmic generator. The generator produces a mathematically valid, pedagogically sound question instance (numbers, distractors, stimuli) by sampling from a constrained parameter space. The goal is pixel-accurate fidelity to the real TestNav interface so students are prepared for the actual digital exam.
 
 ## Starting Point
-A SvelteKit template with Firebase Authentication already integrated and linked to a new Firebase project. Google Sign-In is the primary auth method (students, teachers, and admins use their school Google accounts).
+SvelteKit (Svelte 5) + Firebase Authentication, deployed to Firebase Hosting.
 
 ---
 
 ## Tech Stack
-- **Frontend:** SvelteKit (PWA — no native wrapper needed, deployed as a web app for Chromebook use)
+- **Frontend:** SvelteKit (Svelte 5, Tailwind CSS 4) — PWA, no native wrapper, targets Chromebook
 - **Auth:** Firebase Authentication (Google Sign-In)
 - **Database:** Firestore
-- **Storage:** Firebase Storage (audio files if pre-recorded; potentially SVG assets)
-- **Functions:** Firebase Cloud Functions (AI generation pipeline, server-side Anthropic API calls)
-- **AI:** Anthropic API (Claude Sonnet) called server-side via Cloud Functions
-- **Hosting:** TBD (Vercel or Firebase Hosting)
+- **Hosting:** Firebase Hosting
 
 ---
 
 ## User Roles
-Roles are stored as Firebase custom claims on the user token:
+Stored as Firebase custom claims on the user token:
 - `student`
 - `teacher`
 - `admin`
-- `dev` (single user — developer only)
+- `dev` (single developer account — full access)
 
-Firestore security rules enforce role-based access throughout. Teachers can only access data for students enrolled in their classes. Admins can access all classes under their purview. Dev role has write access to the question bank and prompt collections.
+Firestore security rules enforce role-based access. Teachers access only their own class data. Admins access all classes in their purview. Dev has write access to the question bank.
+
+---
+
+## Question System
+
+### Source of Truth
+Each official MCAS item lives in `data/items/<itemID>/`:
+- `<itemID>.png` — screenshot of the item as it appears in TestNav
+- `<itemID>.html` — raw HTML from the TestNav preview
+
+The canonical item registry is:
+`data/4th_grade_standards_released_questions.xlsx - All Years Combined.csv`
+Columns: Year, Item No., item_id, Item Type, Item Description, Correct Answer, Standard.
+
+### JSON Question Files
+Structured question definitions live in `data/`:
+- `g4-math_2019_questions.json` — 20 questions, all complete
+- `g4-math_2021_questions.json` — 20 questions, all complete
+- `g4-math_2022_questions.json` — 20 questions, all complete
+- `g4-math_2023_questions.json` — 20 questions, all complete
+- `g4-math_2025_questions.json` — 20 questions, all complete
+
+Each question entry includes: `item_id`, `question_type`, `standard`, `question_text`, `answer_options` (or part definitions for multi-part), `correct_answer`, `stimulus_type`/`stimulus_params`, and `generator_id`.
+
+### Algorithmic Generators
+Every question has a generator in `src/lib/utils/generators.js` — a flat registry keyed by `item_id`. Each generator:
+- Samples numbers, scenarios, people from constrained parameter spaces
+- Computes the correct answer algorithmically
+- Produces pedagogically motivated distractors (each wrong answer = a named student error/misconception)
+- Returns a complete question object that the corresponding Svelte component can render directly
+
+Generators do not call any external API. All logic is local.
+
+### renderMath() Notation (`src/lib/utils/math.js`)
+- `[n/d]` → stacked fraction
+- `{?}` → inline boxed question mark
+- `[Save]` → blue rounded pill button
+- Use `{@html renderMath(text)}` in components
+
+---
+
+## Question Type Components (`src/lib/components/questions/`)
+
+| Component | Description |
+|---|---|
+| `MultipleChoice.svelte` | Standard 4-option MC with optional stimulus |
+| `MultipleSelect.svelte` | Select N correct answers |
+| `MultiPart.svelte` | N-part questions; supports inline_choice and true_false_table part types |
+| `ShortAnswer.svelte` | Text/numeric input |
+| `ShortAnswerInput.svelte` | Math editor used inside MultiPart |
+| `InlineChoice.svelte` | Dropdown-in-sentence fill-in |
+| `TrueFalseTable.svelte` | Grid of true/false row choices |
+| `NumberLinePlot.svelte` | Plot points on a number line |
+| `ProtractorDragDrop.svelte` | Drag angle choices onto a protractor |
+| `DragDropInequality.svelte` | Drag tiles into inequality slots |
+| `CategorySort.svelte` | Sort tiles into labeled categories |
+| `FractionModel.svelte` | Interactive shaded fraction strip models |
+| `DragDropMatch.svelte` | Match tiles into a division table |
+
+### Stimulus Components (`src/lib/components/questions/stimuli/`)
+
+| Component | Key params |
+|---|---|
+| `NumberBox.svelte` | rows of number pairs |
+| `DataTable.svelte` | title, headers, rows |
+| `LinePlot.svelte` | X marks above number line |
+| `DotPlot.svelte` | Filled dots above number line |
+| `AngleDiagram.svelte` | center, rays, arc_labels |
+| `SymmetryFigure.svelte` | shape types: star, square, rect, circle, semicircle, triangle, polygon |
+| `FractionComparison.svelte` | Circle or rect fraction models |
+| `RectangleDiagram.svelte` | Labeled rectangle |
+| `ItemArray.svelte` | N×M grid of SVG items |
+| `DecimalGrid.svelte` | Shaded 10×10 grid |
+| `GraduatedCylinder.svelte` | Measurement cylinder |
+| `ProtractorImage.svelte` | Static protractor SVG |
+| `BucketDiagram.svelte` | Fraction-filled buckets |
+| `ClockFace.svelte` | Analog clock, params: { hour, minute } |
+| `StepPattern.svelte` | Growing square-triangle pattern, params: { steps } |
+
+---
+
+## TestNav Visual Style
+All question components replicate TestNav exactly:
+- Font: `"Helvetica Neue", Helvetica, Arial, sans-serif`
+- Question text: 16px, line-height 24px, color #333
+- Body background: #e9e9e9, question area: white, max-width 640px
+
+---
+
+## Application Routes
+
+### Student-Facing
+- `/` — redirects based on role
+- `/student` — current question, answer UI, feedback display
+
+### Teacher-Facing
+- `/teacher` — class overview, mastery grid per student per standard
+- `/teacher/assign` — real-time question assignment UI
+- `/teacher/standards` — configure standard progression order
+- `/teacher/student/[studentId]` — individual student detail
+
+### Admin-Facing
+- `/admin` — overview of all classes and teachers
+- `/admin/class/[classId]` — drill into a specific class
+
+### Developer-Facing (dev role only)
+- `/dev` — dev dashboard home
+- `/dev/preview` — side-by-side: our rendered component (left) vs. PNG screenshot (right); year dropdown + question strip; JSON toggle
+- `/dev/algo-check` — run any generator repeatedly, inspect output distribution, verify correctness
 
 ---
 
@@ -38,7 +146,7 @@ Firestore security rules enforce role-based access throughout. Teachers can only
   email: string,
   displayName: string,
   role: "student" | "teacher" | "admin" | "dev",
-  classIds: string[]  // for students and teachers
+  classIds: string[]
 }
 ```
 
@@ -49,59 +157,45 @@ Firestore security rules enforce role-based access throughout. Teachers can only
   grade: string,
   subject: "math" | "ela",
   studentIds: string[],
-  standardProgression: string[]  // ordered array of standard IDs, teacher-configurable
+  standardProgression: string[]  // ordered standard IDs, teacher-configurable
 }
 ```
 
 ### `standards/{standardId}`
 ```
 {
-  id: string,           // e.g. "C1b"
-  parentId: string,     // null if top-level standard
+  id: string,           // e.g. "4.NBT.B.4"
   description: string,
   grade: string,
   subject: string,
-  order: number         // default curriculum order
+  order: number
 }
 ```
 
 ### `questions/{questionId}`
 ```
 {
+  item_id: string,           // e.g. "MA704649496"
   standardId: string,
-  questionText: string,
-  visual: {
-    type: "numberLine" | "coordinateGrid" | "geometricFigure" | "fractionModel" | etc,
-    params: {}          // type-specific parameters for dynamic SVG rendering
-  } | null,
-  options: [
-    {
-      id: "A" | "B" | "C" | "D",
-      text: string,
-      isCorrect: boolean,
-      feedback: string  // misconception-targeted feedback for this specific option
-    }
-  ],
-  difficulty: "diagnostic" | "standard" | "advanced",
-  status: "pending" | "approved" | "rejected",
-  generatedAt: timestamp,
-  reviewedAt: timestamp | null,
-  promptVersion: string
+  question_type: string,     // matches component name pattern
+  generator_id: string,      // key into generators.js registry
+  status: "active" | "retired",
+  year: number,
+  question_number: number
 }
 ```
+Question content is not stored in Firestore — it is generated at runtime by the generator. Firestore holds only the item registry and routing metadata.
 
 ### `studentProgress/{studentId}/standards/{standardId}`
 ```
 {
-  studentId: string,
-  standardId: string,
   mastered: boolean,
-  streak: number,               // consecutive correct answers without assistance
-  lastAnsweredDate: string,     // YYYY-MM-DD
+  streak: number,
+  lastAnsweredDate: string,    // YYYY-MM-DD
   attempts: number,
   assistedAttempts: number,
-  questionsSeenIds: string[],   // to avoid repetition
-  masteryThreshold: number      // configurable, e.g. 2 or 3
+  questionsSeenIds: string[],
+  masteryThreshold: number     // default 3
 }
 ```
 
@@ -123,102 +217,11 @@ Firestore security rules enforce role-based access throughout. Teachers can only
 ### `assignments/{classId}`
 ```
 {
-  // Real-time document teachers write to, students listen to
   active: boolean,
   questionId: string | null,
   standardId: string | null,
   assignedAt: timestamp | null,
-  assignedBy: string            // teacherId
-}
-```
-
-### `prompts/{standardId}`
-```
-{
-  standardId: string,
-  systemPrompt: string,
-  fewShotExamples: string,
-  schemaInstructions: string,
-  visualType: string | null,
-  version: string,
-  updatedAt: timestamp
-}
-```
-
----
-
-## Application Routes
-
-### Student-Facing
-- `/` — redirects based on role
-- `/student` — main student experience: current question, answer UI, feedback display
-
-### Teacher-Facing
-- `/teacher` — dashboard: class overview, mastery grid per student per standard
-- `/teacher/assign` — real-time question assignment UI
-- `/teacher/standards` — configure standard progression order (drag to reorder)
-- `/teacher/student/[studentId]` — individual student detail view
-
-### Admin-Facing
-- `/admin` — overview of all classes and teachers in purview
-- `/admin/class/[classId]` — drill into a specific class
-
-### Developer-Facing (protected, dev role only)
-- `/dev` — dev dashboard home: bank status grid (questions per standard, flagged thin standards)
-- `/dev/review` — review queue: pending questions with accept/reject/edit/regenerate actions
-- `/dev/generate` — trigger generation for a specific standard (calls Cloud Function)
-- `/dev/prompts` — view and edit prompts per standard without redeployment
-- `/dev/standards` — manage standards list and metadata
-
----
-
-## Visual Question System
-
-~10 visual template types have been identified. Each is implemented as a dedicated Svelte component that accepts structured parameters. No raw SVG is stored in Firestore.
-
-**Known types (expand as needed):**
-- `NumberLine` — params: min, max, marked[], labeled[]
-- `CoordinateGrid` — params: points[], lines[], polygons[]
-- `GeometricFigure` — params: shape, dimensions, labels[]
-- `FractionModel` — params: type (bar/circle), numerator, denominator, shaded
-- `TableOrChart` — params: headers[], rows[][]
-- `AreaModel` — params: dimensions, sections[]
-- `PlaceValueChart` — params: digits{}
-- `PatternSequence` — params: items[], missingIndex
-
-AI generation pipeline outputs JSON parameters for the relevant type. The Svelte component renders the SVG dynamically from those parameters. Editing a visual means changing a few parameter values, not manipulating markup.
-
----
-
-## AI Question Generation Pipeline
-
-1. Dev triggers generation for a standard from `/dev/generate`
-2. SvelteKit calls a Firebase Cloud Function (`generateQuestions`)
-3. Cloud Function:
-   - Fetches the prompt document for that standard from Firestore
-   - Calls Anthropic API (Claude Sonnet) with structured JSON schema output instructions
-   - Receives batch of 10 questions in JSON format
-   - Writes each to `questions` collection with `status: "pending"`
-4. Dev reviews in `/dev/review`:
-   - Questions rendered exactly as students will see them (including visuals)
-   - Accept → sets `status: "approved"`
-   - Reject → sets `status: "rejected"`
-   - Edit → inline edit before approving
-   - Regenerate → triggers single question regeneration
-5. Only `status: "approved"` questions are served to students
-
-**Question JSON schema** (what Claude returns per question):
-```json
-{
-  "questionText": "string",
-  "visual": { "type": "string", "params": {} } | null,
-  "options": [
-    { "id": "A", "text": "string", "isCorrect": false, "feedback": "string" },
-    { "id": "B", "text": "string", "isCorrect": true, "feedback": "string" },
-    { "id": "C", "text": "string", "isCorrect": false, "feedback": "string" },
-    { "id": "D", "text": "string", "isCorrect": false, "feedback": "string" }
-  ],
-  "difficulty": "standard"
+  assignedBy: string
 }
 ```
 
@@ -226,98 +229,127 @@ AI generation pipeline outputs JSON parameters for the relevant type. The Svelte
 
 ## Mastery Algorithm
 
-- Mastery = `streak >= masteryThreshold` (default 2-3) where streak counts consecutive correct answers on separate calendar days, unassisted
-- Any assisted answer resets streak to 0
-- Any incorrect answer resets streak to 0
-- Once mastered, standard moves to "mastered" status in studentProgress; student advances to next standard in their progression
-- Diagnostic mode: rapid sweep through all standards (one question each) to establish baseline before mastery-building begins
+- Mastery = `streak >= masteryThreshold` (default 3)
+- Streak counts consecutive correct answers on separate calendar days, unassisted
+- Any assisted or incorrect answer resets streak to 0
+- On mastery, student advances to next standard in their progression
+- Diagnostic mode: one question per standard to establish baseline before mastery-building begins
 
-**Question selection logic (per student turn):**
-1. Check for active teacher assignment → serve that question
-2. Otherwise find current standard in student's progression that is not yet mastered
-3. Select an approved question for that standard not in `questionsSeenIds`
-4. If all questions seen, allow repeats (oldest first)
+**Question selection per student turn:**
+1. Active teacher assignment → serve that question
+2. Otherwise find current unmastered standard in progression
+3. Call that standard's generator to produce a fresh question instance
+4. Track `questionsSeenIds` to ensure variation (generators produce novel instances, not fixed pools)
 
 ---
 
 ## Real-Time Teacher Assignment
 
-- Teacher selects a standard and question in `/teacher/assign`
-- Writes to `assignments/{classId}` document
-- All students in that class have a Firestore real-time listener on this document
-- When `active: true` and `questionId` changes, student screen transitions to assigned question
-- After all students submit, teacher sees live results: % correct unassisted, % correct after feedback, % unable to answer
-- Teacher deactivates assignment; students return to their individual progression
+- Teacher selects a standard in `/teacher/assign`; a question is generated and previewed
+- Write to `assignments/{classId}`
+- Students have a Firestore real-time listener; when `active: true`, screen transitions to assigned question
+- After all students submit, teacher sees live results: % correct unassisted, % correct after hint, % unable
+- Teacher deactivates; students return to individual progression
 
 ---
 
 ## Audio Feedback
-- Teacher-toggleable per class (stored on class document)
-- Implementation: Web Speech API (`speechSynthesis`) for simplicity — no Storage files needed, no audio pipeline
-- Reads the option-specific feedback text aloud after answer selection
-- Falls back silently if browser doesn't support it
+- Teacher-toggleable per class
+- Web Speech API (`speechSynthesis`) — no Storage files needed
+- Reads option-specific feedback aloud after selection
+- Falls back silently if unsupported
 
 ---
 
-## Build Order
+## Dev Workflow (Reverse-Engineering New Items)
 
-### Phase 1 — Dev Dashboard & Question Bank (START HERE)
-1. Add `dev` custom claim to developer account
-2. Build `/dev` route gated by dev role check
-3. Build standards management (`/dev/standards`)
-4. Build prompt management (`/dev/prompts`) — Firestore-backed, editable in UI
-5. Build Cloud Function for question generation (Anthropic API integration)
-6. Build generation trigger UI (`/dev/generate`)
-7. Build visual component library (one Svelte component per visual type)
-8. Build review queue (`/dev/review`) — renders questions as students will see them
-9. Build bank status grid (`/dev`) — questions per standard, highlight thin standards
-10. Populate question bank to ~30 approved questions per standard
+For each new item:
+1. Fetch: `node scripts/fetch-one-item.mjs <itemID>` → writes PNG + HTML to `data/items/<itemID>/`
+2. Read PNG screenshot → understand visual layout
+3. Read HTML → extract exact text, options, structure
+4. Update JSON file to match exactly
+5. Build or extend the matching Svelte component
+6. Write generator in `generators.js` (flat registry, keyed by `item_id`)
+7. Verify in `/dev/preview` (component vs. screenshot side-by-side)
+8. Verify generator in `/dev/algo-check` (run N times, check distribution and correctness)
+9. `npm run build` — must pass before work is considered complete
 
-### Phase 2 — Student Experience
-11. Student route and role guard
-12. Question selection logic and mastery algorithm
-13. Question display component (text + visual rendering)
-14. Answer selection and feedback display
-15. Audio feedback via Web Speech API
-16. Progress tracking writes to Firestore
-17. Real-time listener for teacher assignments
+### Fetch Scripts
+- `node scripts/fetch-one-item.mjs <itemID>` — fetch one item
+- `node scripts/fetch-all-items.mjs` — fetch all items in `scripts/preview-urls.json`
+- `node scripts/fetch-all-items.mjs --skip-existing` — skip already-fetched items
 
-### Phase 3 — Teacher Dashboard
-18. Teacher route and role guard (class-scoped data only)
-19. Class mastery overview grid
-20. Individual student detail view
-21. Standard progression configuration (drag to reorder)
-22. Real-time assignment UI and live results view
+### Agent Workflow (for batched question work)
+- `scripts/agent-brief.md` — full context brief passed to spawned agents
+- One agent per question — prevents context drift
+- Failure protocol: stop after 2 failed attempts, report what failed, do not loop
+- Build must pass before agent returns
 
-### Phase 4 — Admin Dashboard
-23. Admin route and role guard
-24. Multi-class overview
-25. Drill-down to class and student views
+---
 
-### Phase 5 — Polish & Pilot Prep
-26. PWA configuration (manifest, service worker)
-27. Firestore security rules audit and lockdown
-28. Diagnostic mode implementation
-29. Performance and offline handling
-30. Pilot deployment and monitoring setup
+## Current Phase: Generator Fine-Tuning
+
+All 100 questions across 2019/2021/2022/2023/2025 have components and generators. The current focus is:
+- Verifying each generator's parameter space matches the source model's intent
+- Ensuring distractors are pedagogically valid and cover the key misconceptions
+- Confirming component rendering is pixel-accurate against PNG screenshots
+- Catching and fixing any edge cases that produce invalid or degenerate question instances
+
+---
+
+## Build Order (Remaining)
+
+### Phase 1 — Question Bank (COMPLETE)
+- All 100 released MCAS items have components and generators across 5 test years
+
+### Phase 2 — Generator Fine-Tuning (IN PROGRESS)
+- Audit each generator against source item
+- Fix parameter ranges, distractor logic, edge cases
+- Validate in `/dev/algo-check`
+
+### Phase 3 — Student Experience
+- Student route and role guard
+- Question selection + mastery algorithm
+- Question display (call generator, pass output to component)
+- Answer selection and feedback display
+- Audio feedback via Web Speech API
+- Progress tracking writes to Firestore
+- Real-time listener for teacher assignments
+
+### Phase 4 — Teacher Dashboard
+- Role guard (class-scoped data)
+- Class mastery overview grid
+- Individual student detail view
+- Standard progression configuration
+- Real-time assignment UI and live results
+
+### Phase 5 — Admin Dashboard
+- Multi-class overview
+- Drill-down to class and student views
+
+### Phase 6 — Polish & Pilot Prep
+- PWA configuration (manifest, service worker)
+- Firestore security rules audit
+- Diagnostic mode
+- Performance and offline handling
+- Pilot deployment
 
 ---
 
 ## Firestore Security Rules (Summary)
-- `questions`: read by authenticated users (approved only for non-dev), write by dev only
-- `studentProgress`: read/write by owning student; read by teacher (if student in their class); read by admin (if class in their purview); read by dev
-- `responses`: write by student; read by teacher/admin with same class scope
-- `assignments`: write by teacher (own classes only); read by students in that class
+- `questions`: read by authenticated users; write by dev only
+- `studentProgress`: read/write by owning student; read by teacher (scoped to class); read by admin; read by dev
+- `responses`: write by student; read by teacher/admin (class-scoped)
+- `assignments`: write by teacher (own classes); read by students in that class
 - `classes`: read by teacher/admin/dev; write by admin/dev
-- `prompts`: read/write by dev only
-- `users`: read by self; read by teacher/admin for scoped users; write by dev/admin for role assignment
+- `users`: read by self; scoped read by teacher/admin; write by dev/admin
 
 ---
 
-## Notes for Claude Code
-- Always check user role from Firebase custom claims (`getIdTokenResult()`) on the client, and enforce the same rules server-side in Firestore rules and Cloud Functions — never trust client-side role checks alone
-- Prompts are stored in Firestore and fetched at generation time — do not hardcode prompts in Cloud Functions
-- Visual components receive only parameters and render SVG themselves — never store raw SVG in Firestore
-- The `assignments/{classId}` document is the real-time bridge between teacher and student screens — keep it simple and flat
-- Generate 10 questions per Cloud Function call to stay within reasonable timeout limits
-- All Anthropic API calls happen server-side in Cloud Functions — API key never touches the client
+## Notes for Development
+- Question content is never stored in Firestore — generators run client-side at render time
+- Role checks use Firebase custom claims (`getIdTokenResult()`) — enforce the same rules in Firestore security rules, never trust client alone
+- All visual components receive only parameters and render SVG themselves
+- The `assignments/{classId}` document is the real-time bridge between teacher and student — keep it simple and flat
+- Do not use paper JSON files (`gr4-math_*_paper.json`) — they have incorrect item_id mappings
+- Always start from the PNG + HTML in `data/items/` as ground truth

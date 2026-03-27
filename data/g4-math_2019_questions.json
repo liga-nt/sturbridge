@@ -2,7 +2,7 @@
   {
     "item_id": "MA227383",
     "question_number": "1",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA227383/showByIdentifier/8f4732b0f0674888872e98ebde8b9d84",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA227383",
     "stimulus_intro": "Sonya is thinking of a number. She wrote multiples of her number in a box, as shown.",
     "stimulus_type": "number_box",
     "stimulus_params": {
@@ -51,7 +51,7 @@
   {
     "item_id": "MA311551",
     "question_number": "2",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA311551/showByIdentifier/04988ee6bd8e44d2a76a17cac29f9cf1",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA311551",
     "stimulus_intro": "Find the sum.",
     "question_text": null,
     "math_expression": "[6/100] + [3/10]",
@@ -85,7 +85,7 @@
   {
     "item_id": "MA311583",
     "question_number": "3",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA311583/showByIdentifier/e578688d85784296a661e7d149681d51",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA311583",
     "question_text": "This table shows the length, in kilometers, of each trail in a park.",
     "stimulus_type": "data_table",
     "stimulus_params": {
@@ -150,7 +150,7 @@
   {
     "item_id": "MA303319",
     "question_number": "4",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA303319/showByIdentifier/451f1dea37b143deaf9aad7845a99de1",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA303319",
     "stimulus_intro": "Carmen wrote this expression in a notebook.",
     "math_expression": "1 + 1 + [1/4] + [2/4]",
     "question_text": "Which of these is <strong>not</strong> equal to Carmen's expression?",
@@ -197,13 +197,13 @@
     },
     "page": 5,
     "source_pdf": "g4-math_2019_questions.pdf",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA714225971/showByIdentifier/d2aa0665b96c4d92bdc907a4e73d4649",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA714225971",
     "correct_answer": "C"
   },
   {
     "item_id": "MA713939739",
     "question_number": "6",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA713939739/showByIdentifier/198a8d5c7c3942258c1c9c999bebd0bf",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA713939739",
     "question_text": "A playground has a basketball court and a sandbox. The length of the sandbox is 18 feet.",
     "answer_type": "multi_part",
     "answer_options": null,
@@ -354,7 +354,7 @@
     "has_visual": true,
     "page": 7,
     "source_pdf": "g4-math_2019_questions.pdf",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA704647848/showByIdentifier/6b0ac226e62b4e37919292db8e9269df",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA704647848",
     "correct_answer": "B,E"
   },
   {
@@ -413,13 +413,13 @@
     "has_visual": true,
     "page": 8,
     "source_pdf": "g4-math_2019_questions.pdf",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA303329/showByIdentifier/669cd58a5eb94ab3869bb486b1a629d5",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA303329",
     "correct_answer": "D"
   },
   {
     "item_id": "MA714233266",
     "question_number": "9",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA714233266/showByIdentifier/2cdf58407bf54870a6234b5a45458a8a",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA714233266",
     "question_text": "A teacher has two sets of stickers in different shapes to give to students.",
     "answer_type": "multi_part",
     "layout": "stacked",
@@ -620,7 +620,7 @@
   {
     "item_id": "MA222213",
     "question_number": "10",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA222213/showByIdentifier/a7f2e07fdf2c4f17a58c9e81e833ceb9",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA222213",
     "question_text": "An artist bought 5 yards of rope. Which of the following is equivalent to 5 yards?",
     "answer_type": "multiple_choice",
     "answer_options": [
@@ -652,7 +652,7 @@
   {
     "item_id": "MA307033",
     "question_number": "11",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA307033/showByIdentifier/0be18d5719174b02a411444dffc2f9c9",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA307033",
     "stimulus_intro": "A teacher wrote this number on the board.",
     "math_expression": "24,473",
     "question_text": "The value of the digit in the thousands place is how many times the value of the digit in the hundreds place?",
@@ -669,7 +669,7 @@
   {
     "item_id": "MA307037",
     "question_number": "12",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA307037/showByIdentifier/2843c54d0f13417bacfc4f6e3b3945d1",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA307037",
     "question_text": "What is <em>fourteen thousand, two hundred five</em> written in standard form? Enter your answer in the box.",
     "answer_type": "short_answer",
     "answer_options": null,
@@ -755,13 +755,13 @@
     "visual_description": "4-pointed star figure with a diagonal dashed line from upper-left to lower-right, arrows at both ends.",
     "page": 13,
     "source_pdf": "g4-math_2019_questions.pdf",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA714111699/showByIdentifier/fafa2c460b7244019cce5aca5e5d5138",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA714111699",
     "correct_answer": "A,E"
   },
   {
     "item_id": "MA306994",
     "question_number": "14",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA306994/showByIdentifier/7578b60d583c419dae45796037360641",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA306994",
     "question_text": "Angle HGL has a measure of 167\u00b0. What is the measure of angle JGK?",
     "answer_type": "multiple_choice",
     "answer_options": [
@@ -854,8 +854,8 @@
     "visual_description": null,
     "page": 15,
     "source_pdf": "g4-math_2019_questions.pdf",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA279791/showByIdentifier/2585706222074be7b9bc53847f510fb8",
-    "correct_answer": "C"
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA279791",
+    "correct_answer": "8"
   },
   {
     "item_id": "MA713680384",
@@ -878,8 +878,8 @@
     "visual_description": null,
     "page": 15,
     "source_pdf": "g4-math_2019_questions.pdf",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA713680384/showByIdentifier/491e4dd859a64ee8b71238b5dd8d3078",
-    "correct_answer": "A,D,E"
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA713680384",
+    "correct_answer": "False,True,True"
   },
   {
     "item_id": "MA704650539",
@@ -910,7 +910,7 @@
     "visual_description": "Two separate semicircular protractors are shown. For Angle A, one ray is horizontal to the right along the baseline and the other ray extends up and to the right; the indicated measure is an acute angle. For Angle B, one ray is horizontal to the right along the baseline and the other ray extends up and to the right with a larger opening than Angle A; the indicated measure is an obtuse angle.",
     "page": 16,
     "source_pdf": "g4-math_2019_questions.pdf",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA704650539/showByIdentifier/d9c4ee661fa24ba28ad41ed082329d35",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA704650539",
     "stimulus_params": {
       "angles": [
         {
@@ -945,13 +945,13 @@
     "visual_description": null,
     "page": 17,
     "source_pdf": "g4-math_2019_questions.pdf",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA304988/showByIdentifier/b58b9aaa90604c56bf2a497cc4988bed",
-    "correct_answer": "B"
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA304988",
+    "correct_answer": "3 1/3"
   },
   {
     "item_id": "MA286777",
     "question_number": "19",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA286777/showByIdentifier/f705796b68c143d298148835624a2f46",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA286777",
     "stimulus_intro": "A student wrote this subtraction problem in his notebook.",
     "math_expression": "25,000 \u2212 13,476 = {?}",
     "question_text": "What number belongs in the {?} to make the student's subtraction problem true?",
@@ -985,7 +985,7 @@
   {
     "item_id": "MA247745",
     "question_number": "20",
-    "preview_url": "https://api-tn8previewer.testnav.com/api/tenants/285/item/MA247745/showByIdentifier/c52a55c992674dfbbc81241df83da1f1",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA247745",
     "stimulus_intro": "Anna made a diagram of her room and labeled the length and width, as shown.",
     "stimulus_type": "rectangle_diagram",
     "stimulus_params": {

@@ -34,7 +34,8 @@
     "select_count": null,
     "has_visual": true,
     "visual_description": "4\u00d76 grid of cupcakes (24 total), representing Lily's cookies.",
-    "correct_answer": "A"
+    "correct_answer": "A",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA301798"
   },
   {
     "item_id": "MA297614",
@@ -72,7 +73,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "C"
+    "correct_answer": "C",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA297614"
   },
   {
     "item_id": "MA247705",
@@ -86,26 +88,60 @@
     "answer_options": [
       {
         "letter": "A",
-        "shape": { "type": "triangle", "kind": "right", "legs": [110, 72] }
+        "shape": {
+          "type": "triangle",
+          "kind": "right",
+          "legs": [
+            110,
+            72
+          ]
+        }
       },
       {
         "letter": "B",
-        "shape": { "type": "semicircle", "r": 62 }
+        "shape": {
+          "type": "semicircle",
+          "r": 62
+        }
       },
       {
         "letter": "C",
-        "shape": { "type": "polygon", "vertices": [[-55, 38], [55, 38], [83, -38], [-27, -38]] }
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -55,
+              38
+            ],
+            [
+              55,
+              38
+            ],
+            [
+              83,
+              -38
+            ],
+            [
+              -27,
+              -38
+            ]
+          ]
+        }
       },
       {
         "letter": "D",
-        "shape": { "type": "circle", "r": 55 }
+        "shape": {
+          "type": "circle",
+          "r": 55
+        }
       }
     ],
     "parts": null,
     "select_count": null,
     "has_visual": true,
     "visual_description": "Four shapes shown as answer options: A=right triangle, B=semicircle with flat base, C=slanted parallelogram, D=circle.",
-    "correct_answer": "D"
+    "correct_answer": "D",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA247705"
   },
   {
     "item_id": "MA801035466",
@@ -125,8 +161,16 @@
         "stimulus_type": "bucket_diagram",
         "stimulus_params": {
           "buckets": [
-            { "label": "Bucket A", "numerator": 7, "denominator": 8 },
-            { "label": "Bucket B", "numerator": 5, "denominator": 6 }
+            {
+              "label": "Bucket A",
+              "numerator": 7,
+              "denominator": 8
+            },
+            {
+              "label": "Bucket B",
+              "numerator": 5,
+              "denominator": 6
+            }
           ]
         },
         "answer_type": "constructed_response",
@@ -138,8 +182,16 @@
         "stimulus_type": "bucket_diagram",
         "stimulus_params": {
           "buckets": [
-            { "label": "Bucket C", "numerator": 5, "denominator": 6 },
-            { "label": "Bucket D", "numerator": 1, "denominator": 2 }
+            {
+              "label": "Bucket C",
+              "numerator": 5,
+              "denominator": 6
+            },
+            {
+              "label": "Bucket D",
+              "numerator": 1,
+              "denominator": 2
+            }
           ]
         },
         "answer_type": "constructed_response",
@@ -151,10 +203,26 @@
         "stimulus_type": "bucket_diagram",
         "stimulus_params": {
           "buckets": [
-            { "label": "Bucket A", "numerator": 7, "denominator": 8 },
-            { "label": "Bucket B", "numerator": 5, "denominator": 6 },
-            { "label": "Bucket C", "numerator": 5, "denominator": 6 },
-            { "label": "Bucket D", "numerator": 1, "denominator": 2 }
+            {
+              "label": "Bucket A",
+              "numerator": 7,
+              "denominator": 8
+            },
+            {
+              "label": "Bucket B",
+              "numerator": 5,
+              "denominator": 6
+            },
+            {
+              "label": "Bucket C",
+              "numerator": 5,
+              "denominator": 6
+            },
+            {
+              "label": "Bucket D",
+              "numerator": 1,
+              "denominator": 2
+            }
           ]
         },
         "answer_type": "constructed_response",
@@ -172,7 +240,8 @@
     "select_count": null,
     "has_visual": true,
     "visual_description": "Bucket diagrams showing fill levels: Part A has Buckets A (7/8) and B (5/6); Part B has Buckets C (5/6) and D (1/2); Part C shows all four buckets.",
-    "correct_answer": null
+    "correct_answer": null,
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA801035466"
   },
   {
     "item_id": "MA002128911",
@@ -182,7 +251,20 @@
     "stimulus_params": {
       "shape": {
         "type": "polygon",
-        "vertices": [[55, -52], [-90, 52], [90, 52]]
+        "vertices": [
+          [
+            55,
+            -52
+          ],
+          [
+            -90,
+            52
+          ],
+          [
+            90,
+            52
+          ]
+        ]
       },
       "padding": 16
     },
@@ -195,7 +277,8 @@
     "select_count": null,
     "has_visual": true,
     "visual_description": "A scalene triangle with one obtuse angle at lower-left and two acute angles (top and lower-right).",
-    "correct_answer": "2"
+    "correct_answer": "2",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA002128911"
   },
   {
     "item_id": "MA002334462",
@@ -215,7 +298,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "0.91"
+    "correct_answer": "0.91",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA002334462"
   },
   {
     "item_id": "MA307060",
@@ -229,26 +313,95 @@
     "answer_options": [
       {
         "letter": "A",
-        "shape": { "type": "polygon", "vertices": [[-65, 38], [55, 38], [85, -38], [-35, -38]] }
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -65,
+              38
+            ],
+            [
+              55,
+              38
+            ],
+            [
+              85,
+              -38
+            ],
+            [
+              -35,
+              -38
+            ]
+          ]
+        }
       },
       {
         "letter": "B",
-        "shape": { "type": "rect", "width": 110, "height": 90 }
+        "shape": {
+          "type": "rect",
+          "width": 110,
+          "height": 90
+        }
       },
       {
         "letter": "C",
-        "shape": { "type": "polygon", "vertices": [[-55, 72], [55, 72], [55, -20], [0, -72], [-55, -20]] }
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -55,
+              72
+            ],
+            [
+              55,
+              72
+            ],
+            [
+              55,
+              -20
+            ],
+            [
+              0,
+              -72
+            ],
+            [
+              -55,
+              -20
+            ]
+          ]
+        }
       },
       {
         "letter": "D",
-        "shape": { "type": "polygon", "vertices": [[0, -95], [55, 0], [0, 95], [-55, 0]] }
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              0,
+              -95
+            ],
+            [
+              55,
+              0
+            ],
+            [
+              0,
+              95
+            ],
+            [
+              -55,
+              0
+            ]
+          ]
+        }
       }
     ],
     "parts": null,
     "select_count": null,
     "has_visual": true,
-    "visual_description": "Four shapes: A=parallelogram (no right angles), B=rectangle (perpendicular sides — correct), C=pentagon/house (5 sides, not a quadrilateral), D=kite (quadrilateral but no right angles between sides).",
-    "correct_answer": "B"
+    "visual_description": "Four shapes: A=parallelogram (no right angles), B=rectangle (perpendicular sides \u2014 correct), C=pentagon/house (5 sides, not a quadrilateral), D=kite (quadrilateral but no right angles between sides).",
+    "correct_answer": "B",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA307060"
   },
   {
     "item_id": "MA002139080",
@@ -306,7 +459,8 @@
     "select_count": null,
     "has_visual": true,
     "visual_description": "Dot plot titled 'Completed Puzzles' showing time in hours on x-axis. 3 dots at 1/4, 4 dots at 2/4, 2 dots at 3/4, 1 dot at 1.",
-    "correct_answer": "A"
+    "correct_answer": "A",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA002139080"
   },
   {
     "item_id": "MA002034926",
@@ -339,7 +493,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "A"
+    "correct_answer": "A",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA002034926"
   },
   {
     "item_id": "MA903776098",
@@ -372,7 +527,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "C"
+    "correct_answer": "C",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA903776098"
   },
   {
     "item_id": "MA002145158",
@@ -384,18 +540,39 @@
     "instruction2": "Drag and drop a decimal number into each box so that <strong>all</strong> three comparison statements are true.",
     "math_expression": null,
     "answer_type": "drag_drop_inequality",
-    "tiles": ["0.65", "0.52", "0.78"],
+    "tiles": [
+      "0.65",
+      "0.52",
+      "0.78"
+    ],
     "rows": [
-      { "left": "0.54", "op": ">", "id": "slot1" },
-      { "left": "0.6",  "op": "<", "id": "slot2" },
-      { "left": "0.76", "op": ">", "id": "slot3" }
+      {
+        "left": "0.54",
+        "op": ">",
+        "id": "slot1"
+      },
+      {
+        "left": "0.6",
+        "op": "<",
+        "id": "slot2"
+      },
+      {
+        "left": "0.76",
+        "op": ">",
+        "id": "slot3"
+      }
     ],
     "answer_options": null,
     "parts": null,
     "select_count": null,
     "has_visual": true,
     "visual_description": "Tile bank: 0.65, 0.52, 0.78. Three rows: 0.54 > [blank], 0.6 < [blank], 0.76 > [blank].",
-    "correct_answer": { "slot1": "0.52", "slot2": "0.65", "slot3": "0.78" }
+    "correct_answer": {
+      "slot1": "0.52",
+      "slot2": "0.65",
+      "slot3": "0.78"
+    },
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA002145158"
   },
   {
     "item_id": "MA002140372",
@@ -474,7 +651,8 @@
     "select_count": null,
     "has_visual": true,
     "visual_description": "Rays Q, R, S, T from vertex V with arc labels 41\u00b0, 54\u00b0, 29\u00b0 between consecutive rays.",
-    "correct_answer": "A"
+    "correct_answer": "A",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA002140372"
   },
   {
     "item_id": "MA307317",
@@ -507,7 +685,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": null
+    "correct_answer": null,
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA307317"
   },
   {
     "item_id": "MA002135528",
@@ -540,7 +719,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "C"
+    "correct_answer": "C",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA002135528"
   },
   {
     "item_id": "MA903571693",
@@ -573,7 +753,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "D"
+    "correct_answer": "D",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA903571693"
   },
   {
     "item_id": "MA001851276",
@@ -600,7 +781,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "B,C,E"
+    "correct_answer": "False,True,True",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA001851276"
   },
   {
     "item_id": "MA001750121",
@@ -637,7 +819,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "B"
+    "correct_answer": "B",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA001750121"
   },
   {
     "item_id": "MA704653374",
@@ -669,11 +852,19 @@
         "dropdowns": [
           {
             "id": "RESPONSE_B1",
-            "options": ["5", "6", "30"]
+            "options": [
+              "5",
+              "6",
+              "30"
+            ]
           },
           {
             "id": "RESPONSE_B2",
-            "options": ["5", "6", "30"]
+            "options": [
+              "5",
+              "6",
+              "30"
+            ]
           }
         ]
       }
@@ -681,7 +872,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "RESPONSE_B1=30;RESPONSE_B2=5"
+    "correct_answer": "RESPONSE_B1=30;RESPONSE_B2=5",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA704653374"
   },
   {
     "item_id": "MA900846441",
@@ -701,7 +893,8 @@
     "select_count": null,
     "has_visual": true,
     "visual_description": "Rectangle divided into 8 equal vertical parts with 5 parts shaded (5/8 remaining after 2/8 + 1/8 = 3/8 was eaten). Fewer, More, and Reset buttons shown below.",
-    "correct_answer": "[5/8]"
+    "correct_answer": "[5/8]",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA900846441"
   },
   {
     "item_id": "MA303324",
@@ -734,6 +927,7 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "B"
+    "correct_answer": "B",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA303324"
   }
 ]

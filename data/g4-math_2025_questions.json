@@ -30,7 +30,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "D"
+    "correct_answer": "D",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA900754381&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA136448521",
@@ -41,17 +42,37 @@
     "question_text": "Identify whether each of these numbers is a composite number or a prime number.\n\nDrag and drop each number into the correct box.",
     "math_expression": null,
     "answer_type": "category_sort",
-    "tiles": ["4", "7", "18", "25", "43"],
+    "tiles": [
+      "4",
+      "7",
+      "18",
+      "25",
+      "43"
+    ],
     "categories": [
-      { "label": "Composite", "correct_tiles": ["4", "18", "25"] },
-      { "label": "Prime",     "correct_tiles": ["7", "43"] }
+      {
+        "label": "Composite",
+        "correct_tiles": [
+          "4",
+          "18",
+          "25"
+        ]
+      },
+      {
+        "label": "Prime",
+        "correct_tiles": [
+          "7",
+          "43"
+        ]
+      }
     ],
     "answer_options": null,
     "parts": null,
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "Composite: 4, 18, 25; Prime: 7, 43"
+    "correct_answer": "{\"Composite\": [\"18\", \"25\", \"4\"], \"Prime\": [\"43\", \"7\"]}",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA136448521&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA800780887",
@@ -117,7 +138,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": null
+    "correct_answer": null,
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA800780887&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA010534486",
@@ -159,7 +181,8 @@
     "select_count": null,
     "has_visual": true,
     "visual_description": "Rectangle labeled 15 feet wide by 12 feet tall.",
-    "correct_answer": "54 feet"
+    "correct_answer": "54 feet",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA010534486&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA232254177",
@@ -300,7 +323,8 @@
     "select_count": 3,
     "has_visual": true,
     "visual_description": "Five polygon shapes shown as answer options. A: right-trapezoid-like quadrilateral (top and bottom parallel). B: irregular quadrilateral (no parallel sides). C: irregular pentagon (no parallel sides). D: parallelogram (two pairs of parallel sides). E: trapezoid (top and bottom parallel).",
-    "correct_answer": "A,D,E"
+    "correct_answer": "A,D,E",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA232254177&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA202029218",
@@ -333,7 +357,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "B"
+    "correct_answer": "B",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA202029218&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA713677363",
@@ -361,7 +386,11 @@
           "six thousand, three hundred eighty-one",
           "sixty thousand, three hundred eighty-one"
         ],
-        "correct_matches": [2, 0, 1]
+        "correct_matches": [
+          2,
+          0,
+          1
+        ]
       },
       {
         "label": "B",
@@ -387,7 +416,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": null
+    "correct_answer": null,
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA713677363&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA900741771",
@@ -424,7 +454,8 @@
     "select_count": 3,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "A,B,E"
+    "correct_answer": "A,B,E",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA900741771&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA311554",
@@ -457,7 +488,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "B"
+    "correct_answer": "B",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA311554&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA232261850",
@@ -598,7 +630,8 @@
     "select_count": null,
     "has_visual": true,
     "visual_description": "3 figures with dashed symmetry lines. Row 1: kite/arrowhead shape with vertical line (is symmetric). Row 2: asymmetric trapezoid with horizontal line (not symmetric). Row 3: regular hexagon with horizontal line (is symmetric).",
-    "correct_answer": "A,D,E"
+    "correct_answer": "True,False,True",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA232261850&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA233051799",
@@ -631,7 +664,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "A"
+    "correct_answer": "A",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA233051799&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA307314",
@@ -664,7 +698,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "B"
+    "correct_answer": "B",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA307314&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA900776517",
@@ -683,7 +718,8 @@
     "select_count": null,
     "has_visual": true,
     "visual_description": "Two 10\u00d710 grids: left grid has 71 cells shaded (representing 0.71); right grid is fully shaded labeled \u201crepresents 1 whole\u201d.",
-    "correct_answer": "Any decimal less than 0.71"
+    "correct_answer": "Any decimal less than 0.71",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA900776517&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA231875780",
@@ -734,7 +770,8 @@
     "select_count": null,
     "has_visual": true,
     "visual_description": "Graduated cylinder showing 8 liters of fuel remaining (scale 0\u201320L). Parts B/C/D are text-only constructed response.",
-    "correct_answer": null
+    "correct_answer": null,
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA231875780&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA000732007",
@@ -787,7 +824,8 @@
     "parts": null,
     "select_count": null,
     "has_visual": true,
-    "correct_answer": "B,C"
+    "correct_answer": "B,C",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA000732007&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA900750085",
@@ -828,7 +866,8 @@
     "select_count": 3,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "B,C,E"
+    "correct_answer": "B,C,E",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA900750085&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA231836735",
@@ -844,7 +883,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "[49/100]"
+    "correct_answer": "[49/100]",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA231836735&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA311543",
@@ -877,7 +917,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "A"
+    "correct_answer": "A",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA311543&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA250533",
@@ -893,7 +934,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "198"
+    "correct_answer": "198",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA250533&Subject=Math&Grade=4&Year=2025"
   },
   {
     "item_id": "MA002162929",
@@ -921,6 +963,7 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "B,C,E"
+    "correct_answer": "False,True,True",
+    "preview_url": "https://mcas.cognia.org/item-catalog?itemID=MA002162929&Subject=Math&Grade=4&Year=2025"
   }
 ]

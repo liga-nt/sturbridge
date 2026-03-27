@@ -60,7 +60,7 @@
   // Each has: { label, den, shaded: Set<number> }
 
   function makeState(m) {
-    return { label: m.label ?? 'One Whole', den: m.denominator ?? denominator, shaded: new Set() };
+    return { label: m.label ?? 'One Whole', den: 1, shaded: new Set() };
   }
 
   $: baseModels = models && models.length > 0
@@ -70,8 +70,11 @@
   // Initialise state array reactively when baseModels changes.
   // We intentionally avoid reinitialising on every render — only when the
   // identity of baseModels changes (i.e. a new question is loaded).
-  let states = baseModels.map(makeState);
-  let prevBaseModels = baseModels;
+  // Start empty — the $: block below populates on first run.
+  let states = [];
+  export let value = null;
+  $: value = states.map(s => s.shaded.size + '/' + s.den).join(',');
+  let prevBaseModels = null;
   $: if (baseModels !== prevBaseModels) {
     states = baseModels.map(makeState);
     prevBaseModels = baseModels;
@@ -90,7 +93,7 @@
   }
 
   function reset(i) {
-    states[i] = { ...states[i], den: baseModels[i].denominator ?? denominator, shaded: new Set() };
+    states[i] = { ...states[i], den: 1, shaded: new Set() };
     states = [...states];
   }
 

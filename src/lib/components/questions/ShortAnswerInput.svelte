@@ -4,6 +4,7 @@
 
   let el;
   let redoStack = [];
+  export let value = '';
   let boldActive = false, italicActive = false, underlineActive = false;
 
   // ── Math popout state ──────────────────────────────────────────
@@ -27,12 +28,36 @@
     mathPopoutOpen = false;
     mathInputComp?.reset();
     await tick();
+
+    const cleanHtml = html.replace(/\u200B/g, '');
+    if (!cleanHtml.trim()) { el.focus(); return; }
+
     el.focus();
+
+    const sel = window.getSelection();
+    let r;
     if (range) {
-      try { window.getSelection().removeAllRanges(); window.getSelection().addRange(range); } catch(e) {}
+      try {
+        sel.removeAllRanges();
+        sel.addRange(range);
+        r = sel.rangeCount > 0 ? sel.getRangeAt(0) : null;
+      } catch(e) {}
     }
-    if (html.replace(/\u200B/g, '').trim()) {
-      document.execCommand('insertHTML', false, html.replace(/\u200B/g, ''));
+    if (!r) {
+      r = document.createRange();
+      r.selectNodeContents(el);
+      r.collapse(false);
+    }
+
+    r.deleteContents();
+    const frag = r.createContextualFragment(cleanHtml);
+    const lastNode = frag.lastChild;
+    r.insertNode(frag);
+    if (lastNode) {
+      r.setStartAfter(lastNode);
+      r.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(r);
     }
   }
 
@@ -776,6 +801,7 @@
     on:keydown={handleKeydown}
     on:keyup={updateFormatState}
     on:mouseup={updateFormatState}
+    on:input={() => value = el?.textContent?.trim() ?? ''}
   ></div>
 
   <!-- Math equation popout (always in DOM to preserve mathInputComp ref) -->

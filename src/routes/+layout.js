@@ -12,7 +12,7 @@ export async function load({ url }) {
                 let resolved = false;
                 onAuthStateChanged(auth, async (currentUser) => {
                     if (currentUser) {
-                        const tokenResult = await currentUser.getIdTokenResult();
+                        const tokenResult = await currentUser.getIdTokenResult(true);
                         session.set({
                             user: currentUser,
                             loggedIn: true,

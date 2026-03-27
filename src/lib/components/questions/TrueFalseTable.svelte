@@ -12,6 +12,10 @@
   export let instruction = null;    // optional instruction line shown below question_text
 
   let answers = statements.map(() => null);
+  export let value = null;
+  $: value = answers.map(a =>
+    a === 'true' ? 'True' : a === 'false' ? 'False' : null
+  ).filter(Boolean).join(',');
 </script>
 
 <div class="question-body">

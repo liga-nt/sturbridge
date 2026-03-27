@@ -10,6 +10,8 @@
   // ── Drag-and-drop state ──────────────────────────────────────────────
   let placed = {};       // { slotId: tileValue }
   let draggingTile = null;
+  export let value = null;
+  $: value = JSON.stringify(placed);
 
   $: bankTiles = tiles.filter(t => !Object.values(placed).includes(t));
 

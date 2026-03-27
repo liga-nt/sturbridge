@@ -2,7 +2,9 @@
   export let params;         // { viewBox, stickers: [{id, shape, points|x/y/w/h, label}] }
   export let select_count = 2;
 
+  export let value = '';
   let selected = new Set();
+  $: value = [...selected].sort().join(',');
 
   function toggle(id) {
     if (selected.has(id)) {
@@ -13,11 +15,25 @@
     selected = selected;
   }
 
+  function dist(p1, p2) {
+    return Math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2);
+  }
+
   function centroid(sticker) {
     if (sticker.shape === 'rect') {
       return { x: sticker.x + sticker.w / 2, y: sticker.y + sticker.h / 2 };
     }
     const pts = sticker.points;
+    if (pts.length === 3) {
+      // Incenter: maximizes minimum distance to any side
+      const [A, B, C] = pts;
+      const a = dist(B, C), b = dist(A, C), c = dist(A, B);
+      const s = a + b + c;
+      return {
+        x: (a * A[0] + b * B[0] + c * C[0]) / s,
+        y: (a * A[1] + b * B[1] + c * C[1]) / s
+      };
+    }
     return {
       x: pts.reduce((s, p) => s + p[0], 0) / pts.length,
       y: pts.reduce((s, p) => s + p[1], 0) / pts.length

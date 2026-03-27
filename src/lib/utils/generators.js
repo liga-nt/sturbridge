@@ -222,23 +222,45 @@ function generateQ10() {
   };
 }
 
-// Q11: ShortAnswer — place value (digit × 10 relationship)
+// Q11: ShortAnswer — place value (digit × 10/100/1000 relationship)
 function generateQ11() {
-  // Pick a digit d (2–8) and embed it in two adjacent place positions
+  // Pick a digit d (2–8) and embed it in two place positions 1, 2, or 3 apart
   const d = randInt(2, 8);
-  // Random 5-digit number with digit d at thousands AND hundreds
-  const ten_thousands = randInt(1, 9);
-  const tens = randInt(0, 9);
-  const ones = randInt(0, 9);
-  const num = ten_thousands * 10000 + d * 1000 + d * 100 + tens * 10 + ones;
+
+  const configs = [
+    {
+      higher: 'thousands', lower: 'hundreds', factor: 10,
+      build(d) {
+        const tt = randInt(1, 9), tens = randInt(0, 9), ones = randInt(0, 9);
+        return tt * 10000 + d * 1000 + d * 100 + tens * 10 + ones;
+      }
+    },
+    {
+      higher: 'thousands', lower: 'tens', factor: 100,
+      build(d) {
+        const tt = randInt(1, 9), hundreds = randInt(0, 9), ones = randInt(0, 9);
+        return tt * 10000 + d * 1000 + hundreds * 100 + d * 10 + ones;
+      }
+    },
+    {
+      higher: 'thousands', lower: 'ones', factor: 1000,
+      build(d) {
+        const tt = randInt(1, 9), hundreds = randInt(0, 9), tens = randInt(0, 9);
+        return tt * 10000 + d * 1000 + hundreds * 100 + tens * 10 + d;
+      }
+    },
+  ];
+
+  const config = pick(configs);
+  const num = config.build(d);
 
   return {
     question_number: '11',
     answer_type: 'short_answer',
     stimulus_intro: `${pick(['A teacher', 'A student', 'A parent'])} wrote this number on the board.`,
     math_expression: num.toLocaleString(),
-    question_text: 'The value of the digit in the thousands place is how many times the value of the digit in the hundreds place?',
-    correct_answer: '10'
+    question_text: `The value of the digit in the ${config.higher} place is how many times the value of the digit in the ${config.lower} place?`,
+    correct_answer: String(config.factor)
   };
 }
 
@@ -337,79 +359,120 @@ function generateQ14() {
 // Q3: MultiPart + DataTable — decimal trail lengths, ordering and comparison
 function generateQ3() {
   function fmt(v) {
-    // Trim trailing zero from 2dp: 1.20 → "1.2", 1.58 → "1.58"
     const s = v.toFixed(2);
     return s.endsWith('0') ? v.toFixed(1) : s;
   }
 
-  for (let attempt = 0; attempt < 200; attempt++) {
-    // Blue: 1dp in range 1.2–1.8
-    const blue = randInt(12, 18) / 10;
+  const SCENARIOS = [
+    {
+      tableTitle: 'Park Trails',
+      colHeader: 'Trail',
+      unitLabel: 'kilometers',
+      names: ['Blue', 'Red', 'White', 'Green', 'Purple'],
+      questionText: (u) => `This table shows the length, in ${u}, of each trail in a park.`,
+      partA: () => 'Which trail has the shortest length?',
+      partB: () => 'List the trails in order of length from shortest to longest.',
+      partC: (ref) => `Which trail has a length closest to the length of the ${ref} Trail? Show or explain how you got your answer.`,
+    },
+    {
+      tableTitle: 'Garden Paths',
+      colHeader: 'Path',
+      unitLabel: 'meters',
+      names: ['Birch', 'Cedar', 'Maple', 'Willow', 'Oak'],
+      questionText: (u) => `This table shows the length, in ${u}, of each path in a botanical garden.`,
+      partA: () => 'Which path has the shortest length?',
+      partB: () => 'List the paths in order of length from shortest to longest.',
+      partC: (ref) => `Which path has a length closest to the length of the ${ref} Path? Show or explain how you got your answer.`,
+    },
+    {
+      tableTitle: 'Bike Routes',
+      colHeader: 'Route',
+      unitLabel: 'miles',
+      names: ['Harbor', 'Forest', 'River', 'Valley', 'Hilltop'],
+      questionText: (u) => `This table shows the length, in ${u}, of each bike route in a county park.`,
+      partA: () => 'Which route has the shortest length?',
+      partB: () => 'List the routes in order of length from shortest to longest.',
+      partC: (ref) => `Which route has a length closest to the length of the ${ref} Route? Show or explain how you got your answer.`,
+    },
+    {
+      tableTitle: 'Race Courses',
+      colHeader: 'Course',
+      unitLabel: 'kilometers',
+      names: ['Sprint', 'Dash', 'Relay', 'Stride', 'Pace'],
+      questionText: (u) => `This table shows the length, in ${u}, of each race course at a running event.`,
+      partA: () => 'Which course has the shortest length?',
+      partB: () => 'List the courses in order of length from shortest to longest.',
+      partC: (ref) => `Which course has a length closest to the length of the ${ref} Course? Show or explain how you got your answer.`,
+    },
+  ];
 
-    // Two short trails: 1dp in 0.5–0.9 (always clearly shortest)
+  const sc = pick(SCENARIOS);
+  const shuffledNames = shuffle([...sc.names]);
+  const refName = shuffledNames[0]; // reference item varies each generation
+
+  for (let attempt = 0; attempt < 200; attempt++) {
+    // Reference item: 1dp in range 1.2–1.8
+    const ref = randInt(12, 18) / 10;
+
+    // Two short items: 1dp in 0.5–0.9 (clearly shortest)
     const s1 = randInt(5, 9) / 10;
     const s2 = randInt(5, 9) / 10;
     if (s1 === s2) continue;
 
-    // Two "close" trails: offset 0.02–0.09 from blue (always 2dp, requires decimal comparison)
+    // Two "close" items: offset 0.02–0.09 from ref (requires decimal comparison)
     const o1 = randInt(2, 9) / 100;
     const o2 = randInt(2, 9) / 100;
     const sign1 = Math.random() < 0.5 ? 1 : -1;
     const sign2 = Math.random() < 0.5 ? 1 : -1;
-    const c1 = Math.round((blue + sign1 * o1) * 100) / 100;
-    const c2 = Math.round((blue + sign2 * o2) * 100) / 100;
+    const c1 = Math.round((ref + sign1 * o1) * 100) / 100;
+    const c2 = Math.round((ref + sign2 * o2) * 100) / 100;
 
-    if (c1 === blue || c2 === blue) continue;
-    if (Math.abs(c1 - blue) === Math.abs(c2 - blue)) continue; // tied → no unique answer
+    if (c1 === ref || c2 === ref) continue;
+    if (Math.abs(c1 - ref) === Math.abs(c2 - ref)) continue;
 
-    // All 5 values must be distinct
-    const vals = [blue, s1, s2, c1, c2];
+    const vals = [ref, s1, s2, c1, c2];
     if (new Set(vals.map(v => Math.round(v * 100))).size < 5) continue;
 
-    // Assign names: Blue fixed, others shuffled
-    const otherNames = shuffle(['Red', 'White', 'Green', 'Purple']);
+    // refName gets ref value; other 4 names get shuffled values
+    const otherNames = shuffledNames.slice(1);
     const otherVals = shuffle([s1, s2, c1, c2]);
 
-    const trailData = { Blue: blue };
-    otherNames.forEach((name, i) => { trailData[name] = otherVals[i]; });
+    const itemData = { [refName]: ref };
+    otherNames.forEach((name, i) => { itemData[name] = otherVals[i]; });
 
-    // Compute answers
-    const sorted = Object.entries(trailData).sort(([, a], [, b]) => a - b);
-    const shortestTrail = sorted[0][0];
+    const sorted = Object.entries(itemData).sort(([, a], [, b]) => a - b);
+    const shortestItem = sorted[0][0];
     const orderedList = sorted.map(([name]) => name).join(', ');
-    const closestTrail = Object.entries(trailData)
-      .filter(([name]) => name !== 'Blue')
-      .sort(([, a], [, b]) => Math.abs(a - blue) - Math.abs(b - blue))[0][0];
+    const closestItem = Object.entries(itemData)
+      .filter(([name]) => name !== refName)
+      .sort(([, a], [, b]) => Math.abs(a - ref) - Math.abs(b - ref))[0][0];
 
-    const rows = [
-      ['Blue', fmt(blue)],
-      ...otherNames.map((name, i) => [name, fmt(otherVals[i])])
-    ];
+    const rows = shuffledNames.map(name => [name, fmt(itemData[name])]);
 
     return {
       question_number: '3',
       answer_type: 'multi_part',
-      question_text: 'This table shows the length, in kilometers, of each trail in a park.',
+      question_text: sc.questionText(sc.unitLabel),
       stimulus_type: 'data_table',
       stimulus_params: {
-        title: 'Park Trails',
-        headers: ['Trail', 'Length\n(kilometers)'],
-        rows
+        title: sc.tableTitle,
+        headers: [sc.colHeader, `Length\n(${sc.unitLabel})`],
+        rows,
       },
       parts: [
-        { label: 'A', text: 'Which trail has the shortest length?', answer_type: 'short_answer' },
-        { label: 'B', text: 'List the trails in order of length from shortest to longest.', answer_type: 'short_answer' },
-        { label: 'C', text: 'Which trail has a length closest to the length of the Blue Trail? Show or explain how you got your answer.', answer_type: 'constructed_response' }
+        { label: 'A', text: sc.partA(), answer_type: 'short_answer' },
+        { label: 'B', text: sc.partB(), answer_type: 'short_answer' },
+        { label: 'C', text: sc.partC(refName), answer_type: 'constructed_response' },
       ],
       correct_answer: {
-        A: shortestTrail,
+        A: shortestItem,
         B: orderedList,
-        C: closestTrail
-      }
+        C: closestItem,
+      },
     };
   }
 
-  return generateQ3(); // unreachable in practice
+  return generateQ3();
 }
 
 // Q4: MultipleChoice — "which is NOT equal" to a mixed-number expression
@@ -504,14 +567,14 @@ function generateQ7() {
     { model: { left: { type: 'rect', numerator: an, denominator: ad, orientation: 'h' }, operator: trueOp, right: { type: 'rect', numerator: bn, denominator: bd, orientation: 'h' } }, correct: true },
     // Correct: circle, true operator
     { model: { left: { type: 'circle', numerator: an, denominator: ad }, operator: trueOp, right: { type: 'circle', numerator: bn, denominator: bd } }, correct: true },
-    // Wrong: rect v, wrong operator
-    { model: { left: { type: 'rect', numerator: an, denominator: ad, orientation: 'v' }, operator: wrongOp, right: { type: 'rect', numerator: bn, denominator: bd, orientation: 'v' } }, correct: false },
-    // Wrong: circle wrong operator
+    // Wrong: rect h, wrong operator
+    { model: { left: { type: 'rect', numerator: an, denominator: ad, orientation: 'h' }, operator: wrongOp, right: { type: 'rect', numerator: bn, denominator: bd, orientation: 'h' } }, correct: false },
+    // Wrong: circle, wrong operator
     { model: { left: { type: 'circle', numerator: an, denominator: ad }, operator: wrongOp, right: { type: 'circle', numerator: bn, denominator: bd } }, correct: false },
-    // Wrong: different denominator (misleading model)
-    { model: { left: { type: 'rect', numerator: an, denominator: ad + 1, orientation: 'h' }, operator: trueOp, right: { type: 'rect', numerator: bn, denominator: bd, orientation: 'h' } }, correct: false },
-    // Wrong: mismatched sizes (bigger circle for smaller fraction)
-    { model: { left: { type: 'circle', numerator: an, denominator: ad, size: aVal < bVal ? 1.4 : 0.65 }, operator: trueOp, right: { type: 'circle', numerator: bn, denominator: bd, size: aVal < bVal ? 0.65 : 1.4 } }, correct: false },
+    // Wrong: rect v, correct operator but fractions swapped (bn/ad vs an/bd) — wrong models
+    { model: { left: { type: 'rect', numerator: bn, denominator: ad, orientation: 'v' }, operator: trueOp, right: { type: 'rect', numerator: an, denominator: bd, orientation: 'v' } }, correct: false },
+    // Wrong: circle, correct operator but left denominator off by 1 — wrong fraction
+    { model: { left: { type: 'circle', numerator: an, denominator: ad + 1 }, operator: trueOp, right: { type: 'circle', numerator: bn, denominator: bd } }, correct: false },
   ]);
 
   const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -593,37 +656,61 @@ function generateQ8() {
 
 // Q6: MultiPart — basketball court / sandbox / playground word problem
 function generateQ6() {
-  const sandbox = randInt(10, 25);
+  const SCENARIOS = [
+    {
+      v: 'b',
+      smallThing: 'sandbox',   bigThing: 'basketball court', totalThing: 'playground',
+      intro:  (small) => `A playground has a basketball court and a sandbox. The length of the sandbox is ${small} feet.`,
+      partA:  (n)     => `The length of the basketball court is ${n} times the length of the sandbox. Write an equation that can be used to find b, the length in feet of the basketball court.`,
+      partB:  ()      => 'What is the length, in feet, of the basketball court? Show or explain how you got your answer.',
+      partC:  ()      => 'The length of the playground is twice the length of the basketball court and the sandbox added together. What is the total length, in feet, of the playground? Show or explain how you got your answer.',
+    },
+    {
+      v: 'g',
+      smallThing: 'flower bed', bigThing: 'vegetable garden', totalThing: 'yard',
+      intro:  (small) => `A yard has a vegetable garden and a flower bed. The length of the flower bed is ${small} feet.`,
+      partA:  (n)     => `The length of the vegetable garden is ${n} times the length of the flower bed. Write an equation that can be used to find g, the length in feet of the vegetable garden.`,
+      partB:  ()      => 'What is the length, in feet, of the vegetable garden? Show or explain how you got your answer.',
+      partC:  ()      => 'The length of the yard is twice the length of the vegetable garden and the flower bed added together. What is the total length, in feet, of the yard? Show or explain how you got your answer.',
+    },
+    {
+      v: 'c',
+      smallThing: 'office', bigThing: 'classroom', totalThing: 'school hallway',
+      intro:  (small) => `A school building has a classroom and an office. The length of the office is ${small} feet.`,
+      partA:  (n)     => `The length of the classroom is ${n} times the length of the office. Write an equation that can be used to find c, the length in feet of the classroom.`,
+      partB:  ()      => 'What is the length, in feet, of the classroom? Show or explain how you got your answer.',
+      partC:  ()      => 'The length of the school hallway is twice the length of the classroom and the office added together. What is the total length, in feet, of the school hallway? Show or explain how you got your answer.',
+    },
+    {
+      v: 'p',
+      smallThing: 'wading pool', bigThing: 'lap pool', totalThing: 'pool deck',
+      intro:  (small) => `A recreation center has a lap pool and a wading pool. The length of the wading pool is ${small} feet.`,
+      partA:  (n)     => `The length of the lap pool is ${n} times the length of the wading pool. Write an equation that can be used to find p, the length in feet of the lap pool.`,
+      partB:  ()      => 'What is the length, in feet, of the lap pool? Show or explain how you got your answer.',
+      partC:  ()      => 'The length of the pool deck is twice the length of the lap pool and the wading pool added together. What is the total length, in feet, of the pool deck? Show or explain how you got your answer.',
+    },
+  ];
+
+  const sc = pick(SCENARIOS);
+  const small = randInt(10, 25);
   const multiplier = randInt(3, 8);
-  const bball = sandbox * multiplier;
-  const playground = 2 * (bball + sandbox);
+  const big = small * multiplier;
+  const total = 2 * (big + small);
 
   return {
     question_number: '6',
     answer_type: 'multi_part',
-    question_text: `A playground has a basketball court and a sandbox. The length of the sandbox is ${sandbox} feet.`,
+    question_text: sc.intro(small),
     parts: [
-      {
-        label: 'A',
-        text: `The length of the basketball court is ${multiplier} times the length of the sandbox. Write an equation that can be used to find b, the length in feet of the basketball court.`,
-        answer_type: 'short_answer'
-      },
-      {
-        label: 'B',
-        text: 'What is the length, in feet, of the basketball court? Show or explain how you got your answer.',
-        answer_type: 'constructed_response'
-      },
-      {
-        label: 'C',
-        text: 'The length of the playground is twice the length of the basketball court and the sandbox added together. What is the total length, in feet, of the playground? Show or explain how you got your answer.',
-        answer_type: 'constructed_response'
-      }
+      { label: 'A', text: sc.partA(multiplier), answer_type: 'short_answer' },
+      { label: 'B', text: sc.partB(), answer_type: 'constructed_response' },
+      { label: 'C', text: sc.partC(), answer_type: 'constructed_response' },
     ],
     correct_answer: {
-      A: `b=${multiplier}x${sandbox}`,
-      B: String(bball),
-      C: String(playground)
-    }
+      A: `${sc.v}=${multiplier}x${small}`,
+      B: String(big),
+      C: String(total),
+    },
   };
 }
 
@@ -633,56 +720,16 @@ function generateQ6() {
 // RESPONSE_A2: A="0 lines", B="1 line", C="2 lines", D="3 lines", E="4 lines", F="5 lines"
 function generateQ13() {
   const variants = [
-    // Square, vertical line (IS symmetry, 4 lines)
-    {
-      stimulus_params: { shape: { type: 'square', size: 120 }, line: { from: [0, -75], to: [0, 75] } },
-      correct_answer: 'A,E'
-    },
-    // Square, horizontal line (IS symmetry, 4 lines)
-    {
-      stimulus_params: { shape: { type: 'square', size: 120 }, line: { from: [-75, 0], to: [75, 0] } },
-      correct_answer: 'A,E'
-    },
-    // Square, diagonal line (IS symmetry, 4 lines)
-    {
-      stimulus_params: { shape: { type: 'square', size: 120 }, line: { from: [-75, -75], to: [75, 75] } },
-      correct_answer: 'A,E'
-    },
-    // Rectangle, horizontal axis (IS symmetry, 2 lines)
-    {
-      stimulus_params: { shape: { type: 'rect', width: 150, height: 80 }, line: { from: [-85, 0], to: [85, 0] } },
-      correct_answer: 'A,C'
-    },
-    // Rectangle, diagonal line (IS NOT symmetry, 2 lines)
-    {
-      stimulus_params: { shape: { type: 'rect', width: 150, height: 80 }, line: { from: [-70, -40], to: [70, 40] } },
-      correct_answer: 'B,C'
-    },
-    // Equilateral triangle, vertical altitude (IS symmetry, 3 lines)
-    {
-      stimulus_params: { shape: { type: 'triangle', kind: 'equilateral', size: 120 }, line: { from: [0, -70], to: [0, 38] } },
-      correct_answer: 'A,D'
-    },
-    // Isosceles triangle, vertical axis (IS symmetry, 1 line)
-    {
-      stimulus_params: { shape: { type: 'triangle', kind: 'isosceles', base: 120, height: 100 }, line: { from: [0, -68], to: [0, 36] } },
-      correct_answer: 'A,B'
-    },
-    // Isosceles triangle, horizontal line through middle (IS NOT symmetry, 1 line)
-    {
-      stimulus_params: { shape: { type: 'triangle', kind: 'isosceles', base: 120, height: 100 }, line: { from: [-74, 0], to: [74, 0] } },
-      correct_answer: 'B,B'
-    },
-    // Regular 4-point star, horizontal axis (IS symmetry, 4 lines)
-    {
-      stimulus_params: { shape: { type: 'star', points: 4, outer_r: 80, inner_r: 35 }, line: { from: [-91, 0], to: [91, 0] } },
-      correct_answer: 'A,E'
-    },
-    // Regular 4-point star, diagonal (IS symmetry, 4 lines)
-    {
-      stimulus_params: { shape: { type: 'star', points: 4, outer_r: 80, inner_r: 35 }, line: { from: [-65, -65], to: [65, 65] } },
-      correct_answer: 'A,E'
-    },
+    { shape_name: 'square',             stimulus_params: { shape: { type: 'square', size: 120 }, line: { from: [0, -75], to: [0, 75] } },          correct_answer: 'is,4 lines'     },
+    { shape_name: 'square',             stimulus_params: { shape: { type: 'square', size: 120 }, line: { from: [-75, 0], to: [75, 0] } },           correct_answer: 'is,4 lines'     },
+    { shape_name: 'square',             stimulus_params: { shape: { type: 'square', size: 120 }, line: { from: [-75, -75], to: [75, 75] } },        correct_answer: 'is,4 lines'     },
+    { shape_name: 'rectangle',          stimulus_params: { shape: { type: 'rect', width: 150, height: 80 }, line: { from: [-85, 0], to: [85, 0] } }, correct_answer: 'is,2 lines'    },
+    { shape_name: 'rectangle',          stimulus_params: { shape: { type: 'rect', width: 150, height: 80 }, line: { from: [-70, -40], to: [70, 40] } }, correct_answer: 'is not,2 lines' },
+    { shape_name: 'equilateral triangle', stimulus_params: { shape: { type: 'triangle', kind: 'equilateral', size: 120 }, line: { from: [0, -70], to: [0, 38] } }, correct_answer: 'is,3 lines' },
+    { shape_name: 'isosceles triangle', stimulus_params: { shape: { type: 'triangle', kind: 'isosceles', base: 120, height: 100 }, line: { from: [0, -68], to: [0, 36] } }, correct_answer: 'is,1 line' },
+    { shape_name: 'isosceles triangle', stimulus_params: { shape: { type: 'triangle', kind: 'isosceles', base: 120, height: 100 }, line: { from: [-74, 0], to: [74, 0] } }, correct_answer: 'is not,1 line' },
+    { shape_name: '4-pointed star',     stimulus_params: { shape: { type: 'star', points: 4, outer_r: 80, inner_r: 35 }, line: { from: [-91, 0], to: [91, 0] } }, correct_answer: 'is,4 lines' },
+    { shape_name: '4-pointed star',     stimulus_params: { shape: { type: 'star', points: 4, outer_r: 80, inner_r: 35 }, line: { from: [-65, -65], to: [65, 65] } }, correct_answer: 'is,4 lines' },
   ];
 
   const chosen = variants[randInt(0, variants.length - 1)];
@@ -692,7 +739,7 @@ function generateQ13() {
     answer_type: 'inline_choice',
     stimulus_type: 'symmetry_figure',
     stimulus_params: chosen.stimulus_params,
-    question_text: 'A dashed line is drawn on this figure.',
+    question_text: `A dashed line is drawn on this ${chosen.shape_name}.`,
     instruction: 'Select from the drop-down menus to correctly complete each sentence.',
     sentences: [
       'The dashed line [RESPONSE_A1] a line of symmetry for the figure.',
@@ -734,13 +781,9 @@ function generateQ15() {
   const sc = scenarios[randInt(0, scenarios.length - 1)];
   const divisor = sc.divisors[randInt(0, sc.divisors.length - 1)];
 
-  let boxA, boxB;
-  do {
-    boxA = randInt(10, 20);
-    boxB = randInt(10, 20);
-  } while ((boxA + boxB) % divisor !== 0);
-
-  const answer = (boxA + boxB) / divisor;
+  const boxA = randInt(10, 20);
+  const boxB = randInt(10, 20);
+  const answer = Math.floor((boxA + boxB) / divisor);
 
   return {
     question_number: '15',
@@ -771,9 +814,9 @@ function generateQ16() {
   const TStr = T.toLocaleString();
 
   const correct_answer = [
-    row1True ? 'A' : 'B',
-    row2True ? 'C' : 'D',
-    'E'
+    row1True ? 'True' : 'False',
+    row2True ? 'True' : 'False',
+    'True'
   ].join(',');
 
   return {
@@ -799,7 +842,7 @@ function generateQ18() {
   const totalNumer = N * numer;
   const whole = Math.floor(totalNumer / denom);
   const rem = totalNumer % denom;
-  const correct = rem === 0 ? String(whole) : `${whole}[${rem}/${denom}]`;
+  const correct = rem === 0 ? String(whole) : `${whole} ${rem}/${denom}`;
 
   const scenarios = [
     {
@@ -848,14 +891,14 @@ function generateQ9() {
   }
 
   // ── Part A: 5 sticker slots ──
-  // viewBox "0 0 470 102", slot centers spaced ~94px apart, row center y=51
-  const A_CX = [47, 141, 235, 329, 423];
-  const CY   = 51;
+  // viewBox "0 0 564 122" (470×102 scaled 1.2×), slot centers spaced ~113px apart
+  // All shapes share a common baseline at y=103 so they appear to sit on a table.
+  const A_CX     = [56, 169, 282, 395, 508];
+  const BASELINE = 103;
 
-  // Bigger shapes — all fit within 94px slot width and 102px height
-
-  function pentagon(cx, cy) {
-    const r = 42;
+  function pentagon(cx) {
+    const r = 46;
+    const cy = BASELINE - r * Math.sin(54 * Math.PI / 180);
     const pts = [];
     for (let i = 0; i < 5; i++) {
       const a = (i * 72 - 90) * Math.PI / 180;
@@ -864,38 +907,39 @@ function generateQ9() {
     return { shape: 'polygon', points: pts };
   }
 
-  function parallelogram(cx, cy) {
-    const w = 68, h = 56, skew = randInt(10, 12);
+  function parallelogram(cx) {
+    const w = 64, h = 60, skew = randInt(18, 22);
     return {
       shape: 'polygon',
       points: [
-        [cx - w/2,        cy + h/2],
-        [cx + w/2,        cy + h/2],
-        [cx + w/2 + skew, cy - h/2],
-        [cx - w/2 + skew, cy - h/2]
+        [cx - w/2,        BASELINE],
+        [cx + w/2,        BASELINE],
+        [cx + w/2 + skew, BASELINE - h],
+        [cx - w/2 + skew, BASELINE - h]
       ]
     };
   }
 
-  function obtuseTriSticker(cx, cy) {
-    const base = 78, h = 52, shift = randInt(18, 26);
+  function obtuseTriSticker(cx) {
+    const base = 72, h = 62, overshift = randInt(12, 17);
     return {
       shape: 'polygon',
       points: [
-        [cx - base/2,         cy + h/2],
-        [cx + base/2,         cy + h/2],
-        [cx - base/2 + shift, cy - h/2]
+        [cx - base/2,             BASELINE],
+        [cx + base/2,             BASELINE],
+        [cx - base/2 - overshift, BASELINE - h]
       ]
     };
   }
 
-  function stickerRect(cx, cy) {
-    const w = randInt(72, 86), h = randInt(50, 62);
-    return { shape: 'rect', x: +(cx - w/2).toFixed(1), y: +(cy - h/2).toFixed(1), w, h };
+  function stickerRect(cx) {
+    const w = randInt(86, 100), h = randInt(60, 72);
+    return { shape: 'rect', x: +(cx - w/2).toFixed(1), y: BASELINE - h, w, h };
   }
 
-  function equilateralTriSticker(cx, cy) {
-    const r = 42;
+  function equilateralTriSticker(cx) {
+    const r = 46;
+    const cy = BASELINE - r * 0.5;
     const pts = [];
     for (let i = 0; i < 3; i++) {
       const a = (i * 120 - 90) * Math.PI / 180;
@@ -904,14 +948,14 @@ function generateQ9() {
     return { shape: 'polygon', points: pts };
   }
 
-  function rightTriSticker(cx, cy) {
-    const base = 70, h = 62;
+  function rightTriSticker(cx) {
+    const base = 84, h = 70;
     return {
       shape: 'polygon',
       points: [
-        [+(cx - base/2).toFixed(1), +(cy + h/2).toFixed(1)],
-        [+(cx + base/2).toFixed(1), +(cy + h/2).toFixed(1)],
-        [+(cx - base/2).toFixed(1), +(cy - h/2).toFixed(1)]
+        [+(cx - base/2).toFixed(1), BASELINE],
+        [+(cx + base/2).toFixed(1), BASELINE],
+        [+(cx - base/2).toFixed(1), +(BASELINE - h).toFixed(1)]
       ]
     };
   }
@@ -924,31 +968,39 @@ function generateQ9() {
   const obtusePos  = positions.slice(0, 2).sort((a, b) => a - b);
   const plainPos   = positions.slice(2).sort((a, b) => a - b);
 
-  // Build shapes, track area
+  // Build shapes
   const shapeData = Array.from({ length: 5 }, (_, i) => {
     const cx = A_CX[i];
     const isObtuse = obtusePos.includes(i);
     const idx = isObtuse ? obtusePos.indexOf(i) : plainPos.indexOf(i);
-    const geo = isObtuse ? obtuseBuilders[idx](cx, CY) : plainBuilders[idx](cx, CY);
+    const geo = isObtuse ? obtuseBuilders[idx](cx) : plainBuilders[idx](cx);
     return { slotIdx: i, geo, area: geoArea(geo) };
   });
 
-  // Assign labels: largest area → most text, smallest area → least text
-  // Labels ordered by space needed (desc)
-  const labelsBySize = [
-    ...shuffle(['Congrats!', 'Great\nJob!', 'Way to\nGo!']), // medium — shuffled
-    'Awesome\nTeamwork!',  // largest
-    'A+'                   // smallest
-  ];
-  // Sort shapes desc by area, pair with labels desc by size
-  const sortedByArea = [...shapeData].sort((a, b) => b.area - a.area);
-  sortedByArea.forEach((entry, i) => { entry.label = labelsBySize[i]; });
+  // Assign labels by shape type so wide labels never land on narrow triangles:
+  //   rect            → "Awesome\nTeamwork!" (widest label, wide interior)
+  //   pentagon/quad   → medium 2-line labels (~38px per line, fit in ≥50px interior)
+  //   triangles       → short labels (fit in ~48px equilateral interior)
+  const medPool   = shuffle(['Great\nJob!', 'Way to\nGo!', 'Keep\nIt Up!', 'Congrats!']);
+  const shortPool = shuffle(['A+', 'Yay!', 'Go!']);
+  let mi = 0, si = 0;
+  shapeData.forEach(entry => {
+    const g = entry.geo;
+    if (g.shape === 'rect') {
+      entry.label = 'Awesome\nTeamwork!';
+    } else if (g.points.length === 3) {
+      entry.label = shortPool[si++] ?? 'OK!';
+    } else {
+      entry.label = medPool[mi++] ?? 'Nice!';
+    }
+  });
 
   const stickers = shapeData
     .sort((a, b) => a.slotIdx - b.slotIdx)
     .map(e => ({ id: String(e.slotIdx + 1), ...e.geo, label: e.label }));
 
-  const correctA = obtusePos.map(i => LETTERS[i]).join(',');
+  // Correct answer = sorted 1-indexed sticker IDs (matches StickerSet value export)
+  const correctA = obtusePos.map(i => String(i + 1)).sort().join(',');
 
   // ── Part B: 3 triangle slots ──
   // viewBox "0 0 413 81" — triangles fill the height
@@ -984,7 +1036,7 @@ function generateQ9() {
     return { id: TRI_LABELS[i].replace('!', '').toLowerCase(), label: TRI_LABELS[i], ...maker(slot) };
   });
 
-  const correctB = LETTERS[rightSlot];
+  const correctB = `${TRI_LABELS[rightSlot]},one right angle`;
 
   return {
     question_number: '9',
@@ -998,7 +1050,7 @@ function generateQ9() {
         answer_type: 'hotspot',
         select_count: 2,
         stimulus_type: 'sticker_set',
-        stimulus_params: { viewBox: '0 0 470 102', stickers }
+        stimulus_params: { viewBox: '0 0 564 122', stickers }
       },
       {
         label: 'B',
@@ -1014,7 +1066,7 @@ function generateQ9() {
         ]
       }
     ],
-    correct_answer: `${correctA};${correctB}`
+    correct_answer: { A: correctA, B: correctB }
   };
 }
 
@@ -1368,17 +1420,7 @@ function generate2025Q20() {
     return { text: `${a} \u00d7 ${b} = ${correct.toLocaleString('en-US')}` };
   });
 
-  // Build correct_answer string using TrueFalseTable encoding:
-  // Row N: True = letter(2N-1), False = letter(2N).  N is 1-based.
-  const letters = ['A','B','C','D','E','F'];
-  const correctLetters = chosen.map(([a, b, correct], i) => {
-    const rowN = i + 1; // 1-based
-    if (falseIdx.has(i)) {
-      return letters[2 * rowN - 1]; // False letter (even index)
-    }
-    return letters[2 * rowN - 2];   // True letter (odd index)
-  });
-  const correctAnswer = correctLetters.join(',');
+  const correctAnswer = chosen.map((_, i) => falseIdx.has(i) ? 'False' : 'True').join(',');
 
   return {
     question_number: '20',
@@ -1690,7 +1732,11 @@ function generate2023Q13() {
         correct_answer: totalMiles,
       },
     ],
-    correct_answer: null,
+    correct_answer: {
+      A: weeklyMiles,
+      B: annualMiles,
+      C: totalMiles,
+    },
   };
 }
 
@@ -1844,7 +1890,12 @@ function generate2025Q3() {
         correct_answer: `${pd.soldW}[${pd.soldF}/8]`,
       },
     ],
-    correct_answer: null,
+    correct_answer: {
+      A: correctLetter,
+      B: `[${cookiesN}/8]`,
+      C: `No; [${pc.wA}/${pc.wAD}] + [${pc.wB}/${pc.wBD}] = [${pc.actN}/${pc.actD}]`,
+      D: `${pd.soldW}[${pd.soldF}/8]`,
+    },
   };
 }
 
@@ -1966,7 +2017,12 @@ function generate2025Q14() {
         correct_answer: `Any value between ${lowGrams.toLocaleString()} and ${(massKg * 1000).toLocaleString()} grams (exclusive)`
       }
     ],
-    correct_answer: null
+    correct_answer: {
+      A: String(cylinderValue),
+      B: String(mLAnswer),
+      C: String(timeChoice.total),
+      D: `Any value between ${lowGrams.toLocaleString()} and ${(massKg * 1000).toLocaleString()} grams (exclusive)`,
+    },
   };
 }
 
@@ -2437,12 +2493,6 @@ function generate2025Q10() {
   // Build statements (shape field)
   const statements = chosen.map(c => ({ shape: c.shapeParams }));
 
-  // Build correct_answer using row encoding: row N True=letter(2N-1), False=letter(2N)
-  const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
-  const correctLetters = chosen
-    .map((c, i) => c.isSymmetric ? letters[2 * i] : letters[2 * i + 1])
-    .join(',');
-
   return {
     question_number: '10',
     answer_type: 'true_false_table',
@@ -2451,7 +2501,7 @@ function generate2025Q10() {
     false_label: 'Not a Line of Symmetry',
     question_text: 'Determine whether the line shown on each figure in the table is a line of symmetry.\n\nSelect \u201cLine of Symmetry\u201d or \u201cNot a Line of Symmetry\u201d for each figure.',
     statements,
-    correct_answer: correctLetters,
+    correct_answer: chosen.map(c => c.isSymmetric ? 'True' : 'False').join(','),
   };
 }
 
@@ -2691,7 +2741,12 @@ function generate2023Q4() {
       `Bucket diagrams: Part A shows Bucket A ([${buckANum}/${buckADenom}]) and Bucket B ([${bcNum}/${bcDenom}]); ` +
       `Part B shows Bucket C ([${bcNum}/${bcDenom}]) and Bucket D ([${buckDNum}/${buckDDenom}]); ` +
       `Part C shows all four buckets.`,
-    correct_answer: null,
+    correct_answer: {
+      A: `[${buckANum}/${buckADenom}] ${partAOp} [${bcNum}/${bcDenom}]`,
+      B: 'Bucket C',
+      C: `Yes; both Bucket B and Bucket C are [${bcNum}/${bcDenom}] full, so they have the same amount.`,
+      D: `Any fraction less than [${benchmarkN}/${benchmarkD}]`,
+    },
   };
 }
 
@@ -2848,16 +2903,7 @@ function generate2025Q7() {
   // Standard TFT encoding: row N: True = letter(2N-1), False = letter(2N)
   // Row 1: A=True, B=False; Row 2: C=True, D=False; Row 3: E=True, F=False
   const tfLetters = [];
-  shuffledComparisons.forEach((c, i) => {
-    // true_label = "Less Than R" → if relation is 'less', this is the "true" selection
-    const isLess = c.relation === 'less';
-    // letter index: row i has true=2i, false=2i+1 (0-indexed letters)
-    const trueLetterIdx  = i * 2;      // 0,2,4
-    const falseLetterIdx = i * 2 + 1;  // 1,3,5
-    const LETTERS = 'ABCDEF';
-    tfLetters.push(isLess ? LETTERS[trueLetterIdx] : LETTERS[falseLetterIdx]);
-  });
-  const partBAnswer = tfLetters.join(',');
+  const partBAnswer = shuffledComparisons.map(c => c.relation === 'less' ? 'True' : 'False').join(',');
 
   const Rstr = numWithComma(R);
 
@@ -2876,6 +2922,7 @@ function generate2025Q7() {
         tiles,
         targets,
         correct_matches,
+        correct_answer: correct_matches,
       },
       {
         label: 'B',
@@ -2890,7 +2937,10 @@ function generate2025Q7() {
         correct_answer: partBAnswer,
       },
     ],
-    correct_answer: null,
+    correct_answer: {
+      A: correct_matches,
+      B: partBAnswer,
+    },
   };
 }
 
@@ -3278,21 +3328,19 @@ function generate2021Q4() {
 
   // Items context variety
   const items = [
-    { noun: 'sticks of butter', unit: 'pound', verb: 'bought', seller: true },
-    { noun: 'bags of flour', unit: 'pound', verb: 'bought', seller: true },
-    { noun: 'pieces of ribbon', unit: 'foot', verb: 'cut', seller: false },
-    { noun: 'jars of honey', unit: 'pound', verb: 'purchased', seller: true },
+    { noun: 'sticks of butter', singular: 'stick of butter', unit: 'pound', unit_plural: 'pounds', verb: 'bought',     measure: 'weighs', measure_suffix: '',      quantity: 'weight' },
+    { noun: 'bags of flour',    singular: 'bag of flour',    unit: 'pound', unit_plural: 'pounds', verb: 'bought',     measure: 'weighs', measure_suffix: '',      quantity: 'weight' },
+    { noun: 'pieces of ribbon', singular: 'piece of ribbon', unit: 'foot',  unit_plural: 'feet',   verb: 'cut',        measure: 'is',     measure_suffix: ' long', quantity: 'length' },
+    { noun: 'jars of honey',    singular: 'jar of honey',    unit: 'pound', unit_plural: 'pounds', verb: 'purchased',  measure: 'weighs', measure_suffix: '',      quantity: 'weight' },
   ];
   const item = pick(items);
   const person = pick(PEOPLE);
 
-  // Ordinal pronouns for sentence construction
   const subject = person.name;
-  const verb = item.verb;
 
   const questionText =
-    `${subject} ${verb} ${count} ${item.noun}. Each ${item.noun.replace(/s$/, '')} weighs ` +
-    `[1/${denom}] ${item.unit}.\n\nWhat is the total weight, in ${item.unit}s, of the ${count} ${item.noun}?`;
+    `${subject} ${item.verb} ${count} ${item.noun}. Each ${item.singular} ${item.measure} ` +
+    `[1/${denom}] ${item.unit}${item.measure_suffix}.\n\nWhat is the total ${item.quantity}, in ${item.unit_plural}, of the ${count} ${item.noun}?`;
 
   const answerOptions = [
     { letter: 'A', text: `[${correctNum}/${correctDen}]` },  // CORRECT
@@ -3505,7 +3553,7 @@ function generate2021Q6() {
         stimulus_params: { rows: [[wordForm]] },
         answer_type: 'constructed_response',
         answer_instruction: 'Enter your answer in the box.',
-        correct_answer: partAFormatted,
+        correct_answer: String(partAValue),
       },
       {
         label: 'B',
@@ -3519,18 +3567,23 @@ function generate2021Q6() {
         question_text: `Use >, <, or = to write a comparison of the two numbers in Part A and Part B. Explain how you got your answer.`,
         answer_type: 'constructed_response',
         answer_instruction: 'Enter your answer and your explanation in the space provided.',
-        correct_answer: `${partAFormatted} ${comparison} ${partBFormatted}`,
+        correct_answer: comparison,
       },
       {
         label: 'D',
         question_text: `Write a number that is 1,000 greater than the number ${partDGivenFormatted}. Explain how you got your answer.`,
         answer_type: 'constructed_response',
         answer_instruction: 'Enter your answer and your explanation in the space provided.',
-        correct_answer: partDAnswerFormatted,
+        correct_answer: String(partDAnswer),
       },
     ],
     select_count: null,
-    correct_answer: null,
+    correct_answer: {
+      A: String(partAValue),
+      B: partBExpanded,
+      C: comparison,
+      D: String(partDAnswer),
+    },
   };
 }
 
@@ -3559,8 +3612,9 @@ function generate2021Q7() {
     { object: 'rug',      unit: 'foot' },
     { object: 'painting', unit: 'inch' },
   ];
-  // Side lengths 3–9 keep arithmetic manageable for 4th graders
-  const sideLengths = [3, 4, 5, 6, 7, 8, 9];
+  // Side lengths 3–9 keep arithmetic manageable for 4th graders.
+  // Exclude 4: area=16 equals perimeter=16, causing B=C collision.
+  const sideLengths = [3, 5, 6, 7, 8, 9];
 
   const scenario = pick(scenarios);
   const side = pick(sideLengths);
@@ -3640,7 +3694,7 @@ function generate2021Q8() {
     ],
     parts: null,
     select_count: null,
-    correct_answer: 'A,C,D',
+    correct_answer: '{"0 lines of symmetry": ["parallelogram", "trapezoid"], "1 line of symmetry": [], "2 lines of symmetry": ["rectangle"], "4 lines of symmetry": ["square"]}',
   };
 }
 
@@ -3663,27 +3717,28 @@ function generate2021Q9() {
     item_id: 'MA800763292',
     question_number: '9',
     stimulus_intro: 'This list shows the snowfall amounts, in inches, for eight towns during a storm.',
-    stimulus_type: 'line_plot',
+    stimulus_type: null,
     stimulus_params: {
       title: 'Snowfall Amounts',
       axis_label: 'Snowfall (inches)',
+      min: 0,
+      max: 3,
+      denominator: 4,
+      missing_label: '2[3/4]',
       data_points: [
-        { label: '[3/4]',  count: 1 },
-        { label: '1[1/4]', count: 1 },
-        { label: '1[1/2]', count: 2 },
-        { label: '2',      count: 1 },
-        { label: '2[1/4]', count: 1 },
-        { label: '2[3/4]', count: 2 },
+        { label: '[3/4]',   count: 1 },
+        { label: '1[1/4]',  count: 1 },
+        { label: '1[1/2]',  count: 2 },
+        { label: '2',       count: 1 },
+        { label: '2[1/4]',  count: 1 },
+        { label: '2[3/4]',  count: 2 },
       ],
-      tick_spacing: 60,
     },
     math_expression: '2[1/4],  1[1/2],  2,  2[3/4],  1[1/2],  [3/4],  2[3/4],  1[1/4]',
-    answer_type: 'short_answer',
+    answer_type: 'drag_drop_line_plot',
     question_text:
       'This line plot also shows some of the snowfall amounts. One of the snowfall amounts is missing from the line plot.\n\n' +
       'Drag and drop the X into the correct box above the number line to complete the line plot.',
-    input_widget: 'text',
-    answer_suffix: null,
     answer_options: null,
     parts: null,
     select_count: null,
@@ -3797,12 +3852,11 @@ function generate2021Q11() {
   return {
     item_id: 'MA803730594',
     question_number: '11',
-    stimulus_intro: null,
+    stimulus_intro: `The rule for a pattern is \u201cmultiply by ${mult}.\u201d The first number in the pattern is ${start}.`,
     stimulus_type: null,
     stimulus_params: null,
     math_expression: null,
     answer_type: 'short_answer',
-    stimulus_intro: `The rule for a pattern is \u201cmultiply by ${mult}.\u201d The first number in the pattern is ${start}.`,
     question_text: `What is the <strong>${termLabel}</strong> number in the pattern?`,
     input_widget: 'text',
     answer_suffix: null,
@@ -3869,7 +3923,7 @@ function generate2021Q13() {
       { letter: 'B', shape: { type: 'polygon', vertices: [[-120,22],[120,22],[0,-22]] } },
       { letter: 'C', shape: { type: 'polygon', vertices: [[0,-52],[46,36],[-46,36]] } },
       { letter: 'D', shape: { type: 'polygon', vertices: [[-70,-28],[70,-28],[0,32]] } },
-      { letter: 'E', shape: { type: 'polygon', vertices: [[-70,-60],[70,80],[-70,80]] } },
+      { letter: 'E', shape: { type: 'polygon', vertices: [[-70,-60],[70,80],[-50,80]] } },
     ],
     parts: null,
     select_count: 2,
@@ -3976,7 +4030,12 @@ function generate2021Q14() {
       },
     ],
     select_count: null,
-    correct_answer: null,
+    correct_answer: {
+      A: `${wakeHour}:${wakeMinute.toString().padStart(2, '0')} a.m.`,
+      B: departTimeStr,
+      C: lunchTimeStr,
+      D: hwStartStr,
+    },
   };
 }
 
@@ -4078,11 +4137,6 @@ function generate2021Q15() {
   }
   const bagOptions = [minBags, ...bagDistractors].sort((a, b) => a - b);
 
-  // Determine correct-answer letters (A=index 0, B=index 1, …)
-  const alpha = ['A', 'B', 'C', 'D', 'E', 'F'];
-  const totalLetter = alpha[totalOptions.indexOf(total)];
-  const bagLetter   = alpha[bagOptions.indexOf(minBags)];
-
   return {
     item_id: 'MA713629341',
     question_number: '15',
@@ -4100,7 +4154,7 @@ function generate2021Q15() {
       { id: 'RESPONSE_A1', options: totalOptions.map(String) },
       { id: 'RESPONSE_A2', options: bagOptions.map(String) },
     ],
-    correct_answer: `${totalLetter},${bagLetter}`,
+    correct_answer: `${total},${minBags}`,
   };
 }
 
@@ -4335,17 +4389,6 @@ function generate2021Q18() {
 
   const statements = tagged.map(({ n }) => ({ text: fmt(n) }));
 
-  // Encode correct_answer using TrueFalseTable encoding:
-  // Row N: True (Rounds to 30,000) = letter(2N-1), False (Rounds to 40,000) = letter(2N)
-  function letter(idx) {
-    return String.fromCharCode(65 + idx); // A=0, B=1, ...
-  }
-
-  const correctLetters = tagged.map(({ cat }, i) => {
-    if (cat === 'down') return letter(2 * i);     // True = "Rounds to 30,000"
-    else                return letter(2 * i + 1); // False = "Rounds to 40,000"
-  });
-
   return {
     item_id: 'MA803846674',
     question_number: '18',
@@ -4355,7 +4398,7 @@ function generate2021Q18() {
     true_label: 'Rounds to 30,000',
     false_label: 'Rounds to 40,000',
     statements,
-    correct_answer: correctLetters.join(','),
+    correct_answer: tagged.map(({ cat }) => cat === 'down' ? 'True' : 'False').join(','),
   };
 }
 
@@ -4460,8 +4503,8 @@ function generate2021Q20() {
     question_number: '20',
     answer_type: 'short_answer',
     stimulus_intro: `A parent bought equal amounts of ${clothA} cloth and ${clothB} cloth to make a costume. The parent used [${nA}/${dA}] of the ${clothA} cloth and [${nB}/${dB}] of the ${clothB} cloth.`,
-    question_text: `Write a comparison using >, <, or = to correctly compare the fractions [${nA}/${dA}] and [${nB}/${dB}].\n\nEnter your comparison in the space provided. Enter <strong>only</strong> your comparison.`,
-    input_widget: 'text',
+    question_text: `Write a comparison using >, <, or = to correctly compare the fractions [${nA}/${dA}] and [${nB}/${dB}].`,
+    input_widget: 'equation_editor',
     correct_answer: symbol,
   };
 }
@@ -4685,7 +4728,7 @@ function generate2022Q3() {
     parts: null,
     select_count: null,
     has_visual: true,
-    correct_answer: 'B,C,E,H',
+    correct_answer: 'False,True,True,False',
   };
 }
 
@@ -5011,7 +5054,14 @@ function generate2022Q8() {
           : `Any rectangle with perimeter = ${patioPerim} ft and area < ${gardenArea} sq ft.`,
       },
     ],
-    correct_answer: null,
+    correct_answer: {
+      A: `${gardenArea}`,
+      B: `${patioWid}`,
+      C: `Yes. Garden perimeter = 2×${gardenLen} + 2×${gardenWid} = ${gardenPerim} ft. Patio perimeter = 2×${patioLen} + 2×${patioWid} = ${patioPerim} ft. Both perimeters are equal.`,
+      D: flowerLen > 0
+        ? `Example: length = ${flowerLen} ft, width = ${flowerWid} ft. Perimeter = 2×${flowerLen} + 2×${flowerWid} = ${2 * flowerLen + 2 * flowerWid} ft (equals patio perimeter). Area = ${flowerLen} × ${flowerWid} = ${flowerLen * flowerWid} sq ft (less than garden area of ${gardenArea} sq ft).`
+        : `Any rectangle with perimeter = ${patioPerim} ft and area < ${gardenArea} sq ft.`,
+    },
   };
 }
 
@@ -5251,7 +5301,10 @@ function generate2022Q11() {
         correct_answer: correctOrder.join(', '),
       },
     ],
-    correct_answer: null,
+    correct_answer: {
+      A: times.map(t => String(t.totalSecs)).join(','),
+      B: correctOrder.join(', '),
+    },
   };
 }
 
@@ -5462,7 +5515,12 @@ function generate2022Q15() {
     ],
     answer_options: null,
     select_count: null,
-    correct_answer: null,
+    correct_answer: {
+      A: String(triA),
+      B: String(sqB),
+      C: String(triC),
+      D: String(sqD),
+    },
   };
 }
 

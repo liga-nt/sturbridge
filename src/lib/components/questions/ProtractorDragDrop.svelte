@@ -15,6 +15,8 @@
   let bank  = [...choices]; // available tiles (not yet placed)
 
   let dragging = null;        // { value, from: 'bank'|label }
+  export let value = null;
+  $: value = JSON.stringify(slots);
 
   function onDragStart(e, value, from) {
     dragging = { value, from };
@@ -270,12 +272,9 @@
           marker-end="url(#arr-{angle.label})"
         />
 
-        <!-- Angle label (e.g. "A") near baseline, left side -->
-        <text x={CX - R + 8} y={LINE_Y - 6} font-size="13" font-style="italic" fill="#333">Angle {angle.label}</text>
-
-        <!-- Center dot (on the flat baseline, not at arc center) -->
-        <circle cx={CX} cy={LINE_Y} r="4" fill="white" stroke="#333" stroke-width="1.2"/>
-        <circle cx={CX} cy={LINE_Y} r="1.5" fill="#333"/>
+        <!-- Center dot at arc center -->
+        <circle cx={CX} cy={CY} r="4" fill="white" stroke="#333" stroke-width="1.2"/>
+        <circle cx={CX} cy={CY} r="1.5" fill="#333"/>
       </svg>
 
     </div>

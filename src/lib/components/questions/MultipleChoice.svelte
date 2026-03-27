@@ -18,6 +18,8 @@
   export let answer_options;
 
   let selected = null;
+  export let value = null;
+  $: value = selected;
 </script>
 
 <div class="question-body">

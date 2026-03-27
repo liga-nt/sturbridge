@@ -1,9 +1,74 @@
 const { onCall, HttpsError } = require('firebase-functions/v2/https');
 const { initializeApp } = require('firebase-admin/app');
 const { getFirestore, Timestamp } = require('firebase-admin/firestore');
+const { getAuth } = require('firebase-admin/auth');
 const Anthropic = require('@anthropic-ai/sdk');
 
 initializeApp();
+
+/**
+ * activateAccount — called by the client after Google sign-in.
+ * Looks up invites/{email}, sets the custom role claim, writes users/{uid}.
+ */
+exports.activateAccount = onCall(async (request) => {
+    if (!request.auth) {
+        throw new HttpsError('unauthenticated', 'Must be signed in.');
+    }
+
+    const { uid, token } = request.auth;
+    const email = token.email;
+
+    if (!email) {
+        throw new HttpsError('invalid-argument', 'No email on token.');
+    }
+
+    // Already activated?
+    if (token.role) {
+        return { role: token.role, classIds: token.classIds || [] };
+    }
+
+    const db = getFirestore();
+    const auth = getAuth();
+
+    const inviteSnap = await db.collection('invites').doc(email).get();
+    if (!inviteSnap.exists) {
+        return { status: 'pending' };
+    }
+
+    const invite = inviteSnap.data();
+    const { role, classIds = [] } = invite;
+
+    // Set custom claim
+    await auth.setCustomUserClaims(uid, { role, classIds });
+
+    // Write user doc
+    await db.collection('users').doc(uid).set({
+        uid,
+        email,
+        displayName: token.name || email,
+        role,
+        classIds
+    }, { merge: true });
+
+    // Add student to class studentIds if applicable
+    if (role === 'student' && classIds.length > 0) {
+        for (const classId of classIds) {
+            const classRef = db.collection('classes').doc(classId);
+            const classSnap = await classRef.get();
+            if (classSnap.exists) {
+                const existing = classSnap.data().studentIds || [];
+                if (!existing.includes(uid)) {
+                    await classRef.update({ studentIds: [...existing, uid] });
+                }
+            }
+        }
+    }
+
+    // Delete invite
+    await db.collection('invites').doc(email).delete();
+
+    return { role, classIds };
+});
 
 const db = getFirestore();
 

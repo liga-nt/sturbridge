@@ -1,34 +1,70 @@
 <script>
-    import { auth } from '$lib/firebase/client';
+    import { auth, functions } from '$lib/firebase/client';
     import { session } from '$lib/stores/session';
     import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
     import { goto } from '$app/navigation';
+    import { activateAccount, roleHomePath } from '$lib/utils/auth.js';
+    import { onMount } from 'svelte';
 
     let isLoading = false;
+    let activating = false;
+    let pending = false;
     let error = null;
+
+    // If already logged in, redirect to role home
+    onMount(() => {
+        if ($session.loggedIn && $session.role) {
+            goto(roleHomePath($session.role));
+        }
+    });
 
     async function handleGoogleLogin() {
         isLoading = true;
         error = null;
+        pending = false;
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
-            await session.set({
-                user: result.user,
-                loggedIn: true,
-                loading: false
-            });
+            const user = result.user;
 
-            const redirectUrl = localStorage.getItem('redirectUrl');
-            if (redirectUrl) {
-                localStorage.removeItem('redirectUrl');
-                goto(redirectUrl);
+            // Try to activate (get role claim)
+            activating = true;
+            let role = null;
+            try {
+                const activation = await activateAccount();
+                if (activation?.role) {
+                    role = activation.role;
+                } else if (activation?.status === 'pending') {
+                    pending = true;
+                }
+            } catch (activateErr) {
+                console.warn('Activation error:', activateErr.message);
             }
-            // Otherwise stay on this page — the reactive session update shows the logged-in view
+            activating = false;
+
+            if (role) {
+                // Force token refresh to pick up new claim
+                await user.getIdToken(true);
+                const tokenResult = await user.getIdTokenResult();
+                const freshRole = tokenResult.claims.role || role;
+                session.set({ user, loggedIn: true, loading: false, role: freshRole });
+                goto(roleHomePath(freshRole));
+            } else if (!pending) {
+                // Role was already set (returning user)
+                const tokenResult = await user.getIdTokenResult(true);
+                const existingRole = tokenResult.claims.role ?? null;
+                session.set({ user, loggedIn: true, loading: false, role: existingRole });
+                if (existingRole) {
+                    goto(roleHomePath(existingRole));
+                } else {
+                    pending = true;
+                }
+            }
         } catch (e) {
             error = e.message;
         }
         isLoading = false;
+        activating = false;
     }
 </script>
 
@@ -36,28 +72,27 @@
     <div class="flex min-h-screen items-center justify-center">
         <p>Loading...</p>
     </div>
-{:else if $session.loggedIn}
-    <div class="container mx-auto px-4 py-16">
-        <div class="text-center max-w-2xl mx-auto">
-            <h1 class="text-4xl font-bold mb-6">Welcome to Clean Read</h1>
-            <p class="text-xl mb-8">A distraction-free reading experience.</p>
-            <div class="py-4">
-                <p class="mb-4">You are logged in as {$session.user.email}</p>
-                <button
-                    class="bg-blue-600 text-white py-2 px-6 rounded-lg"
-                    on:click={() => goto('/dashboard')}
-                >
-                    Go to Dashboard
-                </button>
-            </div>
+{:else if activating}
+    <div class="flex min-h-screen items-center justify-center">
+        <p class="text-gray-500">Setting up your account...</p>
+    </div>
+{:else if pending}
+    <div class="flex min-h-screen items-center justify-center">
+        <div class="max-w-md text-center p-8 bg-white rounded-lg shadow">
+            <h2 class="text-xl font-semibold text-gray-800 mb-3">Account Pending</h2>
+            <p class="text-gray-600">Your account hasn't been set up yet. Please contact your teacher or administrator.</p>
         </div>
+    </div>
+{:else if $session.loggedIn && $session.role}
+    <div class="flex min-h-screen items-center justify-center">
+        <p class="text-gray-500">Redirecting...</p>
     </div>
 {:else}
     <div class="flex min-h-screen items-center justify-center">
         <div class="w-full max-w-md space-y-8 p-4">
             <div class="text-center">
-                <h2 class="text-3xl font-bold mb-2">Sign in to Clean Read</h2>
-                <p class="text-gray-600">A distraction-free reading experience.</p>
+                <h2 class="text-3xl font-bold mb-2">Sturbridge Math</h2>
+                <p class="text-gray-600">MCAS 4th Grade Math Practice</p>
             </div>
 
             {#if error}
@@ -79,6 +114,7 @@
                     <path fill="none" d="M0 0h48v48H0z"/>
                 </svg>
                 {isLoading ? 'Signing in...' : 'Sign in with Google'}
+
             </button>
         </div>
     </div>

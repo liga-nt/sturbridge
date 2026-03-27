@@ -105,6 +105,7 @@
   $: {
     const p = padding;
     svgW = Math.round(bbox.maxX - bbox.minX + 2 * p);
+    svgW = Math.round(bbox.maxX - bbox.minX + 2 * p);
     svgH = Math.round(bbox.maxY - bbox.minY + 2 * p);
     ox   = Math.round(-bbox.minX + p);
     oy   = Math.round(-bbox.minY + p);
@@ -114,6 +115,7 @@
   $: lineCoords = line
     ? { x1: ox + line.from[0], y1: oy + line.from[1], x2: ox + line.to[0], y2: oy + line.to[1] }
     : null;
+
 </script>
 
 <svg

@@ -2,8 +2,11 @@
   import { renderMath } from '$lib/utils/math.js';
   import FractionComparison from './stimuli/FractionComparison.svelte';
   import SymmetryFigure from './stimuli/SymmetryFigure.svelte';
+  import DecimalGrid from './stimuli/DecimalGrid.svelte';
 
   export let stimulus_intro = null;
+  export let stimulus_type = null;
+  export let stimulus_params = null;
   export let question_text;
   export let math_expression = null;
   export let answer_options;
@@ -14,6 +17,8 @@
   $: countWord = COUNT_WORDS[select_count] ?? select_count;
 
   let selected = new Set();
+  export let value = null;
+  $: value = [...selected].sort().join(',');
 
   function toggle(letter) {
     if (selected.has(letter)) {
@@ -29,6 +34,13 @@
   {#if stimulus_intro}
     <p class="q-text">{stimulus_intro}</p>
   {/if}
+
+  {#if stimulus_type === 'decimal_grid'}
+    <div class="stimulus">
+      <DecimalGrid params={stimulus_params} />
+    </div>
+  {/if}
+
   {#if math_expression}
     <p class="math-expr">{@html renderMath(math_expression)}</p>
   {/if}
@@ -79,6 +91,11 @@
 
   .q-text {
     margin: 0 0 10px;
+  }
+
+  .stimulus {
+    margin: 10px 0 14px;
+    text-align: center;
   }
 
   .math-expr {

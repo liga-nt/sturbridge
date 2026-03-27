@@ -17,7 +17,8 @@
     "select_count": null,
     "has_visual": true,
     "visual_description": "Circle divided into 10 equal parts with 8 parts shaded (8/10, the sum of 1/10 + 7/10). Fewer, More, and Reset buttons shown below.",
-    "correct_answer": "[8/10]"
+    "correct_answer": "[8/10]",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA704649496"
   },
   {
     "item_id": "MA307079",
@@ -29,14 +30,98 @@
     "answer_type": "multiple_choice",
     "question_text": "Which equation can be used to find b, the age in years of Takara's brother?",
     "answer_options": [
-      { "letter": "A", "text": "b = 1 × 2" },
-      { "letter": "B", "text": "b = 2 × 2" },
-      { "letter": "C", "text": "b = 4 × 2" },
-      { "letter": "D", "text": "b = 8 × 2" }
+      {
+        "letter": "A",
+        "text": "b = 1 \u00d7 2"
+      },
+      {
+        "letter": "B",
+        "text": "b = 2 \u00d7 2"
+      },
+      {
+        "letter": "C",
+        "text": "b = 4 \u00d7 2"
+      },
+      {
+        "letter": "D",
+        "text": "b = 8 \u00d7 2"
+      }
     ],
     "parts": null,
     "select_count": null,
-    "correct_answer": "C"
+    "correct_answer": "C",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA307079"
+  },
+  {
+    "item_id": "MA229063",
+    "question_number": "3",
+    "stimulus_intro": "The shaded portion of this model represents a fraction less than 1.",
+    "stimulus_type": "decimal_grid",
+    "stimulus_params": {
+      "shaded": 80,
+      "show_whole": true
+    },
+    "math_expression": null,
+    "answer_type": "multiple_select",
+    "select_count": 2,
+    "question_text": "Which of these decimals are equivalent to the fraction represented in the model?",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "0.80"
+      },
+      {
+        "letter": "B",
+        "text": "8.0"
+      },
+      {
+        "letter": "C",
+        "text": "0.08"
+      },
+      {
+        "letter": "D",
+        "text": "80.0"
+      },
+      {
+        "letter": "E",
+        "text": "0.8"
+      }
+    ],
+    "parts": null,
+    "correct_answer": "A,E",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA229063"
+  },
+  {
+    "item_id": "MA297973",
+    "question_number": "4",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "question_text": "Ms. Lewis bought 5 sticks of butter. Each stick of butter weighs [1/4] pound.\n\nWhat is the total weight, in pounds, of the 5 sticks of butter?",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "[5/4]"
+      },
+      {
+        "letter": "B",
+        "text": "[6/4]"
+      },
+      {
+        "letter": "C",
+        "text": "[1/20]"
+      },
+      {
+        "letter": "D",
+        "text": "[5/20]"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "A",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA297973"
   },
   {
     "item_id": "MA800628900",
@@ -49,33 +134,30 @@
     "select_count": 2,
     "question_text": "Which of these numbers are prime numbers?",
     "answer_options": [
-      { "letter": "A", "text": "27" },
-      { "letter": "B", "text": "43" },
-      { "letter": "C", "text": "52" },
-      { "letter": "D", "text": "67" },
-      { "letter": "E", "text": "95" }
+      {
+        "letter": "A",
+        "text": "27"
+      },
+      {
+        "letter": "B",
+        "text": "43"
+      },
+      {
+        "letter": "C",
+        "text": "52"
+      },
+      {
+        "letter": "D",
+        "text": "67"
+      },
+      {
+        "letter": "E",
+        "text": "95"
+      }
     ],
     "parts": null,
-    "correct_answer": "B,D"
-  },
-  {
-    "item_id": "MA297973",
-    "question_number": "4",
-    "stimulus_intro": null,
-    "stimulus_type": null,
-    "stimulus_params": null,
-    "math_expression": null,
-    "answer_type": "multiple_choice",
-    "question_text": "Ms. Lewis bought 5 sticks of butter. Each stick of butter weighs [1/4] pound.\n\nWhat is the total weight, in pounds, of the 5 sticks of butter?",
-    "answer_options": [
-      { "letter": "A", "text": "[5/4]" },
-      { "letter": "B", "text": "[6/4]" },
-      { "letter": "C", "text": "[1/20]" },
-      { "letter": "D", "text": "[5/20]" }
-    ],
-    "parts": null,
-    "select_count": null,
-    "correct_answer": "A"
+    "correct_answer": "B,D",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA800628900"
   },
   {
     "item_id": "MA800780932",
@@ -93,7 +175,11 @@
         "question_text": "Write this number in standard form.",
         "stimulus_type": "number_box",
         "stimulus_params": {
-          "rows": [["one hundred sixty-eight thousand, twenty-one"]]
+          "rows": [
+            [
+              "one hundred sixty-eight thousand, twenty-one"
+            ]
+          ]
         },
         "answer_type": "constructed_response",
         "answer_instruction": "Enter your answer in the box."
@@ -120,7 +206,8 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": null
+    "correct_answer": null,
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA800780932"
   },
   {
     "item_id": "MA306940",
@@ -132,14 +219,27 @@
     "answer_type": "multiple_choice",
     "question_text": "A sign is in the shape of a square. Each side of the sign has a length of 6 inches.\n\nWhat is the area of the sign?",
     "answer_options": [
-      { "letter": "A", "text": "12 square inches" },
-      { "letter": "B", "text": "24 square inches" },
-      { "letter": "C", "text": "36 square inches" },
-      { "letter": "D", "text": "48 square inches" }
+      {
+        "letter": "A",
+        "text": "12 square inches"
+      },
+      {
+        "letter": "B",
+        "text": "24 square inches"
+      },
+      {
+        "letter": "C",
+        "text": "36 square inches"
+      },
+      {
+        "letter": "D",
+        "text": "48 square inches"
+      }
     ],
     "parts": null,
     "select_count": null,
-    "correct_answer": "C"
+    "correct_answer": "C",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA306940"
   },
   {
     "item_id": "MA800629956",
@@ -149,27 +249,138 @@
     "tiles": [
       {
         "label": "trapezoid",
-        "shape": { "shape": { "type": "polygon", "vertices": [[-30,-35],[30,-35],[50,35],[-50,35]] }, "padding": 12 }
+        "shape": {
+          "shape": {
+            "type": "polygon",
+            "vertices": [
+              [
+                -30,
+                -35
+              ],
+              [
+                30,
+                -35
+              ],
+              [
+                50,
+                35
+              ],
+              [
+                -50,
+                35
+              ]
+            ]
+          },
+          "padding": 12
+        }
       },
       {
         "label": "parallelogram",
-        "shape": { "shape": { "type": "polygon", "vertices": [[-50,-30],[30,-30],[50,30],[-30,30]] }, "padding": 12 }
+        "shape": {
+          "shape": {
+            "type": "polygon",
+            "vertices": [
+              [
+                -50,
+                -30
+              ],
+              [
+                30,
+                -30
+              ],
+              [
+                50,
+                30
+              ],
+              [
+                -30,
+                30
+              ]
+            ]
+          },
+          "padding": 12
+        }
       },
       {
         "label": "rectangle",
-        "shape": { "shape": { "type": "rect", "width": 100, "height": 60 }, "padding": 12 }
+        "shape": {
+          "shape": {
+            "type": "rect",
+            "width": 100,
+            "height": 60
+          },
+          "padding": 12
+        }
       },
       {
         "label": "square",
-        "shape": { "shape": { "type": "square", "size": 70 }, "padding": 12 }
+        "shape": {
+          "shape": {
+            "type": "square",
+            "size": 70
+          },
+          "padding": 12
+        }
       }
     ],
     "categories": [
       {
         "label": "0 lines of symmetry",
         "correct_tiles": [
-          { "label": "trapezoid", "shape": { "shape": { "type": "polygon", "vertices": [[-30,-35],[30,-35],[50,35],[-50,35]] }, "padding": 12 } },
-          { "label": "parallelogram", "shape": { "shape": { "type": "polygon", "vertices": [[-50,-30],[30,-30],[50,30],[-30,30]] }, "padding": 12 } }
+          {
+            "label": "trapezoid",
+            "shape": {
+              "shape": {
+                "type": "polygon",
+                "vertices": [
+                  [
+                    -30,
+                    -35
+                  ],
+                  [
+                    30,
+                    -35
+                  ],
+                  [
+                    50,
+                    35
+                  ],
+                  [
+                    -50,
+                    35
+                  ]
+                ]
+              },
+              "padding": 12
+            }
+          },
+          {
+            "label": "parallelogram",
+            "shape": {
+              "shape": {
+                "type": "polygon",
+                "vertices": [
+                  [
+                    -50,
+                    -30
+                  ],
+                  [
+                    30,
+                    -30
+                  ],
+                  [
+                    50,
+                    30
+                  ],
+                  [
+                    -30,
+                    30
+                  ]
+                ]
+              },
+              "padding": 12
+            }
+          }
         ]
       },
       {
@@ -179,58 +390,101 @@
       {
         "label": "2 lines of symmetry",
         "correct_tiles": [
-          { "label": "rectangle", "shape": { "shape": { "type": "rect", "width": 100, "height": 60 }, "padding": 12 } }
+          {
+            "label": "rectangle",
+            "shape": {
+              "shape": {
+                "type": "rect",
+                "width": 100,
+                "height": 60
+              },
+              "padding": 12
+            }
+          }
         ]
       },
       {
         "label": "4 lines of symmetry",
         "correct_tiles": [
-          { "label": "square", "shape": { "shape": { "type": "square", "size": 70 }, "padding": 12 } }
+          {
+            "label": "square",
+            "shape": {
+              "shape": {
+                "type": "square",
+                "size": 70
+              },
+              "padding": 12
+            }
+          }
         ]
       }
     ],
-    "correct_answer": "A,C,D",
+    "correct_answer": "{\"0 lines of symmetry\": [\"parallelogram\", \"trapezoid\"], \"1 line of symmetry\": [], \"2 lines of symmetry\": [\"rectangle\"], \"4 lines of symmetry\": [\"square\"]}",
     "parts": null,
-    "select_count": null
+    "select_count": null,
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA800629956"
   },
   {
-    "item_id": "MA229063",
-    "question_number": "3",
-    "stimulus_intro": "The shaded portion of this model represents a fraction less than 1.",
-    "stimulus_type": "decimal_grid",
-    "stimulus_params": {
-      "shaded": 80,
-      "show_whole": true
-    },
-    "math_expression": null,
-    "answer_type": "multiple_select",
-    "select_count": 2,
-    "question_text": "Which of these decimals are equivalent to the fraction represented in the model?",
-    "answer_options": [
-      { "letter": "A", "text": "0.80" },
-      { "letter": "B", "text": "8.0" },
-      { "letter": "C", "text": "0.08" },
-      { "letter": "D", "text": "80.0" },
-      { "letter": "E", "text": "0.8" }
-    ],
-    "parts": null,
-    "correct_answer": "A,E"
-  },
-  {
-    "item_id": "MA736379417",
-    "question_number": "12",
-    "stimulus_intro": "What value of x makes this equation true?",
+    "item_id": "MA800763292",
+    "question_number": "9",
+    "stimulus_intro": "This list shows the snowfall amounts, in inches, for eight towns during a storm.",
     "stimulus_type": null,
-    "stimulus_params": null,
-    "math_expression": "[7/10] = [x/100]",
-    "answer_type": "short_answer",
-    "question_text": null,
-    "input_widget": "text",
-    "answer_suffix": null,
+    "stimulus_params": {
+      "title": "Snowfall Amounts",
+      "axis_label": "Snowfall (inches)",
+      "min": 0,
+      "max": 3,
+      "denominator": 4,
+      "missing_label": "2[3/4]",
+      "data_points": [
+        { "label": "[3/4]",   "count": 1 },
+        { "label": "1[1/4]",  "count": 1 },
+        { "label": "1[1/2]",  "count": 2 },
+        { "label": "2",       "count": 1 },
+        { "label": "2[1/4]",  "count": 1 },
+        { "label": "2[3/4]",  "count": 2 }
+      ]
+    },
+    "math_expression": "2[1/4],  1[1/2],  2,  2[3/4],  1[1/2],  [3/4],  2[3/4],  1[1/4]",
+    "answer_type": "drag_drop_line_plot",
+    "question_text": "This line plot also shows some of the snowfall amounts. One of the snowfall amounts is missing from the line plot.\n\nDrag and drop the X into the correct box above the number line to complete the line plot.",
     "answer_options": null,
     "parts": null,
     "select_count": null,
-    "correct_answer": "70"
+    "correct_answer": "2[3/4]",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA800763292"
+  },
+  {
+    "item_id": "MA270627",
+    "question_number": "10",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": "325 = 147 + {?}",
+    "answer_type": "multiple_choice",
+    "question_text": "What is the value of {?} that makes this number sentence true?",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "178"
+      },
+      {
+        "letter": "B",
+        "text": "188"
+      },
+      {
+        "letter": "C",
+        "text": "222"
+      },
+      {
+        "letter": "D",
+        "text": "472"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "A",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA270627"
   },
   {
     "item_id": "MA803730594",
@@ -248,54 +502,141 @@
     "select_count": null,
     "has_visual": false,
     "visual_description": null,
-    "correct_answer": "162"
+    "correct_answer": "162",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA803730594"
   },
   {
-    "item_id": "MA270627",
-    "question_number": "10",
-    "stimulus_intro": null,
+    "item_id": "MA736379417",
+    "question_number": "12",
+    "stimulus_intro": "What value of x makes this equation true?",
     "stimulus_type": null,
     "stimulus_params": null,
-    "math_expression": "325 = 147 + {?}",
-    "answer_type": "multiple_choice",
-    "question_text": "What is the value of {?} that makes this number sentence true?",
-    "answer_options": [
-      { "letter": "A", "text": "178" },
-      { "letter": "B", "text": "188" },
-      { "letter": "C", "text": "222" },
-      { "letter": "D", "text": "472" }
-    ],
-    "parts": null,
-    "select_count": null,
-    "correct_answer": "A"
-  },
-  {
-    "item_id": "MA800763292",
-    "question_number": "9",
-    "stimulus_intro": "This list shows the snowfall amounts, in inches, for eight towns during a storm.",
-    "stimulus_type": "line_plot",
-    "stimulus_params": {
-      "title": "Snowfall Amounts",
-      "axis_label": "Snowfall (inches)",
-      "data_points": [
-        { "label": "[3/4]",   "count": 1 },
-        { "label": "1[1/4]",  "count": 1 },
-        { "label": "1[1/2]",  "count": 2 },
-        { "label": "2",       "count": 1 },
-        { "label": "2[1/4]",  "count": 1 },
-        { "label": "2[3/4]",  "count": 2 }
-      ],
-      "tick_spacing": 60
-    },
-    "math_expression": "2[1/4],  1[1/2],  2,  2[3/4],  1[1/2],  [3/4],  2[3/4],  1[1/4]",
+    "math_expression": "[7/10] = [x/100]",
     "answer_type": "short_answer",
-    "question_text": "This line plot also shows some of the snowfall amounts. One of the snowfall amounts is missing from the line plot.\n\nDrag and drop the X into the correct box above the number line to complete the line plot.",
+    "question_text": null,
     "input_widget": "text",
     "answer_suffix": null,
     "answer_options": null,
     "parts": null,
     "select_count": null,
-    "correct_answer": "2[3/4]"
+    "correct_answer": "70",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA736379417"
+  },
+  {
+    "item_id": "MA311574",
+    "question_number": "13",
+    "stimulus_intro": null,
+    "stimulus_type": null,
+    "stimulus_params": null,
+    "math_expression": null,
+    "answer_type": "multiple_select",
+    "select_count": 2,
+    "question_text": "Which of these triangles have at least one obtuse angle?",
+    "answer_options": [
+      {
+        "letter": "A",
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -38,
+              -48
+            ],
+            [
+              32,
+              60
+            ],
+            [
+              32,
+              -48
+            ]
+          ]
+        }
+      },
+      {
+        "letter": "B",
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -120,
+              22
+            ],
+            [
+              120,
+              22
+            ],
+            [
+              0,
+              -22
+            ]
+          ]
+        }
+      },
+      {
+        "letter": "C",
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              0,
+              -52
+            ],
+            [
+              46,
+              36
+            ],
+            [
+              -46,
+              36
+            ]
+          ]
+        }
+      },
+      {
+        "letter": "D",
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -70,
+              -28
+            ],
+            [
+              70,
+              -28
+            ],
+            [
+              0,
+              32
+            ]
+          ]
+        }
+      },
+      {
+        "letter": "E",
+        "shape": {
+          "type": "polygon",
+          "vertices": [
+            [
+              -70,
+              -60
+            ],
+            [
+              70,
+              80
+            ],
+            [
+              -50,
+              80
+            ]
+          ]
+        }
+      }
+    ],
+    "parts": null,
+    "correct_answer": "B,E",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA311574"
   },
   {
     "item_id": "MA287484",
@@ -339,7 +680,8 @@
       }
     ],
     "select_count": null,
-    "correct_answer": null
+    "correct_answer": null,
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA287484"
   },
   {
     "item_id": "MA713629341",
@@ -356,13 +698,32 @@
       "Alonzo and Mindy need [RESPONSE_A2] bags to hold all the pretzels."
     ],
     "dropdowns": [
-      { "id": "RESPONSE_A1", "options": ["12", "24", "32", "38", "46"] },
-      { "id": "RESPONSE_A2", "options": ["4", "5", "6", "7", "8"] }
+      {
+        "id": "RESPONSE_A1",
+        "options": [
+          "12",
+          "24",
+          "32",
+          "38",
+          "46"
+        ]
+      },
+      {
+        "id": "RESPONSE_A2",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "7",
+          "8"
+        ]
+      }
     ],
     "answer_options": null,
     "parts": null,
     "select_count": null,
-    "correct_answer": "C,D"
+    "correct_answer": "32,7",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA713629341"
   },
   {
     "item_id": "MA714226701",
@@ -393,7 +754,8 @@
       }
     ],
     "select_count": null,
-    "correct_answer": "0.54;0.62"
+    "correct_answer": "0.54;0.62",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA714226701"
   },
   {
     "item_id": "MA803742735",
@@ -408,41 +770,80 @@
       {
         "letter": "A",
         "model": {
-          "left":  { "type": "rect", "numerator": 6, "denominator": 6 },
+          "left": {
+            "type": "rect",
+            "numerator": 6,
+            "denominator": 6
+          },
           "operator": "",
-          "right": { "type": "rect", "numerator": 3, "denominator": 6 }
+          "right": {
+            "type": "rect",
+            "numerator": 3,
+            "denominator": 6
+          }
         }
       },
       {
         "letter": "B",
         "model": {
-          "left":  { "type": "rect", "numerator": 6, "denominator": 3, "rows": 2 },
+          "left": {
+            "type": "rect",
+            "numerator": 6,
+            "denominator": 3,
+            "rows": 2
+          },
           "operator": "",
-          "right": { "type": "rect", "numerator": 1, "denominator": 3, "rows": 2 }
+          "right": {
+            "type": "rect",
+            "numerator": 1,
+            "denominator": 3,
+            "rows": 2
+          }
         }
       },
       {
         "letter": "C",
         "model": {
-          "left":  { "type": "rect", "numerator": 6, "denominator": 3, "rows": 2 },
+          "left": {
+            "type": "rect",
+            "numerator": 6,
+            "denominator": 3,
+            "rows": 2
+          },
           "operator": "",
-          "right": { "type": "rect", "numerator": 2, "denominator": 3, "rows": 2 }
+          "right": {
+            "type": "rect",
+            "numerator": 2,
+            "denominator": 3,
+            "rows": 2
+          }
         }
       },
       {
         "letter": "D",
         "model": {
-          "left":  { "type": "rect", "numerator": 6, "denominator": 3, "rows": 2 },
+          "left": {
+            "type": "rect",
+            "numerator": 6,
+            "denominator": 3,
+            "rows": 2
+          },
           "operator": "",
-          "right": { "type": "rect", "numerator": 4, "denominator": 3, "rows": 2 }
+          "right": {
+            "type": "rect",
+            "numerator": 4,
+            "denominator": 3,
+            "rows": 2
+          }
         }
       }
     ],
     "parts": null,
     "select_count": null,
     "has_visual": true,
-    "visual_description": "Stem: gray rectangle = 1 whole. Options A–D each show two rectangles. A: 6 vertical strips, left all shaded, right 3/6 shaded (= 9/6 = 3/2). B: 3×2 grid, left all shaded, right 1/6 shaded (= 7/6). C: 3×2 grid, left all shaded, right 2/6 shaded (= 8/6 = 4/3). D: 3×2 grid, left all shaded, right 4/6 shaded (= 10/6 = 5/3 = 1 2/3). Correct answer D.",
-    "correct_answer": "D"
+    "visual_description": "Stem: gray rectangle = 1 whole. Options A\u2013D each show two rectangles. A: 6 vertical strips, left all shaded, right 3/6 shaded (= 9/6 = 3/2). B: 3\u00d72 grid, left all shaded, right 1/6 shaded (= 7/6). C: 3\u00d72 grid, left all shaded, right 2/6 shaded (= 8/6 = 4/3). D: 3\u00d72 grid, left all shaded, right 4/6 shaded (= 10/6 = 5/3 = 1 2/3). Correct answer D.",
+    "correct_answer": "D",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA803742735"
   },
   {
     "item_id": "MA803846674",
@@ -457,15 +858,82 @@
     "true_label": "Rounds to 30,000",
     "false_label": "Rounds to 40,000",
     "statements": [
-      { "text": "34,124" },
-      { "text": "35,021" },
-      { "text": "37,826" },
-      { "text": "32,788" }
+      {
+        "text": "34,124"
+      },
+      {
+        "text": "35,021"
+      },
+      {
+        "text": "37,826"
+      },
+      {
+        "text": "32,788"
+      }
     ],
     "answer_options": null,
     "parts": null,
     "select_count": null,
-    "correct_answer": "A,D,F,G"
+    "correct_answer": "True,False,False,True",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA803846674"
+  },
+  {
+    "item_id": "MA306993",
+    "question_number": "19",
+    "stimulus_intro": "Angle QRS has a measure of 64\u00b0, as shown in this diagram.",
+    "stimulus_type": "angle_diagram",
+    "stimulus_params": {
+      "center": "R",
+      "rays": [
+        {
+          "label": "Q",
+          "angle": 64
+        },
+        {
+          "label": "S",
+          "angle": 0
+        },
+        {
+          "label": "T",
+          "angle": -23
+        }
+      ],
+      "arc_labels": [
+        {
+          "between": [
+            "Q",
+            "S"
+          ],
+          "text": "64\u00b0",
+          "radius": 48
+        }
+      ]
+    },
+    "math_expression": null,
+    "answer_type": "multiple_choice",
+    "question_text": "Angle QRT has a measure of 87\u00b0. What is the measure of angle SRT?",
+    "answer_options": [
+      {
+        "letter": "A",
+        "text": "23\u00b0"
+      },
+      {
+        "letter": "B",
+        "text": "26\u00b0"
+      },
+      {
+        "letter": "C",
+        "text": "64\u00b0"
+      },
+      {
+        "letter": "D",
+        "text": "151\u00b0"
+      }
+    ],
+    "parts": null,
+    "select_count": null,
+    "correct_answer": "A",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA306993"
   },
   {
     "item_id": "MA803746135",
@@ -475,61 +943,13 @@
     "stimulus_params": null,
     "math_expression": null,
     "answer_type": "short_answer",
-    "question_text": "Write a comparison using >, <, or = to correctly compare the fractions [3/6] and [4/12].\n\nEnter your comparison in the space provided. Enter <strong>only</strong> your comparison.",
-    "input_widget": "text",
+    "question_text": "Write a comparison using >, <, or = to correctly compare the fractions [3/6] and [4/12].",
+    "input_widget": "equation_editor",
     "answer_suffix": null,
     "answer_options": null,
     "parts": null,
     "select_count": null,
-    "correct_answer": ">"
-  },
-  {
-    "item_id": "MA306993",
-    "question_number": "19",
-    "stimulus_intro": "Angle QRS has a measure of 64°, as shown in this diagram.",
-    "stimulus_type": "angle_diagram",
-    "stimulus_params": {
-      "center": "R",
-      "rays": [
-        { "label": "Q", "angle": 64 },
-        { "label": "S", "angle": 0 },
-        { "label": "T", "angle": -23 }
-      ],
-      "arc_labels": [
-        { "between": ["Q", "S"], "text": "64°", "radius": 48 }
-      ]
-    },
-    "math_expression": null,
-    "answer_type": "multiple_choice",
-    "question_text": "Angle QRT has a measure of 87°. What is the measure of angle SRT?",
-    "answer_options": [
-      { "letter": "A", "text": "23°" },
-      { "letter": "B", "text": "26°" },
-      { "letter": "C", "text": "64°" },
-      { "letter": "D", "text": "151°" }
-    ],
-    "parts": null,
-    "select_count": null,
-    "correct_answer": "A"
-  },
-  {
-    "item_id": "MA311574",
-    "question_number": "13",
-    "stimulus_intro": null,
-    "stimulus_type": null,
-    "stimulus_params": null,
-    "math_expression": null,
-    "answer_type": "multiple_select",
-    "select_count": 2,
-    "question_text": "Which of these triangles have at least one obtuse angle?",
-    "answer_options": [
-      { "letter": "A", "shape": { "type": "polygon", "vertices": [[-38,-48],[32,60],[32,-48]] } },
-      { "letter": "B", "shape": { "type": "polygon", "vertices": [[-120,22],[120,22],[0,-22]] } },
-      { "letter": "C", "shape": { "type": "polygon", "vertices": [[0,-52],[46,36],[-46,36]] } },
-      { "letter": "D", "shape": { "type": "polygon", "vertices": [[-70,-28],[70,-28],[0,32]] } },
-      { "letter": "E", "shape": { "type": "polygon", "vertices": [[-70,-60],[70,80],[-70,80]] } }
-    ],
-    "parts": null,
-    "correct_answer": "B,E"
+    "correct_answer": ">",
+    "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA803746135"
   }
 ]

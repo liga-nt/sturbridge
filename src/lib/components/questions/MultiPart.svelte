@@ -1,5 +1,7 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import DataTable from './stimuli/DataTable.svelte';
+  import NumberBox from './stimuli/NumberBox.svelte';
   import StickerSet from './stimuli/StickerSet.svelte';
   import TriangleSet from './stimuli/TriangleSet.svelte';
   import GraduatedCylinder from './stimuli/GraduatedCylinder.svelte';
@@ -10,13 +12,16 @@
   import NumberLinePlot from './NumberLinePlot.svelte';
   import StepPattern from './stimuli/StepPattern.svelte';
   import { renderMath } from '$lib/utils/math.js';
+  import { gradePart } from '$lib/utils/grading.js';
+  import { fillTemplate, extractParams } from '$lib/utils/feedback.js';
+
+  const dispatch = createEventDispatcher();
 
   // Helper: split a list of correct answers keyed to table rows
   function parseTableAnswers(correct_answer) {
     if (!correct_answer) return [];
     return String(correct_answer).split(',').map(s => s.trim());
   }
-
 
   export let question_text = null;
   export let stimulus_list = null;   // optional bullet list for left pane
@@ -25,8 +30,80 @@
   export let parts;
   export let layout = null;  // null | 'stacked'
 
+  // Per-part feedback — pass from parent when available
+  export let feedbackTemplate = null;  // { parts: { A: { tip1, tip2, reveal }, ... } }
+  export let question = null;          // full question object (for grading + param extraction)
+
   const partWords = ['one', 'two', 'three', 'four', 'five'];
   $: partWord = partWords[parts.length - 1] ?? parts.length;
+
+  // Answer state exposed to parent via bind:value
+  export let value = {};
+  let partAnswers = {};
+  $: value = partAnswers;
+  // Per-part inline-choice selections: { partLabel: { dropdownId: selectedValue } }
+  let inlineSelections = {};
+
+  // ── Per-part interactive state (only active when question prop is provided) ──
+  let partStates = {};
+  let prevItemId = null;
+  $: {
+    const newId = question?.item_id ?? null;
+    if (newId !== prevItemId) {
+      prevItemId = newId;
+      partStates = Object.fromEntries(parts.map(p => [p.label, {
+        attempt: 0, assisted: false, tip: null, revealed: false, correct: false,
+      }]));
+    }
+  }
+
+  // Dispatch 'complete' when all parts are resolved
+  $: if (question && parts.length > 0) {
+    const allDone = parts.every(p => partStates[p.label]?.correct || partStates[p.label]?.revealed);
+    if (allDone) {
+      const allCorrect = parts.every(p => partStates[p.label]?.correct);
+      const anyAssisted = parts.some(p => partStates[p.label]?.assisted);
+      dispatch('complete', { allCorrect, anyAssisted, answers: partAnswers });
+    }
+  }
+
+  function learnPart(label) {
+    const partTemplate = feedbackTemplate?.parts?.[label];
+    if (!partTemplate) return;
+    const params = question ? extractParams(question) : {};
+    const tip = fillTemplate(partTemplate.tip1, params);
+    partStates = { ...partStates, [label]: { ...partStates[label], assisted: true, tip } };
+  }
+
+  function submitPart(label, part) {
+    if (!question) return;
+    const state = partStates[label];
+    if (state.correct || state.revealed) return;
+    const answer = partAnswers[label];
+    if (answer === undefined || answer === null || answer === '') return;
+
+    const correctAnswer = question.correct_answer?.[label] ?? part.correct_answer;
+    const correct = gradePart(answer, correctAnswer, part.answer_type).correct;
+    const params = extractParams(question);
+
+    if (correct) {
+      partStates = { ...partStates, [label]: { ...state, correct: true, tip: null } };
+    } else {
+      const newAttempt = state.attempt + 1;
+      const partTemplate = feedbackTemplate?.parts?.[label];
+      let tip = null;
+      if (newAttempt === 1) {
+        const key = state.assisted ? 'tip2' : 'tip1';
+        tip = fillTemplate(partTemplate?.[key] ?? null, params);
+      }
+      partStates = { ...partStates, [label]: {
+        ...state,
+        attempt: newAttempt,
+        tip,
+        revealed: newAttempt >= 2,
+      }};
+    }
+  }
 
   // Parse an inline_choice sentence into text/dropdown tokens.
   // "[TOKEN]" → { type: 'dropdown', id: 'TOKEN' }
@@ -72,7 +149,7 @@
       <!-- Per-part stimulus -->
       {#if part.stimulus_type === 'sticker_set'}
         <div class="stimulus-wrap">
-          <StickerSet params={part.stimulus_params} select_count={part.select_count ?? 2} />
+          <StickerSet params={part.stimulus_params} select_count={part.select_count ?? 2} bind:value={partAnswers[part.label]} />
         </div>
       {:else if part.stimulus_type === 'triangle_set'}
         <div class="stimulus-wrap">
@@ -93,6 +170,10 @@
       {:else if part.stimulus_type === 'data_table'}
         <div class="stimulus-wrap">
           <DataTable params={part.stimulus_params} />
+        </div>
+      {:else if part.stimulus_type === 'number_box'}
+        <div class="stimulus-wrap">
+          <NumberBox params={part.stimulus_params} />
         </div>
       {/if}
 
@@ -207,7 +288,12 @@
               {:else}
                 {@const dd = part.dropdowns.find(d => d.id === token.id)}
                 {#if dd}
-                  <select class="inline-select {dd.options.length <= 4 ? 'select-sm' : 'select-md'}">
+                  <select class="inline-select {dd.options.length <= 4 ? 'select-sm' : 'select-md'}"
+                    on:change={(e) => {
+                      const sels = { ...(inlineSelections[part.label] ?? {}), [dd.id]: e.target.value };
+                      inlineSelections = { ...inlineSelections, [part.label]: sels };
+                      partAnswers = { ...partAnswers, [part.label]: (part.dropdowns ?? []).map(d => sels[d.id] ?? '').join(',') };
+                    }}>
                     <option value="">Choose...</option>
                     {#each dd.options as opt}
                       <option>{opt}</option>
@@ -222,6 +308,7 @@
         <NumberLinePlot
           question_text=""
           stimulus_params={part.stimulus_params ?? {}}
+          bind:value={partAnswers[part.label]}
         />
       {:else if part.answer_type === 'short_answer' || part.answer_type === 'constructed_response'}
         {#if part.answer_type === 'constructed_response'}
@@ -232,7 +319,7 @@
           {:else}
             <p class="answer-instruction">Enter your answer and your work or explanation in the space provided.</p>
           {/if}
-          <ShortAnswerInput />
+          <ShortAnswerInput bind:value={partAnswers[part.label]} />
         {:else if part.input_widget === 'math'}
           <!-- Math-equation-only input (no rich-text toolbar) -->
           <div class="math-eq-box" tabindex="0">
@@ -241,20 +328,54 @@
         {:else if part.answer_suffix}
           <p class="answer-instruction">Enter your answer in the box.</p>
           <p class="fill-in-row">
-            <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false" />
+            <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false"
+              bind:value={partAnswers[part.label]} />
             <span class="fill-in-suffix">{part.answer_suffix}</span>
           </p>
         {:else if part.math_expression_prefix}
           <p class="answer-instruction">Enter your answer in the box.</p>
           <p class="fill-in-row">
             <span class="fill-in-prefix">{@html renderMath(part.math_expression_prefix)}</span>
-            <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false" />
+            <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false"
+              bind:value={partAnswers[part.label]} />
           </p>
         {:else}
           <p class="answer-instruction">Enter your answer in the space provided.</p>
-          <ShortAnswerInput />
+          <ShortAnswerInput bind:value={partAnswers[part.label]} />
         {/if}
       {/if}
+
+      <!-- ── Per-part submit + feedback (stacked) ── -->
+      {#if question}
+        {@const ps = partStates[part.label] ?? {}}
+        <div class="part-action-bar">
+          {#if !ps.correct && !ps.revealed}
+            {#if !ps.assisted && feedbackTemplate?.parts?.[part.label]}
+              <button class="part-learn-btn" on:click={() => learnPart(part.label)}>Learn</button>
+            {:else if ps.assisted}
+              <span class="part-learned">Learn clicked</span>
+            {/if}
+            <button class="part-submit-btn" on:click={() => submitPart(part.label, part)}>Submit</button>
+          {:else if ps.correct}
+            <span class="part-correct-badge">✓ Correct</span>
+          {:else}
+            <span class="part-revealed-badge">Answer shown</span>
+          {/if}
+        </div>
+        {#if ps.tip}
+          <div class="part-tip">{ps.tip}</div>
+        {/if}
+        {#if ps.revealed}
+          <div class="part-reveal">
+            {#if feedbackTemplate?.parts?.[part.label]?.reveal}
+              {fillTemplate(feedbackTemplate.parts[part.label].reveal, extractParams(question))}
+            {:else}
+              The answer is: {question.correct_answer?.[part.label] ?? part.correct_answer ?? ''}
+            {/if}
+          </div>
+        {/if}
+      {/if}
+
     {/each}
 
   {:else}
@@ -316,11 +437,43 @@
               </div>
             {:else if part.answer_type === 'constructed_response'}
               <p class="answer-instruction">Enter your answer and your work or explanation in the space provided.</p>
-              <ShortAnswerInput />
+              <ShortAnswerInput bind:value={partAnswers[part.label]} />
             {:else}
               <p class="answer-instruction">Enter your answer in the space provided.</p>
-              <ShortAnswerInput />
+              <ShortAnswerInput bind:value={partAnswers[part.label]} />
             {/if}
+
+            <!-- ── Per-part submit + feedback (two-pane) ── -->
+            {#if question}
+              {@const ps = partStates[part.label] ?? {}}
+              <div class="part-action-bar">
+                {#if !ps.correct && !ps.revealed}
+                  {#if !ps.assisted && feedbackTemplate?.parts?.[part.label]}
+                    <button class="part-learn-btn" on:click={() => learnPart(part.label)}>Learn</button>
+                  {:else if ps.assisted}
+                    <span class="part-learned">Learn clicked</span>
+                  {/if}
+                  <button class="part-submit-btn" on:click={() => submitPart(part.label, part)}>Submit</button>
+                {:else if ps.correct}
+                  <span class="part-correct-badge">✓ Correct</span>
+                {:else}
+                  <span class="part-revealed-badge">Answer shown</span>
+                {/if}
+              </div>
+              {#if ps.tip}
+                <div class="part-tip">{ps.tip}</div>
+              {/if}
+              {#if ps.revealed}
+                <div class="part-reveal">
+                  {#if feedbackTemplate?.parts?.[part.label]?.reveal}
+                    {fillTemplate(feedbackTemplate.parts[part.label].reveal, extractParams(question))}
+                  {:else}
+                    The answer is: {question.correct_answer?.[part.label] ?? part.correct_answer ?? ''}
+                  {/if}
+                </div>
+              {/if}
+            {/if}
+
           </div>
         {/each}
       </div>
@@ -760,5 +913,79 @@
     background: #f8f8f8;
     font-size: 14px;
     color: #333;
+  }
+
+  /* ── Per-part submit + feedback ── */
+  .part-action-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 6px;
+  }
+
+  .part-learn-btn {
+    padding: 4px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 500;
+    color: #555;
+    background: #fff;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .part-learn-btn:hover { background: #f5f5f5; }
+
+  .part-submit-btn {
+    padding: 4px 14px;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 600;
+    color: #fff;
+    background: #3b81c9;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .part-submit-btn:hover { background: #2d6bac; }
+
+  .part-learned {
+    font-size: 12px;
+    color: #6366f1;
+    font-style: italic;
+  }
+
+  .part-correct-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: #16a34a;
+  }
+
+  .part-revealed-badge {
+    font-size: 13px;
+    color: #6b7280;
+    font-style: italic;
+  }
+
+  .part-tip {
+    margin: 6px 0;
+    padding: 8px 12px;
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #92400e;
+    line-height: 1.5;
+  }
+
+  .part-reveal {
+    margin: 6px 0 10px;
+    padding: 8px 12px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #1e3a8a;
+    line-height: 1.5;
   }
 </style>

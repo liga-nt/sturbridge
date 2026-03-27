@@ -10,6 +10,9 @@
   export let instruction = null;
   export let sentences = [];
   export let dropdowns = [];
+  let selections = {};
+  export let value = null;
+  $: value = dropdowns.map(dd => selections[dd.id] ?? '').join(',');
 
   // Parse a sentence string into text/dropdown tokens.
   // "[TOKEN_ID]" → { type: 'dropdown', id: 'TOKEN_ID' }
@@ -57,7 +60,7 @@
         {:else}
           {@const dd = dropdowns.find(d => d.id === token.id)}
           {#if dd}
-            <select class="inline-select" style="width: {dd.options.length <= 3 ? 90 : 110}px">
+            <select class="inline-select" style="width: {dd.options.length <= 3 ? 90 : 110}px" bind:value={selections[dd.id]}>
               <option value="">Choose...</option>
               {#each dd.options as opt}
                 <option>{opt}</option>
