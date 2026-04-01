@@ -4531,7 +4531,9 @@ function generate2022Q1() {
   do {
     A = randInt(1, D - 2);
     B = randInt(1, D - 2);
-  } while (A === B);
+    // A + B must not equal D: if A+B=D then eatenA=B and eatenB=A, making the
+    // "eaten" distractor [B/D]+[A/D]=[D/D] — a commuted copy of the correct answer.
+  } while (A === B || A + B === D);
 
   const sumAB = A + B;
   const eatenA = D - A;
@@ -4852,19 +4854,67 @@ function generate2022Q5() {
   };
 }
 
-// 2022 Q6 — Lines of symmetry of a 45-45-90 isosceles right triangle
-// The shape is fixed; the question is always the same.
-// The triangle has exactly 1 line of symmetry (the altitude from the right-angle vertex to the hypotenuse).
+// 2022 Q6 — Lines of symmetry of a triangle
+// Varies between:
+//   • Isosceles right (45-45-90): 1 line of symmetry  — matches base item
+//   • Scalene acute: 0 lines of symmetry
+//   • Scalene obtuse: 0 lines of symmetry
+//   • Non-right isosceles (e.g. 70-70-40): 1 line of symmetry
+// All drawn as inline SVG at ~176×100.
 function generate2022Q6() {
-  // The triangle is an isosceles right triangle (45°-45°-90°).
-  // It has exactly 1 line of symmetry: the vertical altitude from the apex.
-  // Common errors: 0 (thinks right triangles have no symmetry), 2 (confuses with equilateral), 3 (equilateral error).
-  const triangleSVG = `<br><br><p style="text-align:center;"><svg width="176" height="100" viewBox="0 0 176 100" xmlns="http://www.w3.org/2000/svg" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;"><polygon points="88,5 10,90 166,90" fill="none" stroke="#333" stroke-width="1.5"/><rect x="81" y="5" width="10" height="10" fill="none" stroke="#333" stroke-width="1.2"/><text x="22" y="88" font-size="13" fill="#333" text-anchor="start">45°</text><text x="140" y="88" font-size="13" fill="#333" text-anchor="start">45°</text></svg></p>`;
+  // Each variant: { svg, symmetry, label (for visual_description) }
+  const VARIANTS = [
+    // ── 1 line: isosceles right (45-45-90), apex at top-center ──────────────
+    {
+      symmetry: 1,
+      label: 'isosceles right triangle (45-45-90)',
+      svg: `<svg width="176" height="100" viewBox="0 0 176 100" xmlns="http://www.w3.org/2000/svg"><polygon points="88,5 10,90 166,90" fill="none" stroke="#333" stroke-width="1.5"/><rect x="81" y="5" width="10" height="10" fill="none" stroke="#333" stroke-width="1.2"/><text x="22" y="88" font-size="13" fill="#333" text-anchor="start">45°</text><text x="140" y="88" font-size="13" fill="#333" text-anchor="start">45°</text></svg>`,
+    },
+    // ── 1 line: isosceles right, right angle at bottom-left ─────────────────
+    {
+      symmetry: 1,
+      label: 'isosceles right triangle, right angle at lower-left',
+      svg: `<svg width="176" height="100" viewBox="0 0 176 100" xmlns="http://www.w3.org/2000/svg"><polygon points="10,90 10,10 88,90" fill="none" stroke="#333" stroke-width="1.5"/><rect x="10" y="80" width="10" height="10" fill="none" stroke="#333" stroke-width="1.2"/><text x="14" y="30" font-size="13" fill="#333">45°</text><text x="22" y="88" font-size="13" fill="#333">45°</text></svg>`,
+    },
+    // ── 1 line: isosceles non-right (70-70-40), tall narrow ─────────────────
+    {
+      symmetry: 1,
+      label: 'isosceles triangle (70-70-40)',
+      svg: `<svg width="176" height="110" viewBox="0 0 176 110" xmlns="http://www.w3.org/2000/svg"><polygon points="88,5 20,100 156,100" fill="none" stroke="#333" stroke-width="1.5"/><text x="22" y="98" font-size="13" fill="#333">70°</text><text x="132" y="98" font-size="13" fill="#333">70°</text><text x="78" y="22" font-size="13" fill="#333">40°</text></svg>`,
+    },
+    // ── 1 line: isosceles obtuse (120-30-30) ─────────────────────────────────
+    {
+      symmetry: 1,
+      label: 'isosceles obtuse triangle (120-30-30)',
+      svg: `<svg width="176" height="80" viewBox="0 0 176 80" xmlns="http://www.w3.org/2000/svg"><polygon points="88,10 8,70 168,70" fill="none" stroke="#333" stroke-width="1.5"/><text x="10" y="68" font-size="13" fill="#333">30°</text><text x="144" y="68" font-size="13" fill="#333">30°</text><text x="74" y="26" font-size="13" fill="#333">120°</text></svg>`,
+    },
+    // ── 0 lines: scalene acute (50-60-70) ────────────────────────────────────
+    {
+      symmetry: 0,
+      label: 'scalene acute triangle (50-60-70)',
+      svg: `<svg width="176" height="100" viewBox="0 0 176 100" xmlns="http://www.w3.org/2000/svg"><polygon points="55,10 8,90 168,90" fill="none" stroke="#333" stroke-width="1.5"/><text x="10" y="88" font-size="13" fill="#333">70°</text><text x="140" y="88" font-size="13" fill="#333">60°</text><text x="48" y="26" font-size="13" fill="#333">50°</text></svg>`,
+    },
+    // ── 0 lines: scalene obtuse (110-40-30) ──────────────────────────────────
+    {
+      symmetry: 0,
+      label: 'scalene obtuse triangle (110-40-30)',
+      svg: `<svg width="176" height="90" viewBox="0 0 176 90" xmlns="http://www.w3.org/2000/svg"><polygon points="20,10 8,80 168,80" fill="none" stroke="#333" stroke-width="1.5"/><text x="10" y="78" font-size="13" fill="#333">110°</text><text x="140" y="78" font-size="13" fill="#333">30°</text><text x="18" y="26" font-size="13" fill="#333">40°</text></svg>`,
+    },
+    // ── 0 lines: scalene right (30-60-90) ────────────────────────────────────
+    {
+      symmetry: 0,
+      label: 'scalene right triangle (30-60-90)',
+      svg: `<svg width="176" height="100" viewBox="0 0 176 100" xmlns="http://www.w3.org/2000/svg"><polygon points="10,10 10,90 166,90" fill="none" stroke="#333" stroke-width="1.5"/><rect x="10" y="80" width="10" height="10" fill="none" stroke="#333" stroke-width="1.2"/><text x="14" y="30" font-size="13" fill="#333">60°</text><text x="22" y="88" font-size="13" fill="#333">90°</text><text x="130" y="88" font-size="13" fill="#333">30°</text></svg>`,
+    },
+  ];
+
+  const variant = pick(VARIANTS);
+  const svgBlock = `<br><br><p style="text-align:center;">${variant.svg}</p>`;
 
   return {
     item_id: 'MA307066',
     question_number: '6',
-    stimulus_intro: `A triangle is shown.${triangleSVG}`,
+    stimulus_intro: `A triangle is shown.${svgBlock}`,
     stimulus_type: null,
     stimulus_params: null,
     stimulus_list: null,
@@ -4876,7 +4926,7 @@ function generate2022Q6() {
     answer_options: null,
     parts: null,
     select_count: null,
-    correct_answer: '1',
+    correct_answer: String(variant.symmetry),
   };
 }
 
@@ -5035,32 +5085,28 @@ function generate2022Q8() {
       },
       {
         label: 'B',
-        question_text: `The patio has a length of ${patioLen} feet and an area of ${patioArea} square feet.\n\nWhat is the width, in feet, of the patio? Show or explain how you got your answer.\n\nEnter your answer and your work or explanation in the space provided.`,
+        question_text: `The patio has a length of ${patioLen} feet and an area of ${patioArea} square feet.\n\nWhat is the width, in feet, of the patio? Show or explain how you got your answer.`,
         answer_type: 'constructed_response',
         correct_answer: `${patioWid}`,
       },
       {
         label: 'C',
-        question_text: 'The owner of the house thinks the garden and the patio have the same perimeter.\n\nIs the owner correct? Explain your reasoning.\n\nEnter your answer and your explanation in the space provided.',
-        answer_type: 'constructed_response',
-        correct_answer: `Yes. Garden perimeter = 2×${gardenLen} + 2×${gardenWid} = ${gardenPerim} ft. Patio perimeter = 2×${patioLen} + 2×${patioWid} = ${patioPerim} ft. Both perimeters are equal.`,
+        question_text: 'The owner of the house thinks the garden and the patio have the same perimeter.\n\nIs the owner correct? Explain your reasoning.',
+        answer_type: 'yes_no_explanation',
+        correct_answer: 'yes',
       },
       {
         label: 'D',
-        question_text: 'The area of the flower bed is <strong>less than</strong> the area of the garden. The perimeter of the flower bed is <strong>equal</strong> to the perimeter of the patio.\n\nWhat could be the length <strong>and</strong> the width of the flower bed? Explain how you know your answer is correct.\n\nEnter your answer and your explanation in the space provided.',
-        answer_type: 'constructed_response',
-        correct_answer: flowerLen > 0
-          ? `Example: length = ${flowerLen} ft, width = ${flowerWid} ft. Perimeter = 2×${flowerLen} + 2×${flowerWid} = ${2 * flowerLen + 2 * flowerWid} ft (equals patio perimeter). Area = ${flowerLen} × ${flowerWid} = ${flowerLen * flowerWid} sq ft (less than garden area of ${gardenArea} sq ft).`
-          : `Any rectangle with perimeter = ${patioPerim} ft and area < ${gardenArea} sq ft.`,
+        question_text: 'The area of the flower bed is <strong>less than</strong> the area of the garden. The perimeter of the flower bed is <strong>equal</strong> to the perimeter of the patio.\n\nWhat could be the length <strong>and</strong> the width of the flower bed? Explain how you know your answer is correct.',
+        answer_type: 'dimension_pair',
+        correct_answer: `halfPerim=${halfPerim},maxArea=${gardenArea}`,
       },
     ],
     correct_answer: {
       A: `${gardenArea}`,
       B: `${patioWid}`,
-      C: `Yes. Garden perimeter = 2×${gardenLen} + 2×${gardenWid} = ${gardenPerim} ft. Patio perimeter = 2×${patioLen} + 2×${patioWid} = ${patioPerim} ft. Both perimeters are equal.`,
-      D: flowerLen > 0
-        ? `Example: length = ${flowerLen} ft, width = ${flowerWid} ft. Perimeter = 2×${flowerLen} + 2×${flowerWid} = ${2 * flowerLen + 2 * flowerWid} ft (equals patio perimeter). Area = ${flowerLen} × ${flowerWid} = ${flowerLen * flowerWid} sq ft (less than garden area of ${gardenArea} sq ft).`
-        : `Any rectangle with perimeter = ${patioPerim} ft and area < ${gardenArea} sq ft.`,
+      C: 'yes',
+      D: `halfPerim=${halfPerim},maxArea=${gardenArea}`,
     },
   };
 }
@@ -5107,13 +5153,13 @@ function generate2022Q9() {
     stimulus_list: null,
     math_expression: null,
     answer_type: 'short_answer',
-    question_text: `A student drinks [${n}/${d}] liter of ${substance} each morning.\n\nWhat is the total amount of ${substance}, in liters, the student drinks over ${k} ${period}?\n\nEnter your answer in the space provided. Enter <strong>only</strong> your answer.`,
+    question_text: `A student drinks [${n}/${d}] liter of ${substance} each morning.\n\nWhat is the total amount of ${substance}, in liters, the student drinks over ${k} ${period}?`,
     input_widget: 'text',
     answer_suffix: null,
     answer_options: null,
     parts: null,
     select_count: null,
-    correct_answer: correctAnswer,
+    correct_answer: `${ansNumer}/${d}`,
   };
 }
 
@@ -5442,27 +5488,29 @@ function generate2022Q14() {
 //   Part D total triangles: chosen so triangles/2 gives a clean integer step number
 //
 function generate2022Q15() {
-  // Part A: step for triangles count
-  const stepA = randInt(4, 6);
-  const triA = stepA * 2;
+  // New pattern: 1 triangle (center) + 2 squares per step
+  // Step N: N triangles, 2N squares
 
-  // Part B: step for squares count (different from stepA)
-  let stepB = randInt(5, 8);
-  if (stepB === stepA) stepB = stepB < 8 ? stepB + 1 : stepB - 1;
-  const sqB = stepB;
+  // Part A: total triangles in Step stepA
+  const stepA = randInt(4, 8);
+  const triA = stepA;  // 1 triangle per step
 
-  // Part C: step for triangles count via multiplication
-  let stepC = randInt(7, 10);
-  // avoid collision with A and B
+  // Part B: total squares in Step stepB
+  let stepB = randInt(5, 9);
+  if (stepB === stepA) stepB = stepB < 9 ? stepB + 1 : stepB - 1;
+  const sqB = stepB * 2;  // 2 squares per step
+
+  // Part C: total triangles in Step stepC (by multiplication)
+  let stepC = randInt(7, 12);
   while (stepC === stepA || stepC === stepB) {
-    stepC = stepC < 10 ? stepC + 1 : 7;
+    stepC = stepC < 12 ? stepC + 1 : 7;
   }
-  const triC = stepC * 2;
+  const triC = stepC;  // 1 triangle per step
 
-  // Part D: pick a number of triangles that's an even number (so step = triangles/2)
-  const evenTriangles = [48, 56, 64, 72, 80];
-  const triD = pick(evenTriangles);
-  const sqD = triD / 2;
+  // Part D: given triangles (= step number), find squares
+  const stepD = pick([8, 9, 10, 11, 12, 13, 14, 15]);
+  const triD = stepD;
+  const sqD = stepD * 2;
 
   return {
     question_number: '15',
@@ -5470,9 +5518,9 @@ function generate2022Q15() {
     answer_type: 'multi_part',
     question_text: 'The student continues the pattern.',
     stimulus_intro:
-      'A student uses squares and triangles to make a pattern. In each step of the pattern, the student adds 1 square and 2 triangles, as shown.',
+      'A student uses triangles and squares to make a pattern. In each step of the pattern, the student adds 1 triangle and 2 squares, as shown.',
     stimulus_type: 'step_pattern',
-    stimulus_params: { steps: 3 },
+    stimulus_params: { steps: 3, variant: 'triangle_center' },
     stimulus_list: null,
     math_expression: null,
     layout: null,
@@ -5480,8 +5528,8 @@ function generate2022Q15() {
       {
         label: 'A',
         question_text: `What is the total number of triangles in Step ${stepA} of the pattern?`,
-        answer_type: 'short_answer',
-        answer_suffix: 'triangles',
+        answer_type: 'number_with_work',
+        answer_unit: 'triangles',
         correct_answer: String(triA),
       },
       {
@@ -5489,8 +5537,8 @@ function generate2022Q15() {
         question_text:
           `What is the total number of <strong>squares</strong> in Step ${stepB} of the pattern? ` +
           'Explain how you know your answer is correct.',
-        answer_type: 'constructed_response',
-        answer_instruction: 'Enter your answer and your explanation in the space provided.',
+        answer_type: 'number_with_work',
+        answer_unit: 'squares',
         correct_answer: String(sqB),
       },
       {
@@ -5498,8 +5546,8 @@ function generate2022Q15() {
         question_text:
           `What is the total number of triangles in Step ${stepC} of the pattern? ` +
           'Explain how you can get your answer by using multiplication.',
-        answer_type: 'constructed_response',
-        answer_instruction: 'Enter your answer and your explanation in the space provided.',
+        answer_type: 'number_with_work',
+        answer_unit: 'triangles',
         correct_answer: String(triC),
       },
       {
@@ -5507,9 +5555,8 @@ function generate2022Q15() {
         question_text:
           `One step in the pattern will have a total of ${triD} triangles. ` +
           'What is the total number of squares in that step? Show or explain how you got your answer.',
-        answer_type: 'constructed_response',
-        answer_instruction:
-          'Enter your answer and your work or explanation in the space provided.',
+        answer_type: 'number_with_work',
+        answer_unit: 'squares',
         correct_answer: String(sqD),
       },
     ],
@@ -5693,76 +5740,131 @@ function generate2022Q17() {
 }
 
 function generate2022Q18() {
-  // This question is fixed — the 5 shapes are geometric figures and their
-  // parallel/perpendicular properties are intrinsic to the shapes themselves.
-  // Correct: A (right trapezoid — 1 pair parallel + 1 pair perpendicular),
-  //          C (square — 2 pairs parallel + 2 pairs perpendicular),
-  //          D (rectangle — 2 pairs parallel + 2 pairs perpendicular).
-  // Distractors: B (parallelogram — parallel but no perpendicular),
-  //              E (isosceles trapezoid — 1 pair parallel but no perpendicular).
+  // Shape library: each entry has polygon vertices and parallel/perpendicular pair counts.
+  // perpendicular refers to adjacent side pairs meeting at 90°.
+  const SHAPE_LIB = {
+    right_trapezoid:      { v: [[-50,-45],[50,-45],[50,45],[-70,45]],   parallel: 1, perp: 1 },
+    right_trapezoid_alt:  { v: [[-50,-45],[50,-45],[20,45],[-60,45]],   parallel: 1, perp: 1 },
+    rectangle:            { v: [[-55,-25],[55,-25],[55,25],[-55,25]],   parallel: 2, perp: 2 },
+    tall_rectangle:       { v: [[-30,-50],[30,-50],[30,50],[-30,50]],   parallel: 2, perp: 2 },
+    square_upright:       { v: [[-40,-40],[40,-40],[40,40],[-40,40]],   parallel: 2, perp: 2 },
+    square_tilted:        { v: [[0,-50],[50,0],[0,50],[-50,0]],         parallel: 2, perp: 2 },
+    parallelogram:        { v: [[-30,-30],[70,-30],[30,30],[-70,30]],   parallel: 2, perp: 0 },
+    parallelogram_alt:    { v: [[-40,-25],[60,-25],[40,25],[-60,25]],   parallel: 2, perp: 0 },
+    rhombus:              { v: [[0,-55],[45,0],[0,55],[-45,0]],         parallel: 2, perp: 0 },
+    isosceles_trapezoid:  { v: [[-30,-40],[30,-40],[60,40],[-60,40]],   parallel: 1, perp: 0 },
+    isosceles_trap_alt:   { v: [[-20,-35],[20,-35],[55,35],[-55,35]],   parallel: 1, perp: 0 },
+    right_triangle:       { v: [[-45,-45],[-45,45],[50,45]],            parallel: 0, perp: 1 },
+    general_triangle:     { v: [[-50,40],[0,-50],[60,40]],              parallel: 0, perp: 0 },
+    kite:                 { v: [[0,-60],[-35,0],[0,50],[35,0]],         parallel: 0, perp: 0 },
+  };
+
+  // Three question variants, each with exactly select_count correct answers among 5 options.
+  const VARIANTS = [
+    {
+      question: 'Which of these shapes appear to have at least one pair of parallel sides <strong>and</strong> at least one pair of perpendicular sides?',
+      filter: s => s.parallel >= 1 && s.perp >= 1,
+      correct_names: ['right_trapezoid', 'rectangle', 'square_upright'],
+      wrong_names:   ['parallelogram', 'isosceles_trapezoid'],
+    },
+    {
+      question: 'Which of these shapes appear to have at least two pairs of parallel sides <strong>and</strong> at least two pairs of perpendicular sides?',
+      filter: s => s.parallel >= 2 && s.perp >= 2,
+      correct_names: ['rectangle', 'tall_rectangle'],
+      wrong_names:   ['right_trapezoid', 'rhombus', 'isosceles_trapezoid'],
+    },
+    {
+      question: 'Which of these shapes appear to have at least one pair of parallel sides but <strong>no</strong> pairs of perpendicular sides?',
+      filter: s => s.parallel >= 1 && s.perp === 0,
+      correct_names: ['parallelogram', 'rhombus', 'isosceles_trapezoid'],
+      wrong_names:   ['rectangle', 'right_triangle'],
+    },
+    {
+      question: 'Which of these shapes appear to have at least one pair of parallel sides <strong>and</strong> at least one pair of perpendicular sides?',
+      filter: s => s.parallel >= 1 && s.perp >= 1,
+      correct_names: ['right_trapezoid_alt', 'tall_rectangle', 'square_tilted'],
+      wrong_names:   ['parallelogram_alt', 'isosceles_trap_alt'],
+    },
+  ];
+
+  const variant = pick(VARIANTS);
+  const allNames = [...variant.correct_names, ...variant.wrong_names];
+  const shuffled = shuffle(allNames);
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+
+  const answer_options = shuffled.map((name, i) => {
+    const s = SHAPE_LIB[name];
+    return {
+      letter: letters[i],
+      shape: { type: 'polygon', vertices: s.v },
+    };
+  });
+
+  const correctLetters = variant.correct_names
+    .map(name => letters[shuffled.indexOf(name)])
+    .sort()
+    .join(',');
+
   return {
     question_number: '18',
     item_id: 'MA903757124',
     answer_type: 'multiple_select',
-    question_text: 'Which of these shapes appear to have at least one pair of parallel sides <strong>and</strong> at least one pair of perpendicular sides?',
-    select_count: 3,
+    question_text: variant.question,
+    select_count: variant.correct_names.length,
     stimulus_intro: null,
     stimulus_type: null,
     stimulus_params: null,
     stimulus_list: null,
     math_expression: null,
-    answer_options: [
-      {
-        letter: 'A',
-        shape: { type: 'polygon', vertices: [[-50, -45], [50, -45], [50, 45], [-70, 45]] },
-      },
-      {
-        letter: 'B',
-        shape: { type: 'polygon', vertices: [[-30, -30], [70, -30], [30, 30], [-70, 30]] },
-      },
-      {
-        letter: 'C',
-        shape: { type: 'square', size: 90 },
-      },
-      {
-        letter: 'D',
-        shape: { type: 'polygon', vertices: [[-55, -10], [10, -55], [55, 10], [-10, 55]] },
-      },
-      {
-        letter: 'E',
-        shape: { type: 'polygon', vertices: [[-30, -40], [30, -40], [60, 40], [-60, 40]] },
-      },
-    ],
+    answer_options,
     parts: null,
-    correct_answer: 'A,C,D',
+    correct_answer: correctLetters,
   };
 }
 
 function generate2022Q19() {
-  // 0.3 = 3/10 — decimal-to-fraction equivalence (4.NF.C.6)
-  // Distractors:
-  //   A: 1/3  — student mistakes 0.3 for "one-third" (confuses decimal with fraction notation)
-  //   B: 1/30 — student inverts numerator/denominator and misreads place value
-  //   D: 3/100 — student uses hundredths denominator instead of tenths (place value error)
+  // Vary the decimal: tenths (0.1–0.9) and common hundredths (0.25, 0.50, 0.75)
+  // Standard: 4.NF.C.6 — decimal↔fraction equivalence.
+
+  const scenarios = [
+    // Tenths: n/10
+    ...Array.from({ length: 9 }, (_, i) => {
+      const n = i + 1;
+      return {
+        decimal: `0.${n}`,
+        correct: `[${n}/10]`,
+        distractors: n >= 2
+          ? [`[1/${n}]`, `[${n}/100]`, `[1/${n * 10}]`]
+          : [`[1/10]`, `[1/100]`, `[10/100]`],
+      };
+    }),
+    // Common hundredths
+    { decimal: '0.25', correct: '[25/100]', distractors: ['[1/4]', '[25/10]', '[2/5]'] },
+    { decimal: '0.50', correct: '[50/100]', distractors: ['[5/10]', '[1/2]', '[50/10]'] },
+    { decimal: '0.75', correct: '[75/100]', distractors: ['[3/4]', '[75/10]', '[7/5]'] },
+  ];
+
+  const { decimal, correct, distractors } = pick(scenarios);
+  const picked = shuffle(distractors).slice(0, 3);
+  const allOpts = shuffle([correct, ...picked]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const answer_options = allOpts.map((text, i) => ({ letter: letters[i], text }));
+  const correctLetter = letters[allOpts.indexOf(correct)];
+
   return {
     question_number: '19',
     item_id: 'MA286765',
     answer_type: 'multiple_choice',
-    question_text: 'Which of these fractions is equivalent to 0.3?',
+    question_text: `Which of these fractions is equivalent to ${decimal}?`,
     stimulus_intro: null,
     stimulus_type: null,
     stimulus_params: null,
     stimulus_list: null,
     math_expression: null,
-    answer_options: [
-      { letter: 'A', text: '[1/3]' },
-      { letter: 'B', text: '[1/30]' },
-      { letter: 'C', text: '[3/10]' },
-      { letter: 'D', text: '[3/100]' },
-    ],
+    answer_options,
     parts: null,
     select_count: null,
-    correct_answer: 'C',
+    correct_answer: correctLetter,
   };
 }
 

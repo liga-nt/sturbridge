@@ -17,14 +17,16 @@ export async function load({ url }) {
                             user: currentUser,
                             loggedIn: true,
                             loading: false,
-                            role: tokenResult.claims.role ?? null
+                            role: tokenResult.claims.role ?? null,
+                            schoolId: tokenResult.claims.schoolId ?? null
                         });
                     } else {
                         session.set({
                             user: null,
                             loggedIn: false,
                             loading: false,
-                            role: null
+                            role: null,
+                            schoolId: null
                         });
                     }
                     if (!resolved) {

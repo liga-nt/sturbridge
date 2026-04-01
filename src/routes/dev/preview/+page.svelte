@@ -402,7 +402,17 @@
         {:else if generated.answer_type === 'number_line_plot'}
           <NumberLinePlot question_text={generated.question_text} stimulus_params={generated.stimulus_params ?? {}} bind:value={testAnswer} />
         {:else if generated.answer_type === 'true_false_table'}
-          <TrueFalseTable question_text={generated.question_text} statements={generated.statements ?? []} bind:value={testAnswer} />
+          <TrueFalseTable
+            question_text={generated.question_text}
+            statements={generated.statements ?? []}
+            column_label={generated.column_label ?? 'Statement'}
+            true_label={generated.true_label ?? 'True'}
+            false_label={generated.false_label ?? 'False'}
+            stimulus_intro={generated.stimulus_intro ?? null}
+            stimulus_type={generated.stimulus_type ?? null}
+            instruction={generated.instruction ?? null}
+            bind:value={testAnswer}
+          />
         {:else if generated.answer_type === 'inline_choice'}
           <InlineChoice
             question_text={generated.question_text}
@@ -416,7 +426,7 @@
         {:else if generated.answer_type === 'protractor_drag_drop'}
           <ProtractorDragDrop question_text={generated.question_text} stimulus_params={generated.stimulus_params} bind:value={testAnswer} />
         {:else if generated.answer_type === 'drag_drop_match'}
-          <DragDropMatch question_text={generated.question_text} instruction={generated.instruction ?? ''} tiles={generated.tiles ?? []} rows={generated.rows ?? []} />
+          <DragDropMatch question_text={generated.question_text} instruction={generated.instruction ?? ''} tiles={generated.tiles ?? []} rows={generated.rows ?? []} bind:value={testAnswer} />
         {:else if generated.answer_type === 'fraction_model'}
           <FractionModel
             question_text={generated.question_text}

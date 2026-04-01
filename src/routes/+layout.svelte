@@ -3,6 +3,7 @@
     import { auth } from '$lib/firebase/client';
     import { signOut } from 'firebase/auth';
     import { goto } from '$app/navigation';
+    import { roleHomePath } from '$lib/utils/auth.js';
     import '../app.css';
 </script>
 
@@ -15,13 +16,13 @@
                 {#if $session.loading}
                     <span>Loading...</span>
                 {:else if $session.loggedIn}
-                    <a href="/dashboard" class="hover:text-gray-300">Dashboard</a>
+                    <a href={roleHomePath($session.role)} class="hover:text-gray-300">Home</a>
                     <span>{$session.user.email}</span>
                     <button
                         on:click={async () => {
                             try {
                                 await signOut(auth);
-                                session.set({ user: null, loggedIn: false, loading: false, role: null });
+                                session.set({ user: null, loggedIn: false, loading: false, role: null, schoolId: null });
                                 goto('/');
                             } catch (error) {
                                 console.error('Error signing out:', error);

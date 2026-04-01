@@ -1,20 +1,23 @@
 <script>
     import { onMount } from 'svelte';
-    import { loadStandardsByGradeSubject } from '$lib/utils/studentStore.js';
-    import { COURSES, courseLabel } from '$lib/utils/courses.js';
+    import { session } from '$lib/stores/session';
+    import { page } from '$app/stores';
+    import { loadCourses, loadStandardsByCourse } from '$lib/utils/studentStore.js';
     import {
-        getDocs, collection, doc, setDoc, getDoc, serverTimestamp, updateDoc
+        getDocs, collection, doc, setDoc, getDoc, serverTimestamp, updateDoc, query, where
     } from 'firebase/firestore';
     import { db } from '$lib/firebase/client';
 
     let loading = true;
     let error = null;
     let teachers = [];
+    let courses = {};   // { [courseId]: { id, label, grade, subject, progressionType, ... } }
+    let courseList = []; // ordered array for the dropdown
 
     // New class form
     let newName = '';
     let newTeacherId = '';
-    let newCourseKey = `${COURSES[0].grade}-${COURSES[0].subject}`;  // default: first course
+    let newCourseId = '';
     let creating = false;
     let createError = null;
     let createSuccess = null;
@@ -27,18 +30,38 @@
 
     let classes = [];
 
-    $: selectedCourse = COURSES.find((c) => `${c.grade}-${c.subject}` === newCourseKey) || COURSES[0];
-
     onMount(async () => {
         try {
+            const effectiveSchoolId = $page.url.searchParams.get('schoolId') ?? $session.schoolId;
+            const unscoped = $session.role === 'dev' && !effectiveSchoolId;
+            const usersRef   = unscoped ? collection(db, 'users')   : query(collection(db, 'users'),   where('schoolId', '==', effectiveSchoolId));
+            const classesRef = unscoped ? collection(db, 'classes') : query(collection(db, 'classes'), where('schoolId', '==', effectiveSchoolId));
+
+            // Load school doc to get allowed courseIds (if set)
+            const schoolSnap = effectiveSchoolId
+                ? await getDoc(doc(db, 'schools', effectiveSchoolId))
+                : null;
+            const allowedCourseIds = schoolSnap?.exists()
+                ? (schoolSnap.data().courseIds ?? null)
+                : null;
+
             const [teacherSnap, classSnap] = await Promise.all([
-                getDocs(collection(db, 'users')),
-                getDocs(collection(db, 'classes'))
+                getDocs(usersRef),
+                getDocs(classesRef),
             ]);
             teachers = teacherSnap.docs
                 .map((d) => ({ uid: d.id, ...d.data() }))
                 .filter((u) => u.role === 'teacher');
             classes = classSnap.docs.map((d) => ({ classId: d.id, ...d.data() }));
+            courses = await loadCourses();
+            // Filter to school's allowed courses; if none configured, show all
+            const allCourseList = Object.values(courses).sort((a, b) =>
+                (a.grade ?? '').localeCompare(b.grade ?? '') || (a.label ?? '').localeCompare(b.label ?? '')
+            );
+            courseList = (allowedCourseIds && allowedCourseIds.length > 0)
+                ? allCourseList.filter((c) => allowedCourseIds.includes(c.id))
+                : allCourseList;
+            if (courseList.length > 0) newCourseId = courseList[0].id;
         } catch (e) {
             error = 'Failed to load.';
         } finally {
@@ -47,21 +70,24 @@
     });
 
     async function createClass() {
-        if (!newName.trim()) return;
+        if (!newName.trim() || !newCourseId) return;
         creating = true;
         createError = null;
         createSuccess = null;
         try {
-            // Build progression from standards matching this grade+subject
-            const standards = await loadStandardsByGradeSubject(selectedCourse.grade, selectedCourse.subject);
+            const selectedCourse = courses[newCourseId];
+
+            // Build progression from standards tagged with this courseId
+            const standards = await loadStandardsByCourse(newCourseId);
             const progression = standards.map((s) => s.id);
 
             const classId = `class-${Date.now()}`;
             const classData = {
                 classId,
                 name: newName.trim(),
-                grade: selectedCourse.grade,
-                subject: selectedCourse.subject,
+                courseId: newCourseId,
+                schoolId: $page.url.searchParams.get('schoolId') ?? $session.schoolId ?? 'default',
+                progressionType: selectedCourse.progressionType ?? 'mastery',
                 teacherId: newTeacherId || null,
                 studentIds: [],
                 standardProgression: progression,
@@ -78,7 +104,8 @@
                 }
             }
 
-            createSuccess = `Class "${newName.trim()}" created (${selectedCourse.label}, ${progression.length} standards).`;
+            const label = selectedCourse?.label ?? newCourseId;
+            createSuccess = `Class "${newName.trim()}" created (${label}, ${progression.length} standards).`;
             classes = [...classes, classData];
             newName = '';
             newTeacherId = '';
@@ -104,6 +131,7 @@
                 await setDoc(doc(db, 'invites', email), {
                     role: 'student',
                     classIds: [selectedClassId],
+                    schoolId: $page.url.searchParams.get('schoolId') ?? $session.schoolId ?? 'default',
                     createdAt: serverTimestamp()
                 }, { merge: true });
                 added++;
@@ -146,12 +174,17 @@
                         <label class="block text-xs text-gray-500 mb-1" for="course-sel">Course</label>
                         <select
                             id="course-sel"
-                            bind:value={newCourseKey}
+                            bind:value={newCourseId}
                             class="w-full border border-gray-300 rounded px-3 py-2 text-sm"
+                            required
                         >
-                            {#each COURSES as c}
-                                <option value="{c.grade}-{c.subject}">{c.label}</option>
-                            {/each}
+                            {#if courseList.length === 0}
+                                <option value="">No courses in database</option>
+                            {:else}
+                                {#each courseList as c}
+                                    <option value={c.id}>{c.label}</option>
+                                {/each}
+                            {/if}
                         </select>
                     </div>
                 </div>
@@ -170,7 +203,7 @@
                 </div>
                 <button
                     type="submit"
-                    disabled={creating}
+                    disabled={creating || !newCourseId}
                     class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded hover:bg-indigo-700 disabled:opacity-50"
                 >
                     {creating ? 'Creating…' : 'Create Class'}
@@ -202,7 +235,7 @@
                                     <a href="/admin/class/{cls.classId}" class="hover:text-indigo-600">{cls.name || cls.classId}</a>
                                 </td>
                                 <td class="px-4 py-3 text-gray-500">
-                                    {cls.grade && cls.subject ? courseLabel(cls.grade, cls.subject) : '—'}
+                                    {courses[cls.courseId]?.label ?? cls.courseId ?? '—'}
                                 </td>
                                 <td class="px-4 py-3 text-gray-500">{cls.standardProgression?.length ?? 0}</td>
                                 <td class="px-4 py-3 text-gray-500">{cls.studentIds?.length ?? 0}</td>
@@ -228,7 +261,7 @@
                         <option value="">— Select class —</option>
                         {#each classes as cls}
                             <option value={cls.classId}>
-                                {cls.name || cls.classId}{cls.grade ? ` — ${courseLabel(cls.grade, cls.subject)}` : ''}
+                                {cls.name || cls.classId}{cls.courseId ? ` — ${courses[cls.courseId]?.label ?? cls.courseId}` : ''}
                             </option>
                         {/each}
                     </select>

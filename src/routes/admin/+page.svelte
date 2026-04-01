@@ -1,18 +1,29 @@
 <script>
     import { onMount } from 'svelte';
-    import { loadAllStandards } from '$lib/utils/studentStore.js';
-    import { courseLabel } from '$lib/utils/courses.js';
-    import { getDocs, collection, doc, getDoc } from 'firebase/firestore';
+    import { session } from '$lib/stores/session';
+    import { page } from '$app/stores';
+    import { loadCourses } from '$lib/utils/studentStore.js';
+    import { getDocs, collection, doc, getDoc, query, where } from 'firebase/firestore';
     import { db } from '$lib/firebase/client';
 
     let loading = true;
     let error = null;
     let classes = [];
+    let courses = {};  // { [courseId]: { label, ... } }
 
     onMount(async () => {
         try {
-            const allStd = await loadAllStandards();
-            const classesSna = await getDocs(collection(db, 'classes'));
+            // Dev can impersonate a school via ?schoolId=; otherwise see all
+        const effectiveSchoolId = $page.url.searchParams.get('schoolId') ?? $session.schoolId;
+        const classesRef = ($session.role === 'dev' && !effectiveSchoolId)
+            ? collection(db, 'classes')
+            : query(collection(db, 'classes'), where('schoolId', '==', effectiveSchoolId));
+
+            const [classesSna, coursesMap] = await Promise.all([
+                getDocs(classesRef),
+                loadCourses()
+            ]);
+            courses = coursesMap;
 
             classes = await Promise.all(
                 classesSna.docs.map(async (classSnap) => {
@@ -27,8 +38,7 @@
                         classId: classSnap.id,
                         name: data.name || classSnap.id,
                         teacherName,
-                        grade: data.grade || null,
-                        subject: data.subject || null,
+                        courseId: data.courseId || null,
                         studentCount: data.studentIds?.length || 0,
                         standardCount: data.standardProgression?.length || 0
                     };
@@ -58,8 +68,8 @@
                 <div class="bg-white rounded-lg border border-gray-200 p-5 hover:border-indigo-300 hover:shadow-sm transition-all flex flex-col gap-3">
                     <a href="/admin/class/{cls.classId}" class="block">
                         <h2 class="font-semibold text-gray-800 mb-1">{cls.name}</h2>
-                        {#if cls.grade && cls.subject}
-                            <p class="text-xs text-indigo-600 mb-1">{courseLabel(cls.grade, cls.subject)}</p>
+                        {#if cls.courseId && courses[cls.courseId]}
+                            <p class="text-xs text-indigo-600 mb-1">{courses[cls.courseId].label}</p>
                         {/if}
                         <p class="text-sm text-gray-500">Teacher: {cls.teacherName}</p>
                         <div class="flex gap-4 mt-2 text-sm text-gray-600">

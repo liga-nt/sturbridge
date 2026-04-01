@@ -22,24 +22,25 @@ exports.activateAccount = onCall(async (request) => {
         throw new HttpsError('invalid-argument', 'No email on token.');
     }
 
-    // Already activated?
-    if (token.role) {
-        return { role: token.role, classIds: token.classIds || [] };
-    }
-
     const db = getFirestore();
     const auth = getAuth();
 
+    // Check for a pending invite first — invite always takes precedence over
+    // existing claims (handles re-assignment and reused email addresses).
     const inviteSnap = await db.collection('invites').doc(email).get();
     if (!inviteSnap.exists) {
+        // No invite — return existing claims if present, otherwise pending
+        if (token.role) {
+            return { role: token.role, classIds: token.classIds || [] };
+        }
         return { status: 'pending' };
     }
 
     const invite = inviteSnap.data();
-    const { role, classIds = [] } = invite;
+    const { role, classIds = [], schoolId = 'default' } = invite;
 
     // Set custom claim
-    await auth.setCustomUserClaims(uid, { role, classIds });
+    await auth.setCustomUserClaims(uid, { role, classIds, schoolId });
 
     // Write user doc
     await db.collection('users').doc(uid).set({
@@ -47,7 +48,8 @@ exports.activateAccount = onCall(async (request) => {
         email,
         displayName: token.name || email,
         role,
-        classIds
+        classIds,
+        schoolId
     }, { merge: true });
 
     // Add student to class studentIds if applicable
@@ -68,6 +70,26 @@ exports.activateAccount = onCall(async (request) => {
     await db.collection('invites').doc(email).delete();
 
     return { role, classIds };
+});
+
+/**
+ * revokeAccess — dev-only. Clears a user's custom claims and marks their
+ * Firestore user doc role as null. Their current token stays valid until
+ * expiry (~1hr), but Firestore rules deny access immediately since rules
+ * check the token, not the user doc.
+ */
+exports.revokeAccess = onCall(async (request) => {
+    if (request.auth?.token?.role !== 'dev') {
+        throw new HttpsError('permission-denied', 'Only dev can revoke access.');
+    }
+    const { uid } = request.data;
+    if (!uid) throw new HttpsError('invalid-argument', 'uid is required.');
+
+    const db = getFirestore();
+    const auth = getAuth();
+    await auth.setCustomUserClaims(uid, {});
+    await db.collection('users').doc(uid).update({ role: null });
+    return { success: true };
 });
 
 const db = getFirestore();

@@ -15,6 +15,7 @@
             </div>
             <a href="/dev/preview" class="text-sm text-indigo-600 hover:underline">Question Preview</a>
             <a href="/dev/algo-check" class="text-sm text-indigo-600 hover:underline">Algo Check</a>
+            <a href="/dev/schools" class="text-sm text-indigo-600 hover:underline">Manage Schools</a>
         </div>
 
         <!-- Admin View -->
@@ -34,7 +35,7 @@
                 <span class="w-2 h-2 rounded-full bg-green-500"></span>
                 <h2 class="font-semibold text-gray-800">Student View</h2>
             </div>
-            <a href="/student" class="text-sm text-indigo-600 hover:underline">Question Loop</a>
+            <a href="/student" class="text-sm text-indigo-600 hover:underline">Pick a Class</a>
         </div>
     </div>
 

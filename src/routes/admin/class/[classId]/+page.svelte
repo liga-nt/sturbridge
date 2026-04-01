@@ -1,8 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
-    import { loadClass, loadAllStandardStates, loadAllStandards } from '$lib/utils/studentStore.js';
-    import { courseLabel } from '$lib/utils/courses.js';
+    import { loadClass, loadAllStandardStates, loadAllStandards, loadCourse } from '$lib/utils/studentStore.js';
     import { doc, getDoc, getDocs, collection } from 'firebase/firestore';
     import { db } from '$lib/firebase/client';
 
@@ -10,6 +9,7 @@
     let error = null;
 
     let classDoc = null;
+    let course = null;
     let students = [];
     let standards = [];
     let progressMap = {};
@@ -20,6 +20,10 @@
         try {
             classDoc = await loadClass(classId);
             if (!classDoc) { error = 'Class not found.'; loading = false; return; }
+
+            if (classDoc.courseId) {
+                course = await loadCourse(classDoc.courseId);
+            }
 
             const allStd = await loadAllStandards();
             standards = (classDoc.standardProgression || []).map((id) => ({
@@ -86,9 +90,9 @@
     {:else}
         <div class="flex items-baseline gap-4 mb-4">
             <h1 class="text-xl font-semibold text-gray-800">{classDoc?.name || classId}</h1>
-            {#if classDoc?.grade && classDoc?.subject}
+            {#if course}
                 <span class="text-xs font-medium text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
-                    {courseLabel(classDoc.grade, classDoc.subject)}
+                    {course.label}
                 </span>
             {/if}
             <span class="text-sm text-gray-500">

@@ -25,8 +25,9 @@
                 <a href="/dev" class="font-bold text-lg tracking-wide hover:text-indigo-200">Dev</a>
                 <a href="/dev/preview" class="text-indigo-200 hover:text-white text-sm">Preview</a>
                 <a href="/dev/algo-check" class="text-indigo-200 hover:text-white text-sm">Algo Check</a>
+                <a href="/dev/schools" class="text-indigo-200 hover:text-white text-sm">Schools</a>
+                <a href="/dev/standards" class="text-indigo-200 hover:text-white text-sm">Standards</a>
                 <span class="mx-2 text-indigo-700">|</span>
-                <a href="/admin" class="text-indigo-300 hover:text-white text-sm">Admin</a>
                 <a href="/student" class="text-indigo-300 hover:text-white text-sm">Student</a>
             </div>
         </nav>

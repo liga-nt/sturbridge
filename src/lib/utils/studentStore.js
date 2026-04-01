@@ -68,12 +68,41 @@ export async function loadTips(itemId) {
 }
 
 // ---------------------------------------------------------------------------
+// Leaderboard  (keyed by classId_standardId)
+// ---------------------------------------------------------------------------
+
+export function subscribeLeaderboard(classId, standardId, callback) {
+    return onSnapshot(
+        doc(db, 'leaderboards', `${classId}_${standardId}`),
+        snap => callback(snap.exists() ? (snap.data().entries ?? []) : [])
+    );
+}
+
+export async function updateLeaderboard(classId, standardId, uid, name, bestTime) {
+    const ref = doc(db, 'leaderboards', `${classId}_${standardId}`);
+    const snap = await getDoc(ref);
+    let entries = snap.exists() ? (snap.data().entries ?? []) : [];
+    entries = entries.filter(e => e.uid !== uid);
+    entries.push({ uid, name, bestTime });
+    entries.sort((a, b) => a.bestTime - b.bestTime);
+    await setDoc(ref, { entries: entries.slice(0, 5) });
+}
+
+// ---------------------------------------------------------------------------
 // Class doc
 // ---------------------------------------------------------------------------
 
 export async function loadClass(classId) {
     const snap = await getDoc(doc(db, 'classes', classId));
     return snap.exists() ? snap.data() : null;
+}
+
+/**
+ * Load all class IDs. Used by dev role to access any class without being enrolled.
+ */
+export async function loadAllClassIds() {
+    const snap = await getDocs(collection(db, 'classes'));
+    return snap.docs.map(d => d.id);
 }
 
 // ---------------------------------------------------------------------------
@@ -114,6 +143,28 @@ export async function writeResponse(classId, uid, responseData) {
 }
 
 // ---------------------------------------------------------------------------
+// Courses collection
+// ---------------------------------------------------------------------------
+
+/**
+ * Load all courses as a map { [courseId]: { id, label, grade, subject, ... } }
+ */
+export async function loadCourses() {
+    const snap = await getDocs(collection(db, 'courses'));
+    const result = {};
+    snap.forEach((d) => { result[d.id] = { id: d.id, ...d.data() }; });
+    return result;
+}
+
+/**
+ * Load a single course doc. Returns null if not found.
+ */
+export async function loadCourse(courseId) {
+    const snap = await getDoc(doc(db, 'courses', courseId));
+    return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+}
+
+// ---------------------------------------------------------------------------
 // Standard info (from standards collection)
 // ---------------------------------------------------------------------------
 
@@ -133,12 +184,12 @@ export async function loadAllStandards() {
 }
 
 /**
- * Load standards for a specific grade+subject, sorted by `order`.
+ * Load standards for a specific course, sorted by `order`.
  * Returns an ordered array of { id, shortName, description, order, ... }
  */
-export async function loadStandardsByGradeSubject(grade, subject) {
+export async function loadStandardsByCourse(courseId) {
     const all = await loadAllStandards();
     return Object.values(all)
-        .filter((s) => String(s.grade) === String(grade) && s.subject === subject)
+        .filter((s) => s.courseId === courseId)
         .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 }

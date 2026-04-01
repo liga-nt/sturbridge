@@ -43,6 +43,11 @@
   $: value = partAnswers;
   // Per-part inline-choice selections: { partLabel: { dropdownId: selectedValue } }
   let inlineSelections = {};
+  // table_fill: { partLabel: string[] } — one entry per fillable row
+  let tableFillValues = {};
+  // ordering: { partLabel: string[] } — slots in order
+  let orderingSlots = {};
+  let orderingDragging = null; // { value, from: 'bank'|index }
 
   // ── Per-part interactive state (only active when question prop is provided) ──
   let partStates = {};
@@ -187,7 +192,6 @@
       <!-- Per-part answer widget -->
       {#if part.answer_type === 'table_fill'}
         <!-- Table with fill-in boxes in the second column -->
-        {@const rowAnswers = parseTableAnswers(part.correct_answer)}
         <div class="stimulus-wrap">
           <div class="table-fill-wrap">
             <table class="table-fill">
@@ -207,7 +211,12 @@
                     {#each row as cell, ci}
                       {#if cell === ''}
                         <td class="fill-cell">
-                          <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false" />
+                          <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false"
+                            on:input={(e) => {
+                              if (!tableFillValues[part.label]) tableFillValues[part.label] = [];
+                              tableFillValues[part.label][ri] = e.target.value;
+                              partAnswers = { ...partAnswers, [part.label]: tableFillValues[part.label].join(',') };
+                            }} />
                         </td>
                       {:else}
                         <td>{@html cell}</td>
@@ -220,17 +229,56 @@
           </div>
         </div>
       {:else if part.answer_type === 'ordering'}
-        <!-- Ordering: tiles on top, positional slots labeled least→greatest -->
+        <!-- Ordering: drag tiles into least→greatest slots -->
+        {@const tileCount = (part.tiles ?? []).length}
+        {@const bankTiles = (part.tiles ?? []).filter(t => !(orderingSlots[part.label] ?? []).includes(t))}
         <div class="ordering-wrap">
-          <div class="tile-bank">
-            {#each (part.tiles ?? []) as tile}
-              <div class="tile">{@html renderMath(tile)}</div>
+          <!-- svelte-ignore a11y-no-static-element-interactions -->
+          <div class="tile-bank"
+            on:dragover|preventDefault
+            on:drop={(e) => {
+              const val = e.dataTransfer.getData('text');
+              if (!val) return;
+              const slots = [...(orderingSlots[part.label] ?? Array(tileCount).fill(''))];
+              const si = slots.indexOf(val);
+              if (si >= 0) slots[si] = '';
+              orderingSlots = { ...orderingSlots, [part.label]: slots };
+              partAnswers = { ...partAnswers, [part.label]: slots.filter(Boolean).join(', ') };
+            }}
+          >
+            {#each bankTiles as tile}
+              <!-- svelte-ignore a11y-no-static-element-interactions -->
+              <div class="tile" draggable="true"
+                on:dragstart={(e) => e.dataTransfer.setData('text', tile)}
+              >{@html renderMath(tile)}</div>
             {/each}
           </div>
           <div class="ordering-row">
             <span class="ordering-label">least</span>
-            {#each (part.correct_order ?? []) as slot}
-              <div class="ordering-slot">{@html renderMath(slot)}</div>
+            {#each Array(tileCount) as _, si}
+              <!-- svelte-ignore a11y-no-static-element-interactions -->
+              <div class="ordering-slot"
+                on:dragover|preventDefault
+                on:drop={(e) => {
+                  const val = e.dataTransfer.getData('text');
+                  if (!val) return;
+                  const slots = [...(orderingSlots[part.label] ?? Array(tileCount).fill(''))];
+                  // Remove from any existing slot
+                  const prev = slots.indexOf(val);
+                  if (prev >= 0) slots[prev] = '';
+                  // If slot occupied, move occupant back to bank (clear it)
+                  slots[si] = val;
+                  orderingSlots = { ...orderingSlots, [part.label]: slots };
+                  partAnswers = { ...partAnswers, [part.label]: slots.filter(Boolean).join(', ') };
+                }}
+              >
+                {#if (orderingSlots[part.label] ?? [])[si]}
+                  <!-- svelte-ignore a11y-no-static-element-interactions -->
+                  <span draggable="true"
+                    on:dragstart={(e) => e.dataTransfer.setData('text', (orderingSlots[part.label] ?? [])[si])}
+                  >{@html renderMath((orderingSlots[part.label] ?? [])[si])}</span>
+                {/if}
+              </div>
             {/each}
             <span class="ordering-label">greatest</span>
           </div>
@@ -310,6 +358,58 @@
           stimulus_params={part.stimulus_params ?? {}}
           bind:value={partAnswers[part.label]}
         />
+      {:else if part.answer_type === 'number_with_work'}
+        <p class="answer-instruction">Enter your answer in the box.</p>
+        <p class="fill-in-row">
+          <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false"
+            on:input={(e) => {
+              const work = (partAnswers[part.label] ?? '').split('|')[1] ?? '';
+              partAnswers = { ...partAnswers, [part.label]: e.target.value + '|' + work };
+            }} />
+          {#if part.answer_unit}
+            <span class="fill-in-suffix">{part.answer_unit}</span>
+          {/if}
+        </p>
+        <p class="answer-instruction">Show your work or explain how you got your answer.</p>
+        <ShortAnswerInput bind:value={partAnswers[part.label]} />
+      {:else if part.answer_type === 'yes_no_explanation'}
+        <p class="answer-instruction">Enter your answer.</p>
+        <div class="yes-no-row">
+          <label class="yes-no-option">
+            <input type="radio" name="yn-{part.label}" value="yes"
+              checked={partAnswers[part.label]?.startsWith('yes')}
+              on:change={() => partAnswers[part.label] = 'yes|' + (partAnswers[part.label]?.split('|')[1] ?? '')} />
+            Yes
+          </label>
+          <label class="yes-no-option">
+            <input type="radio" name="yn-{part.label}" value="no"
+              checked={partAnswers[part.label]?.startsWith('no')}
+              on:change={() => partAnswers[part.label] = 'no|' + (partAnswers[part.label]?.split('|')[1] ?? '')} />
+            No
+          </label>
+        </div>
+        <p class="answer-instruction">Explain your reasoning in the space provided.</p>
+        <ShortAnswerInput bind:value={partAnswers[part.label]} />
+      {:else if part.answer_type === 'dimension_pair'}
+        <p class="answer-instruction">Enter the length and width.</p>
+        <div class="dimension-row">
+          <label class="dimension-label">Length:
+            <input class="fill-in-box" type="text" aria-label="length" autocomplete="off" spellcheck="false"
+              on:input={(e) => {
+                const parts2 = (partAnswers[part.label] ?? '').split('|');
+                partAnswers[part.label] = e.target.value + '|' + (parts2[1] ?? '') + '|' + (parts2[2] ?? '');
+              }} /> feet
+          </label>
+          <label class="dimension-label">Width:
+            <input class="fill-in-box" type="text" aria-label="width" autocomplete="off" spellcheck="false"
+              on:input={(e) => {
+                const parts2 = (partAnswers[part.label] ?? '').split('|');
+                partAnswers[part.label] = (parts2[0] ?? '') + '|' + e.target.value + '|' + (parts2[2] ?? '');
+              }} /> feet
+          </label>
+        </div>
+        <p class="answer-instruction">Show your work or explain how you know your answer is correct.</p>
+        <ShortAnswerInput bind:value={partAnswers[part.label]} />
       {:else if part.answer_type === 'short_answer' || part.answer_type === 'constructed_response'}
         {#if part.answer_type === 'constructed_response'}
           {#if part.answer_instruction}
@@ -435,6 +535,58 @@
                   </div>
                 {/each}
               </div>
+            {:else if part.answer_type === 'number_with_work'}
+              <p class="answer-instruction">Enter your answer in the box.</p>
+              <p class="fill-in-row">
+                <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false"
+                  on:input={(e) => {
+                    const work = (partAnswers[part.label] ?? '').split('|')[1] ?? '';
+                    partAnswers = { ...partAnswers, [part.label]: e.target.value + '|' + work };
+                  }} />
+                {#if part.answer_unit}
+                  <span class="fill-in-suffix">{part.answer_unit}</span>
+                {/if}
+              </p>
+              <p class="answer-instruction">Show your work or explain how you got your answer.</p>
+              <ShortAnswerInput bind:value={partAnswers[part.label]} />
+            {:else if part.answer_type === 'yes_no_explanation'}
+              <p class="answer-instruction">Enter your answer.</p>
+              <div class="yes-no-row">
+                <label class="yes-no-option">
+                  <input type="radio" name="yn-{part.label}" value="yes"
+                    checked={partAnswers[part.label]?.startsWith('yes')}
+                    on:change={() => partAnswers[part.label] = 'yes|' + (partAnswers[part.label]?.split('|')[1] ?? '')} />
+                  Yes
+                </label>
+                <label class="yes-no-option">
+                  <input type="radio" name="yn-{part.label}" value="no"
+                    checked={partAnswers[part.label]?.startsWith('no')}
+                    on:change={() => partAnswers[part.label] = 'no|' + (partAnswers[part.label]?.split('|')[1] ?? '')} />
+                  No
+                </label>
+              </div>
+              <p class="answer-instruction">Explain your reasoning in the space provided.</p>
+              <ShortAnswerInput bind:value={partAnswers[part.label]} />
+            {:else if part.answer_type === 'dimension_pair'}
+              <p class="answer-instruction">Enter the length and width.</p>
+              <div class="dimension-row">
+                <label class="dimension-label">Length:
+                  <input class="fill-in-box" type="text" aria-label="length" autocomplete="off" spellcheck="false"
+                    on:input={(e) => {
+                      const parts2 = (partAnswers[part.label] ?? '').split('|');
+                      partAnswers[part.label] = e.target.value + '|' + (parts2[1] ?? '') + '|' + (parts2[2] ?? '');
+                    }} /> feet
+                </label>
+                <label class="dimension-label">Width:
+                  <input class="fill-in-box" type="text" aria-label="width" autocomplete="off" spellcheck="false"
+                    on:input={(e) => {
+                      const parts2 = (partAnswers[part.label] ?? '').split('|');
+                      partAnswers[part.label] = (parts2[0] ?? '') + '|' + e.target.value + '|' + (parts2[2] ?? '');
+                    }} /> feet
+                </label>
+              </div>
+              <p class="answer-instruction">Show your work or explain how you know your answer is correct.</p>
+              <ShortAnswerInput bind:value={partAnswers[part.label]} />
             {:else if part.answer_type === 'constructed_response'}
               <p class="answer-instruction">Enter your answer and your work or explanation in the space provided.</p>
               <ShortAnswerInput bind:value={partAnswers[part.label]} />
@@ -614,6 +766,33 @@
   .fill-in-box:focus {
     border-color: #3a7fc1;
     box-shadow: 0 0 0 1px #3a7fc1;
+  }
+
+  .yes-no-row {
+    display: flex;
+    gap: 24px;
+    margin: 8px 0 12px;
+  }
+  .yes-no-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+  }
+  .dimension-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 8px 0 12px;
+  }
+  .dimension-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: #333;
   }
 
   .fill-in-suffix {

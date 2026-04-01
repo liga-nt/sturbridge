@@ -5,15 +5,19 @@
     import {
         loadClass,
         loadAllStandardStates,
-        loadAllStandards
+        loadAllStandards,
+        loadCourse
     } from '$lib/utils/studentStore.js';
-    import { doc, getDoc, getDocs, collection } from 'firebase/firestore';
+    import { doc, getDoc, getDocs, collection, setDoc } from 'firebase/firestore';
     import { db } from '$lib/firebase/client';
 
     let loading = true;
     let error = null;
 
     let classDoc = null;
+    let classId  = null;
+    let course   = null;
+    let allStdDocs = {};     // { [id]: full standard doc }
     let students = [];       // [{ uid, displayName }]
     let standards = [];      // ordered array of { id, shortName, description }
     let progressMap = {};    // { uid: { [standardId]: standardState } }
@@ -22,11 +26,18 @@
     let popoverCell = null;  // { uid, standardId, state }
     let popoverStd = null;   // { id, shortName, description }
 
+    // Pace settings (fundamentals only)
+    let showSettings = false;
+    let settingsDrafts = {};  // { [standardId]: { timeLimit, problemsPerPage } }
+    let settingsSaving = false;
+    let settingsSaved  = false;
+    let settingsError  = null;
+
     onMount(async () => {
         try {
             // Find teacher's class — URL param takes priority
             const urlClassId = $page.url.searchParams.get('classId');
-            let classId = urlClassId;
+            classId = urlClassId;
 
             if (!classId) {
                 const uid = $session.user?.uid;
@@ -46,15 +57,28 @@
             classDoc = await loadClass(classId);
             if (!classDoc) { error = 'Class not found.'; loading = false; return; }
 
+            if (classDoc.courseId) course = await loadCourse(classDoc.courseId);
+
             // Load all standards info
-            const allStd = await loadAllStandards();
+            allStdDocs = await loadAllStandards();
 
             // Build ordered standards array from class progression
             standards = (classDoc.standardProgression || []).map((id) => ({
                 id,
-                shortName: allStd[id]?.shortName || id,
-                description: allStd[id]?.description || ''
+                shortName: allStdDocs[id]?.shortName || allStdDocs[id]?.label || id,
+                description: allStdDocs[id]?.description || ''
             }));
+
+            // Build pace settings drafts (fundamentals only)
+            if (course?.contentKey === 'fundamentals-math') {
+                for (const id of (classDoc.standardProgression || [])) {
+                    const override = classDoc.standardSettings?.[id] ?? {};
+                    settingsDrafts[id] = {
+                        timeLimit:       override.timeLimit      ?? allStdDocs[id]?.timeLimit      ?? 60,
+                        problemsPerPage: override.problemsPerPage ?? allStdDocs[id]?.problemsPerPage ?? 8
+                    };
+                }
+            }
 
             // Load student docs
             const studentIds = classDoc.studentIds || [];
@@ -101,6 +125,29 @@
     function closePopover() {
         popoverCell = null;
         popoverStd = null;
+    }
+
+    async function saveSettings() {
+        settingsSaving = true;
+        settingsSaved  = false;
+        settingsError  = null;
+        try {
+            const standardSettings = {};
+            for (const [id, vals] of Object.entries(settingsDrafts)) {
+                standardSettings[id] = {
+                    timeLimit:       Number(vals.timeLimit),
+                    problemsPerPage: Number(vals.problemsPerPage)
+                };
+            }
+            await setDoc(doc(db, 'classes', classId), { standardSettings }, { merge: true });
+            classDoc = { ...classDoc, standardSettings };
+            settingsSaved = true;
+            setTimeout(() => settingsSaved = false, 2500);
+        } catch (e) {
+            settingsError = e.message;
+        } finally {
+            settingsSaving = false;
+        }
     }
 </script>
 
@@ -224,5 +271,74 @@
                 </div>
             </div>
         {/if}
+
+        <!-- Pace Settings (fundamentals-math only) -->
+        {#if course?.contentKey === 'fundamentals-math'}
+            <div class="mt-10 border-t border-gray-200 pt-6">
+                <button
+                    on:click={() => showSettings = !showSettings}
+                    class="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-800"
+                >
+                    <span class="text-gray-400">{showSettings ? '▾' : '▸'}</span>
+                    Pace Settings
+                </button>
+
+                {#if showSettings}
+                    <p class="text-xs text-gray-400 mt-2 mb-3">
+                        Override the default timer and problem count for each standard in this class.
+                    </p>
+                    <div class="bg-white rounded-lg shadow overflow-hidden max-w-2xl">
+                        <table class="w-full text-sm">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="text-left px-4 py-2 font-medium text-gray-600">Standard</th>
+                                    <th class="text-center px-4 py-2 font-medium text-gray-600 w-32">Time (s)</th>
+                                    <th class="text-center px-4 py-2 font-medium text-gray-600 w-36">Problems</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                {#each standards as std}
+                                    {#if settingsDrafts[std.id]}
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="px-4 py-2 text-gray-700">{std.shortName}</td>
+                                            <td class="px-4 py-2 text-center">
+                                                <input
+                                                    type="number" min="10" max="600"
+                                                    bind:value={settingsDrafts[std.id].timeLimit}
+                                                    class="w-20 text-center border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-indigo-400"
+                                                />
+                                            </td>
+                                            <td class="px-4 py-2 text-center">
+                                                <input
+                                                    type="number" min="1" max="50"
+                                                    bind:value={settingsDrafts[std.id].problemsPerPage}
+                                                    class="w-20 text-center border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-indigo-400"
+                                                />
+                                            </td>
+                                        </tr>
+                                    {/if}
+                                {/each}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 flex items-center gap-3">
+                        <button
+                            on:click={saveSettings}
+                            disabled={settingsSaving}
+                            class="px-4 py-1.5 text-sm font-medium text-white bg-indigo-600 rounded hover:bg-indigo-700 disabled:opacity-50 transition-colors"
+                        >
+                            {settingsSaving ? 'Saving…' : 'Save'}
+                        </button>
+                        {#if settingsSaved}
+                            <span class="text-sm text-green-600">Saved.</span>
+                        {/if}
+                        {#if settingsError}
+                            <span class="text-sm text-red-500">{settingsError}</span>
+                        {/if}
+                    </div>
+                {/if}
+            </div>
+        {/if}
+
     {/if}
 </div>

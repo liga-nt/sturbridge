@@ -21,8 +21,10 @@
   const STROKE_WIDTH = 0.5;
   const OUTER_STROKE_WIDTH = 1.5;
 
+  // Shade column-by-column (left to right) to match TestNav convention:
+  // each full column = 1 tenth, each cell = 1 hundredth.
   function isShaded(row, col, count) {
-    const idx = row * COLS + col;
+    const idx = col * ROWS + row;
     return idx < count;
   }
 </script>

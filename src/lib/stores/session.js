@@ -4,5 +4,6 @@ export const session = writable({
     user: null,
     loading: true,
     loggedIn: false,
-    role: null
+    role: null,
+    schoolId: null
 });

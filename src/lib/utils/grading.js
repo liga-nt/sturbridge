@@ -67,12 +67,38 @@ function toDecimal(str) {
     if (d === 0) return null;
     return Math.round((n / d) * 100) / 100;
   }
-  // Decimal or whole: "3.33", "3"
+  // Decimal or whole: "3.33", "3", ".8" (leading decimal OK)
   const num = parseFloat(s);
-  if (!isNaN(num) && /^-?\d+(\.\d+)?$/.test(s)) {
+  if (!isNaN(num) && /^-?(\d+\.?\d*|\.\d+)$/.test(s)) {
     return Math.round(num * 100) / 100;
   }
   return null;
+}
+
+// Grade a comparison expression like "0.29 < 0.8".
+// Accepts either order (0.8 > 0.29) and leading-decimal form (.8 = 0.8).
+// Values must match the expected pair exactly; only the operator direction can vary.
+function gradeComparison(student, expected) {
+  function parseComp(str) {
+    const m = String(str).trim().match(/^([0-9.]+)\s*([<>=])\s*([0-9.]+)$/);
+    if (!m) return null;
+    const left = toDecimal(m[1]);
+    const right = toDecimal(m[3]);
+    if (left === null || right === null) return null;
+    return { left, op: m[2], right };
+  }
+  const exp = parseComp(expected);
+  const stu = parseComp(student);
+  if (!exp || !stu) return false;
+  // Values must match (either order)
+  const sameOrder   = exp.left === stu.left  && exp.right === stu.right;
+  const reverseOrder = exp.left === stu.right && exp.right === stu.left;
+  if (!sameOrder && !reverseOrder) return false;
+  // Student's comparison must be mathematically true
+  const { left: sl, op, right: sr } = stu;
+  if (op === '<') return sl < sr;
+  if (op === '>') return sl > sr;
+  return sl === sr;
 }
 
 // Keep parseFractionValue for the gradePart short_answer trigger check
@@ -121,6 +147,10 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
       if (cStr.includes(',')) {
         return { correct: gradeOrderedList(s, cStr) };
       }
+      // Comparison expression: "0.29 < 0.8", "1/3 > 1/4", etc.
+      if (/^[0-9.]+\s*[<>=]\s*[0-9.]+$/.test(cStr.trim())) {
+        return { correct: gradeComparison(String(s), cStr) };
+      }
       if (parseFractionValue(cStr)) {
         return { correct: fractionsEqual(String(s), cStr) };
       }
@@ -140,15 +170,36 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
         const sNums = extractNums(String(s));
         return { correct: cNums.length > 0 && cNums.length === sNums.length && cNums.every((n, i) => n === sNums[i]) };
       }
-      // Plain integer (possibly with commas): strip commas and compare
+      // Plain integer (possibly with commas): accept if student answer starts with that number
       const cDigits = cStr.replace(/,/g, '');
       if (/^\d+$/.test(cDigits)) {
-        return { correct: String(s).replace(/,/g, '').trim() === cDigits };
+        return { correct: String(s).replace(/,/g, '').trim().split(/\D/)[0] === cDigits };
+      }
+      // yes_no_explanation: correct_answer is 'yes' or 'no'; student value is 'yes|explanation'
+      if (/^(yes|no)$/.test(cStr.toLowerCase())) {
+        const yn = String(s).split('|')[0].trim().toLowerCase();
+        return { correct: yn === cStr.toLowerCase() };
+      }
+      // dimension_pair: correct_answer is 'halfPerim=N,maxArea=M'; student value is 'length|width|work'
+      if (/^halfPerim=\d+,maxArea=\d+$/.test(cStr)) {
+        const hp = parseInt(cStr.match(/halfPerim=(\d+)/)[1]);
+        const maxA = parseInt(cStr.match(/maxArea=(\d+)/)[1]);
+        const [lStr, wStr] = String(s).split('|');
+        const l = parseInt(lStr ?? '');
+        const w = parseInt(wStr ?? '');
+        if (!l || !w || l <= 0 || w <= 0) return { correct: false };
+        return { correct: l + w === hp && l * w < maxA };
       }
       if (parseFractionValue(cStr)) {
         return { correct: fractionsEqual(String(s), cStr) };
       }
       return { correct: fuzzyMatch(String(s), cStr) };
+    }
+
+    case 'number_with_work': {
+      // Student value is "number|work". Grade only the number part.
+      const numStr = String(s).split('|')[0].trim();
+      return gradePart(numStr, c, 'short_answer');
     }
 
     case 'number_line_plot': {
@@ -198,13 +249,22 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
     }
 
     case 'fraction_model': {
-      // Student value: "shaded/den" per model, comma-joined for multi-model.
-      // Correct answer: "[n/d]" notation (brackets stripped before comparing).
-      // Each model is graded as a fraction equality check.
+      // Student value: "shaded/den,shaded/den,..." (one entry per model, comma-joined).
+      // Correct answer: "n/d" or "[n/d]" — the TOTAL fraction to be shown.
+      // Grade by summing all student model fractions and comparing the total to correct.
       const sModels = String(s).split(',').map(x => x.trim()).filter(Boolean);
-      const cModels = String(c).replace(/\[|\]/g, '').split(',').map(x => x.trim()).filter(Boolean);
-      if (sModels.length === 0 || sModels.length !== cModels.length) return { correct: false };
-      return { correct: sModels.every((sv, i) => fractionsEqual(sv, cModels[i])) };
+      if (sModels.length === 0) return { correct: false };
+      let sumNum = 0, sumDen = 1;
+      for (const m of sModels) {
+        const parts = m.split('/');
+        const mn = parseInt(parts[0]);
+        const md = parseInt(parts[1]);
+        if (isNaN(mn) || isNaN(md) || md === 0) return { correct: false };
+        sumNum = sumNum * md + mn * sumDen;
+        sumDen = sumDen * md;
+      }
+      const cStr = String(c).replace(/\[|\]/g, '');
+      return { correct: fractionsEqual(`${sumNum}/${sumDen}`, cStr) };
     }
 
     case 'category_sort': {
@@ -504,9 +564,9 @@ export const graders = {
   'MA903574399': multi('MA903574399', [
     { label: 'A', correctAnswer: '32', answerType: 'short_answer' },
     { label: 'B', correctAnswer: '7', answerType: 'constructed_response' },
-    { label: 'C', correctAnswer: 'yes equal', answerType: 'constructed_response' },
-    { label: 'D', correctAnswer: '24', answerType: 'constructed_response' },
-  ], 'A: area of garden = 32 sq ft. B: width of patio = 7 ft. C: yes, perimeters are equal (both 24 ft). D: perimeter 24, area less than 32 (e.g. length/width summing to 12).'),
+    { label: 'C', correctAnswer: 'yes', answerType: 'constructed_response' },
+    { label: 'D', correctAnswer: 'halfPerim=12,maxArea=32', answerType: 'constructed_response' },
+  ], 'A: area=32 sq ft. B: patio width=7 ft (startsWith). C: yes/no radio. D: any l+w=12 with l*w<32.'),
 
   'MA800633803': single('MA800633803', '8/5', 'short_answer',
     'Enter 8/5 or 1 3/5 liters. Fuzzy match.'),
@@ -529,23 +589,20 @@ export const graders = {
     'Enter 45 (degrees). Fuzzy match.'),
 
   'MA311579A': multi('MA311579A', [
-    { label: 'A', correctAnswer: '8', answerType: 'short_answer' },
-    { label: 'B', correctAnswer: '6', answerType: 'constructed_response' },
-    { label: 'C', correctAnswer: '18', answerType: 'constructed_response' },
-    { label: 'D', correctAnswer: '32', answerType: 'constructed_response' },
-  ], 'A: 8 triangles in Step 4. B: 6 squares in Step 6. C: 18 triangles in Step 9. D: 32 squares when 64 triangles.'),
+    { label: 'A', correctAnswer: '4', answerType: 'number_with_work' },
+    { label: 'B', correctAnswer: '12', answerType: 'number_with_work' },
+    { label: 'C', correctAnswer: '9', answerType: 'number_with_work' },
+    { label: 'D', correctAnswer: '16', answerType: 'number_with_work' },
+  ], 'New pattern: 1 triangle + 2 squares per step. A: 4 triangles (Step 4). B: 12 squares (Step 6, 2×6). C: 9 triangles (Step 9). D: 16 squares when 8 triangles (2×8).'),
 
-  'MA900842465': single('MA900842465', '143,000|140,000|100,000', 'inline_choice',
-    'Rounding 142,839: nearest thousand=143,000, ten-thousand=140,000, hundred-thousand=100,000. Enter as "143,000|140,000|100,000".'),
+  // MA900842465 (Q16 rounding): uses generic inline_choice grading with question's correct_answer
 
   'MA903134963': single('MA903134963', 'C,F', 'multiple_select',
     'Select exactly two equivalent fractions (C=4/10, F=40/100). Both required.'),
 
-  'MA903757124': single('MA903757124', 'A,C,D', 'multiple_select',
-    'Select exactly three letters (A, C, D). All required.'),
+  // MA903757124 (Q18 parallel/perp shapes): uses generic multiple_select grading with question's correct_answer
 
-  'MA286765': single('MA286765', 'C', 'multiple_choice',
-    'Select the letter of the correct answer. Exact match.'),
+  // MA286765 (Q19 decimal fraction): uses generic multiple_choice grading with question's correct_answer
 
   'MA704650142': single('MA704650142', '4/3', 'fraction_model',
     'Create fraction model showing 4/3 (4 × 1/3). Any non-empty answer accepted.'),

@@ -277,8 +277,9 @@ async function seedClasses(class1StudentIds, class2StudentIds) {
     classId: 'demo-class-001',
     name: 'Room 12, Ms. Chen',
     teacherId: 'demo-teacher-001',
-    grade: '4',
-    subject: 'math',
+    courseId: 'grade4-math',
+    schoolId: 'default',
+    progressionType: 'mastery',
     studentIds: class1StudentIds,
     standardProgression: PROGRESSION
   }, { merge: true });
@@ -287,8 +288,9 @@ async function seedClasses(class1StudentIds, class2StudentIds) {
     classId: 'demo-class-002',
     name: 'Room 14, Mr. Rivera',
     teacherId: 'demo-teacher-002',
-    grade: '4',
-    subject: 'math',
+    courseId: 'grade4-math',
+    schoolId: 'default',
+    progressionType: 'mastery',
     studentIds: class2StudentIds,
     standardProgression: PROGRESSION
   }, { merge: true });

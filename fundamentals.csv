@@ -1,0 +1,258 @@
+Level,Level Description,Topic
+ZI,Pencil Skills,Colouring
+ZI,Pencil Skills,Straight Lines
+ZI,Pencil Skills,Curved Lines
+ZI,Pencil Skills,Shapes and Pictures
+ZI,Pencil Skills,Shapes and Pictures (Stories)
+ZI,Pencil Skills,Back and Forth
+ZI,Pencil Skills,Corners and Curves
+ZII,Pencil Skills (Advanced),Colouring
+ZII,Pencil Skills (Advanced),Straight Lines
+ZII,Pencil Skills (Advanced),Curved Lines
+ZII,Pencil Skills (Advanced),Shapes and Pictures
+ZII,Pencil Skills (Advanced),Shapes and Pictures (Stories)
+ZII,Pencil Skills (Advanced),Back and Forth
+ZII,Pencil Skills (Advanced),Corners and Curves
+6A,Counting,Counting (Up to 5)
+6A,Counting,Counting (Up to 10)
+6A,Counting,Number Reading Exercises (Up to 10)
+6A,Counting,Number of Dots (Up to 10)
+5A,Reading Numbers,Number Reading Exercises (Up to 30)
+5A,Reading Numbers,Sequence of Numbers (Up to 30)
+5A,Reading Numbers,Sequence of Numbers (Up to 40)
+5A,Reading Numbers,Sequence of Numbers (Up to 50)
+5A,Reading Numbers,Large Numbers
+4A,Writing Numbers,Number Tracing Exercises
+4A,Writing Numbers,Number Writing Exercises (Up to 10)
+4A,Writing Numbers,Number Writing Exercises (Up to 20)
+4A,Writing Numbers,Number Writing Exercises (Up to 30)
+4A,Writing Numbers,Numbers (Up to 50)
+3A,Adding 1,Numbers (Up to 100)
+3A,Adding 1,Numbers (Up to 120)
+3A,Adding 1,Adding 1
+3A,Adding 1,Adding 2
+3A,Adding 1,Adding 3
+3A,Adding 1,Adding up to 3
+2A,Adding up to 10,Review (up to 3A)
+2A,Adding up to 10,Adding 4
+2A,Adding up to 10,Adding 5
+2A,Adding up to 10,Adding up to 5
+2A,Adding up to 10,Adding 6
+2A,Adding up to 10,Adding 7
+2A,Adding up to 10,Adding up to 7
+2A,Adding up to 10,Adding 8
+2A,Adding up to 10,Adding 9
+2A,Adding up to 10,Adding 9 and 10
+2A,Adding up to 10,Adding up to 10
+A,Addition and Subtraction,Addition (Review up to 2A)
+A,Addition and Subtraction,Addition (Up to sum of 12)
+A,Addition and Subtraction,Addition (Up to sum of 15)
+A,Addition and Subtraction,Addition (Up to sum of 18)
+A,Addition and Subtraction,Addition (Up to sum of 20)
+A,Addition and Subtraction,Addition (Up to sum of 24)
+A,Addition and Subtraction,Addition (Up to sum of 28)
+A,Addition and Subtraction,Addition (Summary)
+A,Addition and Subtraction,Subtraction (Subtracting 1)
+A,Addition and Subtraction,Subtraction (Subtracting 2)
+A,Addition and Subtraction,Subtraction (Subtracting 3)
+A,Addition and Subtraction,Subtraction (Subtracting up to 3)
+A,Addition and Subtraction,Subtraction (Subtracting up to 5)
+A,Addition and Subtraction,Subtraction (From numbers up to 10)
+A,Addition and Subtraction,Subtraction (From numbers up to 11)
+A,Addition and Subtraction,Subtraction (From numbers up to 12)
+A,Addition and Subtraction,Subtraction (From numbers up to 14)
+A,Addition and Subtraction,Subtraction (From numbers up to 16)
+A,Addition and Subtraction,Subtraction (From numbers up to 20)
+A,Addition and Subtraction,Subtraction (Summary)
+B,Multi-Digit Addition and Subtraction,Addition (Review up to A)
+B,Multi-Digit Addition and Subtraction,Addition to 100
+B,Multi-Digit Addition and Subtraction,Addition of 2-Digit Numbers
+B,Multi-Digit Addition and Subtraction,Addition of 3-Digit Numbers
+B,Multi-Digit Addition and Subtraction,Subtraction (Review up to A)
+B,Multi-Digit Addition and Subtraction,Subtraction of 2-Digit Numbers
+B,Multi-Digit Addition and Subtraction,Addition and Subtraction of 2-Digit Numbers
+B,Multi-Digit Addition and Subtraction,Subtraction of 3-Digit Numbers
+C,Multiplication and Division,Review (up to B)
+C,Multiplication and Division,Multiplication (Up to 3)
+C,Multiplication and Division,Multiplication (Up to 5)
+C,Multiplication and Division,Multiplication (Up to 7)
+C,Multiplication and Division,Multiplication (Up to 9)
+C,Multiplication and Division,Multiplication: 2 Digits × 1 Digit
+C,Multiplication and Division,Multiplication: 3 or 4 Digits × 1 Digit
+C,Multiplication and Division,Introduction to Division
+C,Multiplication and Division,Division with Remainders
+C,Multiplication and Division,Division: 2 Digits ÷ 1 Digit
+C,Multiplication and Division,Division: 3 Digits ÷ 1 Digit
+D,Long Division and Fractions,Review (up to C)
+D,Long Division and Fractions,Multiplication: 2 Digits × 2 Digits
+D,Long Division and Fractions,Multiplication: 3 Digits × 2 Digits
+D,Long Division and Fractions,Addition and Subtraction up to 4 digits
+D,Long Division and Fractions,Multiplication and Division
+D,Long Division and Fractions,Division by 2-Digit Numbers
+D,Long Division and Fractions,Division: Quotients of 2-or-More Digits
+D,Long Division and Fractions,Fractions
+D,Long Division and Fractions,Reduction
+E,Fractions,Review (up to D)
+E,Fractions,Addition of Fractions
+E,Fractions,Subtraction of Fractions
+E,Fractions,Addition and Subtraction of Fractions
+E,Fractions,Multiplication of Fractions
+E,Fractions,Division of Fractions
+E,Fractions,Multiplication and Division of Fractions
+E,Fractions,Four Operations of 2 Fractions
+F,Order of Operations,Review (up to E)
+F,Order of Operations,Multiplication and Division of 3 Fractions
+F,Order of Operations,Addition of 3 Fractions
+F,Order of Operations,Addition and Subtraction of 3 Fractions
+F,Order of Operations,Order of Operations (3 Fractions)
+F,Order of Operations,Order of Operations (3-or-More Fractions)
+F,Order of Operations,Fractions and Decimals
+F,Order of Operations,Solving Word Problems
+F,Order of Operations,Decimals
+G,Intro to Algebra,Review (up to F)
+G,Intro to Algebra,Addition and Subtraction of Positive and Negative Numbers
+G,Intro to Algebra,Multiplication of Positive and Negative Numbers
+G,Intro to Algebra,Division of Positive and Negative Numbers
+G,Intro to Algebra,Four Operations with Positive and Negative Numbers
+G,Intro to Algebra,Values of Algebraic Expressions
+G,Intro to Algebra,Simplifying Algebraic Expressions
+G,Intro to Algebra,Linear Equations
+H,Simultaneous Equations,Basics for Level H Mathematics
+H,Simultaneous Equations,Literal Equations
+H,Simultaneous Equations,Simultaneous Equations in Two Variables
+H,Simultaneous Equations,Simultaneous Equations in Three and Four Variables
+H,Simultaneous Equations,Application of Equations
+H,Simultaneous Equations,Inequalities
+H,Simultaneous Equations,Functions and Graphs
+H,Simultaneous Equations,Simplifying Monomials and Polynomials
+I,Factorisation,Basics for Level I Mathematics
+I,Factorisation,Multiplication of Polynomials
+I,Factorisation,Multiplication Using Formulas
+I,Factorisation,Factorisation
+I,Factorisation,Square Roots
+I,Factorisation,Quadratic Equations
+I,Factorisation,Graphs of Quadratic Functions
+I,Factorisation,The Pythagorean Theorem
+J,Advanced Algebra,Expansion of Polynomial Products
+J,Advanced Algebra,Factorisation
+J,Advanced Algebra,Fractional Expressions
+J,Advanced Algebra,Irrational Numbers
+J,Advanced Algebra,Quadratic Equations
+J,Advanced Algebra,Quadratic Equations and Complex Numbers
+J,Advanced Algebra,Discriminant
+J,Advanced Algebra,Root-Coefficient Relationships
+J,Advanced Algebra,Simultaneous Equations
+J,Advanced Algebra,Dividing Polynomials
+J,Advanced Algebra,Remainder Theorem
+J,Advanced Algebra,Factor Theorem
+J,Advanced Algebra,Proof of Identities
+J,Advanced Algebra,Proof of Inequalities
+K,Functions,Review of Linear Functions
+K,Functions,Review of Quadratic Functions
+K,Functions,Quadratic Functions and Graphs
+K,Functions,Determining Equations of Quadratic Functions
+K,Functions,Maxima and Minima of Quadratic Functions
+K,Functions,Quadratic Functions and Equations
+K,Functions,Quadratic Functions and Inequalities
+K,Functions,Quadratic Functions and Solutions of Quadratic Equations
+K,Functions,Higher Degree Functions
+K,Functions,Higher Degree Equations and Inequalities
+K,Functions,Graphs of Fractional Functions
+K,Functions,Fractional Equations and Inequalities
+K,Functions,Graphs of Irrational Functions
+K,Functions,Irrational Equations and Inequalities
+K,Functions,Exponential Functions
+K,Functions,Graphs of Exponential Functions
+K,Functions,Exponential Equations and Inequalities
+L,Intro to Calculus,Logarithmic Functions
+L,Intro to Calculus,Graphs of Logarithmic Functions
+L,Intro to Calculus,Logarithmic Equations and Inequalities
+L,Intro to Calculus,Modulus Functions
+L,Intro to Calculus,Limits and Derivatives
+L,Intro to Calculus,Tangents
+L,Intro to Calculus,Relative Maxima and Minima
+L,Intro to Calculus,Maxima and Minima
+L,Intro to Calculus,Applications to Equations and Inequalities
+L,Intro to Calculus,Indefinite and Definite Integrals
+L,Intro to Calculus,Definite Integrals
+L,Intro to Calculus,Areas
+L,Intro to Calculus,Volumes
+L,Intro to Calculus,Velocity and Distance
+L,Intro to Calculus,Summary of Differentiation and Integration
+M,Trigonometry and Sequences,Trigonometric Ratios
+M,Trigonometry and Sequences,Properties of Trigonometric Functions
+M,Trigonometry and Sequences,Trigonometric Equations
+M,Trigonometry and Sequences,Graphs of Trigonometric Functions
+M,Trigonometry and Sequences,Trigonometric Inequalities
+M,Trigonometry and Sequences,Addition Formulas
+M,Trigonometry and Sequences,Sine and Cosine Rules
+M,Trigonometry and Sequences,Area of Triangles
+M,Trigonometry and Sequences,Arithmetic Sequences
+M,Trigonometry and Sequences,Geometric Sequences
+M,Trigonometry and Sequences,Various Sequences
+M,Trigonometry and Sequences,Recurrence Relations
+M,Trigonometry and Sequences,Mathematical Induction
+M,Trigonometry and Sequences,Infinite Sequences
+M,Trigonometry and Sequences,Infinite Geometric Sequences
+M,Trigonometry and Sequences,Infinite Geometric Series
+M,Trigonometry and Sequences,Infinite Series
+N,Differential Calculus,Limits of Functions
+N,Differential Calculus,Limits of Trigonometric Functions
+N,Differential Calculus,Continuous and Discontinuous Functions
+N,Differential Calculus,Differentiation
+N,Differential Calculus,Differentiation of Trigonometric Functions
+N,Differential Calculus,Differentiation of Logarithmic and Exponential Functions
+N,Differential Calculus,Differentiation of Various Functions and Higher Order Derivatives
+N,Differential Calculus,Various Properties of Derivatives
+N,Differential Calculus,Tangents and Normals
+N,Differential Calculus,Increasing/Decreasing Functions and Relative Extreme Values
+N,Differential Calculus,Concavity of Curves
+N,Differential Calculus,Maxima and Minima
+N,Differential Calculus,Various Applications of Differentiation
+O,Integral Calculus,Indefinite Integrals
+O,Integral Calculus,Integration by Substitution
+O,Integral Calculus,Integration by Parts
+O,Integral Calculus,Definite Integrals
+O,Integral Calculus,Integration by Substitution for Definite Integrals
+O,Integral Calculus,Integration by Parts for Definite Integrals
+O,Integral Calculus,Integration by Quadrature and Proof of Inequalities
+O,Integral Calculus,Areas
+O,Integral Calculus,Volumes
+O,Integral Calculus,Length of a Curve and Velocity and Distance
+O,Integral Calculus,Differential Equations
+O,Integral Calculus,Natural/Social Science and Differential Equations
+O,Integral Calculus,Applications of Calculus
+XS,Coordinate Geometry,Points and Lines
+XS,Coordinate Geometry,Circles
+XS,Coordinate Geometry,Loci
+XS,Coordinate Geometry,Regions
+XM,Matrices and Transformations,Matrix Definitions and Addition/Subtraction
+XM,Matrices and Transformations,Matrix Multiplication
+XM,Matrices and Transformations,Inverse Matrices
+XM,Matrices and Transformations,Equations and Matrices
+XM,Matrices and Transformations,Mapping
+XM,Matrices and Transformations,Transformations
+XV,Vectors,Surface Vectors
+XV,Vectors,Coordinates in Space
+XV,Vectors,Vectors in Space
+XV,Vectors,Basics of Inner Products of Vectors
+XV,Vectors,Inner Products of Vectors
+XV,Vectors,Applications and Summary of Vectors
+XV,Vectors,Vectors and Figures
+XV,Vectors,Equations of Lines and Planes in Space
+XV,Vectors,Equations of Lines, Planes and Spheres
+XP,Probability and Statistics,Introduction to Statistics
+XP,Probability and Statistics,Binomial Distribution
+XP,Probability and Statistics,Probability Density Function
+XP,Probability and Statistics,Standard Normal Distribution
+XP,Probability and Statistics,Sampling
+XP,Probability and Statistics,Hypothesis Testing
+XP,Probability and Statistics,Introduction to Permutations
+XP,Probability and Statistics,Permutations
+XP,Probability and Statistics,Permutations and Combinations
+XP,Probability and Statistics,Combinations
+XP,Probability and Statistics,Binomial Theorem
+XP,Probability and Statistics,Probability
+XP,Probability and Statistics,Conditional Probability
+XP,Probability and Statistics,Independent Trials
+XP,Probability and Statistics,Expected Value

@@ -1,6 +1,8 @@
 <script>
     import { onMount } from 'svelte';
-    import { getDocs, collection, doc, setDoc, serverTimestamp } from 'firebase/firestore';
+    import { session } from '$lib/stores/session';
+    import { page } from '$app/stores';
+    import { getDocs, collection, doc, setDoc, serverTimestamp, query, where } from 'firebase/firestore';
     import { db } from '$lib/firebase/client';
 
     let loading = true;
@@ -18,9 +20,13 @@
     async function loadTeachers() {
         loading = true;
         try {
-            const snap = await getDocs(collection(db, 'users'));
+            const effectiveSchoolId = $page.url.searchParams.get('schoolId') ?? $session.schoolId;
+            const usersRef = ($session.role === 'dev' && !effectiveSchoolId)
+                ? collection(db, 'users')
+                : query(collection(db, 'users'), where('schoolId', '==', effectiveSchoolId));
+            const snap = await getDocs(usersRef);
             teachers = snap.docs
-                .map((d) => d.data())
+                .map((d) => ({ uid: d.id, ...d.data() }))
                 .filter((u) => u.role === 'teacher')
                 .sort((a, b) => (a.displayName || '').localeCompare(b.displayName || ''));
         } catch (e) {
@@ -40,6 +46,7 @@
             await setDoc(doc(db, 'invites', newEmail.trim().toLowerCase()), {
                 role: 'teacher',
                 classIds: [],
+                schoolId: $page.url.searchParams.get('schoolId') ?? $session.schoolId ?? 'default',
                 createdAt: serverTimestamp()
             }, { merge: true });
             addSuccess = `Invite created for ${newEmail}. They will get teacher access on first sign-in.`;

@@ -710,12 +710,21 @@ const ALL_TIPS = {
 // Seed functions
 // ---------------------------------------------------------------------------
 
+// Derive courseId from grade+subject — keeps STANDARDS array clean
+function courseIdFor(grade, subject) {
+  if (grade === '4' && subject === 'math') return 'grade4-math';
+  if (grade === '5' && subject === 'math') return 'grade5-math';
+  if (grade === '7' && subject === 'greek') return 'grade7-greek';
+  return null;
+}
+
 async function seedStandards() {
   console.log('Seeding standards...');
   const batch = db.batch();
   for (const std of STANDARDS) {
     const ref = db.collection('standards').doc(std.id);
-    batch.set(ref, std, { merge: true });
+    const data = { ...std, courseId: courseIdFor(std.grade, std.subject) };
+    batch.set(ref, data, { merge: true });
   }
   await batch.commit();
   console.log(`  ✓ Upserted ${STANDARDS.length} standards`);
