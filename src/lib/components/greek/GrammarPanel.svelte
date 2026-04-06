@@ -90,7 +90,8 @@
   }
 
   .dict-entry {
-    font-size: 16px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    font-size: 18px;
     font-weight: 700;
     color: #111827;
   }

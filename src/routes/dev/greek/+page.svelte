@@ -1,19 +1,18 @@
 <script>
   import { onMount } from 'svelte';
-  import { db } from '$lib/firebase/client';
+  import { db, storage } from '$lib/firebase/client';
+  import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
   import { doc, getDoc, getDocs, collection, query, where, updateDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
   import { getFunctions, httpsCallable } from 'firebase/functions';
   import { getApp } from 'firebase/app';
-  import GreekPassage from '$lib/components/greek/GreekPassage.svelte';
   import VocabPanel from '$lib/components/greek/VocabPanel.svelte';
-  import GrammarPanel from '$lib/components/greek/GrammarPanel.svelte';
 
   const functions = getFunctions(getApp());
   const STORY_BIBLE_ID = 'grade7-greek';
   const COURSE_ID = 'grade7-greek';
 
   // ── Tab state ─────────────────────────────────────────────────────────────────
-  let activeTab = 'story-bible'; // 'story-bible' | 'workshop' | 'preview'
+  let activeTab = 'story-bible'; // 'story-bible' | 'workshop' | 'images'
 
   // ── Story Bible ───────────────────────────────────────────────────────────────
   let storyBible = null;
@@ -119,6 +118,15 @@
   let expandedSentence = null;
   let saveTimer = null;
 
+  // Vocab scan
+  let wordFormsCache = null;
+  let vocabScanList = null;   // { dict_entry, short_def, vocab_tier }[] for VocabPanel
+  let vocabUnrecognized = []; // surface forms not found in word_forms
+  let scanLoading = false;
+
+  // Per-sentence Greek translation suggestions
+  let greekSuggestions = {};  // { [i]: { greek, loading } }
+
   $: nextChapterNum = Math.max(
     storyBible?.chapterCount ?? 0,
     ...allLessons.map(l => l.chapter ?? 0)
@@ -137,6 +145,8 @@
     expandedSentence = null;
     chatHistory = [];
     refineFeedback = '';
+    greekSuggestions = {};
+    vocabScanList = null;
   }
 
   function startNewChapter() {
@@ -187,41 +197,57 @@
   async function refineChapter() {
     if (!refineFeedback.trim() || !selectedLessonId) return;
     const feedback = refineFeedback.trim();
-    const chapterBeforeRefine = selectedLesson.chapter;
-    const lessonIdBeforeRefine = selectedLessonId;
     refineFeedback = '';
     chatHistory = [...chatHistory, { role: 'user', text: feedback }];
     workshopAction = 'generating';
     workshopError = null;
     try {
-      const fn = httpsCallable(functions, 'generateGreekLesson', { timeout: 540000 });
-      const result = await fn({
-        storyBibleId: STORY_BIBLE_ID,
-        grammarLevel,
-        sentenceCount,
-        chapter: selectedLesson.chapter,
-        directorsNote: directorsNote.trim() || null,
-        lessonId: selectedLessonId,
-        refinementFeedback: feedback
-      });
-      await selectLesson(result.data.lessonId);
+      const fn = httpsCallable(functions, 'refineGreekLesson', { timeout: 120000 });
+      const result = await fn({ lessonId: selectedLessonId, feedback });
+      // Update local state directly — no need to reload from Firestore
+      editedSentences = JSON.parse(JSON.stringify(result.data.sentences));
+      selectedLesson = { ...selectedLesson, sentences: result.data.sentences, title: result.data.title };
+      dirtyIndices = new Set();
+      greekSuggestions = {};
+      vocabScanList = null;
       chatHistory = [...chatHistory, { role: 'assistant', text: 'Draft revised.' }];
     } catch (e) {
       console.error('refine error:', e);
-      // Reload in case the revision landed despite the timeout.
-      await loadAllLessons();
-      const reloaded = allLessons.find(l => l.lessonId === lessonIdBeforeRefine);
-      if (reloaded) {
-        await selectLesson(lessonIdBeforeRefine);
-        workshopError = 'Connection timed out, but the revision may have landed — reloaded the lesson.';
-        chatHistory = [...chatHistory, { role: 'assistant', text: 'Connection timed out — reloaded. Check if the revision came through.' }];
-      } else {
-        workshopError = e.message;
-        chatHistory = [...chatHistory, { role: 'assistant', text: `Error: ${e.message}` }];
-      }
+      workshopError = e.message;
+      chatHistory = [...chatHistory, { role: 'assistant', text: `Error: ${e.message}` }];
     } finally {
       workshopAction = 'idle';
     }
+  }
+
+  async function translateSentenceToGreek(i) {
+    const english = editedSentences[i]?.english?.trim();
+    if (!english) return;
+
+    // Build brief context from surrounding sentences
+    const context = editedSentences
+      .filter((_, j) => j !== i && editedSentences[j]?.greek)
+      .slice(Math.max(0, i - 2), i + 2)
+      .map(s => `${s.greek}  (${s.english})`)
+      .join('\n');
+
+    greekSuggestions = { ...greekSuggestions, [i]: { greek: null, loading: true } };
+    try {
+      const fn = httpsCallable(functions, 'translateToGreek', { timeout: 30000 });
+      const result = await fn({ english, context: context || null });
+      greekSuggestions = { ...greekSuggestions, [i]: { greek: result.data.greek, loading: false } };
+    } catch (e) {
+      greekSuggestions = { ...greekSuggestions, [i]: { greek: null, loading: false, error: e.message } };
+    }
+  }
+
+  function acceptGreekSuggestion(i) {
+    const greek = greekSuggestions[i]?.greek;
+    if (!greek) return;
+    editedSentences[i] = { ...editedSentences[i], greek, words: retokenize(greek) };
+    markDirty(i);
+    const { [i]: _, ...rest } = greekSuggestions;
+    greekSuggestions = rest;
   }
 
   async function alignChapter() {
@@ -365,13 +391,65 @@
     return { ...sentence, words };
   }
 
+  async function scanVocab() {
+    scanLoading = true;
+    vocabScanList = null;
+    vocabUnrecognized = [];
+    try {
+      if (!wordFormsCache) {
+        const res = await fetch('/data/Greek/word_forms.json');
+        wordFormsCache = await res.json();
+      }
+      const PUNCT_RE = /[.,;:·?!]/g;
+      const seen = new Set();
+      const list = [];
+      const unrecog = new Set();
+      for (const sent of editedSentences) {
+        for (const token of (sent.greek ?? '').trim().split(/\s+/).filter(Boolean)) {
+          const bare = token.replace(PUNCT_RE, '');
+          if (!bare || seen.has(bare)) continue;
+          seen.add(bare);
+          const entry = wordFormsCache[bare] || wordFormsCache[token];
+          if (entry?.dict_entry) {
+            if (!list.find(w => w.dict_entry === entry.dict_entry)) {
+              list.push({ dict_entry: entry.dict_entry, short_def: entry.short_def ?? '', vocab_tier: entry.vocab_tier ?? null });
+            }
+          } else {
+            unrecog.add(bare);
+          }
+        }
+      }
+      vocabScanList = list;
+      vocabUnrecognized = [...unrecog];
+    } finally {
+      scanLoading = false;
+    }
+  }
+
   function markDirty(index) {
     // Immediately clear audioGenerated so the audio loop always sees the correct state,
     // regardless of whether saveEdits has flushed yet.
     editedSentences[index] = { ...editedSentences[index], audioGenerated: false };
     dirtyIndices = new Set([...dirtyIndices, index]);
+    vocabScanList = null; // stale after any edit
     clearTimeout(saveTimer);
     saveTimer = setTimeout(saveEdits, 1500);
+  }
+
+  /** Rebuild a minimal words array from a Greek string (used after manual Greek edits). */
+  function retokenize(greekText) {
+    return (greekText ?? '').trim().split(/\s+/).filter(Boolean).map((text, idx) => ({
+      sentPos: idx, text,
+      dict_entry: null, short_def: null, morph: null,
+      vocab_tier: null, standard_refs: [], syntax_standard_refs: [],
+      paradigm_key: null, engSentPos: null
+    }));
+  }
+
+  function addSentence() {
+    const next = { num: editedSentences.length, greek: '', english: '', words: [], audioGenerated: false };
+    editedSentences = [...editedSentences, next];
+    markDirty(editedSentences.length - 1);
   }
 
   async function saveEdits() {
@@ -396,19 +474,91 @@
     }
   }
 
-  // ── Preview tab ───────────────────────────────────────────────────────────────
-  let previewLessonId = null;
-  let previewLesson = null;
-  let hoveredWord = null;
-  let previewStandards = {};
-
-  async function loadPreviewLesson(lessonId) {
-    previewLessonId = lessonId;
-    const snap = await getDoc(doc(db, 'lessons', lessonId));
-    previewLesson = snap.exists() ? { lessonId: snap.id, ...snap.data() } : null;
-  }
 
   $: acceptedLessons = allLessons.filter(l => normalizeStatus(l.status) === 'accepted');
+
+  // ── Image generation ──────────────────────────────────────────────────────────
+  let charImages = {}; // { 1: { name, url }, 2: ..., 3: ..., 4: ... }
+  let charImageUploading = {};
+  let imageGenChapterId = null;
+  let imageGenPrompt = '';
+  let generatedImageB64 = null;
+  let imageGenStatus = 'idle';
+  let imageGenError = null;
+
+  async function uploadCharImage(slot, file) {
+    charImageUploading = { ...charImageUploading, [slot]: true };
+    try {
+      const sRef = storageRef(storage, `greek/characters/slot-${slot}`);
+      await uploadBytes(sRef, file);
+      const url = await getDownloadURL(sRef);
+      charImages = { ...charImages, [slot]: { ...(charImages[slot] ?? {}), url } };
+      await updateDoc(doc(db, 'story_bible', STORY_BIBLE_ID), {
+        [`characterImages.${slot}`]: charImages[slot]
+      });
+    } catch (e) {
+      console.error('uploadCharImage error:', e);
+    } finally {
+      charImageUploading = { ...charImageUploading, [slot]: false };
+    }
+  }
+
+  async function updateCharName(slot, name) {
+    charImages = { ...charImages, [slot]: { ...(charImages[slot] ?? {}), name } };
+    await updateDoc(doc(db, 'story_bible', STORY_BIBLE_ID), {
+      [`characterImages.${slot}`]: charImages[slot]
+    });
+  }
+
+  async function removeCharImage(slot) {
+    try {
+      const sRef = storageRef(storage, `greek/characters/slot-${slot}`);
+      await deleteObject(sRef);
+    } catch (e) { /* may not exist yet */ }
+    const updated = { ...charImages };
+    delete updated[slot];
+    charImages = updated;
+    await updateDoc(doc(db, 'story_bible', STORY_BIBLE_ID), {
+      [`characterImages.${slot}`]: null
+    });
+  }
+
+  function selectImageChapter(lessonId) {
+    imageGenChapterId = lessonId;
+    const lesson = allLessons.find(l => l.lessonId === lessonId);
+    if (!lesson) return;
+    const parts = [
+      lesson.title ? `Chapter ${lesson.chapter}: ${lesson.title}` : `Chapter ${lesson.chapter}`
+    ];
+    if (lesson.narrative_summary) parts.push(lesson.narrative_summary);
+    else if (lesson.summary) parts.push(lesson.summary);
+    imageGenPrompt = parts.join('\n\n') +
+      '\n\nAncient Greek art style, warm earth tones, suitable for 7th grade students.';
+  }
+
+  async function generateChapterImage() {
+    if (!imageGenPrompt.trim()) return;
+    imageGenStatus = 'generating';
+    imageGenError = null;
+    generatedImageB64 = null;
+    try {
+      const characterImageUrls = Object.values(charImages)
+        .filter(c => c?.url)
+        .map(c => c.url);
+      const res = await fetch('/dev/greek/generate-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: imageGenPrompt, characterImageUrls })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? 'Generation failed');
+      generatedImageB64 = data.b64_json;
+    } catch (e) {
+      imageGenError = e.message;
+    } finally {
+      imageGenStatus = 'idle';
+    }
+  }
 
   // ── Init ──────────────────────────────────────────────────────────────────────
   onMount(async () => {
@@ -418,6 +568,7 @@
       loadNgeVocab(),
       loadAllLessons()
     ]);
+    charImages = { ...(storyBible?.characterImages ?? {}) };
   });
 
   // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -439,12 +590,12 @@
 <!-- ══════════════════════════════════════════════════════════════════════════ -->
 <div class="mb-6">
   <h1 class="text-2xl font-bold text-gray-800">Greek Course Workshop</h1>
-  <p class="text-sm text-gray-500 mt-1">grade7-greek — story bible · chapter generation · preview</p>
+  <p class="text-sm text-gray-500 mt-1">grade7-greek — story bible · chapter generation</p>
 </div>
 
 <!-- Tab switcher -->
 <div class="flex gap-1 mb-6 border-b border-gray-200">
-  {#each [['story-bible','Story Bible'],['workshop','Workshop'],['preview','Preview']] as [tab, label]}
+  {#each [['story-bible','Story Bible'],['workshop','Workshop'],['images','Images']] as [tab, label]}
     <button
       on:click={() => activeTab = tab}
       class="px-4 py-2 text-sm font-medium transition-colors
@@ -792,11 +943,18 @@
               </button>
             </div>
 
+            <!-- Vocab Scan -->
+            <button on:click={scanVocab}
+              disabled={workshopAction !== 'idle' || scanLoading || !editedSentences.length}
+              class="w-full px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-600 text-sm font-medium rounded-lg transition-colors disabled:opacity-50">
+              {scanLoading ? 'Scanning...' : 'Vocab Scan'}
+            </button>
+
             <!-- Align -->
             <button on:click={alignChapter}
               disabled={workshopAction !== 'idle'}
               class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50">
-              {workshopAction === 'aligning' ? 'Aligning...' : 'Align →'}
+              {workshopAction === 'aligning' ? 'Annotating & Aligning...' : 'Annotate & Align →'}
             </button>
           {/if}
 
@@ -888,57 +1046,115 @@
           </div>
 
         {:else if selectedLesson?.status === 'draft' || (newChapterMode && selectedLesson)}
-          <div class="bg-white rounded-xl border border-gray-200 p-5">
-            <div class="mb-4 pb-4 border-b border-gray-100 flex items-center gap-3">
-              <span class="text-xs font-semibold text-indigo-600 uppercase tracking-wide">Chapter {selectedLesson.chapter}</span>
-              {#if selectedLesson.title}
-                <span class="text-gray-400 text-xs">·</span>
-                <span class="text-sm font-medium text-gray-700">{selectedLesson.title}</span>
-              {/if}
-            </div>
+          <div class="flex gap-4 items-start">
 
-            {#if selectedLesson.sentences?.length}
-              <div class="space-y-5 mb-6">
-                {#each selectedLesson.sentences as sentence, i}
-                  <div class="flex gap-3 group">
-                    <span class="text-xs text-gray-300 font-mono mt-0.5 w-5 shrink-0 text-right">{i + 1}</span>
-                    <div class="flex-1">
-                      <p class="text-gray-800 leading-relaxed mb-0.5">
-                        {#each sentence.words ?? [] as word}
-                          <span class="hover:bg-yellow-50 rounded px-0.5 cursor-default"
-                            title={word.short_def ?? ''}>{word.text ?? ''}</span>{' '}
-                        {/each}
-                      </p>
-                      <p class="text-sm text-gray-400 italic">{sentence.english ?? ''}</p>
-                    </div>
-                    <button
-                      on:click={async () => {
-                        const updated = selectedLesson.sentences.filter((_, j) => j !== i);
-                        await updateDoc(doc(db, 'lessons', selectedLessonId), { sentences: updated, updatedAt: serverTimestamp() });
-                        selectedLesson = { ...selectedLesson, sentences: updated };
-                      }}
-                      class="opacity-0 group-hover:opacity-100 transition-opacity shrink-0 mt-0.5 text-red-400 hover:text-red-600 text-sm leading-none"
-                      title="Remove sentence"
-                    >✕</button>
-                  </div>
-                {/each}
+            <!-- Sentence editor -->
+            <div class="flex-1 bg-white rounded-xl border border-gray-200 p-5 min-w-0">
+              <div class="mb-4 pb-4 border-b border-gray-100 flex items-center gap-3">
+                <span class="text-xs font-semibold text-indigo-600 uppercase tracking-wide">Chapter {selectedLesson.chapter}</span>
+                {#if selectedLesson.title}
+                  <span class="text-gray-400 text-xs">·</span>
+                  <span class="text-sm font-medium text-gray-700">{selectedLesson.title}</span>
+                {/if}
               </div>
-            {/if}
 
-            {#if selectedLesson.vocab_list?.length}
-              <div class="pt-4 border-t border-gray-100">
-                <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Vocab in this chapter</div>
-                <div class="flex flex-wrap gap-2">
-                  {#each selectedLesson.vocab_list as word}
-                    <span class="px-2 py-1 rounded-lg bg-gray-50 border border-gray-200 text-xs text-gray-700">
-                      <span class="font-medium">{word.dict_entry}</span>
-                      {#if word.short_def} — {word.short_def}{/if}
-                      {#if word.vocab_tier}<span class="ml-1 text-gray-400">({word.vocab_tier})</span>{/if}
-                    </span>
+              {#if editedSentences.length}
+                <div class="space-y-3 mb-4">
+                  {#each editedSentences as sentence, i}
+                    {@const isDirty = dirtyIndices.has(i)}
+                    {@const suggestion = greekSuggestions[i]}
+                    <div class="rounded-lg {isDirty ? 'bg-amber-50 border border-amber-200 p-2 -mx-2' : ''}">
+                      <div class="flex gap-3 group">
+                        <span class="text-xs text-gray-300 font-mono mt-2 w-5 shrink-0 text-right">{i + 1}</span>
+                        <div class="flex-1 space-y-1">
+                          <textarea
+                            value={sentence.greek ?? ''}
+                            on:input={e => {
+                              const greek = e.target.value;
+                              editedSentences[i] = { ...editedSentences[i], greek, words: retokenize(greek) };
+                              markDirty(i);
+                            }}
+                            rows="2"
+                            placeholder="Greek text..."
+                            class="w-full text-gray-800 text-sm border border-gray-200 rounded px-2 py-1 focus:outline-none focus:border-indigo-400 resize-none bg-white"
+                          ></textarea>
+                          <div class="flex gap-1 items-center">
+                            <input
+                              value={sentence.english ?? ''}
+                              on:input={e => { editedSentences[i] = { ...editedSentences[i], english: e.target.value }; markDirty(i); }}
+                              placeholder="English translation..."
+                              class="flex-1 text-sm text-gray-500 italic border border-dashed border-gray-200 rounded px-2 py-1 focus:outline-none focus:border-indigo-400 bg-transparent"
+                            />
+                            <button
+                              on:click={() => translateSentenceToGreek(i)}
+                              disabled={!sentence.english?.trim() || suggestion?.loading}
+                              title="Get Greek translation suggestion"
+                              class="shrink-0 px-2 py-1 text-xs text-indigo-500 border border-indigo-200 rounded hover:bg-indigo-50 disabled:opacity-40 disabled:cursor-default transition-colors"
+                            >{suggestion?.loading ? '…' : '→ Gk'}</button>
+                          </div>
+                        </div>
+                        <button
+                          on:click={() => {
+                            editedSentences = editedSentences.filter((_, j) => j !== i);
+                            dirtyIndices = new Set(editedSentences.map((_, j) => j));
+                            vocabScanList = null;
+                            const { [i]: _, ...rest } = greekSuggestions;
+                            greekSuggestions = rest;
+                            clearTimeout(saveTimer);
+                            saveTimer = setTimeout(saveEdits, 1500);
+                          }}
+                          class="opacity-0 group-hover:opacity-100 transition-opacity shrink-0 mt-2 text-red-400 hover:text-red-600 text-sm leading-none"
+                          title="Remove sentence"
+                        >✕</button>
+                      </div>
+                      <!-- Greek suggestion -->
+                      {#if suggestion?.greek}
+                        <div class="ml-8 mt-1.5 flex items-start gap-2 bg-indigo-50 border border-indigo-200 rounded px-3 py-2">
+                          <span class="flex-1 text-sm text-indigo-800">{suggestion.greek}</span>
+                          <button
+                            on:click={() => acceptGreekSuggestion(i)}
+                            class="shrink-0 text-xs px-2 py-0.5 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors"
+                          >Use</button>
+                          <button
+                            on:click={() => { const { [i]: _, ...rest } = greekSuggestions; greekSuggestions = rest; }}
+                            class="shrink-0 text-xs text-indigo-400 hover:text-indigo-600"
+                          >✕</button>
+                        </div>
+                      {/if}
+                      {#if suggestion?.error}
+                        <p class="ml-8 mt-1 text-xs text-red-500">{suggestion.error}</p>
+                      {/if}
+                    </div>
                   {/each}
                 </div>
+              {/if}
+              <button
+                on:click={addSentence}
+                disabled={workshopAction !== 'idle'}
+                class="text-xs text-indigo-500 hover:text-indigo-700 border border-dashed border-indigo-300 rounded px-3 py-1.5 w-full hover:bg-indigo-50 transition-colors disabled:opacity-40"
+              >+ Add Sentence</button>
+            </div>
+
+            <!-- Vocab scan panel -->
+            {#if vocabScanList !== null}
+              <div class="w-52 shrink-0 bg-white rounded-xl border border-gray-200 p-4">
+                <div class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3 pb-2 border-b border-gray-100">
+                  Vocab Scan
+                </div>
+                <VocabPanel vocabList={vocabScanList} headless />
+                {#if vocabUnrecognized.length}
+                  <div class="mt-3 pt-3 border-t border-gray-100">
+                    <div class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-1">Unrecognized</div>
+                    <div class="flex flex-wrap gap-1">
+                      {#each vocabUnrecognized as word}
+                        <span class="text-xs text-gray-400 font-mono bg-gray-50 px-1.5 py-0.5 rounded">{word}</span>
+                      {/each}
+                    </div>
+                  </div>
+                {/if}
               </div>
             {/if}
+
           </div>
 
         <!-- Alignment editor -->
@@ -968,7 +1184,7 @@
                       <span class="text-xs text-gray-300 font-mono mt-1 w-5 shrink-0 text-right">{i + 1}</span>
                       <div class="flex-1">
                         <p class="text-gray-800 text-sm leading-relaxed mb-1">{sent.greek}</p>
-                        {#if normalizeStatus(selectedLesson?.status) === 'draft'}
+                        {#if normalizeStatus(selectedLesson?.status) !== 'accepted'}
                           <input
                             value={sent.english}
                             on:input={e => { editedSentences[i] = { ...editedSentences[i], english: e.target.value }; markDirty(i); }}
@@ -1072,47 +1288,157 @@
 {/if}
 
 <!-- ══════════════════════════════════════════════════════════════════════════ -->
-<!-- TAB 3: Preview                                                            -->
+<!-- TAB 3: Images                                                             -->
 <!-- ══════════════════════════════════════════════════════════════════════════ -->
-{#if activeTab === 'preview'}
-  <!-- Lesson selector -->
-  <div class="flex flex-wrap gap-2 mb-6">
-    {#if !acceptedLessons.length}
-      <p class="text-sm text-gray-400 italic">No accepted lessons yet.</p>
-    {:else}
-      {#each acceptedLessons as lesson}
-        <button
-          on:click={() => loadPreviewLesson(lesson.lessonId)}
-          class="px-3 py-2 rounded-lg border text-sm transition-colors
-            {previewLessonId === lesson.lessonId
-              ? 'border-indigo-400 bg-indigo-50 text-indigo-800'
-              : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'}"
-        >
-          Ch.{lesson.chapter}{lesson.title ? ` — ${lesson.title}` : ''}
-        </button>
-      {/each}
-    {/if}
-  </div>
+{#if activeTab === 'images'}
+  <div class="space-y-6">
 
-  <!-- Three-panel student view -->
-  {#if previewLesson}
-    <div class="grid grid-cols-12 gap-0 border border-gray-200 rounded-xl overflow-hidden" style="height: calc(100vh - 220px)">
-      <div class="col-span-3 border-r border-gray-200 overflow-y-auto bg-white">
-        <VocabPanel vocabList={previewLesson.vocab_list ?? []} />
-      </div>
-      <div class="col-span-6 overflow-y-auto bg-white">
-        <GreekPassage
-          sentences={previewLesson.sentences ?? []}
-          on:wordHover={e => hoveredWord = e.detail?.word ?? null}
-        />
-      </div>
-      <div class="col-span-3 border-l border-gray-200 overflow-y-auto bg-white">
-        <GrammarPanel hoveredWord={hoveredWord} standards={previewStandards} />
+    <!-- Character References -->
+    <div class="bg-white rounded-xl border border-gray-200 p-5">
+      <h2 class="font-semibold text-gray-800 mb-1">Character References</h2>
+      <p class="text-xs text-gray-400 mb-4">
+        Upload one canonical portrait per character slot. These images are sent with each generation
+        request so the model can maintain visual consistency across chapters.
+      </p>
+      <div class="grid grid-cols-4 gap-4">
+        {#each [1,2,3,4] as slot}
+          {@const char = charImages[slot]}
+          <div class="flex flex-col gap-2">
+            <!-- Image slot -->
+            <div class="aspect-square rounded-lg border-2 border-dashed border-gray-200 overflow-hidden relative bg-gray-50 flex items-center justify-center group">
+              {#if char?.url}
+                <img src={char.url} alt="Character {slot}" class="w-full h-full object-cover" />
+                <button
+                  on:click={() => removeCharImage(slot)}
+                  class="absolute top-1 right-1 w-5 h-5 bg-red-500 hover:bg-red-600 text-white rounded-full text-xs leading-none flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  title="Remove image"
+                >✕</button>
+              {:else if charImageUploading[slot]}
+                <span class="text-xs text-gray-400">Uploading…</span>
+              {:else}
+                <label class="cursor-pointer flex flex-col items-center gap-1 p-4 w-full h-full justify-center">
+                  <span class="text-3xl text-gray-300 leading-none">+</span>
+                  <span class="text-xs text-gray-400 text-center">Upload image</span>
+                  <input
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                    class="sr-only"
+                    on:change={e => { if (e.target.files[0]) uploadCharImage(slot, e.target.files[0]); e.target.value = ''; }}
+                  />
+                </label>
+              {/if}
+            </div>
+            <!-- Replace button (only when image exists) -->
+            {#if char?.url}
+              <label class="cursor-pointer text-xs text-indigo-500 hover:text-indigo-700 text-center">
+                Replace
+                <input
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp"
+                  class="sr-only"
+                  on:change={e => { if (e.target.files[0]) uploadCharImage(slot, e.target.files[0]); e.target.value = ''; }}
+                />
+              </label>
+            {/if}
+            <!-- Character name -->
+            <input
+              value={char?.name ?? ''}
+              on:blur={e => { if (e.target.value !== (char?.name ?? '')) updateCharName(slot, e.target.value); }}
+              placeholder="Character {slot} name"
+              class="text-xs text-center border border-gray-200 rounded px-2 py-1 focus:outline-none focus:border-indigo-400 text-gray-700 placeholder-gray-300"
+            />
+          </div>
+        {/each}
       </div>
     </div>
-  {:else if acceptedLessons.length}
-    <div class="flex items-center justify-center h-48 text-gray-300 text-sm">
-      Select a lesson above to preview.
+
+    <!-- Chapter Image Generator -->
+    <div class="bg-white rounded-xl border border-gray-200 p-5">
+      <h2 class="font-semibold text-gray-800 mb-1">Chapter Image Generator</h2>
+      <p class="text-xs text-gray-400 mb-4">
+        Describe a scene from a chapter. Select a chapter to auto-fill a starting prompt,
+        then refine as needed.
+      </p>
+
+      <div class="grid grid-cols-2 gap-6">
+
+        <!-- Controls -->
+        <div class="space-y-3">
+          <!-- Chapter selector -->
+          <div>
+            <label class="block text-xs text-gray-500 mb-1">Chapter <span class="text-gray-400">(auto-fills prompt)</span></label>
+            <select
+              bind:value={imageGenChapterId}
+              on:change={e => { if (e.target.value) selectImageChapter(e.target.value); }}
+              class="w-full border border-gray-300 rounded px-2 py-1.5 text-sm"
+            >
+              <option value={null}>— select a chapter —</option>
+              {#each allLessons as lesson}
+                <option value={lesson.lessonId}>
+                  Ch.{lesson.chapter}{lesson.title ? ` — ${lesson.title}` : ''}
+                </option>
+              {/each}
+            </select>
+          </div>
+
+          <!-- Prompt -->
+          <div>
+            <label class="block text-xs text-gray-500 mb-1">Scene prompt</label>
+            <textarea
+              bind:value={imageGenPrompt}
+              rows="7"
+              placeholder="Describe the scene: characters present, setting, action, mood, art style…"
+              class="w-full border border-gray-300 rounded px-3 py-2 text-sm resize-none focus:outline-none focus:border-indigo-400"
+            ></textarea>
+          </div>
+
+          <!-- Character reference count -->
+          <p class="text-xs text-gray-400">
+            {Object.values(charImages).filter(c => c?.url).length} of 4 character references loaded
+            {#if !Object.values(charImages).some(c => c?.url)} — upload portraits above for visual consistency{/if}
+          </p>
+
+          <!-- Generate -->
+          {#if imageGenStatus === 'generating'}
+            <div class="flex items-center gap-2 text-sm text-gray-500">
+              <span class="inline-block w-4 h-4 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin"></span>
+              Generating image…
+            </div>
+          {:else}
+            <button
+              on:click={generateChapterImage}
+              disabled={!imageGenPrompt.trim()}
+              class="w-full px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
+            >Generate Image</button>
+          {/if}
+
+          {#if imageGenError}
+            <p class="text-xs text-red-600 bg-red-50 border border-red-200 rounded p-3">{imageGenError}</p>
+          {/if}
+        </div>
+
+        <!-- Result -->
+        <div class="flex flex-col gap-3">
+          {#if generatedImageB64}
+            <img
+              src="data:image/png;base64,{generatedImageB64}"
+              alt="Generated chapter illustration"
+              class="w-full rounded-lg border border-gray-200"
+            />
+            <a
+              href="data:image/png;base64,{generatedImageB64}"
+              download="chapter-image.png"
+              class="text-center text-xs text-indigo-500 hover:text-indigo-700 border border-indigo-200 rounded py-1.5 px-3 transition-colors"
+            >Download PNG</a>
+          {:else}
+            <div class="flex-1 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-gray-200 min-h-64 text-gray-300 text-sm">
+              Generated image will appear here
+            </div>
+          {/if}
+        </div>
+
+      </div>
     </div>
-  {/if}
+
+  </div>
 {/if}

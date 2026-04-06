@@ -140,7 +140,7 @@ const STORY_CANON = {
         'Παλλάς': {
             english:     'Pallas',
             age:         13,
-            relation:    'older brother of Dolios; cousin of Phoebe and Klēta',
+            relation:    'older sister of Dolios; cousin of Phoebe and Klēta',
             personality: 'Brave and decisive. Natural leader who acts when others hesitate. Sometimes charges in before fully thinking things through.',
             role:        'leader, protector',
             patronDeity: 'Athena',
@@ -149,7 +149,7 @@ const STORY_CANON = {
         },
         'Κλήτα': {
             english:     'Klēta',
-            age:         null,
+            age:         10,
             relation:    'younger sister of Phoebe',
             personality: 'Inventive and practical. Loves making things and solving problems with her hands. Quietly resourceful.',
             role:        'builder, problem-solver',
@@ -159,7 +159,7 @@ const STORY_CANON = {
         },
         'Δόλιος': {
             english:     'Dolios',
-            age:         null,
+            age:         10,
             relation:    'younger brother of Pallas',
             personality: 'Charming and quick-witted. Can make anyone laugh. Talks his way into — and out of — trouble with equal ease.',
             role:        'charmer, negotiator',

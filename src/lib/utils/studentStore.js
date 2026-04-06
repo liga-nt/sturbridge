@@ -202,10 +202,15 @@ export async function loadStandardsByCourse(courseId) {
 // ---------------------------------------------------------------------------
 
 export async function loadLessons(courseId) {
-    const snap = await getDocs(
-        query(collection(db, 'lessons'), where('courseId', '==', courseId), where('status', '==', 'published'), orderBy('order'))
-    );
-    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const [pubSnap, accSnap] = await Promise.all([
+        getDocs(query(collection(db, 'lessons'), where('courseId', '==', courseId), where('status', '==', 'published'))),
+        getDocs(query(collection(db, 'lessons'), where('courseId', '==', courseId), where('status', '==', 'accepted')))
+    ]);
+    const all = [
+        ...pubSnap.docs.map(d => ({ id: d.id, ...d.data() })),
+        ...accSnap.docs.map(d => ({ id: d.id, ...d.data() }))
+    ];
+    return all.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 }
 
 export async function loadLesson(lessonId) {

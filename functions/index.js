@@ -513,6 +513,150 @@ function computeEngAlignment(sentence, positionMap) {
 }
 
 // ---------------------------------------------------------------------------
+// Shared helper: annotateGreekSentences (Steps 2–3–5)
+// Fills in dict_entry/morph/syntax/paradigm on an array of sentence objects
+// that already have a `words` array (from tokenization or retokenization).
+// Only tokens with null dict_entry are sent to Claude for annotation.
+// ---------------------------------------------------------------------------
+
+const PUNCT_RE_SHARED = /[.,;:·?!]/g;
+const stripAccentsShared = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').normalize('NFC');
+
+async function annotateGreekSentences(sentences, client, courseId) {
+    // ── Step 2: dict lookup + Claude batch for misses ──────────────────────
+    const misses = [];
+    const missSet = new Set();
+    for (const sent of sentences) {
+        for (const word of sent.words) {
+            if (!word.dict_entry) {
+                const bare = word.text.replace(PUNCT_RE_SHARED, '');
+                const entry = wordForms[bare] || wordForms[word.text] || wordForms[stripAccentsShared(bare)] || null;
+                if (entry) {
+                    word.dict_entry    = entry.dict_entry;
+                    word.short_def     = entry.short_def;
+                    word.morph         = entry.morph;
+                    word.vocab_tier    = entry.vocab_tier;
+                    word.standard_refs = entry.standard_refs || [];
+                    word.paradigm_key  = entry.paradigm_key  || null;
+                } else if (!missSet.has(bare) && bare) {
+                    missSet.add(bare);
+                    misses.push({ text: bare });
+                }
+            }
+        }
+    }
+
+    if (misses.length > 0) {
+        const step2Prompt = [
+            'Annotate each Ancient Greek token. Return ONLY a JSON array — no prose, no fences.',
+            '',
+            'Morph tag schema:',
+            '  verb.{tense}.indic.act.{person}{number}   e.g. verb.pres.indic.act.3sg',
+            '  noun.{gender}.{number}.{case}             e.g. noun.masc.sg.nom',
+            '  adj.{gender}.{number}.{case}',
+            '  art.{gender}.{number}.{case}',
+            '  pron.{type}.{gender}.{number}.{case}',
+            '  conj | prep | adv | particle | interj',
+            '',
+            'For each token provide: text, dict_entry (lexicon headword), short_def (≤5 words),',
+            'morph (tag from schema), vocab_tier ("intro"|"beginning"|"intermediate"|"prose"|null),',
+            'standard_refs (array of morph standard IDs, may be empty), paradigm_key (or null).',
+            '',
+            'Tokens to annotate:',
+            JSON.stringify(misses.map(m => m.text))
+        ].join('\n');
+
+        const step2Msg = await client.messages.create({
+            model: 'claude-sonnet-4-6',
+            max_tokens: 4096,
+            messages: [{ role: 'user', content: step2Prompt }]
+        });
+
+        let claudeAnnotations;
+        try {
+            claudeAnnotations = JSON.parse(stripFences(step2Msg.content[0].text));
+        } catch {
+            throw new HttpsError('internal', 'Annotate Step 2: Claude returned invalid JSON.');
+        }
+
+        const annotationMap = {};
+        for (const ann of claudeAnnotations) annotationMap[ann.text] = ann;
+
+        for (const sent of sentences) {
+            for (const word of sent.words) {
+                if (!word.dict_entry) {
+                    const bare = word.text.replace(PUNCT_RE_SHARED, '');
+                    const ann = annotationMap[bare];
+                    if (ann) {
+                        word.dict_entry    = ann.dict_entry    || null;
+                        word.short_def     = ann.short_def     || null;
+                        word.morph         = ann.morph         || null;
+                        word.vocab_tier    = ann.vocab_tier    || null;
+                        word.standard_refs = ann.standard_refs || [];
+                        word.paradigm_key  = ann.paradigm_key  || null;
+                    }
+                }
+            }
+        }
+    }
+
+    // ── Step 3: syntax annotation ──────────────────────────────────────────
+    const db = getFirestore();
+    const synSnap = await db.collection('standards')
+        .where('courseId', '==', courseId)
+        .get();
+    const synStandards = synSnap.docs
+        .map(d => ({ id: d.id, ...d.data() }))
+        .filter(s => s.id.startsWith('syn'));
+
+    if (synStandards.length > 0) {
+        const step3Prompt = [
+            'You are a Greek syntax expert. For each sentence, identify syntactic constructions',
+            'and tag the KEY word of each construction by adding its standard ID to syntax_standard_refs.',
+            'Use ONLY standard IDs from the provided list. Return ONLY JSON — no prose, no fences.',
+            '',
+            'Available syntax standards:',
+            JSON.stringify(synStandards.map(s => ({ id: s.id, description: s.description }))),
+            '',
+            'Sentences with annotated words:',
+            JSON.stringify(sentences.map(s => ({ num: s.num, greek: s.greek, words: s.words }))),
+            '',
+            'Return: [{ "num": 0, "words": [{ "sentPos": 0, "syntax_standard_refs": [...] }] }]',
+            'Only include words that have at least one syntax_standard_ref.'
+        ].join('\n');
+
+        const step3Msg = await client.messages.create({
+            model: 'claude-sonnet-4-6',
+            max_tokens: 4096,
+            messages: [{ role: 'user', content: step3Prompt }]
+        });
+
+        let syntaxResult;
+        try {
+            syntaxResult = JSON.parse(stripFences(step3Msg.content[0].text));
+        } catch {
+            throw new HttpsError('internal', 'Annotate Step 3: Claude returned invalid JSON.');
+        }
+
+        for (const sentResult of syntaxResult) {
+            const sent = sentences.find(s => s.num === sentResult.num);
+            if (!sent) continue;
+            for (const wResult of sentResult.words ?? []) {
+                const word = sent.words.find(w => w.sentPos === wResult.sentPos);
+                if (word) word.syntax_standard_refs = wResult.syntax_standard_refs || [];
+            }
+        }
+    }
+
+    // ── Step 5: paradigm key assignment (deterministic fallback) ───────────
+    for (const sent of sentences) {
+        for (const word of sent.words) {
+            if (!word.paradigm_key) word.paradigm_key = resolveParadigmKey(word);
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
 // Function 1: generateGreekLesson (Steps 1–6)
 // ---------------------------------------------------------------------------
 
@@ -630,155 +774,19 @@ exports.generateGreekLesson = onCall(
         const { sentences: rawSentences, title, story_bible_delta: storyBibleDelta } = step1Result;
 
         // ------------------------------------------------------------------
-        // Step 2 — Tokenize + annotate (dict + Claude batch for misses)
+        // Step 2 — Tokenize (build word skeletons)
         // ------------------------------------------------------------------
-        const PUNCT_RE = /[.,;:·?]/g;
-        const stripAccents = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').normalize('NFC');
-
-        // Build annotated word skeletons for every sentence
         for (const sent of rawSentences) {
-            const tokens = sent.greek.split(/\s+/);
-            sent.words = tokens.map((text, idx) => {
-                const bare = text.replace(PUNCT_RE, '');
-                const entry = wordForms[bare] || wordForms[text] || wordForms[stripAccents(bare)] || null;
-                return {
-                    sentPos: idx,
-                    text,
-                    dict_entry:          entry ? entry.dict_entry          : null,
-                    short_def:           entry ? entry.short_def           : null,
-                    morph:               entry ? entry.morph               : null,
-                    vocab_tier:          entry ? entry.vocab_tier          : null,
-                    standard_refs:       entry ? (entry.standard_refs || []) : [],
-                    syntax_standard_refs: [],
-                    paradigm_key:        entry ? (entry.paradigm_key || null) : null,
-                    engSentPos:          null
-                };
-            });
+            sent.words = sent.greek.split(/\s+/).map((text, idx) => ({
+                sentPos: idx, text,
+                dict_entry: null, short_def: null, morph: null,
+                vocab_tier: null, standard_refs: [], syntax_standard_refs: [],
+                paradigm_key: null, engSentPos: null
+            }));
         }
 
-        // Collect tokens that missed the dict
-        const misses = [];
-        const missSet = new Set();
-        for (const sent of rawSentences) {
-            for (const word of sent.words) {
-                if (!word.dict_entry) {
-                    const bare = word.text.replace(PUNCT_RE, '');
-                    if (!missSet.has(bare)) {
-                        missSet.add(bare);
-                        misses.push({ text: bare, originalText: word.text });
-                    }
-                }
-            }
-        }
-
-        // One Claude batch call for all unknown tokens
-        if (misses.length > 0) {
-            const step2Prompt = [
-                'Annotate each Ancient Greek token. Return ONLY a JSON array — no prose, no fences.',
-                '',
-                'Morph tag schema:',
-                '  verb.{tense}.indic.act.{person}{number}   e.g. verb.pres.indic.act.3sg',
-                '  noun.{gender}.{number}.{case}             e.g. noun.masc.sg.nom',
-                '  adj.{gender}.{number}.{case}',
-                '  art.{gender}.{number}.{case}',
-                '  pron.{type}.{gender}.{number}.{case}',
-                '  conj | prep | adv | particle | interj',
-                '',
-                'For each token provide: text, dict_entry (lexicon headword), short_def (≤5 words),',
-                'morph (tag from schema), vocab_tier ("intro"|"core"|"advanced"|null),',
-                'standard_refs (array of morph standard IDs, may be empty), paradigm_key (or null).',
-                '',
-                'Tokens to annotate:',
-                JSON.stringify(misses.map(m => m.text))
-            ].join('\n');
-
-            const step2Msg = await client.messages.create({
-                model: 'claude-sonnet-4-6',
-                max_tokens: 4096,
-                messages: [{ role: 'user', content: step2Prompt }]
-            });
-
-            let claudeAnnotations;
-            try {
-                claudeAnnotations = JSON.parse(stripFences(step2Msg.content[0].text));
-            } catch {
-                throw new HttpsError('internal', 'Step 2: Claude returned invalid JSON for unknown tokens.');
-            }
-
-            // Build lookup by text
-            const annotationMap = {};
-            for (const ann of claudeAnnotations) {
-                annotationMap[ann.text] = ann;
-            }
-
-            // Back-fill misses in every sentence
-            for (const sent of rawSentences) {
-                for (const word of sent.words) {
-                    if (!word.dict_entry) {
-                        const bare = word.text.replace(PUNCT_RE, '');
-                        const ann = annotationMap[bare];
-                        if (ann) {
-                            word.dict_entry    = ann.dict_entry    || null;
-                            word.short_def     = ann.short_def     || null;
-                            word.morph         = ann.morph         || null;
-                            word.vocab_tier    = ann.vocab_tier    || null;
-                            word.standard_refs = ann.standard_refs || [];
-                            word.paradigm_key  = ann.paradigm_key  || null;
-                        }
-                    }
-                }
-            }
-        }
-
-        // ------------------------------------------------------------------
-        // Step 3 — Syntax annotation [Claude]
-        // ------------------------------------------------------------------
-        const synStandardsSnap = await db.collection('standards')
-            .where('courseId', '==', bible.courseId)
-            .get();
-        const synStandards = synStandardsSnap.docs
-            .map(d => ({ id: d.id, ...d.data() }))
-            .filter(s => s.id.startsWith('syn'));
-
-        if (synStandards.length > 0) {
-            const step3Prompt = [
-                'You are a Greek syntax expert. For each sentence, identify syntactic constructions',
-                'and tag the KEY word of each construction by adding its standard ID to syntax_standard_refs.',
-                'Use ONLY standard IDs from the provided list. Return ONLY JSON — no prose, no fences.',
-                '',
-                'Available syntax standards:',
-                JSON.stringify(synStandards.map(s => ({ id: s.id, description: s.description }))),
-                '',
-                'Sentences with annotated words:',
-                JSON.stringify(rawSentences.map(s => ({ num: s.num, greek: s.greek, words: s.words }))),
-                '',
-                'Return: [{ "num": 0, "words": [{ "sentPos": 0, "syntax_standard_refs": [...] }] }]',
-                'Only include words that have at least one syntax_standard_ref.'
-            ].join('\n');
-
-            const step3Msg = await client.messages.create({
-                model: 'claude-sonnet-4-6',
-                max_tokens: 4096,
-                messages: [{ role: 'user', content: step3Prompt }]
-            });
-
-            let syntaxResult;
-            try {
-                syntaxResult = JSON.parse(stripFences(step3Msg.content[0].text));
-            } catch {
-                throw new HttpsError('internal', 'Step 3: Claude returned invalid JSON for syntax annotation.');
-            }
-
-            // Merge syntax_standard_refs back
-            for (const sentResult of syntaxResult) {
-                const sent = rawSentences.find(s => s.num === sentResult.num);
-                if (!sent) continue;
-                for (const wResult of sentResult.words ?? []) {
-                    const word = sent.words.find(w => w.sentPos === wResult.sentPos);
-                    if (word) word.syntax_standard_refs = wResult.syntax_standard_refs || [];
-                }
-            }
-        }
+        // Steps 2b–3–5: annotation via shared helper
+        await annotateGreekSentences(rawSentences, client, bible.courseId);
 
         // ------------------------------------------------------------------
         // Step 4 — Translate [Claude] (alignment deferred to alignGreekLesson)
@@ -812,22 +820,11 @@ exports.generateGreekLesson = onCall(
         }
 
         // ------------------------------------------------------------------
-        // Step 5 — Paradigm key assignment [deterministic fallback]
-        // ------------------------------------------------------------------
-        for (const sent of rawSentences) {
-            for (const word of sent.words) {
-                if (!word.paradigm_key) {
-                    word.paradigm_key = resolveParadigmKey(word);
-                }
-            }
-        }
-
-        // ------------------------------------------------------------------
         // Final assembly + Firestore save
         // ------------------------------------------------------------------
         const allWords = rawSentences.flatMap(s => s.words);
 
-        const allStandardIds = new Set(storyBibleDelta.standards_covered ?? []);
+        const allStandardIds = new Set(storyBibleDelta?.standards_covered ?? []);
         for (const word of allWords) {
             for (const s of word.standard_refs || [])        allStandardIds.add(s);
             for (const s of word.syntax_standard_refs || []) allStandardIds.add(s);
@@ -850,7 +847,7 @@ exports.generateGreekLesson = onCall(
             standardIds:     [...allStandardIds],
             title,
             status:          'draft',
-            storyBibleDelta,
+            storyBibleDelta:  storyBibleDelta ?? null,
             sentences:       rawSentences,
             vocab_list:      vocabList,
             updatedAt:       Timestamp.now()
@@ -865,7 +862,7 @@ exports.generateGreekLesson = onCall(
 // ---------------------------------------------------------------------------
 
 exports.alignGreekLesson = onCall(
-    { secrets: ['ANTHROPIC_API_KEY'], timeoutSeconds: 120 },
+    { secrets: ['ANTHROPIC_API_KEY'], timeoutSeconds: 300 },
     async (request) => {
         if (request.auth?.token?.role !== 'dev') {
             throw new HttpsError('permission-denied', 'Only dev can align Greek lessons.');
@@ -880,6 +877,11 @@ exports.alignGreekLesson = onCall(
         if (!lessonSnap.exists) throw new HttpsError('not-found', `lessons/${lessonId} not found.`);
         const lesson = lessonSnap.data();
         const sentences = lesson.sentences;
+
+        // ── Annotate first (Steps 2–3–5) ──────────────────────────────────
+        // Ensures all words have morph/syntax/paradigm regardless of how they
+        // were created (initial generation, manual edit, or lightweight refine).
+        await annotateGreekSentences(sentences, client, lesson.courseId);
 
         // Build numbered translations for each sentence (used in prompt + post-processing)
         const sentenceMeta = sentences.map(s => {
@@ -956,6 +958,122 @@ exports.alignGreekLesson = onCall(
         });
 
         return { sentences };
+    }
+);
+
+// ---------------------------------------------------------------------------
+// Function 2b: refineGreekLesson — lightweight draft revision (one Claude call)
+// ---------------------------------------------------------------------------
+
+exports.refineGreekLesson = onCall(
+    { secrets: ['ANTHROPIC_API_KEY'], timeoutSeconds: 120 },
+    async (request) => {
+        if (request.auth?.token?.role !== 'dev') {
+            throw new HttpsError('permission-denied', 'Only dev can refine Greek lessons.');
+        }
+
+        const { lessonId, feedback } = request.data;
+        if (!lessonId) throw new HttpsError('invalid-argument', 'lessonId is required.');
+        if (!feedback?.trim()) throw new HttpsError('invalid-argument', 'feedback is required.');
+
+        const lessonSnap = await db.collection('lessons').doc(lessonId).get();
+        if (!lessonSnap.exists) throw new HttpsError('not-found', `lessons/${lessonId} not found.`);
+        const lesson = lessonSnap.data();
+
+        const sentenceList = (lesson.sentences ?? [])
+            .map((s, i) => `${i + 1}. ${s.greek}  (${s.english ?? ''})`)
+            .join('\n');
+
+        const prompt = [
+            'These are Ancient Greek sentences with their English translations:',
+            sentenceList,
+            '',
+            `Feedback: ${feedback.trim()}`,
+            '',
+            'Revise the sentences as requested. Return ALL sentences (revised and unchanged).',
+            'Keep the title unless the feedback asks to change it.',
+            'Return ONLY valid JSON — no prose, no fences:',
+            '{ "title": "...", "sentences": [{ "num": 0, "greek": "...", "english": "..." }] }'
+        ].join('\n');
+
+        const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+        const msg = await client.messages.create({
+            model: 'claude-sonnet-4-6',
+            max_tokens: 4096,
+            messages: [{ role: 'user', content: prompt }]
+        });
+
+        let result;
+        try {
+            result = JSON.parse(stripFences(msg.content[0].text));
+        } catch {
+            throw new HttpsError('internal', 'Refine: Claude returned invalid JSON.');
+        }
+
+        // Retokenize with basic word objects — annotation happens at Align time
+        const sentences = result.sentences.map(s => ({
+            num: s.num,
+            greek: s.greek,
+            english: s.english ?? '',
+            words: (s.greek ?? '').trim().split(/\s+/).filter(Boolean).map((text, idx) => ({
+                sentPos: idx, text,
+                dict_entry: null, short_def: null, morph: null,
+                vocab_tier: null, standard_refs: [], syntax_standard_refs: [],
+                paradigm_key: null, engSentPos: null
+            })),
+            audioGenerated: false
+        }));
+
+        await db.collection('lessons').doc(lessonId).update({
+            sentences,
+            title: result.title ?? lesson.title,
+            status: 'draft',
+            updatedAt: Timestamp.now()
+        });
+
+        return { lessonId, sentences, title: result.title ?? lesson.title };
+    }
+);
+
+// ---------------------------------------------------------------------------
+// Function 2c: translateToGreek — single-sentence Greek suggestion (Haiku)
+// ---------------------------------------------------------------------------
+
+exports.translateToGreek = onCall(
+    { secrets: ['ANTHROPIC_API_KEY'], timeoutSeconds: 30 },
+    async (request) => {
+        if (request.auth?.token?.role !== 'dev') {
+            throw new HttpsError('permission-denied', 'Only dev can use translateToGreek.');
+        }
+
+        const { english, context } = request.data;
+        if (!english?.trim()) throw new HttpsError('invalid-argument', 'english is required.');
+
+        const prompt = [
+            'Translate the following English sentence into Ancient Greek (Attic dialect).',
+            'Use simple vocabulary appropriate for beginning Greek learners (NGE intro/beginning tier if possible).',
+            context ? `Surrounding context:\n${context}` : '',
+            '',
+            `English: ${english.trim()}`,
+            '',
+            'Return ONLY valid JSON — no prose, no fences: { "greek": "..." }'
+        ].filter(Boolean).join('\n');
+
+        const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+        const msg = await client.messages.create({
+            model: 'claude-haiku-4-5-20251001',
+            max_tokens: 256,
+            messages: [{ role: 'user', content: prompt }]
+        });
+
+        let result;
+        try {
+            result = JSON.parse(stripFences(msg.content[0].text));
+        } catch {
+            throw new HttpsError('internal', 'translateToGreek: Claude returned invalid JSON.');
+        }
+
+        return { greek: result.greek };
     }
 );
 

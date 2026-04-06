@@ -5,6 +5,7 @@
    *   vocabList: { dict_entry, short_def, vocab_tier, morph? }[]
    */
   export let vocabList = [];
+  export let headless = false; // suppress built-in title when parent provides one
 
   const TIER_ORDER = ['intro', 'beginning', 'intermediate', 'prose', null];
   const TIER_LABELS = {
@@ -42,7 +43,9 @@
 </script>
 
 <div class="vocab-panel">
-  <div class="panel-title">Vocabulary</div>
+  {#if !headless}
+    <div class="panel-title">Vocabulary</div>
+  {/if}
 
   {#if grouped.length === 0}
     <p class="empty-note">No vocabulary for this lesson.</p>
@@ -158,7 +161,8 @@
   }
 
   .dict-entry {
-    font-size: 14px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    font-size: 15px;
     font-weight: 600;
     line-height: 1.3;
   }
