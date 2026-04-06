@@ -22,7 +22,9 @@
 
     let problems  = [];
     let answers   = [];
+    let carries   = [];   // carry scratch values, one per vertical problem
     let inputRefs = [];
+    let carryRefs = [];
     let submitted = false;
     let results   = null;
 
@@ -74,6 +76,7 @@
         const count = setting(std.id, 'problemsPerPage', std.problemsPerPage ?? 8);
         problems  = generatePage(std.id, count);
         answers   = Array(count).fill('');
+        carries   = Array(count).fill('');
         submitted = false;
         results   = null;
         justMastered = false;
@@ -84,6 +87,11 @@
     }
 
     function handleKeydown(e, i) {
+        if (e.key === 'ArrowUp' && problems[i]?.factors && !submitted) {
+            e.preventDefault();
+            carryRefs[i]?.focus();
+            return;
+        }
         const isNav = e.key === 'Enter' || (e.key === ' ' && problems[i]?.type === 'number');
         if (!isNav) return;
         e.preventDefault();
@@ -92,6 +100,17 @@
         } else {
             handleSubmit();
         }
+    }
+
+    function handleCarryKeydown(e, i) {
+        if (e.key === 'ArrowDown' || e.key === 'Enter') {
+            e.preventDefault();
+            inputRefs[i]?.focus();
+        }
+    }
+
+    function clearCarry(i) {
+        carries = carries.map((c, j) => j === i ? '' : c);
     }
 
     function handleSubmit() {
@@ -318,7 +337,22 @@
                                 <!-- Wrap in flex so inline-block doesn't stretch to fill the grid cell -->
                                 <div class="flex justify-center">
                                     <div class="font-mono text-base text-gray-800 select-none"
-                                         style="min-width: {minW}ch">
+                                         style="min-width: {minW}ch; width: fit-content">
+                                        <!-- Carry scratch box: centered above the top factor, single digit -->
+                                        <div class="flex justify-center mb-0.5">
+                                            <input
+                                                type="text"
+                                                inputmode="numeric"
+                                                maxlength="1"
+                                                bind:this={carryRefs[i]}
+                                                bind:value={carries[i]}
+                                                disabled={submitted}
+                                                on:keydown={e => handleCarryKeydown(e, i)}
+                                                class="select-text w-5 h-5 border border-gray-400 rounded text-center text-xs text-red-500 font-mono
+                                                       focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-200
+                                                       disabled:cursor-default bg-white"
+                                            />
+                                        </div>
                                         <div class="text-right">{problem.factors[0]}</div>
                                         <div class="flex items-baseline justify-end gap-1">
                                             <span class="text-gray-500">×</span>
@@ -332,7 +366,8 @@
                                             bind:value={answers[i]}
                                             disabled={submitted}
                                             on:keydown={e => handleKeydown(e, i)}
-                                            style="width: {minW}ch"
+                                            on:input={() => clearCarry(i)}
+                                            style="width: 100%"
                                             class="p-0 border-0 bg-transparent text-right text-sm
                                                    focus:outline-none disabled:cursor-default transition-colors
                                                    {graded ? (correct ? 'text-green-700' : 'text-red-600') : 'text-gray-800'}"

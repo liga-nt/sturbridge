@@ -1,0 +1,2029 @@
+{
+  "exam": "National Greek Exams",
+  "revised": 2016,
+  "levels": ["introductory", "beginning", "intermediate", "prose"],
+  "standards": [
+
+    // ─── DOMAIN: ALPHABET ─────────────────────────────────────────────────────
+
+    {
+      "id": "alpha.order",
+      "domain": "alphabet",
+      "introduced_in": "introductory",
+      "description": "Know the Attic Greek alphabet in correct order, upper and lower case, including rough breathing",
+      "type": "knowledge"
+    },
+    {
+      "id": "alpha.names",
+      "domain": "alphabet",
+      "introduced_in": "introductory",
+      "description": "Know the names of all Greek letters",
+      "type": "knowledge"
+    },
+    {
+      "id": "alpha.transliterate_gk_en",
+      "domain": "alphabet",
+      "introduced_in": "introductory",
+      "description": "Transliterate Greek letters into their English equivalents",
+      "type": "skill"
+    },
+    {
+      "id": "alpha.transliterate_en_gk",
+      "domain": "alphabet",
+      "introduced_in": "introductory",
+      "description": "Transliterate English letters into their Greek equivalents",
+      "type": "skill"
+    },
+    {
+      "id": "alpha.case_transform",
+      "domain": "alphabet",
+      "introduced_in": "introductory",
+      "description": "Transform lower case Greek letters to upper case, and vice versa",
+      "type": "skill"
+    },
+    {
+      "id": "alpha.adjacent",
+      "domain": "alphabet",
+      "introduced_in": "introductory",
+      "description": "Identify the preceding and following letters of the Greek alphabet for any given letter",
+      "type": "skill"
+    },
+
+    // ─── DOMAIN: GEOGRAPHY ────────────────────────────────────────────────────
+
+    {
+      "id": "geo.athens",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Athens",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.sparta",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Sparta",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.thebes",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Thebes",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.troy",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Troy",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.delphi",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Delphi",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.olympia",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Olympia",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.corinth",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Corinth",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.mycenae",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Mycenae",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.alexandria",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Alexandria",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.crete",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Crete",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.sicily",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Sicily",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.rhodes",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Rhodes",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.euboea",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of Euboea",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.aegean_sea",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of the Aegean Sea",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.ionian_sea",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of the Ionian Sea",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.black_sea",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of the Black Sea",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.adriatic_sea",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of the Adriatic Sea",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.nile",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of the Nile",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.hellespont",
+      "domain": "geography",
+      "introduced_in": "introductory",
+      "description": "Know the location of the Hellespont",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: HISTORY — PERIODS ────────────────────────────────────────────
+
+    {
+      "id": "hist.period.persian_wars",
+      "domain": "history",
+      "subtype": "period",
+      "introduced_in": "introductory",
+      "description": "Know the Persian Wars (490–479 BCE): a conflict between Greece and Persia",
+      "dates": "490–479 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.period.athenian_empire",
+      "domain": "history",
+      "subtype": "period",
+      "introduced_in": "introductory",
+      "description": "Know the Athenian Empire (479–431/404 BCE): emerged from the Delian League; the Golden Age of Athens; rise of the Athenian navy",
+      "dates": "479–431/404 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.period.peloponnesian_war",
+      "domain": "history",
+      "subtype": "period",
+      "introduced_in": "introductory",
+      "description": "Know the Peloponnesian War (431–404 BCE): a conflict between Athens and Sparta",
+      "dates": "431–404 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.period.rise_of_macedon",
+      "domain": "history",
+      "subtype": "period",
+      "introduced_in": "introductory",
+      "description": "Know the Rise of Macedon: Philip II attacked Greek city-states; Alexander extended Greek rule to its furthest extent",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.period.hellenistic_age",
+      "domain": "history",
+      "subtype": "period",
+      "introduced_in": "introductory",
+      "description": "Know the Hellenistic Age: the period following the death of Alexander the Great (after 323 BCE)",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: HISTORY — FIGURES ────────────────────────────────────────────
+
+    {
+      "id": "hist.figure.darius",
+      "domain": "history",
+      "subtype": "figure",
+      "introduced_in": "introductory",
+      "description": "Know Darius I (the Great): a Persian leader who died in 485 BCE; associated with the Persian Wars",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.figure.xerxes",
+      "domain": "history",
+      "subtype": "figure",
+      "introduced_in": "introductory",
+      "description": "Know Xerxes: son of Darius I; Persian leader during the Persian Wars",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.figure.leonidas",
+      "domain": "history",
+      "subtype": "figure",
+      "introduced_in": "introductory",
+      "description": "Know Leonidas: a Spartan king who commanded the 300 Spartans at Thermopylae",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.figure.pericles",
+      "domain": "history",
+      "subtype": "figure",
+      "introduced_in": "introductory",
+      "description": "Know Pericles: Athenian statesman and general who died in 429 BCE; promoted Athens as a cultural center and fostered Athenian democracy",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.figure.philip_ii",
+      "domain": "history",
+      "subtype": "figure",
+      "introduced_in": "introductory",
+      "description": "Know Philip II of Macedon: a warlord who attacked Greek city-states; father of Alexander the Great",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.figure.alexander",
+      "domain": "history",
+      "subtype": "figure",
+      "introduced_in": "introductory",
+      "description": "Know Alexander the Great: son of Philip of Macedon, died in 323 BCE; extended Greek rule to its furthest extent",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: HISTORY — BATTLES & EVENTS ──────────────────────────────────
+
+    {
+      "id": "hist.battle.marathon",
+      "domain": "history",
+      "subtype": "battle",
+      "introduced_in": "introductory",
+      "description": "Know the Battle of Marathon (490 BCE): Greeks defeated the Persians on the plain of Marathon; Athenians asked Spartans for help but they declined",
+      "date": "490 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.thermopylae",
+      "domain": "history",
+      "subtype": "battle",
+      "introduced_in": "introductory",
+      "description": "Know the Battle of Thermopylae (480 BCE): 300 Spartans under Leonidas prevented the Persians from invading at a narrow pass",
+      "date": "480 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.salamis",
+      "domain": "history",
+      "subtype": "battle",
+      "introduced_in": "introductory",
+      "description": "Know the Battle of Salamis (480 BCE): the Greek navy defeated the Persian navy",
+      "date": "480 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.event.peace_of_nicias",
+      "domain": "history",
+      "subtype": "event",
+      "introduced_in": "introductory",
+      "description": "Know the Peace of Nicias (421 BCE): a treaty meant to end the Peloponnesian War but was subsequently undermined",
+      "date": "421 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.aegospotami",
+      "domain": "history",
+      "subtype": "battle",
+      "introduced_in": "introductory",
+      "description": "Know the Battle of Aegospotami (405 BCE): Spartan navy destroyed the Athenian navy, ending the Peloponnesian War",
+      "date": "405 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.chaeronea",
+      "domain": "history",
+      "subtype": "battle",
+      "introduced_in": "introductory",
+      "description": "Know the Battle of Chaeronea (338 BCE): Philip II defeated Athens and Thebes, resulting in the League of Corinth",
+      "date": "338 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.issus",
+      "domain": "history",
+      "subtype": "battle",
+      "introduced_in": "introductory",
+      "description": "Know the Battle of Issus (333 BCE): Alexander led the Hellenic League against the Achaemenid Empire under Darius III",
+      "date": "333 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.gaugamela",
+      "domain": "history",
+      "subtype": "battle",
+      "introduced_in": "introductory",
+      "description": "Know the Battle of Gaugamela (331 BCE): Alexander and the Hellenic League decisively defeated Darius III",
+      "date": "331 BCE",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: HISTORY — AUTHORS ────────────────────────────────────────────
+
+    {
+      "id": "hist.author.plato",
+      "domain": "history",
+      "subtype": "author",
+      "introduced_in": "introductory",
+      "description": "Know Plato: philosopher who wrote about Socrates' philosophical dialogues; famous works include The Republic (on the ideal state) and the Apology (Socrates' defense against corrupting the youth of Athens)",
+      "genre": "philosophy",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.author.aeschylus",
+      "domain": "history",
+      "subtype": "author",
+      "introduced_in": "introductory",
+      "description": "Know Aeschylus: called 'The Father of Tragedy'; produced the Oresteia trilogy about Agamemnon's son",
+      "genre": "tragedy",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.author.sophocles",
+      "domain": "history",
+      "subtype": "author",
+      "introduced_in": "introductory",
+      "description": "Know Sophocles: never judged lower than 2nd place in dramatic competitions; produced Oedipus the King and Oedipus at Colonus about the tragic king of Thebes",
+      "genre": "tragedy",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.author.euripides",
+      "domain": "history",
+      "subtype": "author",
+      "introduced_in": "introductory",
+      "description": "Know Euripides: produced Medea (about the witch married to the Argonaut Jason) and Hippolytus (on the tragic death of Theseus' son)",
+      "genre": "tragedy",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.author.herodotus",
+      "domain": "history",
+      "subtype": "author",
+      "introduced_in": "introductory",
+      "description": "Know Herodotus: called 'The Father of History'; author of The Histories on the origins of the Persian Wars",
+      "genre": "history",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.author.thucydides",
+      "domain": "history",
+      "subtype": "author",
+      "introduced_in": "introductory",
+      "description": "Know Thucydides: author of the History of the Peloponnesian War",
+      "genre": "history",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: MYTHOLOGY — DEITIES ─────────────────────────────────────────
+
+    {
+      "id": "myth.deity.zeus",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Zeus: king of the gods; spheres include lightning and thunder; symbols are the eagle and lightning bolt",
+      "spheres": ["king of the gods", "lightning", "thunder"],
+      "symbols": ["eagle", "lightning bolt"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.hera",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Hera: queen of the gods; sphere is marriage; symbol is the peacock",
+      "spheres": ["queen of the gods", "marriage"],
+      "symbols": ["peacock"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.poseidon",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Poseidon: god of oceans, water, and earthquakes; symbols are the trident and horse",
+      "spheres": ["oceans and water", "earthquakes"],
+      "symbols": ["trident", "horse"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.hades",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Hades: ruler of the Underworld; symbol is the bident",
+      "spheres": ["Underworld"],
+      "symbols": ["bident"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.demeter",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Demeter: goddess of agriculture; symbols are the stalk of wheat and cornucopia",
+      "spheres": ["agriculture"],
+      "symbols": ["stalk of wheat", "cornucopia"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.hestia",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Hestia: goddess of the hearth (home fire); symbols are the hearth and small fire",
+      "spheres": ["hearth", "home fire"],
+      "symbols": ["hearth", "small fire"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.ares",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Ares: god of war; symbols are the spear and vulture",
+      "spheres": ["war"],
+      "symbols": ["spear", "vulture"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.athena",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Athena: goddess of wisdom, war, and domestic crafts/tasks; symbols are the owl, helmet, olive branch/tree, and aegis",
+      "spheres": ["wisdom", "war", "domestic crafts"],
+      "symbols": ["owl", "helmet", "olive branch", "olive tree", "aegis"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.hephaestus",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Hephaestus: god of blacksmithing and metalworking; symbols are the hammer and anvil",
+      "spheres": ["blacksmithing", "metalworking"],
+      "symbols": ["hammer", "anvil"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.apollo",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Apollo: god of the sun, prophecy, music, and medicine; symbols are the sun, bow and arrows, and lyre",
+      "spheres": ["sun", "prophecy", "music", "medicine"],
+      "symbols": ["sun", "bow and arrows", "lyre"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.artemis",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Artemis: goddess of the moon, hunting, and animals; symbols are the moon, bow and arrows, deer, and hunting dog",
+      "spheres": ["moon", "hunting", "animals"],
+      "symbols": ["moon", "bow and arrows", "deer", "hunting dog"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.hermes",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Hermes: god of messengers, thieves, and inventors; symbols are the caduceus (winged staff with serpents) and winged sandals",
+      "spheres": ["messengers", "thieves", "inventors"],
+      "symbols": ["caduceus", "winged sandals"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.dionysus",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Dionysus: god of wine, revelry, and insanity; symbols are grapes, grape vines, ivy, leopards, and the thyrsus (pinecone-topped staff)",
+      "spheres": ["wine", "revelry", "insanity"],
+      "symbols": ["grapes", "grape vines", "ivy", "leopards", "thyrsus"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.aphrodite",
+      "domain": "mythology",
+      "subtype": "deity",
+      "introduced_in": "introductory",
+      "description": "Know Aphrodite: goddess of love and beauty; symbols are doves and erotes (winged babies)",
+      "spheres": ["love", "beauty"],
+      "symbols": ["doves", "erotes"],
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: MYTHOLOGY — MYTHS ───────────────────────────────────────────
+
+    {
+      "id": "myth.story.arachne",
+      "domain": "mythology",
+      "subtype": "myth",
+      "introduced_in": "introductory",
+      "description": "Know the general plot of the myth of Arachne",
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.story.midas",
+      "domain": "mythology",
+      "subtype": "myth",
+      "introduced_in": "introductory",
+      "description": "Know the general plot of the myth of Midas",
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.story.theseus_minotaur",
+      "domain": "mythology",
+      "subtype": "myth",
+      "introduced_in": "introductory",
+      "description": "Know the general plot of the myth of Theseus and the Minotaur",
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.story.perseus_medusa",
+      "domain": "mythology",
+      "subtype": "myth",
+      "introduced_in": "introductory",
+      "description": "Know the general plot of the myth of Perseus and Medusa",
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.story.atalanta",
+      "domain": "mythology",
+      "subtype": "myth",
+      "introduced_in": "introductory",
+      "description": "Know the general plot of the myth of Atalanta",
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.story.daedalus_icarus",
+      "domain": "mythology",
+      "subtype": "myth",
+      "introduced_in": "introductory",
+      "description": "Know the general plot of the myth of Daedalus and Icarus",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: DERIVATIVES ──────────────────────────────────────────────────
+
+    {
+      "id": "deriv.amphi",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of ἀμφί (amphi-: around, on both sides)",
+      "greek": "ἀμφί",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.anti",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of ἀντί (anti-: against, opposite)",
+      "greek": "ἀντί",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.apo",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of ἀπό (apo-: away from, off)",
+      "greek": "ἀπό",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.dia",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of διά (dia-: through, across)",
+      "greek": "διά",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.dys",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of δυσ- (dys-: bad, difficult)",
+      "greek": "δυσ-",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.ek",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of ἐκ (ec-/ex-: out of, from)",
+      "greek": "ἐκ",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.en",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of ἐν (en-: in, within)",
+      "greek": "ἐν",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.epi",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of ἐπί (epi-: upon, on, over)",
+      "greek": "ἐπί",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.eu",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of εὐ- (eu-: good, well)",
+      "greek": "εὐ-",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.meta",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of μετά (meta-: after, beyond, with)",
+      "greek": "μετά",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.pan",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of παν- (pan-: all, every)",
+      "greek": "παν-",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.peri",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of περί (peri-: around, about)",
+      "greek": "περί",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.pro",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of πρό (pro-: before, in front of)",
+      "greek": "πρό",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.pros",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of πρός (pros-: toward, in addition to)",
+      "greek": "πρός",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.syn",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of σύν (syn-/sym-: with, together)",
+      "greek": "σύν",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.hyper",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of ὑπέρ (hyper-: over, above, beyond)",
+      "greek": "ὑπέρ",
+      "type": "knowledge"
+    },
+    {
+      "id": "deriv.hypo",
+      "domain": "derivatives",
+      "introduced_in": "introductory",
+      "description": "Know the meaning and English derivatives of ὑπό (hypo-: under, beneath)",
+      "greek": "ὑπό",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: MORPHOLOGY — INTRODUCTORY ───────────────────────────────────
+
+    {
+      "id": "morph.noun.1st_decl",
+      "domain": "morphology",
+      "subtype": "noun",
+      "introduced_in": "introductory",
+      "description": "Know 1st declension noun endings, all cases, singular and plural",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.noun.2nd_decl",
+      "domain": "morphology",
+      "subtype": "noun",
+      "introduced_in": "introductory",
+      "description": "Know 2nd declension noun endings, all cases, singular and plural",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.article.definite_all_genders",
+      "domain": "morphology",
+      "subtype": "article",
+      "introduced_in": "introductory",
+      "description": "Know the definite article (ὁ, ἡ, τό) in all three genders, all cases, singular and plural",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.adjective.1st_2nd_decl",
+      "domain": "morphology",
+      "subtype": "adjective",
+      "introduced_in": "introductory",
+      "description": "Know 1st and 2nd declension adjective endings, all cases, singular and plural",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.present_indicative_active",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "introductory",
+      "description": "Know present indicative active endings for regular verbs, all persons singular and plural",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.epsilon_contract_present",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "introductory",
+      "description": "Know present indicative active endings for epsilon contract verbs, all persons singular and plural",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.present_infinitive_active",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "introductory",
+      "description": "Know the present active infinitive ending for regular and epsilon contract verbs",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: MORPHOLOGY — BEGINNING ──────────────────────────────────────
+
+    {
+      "id": "morph.noun.3rd_decl_recognition",
+      "domain": "morphology",
+      "subtype": "noun",
+      "introduced_in": "beginning",
+      "description": "Recognize 3rd declension nouns for meaning; not tested on forms or as grammatical items",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.pronoun.personal_1st_2nd",
+      "domain": "morphology",
+      "subtype": "pronoun",
+      "introduced_in": "beginning",
+      "description": "Know the forms of the 1st and 2nd person personal pronouns: ἐγώ, σύ, ἡμεῖς, ὑμεῖς",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.pronoun.autos_oblique",
+      "domain": "morphology",
+      "subtype": "pronoun",
+      "introduced_in": "beginning",
+      "description": "Know αὐτός as a 3rd person pronoun in oblique cases only",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.pronoun.relative_hos",
+      "domain": "morphology",
+      "subtype": "pronoun",
+      "introduced_in": "beginning",
+      "description": "Know the forms of the relative pronoun ὅς, ἥ, ὅν",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.adjective.3rd_decl_recognition",
+      "domain": "morphology",
+      "subtype": "adjective",
+      "introduced_in": "beginning",
+      "description": "Recognize 3rd declension adjectives (e.g. μέγας, πολύς, πᾶς, οὐδείς) for meaning; not tested as form or grammatical items",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.adjective.possessive",
+      "domain": "morphology",
+      "subtype": "adjective",
+      "introduced_in": "beginning",
+      "description": "Know the possessive adjectives ἐμός, σός, ἡμέτερος, ὑμέτερος",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.adjective.positive_degree",
+      "domain": "morphology",
+      "subtype": "adjective",
+      "introduced_in": "beginning",
+      "description": "Know 1st and 2nd declension adjectives at the positive degree",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.numeral.cardinal_ordinal_1_10",
+      "domain": "morphology",
+      "subtype": "numeral",
+      "introduced_in": "beginning",
+      "description": "Know cardinal and ordinal numbers 1–10",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.adverb.ws_ending",
+      "domain": "morphology",
+      "subtype": "adverb",
+      "introduced_in": "beginning",
+      "description": "Know adverb forms ending in -ως at the positive degree",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.adverb.negatives",
+      "domain": "morphology",
+      "subtype": "adverb",
+      "introduced_in": "beginning",
+      "description": "Know the negative adverbs οὐ, οὐκ, οὐχ and the adverb οὕτως",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.interrogative.adverbs_adjectives",
+      "domain": "morphology",
+      "subtype": "interrogative",
+      "introduced_in": "beginning",
+      "description": "Know the interrogative adverbs and adjectives: ποῖος, πότε, πότερος, ποῦ, πώς",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.particle.beginning",
+      "domain": "morphology",
+      "subtype": "particle",
+      "introduced_in": "beginning",
+      "description": "Know the particles and conjunctions: δέ, γάρ, μέν...δέ, ἆρα, γε, ἀλλά, καί, τε...καί, καί...καί, οὔτε...οὔτε",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.imperfect_indicative_active",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "beginning",
+      "description": "Know imperfect indicative active endings for regular, alpha contract, and epsilon contract verbs",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.future_indicative_active",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "beginning",
+      "description": "Know future indicative active endings for regular, alpha contract, and epsilon contract verbs",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.alpha_contract_present",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "beginning",
+      "description": "Know present indicative active endings for alpha contract verbs",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.middle_voice",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "beginning",
+      "description": "Know present and imperfect indicative middle voice endings; recognize deponent verbs",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.imperative_present",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "beginning",
+      "description": "Know present imperative active endings",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.eimi",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "beginning",
+      "description": "Know the forms of the irregular verb εἰμί (present, imperfect, future, infinitive)",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.impersonal_dei",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "beginning",
+      "description": "Know the impersonal verb δεῖ",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: MORPHOLOGY — INTERMEDIATE ───────────────────────────────────
+
+    {
+      "id": "morph.noun.3rd_decl_forms",
+      "domain": "morphology",
+      "subtype": "noun",
+      "introduced_in": "intermediate",
+      "description": "Know 3rd declension noun endings, all cases, singular and plural",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.pronoun.relative_hosper",
+      "domain": "morphology",
+      "subtype": "pronoun",
+      "introduced_in": "intermediate",
+      "description": "Know the forms of the emphatic relative pronoun ὅσπερ",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.pronoun.reflexive",
+      "domain": "morphology",
+      "subtype": "pronoun",
+      "introduced_in": "intermediate",
+      "description": "Know the reflexive pronouns: ἐμαυτοῦ, σεαυτοῦ, ἑαυτοῦ, αὑτοῦ",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.pronoun.interrogative_tis",
+      "domain": "morphology",
+      "subtype": "pronoun",
+      "introduced_in": "intermediate",
+      "description": "Know the interrogative pronoun τίς",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.pronoun.indefinite_tis",
+      "domain": "morphology",
+      "subtype": "pronoun",
+      "introduced_in": "intermediate",
+      "description": "Know the indefinite pronoun τις",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.adjective.3rd_decl_forms",
+      "domain": "morphology",
+      "subtype": "adjective",
+      "introduced_in": "intermediate",
+      "description": "Know 3rd declension adjective endings, all cases, singular and plural",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.adjective.comparative_superlative",
+      "domain": "morphology",
+      "subtype": "adjective",
+      "introduced_in": "intermediate",
+      "description": "Know comparative and superlative degrees of adjectives and adverbs",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.adjective.irregular_comparatives",
+      "domain": "morphology",
+      "subtype": "adjective",
+      "introduced_in": "intermediate",
+      "description": "Know the irregular comparatives and superlatives of ἀγαθός, κακός, μέγας, πολύς, ῥᾴδιος, ὀλίγος, μικρός, ταχύς, and their adverbs",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.demonstrative.all",
+      "domain": "morphology",
+      "subtype": "demonstrative",
+      "introduced_in": "intermediate",
+      "description": "Know the demonstrative and intensive pronouns: οὗτος, ἐκεῖνος, ὅδε, αὐτός",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.pronoun.oudeis_medeis",
+      "domain": "morphology",
+      "subtype": "pronoun",
+      "introduced_in": "intermediate",
+      "description": "Know the compound negatives οὐδείς and μηδείς",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.negative.me",
+      "domain": "morphology",
+      "subtype": "particle",
+      "introduced_in": "intermediate",
+      "description": "Know the negative μή and distinguish its use from οὐ/οὐκ/οὐχ",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.interrogative.intermediate",
+      "domain": "morphology",
+      "subtype": "interrogative",
+      "introduced_in": "intermediate",
+      "description": "Know the interrogative adverbs and adjectives: ἄρα, πόθεν, πότε, πῶς",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.particle.intermediate",
+      "domain": "morphology",
+      "subtype": "particle",
+      "introduced_in": "intermediate",
+      "description": "Know the particles and conjunctions: ἤ, ἤ...ἤ, οὔκουν, οὐδέ, δήπου, ἄν",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.aorist_active",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "intermediate",
+      "description": "Know aorist indicative, imperative, infinitive, and participle forms in the active voice for regular and contract verbs",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.passive_present_system",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "intermediate",
+      "description": "Know passive voice forms for the present system (present and imperfect)",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.subjunctive_present_aorist",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "intermediate",
+      "description": "Know present and aorist subjunctive forms",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.imperative_aorist",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "intermediate",
+      "description": "Know aorist imperative forms",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.infinitive_future_aorist",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "intermediate",
+      "description": "Know future and aorist infinitive forms",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.participle_present_future_aorist",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "intermediate",
+      "description": "Know present, future, and aorist participle forms",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.eimi_eim_phemi_oida",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "intermediate",
+      "description": "Know the irregular verbs εἰμί, εἶμι, φημί, and οἶδα",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.mi_verbs_didomi_deiknymi",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "intermediate",
+      "description": "Know the -μι verbs δίδωμι and δείκνυμι",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.temporal_augment",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "intermediate",
+      "description": "Know the temporal augment as a prefix in verb formation",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.o_contract_present",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "intermediate",
+      "description": "Know present indicative active endings for omicron contract verbs",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: MORPHOLOGY — PROSE ──────────────────────────────────────────
+
+    {
+      "id": "morph.numeral.cardinal_ordinal_1_20",
+      "domain": "morphology",
+      "subtype": "numeral",
+      "introduced_in": "prose",
+      "description": "Know cardinal and ordinal numbers 1–20",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.conjunction.ou_monon_alla_kai",
+      "domain": "morphology",
+      "subtype": "conjunction",
+      "introduced_in": "prose",
+      "description": "Know the coordinating conjunction οὐ μόνον...ἀλλὰ καί (not only...but also)",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.particle.ei_gar_eithe",
+      "domain": "morphology",
+      "subtype": "particle",
+      "introduced_in": "prose",
+      "description": "Know the wish particles εἰ γάρ and εἴθε",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.all_tenses",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "prose",
+      "description": "Know all tenses: present, imperfect, future, aorist, perfect, pluperfect, future perfect",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.all_voices",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "prose",
+      "description": "Know all voices: active, middle, passive",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.subjunctive_perfect",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "prose",
+      "description": "Know perfect subjunctive forms",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.optative_present_aorist_perfect",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "prose",
+      "description": "Know present, aorist, and perfect optative forms",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.infinitive_participle_perfect",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "prose",
+      "description": "Know perfect infinitive and perfect participle forms",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.verb.mi_verbs_histemi_tithemi",
+      "domain": "morphology",
+      "subtype": "verb",
+      "introduced_in": "prose",
+      "description": "Know the -μι verbs ἵστημι and τίθημι, including their infinitives and participles",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.word_formation.alpha_privative",
+      "domain": "morphology",
+      "subtype": "word_formation",
+      "introduced_in": "prose",
+      "description": "Know the alpha privative prefix (ἀ-/ἀν-: without, not)",
+      "type": "knowledge"
+    },
+    {
+      "id": "morph.word_formation.suffix_then_de",
+      "domain": "morphology",
+      "subtype": "word_formation",
+      "introduced_in": "prose",
+      "description": "Know the suffixes -θε(ν) (from a place) and -δε (to a place)",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: SYNTAX — BEGINNING ──────────────────────────────────────────
+
+    {
+      "id": "syn.accent.types",
+      "domain": "syntax",
+      "subtype": "accent",
+      "introduced_in": "beginning",
+      "description": "Know accent types: enclitic, proclitic, acute, grave, circumflex; and phonological features: elision, crasis, rough and smooth breathing",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.agreement.noun_adjective",
+      "domain": "syntax",
+      "subtype": "agreement",
+      "introduced_in": "beginning",
+      "description": "Understand agreement between noun and adjective",
+      "type": "application"
+    },
+    {
+      "id": "syn.agreement.noun_article",
+      "domain": "syntax",
+      "subtype": "agreement",
+      "introduced_in": "beginning",
+      "description": "Understand agreement between noun and article",
+      "type": "application"
+    },
+    {
+      "id": "syn.agreement.subject_verb",
+      "domain": "syntax",
+      "subtype": "agreement",
+      "introduced_in": "beginning",
+      "description": "Understand agreement between subject and verb",
+      "type": "application"
+    },
+    {
+      "id": "syn.agreement.pronoun_participle",
+      "domain": "syntax",
+      "subtype": "agreement",
+      "introduced_in": "beginning",
+      "description": "Understand agreement between (pro)noun and participle",
+      "type": "application"
+    },
+    {
+      "id": "syn.agreement.relative_antecedent",
+      "domain": "syntax",
+      "subtype": "agreement",
+      "introduced_in": "beginning",
+      "description": "Understand agreement between relative pronoun and its antecedent",
+      "type": "application"
+    },
+    {
+      "id": "syn.case.nominative_subject",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know the nominative case used as subject",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.nominative_predicate",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know the nominative case used as subject complement (predicate nominative)",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.genitive_possession",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know the genitive of possession",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.genitive_prepositions_beginning",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know the prepositions that take the genitive: ἀπό, διά, ἐκ/ἐξ, μετά, πρό, ὑπέρ",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_indirect_object",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know the dative of indirect object",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_means",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know the dative of means/instrument",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_time_when",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know the dative of time when",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_prepositions_beginning",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know the prepositions that take the dative: ἐν, ἐπί, πρός, σύν/ξύν, ὑπό",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.accusative_direct_object",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know the accusative of direct object",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.accusative_prepositions_beginning",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know the prepositions that take the accusative: ἀνά, εἰς, ἐπί, ἐς, κατά, περί, πρός",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.vocative_address",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know the vocative case used for direct address",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.apposition",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "beginning",
+      "description": "Know apposition as a usage across all cases",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.sentence.statement",
+      "domain": "syntax",
+      "subtype": "sentence_type",
+      "introduced_in": "beginning",
+      "description": "Understand and identify declarative statements",
+      "type": "application"
+    },
+    {
+      "id": "syn.sentence.question",
+      "domain": "syntax",
+      "subtype": "sentence_type",
+      "introduced_in": "beginning",
+      "description": "Understand and identify questions",
+      "type": "application"
+    },
+    {
+      "id": "syn.sentence.command",
+      "domain": "syntax",
+      "subtype": "sentence_type",
+      "introduced_in": "beginning",
+      "description": "Understand and identify commands",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.relative_definite",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "beginning",
+      "description": "Understand definite relative clauses (adjectival)",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.temporal_epei",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "beginning",
+      "description": "Understand temporal clauses with ἐπεί and ἐπειδή",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.result_hoste_indicative",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "beginning",
+      "description": "Understand result clauses using ὥστε + indicative",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.indirect_statement_hoti_indicative",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "beginning",
+      "description": "Understand indirect statement using ὅτι + indicative",
+      "type": "application"
+    },
+    {
+      "id": "syn.word_order.predicative",
+      "domain": "syntax",
+      "subtype": "word_order",
+      "introduced_in": "beginning",
+      "description": "Understand predicative position of adjectives",
+      "type": "application"
+    },
+    {
+      "id": "syn.word_order.attributive",
+      "domain": "syntax",
+      "subtype": "word_order",
+      "introduced_in": "beginning",
+      "description": "Understand attributive position of adjectives",
+      "type": "application"
+    },
+    {
+      "id": "syn.terminology.parts_of_speech",
+      "domain": "syntax",
+      "subtype": "terminology",
+      "introduced_in": "beginning",
+      "description": "Know the parts of speech: noun, verb, adjective, article, adverb, particle, pronoun, coordinating conjunction, subordinating conjunction",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.terminology.diphthongs",
+      "domain": "syntax",
+      "subtype": "terminology",
+      "introduced_in": "beginning",
+      "description": "Know what diphthongs are and recognize them in Greek",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.terminology.complementary_infinitive",
+      "domain": "syntax",
+      "subtype": "terminology",
+      "introduced_in": "beginning",
+      "description": "Know the complementary infinitive",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.terminology.substantive",
+      "domain": "syntax",
+      "subtype": "terminology",
+      "introduced_in": "beginning",
+      "description": "Know the concept of the substantive (adjective or participle used as a noun)",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: SYNTAX — INTERMEDIATE ───────────────────────────────────────
+
+    {
+      "id": "syn.agreement.noun_participle",
+      "domain": "syntax",
+      "subtype": "agreement",
+      "introduced_in": "intermediate",
+      "description": "Understand agreement between noun and participle",
+      "type": "application"
+    },
+    {
+      "id": "syn.case.genitive_partitive",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "intermediate",
+      "description": "Know the partitive genitive (genitive of the whole)",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.genitive_time_within",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "intermediate",
+      "description": "Know the genitive of time within which",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.genitive_comparison",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "intermediate",
+      "description": "Know the genitive of comparison",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.genitive_absolute",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "intermediate",
+      "description": "Know the genitive absolute construction",
+      "type": "application"
+    },
+    {
+      "id": "syn.case.genitive_prepositions_intermediate",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "intermediate",
+      "description": "Know the additional prepositions taking the genitive: ἀντί, ἐπί, περί, πρός, ὑπό",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_respect",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "intermediate",
+      "description": "Know the dative of respect",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_possession",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "intermediate",
+      "description": "Know the dative of possession",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_prepositions_intermediate",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "intermediate",
+      "description": "Know the additional prepositions taking the dative: παρά",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.accusative_subject_infinitive",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "intermediate",
+      "description": "Know the accusative as subject of an infinitive",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.accusative_duration",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "intermediate",
+      "description": "Know the accusative of duration of time",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.accusative_prepositions_intermediate",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "intermediate",
+      "description": "Know the additional prepositions taking the accusative: διά, μετά, παρά, ὑπέρ, ὑπό",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.sentence.exhortation",
+      "domain": "syntax",
+      "subtype": "sentence_type",
+      "introduced_in": "intermediate",
+      "description": "Understand exhortations (hortatory subjunctive)",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.relative_indefinite",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "intermediate",
+      "description": "Understand indefinite relative clauses (adjectival)",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.purpose_hina_hos_hopos",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "intermediate",
+      "description": "Understand purpose clauses using ἵνα, ὡς, ὅπως + subjunctive",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.causal_intermediate",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "intermediate",
+      "description": "Understand causal clauses using διότι, ἐπεί, ἐπειδή, ὁπότε, ὅτε, ὅτι, ὡς",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.temporal_intermediate",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "intermediate",
+      "description": "Understand temporal clauses using ἐπεί, ἐπειδή, ἐπειδάν, ὁπότε, ὁποτάν, ὅτε, ὅταν, ὡς",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.indirect_statement_infinitive_participle",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "intermediate",
+      "description": "Understand indirect statement using infinitive or participle constructions",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.indirect_statement_hoti_hos",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "intermediate",
+      "description": "Understand indirect statement using ὅτι/ὡς + indicative",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.indirect_question",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "intermediate",
+      "description": "Understand indirect questions using interrogatives: ὁπότερος, ὁπόσος, ὁπότε, ὅπου, ὅσος, ὅστις, ὅτε",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.complementary_infinitive_exo",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "intermediate",
+      "description": "Understand complementary infinitive with ἔχω and ἐξέστιν",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.supplementary_participle",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "intermediate",
+      "description": "Understand the supplementary participle",
+      "type": "application"
+    },
+    {
+      "id": "syn.construction.hos_superlative",
+      "domain": "syntax",
+      "subtype": "construction",
+      "introduced_in": "intermediate",
+      "description": "Understand ὡς + superlative adverb/adjective (as X as possible)",
+      "type": "application"
+    },
+    {
+      "id": "syn.construction.e_comparative",
+      "domain": "syntax",
+      "subtype": "construction",
+      "introduced_in": "intermediate",
+      "description": "Understand ἤ + comparative (than)",
+      "type": "application"
+    },
+
+    // ─── DOMAIN: SYNTAX — PROSE ───────────────────────────────────────────────
+
+    {
+      "id": "syn.case.genitive_separation",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the genitive of separation",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.genitive_agent",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the genitive of agent",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.genitive_compound_verbs",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the genitive used with compound verbs",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.genitive_prepositions_prose",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the additional prepositions taking the genitive: ἄνευ, ἄχρι, ἐγγύς, εἴσω, ἐκτός, ἕνεκα/ἕνεκεν, ἐντός, ἔξω, μεταξύ, κατά, πλήν",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_accompaniment",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the dative of accompaniment",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_degree_difference",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the dative of degree of difference",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_agent",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the dative of agent",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_compound_verbs",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the dative used with compound verbs",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.dative_prepositions_prose",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the prepositions ἀμφί and περί taking the dative",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.accusative_respect",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the accusative of respect",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.accusative_extent_space",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the accusative of extent of space",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.accusative_neuter_adverbial",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the neuter accusative used adverbially",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.accusative_oaths",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the accusative used in oaths",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.case.accusative_prepositions_prose",
+      "domain": "syntax",
+      "subtype": "case_usage",
+      "introduced_in": "prose",
+      "description": "Know the prepositions ἀμφί and περί taking the accusative",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.figure.asyndeton",
+      "domain": "syntax",
+      "subtype": "figure_of_speech",
+      "introduced_in": "prose",
+      "description": "Know and identify asyndeton: the omission of conjunctions between coordinate elements",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.figure.polysyndeton",
+      "domain": "syntax",
+      "subtype": "figure_of_speech",
+      "introduced_in": "prose",
+      "description": "Know and identify polysyndeton: the use of multiple conjunctions in close succession",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.figure.parallelism",
+      "domain": "syntax",
+      "subtype": "figure_of_speech",
+      "introduced_in": "prose",
+      "description": "Know and identify parallelism: the use of matching syntactic structures",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.figure.chiasmus",
+      "domain": "syntax",
+      "subtype": "figure_of_speech",
+      "introduced_in": "prose",
+      "description": "Know and identify chiasmus: an ABBA arrangement of parallel elements",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.infinitive.as_verbal_noun",
+      "domain": "syntax",
+      "subtype": "construction",
+      "introduced_in": "prose",
+      "description": "Know the infinitive used as a verbal noun: as subject, subject complement, object, or appositive",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.sentence.deliberative_question",
+      "domain": "syntax",
+      "subtype": "sentence_type",
+      "introduced_in": "prose",
+      "description": "Understand the deliberative question (subjunctive)",
+      "type": "application"
+    },
+    {
+      "id": "syn.sentence.prohibition",
+      "domain": "syntax",
+      "subtype": "sentence_type",
+      "introduced_in": "prose",
+      "description": "Understand prohibition (negative command with μή)",
+      "type": "application"
+    },
+    {
+      "id": "syn.sentence.potential",
+      "domain": "syntax",
+      "subtype": "sentence_type",
+      "introduced_in": "prose",
+      "description": "Understand potential statements (optative + ἄν)",
+      "type": "application"
+    },
+    {
+      "id": "syn.sentence.wish",
+      "domain": "syntax",
+      "subtype": "sentence_type",
+      "introduced_in": "prose",
+      "description": "Understand wishes (optative; εἰ γάρ / εἴθε constructions)",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.relative_subjunctive",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "prose",
+      "description": "Understand relative clauses with subjunctive expressing purpose, result, or condition",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.circumstantial_participle_causal",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "prose",
+      "description": "Understand causal circumstantial participles using ἅτε or ὡς + participle",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.circumstantial_participle_comparative",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "prose",
+      "description": "Understand comparative circumstantial participles using ὥσπερ + participle",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.circumstantial_participle_concessive",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "prose",
+      "description": "Understand concessive circumstantial participles using καί or καίπερ + participle",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.circumstantial_participle_purpose",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "prose",
+      "description": "Understand purpose circumstantial participles using ὡς + future participle",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.conditional_all_types",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "prose",
+      "description": "Understand all types of conditional clauses using εἰ and ἐάν",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.purpose_prose",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "prose",
+      "description": "Understand purpose clauses using ὡς + future participle and ὡς + prepositional phrase",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.result_hoste_infinitive",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "prose",
+      "description": "Understand result clauses using ὥστε + infinitive",
+      "type": "application"
+    },
+    {
+      "id": "syn.clause.temporal_prin_heos",
+      "domain": "syntax",
+      "subtype": "subordinate_clause",
+      "introduced_in": "prose",
+      "description": "Understand temporal clauses using πρίν, ἕως, ἔστε, μέχρι, ὄφρα",
+      "type": "application"
+    },
+    {
+      "id": "syn.construction.apposition",
+      "domain": "syntax",
+      "subtype": "construction",
+      "introduced_in": "prose",
+      "description": "Understand apposition in complex prose contexts",
+      "type": "application"
+    },
+    {
+      "id": "syn.construction.aspect",
+      "domain": "syntax",
+      "subtype": "construction",
+      "introduced_in": "prose",
+      "description": "Understand verbal aspect (ongoing vs. completed action) as distinct from tense",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.construction.reduplication",
+      "domain": "syntax",
+      "subtype": "construction",
+      "introduced_in": "prose",
+      "description": "Understand reduplication as a feature of perfect stem formation",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.construction.primary_secondary_sequence",
+      "domain": "syntax",
+      "subtype": "construction",
+      "introduced_in": "prose",
+      "description": "Understand primary and secondary sequence in the use of moods in subordinate clauses",
+      "type": "knowledge"
+    },
+    {
+      "id": "syn.construction.ou_me_uses",
+      "domain": "syntax",
+      "subtype": "construction",
+      "introduced_in": "prose",
+      "description": "Understand the distinct uses of οὐ and μή across moods and constructions",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN: READING — INTRODUCTORY ──────────────────────────────────────
+
+    {
+      "id": "read.prepositional_phrases",
+      "domain": "reading",
+      "introduced_in": "introductory",
+      "description": "Understand prepositional phrases in easy Greek sentences",
+      "type": "application"
+    },
+    {
+      "id": "read.adjectives_in_sentences",
+      "domain": "reading",
+      "introduced_in": "introductory",
+      "description": "Understand the use of adjectives in easy Greek sentences",
+      "type": "application"
+    },
+    {
+      "id": "read.easy_sentences",
+      "domain": "reading",
+      "introduced_in": "introductory",
+      "description": "Understand easy Greek sentences drawing on the Introductory Vocabulary List",
+      "type": "application"
+    },
+    {
+      "id": "read.short_passage",
+      "domain": "reading",
+      "introduced_in": "introductory",
+      "description": "Understand a short Greek reading passage drawing on the Introductory Vocabulary List",
+      "type": "application"
+    },
+
+    // ─── DOMAIN: READING — PROSE (unadapted) ─────────────────────────────────
+
+    {
+      "id": "read.unadapted_text",
+      "domain": "reading",
+      "introduced_in": "prose",
+      "description": "Read and understand unadapted Attic prose; vocabulary and grammar aids will be given as needed",
+      "type": "application"
+    }
+
+  ]
+}

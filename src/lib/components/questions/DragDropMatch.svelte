@@ -1,86 +1,77 @@
 <script>
   import { renderMath } from '$lib/utils/math.js';
 
-  // Instruction text (two lines in TestNav)
   export let question_text = '';
   export let instruction = '';
-
-  // Tiles available to drag
   export let tiles = [];
-
-  // Rows: each row has a division equation and 3 answer slots
-  // { division: "36 ÷ p = 4", slots: ["p", "4", "36"] }
   export let rows = [];
-
-  // Exported value — JSON string of { rowIndex: [slot0, slot1, slot2] }
-  // null until at least one tile is placed
   export let value = null;
-
-  // ── Internal state ──────────────────────────────────────────────────────────
 
   // placed[rowIdx][slotIdx] = tileText | null
   let placed = rows.map(r => r.slots.map(() => null));
 
-  // Which tile is currently selected from the bank (index into `tiles`, or -1)
-  let selectedTile = -1;
+  // Track what's being dragged: { source: 'bank'|'slot', tile, rowIdx?, slotIdx? }
+  let dragging = null;
 
-  // Tiles that are already placed somewhere (to grey them out in the bank)
   $: usedTiles = placed.flat().filter(Boolean);
 
   function isTileAvailable(tile) {
-    // Count how many times it appears in the bank vs how many are placed
     const inBank = tiles.filter(t => t === tile).length;
-    const inUse = usedTiles.filter(t => t === tile).length;
+    const inUse  = usedTiles.filter(t => t === tile).length;
     return inUse < inBank;
-  }
-
-  // ── Interaction ─────────────────────────────────────────────────────────────
-
-  function handleTileClick(tileText, idx) {
-    // idx is the index in `tiles` array — but tiles may repeat so we track by text uniqueness
-    if (!isTileAvailable(tileText)) return; // already all copies placed
-    if (selectedTile === idx) {
-      // Deselect
-      selectedTile = -1;
-    } else {
-      selectedTile = idx;
-    }
-  }
-
-  function handleSlotClick(rowIdx, slotIdx) {
-    const current = placed[rowIdx][slotIdx];
-
-    if (current !== null) {
-      // Remove tile from slot — return it to bank
-      placed[rowIdx][slotIdx] = null;
-      placed = [...placed];
-      selectedTile = -1;
-      updateValue();
-      return;
-    }
-
-    if (selectedTile === -1) return; // nothing selected
-
-    // Place the selected tile here
-    const tileText = tiles[selectedTile];
-    placed[rowIdx][slotIdx] = tileText;
-    placed = [...placed];
-    selectedTile = -1;
-    updateValue();
   }
 
   function updateValue() {
     const anyPlaced = placed.some(row => row.some(s => s !== null));
-    if (!anyPlaced) {
-      value = null;
-      return;
-    }
-    // Build { "0": ["p", "4", "36"], "1": [...], ... }
+    if (!anyPlaced) { value = null; return; }
     const obj = {};
-    placed.forEach((row, i) => {
-      obj[String(i)] = row.map(s => s ?? '');
-    });
+    placed.forEach((row, i) => { obj[String(i)] = row.map(s => s ?? ''); });
     value = JSON.stringify(obj);
+  }
+
+  // ── Drag sources ──────────────────────────────────────────────────────────
+
+  function bankDragStart(e, tile) {
+    if (!isTileAvailable(tile)) { e.preventDefault(); return; }
+    dragging = { source: 'bank', tile };
+    e.dataTransfer.setData('text', tile);
+    e.dataTransfer.effectAllowed = 'move';
+  }
+
+  function slotDragStart(e, rowIdx, slotIdx) {
+    const tile = placed[rowIdx][slotIdx];
+    if (!tile) { e.preventDefault(); return; }
+    dragging = { source: 'slot', tile, rowIdx, slotIdx };
+    e.dataTransfer.setData('text', tile);
+    e.dataTransfer.effectAllowed = 'move';
+  }
+
+  // ── Drop targets ──────────────────────────────────────────────────────────
+
+  function slotDrop(e, rowIdx, slotIdx) {
+    e.preventDefault();
+    const tile = e.dataTransfer.getData('text');
+    if (!tile) return;
+    // Clear origin slot if dragging from another slot
+    if (dragging?.source === 'slot') {
+      placed[dragging.rowIdx][dragging.slotIdx] = null;
+    }
+    // If target already has a tile, it returns to the bank (just overwrite — bank recalcs)
+    placed[rowIdx][slotIdx] = tile;
+    placed = placed.map(r => [...r]);
+    dragging = null;
+    updateValue();
+  }
+
+  function bankDrop(e) {
+    e.preventDefault();
+    // Dropping back to bank: clear the source slot
+    if (dragging?.source === 'slot') {
+      placed[dragging.rowIdx][dragging.slotIdx] = null;
+      placed = placed.map(r => [...r]);
+      updateValue();
+    }
+    dragging = null;
   }
 </script>
 
@@ -93,18 +84,17 @@
   {/if}
 
   <!-- Tile bank -->
-  <div class="tile-bank">
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div class="tile-bank" on:dragover|preventDefault on:drop={bankDrop}>
     {#each tiles as tile, idx}
       {@const available = isTileAvailable(tile)}
-      {@const isSelected = selectedTile === idx}
-      <button
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div
         class="tile"
-        class:tile--selected={isSelected}
         class:tile--used={!available}
-        disabled={!available}
-        on:click={() => handleTileClick(tile, idx)}
-        type="button"
-      >{tile}</button>
+        draggable={available}
+        on:dragstart={(e) => bankDragStart(e, tile)}
+      >{tile}</div>
     {/each}
   </div>
 
@@ -116,17 +106,22 @@
         <span class="fact-label">has a related multiplication fact of</span>
         {#each row.slots as _slot, slotIdx}
           {@const placedTile = placed[rowIdx][slotIdx]}
-          <button
+          <!-- svelte-ignore a11y-no-static-element-interactions -->
+          <div
             class="slot"
             class:slot--filled={placedTile !== null}
-            on:click={() => handleSlotClick(rowIdx, slotIdx)}
-            type="button"
-            title={placedTile ? `Click to remove "${placedTile}"` : selectedTile >= 0 ? `Click to place "${tiles[selectedTile]}"` : ''}
+            on:dragover|preventDefault
+            on:drop={(e) => slotDrop(e, rowIdx, slotIdx)}
           >
             {#if placedTile !== null}
-              <span class="slot-tile">{placedTile}</span>
+              <!-- svelte-ignore a11y-no-static-element-interactions -->
+              <span
+                class="slot-tile"
+                draggable="true"
+                on:dragstart={(e) => slotDragStart(e, rowIdx, slotIdx)}
+              >{placedTile}</span>
             {/if}
-          </button>
+          </div>
           {#if slotIdx === 0}
             <span class="op">×</span>
           {:else if slotIdx === 1}
@@ -149,17 +144,14 @@
     max-width: 640px;
   }
 
-  .q-text {
-    margin: 0 0 10px;
-  }
+  .q-text { margin: 0 0 10px; }
 
-  /* Tile bank: row of bordered tiles like TestNav */
   .tile-bank {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     gap: 0;
     margin: 12px 0 20px;
+    min-height: 36px;
   }
 
   .tile {
@@ -171,22 +163,12 @@
     min-width: 32px;
     text-align: center;
     background: #fff;
-    cursor: pointer;
+    cursor: grab;
     user-select: none;
     border-radius: 2px;
     margin-right: 4px;
     margin-bottom: 4px;
     font-family: inherit;
-    transition: background 0.1s, color 0.1s;
-  }
-
-  .tile:hover:not(:disabled) {
-    background: #e8f0fb;
-  }
-
-  .tile--selected {
-    background: #4a90d9;
-    color: #fff;
   }
 
   .tile--used {
@@ -196,7 +178,6 @@
     background: #f9f9f9;
   }
 
-  /* Equation rows */
   .equation-rows {
     display: flex;
     flex-direction: column;
@@ -211,14 +192,8 @@
     font-size: 16px;
   }
 
-  .division-eq {
-    font-style: italic;
-    white-space: nowrap;
-  }
-
-  .fact-label {
-    white-space: nowrap;
-  }
+  .division-eq { font-style: italic; white-space: nowrap; }
+  .fact-label  { white-space: nowrap; }
 
   .slot {
     display: inline-flex;
@@ -229,16 +204,6 @@
     border: 1.5px solid #555;
     background: #f7f7f7;
     font-size: 16px;
-    font-style: normal;
-    cursor: pointer;
-    font-family: inherit;
-    padding: 0;
-    transition: background 0.1s, border-color 0.1s;
-  }
-
-  .slot:hover {
-    border-color: #4a90d9;
-    background: #f0f6ff;
   }
 
   .slot--filled {
@@ -249,9 +214,9 @@
   .slot-tile {
     color: #1a5fa8;
     font-weight: 500;
+    cursor: grab;
+    user-select: none;
   }
 
-  .op {
-    font-size: 16px;
-  }
+  .op { font-size: 16px; }
 </style>

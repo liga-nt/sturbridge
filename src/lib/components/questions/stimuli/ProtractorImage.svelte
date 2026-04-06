@@ -14,10 +14,11 @@
   const H = 190;
   const CX = 163;
   const CY = 162;
-  const LINE_Y = CY + 10;   // flat baseline below arc
+  const LINE_Y = CY + 10;   // flat bottom edge of protractor (center is offset above it)
 
   const R       = 145;      // outer arc radius
   const R_INNER = 103;      // inner arc radius
+  const RAY_EXT = R + 15;   // how far rays extend beyond arc
 
   const R_TICK_O_MAJ = R - 9;
   const R_TICK_O_MIN = R - 5;
@@ -57,11 +58,17 @@
     labels.push({ i, outerVal, innerVal, no_x, no_y, ni_x, ni_y, rot });
   }
 
-  // Left arrowhead on baseline
+  // Arrowheads on baseline (left points left, right points right)
   function leftArrowhead() {
-    const tipX = CX - R - 20;
-    const tipY = LINE_Y;
+    const tipX = CX - RAY_EXT;
+    const tipY = CY;
     return `${tipX},${tipY} ${tipX + 10},${tipY - 4} ${tipX + 10},${tipY + 4}`;
+  }
+
+  function rightArrowhead() {
+    const tipX = CX + RAY_EXT;
+    const tipY = CY;
+    return `${tipX},${tipY} ${tipX - 10},${tipY - 4} ${tipX - 10},${tipY + 4}`;
   }
 
   // Arrowhead at ray tip
@@ -76,10 +83,12 @@
     return `${tx},${ty} ${bx - px},${by + py} ${bx + px},${by - py}`;
   }
 
-  // Ray label position: beyond the arrowhead tip
-  function rayLabelPos(angleDeg, tipR) {
-    const offset = 18;
-    const [x, y] = pt(angleDeg, tipR + offset);
+  // Ray label position: inside the angle at the midpoint between baseline ray and angled ray
+  function rayLabelPos(angleDeg) {
+    // Left-side angle (>90°): angle is between left baseline (180°) and the ray
+    // Right-side angle (<90°): angle is between right baseline (0°) and the ray
+    const midAngle = angleDeg > 90 ? (180 + angleDeg) / 2 : angleDeg / 2;
+    const [x, y] = pt(midAngle, 52);
     return { x, y };
   }
 </script>
@@ -92,7 +101,7 @@
   font-family="'Helvetica Neue',Helvetica,Arial,sans-serif"
   aria-label="Protractor diagram"
 >
-  <!-- Outer arc with legs down to baseline -->
+  <!-- Outer arc with legs down to flat bottom edge -->
   <path
     d="M {CX + R} {LINE_Y} L {CX + R} {CY} A {R} {R} 0 0 0 {CX - R} {CY} L {CX - R} {LINE_Y}"
     fill="none" stroke="#333" stroke-width="1.2"
@@ -104,10 +113,19 @@
     fill="none" stroke="#333" stroke-width="1"
   />
 
-  <!-- Flat baseline -->
-  <line x1={CX - R - 22} y1={LINE_Y} x2={CX + R} y2={LINE_Y} stroke="#333" stroke-width="1.2"/>
-  <!-- Left arrowhead -->
-  <polygon points={leftArrowhead()} fill="#333"/>
+  <!-- Flat bottom of protractor: connects the two arc leg endpoints -->
+  <line x1={CX - R} y1={LINE_Y} x2={CX + R} y2={LINE_Y} stroke="#333" stroke-width="1.2"/>
+
+  <!-- Baseline ray: direction depends on which side the angle is on -->
+  {#if rays[0]?.angle > 90}
+    <!-- Left-side angle: ray extends left from center only, stops at origin -->
+    <line x1={CX - RAY_EXT} y1={CY} x2={CX} y2={CY} stroke="#333" stroke-width="1.2"/>
+    <polygon points={leftArrowhead()} fill="#333"/>
+  {:else}
+    <!-- Right-side angle: ray extends right from center only, stops at origin -->
+    <line x1={CX} y1={CY} x2={CX + RAY_EXT} y2={CY} stroke="#333" stroke-width="1.2"/>
+    <polygon points={rightArrowhead()} fill="#333"/>
+  {/if}
 
   <!-- Outer tick marks -->
   {#each ticks as t}
@@ -141,9 +159,9 @@
 
   <!-- Named rays -->
   {#each rays as ray}
-    {@const [rx, ry] = pt(ray.angle, R - 6)}
-    {@const arrowPts = arrowhead(ray.angle, R - 6)}
-    {@const lbl = rayLabelPos(ray.angle, R - 6)}
+    {@const [rx, ry] = pt(ray.angle, RAY_EXT)}
+    {@const arrowPts = arrowhead(ray.angle, RAY_EXT)}
+    {@const lbl = rayLabelPos(ray.angle)}
     <line
       x1={CX} y1={CY} x2={rx} y2={ry}
       stroke="#333" stroke-width="2"
@@ -169,10 +187,10 @@
     >{centerLabel}</text>
   {/if}
 
-  <!-- Baseline right-end label -->
+  <!-- Baseline right-end label (after arrowhead) -->
   {#if baseLabel}
     <text
-      x={CX + R + 8} y={LINE_Y + 2}
+      x={CX + RAY_EXT + 8} y={CY}
       text-anchor="start" dominant-baseline="middle"
       font-size="13" font-style="italic" fill="#333"
     >{baseLabel}</text>

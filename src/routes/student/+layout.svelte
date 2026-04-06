@@ -18,6 +18,7 @@
     const COURSE_ROUTES = {
         'fundamentals-math': '/student/fundamentals',
         'mcas-grade4-math':  '/student/mcas',
+        'greek-immersive':   '/student/greek',
     };
     const FALLBACK_ROUTE = '/student/mcas';
 

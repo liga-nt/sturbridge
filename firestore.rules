@@ -122,5 +122,15 @@ service cloud.firestore {
     match /prompts/{promptId} {
       allow read, write: if isDev();
     }
+
+    // ── Greek immersive course ────────────────────────────────────────────────
+    match /story_bible/{docId} {
+      allow read, write: if isDev();
+    }
+
+    match /lessons/{lessonId} {
+      allow read:  if isAuth();
+      allow write: if isDev();
+    }
   }
 }

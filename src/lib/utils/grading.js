@@ -157,6 +157,8 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
       return { correct: fuzzyMatch(String(s), cStr) };
     }
 
+    case 'yes_no_explanation':
+    case 'dimension_pair':
     case 'constructed_response': {
       const cStr = String(c).trim();
       // Comparison operator only (>, <, =): check if student's answer contains it
@@ -223,7 +225,7 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
         const cParts = String(c).split('|').map(x => normalize(x.trim()));
         const sParts = String(s).split('|').map(x => normalize(x.trim()));
         if (cParts.length !== sParts.length) return { correct: false };
-        return { correct: cParts.every((cp, i) => fuzzyMatch(sParts[i] ?? '', cp)) };
+        return { correct: cParts.every((cp, i) => (sParts[i] ?? '') === cp) };
       }
       return { correct: normalize(s) === normalize(String(c)) };
     }
@@ -324,6 +326,12 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
 
 export function gradeQuestion(answers, question) {
   if (!question) return { parts: [], score: 0, total: 0 };
+
+  // drag_drop_match grading reads from question.rows — route to the item grader
+  if (question.answer_type === 'drag_drop_match') {
+    const grader = graders[question.item_id];
+    if (grader) return grader.grade(answers.answer ?? '', question);
+  }
 
   if (question.answer_type === 'multi_part' && question.parts) {
     const topCA = typeof question.correct_answer === 'object' ? question.correct_answer : {};
@@ -552,7 +560,17 @@ export const graders = {
         if (rows.length === 0) return { correct: !!answers };
         const allCorrect = rows.every((row, i) => {
           const studentSlots = placed[String(i)] ?? [];
-          return row.slots.every((expected, j) => String(studentSlots[j] ?? '').trim() === String(expected).trim());
+          const expected = row.slots;
+          // Product (slot 2) must match exactly; multiplicands (slots 0 & 1) can be in either order
+          const s0 = String(studentSlots[0] ?? '').trim();
+          const s1 = String(studentSlots[1] ?? '').trim();
+          const s2 = String(studentSlots[2] ?? '').trim();
+          const e0 = String(expected[0]).trim();
+          const e1 = String(expected[1]).trim();
+          const e2 = String(expected[2]).trim();
+          const productMatch = s2 === e2;
+          const multiplicandsMatch = (s0 === e0 && s1 === e1) || (s0 === e1 && s1 === e0);
+          return productMatch && multiplicandsMatch;
         });
         return { correct: allCorrect };
       } catch {

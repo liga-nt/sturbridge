@@ -4969,17 +4969,17 @@ function generate2022Q7() {
   const div3 = `${f3[2]} ÷ ${f3[0]} = ${v3}`;
   const slots3 = [`${f3[0]}`, v3, `${f3[2]}`];
 
-  // Build tile bank: all values appearing in the equations (unique), sorted
-  const tileSet = new Set([
-    v1, v2, v3,
-    `${f1[1]}`, `${f1[2]}`,
-    `${f2[0]}`, `${f2[1]}`,
-    `${f3[0]}`, `${f3[2]}`,
-  ]);
-  // Sort: variables first (alphabetically), then numbers (ascending)
+  // Build tile bank: one tile per slot usage — duplicates get multiple copies
+  const allSlotValues = [
+    v1, `${f1[1]}`, `${f1[2]}`,
+    `${f2[0]}`, `${f2[1]}`, v2,
+    `${f3[0]}`, v3, `${f3[2]}`,
+  ];
+  const tileCount = {};
+  for (const t of allSlotValues) tileCount[t] = (tileCount[t] ?? 0) + 1;
   const tiles = [
-    ...[...tileSet].filter(t => isNaN(Number(t))).sort(),
-    ...[...tileSet].filter(t => !isNaN(Number(t))).sort((a, b) => Number(a) - Number(b)),
+    ...Object.entries(tileCount).filter(([t]) => isNaN(Number(t))).sort(([a],[b]) => a.localeCompare(b)).flatMap(([t,n]) => Array(n).fill(t)),
+    ...Object.entries(tileCount).filter(([t]) => !isNaN(Number(t))).sort(([a],[b]) => Number(a)-Number(b)).flatMap(([t,n]) => Array(n).fill(t)),
   ];
 
   return {
@@ -4994,7 +4994,7 @@ function generate2022Q7() {
       { division: div2, slots: slots2 },
       { division: div3, slots: slots3 },
     ],
-    correct_answer: `${slots1.join('×')}=${slots1[2]}, ${slots2[0]}×${slots2[1]}=${slots2[2]}, ${slots3[0]}×${slots3[1]}=${slots3[2]}`,
+    correct_answer: `${slots1[0]}×${slots1[1]}=${slots1[2]}, ${slots2[0]}×${slots2[1]}=${slots2[2]}, ${slots3[0]}×${slots3[1]}=${slots3[2]}`,
   };
 }
 
@@ -5078,26 +5078,27 @@ function generate2022Q8() {
           width_label: `${gardenWid} ft.`,
           height_label: `${gardenLen} ft.`,
         },
-        answer_prompt: 'What is the area, in square feet, of the garden?\n\nEnter your answer in the box.',
+        answer_prompt: 'What is the area, in square feet, of the garden?',
         answer_type: 'short_answer',
         answer_suffix: 'square feet',
         correct_answer: `${gardenArea}`,
       },
       {
         label: 'B',
-        question_text: `The patio has a length of ${patioLen} feet and an area of ${patioArea} square feet.\n\nWhat is the width, in feet, of the patio? Show or explain how you got your answer.`,
-        answer_type: 'constructed_response',
+        question_text: `The patio has a length of ${patioLen} feet and an area of ${patioArea} square feet.\n\nWhat is the width, in feet, of the patio?`,
+        answer_type: 'number_with_work',
+        answer_unit: 'feet',
         correct_answer: `${patioWid}`,
       },
       {
         label: 'C',
-        question_text: 'The owner of the house thinks the garden and the patio have the same perimeter.\n\nIs the owner correct? Explain your reasoning.',
+        question_text: 'The owner of the house thinks the garden and the patio have the same perimeter.\n\nIs the owner correct?',
         answer_type: 'yes_no_explanation',
         correct_answer: 'yes',
       },
       {
         label: 'D',
-        question_text: 'The area of the flower bed is <strong>less than</strong> the area of the garden. The perimeter of the flower bed is <strong>equal</strong> to the perimeter of the patio.\n\nWhat could be the length <strong>and</strong> the width of the flower bed? Explain how you know your answer is correct.',
+        question_text: 'The area of the flower bed is <strong>less than</strong> the area of the garden. The perimeter of the flower bed is <strong>equal</strong> to the perimeter of the patio.\n\nWhat could be the length <strong>and</strong> the width of the flower bed?',
         answer_type: 'dimension_pair',
         correct_answer: `halfPerim=${halfPerim},maxArea=${gardenArea}`,
       },
@@ -5491,21 +5492,21 @@ function generate2022Q15() {
   // New pattern: 1 triangle (center) + 2 squares per step
   // Step N: N triangles, 2N squares
 
-  // Part A: total triangles in Step stepA
+  // Part A: total triangles in Step stepA (1 triangle per step)
   const stepA = randInt(4, 8);
-  const triA = stepA;  // 1 triangle per step
+  const triA = stepA;
 
-  // Part B: total squares in Step stepB
+  // Part B: total triangles in Step stepB
   let stepB = randInt(5, 9);
   if (stepB === stepA) stepB = stepB < 9 ? stepB + 1 : stepB - 1;
-  const sqB = stepB * 2;  // 2 squares per step
+  const triB = stepB;  // 1 triangle per step
 
-  // Part C: total triangles in Step stepC (by multiplication)
+  // Part C: total squares in Step stepC (2 squares per step — uses multiplication)
   let stepC = randInt(7, 12);
   while (stepC === stepA || stepC === stepB) {
     stepC = stepC < 12 ? stepC + 1 : 7;
   }
-  const triC = stepC;  // 1 triangle per step
+  const sqC = stepC * 2;  // 2 squares per step
 
   // Part D: given triangles (= step number), find squares
   const stepD = pick([8, 9, 10, 11, 12, 13, 14, 15]);
@@ -5534,27 +5535,22 @@ function generate2022Q15() {
       },
       {
         label: 'B',
-        question_text:
-          `What is the total number of <strong>squares</strong> in Step ${stepB} of the pattern? ` +
-          'Explain how you know your answer is correct.',
+        question_text: `What is the total number of triangles in Step ${stepB} of the pattern?`,
         answer_type: 'number_with_work',
-        answer_unit: 'squares',
-        correct_answer: String(sqB),
+        answer_unit: 'triangles',
+        correct_answer: String(triB),
       },
       {
         label: 'C',
-        question_text:
-          `What is the total number of triangles in Step ${stepC} of the pattern? ` +
-          'Explain how you can get your answer by using multiplication.',
+        question_text: `What is the total number of <strong>squares</strong> in Step ${stepC} of the pattern?`,
         answer_type: 'number_with_work',
-        answer_unit: 'triangles',
-        correct_answer: String(triC),
+        answer_unit: 'squares',
+        work_instruction: 'Explain how you can get your answer by using multiplication.',
+        correct_answer: String(sqC),
       },
       {
         label: 'D',
-        question_text:
-          `One step in the pattern will have a total of ${triD} triangles. ` +
-          'What is the total number of squares in that step? Show or explain how you got your answer.',
+        question_text: `One step in the pattern will have a total of ${triD} triangles. What is the total number of squares in that step?`,
         answer_type: 'number_with_work',
         answer_unit: 'squares',
         correct_answer: String(sqD),
@@ -5564,8 +5560,8 @@ function generate2022Q15() {
     select_count: null,
     correct_answer: {
       A: String(triA),
-      B: String(sqB),
-      C: String(triC),
+      B: String(triB),
+      C: String(sqC),
       D: String(sqD),
     },
   };
@@ -5656,6 +5652,7 @@ function generate2022Q16() {
     question_number: '16',
     item_id: 'MA900842465',
     answer_type: 'inline_choice',
+    drag_mode: true,
     question_text:
       `Round this number to the nearest thousand, the nearest ten thousand, and the nearest hundred thousand.\n\n<p style="text-align:center;">${fmtNum}</p>`,
     instruction:
@@ -5922,7 +5919,7 @@ function generate2022Q20() {
     answer_options: null,
     parts: null,
     select_count: null,
-    correct_answer: `${totalNumerator}/${d} (${numModels} model${numModels !== 1 ? 's' : ''})`,
+    correct_answer: `${totalNumerator}/${d}`,
   };
 }
 

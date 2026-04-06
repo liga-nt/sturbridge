@@ -1,0 +1,3480 @@
+{
+  "entries": [
+    {
+      "greek": "ἄρχω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "governs": "+gen.",
+      "definition": "begin, lead, rule",
+      "introduced": "intro"
+    },
+    {
+      "greek": "βαίνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "walk, come, go",
+      "introduced": "intro"
+    },
+    {
+      "greek": "βλέπω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "see, look",
+      "introduced": "intro"
+    },
+    {
+      "greek": "βάλλω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "throw, hit",
+      "introduced": "intro"
+    },
+    {
+      "greek": "γράφω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "write, draw",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἐθέλω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "want, be willing",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἔχω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "have, hold",
+      "introduced": "intro"
+    },
+    {
+      "greek": "καλέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "call",
+      "introduced": "intro"
+    },
+    {
+      "greek": "κελεύω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "order",
+      "introduced": "intro"
+    },
+    {
+      "greek": "λαμβάνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "take, grab; receive, get",
+      "introduced": "intro"
+    },
+    {
+      "greek": "λέγω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "say, speak, report",
+      "introduced": "intro"
+    },
+    {
+      "greek": "λείπω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "leave, abandon",
+      "introduced": "intro"
+    },
+    {
+      "greek": "λύω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "loosen, destroy",
+      "introduced": "intro"
+    },
+    {
+      "greek": "μανθάνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "learn",
+      "introduced": "intro"
+    },
+    {
+      "greek": "μένω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "remain, endure, await",
+      "introduced": "intro"
+    },
+    {
+      "greek": "νομίζω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "believe",
+      "introduced": "intro"
+    },
+    {
+      "greek": "οἰκέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "inhabit, occupy",
+      "introduced": "intro"
+    },
+    {
+      "greek": "πάσχω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "suffer, experience",
+      "introduced": "intro"
+    },
+    {
+      "greek": "παύω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "stop",
+      "introduced": "intro"
+    },
+    {
+      "greek": "πείθω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "middle_note": "(mid. and pass.) obey, trust in (+dat.)",
+      "definition": "persuade, convince",
+      "introduced": "intro"
+    },
+    {
+      "greek": "πέμπω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "send",
+      "introduced": "intro"
+    },
+    {
+      "greek": "πλέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "sail",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ποιέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "middle_note": "(mid.) consider, reckon",
+      "definition": "make, do, make happen",
+      "introduced": "intro"
+    },
+    {
+      "greek": "φέρω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "carry, bring; φέρε: come on!",
+      "introduced": "intro"
+    },
+    {
+      "greek": "φεύγω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "flee, run away",
+      "introduced": "intro"
+    },
+    {
+      "greek": "εἰμί",
+      "pos": "verb",
+      "conjugation": "mi",
+      "definition": "be, exist (present indicative forms only at intro level)",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἀδελφή",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ῆς",
+      "definition": "sister",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἀρετή",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ῆς",
+      "definition": "excellence",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἀρχή",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ῆς",
+      "definition": "beginning, authority, office",
+      "introduced": "intro"
+    },
+    {
+      "greek": "γῆ",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "γῆς",
+      "definition": "earth",
+      "introduced": "intro"
+    },
+    {
+      "greek": "δίκη",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "definition": "justice; legal case",
+      "introduced": "intro"
+    },
+    {
+      "greek": "εἰρήνη",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "definition": "peace",
+      "introduced": "intro"
+    },
+    {
+      "greek": "κεφαλή",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ῆς",
+      "definition": "head",
+      "introduced": "intro"
+    },
+    {
+      "greek": "μάχη",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "definition": "battle",
+      "introduced": "intro"
+    },
+    {
+      "greek": "νίκη",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "definition": "victory",
+      "introduced": "intro"
+    },
+    {
+      "greek": "τέχνη",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "definition": "art, skill",
+      "introduced": "intro"
+    },
+    {
+      "greek": "τιμή",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ῆς",
+      "definition": "value, honor",
+      "introduced": "intro"
+    },
+    {
+      "greek": "τύχη",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "definition": "luck, fate",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ψυχή",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ῆς",
+      "definition": "breath, soul",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἀδελφός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "definition": "brother",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἄνθρωπος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m/f",
+      "genitive": "-ου",
+      "definition": "human being",
+      "introduced": "intro"
+    },
+    {
+      "greek": "βίος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "life",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἥλιος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "sun",
+      "introduced": "intro"
+    },
+    {
+      "greek": "θεός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m/f",
+      "genitive": "-οῦ",
+      "definition": "god, goddess",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἵππος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "horse",
+      "introduced": "intro"
+    },
+    {
+      "greek": "κύριος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "lord, master",
+      "introduced": "intro"
+    },
+    {
+      "greek": "λόγος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "word, speech; thought, reason, account, reckoning",
+      "introduced": "intro"
+    },
+    {
+      "greek": "πόλεμος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "war",
+      "introduced": "intro"
+    },
+    {
+      "greek": "φόβος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "panic, fear",
+      "introduced": "intro"
+    },
+    {
+      "greek": "χρόνος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "time",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἔργον",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "n",
+      "genitive": "-ου",
+      "definition": "work, deed, exploit",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ζῷον",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "n",
+      "genitive": "-ου",
+      "definition": "living being, animal",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἀγαθός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "good, brave, noble",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἄριστος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "definition": "best",
+      "introduced": "intro"
+    },
+    {
+      "greek": "δίκαιος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "just",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἱερός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ά -όν",
+      "definition": "holy, sacred",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἰσχυρός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ά -όν",
+      "definition": "strong",
+      "introduced": "intro"
+    },
+    {
+      "greek": "κακός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "bad, cowardly",
+      "introduced": "intro"
+    },
+    {
+      "greek": "καλός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "beautiful, noble",
+      "introduced": "intro"
+    },
+    {
+      "greek": "μακρός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ά -όν",
+      "definition": "long, tall, large",
+      "introduced": "intro"
+    },
+    {
+      "greek": "μικρός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ά -όν",
+      "definition": "small, little, short",
+      "introduced": "intro"
+    },
+    {
+      "greek": "νέος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "young, new",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ὀλίγος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "definition": "few, little, small",
+      "introduced": "intro"
+    },
+    {
+      "greek": "παλαιός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ά -όν",
+      "definition": "old, ancient",
+      "introduced": "intro"
+    },
+    {
+      "greek": "φίλος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "definition": "beloved, dear; friendly",
+      "introduced": "intro"
+    },
+    {
+      "greek": "χαλεπός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "difficult",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἀλλά",
+      "pos": "conjunction",
+      "definition": "but",
+      "introduced": "intro"
+    },
+    {
+      "greek": "καί",
+      "pos": "conjunction",
+      "definition": "and, also, even",
+      "introduced": "intro"
+    },
+    {
+      "greek": "οὐ",
+      "pos": "adverb",
+      "variants": "οὐκ, οὐχ",
+      "definition": "no, not",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἀμφί",
+      "pos": "preposition",
+      "governs": "+gen./dat./acc.",
+      "definition": "around, on both sides",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἀντί",
+      "pos": "preposition",
+      "governs": "+gen.",
+      "definition": "against, opposite",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἀπό",
+      "pos": "preposition",
+      "governs": "+gen.",
+      "definition": "(away) from",
+      "introduced": "intro"
+    },
+    {
+      "greek": "διά",
+      "pos": "preposition",
+      "governs": "+gen./acc.",
+      "definition": "through; because of",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἐκ",
+      "pos": "preposition",
+      "variants": "ἐξ",
+      "governs": "+gen.",
+      "definition": "from, out of",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἐν",
+      "pos": "preposition",
+      "governs": "+dat.",
+      "definition": "in, among; into",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἐπί",
+      "pos": "preposition",
+      "governs": "+gen./dat./acc.",
+      "definition": "at (+gen.); on (+dat.); against (+acc.)",
+      "introduced": "intro"
+    },
+    {
+      "greek": "μετά",
+      "pos": "preposition",
+      "governs": "+gen./acc.",
+      "definition": "with (+gen.); after (+acc.)",
+      "introduced": "intro"
+    },
+    {
+      "greek": "περί",
+      "pos": "preposition",
+      "governs": "+gen./dat./acc.",
+      "definition": "around, about",
+      "introduced": "intro"
+    },
+    {
+      "greek": "πρό",
+      "pos": "preposition",
+      "governs": "+gen.",
+      "definition": "before, in front of",
+      "introduced": "intro"
+    },
+    {
+      "greek": "πρός",
+      "pos": "preposition",
+      "governs": "+dat./acc.",
+      "definition": "near, toward; to (+dat.); in addition to (+acc.)",
+      "introduced": "intro"
+    },
+    {
+      "greek": "σύν",
+      "pos": "preposition",
+      "governs": "+dat.",
+      "definition": "with",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ὑπέρ",
+      "pos": "preposition",
+      "governs": "+gen./acc.",
+      "definition": "for, over, above, beyond (+gen.); beyond (+acc.)",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ὑπό",
+      "pos": "preposition",
+      "governs": "+gen./dat./acc.",
+      "definition": "by (+gen.); under (+gen./dat.); down under (+acc.)",
+      "introduced": "intro"
+    },
+    {
+      "greek": "δυσ-",
+      "pos": "prefix",
+      "definition": "mis-, un-",
+      "introduced": "intro"
+    },
+    {
+      "greek": "εὐ-",
+      "pos": "prefix",
+      "definition": "well, good",
+      "introduced": "intro"
+    },
+    {
+      "greek": "παν-",
+      "pos": "prefix",
+      "definition": "all",
+      "introduced": "intro"
+    },
+    {
+      "greek": "ἀγγέλλω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "report, tell",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἄγω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "lead, bring, pass (time)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀδικέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "do wrong; injure",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "αἱρέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "middle_note": "(mid.) choose",
+      "definition": "take, grasp",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "αἴρω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "raise",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "αἰτέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "ask, beg",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀκούω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "hear",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἁμαρτάνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "miss, fail, make a mistake",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀποθνῄσκω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "die",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀποκρίνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "middle_note": "(mid.) answer, reply",
+      "definition": "separate",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀποκτείνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "kill",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "βοηθέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "governs": "+dat.",
+      "definition": "assist",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "βουλεύω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "deliberate, resolve",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "γιγνώσκω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "know, learn, judge, think",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δεῖ",
+      "pos": "verb",
+      "conjugation": "impersonal",
+      "definition": "it is necessary",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "διδάσκω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "teach",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "διώκω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "pursue",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δοκεῖ",
+      "pos": "verb",
+      "conjugation": "impersonal",
+      "governs": "+dat.",
+      "definition": "it seems (best) to",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δοκέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "seem, seem good",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δράω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "do",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐάω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "allow, permit",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐλαύνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "drive",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐρωτάω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "ask",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "εὑρίσκω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "find",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ζάω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "live",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ζητέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "seek",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "θαυμάζω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "be amazed",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "θύω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "sacrifice",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "κινέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "move",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "κομίζω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "provide for",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "κρατέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "governs": "+gen.",
+      "definition": "rule, conquer",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "κρίνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "judge, decide, determine",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "κωλύω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "prevent",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "λαλέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "talk, babble",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "νικάω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "conquer, win",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὀνομάζω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "call by name",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὁράω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "see",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὁρμάω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "urge; (intr.) hurry",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "παρέχω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "provide",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πειράω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "governs": "+gen.",
+      "definition": "try, test",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πίνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "drink",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πίπτω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "fall",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πιστεύω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "governs": "+dat.",
+      "definition": "trust, rely on, believe in",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πολεμέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "make war",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πορεύω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "middle_note": "(mid.) go, march",
+      "definition": "carry",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πράττω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "do",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "σκοπέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "look at, examine",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "σῴζω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "save",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τάττω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "arrange",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τέμνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "cut",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τίκτω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "give birth",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τιμάω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "honor",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τολμάω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "dare",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τρέπω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "turn",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τρέφω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "feed, support, educate",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "φαίνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "middle_note": "(mid.) appear to be (+infin.)",
+      "definition": "make appear, explain",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "φοβέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "middle_note": "(mid.) flee, fear",
+      "definition": "frighten",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "φυλάττω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "watch, guard, defend",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "φύω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "produce",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "αἰσθάνομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "perceive",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀφικνέομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "come to, arrive at",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "βούλομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "want, be willing, prefer",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "γίγνομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "happen, become, be born",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δέχομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "take, accept; welcome, entertain",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δύναμαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "be able, can",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἕπομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "follow",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐργάζομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "work",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἔρχομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "come, go",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἡγέομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "lead, consider",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "κτάομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "get, acquire",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "μάχομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "fight",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πειράομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "governs": "+gen.",
+      "definition": "try, test",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πυνθάνομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "learn, hear, inquire about",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "αἰτία",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ας",
+      "definition": "cause, origin; accusation",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀνάγκη",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "definition": "necessity",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀλήθεια",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ας",
+      "declension_subtype": "short-alpha nom./acc.",
+      "definition": "truth",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "βουλή",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ῆς",
+      "definition": "council, plan, advice",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "γλῶττα",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "declension_subtype": "short-alpha nom./acc.",
+      "definition": "tongue, language",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "γνώμη",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "definition": "idea, intelligence, opinion",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δόξα",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "declension_subtype": "short-alpha nom./acc.",
+      "definition": "opinion, judgment, glory",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐπιστήμη",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "definition": "knowledge",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἡδονή",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ῆς",
+      "definition": "pleasure, enjoyment",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἡμέρα",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ας",
+      "definition": "day",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "θάλαττα",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ης",
+      "declension_subtype": "short-alpha nom./acc.",
+      "definition": "sea",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "θεά",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ᾶς",
+      "definition": "goddess",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "οἰκία",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ας",
+      "definition": "building, house",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "στρατιά",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ᾶς",
+      "definition": "army",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "σωτηρία",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ας",
+      "definition": "safety",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τροφή",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ῆς",
+      "definition": "nourishment, food",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "φωνή",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ῆς",
+      "definition": "sound, voice",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "χώρα",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ας",
+      "definition": "land, place",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δεσπότης",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "m",
+      "genitive": "-ου",
+      "declension_subtype": "masculine",
+      "definition": "master",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "στρατιώτης",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "m",
+      "genitive": "-ου",
+      "declension_subtype": "masculine",
+      "definition": "soldier",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀριθμός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "definition": "number",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δῆμος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "people",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δοῦλος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "slave",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "θάνατος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "death",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "κίνδυνος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "danger",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "κόσμος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "order, decoration, world",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "κύκλος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "circle",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "λαός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "definition": "the people, folk",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "λίθος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "stone",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "νόμος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "custom, tradition, law",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "νόσος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "disease",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ξένος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "guest-friend, host; foreigner, stranger",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "οἶκος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "house, home, family",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὅπλον",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "n",
+      "genitive": "-ου",
+      "definition": "weapon, tool (mostly pl.)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "οὐρανός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "definition": "sky, heaven",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὀφθαλμός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "definition": "eye",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πολέμιοι",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ων",
+      "declension_subtype": "plural only",
+      "definition": "the enemy",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πόνος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "work, stress, trouble, pain",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ποταμός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "definition": "river",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "στρατηγός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "definition": "general",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "στρατός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "definition": "army",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "σύμμαχοι",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ων",
+      "declension_subtype": "plural only",
+      "definition": "allies",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τόπος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "place, topic",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τρόπος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-ου",
+      "definition": "way, turn",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "υἱός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "definition": "son",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὁδός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "f",
+      "genitive": "-οῦ",
+      "definition": "road",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀργύριον",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "n",
+      "genitive": "-ου",
+      "definition": "money, silver",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πρόσωπον",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "n",
+      "genitive": "-ου",
+      "definition": "face, mask, person",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "σημεῖον",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "n",
+      "genitive": "-ου",
+      "definition": "sign",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τέκνον",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "n",
+      "genitive": "-ου",
+      "definition": "child",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "αἰσχρός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ά -όν",
+      "definition": "ugly, disgraceful",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἄλλος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "definition": "other",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀμφότερος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "both",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἄξιος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "worthy",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "βάρβαρος",
+      "pos": "adjective",
+      "declension_pattern": "2nd only",
+      "definition": "barbaric, not Greek, foreign",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δεινός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "awesome, terrible",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δῆλος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "definition": "clear, visible",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δυνατός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "able",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἕκαστος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "definition": "each",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἑκάτερος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "each of two",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐκεῖνος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ο",
+      "definition": "that",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐλεύθερος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "free",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐμός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "my, mine",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἕτερος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "other (of two)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐχθρός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ά -όν",
+      "definition": "hated, hostile",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἡμέτερος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "our",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἴδιος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "one's own, private",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἱκανός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "sufficient",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἴσος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "governs": "+dat.",
+      "definition": "equal to",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "κοινός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "common",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "λαμπρός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ά -όν",
+      "definition": "bright, brilliant, famous",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "λοιπός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "remaining",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "μέγας",
+      "pos": "adjective",
+      "declension_pattern": "irregular",
+      "endings": "μεγάλη, μέγα",
+      "definition": "big",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "μέσος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "definition": "middle",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "μόνος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "definition": "alone, single",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὅλος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "definition": "whole, complete",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὅμοιος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "like, resembling",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὀρθός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "straight, true, regular",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πλεῖστος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "definition": "most, largest (superl. of πολύς)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πολύς",
+      "pos": "adjective",
+      "declension_pattern": "irregular",
+      "endings": "πολλή, πολύ",
+      "definition": "much, many",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πονηρός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ά -όν",
+      "definition": "worthless, bad",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ῥᾴδιος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "easy",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "σός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "your, yours (sing.)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "σοφός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ή -όν",
+      "definition": "wise",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὑμέτερος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "your, yours (pl.)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "φανερός",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-ά -όν",
+      "definition": "clear, evident",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "χαλκοῦς",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2 contracted",
+      "endings": "-ῆ -οῦν",
+      "definition": "bronze",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἄδικος",
+      "pos": "adjective",
+      "declension_pattern": "2nd only",
+      "definition": "unjust",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πᾶς",
+      "pos": "adjective",
+      "declension_pattern": "3-1-3",
+      "endings": "πᾶσα, πᾶν",
+      "definition": "every, all",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἆρα",
+      "pos": "particle",
+      "definition": "(introduces a question)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "γε",
+      "pos": "particle",
+      "definition": "at least (emphasizes preceding word)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "μή",
+      "pos": "adverb",
+      "definition": "not (with non-indicative verbs)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "οὕτως",
+      "pos": "adverb",
+      "definition": "in this way",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πότε",
+      "pos": "adverb",
+      "definition": "when?",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πῶς",
+      "pos": "adverb",
+      "definition": "how?",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "αὐτός",
+      "pos": "pronoun",
+      "endings": "-ή -ό",
+      "definition": "self, same; s/he/it",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἑαυτοῦ",
+      "pos": "pronoun",
+      "endings": "-ῆς -οῦ",
+      "definition": "him/her/itself (reflexive)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐγώ",
+      "pos": "pronoun",
+      "definition": "I (gen. ἐμοῦ; pl. ἡμεῖς, ἡμῶν)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "οὐδείς",
+      "pos": "pronoun",
+      "endings": "οὐδεμία, οὐδέν",
+      "definition": "no one, nothing",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "σύ",
+      "pos": "pronoun",
+      "definition": "you (gen. σοῦ; pl. ὑμεῖς, ὑμῶν)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τις",
+      "pos": "pronoun",
+      "endings": "τι",
+      "definition": "someone, something (enclitic)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τίς",
+      "pos": "pronoun",
+      "endings": "τί",
+      "definition": "who? what? which?",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀνά",
+      "pos": "preposition",
+      "governs": "+gen./dat./acc.",
+      "definition": "up",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "εἰς",
+      "pos": "preposition",
+      "governs": "+acc.",
+      "definition": "into, to, towards",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "κατά",
+      "pos": "preposition",
+      "governs": "+gen./acc.",
+      "definition": "down",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "γάρ",
+      "pos": "conjunction",
+      "definition": "for, because (postpositive)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δέ",
+      "pos": "conjunction",
+      "definition": "and, but (postpositive)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐπεί",
+      "pos": "conjunction",
+      "definition": "after, since, when",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "μέν…δέ",
+      "pos": "conjunction",
+      "definition": "(contrasts a pair)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὅτι",
+      "pos": "conjunction",
+      "definition": "because, that",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "οὐδέ",
+      "pos": "conjunction",
+      "definition": "but not",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "οὔτε",
+      "pos": "conjunction",
+      "definition": "and not",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τε",
+      "pos": "conjunction",
+      "definition": "and; τε…τε: both…and",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὥστε",
+      "pos": "conjunction",
+      "definition": "that (result clause)",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "εἷς",
+      "pos": "numeral",
+      "endings": "μία, ἕν",
+      "ordinal": "πρῶτος -η -ον (first)",
+      "definition": "one",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δύο",
+      "pos": "numeral",
+      "ordinal": "δεύτερος -α -ον (second)",
+      "definition": "two",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τρεῖς",
+      "pos": "numeral",
+      "endings": "τρία",
+      "ordinal": "τρίτος -η -ον (third)",
+      "definition": "three",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "τέτταρες",
+      "pos": "numeral",
+      "endings": "τέτταρα",
+      "ordinal": "τέταρτος -η -ον (fourth)",
+      "definition": "four",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "πέντε",
+      "pos": "numeral",
+      "ordinal": "πέμπτος -η -ον (fifth)",
+      "definition": "five",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἕξ",
+      "pos": "numeral",
+      "ordinal": "ἕκτος -η -ον (sixth)",
+      "definition": "six",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἑπτά",
+      "pos": "numeral",
+      "ordinal": "ἕβδομος -η -ον (seventh)",
+      "definition": "seven",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ὀκτώ",
+      "pos": "numeral",
+      "ordinal": "ὄγδοος -η -ον (eighth)",
+      "definition": "eight",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἐννέα",
+      "pos": "numeral",
+      "ordinal": "ἔνατος -η -ον (ninth)",
+      "definition": "nine",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "δέκα",
+      "pos": "numeral",
+      "ordinal": "δέκατος -η -ον (tenth)",
+      "definition": "ten",
+      "introduced": "beginning"
+    },
+    {
+      "greek": "ἀναιρέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "raise up; kill, destroy",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἀξιόω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "consider worthy",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἁπαλλάττω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "release, deliver",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἀφαιρέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "take from, take away",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "δέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "governs": "+gen.",
+      "definition": "lack; bind",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "δηλόω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "show",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "διαφέρω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "spread, differ",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "διαφθείρω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "destroy",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἥκω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "have come, be present",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "θνήσκω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "die",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "καταλαμβάνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "seize, catch up to, arrest",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "κατασκευάζω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "equip, furnish, make ready",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "κατηγορέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "speak against, accuse",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "λανθάνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "middle_note": "(mid.) forget",
+      "definition": "escape notice of",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "μέλλω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "intend, be about to",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὁμολογέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "agree",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "προσήκω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "belong to, befit",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "συμβαίνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "happen, agree, result",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "συμφέρω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "benefit, profit",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "τελευτάω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "finish; die",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "τυγχάνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "governs": "+part. (happen to); +gen. (meet)",
+      "definition": "happen to; meet",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὑπάρχω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "exist, be, belong to",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὑπολαμβάνω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "take up, reply, suppose",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "φράζω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "middle_note": "(mid.) think",
+      "definition": "tell",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "φρονέω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "think",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "χαίρω",
+      "pos": "verb",
+      "conjugation": "omega",
+      "definition": "be happy; χαῖρε / χαίρετε: hello, goodbye",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἁλίσκομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "be taken, be conquered",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "κεῖμαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "lie (= perf. pass. of τίθημι)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "οἴομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "variants": "οἶμαι",
+      "definition": "I think (parenthetical)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "χράομαι",
+      "pos": "verb",
+      "conjugation": "deponent",
+      "definition": "use",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "διαφέρει",
+      "pos": "verb",
+      "conjugation": "impersonal",
+      "definition": "it makes a difference",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πάρεστι",
+      "pos": "verb",
+      "conjugation": "impersonal",
+      "governs": "+dat.",
+      "definition": "it depends on",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "συμφέρει",
+      "pos": "verb",
+      "conjugation": "impersonal",
+      "definition": "it is useful",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "χρή",
+      "pos": "verb",
+      "conjugation": "impersonal",
+      "definition": "it is necessary",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "δείκνυμι",
+      "pos": "verb",
+      "conjugation": "mi",
+      "definition": "show",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "δίδωμι",
+      "pos": "verb",
+      "conjugation": "mi",
+      "definition": "give",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "εἶμι",
+      "pos": "verb",
+      "conjugation": "mi",
+      "definition": "will go (future of ἔρχομαι)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "φημί",
+      "pos": "verb",
+      "conjugation": "mi",
+      "definition": "say",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "γραφή",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ῆς",
+      "definition": "drawing, writing, indictment",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "διαφορά",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ᾶς",
+      "definition": "difference, disagreement",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "οὐσία",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ας",
+      "definition": "essence, property",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πολιτεία",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ας",
+      "definition": "constitution, republic",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "συμφορά",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "f",
+      "genitive": "-ᾶς",
+      "definition": "event, situation, disaster",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ποιητής",
+      "pos": "noun",
+      "declension": "1st",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "declension_subtype": "masculine",
+      "definition": "creator, poet",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "θυμός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "definition": "soul, spirit",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "καιρός",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "m",
+      "genitive": "-οῦ",
+      "definition": "the right time",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "νεώς",
+      "pos": "noun",
+      "declension": "2nd irregular",
+      "gender": "m",
+      "genitive": "νεώ",
+      "definition": "temple",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "νῆσος",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "f",
+      "genitive": "-ου",
+      "definition": "island",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "νοῦς",
+      "pos": "noun",
+      "declension": "2nd contracted",
+      "gender": "m",
+      "genitive": "νοῦ",
+      "definition": "mind, perception, sense",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "χωρίον",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "n",
+      "genitive": "-ου",
+      "definition": "place, spot, district",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "σύμμαχος",
+      "pos": "adjective",
+      "declension_pattern": "2nd only",
+      "definition": "allied",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "εἰκός",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ότος",
+      "declension_subtype": "stem in -τ-",
+      "definition": "propriety, probability",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἐλπίς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "-ίδος",
+      "declension_subtype": "stem in -δ-",
+      "definition": "hope",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "μυριάς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "-άδος",
+      "declension_subtype": "stem in -δ-",
+      "definition": "ten thousand (a countless amount)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "νύξ",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "νυκτός",
+      "declension_subtype": "stem in -κτ-",
+      "definition": "night",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "παῖς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m/f",
+      "genitive": "παιδός",
+      "declension_subtype": "stem in -δ-",
+      "definition": "child; slave",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πατρίς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "-ίδος",
+      "declension_subtype": "stem in -δ-",
+      "definition": "fatherland",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πούς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m",
+      "genitive": "ποδός",
+      "declension_subtype": "stem in -δ-",
+      "definition": "foot",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "προσήκοντα",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-οντων",
+      "declension_subtype": "plural only, stem in -ντ-",
+      "definition": "duties",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "προσήκοντες",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m",
+      "genitive": "-οντων",
+      "declension_subtype": "plural only, stem in -ντ-",
+      "definition": "relatives",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "συμφέρον",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-οντος",
+      "declension_subtype": "stem in -ντ-",
+      "definition": "use, advantage",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὕδωρ",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "ὕδατος",
+      "declension_subtype": "stem in -ατ-",
+      "definition": "water",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὑπάρχοντα",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-οντων",
+      "declension_subtype": "plural only, stem in -ντ-",
+      "definition": "circumstances",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "φῶς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "φωτός",
+      "declension_subtype": "stem in -τ-",
+      "definition": "light",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "χάρις",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "-ιτος",
+      "declension_subtype": "stem in -τ-",
+      "definition": "favor, thanks",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "αἷμα",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ατος",
+      "declension_subtype": "stem in -ματ-",
+      "definition": "blood",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "γράμμα",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ατος",
+      "declension_subtype": "stem in -ματ-",
+      "definition": "letter",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὄνομα",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ατος",
+      "declension_subtype": "stem in -ματ-",
+      "definition": "name",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πνεῦμα",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ατος",
+      "declension_subtype": "stem in -ματ-",
+      "definition": "wind, breath, spirit",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πρᾶγμα",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ατος",
+      "declension_subtype": "stem in -ματ-",
+      "definition": "thing; (pl.) circumstances, affairs, business",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "στόμα",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ατος",
+      "declension_subtype": "stem in -ματ-",
+      "definition": "mouth",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "σχῆμα",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ατος",
+      "declension_subtype": "stem in -ματ-",
+      "definition": "form, appearance",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "σῶμα",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ατος",
+      "declension_subtype": "stem in -ματ-",
+      "definition": "body",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "χρῆμα",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ατος",
+      "declension_subtype": "stem in -ματ-",
+      "definition": "thing; (pl.) money",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἀγών",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m",
+      "genitive": "-ῶνος",
+      "declension_subtype": "stem in -ν-",
+      "definition": "contest",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "δαίμων",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m/f",
+      "genitive": "-ονος",
+      "declension_subtype": "stem in -ν-",
+      "definition": "spirit, god, demon",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἡγεμών",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m",
+      "genitive": "-όνος",
+      "declension_subtype": "stem in -ν-",
+      "definition": "guide, commander",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἀνήρ",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m",
+      "genitive": "ἀνδρός",
+      "declension_subtype": "stem in -ρ-",
+      "definition": "man",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "θυγάτηρ",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "-τρός",
+      "declension_subtype": "stem in -ρ-",
+      "definition": "daughter",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "μάρτυς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m/f",
+      "genitive": "-υρος",
+      "declension_subtype": "stem in -ρ-",
+      "definition": "witness",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "μήτηρ",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "μητρός",
+      "declension_subtype": "stem in -ρ-",
+      "definition": "mother",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πατήρ",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m",
+      "genitive": "πατρός",
+      "declension_subtype": "stem in -ρ-",
+      "definition": "father",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πῦρ",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "πυρός",
+      "declension_subtype": "stem in -ρ-",
+      "definition": "fire",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "χείρ",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "χειρός",
+      "declension_subtype": "stem in -ρ-",
+      "definition": "hand",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "γένος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "race, family; kind, class",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἔθνος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "nation",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "εἶδος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "form, shape",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἔπος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "word",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἔτος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "year",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "μέγεθος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "magnitude",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "μέρος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "part, share",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὄρος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "mountain, hill",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πάθος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "suffering, experience, emotion",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πλῆθος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "crowd",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "τεῖχος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "wall",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "τέλος",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "n",
+      "genitive": "-ους",
+      "declension_subtype": "stem in -εσ-",
+      "definition": "end",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "δύναμις",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "-εως",
+      "declension_subtype": "stem in -ι-",
+      "definition": "power",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πίστις",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "-εως",
+      "declension_subtype": "stem in -ι-",
+      "definition": "trust, proof, guarantee",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πόλις",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "-εως",
+      "declension_subtype": "stem in -ι-",
+      "definition": "city",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πρᾶξις",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "-εως",
+      "declension_subtype": "stem in -ι-",
+      "definition": "action",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "τάξις",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "-εως",
+      "declension_subtype": "stem in -ι-",
+      "definition": "arrangement, order",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "φύσις",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "-εως",
+      "declension_subtype": "stem in -ι-",
+      "definition": "nature",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "βασιλεύς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m",
+      "genitive": "-έως",
+      "declension_subtype": "stem in -υ-",
+      "definition": "king",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "βοῦς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m/f",
+      "genitive": "βοός",
+      "declension_subtype": "stem in -υ-",
+      "definition": "bull, ox (m.); cow (f.)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἱππεύς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m",
+      "genitive": "-έως",
+      "declension_subtype": "stem in -υ-",
+      "definition": "horseman, charioteer",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ναῦς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "f",
+      "genitive": "νεώς",
+      "declension_subtype": "stem in -υ-",
+      "definition": "ship",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πρέσβυς",
+      "pos": "noun",
+      "declension": "3rd",
+      "gender": "m",
+      "genitive": "-εως",
+      "declension_subtype": "stem in -υ-",
+      "definition": "old man; (pl.) ambassadors",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "γυνή",
+      "pos": "noun",
+      "declension": "3rd irregular",
+      "gender": "f",
+      "genitive": "γυναικός",
+      "declension_subtype": "stem in -κ- (irregular)",
+      "definition": "woman",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "αἴτιος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "responsible, guilty",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἀδύνατος",
+      "pos": "adjective",
+      "declension_pattern": "2nd only",
+      "definition": "impossible",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἀληθής",
+      "pos": "adjective",
+      "declension_pattern": "3rd only",
+      "endings": "-ές",
+      "definition": "true",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἀμείνων",
+      "pos": "adjective",
+      "declension_pattern": "3rd only",
+      "endings": "-ον",
+      "definition": "better, stronger, braver",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἅπας",
+      "pos": "adjective",
+      "declension_pattern": "3-1-3",
+      "endings": "-ᾶσα -αν",
+      "definition": "all together",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "βαρύς",
+      "pos": "adjective",
+      "declension_pattern": "3-1-3",
+      "endings": "-εῖα -ύ",
+      "definition": "heavy, tedious",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "βελτίων",
+      "pos": "adjective",
+      "declension_pattern": "3rd only",
+      "endings": "-ον",
+      "definition": "better (comp. of ἀγαθός)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "βραχύς",
+      "pos": "adjective",
+      "declension_pattern": "3-1-3",
+      "endings": "-εῖα -ύ",
+      "definition": "brief, short",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "θεῖος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "divine",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἐλάττων",
+      "pos": "adjective",
+      "declension_pattern": "3rd only",
+      "endings": "-ον",
+      "definition": "smaller, less",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἐναντίος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "opposite",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "εὐθύς",
+      "pos": "adjective",
+      "declension_pattern": "3-1-3",
+      "endings": "-εῖα -ύ",
+      "definition": "straight",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἡδύς",
+      "pos": "adjective",
+      "declension_pattern": "3-1-3",
+      "endings": "-εῖα -ύ",
+      "definition": "sweet",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἥττων",
+      "pos": "adjective",
+      "declension_pattern": "3rd only",
+      "endings": "-ον",
+      "definition": "less, weaker",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "κρείττων",
+      "pos": "adjective",
+      "declension_pattern": "3rd only",
+      "endings": "-ον",
+      "definition": "stronger, better",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "μυρίος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "countless thousands",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "οἰκεῖος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "domestic, one's own",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὀξύς",
+      "pos": "adjective",
+      "declension_pattern": "3-1-3",
+      "endings": "-εῖα -ύ",
+      "definition": "sharp, keen, shrill, pungent",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πλείων",
+      "pos": "adjective",
+      "declension_pattern": "3rd only",
+      "endings": "πλέων, πλεῖον/πλέον",
+      "definition": "more, larger (comp. of πολύς)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ποῖος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "what sort of?",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πολέμιος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "hostile",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πότερος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "which of the two?",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "πρότερος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "before, earlier",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "σαφής",
+      "pos": "adjective",
+      "declension_pattern": "3rd only",
+      "endings": "-ές",
+      "definition": "clear",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ταχύς",
+      "pos": "adjective",
+      "declension_pattern": "3-1-3",
+      "endings": "-εῖα -ύ",
+      "definition": "quick",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὕστερος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-α -ον",
+      "definition": "following, next, later",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "χρήσιμος",
+      "pos": "adjective",
+      "declension_pattern": "2-1-2",
+      "endings": "-η -ον",
+      "definition": "useful",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "χείρων",
+      "pos": "adjective",
+      "declension_pattern": "3rd only",
+      "endings": "-ον",
+      "definition": "worse, inferior",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὁ ἡ τό",
+      "pos": "article",
+      "definition": "the (definite article)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὅδε",
+      "pos": "pronoun",
+      "endings": "ἥδε, τόδε",
+      "definition": "this",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὅς",
+      "pos": "pronoun",
+      "endings": "ἥ, ὅ",
+      "definition": "who, which, that (relative)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὅσος",
+      "pos": "pronoun",
+      "endings": "-η -ον",
+      "definition": "however many, all",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὅσπερ",
+      "pos": "pronoun",
+      "endings": "ἥπερ, ὅπερ",
+      "definition": "who, which, that (emphatic relative)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὅστις",
+      "pos": "pronoun",
+      "endings": "ἥτις, ὅ τι",
+      "definition": "anyone/anything who/which (indefinite relative)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "οὗτος",
+      "pos": "pronoun",
+      "endings": "αὕτη, τοῦτο",
+      "definition": "this",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "μηδείς",
+      "pos": "pronoun",
+      "endings": "μηδεμία, μηδέν",
+      "definition": "no one (with non-indicative verbs)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ἵνα",
+      "pos": "conjunction",
+      "definition": "in order that (+subj./opt.); where (rel. adv.)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὅπου",
+      "pos": "conjunction",
+      "definition": "where",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὅπως",
+      "pos": "conjunction",
+      "definition": "how, as, so that",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὅταν",
+      "pos": "conjunction",
+      "definition": "whenever (= ὅτε + ἄν)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὅτε",
+      "pos": "conjunction",
+      "definition": "when",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὡς",
+      "pos": "conjunction",
+      "definition": "as, since, so that (+subj./opt.); that, to (indirect statement)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "ὦ",
+      "pos": "interjection",
+      "definition": "oh! (vocative exclamation)",
+      "introduced": "intermediate"
+    },
+    {
+      "greek": "στάδιον",
+      "pos": "noun",
+      "declension": "2nd",
+      "gender": "n",
+      "genitive": "-ου",
+      "definition": "stadion/stade (~185 meters); (pl.) στάδια or στάδιοι",
+      "introduced": "intermediate"
+    }
+  ]
+}

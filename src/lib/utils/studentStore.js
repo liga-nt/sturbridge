@@ -13,7 +13,10 @@ import {
     collection,
     getDocs,
     onSnapshot,
-    serverTimestamp
+    serverTimestamp,
+    where,
+    orderBy,
+    query
 } from 'firebase/firestore';
 import { db } from '$lib/firebase/client';
 
@@ -192,4 +195,37 @@ export async function loadStandardsByCourse(courseId) {
     return Object.values(all)
         .filter((s) => s.courseId === courseId)
         .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+}
+
+// ---------------------------------------------------------------------------
+// Lessons (Greek immersive course)
+// ---------------------------------------------------------------------------
+
+export async function loadLessons(courseId) {
+    const snap = await getDocs(
+        query(collection(db, 'lessons'), where('courseId', '==', courseId), where('status', '==', 'published'), orderBy('order'))
+    );
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+export async function loadLesson(lessonId) {
+    const snap = await getDoc(doc(db, 'lessons', lessonId));
+    return snap.exists() ? { lessonId: snap.id, ...snap.data() } : null;
+}
+
+export async function loadAllLessonsForCourse(courseId) {
+    const snap = await getDocs(
+        query(collection(db, 'lessons'), where('courseId', '==', courseId))
+    );
+    return snap.docs
+        .map(d => ({ lessonId: d.id, ...d.data() }))
+        .sort((a, b) => (a.chapter ?? 0) - (b.chapter ?? 0));
+}
+
+export async function savePassageProgress(uid, lessonId, data) {
+    await setDoc(
+        doc(db, 'studentProgress', uid, 'lessons', lessonId),
+        { ...data, savedAt: serverTimestamp() },
+        { merge: true }
+    );
 }

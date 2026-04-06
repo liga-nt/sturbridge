@@ -370,7 +370,7 @@
             <span class="fill-in-suffix">{part.answer_unit}</span>
           {/if}
         </p>
-        <p class="answer-instruction">Show your work or explain how you got your answer.</p>
+        <p class="answer-instruction">{part.work_instruction ?? 'Show your work or explain how you got your answer.'}</p>
         <ShortAnswerInput bind:value={partAnswers[part.label]} />
       {:else if part.answer_type === 'yes_no_explanation'}
         <p class="answer-instruction">Enter your answer.</p>
@@ -547,7 +547,7 @@
                   <span class="fill-in-suffix">{part.answer_unit}</span>
                 {/if}
               </p>
-              <p class="answer-instruction">Show your work or explain how you got your answer.</p>
+              <p class="answer-instruction">{part.work_instruction ?? 'Show your work or explain how you got your answer.'}</p>
               <ShortAnswerInput bind:value={partAnswers[part.label]} />
             {:else if part.answer_type === 'yes_no_explanation'}
               <p class="answer-instruction">Enter your answer.</p>

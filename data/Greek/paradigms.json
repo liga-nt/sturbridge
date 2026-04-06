@@ -1,0 +1,229 @@
+{
+  "eimi_present_indicative_active": {
+    "label": "εἰμί — Present Indicative",
+    "headword": "εἰμί",
+    "pos": "verb",
+    "forms": {
+      "sg": { "1": "εἰμί", "2": "εἶ", "3": "ἐστί(ν)" },
+      "pl": { "1": "ἐσμέν", "2": "ἐστέ", "3": "εἰσί(ν)" }
+    },
+    "labels": { "rows": ["1st", "2nd", "3rd"], "cols": ["Singular", "Plural"] }
+  },
+
+  "omega_verb_present_indicative_active": {
+    "label": "ω-verb — Present Indicative Active",
+    "headword": "-ω",
+    "pos": "verb",
+    "template": "-ω, -εις, -ει, -ομεν, -ετε, -ουσι(ν)",
+    "forms": {
+      "sg": { "1": "-ω", "2": "-εις", "3": "-ει" },
+      "pl": { "1": "-ομεν", "2": "-ετε", "3": "-ουσι(ν)" }
+    },
+    "labels": { "rows": ["1st", "2nd", "3rd"], "cols": ["Singular", "Plural"] }
+  },
+
+  "epsilon_contract_present_indicative_active": {
+    "label": "ε-contract — Present Indicative Active",
+    "headword": "-έω (→ -ῶ)",
+    "pos": "verb",
+    "note": "ε + thematic vowel → contracted",
+    "forms": {
+      "sg": { "1": "-ῶ", "2": "-εῖς", "3": "-εῖ" },
+      "pl": { "1": "-οῦμεν", "2": "-εῖτε", "3": "-οῦσι(ν)" }
+    },
+    "labels": { "rows": ["1st", "2nd", "3rd"], "cols": ["Singular", "Plural"] }
+  },
+
+  "alpha_contract_present_indicative_active": {
+    "label": "α-contract — Present Indicative Active",
+    "headword": "-άω (→ -ῶ)",
+    "pos": "verb",
+    "note": "α + thematic vowel → contracted",
+    "forms": {
+      "sg": { "1": "-ῶ", "2": "-ᾷς", "3": "-ᾷ" },
+      "pl": { "1": "-ῶμεν", "2": "-ᾶτε", "3": "-ῶσι(ν)" }
+    },
+    "labels": { "rows": ["1st", "2nd", "3rd"], "cols": ["Singular", "Plural"] }
+  },
+
+  "2nd_declension_masculine": {
+    "label": "2nd Declension Masculine",
+    "headword": "-ος, -ου",
+    "pos": "noun",
+    "gender": "masculine",
+    "forms": {
+      "sg": { "nom": "-ος", "gen": "-ου", "dat": "-ῳ", "acc": "-ον", "voc": "-ε" },
+      "pl": { "nom": "-οι", "gen": "-ων", "dat": "-οις", "acc": "-ους", "voc": "-οι" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "2nd_declension_neuter": {
+    "label": "2nd Declension Neuter",
+    "headword": "-ον, -ου",
+    "pos": "noun",
+    "gender": "neuter",
+    "forms": {
+      "sg": { "nom": "-ον", "gen": "-ου", "dat": "-ῳ", "acc": "-ον", "voc": "-ον" },
+      "pl": { "nom": "-α", "gen": "-ων", "dat": "-οις", "acc": "-α", "voc": "-α" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "1st_declension_feminine_eta": {
+    "label": "1st Declension Feminine (η-type)",
+    "headword": "-η, -ης",
+    "pos": "noun",
+    "gender": "feminine",
+    "forms": {
+      "sg": { "nom": "-η", "gen": "-ης", "dat": "-ῃ", "acc": "-ην", "voc": "-η" },
+      "pl": { "nom": "-αι", "gen": "-ῶν", "dat": "-αις", "acc": "-ας", "voc": "-αι" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "1st_declension_feminine_alpha": {
+    "label": "1st Declension Feminine (α-type)",
+    "headword": "-α, -ας",
+    "pos": "noun",
+    "gender": "feminine",
+    "forms": {
+      "sg": { "nom": "-α", "gen": "-ας", "dat": "-ᾳ", "acc": "-αν", "voc": "-α" },
+      "pl": { "nom": "-αι", "gen": "-ῶν", "dat": "-αις", "acc": "-ας", "voc": "-αι" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "2_1_2_adjective": {
+    "label": "1st/2nd Declension Adjective (2-1-2)",
+    "headword": "-ος, -η/-α, -ον",
+    "pos": "adjective",
+    "forms": {
+      "masc": {
+        "sg": { "nom": "-ος", "gen": "-ου", "dat": "-ῳ", "acc": "-ον", "voc": "-ε" },
+        "pl": { "nom": "-οι", "gen": "-ων", "dat": "-οις", "acc": "-ους", "voc": "-οι" }
+      },
+      "fem": {
+        "sg": { "nom": "-η/-α", "gen": "-ης/-ας", "dat": "-ῃ/-ᾳ", "acc": "-ην/-αν", "voc": "-η/-α" },
+        "pl": { "nom": "-αι", "gen": "-ῶν", "dat": "-αις", "acc": "-ας", "voc": "-αι" }
+      },
+      "neut": {
+        "sg": { "nom": "-ον", "gen": "-ου", "dat": "-ῳ", "acc": "-ον", "voc": "-ον" },
+        "pl": { "nom": "-α", "gen": "-ων", "dat": "-οις", "acc": "-α", "voc": "-α" }
+      }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["M. Sg", "F. Sg", "N. Sg", "M. Pl", "F. Pl", "N. Pl"] }
+  },
+
+  "definite_article": {
+    "label": "Definite Article (ὁ, ἡ, τό)",
+    "headword": "ὁ ἡ τό",
+    "pos": "article",
+    "forms": {
+      "masc": {
+        "sg": { "nom": "ὁ", "gen": "τοῦ", "dat": "τῷ", "acc": "τόν", "voc": null },
+        "pl": { "nom": "οἱ", "gen": "τῶν", "dat": "τοῖς", "acc": "τούς", "voc": null }
+      },
+      "fem": {
+        "sg": { "nom": "ἡ", "gen": "τῆς", "dat": "τῇ", "acc": "τήν", "voc": null },
+        "pl": { "nom": "αἱ", "gen": "τῶν", "dat": "ταῖς", "acc": "τάς", "voc": null }
+      },
+      "neut": {
+        "sg": { "nom": "τό", "gen": "τοῦ", "dat": "τῷ", "acc": "τό", "voc": null },
+        "pl": { "nom": "τά", "gen": "τῶν", "dat": "τοῖς", "acc": "τά", "voc": null }
+      }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc"], "cols": ["M. Sg", "F. Sg", "N. Sg", "M. Pl", "F. Pl", "N. Pl"] }
+  },
+
+  "3rd_declension_us_eos": {
+    "label": "3rd Declension (-υς/-εως type)",
+    "headword": "-υς/-εύς, -εως",
+    "pos": "noun",
+    "gender": "masculine",
+    "example": "βασιλεύς, βασιλέως — king",
+    "forms": {
+      "sg": { "nom": "-υς/-εύς", "gen": "-εως", "dat": "-εῖ", "acc": "-έα", "voc": "-εῦ" },
+      "pl": { "nom": "-εῖς", "gen": "-έων", "dat": "-εῦσι(ν)", "acc": "-εῖς", "voc": "-εῖς" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "3rd_declension_er_eros": {
+    "label": "3rd Declension (-ηρ/-ερ type)",
+    "headword": "-ήρ, -ρός",
+    "pos": "noun",
+    "gender": "masculine",
+    "example": "πατήρ, πατρός — father",
+    "forms": {
+      "sg": { "nom": "πατήρ", "gen": "πατρός", "dat": "πατρί", "acc": "πατέρα", "voc": "πάτερ" },
+      "pl": { "nom": "πατέρες", "gen": "πατέρων", "dat": "πατράσι(ν)", "acc": "πατέρας", "voc": "πατέρες" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "pronoun_personal_1st": {
+    "label": "1st Person Pronoun (ἐγώ)",
+    "headword": "ἐγώ",
+    "pos": "pronoun",
+    "forms": {
+      "sg": { "nom": "ἐγώ", "gen": "ἐμοῦ (μου)", "dat": "ἐμοί (μοι)", "acc": "ἐμέ (με)" },
+      "pl": { "nom": "ἡμεῖς", "gen": "ἡμῶν", "dat": "ἡμῖν", "acc": "ἡμᾶς" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "pronoun_personal_2nd": {
+    "label": "2nd Person Pronoun (σύ)",
+    "headword": "σύ",
+    "pos": "pronoun",
+    "forms": {
+      "sg": { "nom": "σύ", "gen": "σοῦ (σου)", "dat": "σοί (σοι)", "acc": "σέ (σε)" },
+      "pl": { "nom": "ὑμεῖς", "gen": "ὑμῶν", "dat": "ὑμῖν", "acc": "ὑμᾶς" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "pronoun_autos": {
+    "label": "αὐτός — self, same; he/she/it",
+    "headword": "αὐτός",
+    "pos": "pronoun",
+    "note": "Used as 3rd person pronoun in oblique cases only (not nominative)",
+    "forms": {
+      "masc": {
+        "sg": { "nom": "αὐτός", "gen": "αὐτοῦ", "dat": "αὐτῷ", "acc": "αὐτόν" },
+        "pl": { "nom": "αὐτοί", "gen": "αὐτῶν", "dat": "αὐτοῖς", "acc": "αὐτούς" }
+      },
+      "fem": {
+        "sg": { "nom": "αὐτή", "gen": "αὐτῆς", "dat": "αὐτῇ", "acc": "αὐτήν" },
+        "pl": { "nom": "αὐταί", "gen": "αὐτῶν", "dat": "αὐταῖς", "acc": "αὐτάς" }
+      },
+      "neut": {
+        "sg": { "nom": "αὐτό", "gen": "αὐτοῦ", "dat": "αὐτῷ", "acc": "αὐτό" },
+        "pl": { "nom": "αὐτά", "gen": "αὐτῶν", "dat": "αὐτοῖς", "acc": "αὐτά" }
+      }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc"], "cols": ["M. Sg", "F. Sg", "N. Sg", "M. Pl", "F. Pl", "N. Pl"] }
+  },
+
+  "pronoun_relative_hos": {
+    "label": "Relative Pronoun (ὅς, ἥ, ὅ)",
+    "headword": "ὅς ἥ ὅ",
+    "pos": "pronoun",
+    "forms": {
+      "masc": {
+        "sg": { "nom": "ὅς", "gen": "οὗ", "dat": "ᾧ", "acc": "ὅν" },
+        "pl": { "nom": "οἵ", "gen": "ὧν", "dat": "οἷς", "acc": "οὕς" }
+      },
+      "fem": {
+        "sg": { "nom": "ἥ", "gen": "ἧς", "dat": "ᾗ", "acc": "ἥν" },
+        "pl": { "nom": "αἵ", "gen": "ὧν", "dat": "αἷς", "acc": "ἅς" }
+      },
+      "neut": {
+        "sg": { "nom": "ὅ", "gen": "οὗ", "dat": "ᾧ", "acc": "ὅ" },
+        "pl": { "nom": "ἅ", "gen": "ὧν", "dat": "οἷς", "acc": "ἅ" }
+      }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc"], "cols": ["M. Sg", "F. Sg", "N. Sg", "M. Pl", "F. Pl", "N. Pl"] }
+  }
+}

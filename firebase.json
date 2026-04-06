@@ -3,6 +3,7 @@
     "rules": "firestore.rules"
   },
   "hosting": {
+    "site": "sturbridge-e59d9",
     "public": "build",
     "ignore": [
       "firebase.json",

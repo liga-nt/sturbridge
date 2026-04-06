@@ -246,26 +246,27 @@
           "width_label": "8 ft.",
           "height_label": "4 ft."
         },
-        "answer_prompt": "What is the area, in square feet, of the garden?\n\nEnter your answer in the box.",
+        "answer_prompt": "What is the area, in square feet, of the garden?",
         "answer_type": "short_answer",
         "answer_suffix": "square feet",
         "correct_answer": "32"
       },
       {
         "label": "B",
-        "question_text": "The patio has a length of 5 feet and an area of 35 square feet.\n\nWhat is the width, in feet, of the patio? Show or explain how you got your answer.\n\nEnter your answer and your work or explanation in the space provided.",
-        "answer_type": "constructed_response",
+        "question_text": "The patio has a length of 5 feet and an area of 35 square feet.\n\nWhat is the width, in feet, of the patio?",
+        "answer_type": "number_with_work",
+        "answer_unit": "feet",
         "correct_answer": "7"
       },
       {
         "label": "C",
-        "question_text": "The owner of the house thinks the garden and the patio have the same perimeter.\n\nIs the owner correct? Explain your reasoning.\n\nEnter your answer and your explanation in the space provided.",
+        "question_text": "The owner of the house thinks the garden and the patio have the same perimeter.\n\nIs the owner correct?",
         "answer_type": "constructed_response",
         "correct_answer": "Yes. Garden perimeter = 2×4 + 2×8 = 24 ft. Patio perimeter = 2×5 + 2×7 = 24 ft. Both perimeters are equal."
       },
       {
         "label": "D",
-        "question_text": "The area of the flower bed is <strong>less than</strong> the area of the garden. The perimeter of the flower bed is <strong>equal</strong> to the perimeter of the patio.\n\nWhat could be the length <strong>and</strong> the width of the flower bed? Explain how you know your answer is correct.\n\nEnter your answer and your explanation in the space provided.",
+        "question_text": "The area of the flower bed is <strong>less than</strong> the area of the garden. The perimeter of the flower bed is <strong>equal</strong> to the perimeter of the patio.\n\nWhat could be the length <strong>and</strong> the width of the flower bed?",
         "answer_type": "constructed_response",
         "correct_answer": "Any rectangle with perimeter = 24 ft and area < 32 sq ft. Example: length = 9 ft, width = 3 ft (perimeter = 24, area = 27 < 32)."
       }
@@ -472,23 +473,24 @@
       },
       {
         "label": "B",
-        "question_text": "What is the total number of <strong>squares</strong> in Step 6 of the pattern? Explain how you know your answer is correct.",
-        "answer_type": "constructed_response",
-        "answer_instruction": "Enter your answer and your explanation in the space provided.",
-        "correct_answer": "6"
+        "question_text": "What is the total number of triangles in Step 6 of the pattern?",
+        "answer_type": "number_with_work",
+        "answer_unit": "triangles",
+        "correct_answer": "12"
       },
       {
         "label": "C",
-        "question_text": "What is the total number of triangles in Step 9 of the pattern? Explain how you can get your answer by using multiplication.",
-        "answer_type": "constructed_response",
-        "answer_instruction": "Enter your answer and your explanation in the space provided.",
-        "correct_answer": "18"
+        "question_text": "What is the total number of <strong>squares</strong> in Step 9 of the pattern?",
+        "answer_type": "number_with_work",
+        "answer_unit": "squares",
+        "work_instruction": "Explain how you can get your answer by using multiplication.",
+        "correct_answer": "9"
       },
       {
         "label": "D",
-        "question_text": "One step in the pattern will have a total of 64 triangles. What is the total number of squares in that step? Show or explain how you got your answer.",
-        "answer_type": "constructed_response",
-        "answer_instruction": "Enter your answer and your work or explanation in the space provided.",
+        "question_text": "One step in the pattern will have a total of 64 triangles. What is the total number of squares in that step?",
+        "answer_type": "number_with_work",
+        "answer_unit": "squares",
         "correct_answer": "32"
       }
     ],
