@@ -38,8 +38,8 @@
 </script>
 
 <div class="greek-text">
-  {#each sentences as sentence}
-    <p class="sentence">
+  <p class="passage">
+    {#each sentences as sentence}
       {#each sentence.words ?? [] as word}
         <!-- svelte-ignore a11y-no-static-element-interactions -->
         <span
@@ -52,8 +52,8 @@
           on:mouseleave={handleLeave}
         >{word.text}</span>
       {/each}
-    </p>
-  {/each}
+    {/each}
+  </p>
 </div>
 
 <style>
@@ -62,13 +62,17 @@
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    width: 100%;
+    overflow-wrap: break-word;
+    word-break: normal;
   }
 
-  .sentence {
+  .passage {
     font-size: 20px;
     line-height: 1.9;
     color: #1a1a1a;
-    margin: 0 0 1.4em;
+    margin: 0;
+    white-space: normal;
   }
 
   /* Inline span — no layout shift on highlight */

@@ -167,6 +167,71 @@ export const paradigms = {
     "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
   },
 
+  "3rd_declension_dental_stem": {
+    "label": "3rd Declension Dental Stem (-δ/-τ)",
+    "headword": "-ς / -δος",
+    "pos": "noun",
+    "note": "Stem ends in -δ or -τ; dental drops before -σ in nom sg and dat pl",
+    "forms": {
+      "sg": { "nom": "-(ς)", "gen": "-ος", "dat": "-ι", "acc": "-α", "voc": "-(ς)" },
+      "pl": { "nom": "-ες", "gen": "-ων", "dat": "-σι(ν)", "acc": "-ας", "voc": "-ες" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "3rd_declension_sigma_stem": {
+    "label": "3rd Declension Sigma Stem (-ος/-ους, neuter)",
+    "headword": "-ος, -ους",
+    "pos": "noun",
+    "gender": "neuter",
+    "note": "Stem in -εσ-; sigma drops between vowels with compensatory contraction",
+    "example": "γένος, γένους — race, kind",
+    "forms": {
+      "sg": { "nom": "-ος", "gen": "-ους", "dat": "-ει", "acc": "-ος", "voc": "-ος" },
+      "pl": { "nom": "-η", "gen": "-ῶν", "dat": "-εσι(ν)", "acc": "-η", "voc": "-η" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "3rd_declension_mat_stem": {
+    "label": "3rd Declension -μα Stem (-ματος, neuter)",
+    "headword": "-μα, -ματος",
+    "pos": "noun",
+    "gender": "neuter",
+    "example": "ὄνομα, ὀνόματος — name",
+    "forms": {
+      "sg": { "nom": "-μα", "gen": "-ματος", "dat": "-ματι", "acc": "-μα", "voc": "-μα" },
+      "pl": { "nom": "-ματα", "gen": "-μάτων", "dat": "-μασι(ν)", "acc": "-ματα", "voc": "-ματα" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "3rd_declension_nu_stem": {
+    "label": "3rd Declension Nu Stem (-ων/-ονος)",
+    "headword": "-ων, -ονος",
+    "pos": "noun",
+    "note": "Stem in -ν-; voc sg drops the final -ν of stem",
+    "example": "δαίμων, δαίμονος — spirit",
+    "forms": {
+      "sg": { "nom": "-ων", "gen": "-ονος", "dat": "-ονι", "acc": "-ονα", "voc": "-ον" },
+      "pl": { "nom": "-ονες", "gen": "-ονων", "dat": "-οσι(ν)", "acc": "-ονας", "voc": "-ονες" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
+  },
+
+  "3rd_declension_iota_stem": {
+    "label": "3rd Declension Iota Stem (-ις/-εως)",
+    "headword": "-ις, -εως",
+    "pos": "noun",
+    "gender": "feminine",
+    "example": "πόλις, πόλεως — city",
+    "forms": {
+      "sg": { "nom": "-ις", "gen": "-εως", "dat": "-ει", "acc": "-ιν", "voc": "-ι" },
+      "pl": { "nom": "-εις", "gen": "-εων", "dat": "-εσι(ν)", "acc": "-εις", "voc": "-εις" }
+    },
+    "labels": { "rows": ["Nom", "Gen", "Dat", "Acc", "Voc"], "cols": ["Singular", "Plural"] }
+  },
+
   "pronoun_personal_1st": {
     "label": "1st Person Pronoun (ἐγώ)",
     "headword": "ἐγώ",

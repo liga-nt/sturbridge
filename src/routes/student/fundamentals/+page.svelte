@@ -343,12 +343,13 @@
                                             <input
                                                 type="text"
                                                 inputmode="numeric"
-                                                maxlength="1"
+                                                maxlength="2"
                                                 bind:this={carryRefs[i]}
-                                                bind:value={carries[i]}
+                                                value={carries[i] ?? ''}
+                                                on:input={(e) => { carries[i] = e.target.value; carries = carries; }}
                                                 disabled={submitted}
                                                 on:keydown={e => handleCarryKeydown(e, i)}
-                                                class="select-text w-5 h-5 border border-gray-400 rounded text-center text-xs text-red-500 font-mono
+                                                class="select-text w-6 h-5 border border-gray-400 rounded text-center text-xs text-red-500 font-mono
                                                        focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-200
                                                        disabled:cursor-default bg-white"
                                             />

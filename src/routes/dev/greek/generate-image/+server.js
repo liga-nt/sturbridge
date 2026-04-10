@@ -18,6 +18,7 @@ export async function POST({ request }) {
     form.append('model', 'gpt-image-1');
     form.append('prompt', prompt.trim());
     form.append('size', '1024x1024');
+    form.append('response_format', 'b64_json');
 
     for (const url of characterImageUrls) {
       try {
@@ -57,7 +58,7 @@ export async function POST({ request }) {
       model: 'gpt-image-1',
       prompt: prompt.trim(),
       size: '1024x1024',
-      output_format: 'png'
+      response_format: 'b64_json'
     })
   });
 

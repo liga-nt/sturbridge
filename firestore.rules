@@ -132,5 +132,11 @@ service cloud.firestore {
       allow read:  if isAuth();
       allow write: if isDev();
     }
+
+    // ── word_glosses — glossed Greek word forms for each course ──────────────
+    match /word_glosses/{courseId} {
+      allow read:  if isAuth();
+      allow write: if isDev();
+    }
   }
 }
