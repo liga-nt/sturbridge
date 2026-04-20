@@ -1,0 +1,480 @@
+[
+  {
+    "id": "alef",
+    "char": "ا",
+    "name_en": "Alef",
+    "name_fa": "الف",
+    "order": 1,
+    "qwerty_key": "h",
+    "transliteration": "ā / a",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/alef.mp3",
+    "audio_timestamps": [
+      0
+    ]
+  },
+  {
+    "id": "be",
+    "char": "ب",
+    "name_en": "Be",
+    "name_fa": "بِ",
+    "order": 2,
+    "qwerty_key": "f",
+    "transliteration": "b",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/be.mp3",
+    "audio_timestamps": [
+      0,
+      0.274813,
+      1.175875
+    ]
+  },
+  {
+    "id": "pe",
+    "char": "پ",
+    "name_en": "Pe",
+    "name_fa": "پِ",
+    "order": 3,
+    "qwerty_key": "m",
+    "transliteration": "p",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/pe.mp3",
+    "audio_timestamps": [
+      0,
+      0.268688,
+      1.303313
+    ]
+  },
+  {
+    "id": "te",
+    "char": "ت",
+    "name_en": "Te",
+    "name_fa": "تِ",
+    "order": 4,
+    "qwerty_key": "j",
+    "transliteration": "t",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/te.mp3",
+    "audio_timestamps": [
+      0,
+      0.268625,
+      1.270813
+    ]
+  },
+  {
+    "id": "se",
+    "char": "ث",
+    "name_en": "Se",
+    "name_fa": "ثِ",
+    "order": 5,
+    "qwerty_key": "e",
+    "transliteration": "s",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/se.mp3",
+    "audio_timestamps": [
+      0,
+      0.304875,
+      1.391063
+    ]
+  },
+  {
+    "id": "jim",
+    "char": "ج",
+    "name_en": "Jim",
+    "name_fa": "جيم",
+    "order": 6,
+    "qwerty_key": "[",
+    "transliteration": "j",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/jim.mp3",
+    "audio_timestamps": [
+      0,
+      0.271,
+      1.272
+    ]
+  },
+  {
+    "id": "che",
+    "char": "چ",
+    "name_en": "Che",
+    "name_fa": "چِ",
+    "order": 7,
+    "qwerty_key": "]",
+    "transliteration": "ch",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/che.mp3",
+    "audio_timestamps": [
+      0,
+      0.267062,
+      1.266125
+    ]
+  },
+  {
+    "id": "he_jooti",
+    "char": "ح",
+    "name_en": "He (Hā-ye Jooti)",
+    "name_fa": "حِ",
+    "order": 8,
+    "qwerty_key": "p",
+    "transliteration": "h",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/he_jooti.mp3",
+    "audio_timestamps": [
+      0,
+      0.31725,
+      1.261437
+    ]
+  },
+  {
+    "id": "khe",
+    "char": "خ",
+    "name_en": "Khe",
+    "name_fa": "خِ",
+    "order": 9,
+    "qwerty_key": "o",
+    "transliteration": "kh",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/khe.mp3",
+    "audio_timestamps": [
+      0,
+      0.306688,
+      1.32125
+    ]
+  },
+  {
+    "id": "dal",
+    "char": "د",
+    "name_en": "Dal",
+    "name_fa": "دال",
+    "order": 10,
+    "qwerty_key": "n",
+    "transliteration": "d",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/dal.mp3",
+    "audio_timestamps": [
+      0,
+      0.270875,
+      1.303438
+    ]
+  },
+  {
+    "id": "zal",
+    "char": "ذ",
+    "name_en": "Zal",
+    "name_fa": "ذال",
+    "order": 11,
+    "qwerty_key": "b",
+    "transliteration": "z",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/zal.mp3",
+    "audio_timestamps": [
+      0,
+      0.320375,
+      1.456063
+    ]
+  },
+  {
+    "id": "re",
+    "char": "ر",
+    "name_en": "Re",
+    "name_fa": "رِ",
+    "order": 12,
+    "qwerty_key": "v",
+    "transliteration": "r",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/re.mp3",
+    "audio_timestamps": [
+      0,
+      0.2905,
+      1.34225
+    ]
+  },
+  {
+    "id": "ze",
+    "char": "ز",
+    "name_en": "Ze",
+    "name_fa": "زِ",
+    "order": 13,
+    "qwerty_key": "c",
+    "transliteration": "z",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/ze.mp3",
+    "audio_timestamps": [
+      0,
+      0.291313,
+      1.421125
+    ]
+  },
+  {
+    "id": "zhe",
+    "char": "ژ",
+    "name_en": "Zhe",
+    "name_fa": "ژِ",
+    "order": 14,
+    "qwerty_key": "Shift+C",
+    "transliteration": "zh",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/zhe.mp3",
+    "audio_timestamps": [
+      0,
+      0.283625,
+      1.298687
+    ]
+  },
+  {
+    "id": "sin",
+    "char": "س",
+    "name_en": "Sin",
+    "name_fa": "سين",
+    "order": 15,
+    "qwerty_key": "s",
+    "transliteration": "s",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/sin.mp3",
+    "audio_timestamps": [
+      0,
+      0.300312,
+      1.420875
+    ]
+  },
+  {
+    "id": "shin",
+    "char": "ش",
+    "name_en": "Shin",
+    "name_fa": "شين",
+    "order": 16,
+    "qwerty_key": "a",
+    "transliteration": "sh",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/shin.mp3",
+    "audio_timestamps": [
+      0,
+      0.271,
+      1.321688
+    ]
+  },
+  {
+    "id": "sad",
+    "char": "ص",
+    "name_en": "Sad",
+    "name_fa": "صاد",
+    "order": 17,
+    "qwerty_key": "w",
+    "transliteration": "s",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/sad.mp3",
+    "audio_timestamps": [
+      0,
+      0.295625,
+      1.365125
+    ]
+  },
+  {
+    "id": "zad",
+    "char": "ض",
+    "name_en": "Zad",
+    "name_fa": "ضاد",
+    "order": 18,
+    "qwerty_key": "q",
+    "transliteration": "z",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/zad.mp3",
+    "audio_timestamps": [
+      0,
+      0.3185,
+      1.432875
+    ]
+  },
+  {
+    "id": "ta",
+    "char": "ط",
+    "name_en": "Ṭa",
+    "name_fa": "طا",
+    "order": 19,
+    "qwerty_key": "x",
+    "transliteration": "t",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/ta.mp3",
+    "audio_timestamps": [
+      0,
+      0.268625,
+      1.240687
+    ]
+  },
+  {
+    "id": "za",
+    "char": "ظ",
+    "name_en": "Ẓa",
+    "name_fa": "ظا",
+    "order": 20,
+    "qwerty_key": "z",
+    "transliteration": "z",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/za.mp3",
+    "audio_timestamps": [
+      0,
+      0.29175,
+      1.3875
+    ]
+  },
+  {
+    "id": "ain",
+    "char": "ع",
+    "name_en": "Ain",
+    "name_fa": "عَين",
+    "order": 21,
+    "qwerty_key": "u",
+    "transliteration": "' / a",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/ain.mp3",
+    "audio_timestamps": [
+      0,
+      0.267062,
+      1.307
+    ]
+  },
+  {
+    "id": "ghain",
+    "char": "غ",
+    "name_en": "Ghain",
+    "name_fa": "غَين",
+    "order": 22,
+    "qwerty_key": "y",
+    "transliteration": "gh",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/ghain.mp3",
+    "audio_timestamps": [
+      0,
+      0.269,
+      1.255812
+    ]
+  },
+  {
+    "id": "fe",
+    "char": "ف",
+    "name_en": "Fe",
+    "name_fa": "فِ",
+    "order": 23,
+    "qwerty_key": "t",
+    "transliteration": "f",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/fe.mp3",
+    "audio_timestamps": [
+      0,
+      0.448,
+      1.625312
+    ]
+  },
+  {
+    "id": "qaf",
+    "char": "ق",
+    "name_en": "Qaf",
+    "name_fa": "قاف",
+    "order": 24,
+    "qwerty_key": "r",
+    "transliteration": "q / gh",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/qaf.mp3",
+    "audio_timestamps": [
+      0,
+      0.268625,
+      1.223125
+    ]
+  },
+  {
+    "id": "kaf",
+    "char": "ک",
+    "name_en": "Kaf",
+    "name_fa": "کاف",
+    "order": 25,
+    "qwerty_key": ";",
+    "transliteration": "k",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/kaf.mp3",
+    "audio_timestamps": [
+      0,
+      0.270813,
+      1.26975
+    ]
+  },
+  {
+    "id": "gaf",
+    "char": "گ",
+    "name_en": "Gaf",
+    "name_fa": "گاف",
+    "order": 26,
+    "qwerty_key": "'",
+    "transliteration": "g",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/gaf.mp3",
+    "audio_timestamps": [
+      0,
+      0.270875,
+      1.265437
+    ]
+  },
+  {
+    "id": "lam",
+    "char": "ل",
+    "name_en": "Lam",
+    "name_fa": "لام",
+    "order": 27,
+    "qwerty_key": "g",
+    "transliteration": "l",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/lam.mp3",
+    "audio_timestamps": [
+      0,
+      0.2825,
+      1.360188
+    ]
+  },
+  {
+    "id": "mim",
+    "char": "م",
+    "name_en": "Mim",
+    "name_fa": "ميم",
+    "order": 28,
+    "qwerty_key": "l",
+    "transliteration": "m",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/mim.mp3",
+    "audio_timestamps": [
+      0,
+      0.2805,
+      1.356563
+    ]
+  },
+  {
+    "id": "nun",
+    "char": "ن",
+    "name_en": "Nun",
+    "name_fa": "نون",
+    "order": 29,
+    "qwerty_key": "k",
+    "transliteration": "n",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/nun.mp3",
+    "audio_timestamps": [
+      0,
+      0.275,
+      1.351813
+    ]
+  },
+  {
+    "id": "vav",
+    "char": "و",
+    "name_en": "Vav",
+    "name_fa": "واو",
+    "order": 30,
+    "qwerty_key": ",",
+    "transliteration": "v / u / ow",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/vav.mp3",
+    "audio_timestamps": [
+      0,
+      0.295187,
+      1.313688
+    ]
+  },
+  {
+    "id": "he",
+    "char": "ه",
+    "name_en": "He",
+    "name_fa": "هِ",
+    "order": 31,
+    "qwerty_key": "i",
+    "transliteration": "h",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/he.mp3",
+    "audio_timestamps": [
+      0,
+      0.312688,
+      1.26575
+    ]
+  },
+  {
+    "id": "ye",
+    "char": "ی",
+    "name_en": "Ye",
+    "name_fa": "يِ",
+    "order": 32,
+    "qwerty_key": "d",
+    "transliteration": "y / i",
+    "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/letters/ye.mp3",
+    "audio_timestamps": [
+      0,
+      0.278062,
+      1.263062
+    ]
+  }
+]

@@ -22,7 +22,7 @@
 
     let problems  = [];
     let answers   = [];
-    let carries   = [];   // carry scratch values, one per vertical problem
+    let carries   = [];   // carry scratch DOM values (cleared via ref, not Svelte state)
     let inputRefs = [];
     let carryRefs = [];
     let submitted = false;
@@ -76,13 +76,13 @@
         const count = setting(std.id, 'problemsPerPage', std.problemsPerPage ?? 8);
         problems  = generatePage(std.id, count);
         answers   = Array(count).fill('');
-        carries   = Array(count).fill('');
         submitted = false;
         results   = null;
         justMastered = false;
         lastTime  = null;
         isNewBest = false;
         await tick();
+        carryRefs.forEach(r => { if (r) r.value = ''; });
         inputRefs[0]?.focus();
     }
 
@@ -105,12 +105,16 @@
     function handleCarryKeydown(e, i) {
         if (e.key === 'ArrowDown' || e.key === 'Enter') {
             e.preventDefault();
-            inputRefs[i]?.focus();
+            const input = inputRefs[i];
+            if (input) {
+                input.focus();
+                input.setSelectionRange(0, 0);
+            }
         }
     }
 
     function clearCarry(i) {
-        carries = carries.map((c, j) => j === i ? '' : c);
+        if (carryRefs[i]) carryRefs[i].value = '';
     }
 
     function handleSubmit() {
@@ -334,26 +338,20 @@
 
                             {#if problem.factors}
                                 {@const minW = Math.max(String(problem.factors[0]).length, problem.answer.length) + 2}
-                                <!-- Wrap in flex so inline-block doesn't stretch to fill the grid cell -->
                                 <div class="flex justify-center">
-                                    <div class="font-mono text-base text-gray-800 select-none"
-                                         style="min-width: {minW}ch; width: fit-content">
-                                        <!-- Carry scratch box: centered above the top factor, single digit -->
-                                        <div class="flex justify-center mb-0.5">
-                                            <input
-                                                type="text"
-                                                inputmode="numeric"
-                                                maxlength="2"
-                                                bind:this={carryRefs[i]}
-                                                value={carries[i] ?? ''}
-                                                on:input={(e) => { carries[i] = e.target.value; carries = carries; }}
-                                                disabled={submitted}
-                                                on:keydown={e => handleCarryKeydown(e, i)}
-                                                class="select-text w-6 h-5 border border-gray-400 rounded text-center text-xs text-red-500 font-mono
-                                                       focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-200
-                                                       disabled:cursor-default bg-white"
-                                            />
-                                        </div>
+                                    <div class="font-mono text-base text-gray-800"
+                                         style="width: {minW}ch">
+                                        <input
+                                            type="text"
+                                            inputmode="numeric"
+                                            maxlength="2"
+                                            tabindex="-1"
+                                            bind:this={carryRefs[i]}
+                                            disabled={submitted}
+                                            on:keydown={e => handleCarryKeydown(e, i)}
+                                            class="select-text block w-full border-0 bg-transparent text-sm leading-none py-1 text-center text-red-500 font-mono font-bold
+                                                   focus:outline-none disabled:cursor-default"
+                                        />
                                         <div class="text-right">{problem.factors[0]}</div>
                                         <div class="flex items-baseline justify-end gap-1">
                                             <span class="text-gray-500">×</span>

@@ -44,6 +44,8 @@
 		"dotenv": "^16.5.0",
 		"firebase": "^11.10.0",
 		"firebase-admin": "^13.2.0",
-		"topojson-client": "^3.1.0"
+		"microsoft-cognitiveservices-speech-sdk": "^1.49.0",
+		"topojson-client": "^3.1.0",
+		"ts-fsrs": "^5.3.2"
 	}
 }

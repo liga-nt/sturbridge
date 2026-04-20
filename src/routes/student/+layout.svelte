@@ -16,10 +16,18 @@
 
     // contentKey → student route
     const COURSE_ROUTES = {
-        'fundamentals-math': '/student/fundamentals',
-        'mcas-grade4-math':  '/student/mcas',
-        'greek-immersive':   '/student/greek',
+        'fundamentals-math':  '/student/fundamentals',
+        'mcas-grade4-math':   '/student/mcas',
+        'greek-immersive':    '/student/greek',
+        'persian-immersive':  '/student/persian',
     };
+
+    // Routes that render without class/course data (standalone pages)
+    const STANDALONE_ROUTES = ['/student/persian'];
+
+    function isStandalone(pathname) {
+        return STANDALONE_ROUTES.some(r => pathname === r || pathname.startsWith(r + '/'));
+    }
     const FALLBACK_ROUTE = '/student/mcas';
 
     // Context — child components see these after dataLoaded = true
@@ -41,8 +49,9 @@
     let dataError   = null;
 
     // Course picker
-    let showPicker   = false;
-    let classOptions = [];   // [{ classId, className, courseLabel, contentKey }]
+    let showPicker        = false;
+    let classOptions      = [];   // [{ classId, className, courseLabel, contentKey }]
+    let hasMultipleClasses = false;
 
     async function loadData() {
         uid = $session.user?.uid;
@@ -74,12 +83,13 @@
         if (classIds.length === 1) {
             selectedClassId = classIds[0];
         } else {
-            // Multiple classes — check localStorage for remembered choice
-            const remembered = localStorage.getItem(`student_class_${uid}`);
+            hasMultipleClasses = true;
+            // Dev always sees the picker; students get their remembered choice
+            const remembered = $session.role !== 'dev' && localStorage.getItem(`student_class_${uid}`);
             if (remembered && classIds.includes(remembered)) {
+                classOptions = await loadPickerOptions(classIds);
                 selectedClassId = remembered;
             } else {
-                // Need to show the picker — load options first
                 classOptions = await loadPickerOptions(classIds);
                 showPicker = true;
                 return; // wait for user to pick
@@ -108,6 +118,11 @@
         await loadForClass(classId);
     }
 
+    function switchClass() {
+        if (uid) localStorage.removeItem(`student_class_${uid}`);
+        showPicker = true;
+    }
+
     async function loadForClass(classId) {
         const rawClass = await loadClass(classId);
         if (!rawClass) throw new Error('Class not found.');
@@ -128,6 +143,7 @@
 
     onMount(async () => {
         if ($session.role !== 'student' && $session.role !== 'dev') return;
+        if (isStandalone($page.url.pathname)) return;
         try {
             await loadData();
         } catch (e) {
@@ -170,11 +186,19 @@
         </div>
     </div>
 
-{:else if !dataLoaded}
+{:else if !dataLoaded && !isStandalone($page.url.pathname)}
     <div class="flex min-h-screen items-center justify-center">
         <p class="text-gray-400">Loading...</p>
     </div>
 
 {:else}
     <slot />
+    {#if hasMultipleClasses}
+        <button
+            on:click={switchClass}
+            class="fixed bottom-4 right-4 text-xs text-gray-400 bg-white border border-gray-200 rounded-full px-3 py-1.5 shadow-sm hover:text-gray-600 hover:border-gray-300 transition-all"
+        >
+            Switch course
+        </button>
+    {/if}
 {/if}

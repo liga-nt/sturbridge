@@ -90,9 +90,11 @@
 {:else}
     <div class="flex min-h-screen items-center justify-center">
         <div class="w-full max-w-md space-y-8 p-4">
-            <div class="text-center">
-                <h2 class="text-3xl font-bold mb-2">Sturbridge Math</h2>
-                <p class="text-gray-600">MCAS 4th Grade Math Practice</p>
+            <div class="text-center flex flex-col items-center gap-3">
+                <div class="bg-gray-800 rounded-2xl px-8 py-5 inline-block">
+                    <img src="/lexlogo.png" alt="LexAudio" class="h-12" />
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mt-1">LexAudio Learn</h2>
             </div>
 
             {#if error}

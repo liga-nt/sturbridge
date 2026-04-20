@@ -1,0 +1,252 @@
+[
+  {
+    "id": "w001",
+    "farsi": "نی",
+    "transliteration": "ney",
+    "english": "reed flute",
+    "sufi_meaning": "the soul separated from its divine origin; the opening image of the Masnavi",
+    "frequency_rank": 1,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w002",
+    "farsi": "دل",
+    "transliteration": "del",
+    "english": "heart",
+    "sufi_meaning": "the spiritual center; the seat of divine longing",
+    "frequency_rank": 2,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w003",
+    "farsi": "عشق",
+    "transliteration": "eshq",
+    "english": "love",
+    "sufi_meaning": "divine love; the overwhelming force that draws the soul toward God",
+    "frequency_rank": 3,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w004",
+    "farsi": "جان",
+    "transliteration": "jân",
+    "english": "soul / life",
+    "sufi_meaning": "the immortal soul; that which longs to return to its divine source",
+    "frequency_rank": 4,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w005",
+    "farsi": "راز",
+    "transliteration": "râz",
+    "english": "secret",
+    "sufi_meaning": "the hidden knowledge; divine mystery disclosed only to the lover",
+    "frequency_rank": 5,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w006",
+    "farsi": "می",
+    "transliteration": "mey",
+    "english": "wine",
+    "sufi_meaning": "spiritual intoxication; the ecstasy of divine love that obliterates the ego",
+    "frequency_rank": 6,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w007",
+    "farsi": "مست",
+    "transliteration": "mast",
+    "english": "intoxicated",
+    "sufi_meaning": "the state of being overwhelmed by divine love; beyond reason",
+    "frequency_rank": 7,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w008",
+    "farsi": "یار",
+    "transliteration": "yâr",
+    "english": "beloved friend",
+    "sufi_meaning": "the divine beloved; God as the intimate companion of the soul",
+    "frequency_rank": 8,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w009",
+    "farsi": "آتش",
+    "transliteration": "âtash",
+    "english": "fire",
+    "sufi_meaning": "the purifying fire of divine love; burns away all that is not God",
+    "frequency_rank": 9,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w010",
+    "farsi": "درد",
+    "transliteration": "dard",
+    "english": "pain / longing",
+    "sufi_meaning": "the ache of separation; for Rumi, pain is the gate to awakening",
+    "frequency_rank": 10,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w011",
+    "farsi": "شمع",
+    "transliteration": "sham'",
+    "english": "candle",
+    "sufi_meaning": "the divine light that draws the moth; God as the luminous center",
+    "frequency_rank": 11,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w012",
+    "farsi": "پروانه",
+    "transliteration": "parvâneh",
+    "english": "moth / butterfly",
+    "sufi_meaning": "the soul that circles the candle of divine light, willing to be consumed",
+    "frequency_rank": 12,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w013",
+    "farsi": "سر",
+    "transliteration": "sar",
+    "english": "head / secret",
+    "sufi_meaning": "hidden meaning; the inner secret of the universe known to the mystic",
+    "frequency_rank": 13,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w014",
+    "farsi": "نور",
+    "transliteration": "nur",
+    "english": "light",
+    "sufi_meaning": "divine light; the illumination that guides the seeker",
+    "frequency_rank": 14,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w015",
+    "farsi": "آب",
+    "transliteration": "âb",
+    "english": "water",
+    "sufi_meaning": "the water of life; divine grace and mercy",
+    "frequency_rank": 15,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w016",
+    "farsi": "دریا",
+    "transliteration": "daryâ",
+    "english": "sea / ocean",
+    "sufi_meaning": "the infinite divine; the ocean of being from which the soul emerges as a wave",
+    "frequency_rank": 16,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w017",
+    "farsi": "باد",
+    "transliteration": "bâd",
+    "english": "wind",
+    "sufi_meaning": "the breath of divine spirit; the invisible force that moves the soul",
+    "frequency_rank": 17,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w018",
+    "farsi": "گل",
+    "transliteration": "gol",
+    "english": "flower / rose",
+    "sufi_meaning": "beauty and transience; the rose symbolizes the divine beloved and worldly impermanence",
+    "frequency_rank": 18,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w019",
+    "farsi": "بلبل",
+    "transliteration": "bolbol",
+    "english": "nightingale",
+    "sufi_meaning": "the soul in love; the bird that sings endlessly for the rose (beloved)",
+    "frequency_rank": 19,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w020",
+    "farsi": "خاموش",
+    "transliteration": "khâmush",
+    "english": "silent",
+    "sufi_meaning": "Rumi's pen name meaning 'silent one'; true knowledge lies beyond words",
+    "frequency_rank": 20,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w021",
+    "farsi": "غم",
+    "transliteration": "gham",
+    "english": "sorrow / grief",
+    "sufi_meaning": "the productive sadness of the seeker; grief opens the heart to God",
+    "frequency_rank": 21,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w022",
+    "farsi": "شادی",
+    "transliteration": "shâdi",
+    "english": "joy",
+    "sufi_meaning": "",
+    "frequency_rank": 22,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w023",
+    "farsi": "رنگ",
+    "transliteration": "rang",
+    "english": "color",
+    "sufi_meaning": "worldly appearance and beauty; also the coloring (tincture) of divine love",
+    "frequency_rank": 23,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w024",
+    "farsi": "بوی",
+    "transliteration": "buy",
+    "english": "scent / fragrance",
+    "sufi_meaning": "the divine fragrance that draws the seeker before they can see the source",
+    "frequency_rank": 24,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  },
+  {
+    "id": "w025",
+    "farsi": "خدا",
+    "transliteration": "khodâ",
+    "english": "God",
+    "sufi_meaning": "",
+    "frequency_rank": 25,
+    "audio_fa_url": "",
+    "audio_en_url": ""
+  }
+]

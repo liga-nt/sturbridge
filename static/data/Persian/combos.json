@@ -1,0 +1,4952 @@
+[
+  {
+    "id": "c0001",
+    "text": "با",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0002",
+    "text": "بب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0003",
+    "text": "بپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0004",
+    "text": "بت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0005",
+    "text": "بث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0006",
+    "text": "بج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0007",
+    "text": "بچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0008",
+    "text": "بح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0009",
+    "text": "بخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0010",
+    "text": "بد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0011",
+    "text": "بذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0012",
+    "text": "بر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0013",
+    "text": "بز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0014",
+    "text": "بژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0015",
+    "text": "بس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0016",
+    "text": "بش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0017",
+    "text": "بص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0018",
+    "text": "بض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0019",
+    "text": "بط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0020",
+    "text": "بظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0021",
+    "text": "بع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0022",
+    "text": "بغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0023",
+    "text": "بف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0024",
+    "text": "بق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0025",
+    "text": "بک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0026",
+    "text": "بگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0027",
+    "text": "بل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0028",
+    "text": "بم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0029",
+    "text": "بن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0030",
+    "text": "بو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0031",
+    "text": "به",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0032",
+    "text": "بی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0033",
+    "text": "پا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0034",
+    "text": "پب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0035",
+    "text": "پپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0036",
+    "text": "پت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0037",
+    "text": "پث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0038",
+    "text": "پج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0039",
+    "text": "پچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0040",
+    "text": "پح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0041",
+    "text": "پخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0042",
+    "text": "پد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0043",
+    "text": "پذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0044",
+    "text": "پر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0045",
+    "text": "پز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0046",
+    "text": "پژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0047",
+    "text": "پس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0048",
+    "text": "پش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0049",
+    "text": "پص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0050",
+    "text": "پض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0051",
+    "text": "پط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0052",
+    "text": "پظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0053",
+    "text": "پع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0054",
+    "text": "پغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0055",
+    "text": "پف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0056",
+    "text": "پق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0057",
+    "text": "پک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0058",
+    "text": "پگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0059",
+    "text": "پل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0060",
+    "text": "پم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0061",
+    "text": "پن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0062",
+    "text": "پو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0063",
+    "text": "په",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0064",
+    "text": "پی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0065",
+    "text": "تا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0066",
+    "text": "تب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0067",
+    "text": "تپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0068",
+    "text": "تت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0069",
+    "text": "تث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0070",
+    "text": "تج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0071",
+    "text": "تچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0072",
+    "text": "تح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0073",
+    "text": "تخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0074",
+    "text": "تد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0075",
+    "text": "تذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0076",
+    "text": "تر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0077",
+    "text": "تز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0078",
+    "text": "تژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0079",
+    "text": "تس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0080",
+    "text": "تش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0081",
+    "text": "تص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0082",
+    "text": "تض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0083",
+    "text": "تط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0084",
+    "text": "تظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0085",
+    "text": "تع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0086",
+    "text": "تغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0087",
+    "text": "تف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0088",
+    "text": "تق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0089",
+    "text": "تک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0090",
+    "text": "تگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0091",
+    "text": "تل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0092",
+    "text": "تم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0093",
+    "text": "تن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0094",
+    "text": "تو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0095",
+    "text": "ته",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0096",
+    "text": "تی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0097",
+    "text": "ثا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0098",
+    "text": "ثب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0099",
+    "text": "ثپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0100",
+    "text": "ثت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0101",
+    "text": "ثث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0102",
+    "text": "ثج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0103",
+    "text": "ثچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0104",
+    "text": "ثح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0105",
+    "text": "ثخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0106",
+    "text": "ثد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0107",
+    "text": "ثذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0108",
+    "text": "ثر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0109",
+    "text": "ثز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0110",
+    "text": "ثژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0111",
+    "text": "ثس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0112",
+    "text": "ثش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0113",
+    "text": "ثص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0114",
+    "text": "ثض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0115",
+    "text": "ثط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0116",
+    "text": "ثظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0117",
+    "text": "ثع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0118",
+    "text": "ثغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0119",
+    "text": "ثف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0120",
+    "text": "ثق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0121",
+    "text": "ثک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0122",
+    "text": "ثگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0123",
+    "text": "ثل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0124",
+    "text": "ثم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0125",
+    "text": "ثن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0126",
+    "text": "ثو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0127",
+    "text": "ثه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0128",
+    "text": "ثی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0129",
+    "text": "جا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0130",
+    "text": "جب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0131",
+    "text": "جپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0132",
+    "text": "جت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0133",
+    "text": "جث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0134",
+    "text": "جج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0135",
+    "text": "جچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0136",
+    "text": "جح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0137",
+    "text": "جخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0138",
+    "text": "جد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0139",
+    "text": "جذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0140",
+    "text": "جر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0141",
+    "text": "جز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0142",
+    "text": "جژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0143",
+    "text": "جس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0144",
+    "text": "جش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0145",
+    "text": "جص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0146",
+    "text": "جض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0147",
+    "text": "جط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0148",
+    "text": "جظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0149",
+    "text": "جع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0150",
+    "text": "جغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0151",
+    "text": "جف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0152",
+    "text": "جق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0153",
+    "text": "جک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0154",
+    "text": "جگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0155",
+    "text": "جل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0156",
+    "text": "جم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0157",
+    "text": "جن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0158",
+    "text": "جو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0159",
+    "text": "جه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0160",
+    "text": "جی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0161",
+    "text": "چا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0162",
+    "text": "چب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0163",
+    "text": "چپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0164",
+    "text": "چت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0165",
+    "text": "چث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0166",
+    "text": "چج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0167",
+    "text": "چچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0168",
+    "text": "چح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0169",
+    "text": "چخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0170",
+    "text": "چد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0171",
+    "text": "چذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0172",
+    "text": "چر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0173",
+    "text": "چز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0174",
+    "text": "چژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0175",
+    "text": "چس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0176",
+    "text": "چش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0177",
+    "text": "چص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0178",
+    "text": "چض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0179",
+    "text": "چط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0180",
+    "text": "چظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0181",
+    "text": "چع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0182",
+    "text": "چغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0183",
+    "text": "چف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0184",
+    "text": "چق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0185",
+    "text": "چک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0186",
+    "text": "چگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0187",
+    "text": "چل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0188",
+    "text": "چم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0189",
+    "text": "چن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0190",
+    "text": "چو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0191",
+    "text": "چه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0192",
+    "text": "چی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0193",
+    "text": "حا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0194",
+    "text": "حب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0195",
+    "text": "حپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0196",
+    "text": "حت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0197",
+    "text": "حث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0198",
+    "text": "حج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0199",
+    "text": "حچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0200",
+    "text": "حح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0201",
+    "text": "حخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0202",
+    "text": "حد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0203",
+    "text": "حذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0204",
+    "text": "حر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0205",
+    "text": "حز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0206",
+    "text": "حژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0207",
+    "text": "حس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0208",
+    "text": "حش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0209",
+    "text": "حص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0210",
+    "text": "حض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0211",
+    "text": "حط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0212",
+    "text": "حظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0213",
+    "text": "حع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0214",
+    "text": "حغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0215",
+    "text": "حف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0216",
+    "text": "حق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0217",
+    "text": "حک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0218",
+    "text": "حگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0219",
+    "text": "حل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0220",
+    "text": "حم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0221",
+    "text": "حن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0222",
+    "text": "حو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0223",
+    "text": "حه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0224",
+    "text": "حی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0225",
+    "text": "خا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0226",
+    "text": "خب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0227",
+    "text": "خپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0228",
+    "text": "خت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0229",
+    "text": "خث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0230",
+    "text": "خج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0231",
+    "text": "خچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0232",
+    "text": "خح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0233",
+    "text": "خخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0234",
+    "text": "خد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0235",
+    "text": "خذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0236",
+    "text": "خر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0237",
+    "text": "خز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0238",
+    "text": "خژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0239",
+    "text": "خس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0240",
+    "text": "خش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0241",
+    "text": "خص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0242",
+    "text": "خض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0243",
+    "text": "خط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0244",
+    "text": "خظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0245",
+    "text": "خع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0246",
+    "text": "خغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0247",
+    "text": "خف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0248",
+    "text": "خق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0249",
+    "text": "خک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0250",
+    "text": "خگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0251",
+    "text": "خل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0252",
+    "text": "خم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0253",
+    "text": "خن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0254",
+    "text": "خو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0255",
+    "text": "خه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0256",
+    "text": "خی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0257",
+    "text": "سا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0258",
+    "text": "سب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0259",
+    "text": "سپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0260",
+    "text": "ست",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0261",
+    "text": "سث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0262",
+    "text": "سج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0263",
+    "text": "سچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0264",
+    "text": "سح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0265",
+    "text": "سخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0266",
+    "text": "سد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0267",
+    "text": "سذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0268",
+    "text": "سر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0269",
+    "text": "سز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0270",
+    "text": "سژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0271",
+    "text": "سس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0272",
+    "text": "سش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0273",
+    "text": "سص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0274",
+    "text": "سض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0275",
+    "text": "سط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0276",
+    "text": "سظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0277",
+    "text": "سع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0278",
+    "text": "سغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0279",
+    "text": "سف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0280",
+    "text": "سق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0281",
+    "text": "سک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0282",
+    "text": "سگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0283",
+    "text": "سل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0284",
+    "text": "سم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0285",
+    "text": "سن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0286",
+    "text": "سو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0287",
+    "text": "سه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0288",
+    "text": "سی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0289",
+    "text": "شا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0290",
+    "text": "شب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0291",
+    "text": "شپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0292",
+    "text": "شت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0293",
+    "text": "شث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0294",
+    "text": "شج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0295",
+    "text": "شچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0296",
+    "text": "شح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0297",
+    "text": "شخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0298",
+    "text": "شد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0299",
+    "text": "شذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0300",
+    "text": "شر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0301",
+    "text": "شز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0302",
+    "text": "شژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0303",
+    "text": "شس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0304",
+    "text": "شش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0305",
+    "text": "شص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0306",
+    "text": "شض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0307",
+    "text": "شط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0308",
+    "text": "شظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0309",
+    "text": "شع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0310",
+    "text": "شغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0311",
+    "text": "شف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0312",
+    "text": "شق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0313",
+    "text": "شک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0314",
+    "text": "شگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0315",
+    "text": "شل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0316",
+    "text": "شم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0317",
+    "text": "شن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0318",
+    "text": "شو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0319",
+    "text": "شه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0320",
+    "text": "شی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0321",
+    "text": "صا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0322",
+    "text": "صب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0323",
+    "text": "صپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0324",
+    "text": "صت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0325",
+    "text": "صث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0326",
+    "text": "صج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0327",
+    "text": "صچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0328",
+    "text": "صح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0329",
+    "text": "صخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0330",
+    "text": "صد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0331",
+    "text": "صذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0332",
+    "text": "صر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0333",
+    "text": "صز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0334",
+    "text": "صژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0335",
+    "text": "صس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0336",
+    "text": "صش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0337",
+    "text": "صص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0338",
+    "text": "صض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0339",
+    "text": "صط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0340",
+    "text": "صظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0341",
+    "text": "صع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0342",
+    "text": "صغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0343",
+    "text": "صف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0344",
+    "text": "صق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0345",
+    "text": "صک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0346",
+    "text": "صگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0347",
+    "text": "صل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0348",
+    "text": "صم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0349",
+    "text": "صن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0350",
+    "text": "صو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0351",
+    "text": "صه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0352",
+    "text": "صی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0353",
+    "text": "ضا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0354",
+    "text": "ضب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0355",
+    "text": "ضپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0356",
+    "text": "ضت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0357",
+    "text": "ضث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0358",
+    "text": "ضج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0359",
+    "text": "ضچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0360",
+    "text": "ضح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0361",
+    "text": "ضخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0362",
+    "text": "ضد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0363",
+    "text": "ضذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0364",
+    "text": "ضر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0365",
+    "text": "ضز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0366",
+    "text": "ضژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0367",
+    "text": "ضس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0368",
+    "text": "ضش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0369",
+    "text": "ضص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0370",
+    "text": "ضض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0371",
+    "text": "ضط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0372",
+    "text": "ضظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0373",
+    "text": "ضع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0374",
+    "text": "ضغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0375",
+    "text": "ضف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0376",
+    "text": "ضق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0377",
+    "text": "ضک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0378",
+    "text": "ضگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0379",
+    "text": "ضل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0380",
+    "text": "ضم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0381",
+    "text": "ضن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0382",
+    "text": "ضو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0383",
+    "text": "ضه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0384",
+    "text": "ضی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0385",
+    "text": "طا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0386",
+    "text": "طب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0387",
+    "text": "طپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0388",
+    "text": "طت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0389",
+    "text": "طث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0390",
+    "text": "طج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0391",
+    "text": "طچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0392",
+    "text": "طح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0393",
+    "text": "طخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0394",
+    "text": "طد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0395",
+    "text": "طذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0396",
+    "text": "طر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0397",
+    "text": "طز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0398",
+    "text": "طژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0399",
+    "text": "طس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0400",
+    "text": "طش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0401",
+    "text": "طص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0402",
+    "text": "طض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0403",
+    "text": "طط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0404",
+    "text": "طظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0405",
+    "text": "طع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0406",
+    "text": "طغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0407",
+    "text": "طف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0408",
+    "text": "طق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0409",
+    "text": "طک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0410",
+    "text": "طگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0411",
+    "text": "طل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0412",
+    "text": "طم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0413",
+    "text": "طن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0414",
+    "text": "طو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0415",
+    "text": "طه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0416",
+    "text": "طی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0417",
+    "text": "ظا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0418",
+    "text": "ظب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0419",
+    "text": "ظپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0420",
+    "text": "ظت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0421",
+    "text": "ظث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0422",
+    "text": "ظج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0423",
+    "text": "ظچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0424",
+    "text": "ظح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0425",
+    "text": "ظخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0426",
+    "text": "ظد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0427",
+    "text": "ظذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0428",
+    "text": "ظر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0429",
+    "text": "ظز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0430",
+    "text": "ظژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0431",
+    "text": "ظس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0432",
+    "text": "ظش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0433",
+    "text": "ظص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0434",
+    "text": "ظض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0435",
+    "text": "ظط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0436",
+    "text": "ظظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0437",
+    "text": "ظع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0438",
+    "text": "ظغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0439",
+    "text": "ظف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0440",
+    "text": "ظق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0441",
+    "text": "ظک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0442",
+    "text": "ظگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0443",
+    "text": "ظل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0444",
+    "text": "ظم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0445",
+    "text": "ظن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0446",
+    "text": "ظو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0447",
+    "text": "ظه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0448",
+    "text": "ظی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0449",
+    "text": "عا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0450",
+    "text": "عب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0451",
+    "text": "عپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0452",
+    "text": "عت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0453",
+    "text": "عث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0454",
+    "text": "عج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0455",
+    "text": "عچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0456",
+    "text": "عح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0457",
+    "text": "عخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0458",
+    "text": "عد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0459",
+    "text": "عذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0460",
+    "text": "عر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0461",
+    "text": "عز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0462",
+    "text": "عژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0463",
+    "text": "عس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0464",
+    "text": "عش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0465",
+    "text": "عص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0466",
+    "text": "عض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0467",
+    "text": "عط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0468",
+    "text": "عظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0469",
+    "text": "عع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0470",
+    "text": "عغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0471",
+    "text": "عف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0472",
+    "text": "عق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0473",
+    "text": "عک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0474",
+    "text": "عگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0475",
+    "text": "عل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0476",
+    "text": "عم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0477",
+    "text": "عن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0478",
+    "text": "عو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0479",
+    "text": "عه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0480",
+    "text": "عی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0481",
+    "text": "غا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0482",
+    "text": "غب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0483",
+    "text": "غپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0484",
+    "text": "غت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0485",
+    "text": "غث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0486",
+    "text": "غج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0487",
+    "text": "غچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0488",
+    "text": "غح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0489",
+    "text": "غخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0490",
+    "text": "غد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0491",
+    "text": "غذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0492",
+    "text": "غر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0493",
+    "text": "غز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0494",
+    "text": "غژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0495",
+    "text": "غس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0496",
+    "text": "غش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0497",
+    "text": "غص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0498",
+    "text": "غض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0499",
+    "text": "غط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0500",
+    "text": "غظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0501",
+    "text": "غع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0502",
+    "text": "غغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0503",
+    "text": "غف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0504",
+    "text": "غق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0505",
+    "text": "غک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0506",
+    "text": "غگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0507",
+    "text": "غل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0508",
+    "text": "غم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0509",
+    "text": "غن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0510",
+    "text": "غو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0511",
+    "text": "غه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0512",
+    "text": "غی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0513",
+    "text": "فا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0514",
+    "text": "فب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0515",
+    "text": "فپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0516",
+    "text": "فت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0517",
+    "text": "فث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0518",
+    "text": "فج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0519",
+    "text": "فچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0520",
+    "text": "فح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0521",
+    "text": "فخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0522",
+    "text": "فد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0523",
+    "text": "فذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0524",
+    "text": "فر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0525",
+    "text": "فز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0526",
+    "text": "فژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0527",
+    "text": "فس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0528",
+    "text": "فش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0529",
+    "text": "فص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0530",
+    "text": "فض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0531",
+    "text": "فط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0532",
+    "text": "فظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0533",
+    "text": "فع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0534",
+    "text": "فغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0535",
+    "text": "فف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0536",
+    "text": "فق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0537",
+    "text": "فک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0538",
+    "text": "فگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0539",
+    "text": "فل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0540",
+    "text": "فم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0541",
+    "text": "فن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0542",
+    "text": "فو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0543",
+    "text": "فه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0544",
+    "text": "فی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0545",
+    "text": "قا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0546",
+    "text": "قب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0547",
+    "text": "قپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0548",
+    "text": "قت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0549",
+    "text": "قث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0550",
+    "text": "قج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0551",
+    "text": "قچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0552",
+    "text": "قح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0553",
+    "text": "قخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0554",
+    "text": "قد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0555",
+    "text": "قذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0556",
+    "text": "قر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0557",
+    "text": "قز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0558",
+    "text": "قژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0559",
+    "text": "قس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0560",
+    "text": "قش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0561",
+    "text": "قص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0562",
+    "text": "قض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0563",
+    "text": "قط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0564",
+    "text": "قظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0565",
+    "text": "قع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0566",
+    "text": "قغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0567",
+    "text": "قف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0568",
+    "text": "قق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0569",
+    "text": "قک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0570",
+    "text": "قگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0571",
+    "text": "قل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0572",
+    "text": "قم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0573",
+    "text": "قن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0574",
+    "text": "قو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0575",
+    "text": "قه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0576",
+    "text": "قی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0577",
+    "text": "کا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0578",
+    "text": "کب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0579",
+    "text": "کپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0580",
+    "text": "کت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0581",
+    "text": "کث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0582",
+    "text": "کج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0583",
+    "text": "کچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0584",
+    "text": "کح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0585",
+    "text": "کخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0586",
+    "text": "کد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0587",
+    "text": "کذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0588",
+    "text": "کر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0589",
+    "text": "کز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0590",
+    "text": "کژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0591",
+    "text": "کس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0592",
+    "text": "کش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0593",
+    "text": "کص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0594",
+    "text": "کض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0595",
+    "text": "کط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0596",
+    "text": "کظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0597",
+    "text": "کع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0598",
+    "text": "کغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0599",
+    "text": "کف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0600",
+    "text": "کق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0601",
+    "text": "کک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0602",
+    "text": "کگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0603",
+    "text": "کل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0604",
+    "text": "کم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0605",
+    "text": "کن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0606",
+    "text": "کو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0607",
+    "text": "که",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0608",
+    "text": "کی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0609",
+    "text": "گا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0610",
+    "text": "گب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0611",
+    "text": "گپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0612",
+    "text": "گت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0613",
+    "text": "گث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0614",
+    "text": "گج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0615",
+    "text": "گچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0616",
+    "text": "گح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0617",
+    "text": "گخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0618",
+    "text": "گد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0619",
+    "text": "گذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0620",
+    "text": "گر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0621",
+    "text": "گز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0622",
+    "text": "گژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0623",
+    "text": "گس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0624",
+    "text": "گش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0625",
+    "text": "گص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0626",
+    "text": "گض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0627",
+    "text": "گط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0628",
+    "text": "گظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0629",
+    "text": "گع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0630",
+    "text": "گغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0631",
+    "text": "گف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0632",
+    "text": "گق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0633",
+    "text": "گک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0634",
+    "text": "گگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0635",
+    "text": "گل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0636",
+    "text": "گم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0637",
+    "text": "گن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0638",
+    "text": "گو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0639",
+    "text": "گه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0640",
+    "text": "گی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0641",
+    "text": "لا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0642",
+    "text": "لب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0643",
+    "text": "لپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0644",
+    "text": "لت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0645",
+    "text": "لث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0646",
+    "text": "لج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0647",
+    "text": "لچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0648",
+    "text": "لح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0649",
+    "text": "لخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0650",
+    "text": "لد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0651",
+    "text": "لذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0652",
+    "text": "لر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0653",
+    "text": "لز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0654",
+    "text": "لژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0655",
+    "text": "لس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0656",
+    "text": "لش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0657",
+    "text": "لص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0658",
+    "text": "لض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0659",
+    "text": "لط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0660",
+    "text": "لظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0661",
+    "text": "لع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0662",
+    "text": "لغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0663",
+    "text": "لف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0664",
+    "text": "لق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0665",
+    "text": "لک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0666",
+    "text": "لگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0667",
+    "text": "لل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0668",
+    "text": "لم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0669",
+    "text": "لن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0670",
+    "text": "لو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0671",
+    "text": "له",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0672",
+    "text": "لی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0673",
+    "text": "ما",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0674",
+    "text": "مب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0675",
+    "text": "مپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0676",
+    "text": "مت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0677",
+    "text": "مث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0678",
+    "text": "مج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0679",
+    "text": "مچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0680",
+    "text": "مح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0681",
+    "text": "مخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0682",
+    "text": "مد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0683",
+    "text": "مذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0684",
+    "text": "مر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0685",
+    "text": "مز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0686",
+    "text": "مژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0687",
+    "text": "مس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0688",
+    "text": "مش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0689",
+    "text": "مص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0690",
+    "text": "مض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0691",
+    "text": "مط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0692",
+    "text": "مظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0693",
+    "text": "مع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0694",
+    "text": "مغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0695",
+    "text": "مف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0696",
+    "text": "مق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0697",
+    "text": "مک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0698",
+    "text": "مگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0699",
+    "text": "مل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0700",
+    "text": "مم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0701",
+    "text": "من",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0702",
+    "text": "مو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0703",
+    "text": "مه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0704",
+    "text": "می",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0705",
+    "text": "نا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0706",
+    "text": "نب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0707",
+    "text": "نپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0708",
+    "text": "نت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0709",
+    "text": "نث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0710",
+    "text": "نج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0711",
+    "text": "نچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0712",
+    "text": "نح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0713",
+    "text": "نخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0714",
+    "text": "ند",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0715",
+    "text": "نذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0716",
+    "text": "نر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0717",
+    "text": "نز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0718",
+    "text": "نژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0719",
+    "text": "نس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0720",
+    "text": "نش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0721",
+    "text": "نص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0722",
+    "text": "نض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0723",
+    "text": "نط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0724",
+    "text": "نظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0725",
+    "text": "نع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0726",
+    "text": "نغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0727",
+    "text": "نف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0728",
+    "text": "نق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0729",
+    "text": "نک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0730",
+    "text": "نگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0731",
+    "text": "نل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0732",
+    "text": "نم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0733",
+    "text": "نن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0734",
+    "text": "نو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0735",
+    "text": "نه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0736",
+    "text": "نی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0737",
+    "text": "ها",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0738",
+    "text": "هب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0739",
+    "text": "هپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0740",
+    "text": "هت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0741",
+    "text": "هث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0742",
+    "text": "هج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0743",
+    "text": "هچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0744",
+    "text": "هح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0745",
+    "text": "هخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0746",
+    "text": "هد",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0747",
+    "text": "هذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0748",
+    "text": "هر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0749",
+    "text": "هز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0750",
+    "text": "هژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0751",
+    "text": "هس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0752",
+    "text": "هش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0753",
+    "text": "هص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0754",
+    "text": "هض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0755",
+    "text": "هط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0756",
+    "text": "هظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0757",
+    "text": "هع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0758",
+    "text": "هغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0759",
+    "text": "هف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0760",
+    "text": "هق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0761",
+    "text": "هک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0762",
+    "text": "هگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0763",
+    "text": "هل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0764",
+    "text": "هم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0765",
+    "text": "هن",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0766",
+    "text": "هو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0767",
+    "text": "هه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0768",
+    "text": "هی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0769",
+    "text": "یا",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0770",
+    "text": "یب",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0771",
+    "text": "یپ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0772",
+    "text": "یت",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0773",
+    "text": "یث",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0774",
+    "text": "یج",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0775",
+    "text": "یچ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0776",
+    "text": "یح",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0777",
+    "text": "یخ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0778",
+    "text": "ید",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0779",
+    "text": "یذ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0780",
+    "text": "یر",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0781",
+    "text": "یز",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0782",
+    "text": "یژ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0783",
+    "text": "یس",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0784",
+    "text": "یش",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0785",
+    "text": "یص",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0786",
+    "text": "یض",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0787",
+    "text": "یط",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0788",
+    "text": "یظ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0789",
+    "text": "یع",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0790",
+    "text": "یغ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0791",
+    "text": "یف",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0792",
+    "text": "یق",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0793",
+    "text": "یک",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0794",
+    "text": "یگ",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0795",
+    "text": "یل",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0796",
+    "text": "یم",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0797",
+    "text": "ین",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0798",
+    "text": "یو",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0799",
+    "text": "یه",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0800",
+    "text": "یی",
+    "length": 2,
+    "audio_url": ""
+  },
+  {
+    "id": "c0801",
+    "text": "پبن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0802",
+    "text": "بپن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0803",
+    "text": "بتن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0804",
+    "text": "بثن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0805",
+    "text": "بجن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0806",
+    "text": "بچن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0807",
+    "text": "بحن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0808",
+    "text": "بخن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0809",
+    "text": "بسن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0810",
+    "text": "بشن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0811",
+    "text": "بصن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0812",
+    "text": "بضن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0813",
+    "text": "بطن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0814",
+    "text": "بظن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0815",
+    "text": "بعن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0816",
+    "text": "بغن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0817",
+    "text": "بفن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0818",
+    "text": "بقن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0819",
+    "text": "بکن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0820",
+    "text": "بگن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0821",
+    "text": "بلن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0822",
+    "text": "بمن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0823",
+    "text": "بنپ",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0824",
+    "text": "بهن",
+    "length": 3,
+    "audio_url": ""
+  },
+  {
+    "id": "c0825",
+    "text": "بین",
+    "length": 3,
+    "audio_url": ""
+  }
+]

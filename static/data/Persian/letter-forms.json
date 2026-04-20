@@ -1,0 +1,892 @@
+[
+  {
+    "id": "alef",
+    "char": "ا",
+    "name_en": "Alef",
+    "qwerty_key": "h",
+    "transliteration": "ā / a",
+    "is_connector": false,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ا",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/alef_isolated.mp3"
+      },
+      {
+        "label": "after-connector",
+        "text": "نا",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/alef_after-connector.mp3"
+      }
+    ]
+  },
+  {
+    "id": "be",
+    "char": "ب",
+    "name_en": "Be",
+    "qwerty_key": "f",
+    "transliteration": "b",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ب",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/be_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "بن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/be_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نبن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/be_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نب",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/be_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "pe",
+    "char": "پ",
+    "name_en": "Pe",
+    "qwerty_key": "m",
+    "transliteration": "p",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "پ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/pe_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "پن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/pe_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نپن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/pe_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نپ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/pe_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "te",
+    "char": "ت",
+    "name_en": "Te",
+    "qwerty_key": "j",
+    "transliteration": "t",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ت",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/te_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "تن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/te_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نتن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/te_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نت",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/te_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "se",
+    "char": "ث",
+    "name_en": "Se",
+    "qwerty_key": "e",
+    "transliteration": "s",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ث",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/se_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "ثن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/se_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نثن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/se_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نث",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/se_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "jim",
+    "char": "ج",
+    "name_en": "Jim",
+    "qwerty_key": "[",
+    "transliteration": "j",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ج",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/jim_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "جن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/jim_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نجن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/jim_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نج",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/jim_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "che",
+    "char": "چ",
+    "name_en": "Che",
+    "qwerty_key": "]",
+    "transliteration": "ch",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "چ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/che_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "چن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/che_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نچن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/che_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نچ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/che_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "he_jooti",
+    "char": "ح",
+    "name_en": "He (Hā-ye Jooti)",
+    "qwerty_key": "p",
+    "transliteration": "h",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ح",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/he_jooti_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "حن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/he_jooti_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نحن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/he_jooti_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نح",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/he_jooti_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "khe",
+    "char": "خ",
+    "name_en": "Khe",
+    "qwerty_key": "o",
+    "transliteration": "kh",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "خ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/khe_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "خن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/khe_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نخن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/khe_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نخ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/khe_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "dal",
+    "char": "د",
+    "name_en": "Dal",
+    "qwerty_key": "n",
+    "transliteration": "d",
+    "is_connector": false,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "د",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/dal_isolated.mp3"
+      },
+      {
+        "label": "after-connector",
+        "text": "ند",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/dal_after-connector.mp3"
+      }
+    ]
+  },
+  {
+    "id": "zal",
+    "char": "ذ",
+    "name_en": "Zal",
+    "qwerty_key": "b",
+    "transliteration": "z",
+    "is_connector": false,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ذ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/zal_isolated.mp3"
+      },
+      {
+        "label": "after-connector",
+        "text": "نذ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/zal_after-connector.mp3"
+      }
+    ]
+  },
+  {
+    "id": "re",
+    "char": "ر",
+    "name_en": "Re",
+    "qwerty_key": "v",
+    "transliteration": "r",
+    "is_connector": false,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ر",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/re_isolated.mp3"
+      },
+      {
+        "label": "after-connector",
+        "text": "نر",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/re_after-connector.mp3"
+      }
+    ]
+  },
+  {
+    "id": "ze",
+    "char": "ز",
+    "name_en": "Ze",
+    "qwerty_key": "c",
+    "transliteration": "z",
+    "is_connector": false,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ز",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ze_isolated.mp3"
+      },
+      {
+        "label": "after-connector",
+        "text": "نز",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ze_after-connector.mp3"
+      }
+    ]
+  },
+  {
+    "id": "zhe",
+    "char": "ژ",
+    "name_en": "Zhe",
+    "qwerty_key": "Shift+C",
+    "transliteration": "zh",
+    "is_connector": false,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ژ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/zhe_isolated.mp3"
+      },
+      {
+        "label": "after-connector",
+        "text": "نژ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/zhe_after-connector.mp3"
+      }
+    ]
+  },
+  {
+    "id": "sin",
+    "char": "س",
+    "name_en": "Sin",
+    "qwerty_key": "s",
+    "transliteration": "s",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "س",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/sin_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "سن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/sin_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نسن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/sin_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نس",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/sin_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "shin",
+    "char": "ش",
+    "name_en": "Shin",
+    "qwerty_key": "a",
+    "transliteration": "sh",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ش",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/shin_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "شن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/shin_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نشن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/shin_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نش",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/shin_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "sad",
+    "char": "ص",
+    "name_en": "Sad",
+    "qwerty_key": "w",
+    "transliteration": "s",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ص",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/sad_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "صن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/sad_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نصن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/sad_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نص",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/sad_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "zad",
+    "char": "ض",
+    "name_en": "Zad",
+    "qwerty_key": "q",
+    "transliteration": "z",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ض",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/zad_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "ضن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/zad_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نضن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/zad_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نض",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/zad_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "ta",
+    "char": "ط",
+    "name_en": "Ṭa",
+    "qwerty_key": "x",
+    "transliteration": "t",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ط",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ta_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "طن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ta_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نطن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ta_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نط",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ta_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "za",
+    "char": "ظ",
+    "name_en": "Ẓa",
+    "qwerty_key": "z",
+    "transliteration": "z",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ظ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/za_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "ظن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/za_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نظن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/za_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نظ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/za_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "ain",
+    "char": "ع",
+    "name_en": "Ain",
+    "qwerty_key": "u",
+    "transliteration": "' / a",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ع",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ain_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "عن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ain_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نعن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ain_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نع",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ain_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "ghain",
+    "char": "غ",
+    "name_en": "Ghain",
+    "qwerty_key": "y",
+    "transliteration": "gh",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "غ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ghain_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "غن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ghain_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نغن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ghain_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نغ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ghain_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "fe",
+    "char": "ف",
+    "name_en": "Fe",
+    "qwerty_key": "t",
+    "transliteration": "f",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ف",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/fe_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "فن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/fe_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نفن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/fe_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نف",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/fe_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "qaf",
+    "char": "ق",
+    "name_en": "Qaf",
+    "qwerty_key": "r",
+    "transliteration": "q / gh",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ق",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/qaf_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "قن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/qaf_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نقن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/qaf_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نق",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/qaf_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "kaf",
+    "char": "ک",
+    "name_en": "Kaf",
+    "qwerty_key": ";",
+    "transliteration": "k",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ک",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/kaf_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "کن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/kaf_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نکن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/kaf_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نک",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/kaf_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "gaf",
+    "char": "گ",
+    "name_en": "Gaf",
+    "qwerty_key": "'",
+    "transliteration": "g",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "گ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/gaf_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "گن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/gaf_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نگن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/gaf_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نگ",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/gaf_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "lam",
+    "char": "ل",
+    "name_en": "Lam",
+    "qwerty_key": "g",
+    "transliteration": "l",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ل",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/lam_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "لن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/lam_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نلن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/lam_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نل",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/lam_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "mim",
+    "char": "م",
+    "name_en": "Mim",
+    "qwerty_key": "l",
+    "transliteration": "m",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "م",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/mim_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "من",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/mim_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نمن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/mim_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نم",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/mim_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "nun",
+    "char": "ن",
+    "name_en": "Nun",
+    "qwerty_key": "k",
+    "transliteration": "n",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/nun_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "نن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/nun_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "ننن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/nun_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/nun_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "vav",
+    "char": "و",
+    "name_en": "Vav",
+    "qwerty_key": ",",
+    "transliteration": "v / u / ow",
+    "is_connector": false,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "و",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/vav_isolated.mp3"
+      },
+      {
+        "label": "after-connector",
+        "text": "نو",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/vav_after-connector.mp3"
+      }
+    ]
+  },
+  {
+    "id": "he",
+    "char": "ه",
+    "name_en": "He",
+    "qwerty_key": "i",
+    "transliteration": "h",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ه",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/he_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "هن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/he_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نهن",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/he_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نه",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/he_final.mp3"
+      }
+    ]
+  },
+  {
+    "id": "ye",
+    "char": "ی",
+    "name_en": "Ye",
+    "qwerty_key": "d",
+    "transliteration": "y / i",
+    "is_connector": true,
+    "forms": [
+      {
+        "label": "isolated",
+        "text": "ی",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ye_isolated.mp3"
+      },
+      {
+        "label": "initial",
+        "text": "ین",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ye_initial.mp3"
+      },
+      {
+        "label": "medial",
+        "text": "نین",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ye_medial.mp3"
+      },
+      {
+        "label": "final",
+        "text": "نی",
+        "audio_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/persian/forms/ye_final.mp3"
+      }
+    ]
+  }
+]
