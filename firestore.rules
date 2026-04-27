@@ -123,6 +123,13 @@ service cloud.firestore {
       allow read, write: if isDev();
     }
 
+    // ── Greek vocab FSRS card states ─────────────────────────────────────────
+    // Students own their card states; dev can read all.
+    match /greekCardStates/{uid}/courses/{courseId}/cards/{cardId} {
+      allow read, write: if isAuth() && request.auth.uid == uid;
+      allow read: if isDev();
+    }
+
     // ── Persian poem FSRS card states ────────────────────────────────────────
     // Students own their card states; dev can read all.
     match /persianCardStates/{uid}/poems/{poemId}/cards/{cardId} {

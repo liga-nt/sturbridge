@@ -8,6 +8,7 @@
   import VocabPanel from '$lib/components/greek/VocabPanel.svelte';
   import ConjugationTable from '$lib/components/greek/ConjugationTable.svelte';
   import MediterraneanMap from '$lib/components/greek/MediterraneanMap.svelte';
+  import GreekVocabExercise from '$lib/components/greek/GreekVocabExercise.svelte';
 
   const ctx = getContext('student');
 
@@ -64,7 +65,7 @@
 
   /**
    * Scan sentence tokens against wordFormsCache — same logic as dev scanVocab.
-   * Returns { dict_entry, short_def, vocab_tier }[] deduplicated.
+   * Returns { dictEntry, shortDef, vocabTier }[] deduplicated.
    */
   function scanVocabFromCache(sents, cache) {
     if (!cache) return [];
@@ -76,9 +77,9 @@
         if (!bare || seen.has(bare)) continue;
         seen.add(bare);
         const entry = cache[bare] || cache[token] || cache[stripGreekDiacritics(bare)];
-        if (entry?.dict_entry && entry.vocab_tier) {
-          if (!list.find(w => w.dict_entry === entry.dict_entry)) {
-            list.push({ dict_entry: entry.dict_entry, short_def: entry.short_def ?? '', vocab_tier: entry.vocab_tier });
+        if (entry?.dictEntry && entry.vocabTier) {
+          if (!list.find(w => w.dictEntry === entry.dictEntry)) {
+            list.push({ dictEntry: entry.dictEntry, shortDef: entry.shortDef ?? '', vocabTier: entry.vocabTier });
           }
         }
       }
@@ -87,7 +88,7 @@
   }
 
   /**
-   * Build nested forms for a specific dict_entry from the flat cache.
+   * Build nested forms for a specific dictEntry from the flat cache.
    * Stores forms both with gender key (for multi-gender paradigms like adjectives/articles)
    * AND without gender key (for simple noun paradigms like 2nd_declension_masculine).
    */
@@ -102,7 +103,7 @@
   }
 
   /**
-   * Build nested forms for a specific dict_entry from the flat cache.
+   * Build nested forms for a specific dictEntry from the flat cache.
    *
    * Verbs are grouped by tense.mood.voice so different tenses don't clobber each other.
    *   result['pres.indic.act'] = { sg: { 1: 'λύω', 2: 'λύεις', ... }, pl: { ... } }
@@ -116,7 +117,7 @@
     if (!de || !wordFormsCache) return null;
     const result = {};
     for (const [form, entry] of Object.entries(wordFormsCache)) {
-      if (entry.dict_entry !== de) continue;
+      if (entry.dictEntry !== de) continue;
       const m = entry.morph;
       if (!m || typeof m !== 'object') continue;
       const { pos, number: num, case: case_, gender, person, tense, mood, voice } = m;
@@ -194,19 +195,20 @@
     hoveredWord = e.detail?.word ?? null;
   }
 
-  $: paradigmKey = hoveredWord?.paradigm_key ?? null;
+  $: paradigmKey = hoveredWord?.paradigmKey ?? null;
   $: highlightMorph = hoveredWord?.morph ?? null;
   // Build forms for the hovered word, then select the relevant sub-paradigm
-  $: _allWordForms = hoveredWord && wordFormsCache ? buildWordForms(hoveredWord.dict_entry) : null;
+  $: _allWordForms = hoveredWord && wordFormsCache ? buildWordForms(hoveredWord.dictEntry) : null;
   $: wordForms = selectWordForms(_allWordForms, highlightMorph);
-  $: dictEntry = hoveredWord?.dict_entry ?? null;
+  $: dictEntry = hoveredWord?.dictEntry ?? null;
 
   // ── Lesson part navigation ────────────────────────────────────────────────────
-  let lessonPart = 'story'; // 'overview' | 'story' | 'map'
+  let lessonPart = 'overview'; // 'overview' | 'vocab' | 'story' | 'map'
 
   // Available parts in order — derived once lesson loads
   $: availableParts = lesson ? [
     lesson.overview?.text                          ? 'overview' : null,
+    'vocab',
     (lesson.sentences?.length ?? 0) > 0           ? 'story'    : null,
     lesson.map?.description                        ? 'map'      : null,
   ].filter(Boolean) : [];
@@ -214,7 +216,22 @@
   // Default to first available part when lesson loads
   $: if (lesson && !availableParts.includes(lessonPart)) lessonPart = availableParts[0] ?? 'story';
 
-  const PART_LABELS = { overview: 'Overview', story: 'Story', map: 'Map' };
+  const PART_LABELS = { overview: 'Overview', vocab: 'Vocab', story: 'Story', map: 'Map' };
+
+  // ── Enforce accents toggle (persisted in localStorage) ───────────────────────
+  let enforceAccents = false;
+
+  function toggleEnforceAccents() {
+    enforceAccents = !enforceAccents;
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('greek_enforce_accents', String(enforceAccents));
+    }
+  }
+
+  // Load enforce-accents preference on mount
+  $: if (typeof localStorage !== 'undefined') {
+    enforceAccents = localStorage.getItem('greek_enforce_accents') === 'true';
+  }
 
   // ── Simple audio highlighting for overview / map ───────────────────────────
   let simpleHighlightIndex = -1;  // index into alignment array
@@ -489,6 +506,7 @@
   <!-- ── Fixed top bar ─────────────────────────────────────────────────────── -->
   <div class="top-bar">
     <div class="controls-row">
+      <div class="controls-inner">
       <!-- Back -->
       <button class="back-btn" on:click={() => goto('/student/greek')}>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -545,6 +563,18 @@
         {/if}
       {/if}
 
+      <!-- Enforce accents toggle (vocab tab) -->
+      {#if lessonPart === 'vocab'}
+        <button
+          class="accent-toggle"
+          class:accent-on={enforceAccents}
+          on:click={toggleEnforceAccents}
+          title={enforceAccents ? 'Accents required — click to relax' : 'Accents optional — click to require'}
+        >
+          {enforceAccents ? 'Accents: on' : 'Accents: off'}
+        </button>
+      {/if}
+
       <!-- Part tabs -->
       {#if availableParts.length > 1}
         <div class="part-tabs">
@@ -556,26 +586,27 @@
           {/each}
         </div>
       {/if}
+      </div>
     </div>
 
     <!-- Analysis bar — Reader.svelte style -->
-    {#if hoveredWord}
-      <div class="analysis-bar">
-        <strong class="word-form">{hoveredWord.dict_entry ?? hoveredWord.text}</strong>
-        {#if hoveredWord.short_def}
-          <span class="sep">|</span>
-          <span class="definition">"{hoveredWord.short_def}"</span>
-        {/if}
-        {#if hoveredWord.morph}
-          <span class="sep">|</span>
-          <span class="morph-tag">{morphToDisplay(hoveredWord.morph)}</span>
+    <div class="analysis-bar" class:analysis-placeholder={!hoveredWord}>
+      <div class="analysis-inner">
+        {#if hoveredWord}
+          <strong class="word-form">{hoveredWord.dictEntry ?? hoveredWord.text}</strong>
+          {#if hoveredWord.shortDef}
+            <span class="sep">|</span>
+            <span class="definition">"{hoveredWord.shortDef}"</span>
+          {/if}
+          {#if hoveredWord.morph}
+            <span class="sep">|</span>
+            <span class="morph-tag">{morphToDisplay(hoveredWord.morph)}</span>
+          {/if}
+        {:else}
+          Hover a word to see analysis
         {/if}
       </div>
-    {:else}
-      <div class="analysis-bar analysis-placeholder">
-        Hover a word to see analysis
-      </div>
-    {/if}
+    </div>
   </div>
 
   <!-- ── Single scrollable area ─────────────────────────────────────────────── -->
@@ -585,8 +616,21 @@
     <div class="state-msg error">{error}</div>
   {:else if lesson}
 
+    <!-- ── Vocab part ───────────────────────────────────────────────────────── -->
+    {#if lessonPart === 'vocab'}
+      <div class="scroll-area">
+        <div class="vocab-exercise-wrap">
+          <GreekVocabExercise
+            vocabList={lesson.vocab_list ?? []}
+            uid={ctx.uid}
+            courseId="grade7-greek"
+            {enforceAccents}
+          />
+        </div>
+      </div>
+
     <!-- ── Overview part ───────────────────────────────────────────────────── -->
-    {#if lessonPart === 'overview'}
+    {:else if lessonPart === 'overview'}
       {@const ov = lesson.overview ?? {}}
       {@const alignment = ov.alignment ?? []}
       {@const words = ov.text ? ov.text.match(/\S+/g) ?? [] : []}
@@ -853,11 +897,18 @@
   }
 
   .controls-row {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .controls-inner {
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 4px 16px;
-    border-bottom: 1px solid #e5e7eb;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .back-btn {
@@ -934,17 +985,24 @@
 
   /* Analysis bar — Reader.svelte pattern */
   .analysis-bar {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 6px;
-    padding: 6px 20px;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
     font-size: 15px;
     line-height: 1.5;
     min-height: 32px;
     background: #fff;
     color: #111;
+  }
+
+  .analysis-inner {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .analysis-placeholder {
@@ -1028,6 +1086,30 @@
   }
   .part-tab:hover { color: #374151; background: #f3f4f6; }
   .part-tab-active { background: #eef2ff; color: #4338ca; border-color: #c7d2fe; }
+
+  /* ── Enforce-accents toggle ── */
+  .accent-toggle {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    color: #9ca3af;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+
+  .accent-toggle:hover  { background: #f3f4f6; color: #374151; }
+  .accent-toggle.accent-on { background: #eef2ff; border-color: #a5b4fc; color: #4338ca; font-weight: 600; }
+
+  /* ── Vocab tab wrapper ── */
+  .vocab-exercise-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    width: 100%;
+  }
 
   /* ── Simple part layout (overview, map) ── */
   .simple-part {

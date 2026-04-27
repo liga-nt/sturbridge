@@ -401,8 +401,8 @@ function mergeStoryBible(bible, delta, annotatedWords) {
     }
 
     for (const word of annotatedWords) {
-        if (word.vocab_tier && !bible.vocab.introduced[word.dict_entry]) {
-            bible.vocab.introduced[word.dict_entry] = { chapter: delta.chapter, tier: word.vocab_tier };
+        if (word.vocabTier && !bible.vocab.introduced[word.dictEntry]) {
+            bible.vocab.introduced[word.dictEntry] = { chapter: delta.chapter, tier: word.vocabTier };
         }
     }
 
@@ -410,20 +410,20 @@ function mergeStoryBible(bible, delta, annotatedWords) {
 }
 
 /**
- * resolveParadigmKey — deterministic fallback for words whose paradigm_key is
+ * resolveParadigmKey — deterministic fallback for words whose paradigmKey is
  * still null after the word-forms dict lookup.
  */
 function resolveParadigmKey(word) {
-    const { morph, dict_entry } = word;
+    const { morph, dictEntry } = word;
     if (!morph || typeof morph !== 'object') return null;
     const { pos, tense, mood, voice, gender } = morph;
 
     if (pos === 'art') return 'definite_article';
 
     if (pos === 'verb' && tense === 'pres' && mood === 'indic' && voice === 'act') {
-        if (dict_entry === 'εἰμί') return 'eimi_present_indicative_active';
-        if (dict_entry && dict_entry.endsWith('έω')) return 'epsilon_contract_present_indicative_active';
-        if (dict_entry && dict_entry.endsWith('άω')) return 'alpha_contract_present_indicative_active';
+        if (dictEntry === 'εἰμί') return 'eimi_present_indicative_active';
+        if (dictEntry && dictEntry.endsWith('έω')) return 'epsilon_contract_present_indicative_active';
+        if (dictEntry && dictEntry.endsWith('άω')) return 'alpha_contract_present_indicative_active';
         return 'omega_verb_present_indicative_active';
     }
 
@@ -431,7 +431,7 @@ function resolveParadigmKey(word) {
         if (gender === 'masc') return '2nd_declension_masculine';
         if (gender === 'neut') return '2nd_declension_neuter';
         if (gender === 'fem') {
-            if (dict_entry && dict_entry.endsWith('α')) return '1st_declension_feminine_alpha';
+            if (dictEntry && dictEntry.endsWith('α')) return '1st_declension_feminine_alpha';
             return '1st_declension_feminine_eta';
         }
     }
@@ -531,9 +531,9 @@ function computeEngAlignment(sentence, positionMap) {
 
 // ---------------------------------------------------------------------------
 // Shared helper: annotateGreekSentences (Steps 2–3–5)
-// Fills in dict_entry/morph/syntax/paradigm on an array of sentence objects
+// Fills in dictEntry/morph/syntax/paradigm on an array of sentence objects
 // that already have a `words` array (from tokenization or retokenization).
-// Only tokens with null dict_entry are sent to Claude for annotation.
+// Only tokens with null dictEntry are sent to Claude for annotation.
 // ---------------------------------------------------------------------------
 
 const PUNCT_RE_SHARED = /[.,;:·?!]/g;
@@ -546,15 +546,15 @@ async function annotateGreekSentences(sentences, client, courseId) {
     const missSet = new Set();
     for (const sent of sentences) {
         for (const word of sent.words) {
-            if (!word.dict_entry) {
+            if (!word.dictEntry) {
                 const bare = word.text.replace(PUNCT_RE_SHARED, '');
                 const entry = wordForms[bare] || wordForms[word.text] || wordForms[stripAccentsShared(bare)] || null;
                 if (entry) {
-                    word.dict_entry    = entry.dict_entry;
-                    word.short_def     = entry.short_def;
+                    word.dictEntry    = entry.dictEntry;
+                    word.shortDef     = entry.shortDef;
                     word.morph         = entry.morph;
-                    word.vocab_tier    = entry.vocab_tier;
-                    word.paradigm_key  = entry.paradigm_key  || null;
+                    word.vocabTier    = entry.vocabTier;
+                    word.paradigmKey  = entry.paradigmKey  || null;
                 } else if (!missSet.has(bare) && bare) {
                     missSet.add(bare);
                     misses.push({ text: bare });
@@ -574,9 +574,9 @@ async function annotateGreekSentences(sentences, client, courseId) {
             '  For pronouns:       subtype ("personal"|"autos"|"relative"|"other"), plus gender/number/case or person/number/case',
             '  For uninflected:    only pos is needed',
             '',
-            'For each token provide: text, dict_entry (nominative sg for nouns, 1st sg pres act indic for verbs),',
-            'short_def (≤5 words), morph (object per schema above),',
-            'vocab_tier ("intro"|"beginning"|"intermediate"|"prose"|null), paradigm_key (or null).',
+            'For each token provide: text, dictEntry (nominative sg for nouns, 1st sg pres act indic for verbs),',
+            'shortDef (≤5 words), morph (object per schema above),',
+            'vocabTier ("intro"|"beginning"|"intermediate"|"prose"|null), paradigmKey (or null).',
             '',
             'Tokens to annotate:',
             JSON.stringify(misses.map(m => m.text))
@@ -600,15 +600,15 @@ async function annotateGreekSentences(sentences, client, courseId) {
 
         for (const sent of sentences) {
             for (const word of sent.words) {
-                if (!word.dict_entry) {
+                if (!word.dictEntry) {
                     const bare = word.text.replace(PUNCT_RE_SHARED, '');
                     const ann = annotationMap[bare];
                     if (ann) {
-                        word.dict_entry    = ann.dict_entry    || null;
-                        word.short_def     = ann.short_def     || null;
+                        word.dictEntry    = ann.dictEntry    || null;
+                        word.shortDef     = ann.shortDef     || null;
                         word.morph         = ann.morph         || null;
-                        word.vocab_tier    = ann.vocab_tier    || null;
-                        word.paradigm_key  = ann.paradigm_key  || null;
+                        word.vocabTier    = ann.vocabTier    || null;
+                        word.paradigmKey  = ann.paradigmKey  || null;
                     }
                 }
             }
@@ -618,7 +618,7 @@ async function annotateGreekSentences(sentences, client, courseId) {
     // ── Step 5: paradigm key assignment (deterministic fallback) ───────────
     for (const sent of sentences) {
         for (const word of sent.words) {
-            if (!word.paradigm_key) word.paradigm_key = resolveParadigmKey(word);
+            if (!word.paradigmKey) word.paradigmKey = resolveParadigmKey(word);
         }
     }
 }
@@ -743,8 +743,8 @@ exports.generateGreekLesson = onCall(
         for (const sent of rawSentences) {
             sent.words = sent.greek.split(/\s+/).map((text, idx) => ({
                 sentPos: idx, text,
-                dict_entry: null, short_def: null, morph: null,
-                vocab_tier: null, paradigm_key: null, engSentPos: null
+                dictEntry: null, shortDef: null, morph: null,
+                vocabTier: null, paradigmKey: null, engSentPos: null
             }));
         }
 
@@ -790,9 +790,9 @@ exports.generateGreekLesson = onCall(
         const seenVocab = new Set();
         const vocabList = [];
         for (const word of allWords) {
-            if (word.vocab_tier && !seenVocab.has(word.dict_entry)) {
-                seenVocab.add(word.dict_entry);
-                vocabList.push({ dict_entry: word.dict_entry, short_def: word.short_def, vocab_tier: word.vocab_tier });
+            if (word.vocabTier && !seenVocab.has(word.dictEntry)) {
+                seenVocab.add(word.dictEntry);
+                vocabList.push({ dictEntry: word.dictEntry, shortDef: word.shortDef, vocabTier: word.vocabTier });
             }
         }
 
@@ -914,9 +914,9 @@ exports.alignGreekLesson = onCall(
         const vocabList = [];
         for (const sent of sentences) {
             for (const word of sent.words ?? []) {
-                if (word.vocab_tier && word.dict_entry && !seenVocab.has(word.dict_entry)) {
-                    seenVocab.add(word.dict_entry);
-                    vocabList.push({ dict_entry: word.dict_entry, short_def: word.short_def, vocab_tier: word.vocab_tier });
+                if (word.vocabTier && word.dictEntry && !seenVocab.has(word.dictEntry)) {
+                    seenVocab.add(word.dictEntry);
+                    vocabList.push({ dictEntry: word.dictEntry, shortDef: word.shortDef, vocabTier: word.vocabTier });
                 }
             }
         }
@@ -988,8 +988,8 @@ exports.refineGreekLesson = onCall(
             english: s.english ?? '',
             words: (s.greek ?? '').trim().split(/\s+/).filter(Boolean).map((text, idx) => ({
                 sentPos: idx, text,
-                dict_entry: null, short_def: null, morph: null,
-                vocab_tier: null, paradigm_key: null, engSentPos: null
+                dictEntry: null, shortDef: null, morph: null,
+                vocabTier: null, paradigmKey: null, engSentPos: null
             })),
             audioGenerated: false
         }));
@@ -1408,8 +1408,8 @@ exports.recomputeStoryBible = onCall(async (request) => {
 /**
  * glossGreekWords — two-step pipeline for unrecognized Greek surface forms.
  *
- * Step 1 — Morph-tag: identify dict_entry, morph, short_def for each token.
- * Step 2 — Generate forms: for each unique (dict_entry, tense/mood/voice group),
+ * Step 1 — Morph-tag: identify dictEntry, morph, shortDef for each token.
+ * Step 2 — Generate forms: for each unique (dictEntry, tense/mood/voice group),
  *           generate all paradigm forms with correct diacritics.
  *
  * Stored entries are canonical (accented forms only — no stripped duplicates).
@@ -1441,8 +1441,8 @@ Return a JSON array — one object per input form:
 [
   {
     "form": "<input surface form>",
-    "dict_entry": "<canonical headword: nom sg for nouns/adj, 1sg pres act indic for verbs, full polytonic diacritics>",
-    "short_def": "<3–5 word English definition>",
+    "dictEntry": "<canonical headword: nom sg for nouns/adj, 1sg pres act indic for verbs, full polytonic diacritics>",
+    "shortDef": "<3–5 word English definition>",
     "morph": {
       "pos": "noun"|"verb"|"adj"|"art"|"pron"|"prep"|"conj"|"adv"|"particle"|"interj",
       // Nouns/adj/art/pron: "gender" ("masc"|"fem"|"neut"), "number" ("sg"|"pl"), "case" ("nom"|"gen"|"dat"|"acc"|"voc")
@@ -1503,14 +1503,14 @@ Return only valid JSON, no explanation.`;
             return null;
         }
 
-        // Group tagged tokens by (dict_entry, paradigm_group)
+        // Group tagged tokens by (dictEntry, paradigm_group)
         // paradigm_group = tense.mood.voice for verbs, 'decl' for everything else
-        const groups = new Map(); // key → { dict_entry, short_def, morph, paradigm_group }
+        const groups = new Map(); // key → { dictEntry, shortDef, morph, paradigm_group }
         const skipped = [];
 
         for (const item of tagged) {
-            const { form, dict_entry, short_def, morph } = item;
-            if (!dict_entry || !morph) { skipped.push(form); continue; }
+            const { form, dictEntry, shortDef, morph } = item;
+            if (!dictEntry || !morph) { skipped.push(form); continue; }
             const err = validateMorph(morph);
             if (err) { skipped.push(`${form}(${err})`); continue; }
             if (UNINFLECTED.has(morph.pos)) continue; // no forms to generate
@@ -1523,14 +1523,14 @@ Return only valid JSON, no explanation.`;
                 paradigmGroup = morph.pos; // 'noun', 'adj', 'art', 'pron'
             }
 
-            const key = `${dict_entry}|${paradigmGroup}`;
+            const key = `${dictEntry}|${paradigmGroup}`;
             if (!groups.has(key)) {
-                groups.set(key, { dict_entry, short_def, morph, paradigmGroup });
+                groups.set(key, { dictEntry, shortDef, morph, paradigmGroup });
             }
         }
 
         // ── Step 2: Generate forms for each group ───────────────────────────
-        function formPromptFor(dict_entry, morph, paradigmGroup) {
+        function formPromptFor(dictEntry, morph, paradigmGroup) {
             const { pos, tense, mood, voice, gender, number: num } = morph;
 
             if (pos === 'verb') {
@@ -1541,7 +1541,7 @@ Return only valid JSON, no explanation.`;
                          : 'Indicative';
                 const v = { act:'Active', mid:'Middle', pass:'Passive', mp:'Middle/Passive' }[voice] ?? voice;
                 return `Return ONLY a JSON array of form objects — no prose, no fences.
-Generate exactly 7 forms for the Ancient Greek verb: ${dict_entry}
+Generate exactly 7 forms for the Ancient Greek verb: ${dictEntry}
 Forms: ${t} ${mo} ${v} (1sg 2sg 3sg 1pl 2pl 3pl) + ${t} ${v} infinitive.
 Use correct Greek diacritics (recessive accent on finite forms).
 Finite: {"form":"<Greek>","morph":{"pos":"verb","tense":"${tense}","mood":"indic","voice":"${voice}","person":"<1|2|3>","number":"<sg|pl>"}}
@@ -1551,21 +1551,21 @@ Infinitive: {"form":"<Greek>","morph":{"pos":"verb","tense":"${tense}","mood":"i
             if (pos === 'noun') {
                 const g = { masc:'masculine', fem:'feminine', neut:'neuter' }[gender] ?? gender;
                 return `Return ONLY a JSON array of form objects — no prose, no fences.
-Generate exactly 10 forms for the Ancient Greek noun: ${dict_entry} (${g})
+Generate exactly 10 forms for the Ancient Greek noun: ${dictEntry} (${g})
 Forms: nom/gen/dat/acc/voc × singular/plural. Use correct diacritics.
 Schema: {"form":"<Greek>","morph":{"pos":"noun","gender":"${gender}","number":"<sg|pl>","case":"<nom|gen|dat|acc|voc>"}}`;
             }
 
             if (pos === 'adj') {
                 return `Return ONLY a JSON array of form objects — no prose, no fences.
-Generate exactly 30 forms for the Ancient Greek adjective: ${dict_entry}
+Generate exactly 30 forms for the Ancient Greek adjective: ${dictEntry}
 Forms: nom/gen/dat/acc/voc × sg/pl × masc/fem/neut. Use correct diacritics.
 Schema: {"form":"<Greek>","morph":{"pos":"adj","gender":"<masc|fem|neut>","number":"<sg|pl>","case":"<nom|gen|dat|acc|voc>"}}`;
             }
 
             if (pos === 'pron') {
                 return `Return ONLY a JSON array of form objects — no prose, no fences.
-Generate all standard inflected forms for: ${dict_entry} (pronoun). Use correct diacritics.
+Generate all standard inflected forms for: ${dictEntry} (pronoun). Use correct diacritics.
 Schema: {"form":"<Greek>","morph":{"pos":"pron","subtype":"<personal|autos|relative|other>",<gender or person>,"number":"<sg|pl>","case":"<nom|gen|dat|acc|voc>"}}`;
             }
 
@@ -1586,16 +1586,16 @@ Schema: {"form":"<Greek>","morph":{"pos":"art","gender":"<masc|fem|neut>","numbe
             return null; // pron: variable
         }
 
-        // ── Resolve paradigm_key from morph (for storage) ───────────────────
-        function resolveParadigmKeyFromMorph(morph, dict_entry) {
+        // ── Resolve paradigmKey from morph (for storage) ───────────────────
+        function resolveParadigmKeyFromMorph(morph, dictEntry) {
             const { pos, tense, mood, voice, gender } = morph;
             if (pos === 'art') return 'definite_article';
             if (pos === 'adj') return '2_1_2_adjective';
             if (pos === 'verb') {
                 if (tense !== 'pres') return null; // non-present: data-driven, no static paradigm needed
-                if (dict_entry === 'εἰμί') return 'eimi_present_indicative_active';
-                if (dict_entry?.endsWith('έω')) return 'epsilon_contract_present_indicative_active';
-                if (dict_entry?.endsWith('άω')) return 'alpha_contract_present_indicative_active';
+                if (dictEntry === 'εἰμί') return 'eimi_present_indicative_active';
+                if (dictEntry?.endsWith('έω')) return 'epsilon_contract_present_indicative_active';
+                if (dictEntry?.endsWith('άω')) return 'alpha_contract_present_indicative_active';
                 return 'omega_verb_present_indicative_active';
             }
             if (pos === 'noun') {
@@ -1604,10 +1604,10 @@ Schema: {"form":"<Greek>","morph":{"pos":"art","gender":"<masc|fem|neut>","numbe
                 return null; // fem: need more info
             }
             if (pos === 'pron') {
-                if (dict_entry === 'ἐγώ') return 'pronoun_personal_1st';
-                if (dict_entry === 'σύ')  return 'pronoun_personal_2nd';
-                if (dict_entry?.startsWith('αὐτ')) return 'pronoun_autos';
-                if (dict_entry?.startsWith('ὅς') || dict_entry?.startsWith('ὅ')) return 'pronoun_relative_hos';
+                if (dictEntry === 'ἐγώ') return 'pronoun_personal_1st';
+                if (dictEntry === 'σύ')  return 'pronoun_personal_2nd';
+                if (dictEntry?.startsWith('αὐτ')) return 'pronoun_autos';
+                if (dictEntry?.startsWith('ὅς') || dictEntry?.startsWith('ὅ')) return 'pronoun_relative_hos';
             }
             return null;
         }
@@ -1616,8 +1616,8 @@ Schema: {"form":"<Greek>","morph":{"pos":"art","gender":"<masc|fem|neut>","numbe
         const added   = {};
 
         for (const [, group] of groups) {
-            const { dict_entry, short_def, morph, paradigmGroup } = group;
-            const prompt = formPromptFor(dict_entry, morph, paradigmGroup);
+            const { dictEntry, shortDef, morph, paradigmGroup } = group;
+            const prompt = formPromptFor(dictEntry, morph, paradigmGroup);
             if (!prompt) continue;
 
             let forms;
@@ -1630,30 +1630,30 @@ Schema: {"form":"<Greek>","morph":{"pos":"art","gender":"<masc|fem|neut>","numbe
                 forms = JSON.parse(stripFences(msg.content[0].text));
                 if (!Array.isArray(forms)) throw new Error('not an array');
             } catch (e) {
-                console.warn(`Form generation failed for ${dict_entry}: ${e.message}`);
+                console.warn(`Form generation failed for ${dictEntry}: ${e.message}`);
                 continue;
             }
 
             // Validate form count (warn only — don't discard partial results)
             const exp = expectedCount(morph.pos);
             if (exp !== null && forms.length !== exp) {
-                console.warn(`${dict_entry}: expected ${exp} forms, got ${forms.length}`);
+                console.warn(`${dictEntry}: expected ${exp} forms, got ${forms.length}`);
             }
 
-            const pkey = resolveParadigmKeyFromMorph(morph, dict_entry);
+            const pkey = resolveParadigmKeyFromMorph(morph, dictEntry);
 
             for (const { form, morph: formMorph } of forms) {
                 if (!form || !formMorph) continue;
                 formMap[form] = {
-                    dict_entry,
-                    short_def: short_def ?? '',
-                    paradigm_key: pkey,
+                    dictEntry,
+                    shortDef: shortDef ?? '',
+                    paradigmKey: pkey,
                     morph: formMorph,
-                    vocab_tier: null
+                    vocabTier: null
                 };
             }
 
-            added[dict_entry] = { dict_entry, short_def: short_def ?? '', vocab_tier: null };
+            added[dictEntry] = { dictEntry, shortDef: shortDef ?? '', vocabTier: null };
         }
 
         if (Object.keys(formMap).length === 0) {

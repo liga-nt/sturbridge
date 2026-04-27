@@ -47,13 +47,15 @@
                 await user.getIdToken(true);
                 const tokenResult = await user.getIdTokenResult();
                 const freshRole = tokenResult.claims.role || role;
-                session.set({ user, loggedIn: true, loading: false, role: freshRole });
+                const freshSchoolId = tokenResult.claims.schoolId ?? null;
+                session.set({ user, loggedIn: true, loading: false, role: freshRole, schoolId: freshSchoolId });
                 goto(roleHomePath(freshRole));
             } else if (!pending) {
                 // Role was already set (returning user)
                 const tokenResult = await user.getIdTokenResult(true);
                 const existingRole = tokenResult.claims.role ?? null;
-                session.set({ user, loggedIn: true, loading: false, role: existingRole });
+                const existingSchoolId = tokenResult.claims.schoolId ?? null;
+                session.set({ user, loggedIn: true, loading: false, role: existingRole, schoolId: existingSchoolId });
                 if (existingRole) {
                     goto(roleHomePath(existingRole));
                 } else {
@@ -91,10 +93,8 @@
     <div class="flex min-h-screen items-center justify-center">
         <div class="w-full max-w-md space-y-8 p-4">
             <div class="text-center flex flex-col items-center gap-3">
-                <div class="bg-gray-800 rounded-2xl px-8 py-5 inline-block">
-                    <img src="/lexlogo.png" alt="LexAudio" class="h-12" />
-                </div>
-                <h2 class="text-2xl font-bold text-gray-800 mt-1">LexAudio Learn</h2>
+                <img src="/lexlogo_solid.png" alt="LexAudio" class="h-48" />
+                <h2 class="text-2xl font-bold text-gray-800 mt-1">Learn</h2>
             </div>
 
             {#if error}

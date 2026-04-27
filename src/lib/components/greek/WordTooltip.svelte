@@ -15,12 +15,12 @@
     style="left: {position.x}px; top: {position.y - 8}px;"
     role="tooltip"
   >
-    <div class="tooltip-entry">{word.dict_entry ?? word.text}</div>
+    <div class="tooltip-entry">{word.dictEntry ?? word.text}</div>
     {#if word.morph}
       <div class="tooltip-morph">{word.morph}</div>
     {/if}
-    {#if word.short_def}
-      <div class="tooltip-def">{word.short_def}</div>
+    {#if word.shortDef}
+      <div class="tooltip-def">{word.shortDef}</div>
     {/if}
   </div>
 {/if}

@@ -25,7 +25,10 @@
     ['alef', 'lam', 'mim', 'nun', 'vav', 'he', 'ye'],
   ];
 
-  // ── Normal mode ──────────────────────────────────────────────────
+  // ── Mode ─────────────────────────────────────────────────────────
+  let mode = 'sequence'; // 'sequence' | 'groups' | 'practice'
+
+  // ── Sequence mode ────────────────────────────────────────────────
   let currentIndex = 0;
   let flash = null;
   let flashTimer = null;
@@ -36,7 +39,6 @@
   $: currentLetter = alphabet[currentIndex] ?? null;
 
   // ── Group mode ───────────────────────────────────────────────────
-  let groupMode = false;
   let groupIndex = 0;
   let groupProgress = 0;
   let groupChecks = [];
@@ -51,8 +53,47 @@
     ? GROUPS.map(g => alphabet.find(l => l.id === g[0])?.char ?? '')
     : [];
 
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // ── Practice mode ────────────────────────────────────────────────
+  let practiceDeck = [];
+  let practiceTotal = 0;
+  let practiceDone = false;
+
+  $: practiceLetter = practiceDeck[0] ?? null;
+
+  function startPractice() {
+    practiceDeck = shuffle([...alphabet]);
+    practiceTotal = practiceDeck.length;
+    practiceDone = false;
+  }
+
+  function practiceCorrect() {
+    const letter = practiceDeck[0];
+    const advance = () => {
+      practiceDeck = practiceDeck.slice(1);
+      if (practiceDeck.length === 0) practiceDone = true;
+    };
+    if (letter?.audio_url) {
+      const a = new Audio(letter.audio_url);
+      a.addEventListener('ended', advance);
+      a.play().catch(() => setTimeout(advance, 400));
+    } else {
+      setTimeout(advance, 400);
+    }
+  }
+
   // ── Shared ───────────────────────────────────────────────────────
-  $: activeLetter = groupMode ? (groupLetters[groupProgress] ?? null) : currentLetter;
+  $: activeLetter = mode === 'groups'   ? (groupLetters[groupProgress] ?? null)
+                  : mode === 'practice' ? practiceLetter
+                  : currentLetter;
 
   $: vowelChars = activeLetter && activeLetter.id !== 'alef'
     ? [activeLetter.char + FATHA, activeLetter.char + KASRA, activeLetter.char + DAMMA]
@@ -96,10 +137,11 @@
     if (!persian) return;
     if (persian === activeLetter.char) {
       triggerFlash('correct');
-      if (groupMode) groupCorrect(); else playLetter();
+      if (mode === 'groups') groupCorrect();
+      else if (mode === 'practice') practiceCorrect();
+      else playLetter();
     } else {
       triggerFlash('wrong');
-      if (groupMode) groupWrong();
     }
   }
 
@@ -125,7 +167,11 @@
       activeVowel = null;
       if (currentIndex < alphabet.length - 1) currentIndex++;
     });
-    audioEl.play().catch(() => {});
+    audioEl.play().catch(() => {
+      cancelAnimationFrame(rafId);
+      activeVowel = null;
+      advanceAfterDelay();
+    });
   }
 
   function advanceAfterDelay() {
@@ -181,9 +227,9 @@
     ).fill(false);
   }
 
-  function toggleGroupMode() {
-    groupMode = !groupMode;
-    if (groupMode) {
+  function setMode(m) {
+    mode = m;
+    if (m === 'groups') {
       groupIndex = 0;
       groupProgress = 0;
       groupDone = false;
@@ -191,7 +237,10 @@
       groupChecks = Array(
         (GROUPS[0] ?? []).map(id => alphabet.find(l => l.id === id)).filter(Boolean).length
       ).fill(false);
+    } else if (m === 'practice') {
+      startPractice();
     }
+    focusInput();
   }
 
   // ── Shared helpers ───────────────────────────────────────────────
@@ -202,7 +251,7 @@
   }
 
   function goToIndex(i) {
-    if (groupMode) return;
+    if (mode !== 'sequence') return;
     currentIndex = i;
     activeVowel = null;
     if (audioEl) { audioEl.pause(); cancelAnimationFrame(rafId); }
@@ -224,10 +273,11 @@
     if (!persian) return;
     if (persian === activeLetter.char) {
       triggerFlash('correct');
-      if (groupMode) groupCorrect(); else playLetter();
+      if (mode === 'groups') groupCorrect();
+      else if (mode === 'practice') practiceCorrect();
+      else playLetter();
     } else {
       triggerFlash('wrong');
-      if (groupMode) groupWrong();
     }
   }
 
@@ -259,11 +309,12 @@
 
   <!-- Mode toggle -->
   <div class="mode-row">
-    <button class="mode-btn" class:active={!groupMode} on:click={() => { if (groupMode) toggleGroupMode(); }}>Sequence</button>
-    <button class="mode-btn" class:active={groupMode}  on:click={() => { if (!groupMode) toggleGroupMode(); }}>Groups</button>
+    <button class="mode-btn" class:active={mode === 'sequence'} on:click={() => setMode('sequence')}>Sequence</button>
+    <button class="mode-btn" class:active={mode === 'groups'}   on:click={() => setMode('groups')}>Groups</button>
+    <button class="mode-btn" class:active={mode === 'practice'} on:click={() => setMode('practice')}>Practice</button>
   </div>
 
-  {#if groupMode}
+  {#if mode === 'groups'}
     <div class="group-label">Group {groupIndex + 1} <span class="group-of">of {GROUPS.length}</span></div>
     <div class="group-nav">
       {#each GROUPS as _, gi}
@@ -280,68 +331,84 @@
     </div>
   {/if}
 
-  <!-- Letter card -->
-  <div class="letter-card" class:flash-correct={flash === 'correct'} class:flash-wrong={flash === 'wrong'}>
-    {#if activeLetter && !groupDone}
-      <div class="persian-char" dir="rtl">{activeLetter.char}</div>
-      {#if showRomanization}
-        <div class="letter-name">{activeLetter.name_en}</div>
-        <div class="letter-translit">{activeLetter.transliteration}</div>
-      {/if}
-      {#if showQwertyHint}
-        <div class="qwerty-hint"><kbd>{activeLetter.qwerty_key}</kbd></div>
-      {/if}
-      {#if activeForms.length > 1}
-        <div class="forms-row">
-          {#each activeForms as form}
-            <div class="form-cell">
-              <div class="form-text" dir="rtl">{formDisplay(activeLetter.char, form.label)}</div>
-              <div class="form-label-name">{FORM_LABELS[form.label] ?? form.label}</div>
-            </div>
-          {/each}
-        </div>
-      {/if}
-      {#if vowelChars}
-        <div class="vowel-strip" dir="rtl">
-          {#each vowelChars as vc, vi}
-            <div class="vowel-badge" class:active={activeVowel === vi}
-              style={activeVowel === vi ? `background:${VOWEL_COLORS[vi]}22; border-color:${VOWEL_COLORS[vi]}; color:${VOWEL_COLORS[vi]}` : ''}>
-              {vc}
-            </div>
-          {/each}
-        </div>
-      {/if}
-    {:else}
-      <div class="complete-message">{groupDone ? 'All groups complete!' : 'All 32 letters complete!'}</div>
-    {/if}
-  </div>
+  {#if mode === 'practice' && practiceDone}
+    <!-- Practice complete -->
+    <div class="letter-card">
+      <div class="complete-message">All {practiceTotal} letters!</div>
+    </div>
+    <button class="restart-practice-btn" on:click={startPractice}>Try again</button>
 
-  <!-- Progress strip -->
-  {#if groupMode}
-    <div class="progress-strip" dir="ltr">
-      {#each groupLetters as letter, i}
-        <div class="strip-tile" class:current={i === groupProgress} class:passed={groupChecks[i]}>
-          {#if groupChecks[i]}
-            <span class="check">✓</span>
-          {:else}
-            <span class="tile-char" dir="rtl">{letter.char}</span>
-          {/if}
-        </div>
-      {/each}
-    </div>
   {:else}
-    <div class="progress-strip" dir="ltr">
-      {#each alphabet as letter, i}
-        <button class="strip-tile" class:current={i === currentIndex} class:passed={i < currentIndex}
-          on:click={() => goToIndex(i)} title="{letter.name_en} ({letter.transliteration})">
-          {#if i < currentIndex}
-            <span class="check">✓</span>
-          {:else}
-            <span class="tile-char" dir="rtl">{letter.char}</span>
-          {/if}
-        </button>
-      {/each}
+    <!-- Letter card -->
+    <div class="letter-card" class:flash-correct={flash === 'correct'} class:flash-wrong={flash === 'wrong'}>
+      {#if activeLetter && !(mode === 'groups' && groupDone)}
+        <div class="persian-char" dir="rtl">{activeLetter.char}</div>
+        {#if showRomanization}
+          <div class="letter-name">{activeLetter.name_en}</div>
+          <div class="letter-translit">{activeLetter.transliteration}</div>
+        {/if}
+        {#if showQwertyHint}
+          <div class="qwerty-hint"><kbd>{activeLetter.qwerty_key}</kbd></div>
+        {/if}
+        {#if activeForms.length > 1}
+          <div class="forms-row">
+            {#each activeForms as form}
+              <div class="form-cell">
+                <div class="form-text" dir="rtl">{formDisplay(activeLetter.char, form.label)}</div>
+                <div class="form-label-name">{FORM_LABELS[form.label] ?? form.label}</div>
+              </div>
+            {/each}
+          </div>
+        {/if}
+        {#if vowelChars && mode !== 'practice'}
+          <div class="vowel-strip" dir="rtl">
+            {#each vowelChars as vc, vi}
+              <div class="vowel-badge" class:active={activeVowel === vi}
+                style={activeVowel === vi ? `background:${VOWEL_COLORS[vi]}22; border-color:${VOWEL_COLORS[vi]}; color:${VOWEL_COLORS[vi]}` : ''}>
+                {vc}
+              </div>
+            {/each}
+          </div>
+        {/if}
+      {:else}
+        <div class="complete-message">{mode === 'groups' ? 'All groups complete!' : 'All 32 letters complete!'}</div>
+      {/if}
     </div>
+
+    <!-- Progress -->
+    {#if mode === 'practice'}
+      <div class="practice-progress">
+        <div class="practice-track">
+          <div class="practice-fill" style="width:{((practiceTotal - practiceDeck.length) / practiceTotal) * 100}%"></div>
+        </div>
+        <span class="practice-count">{practiceTotal - practiceDeck.length} / {practiceTotal}</span>
+      </div>
+    {:else if mode === 'groups'}
+      <div class="progress-strip" dir="ltr">
+        {#each groupLetters as letter, i}
+          <div class="strip-tile" class:current={i === groupProgress} class:passed={groupChecks[i]}>
+            {#if groupChecks[i]}
+              <span class="check">✓</span>
+            {:else}
+              <span class="tile-char" dir="rtl">{letter.char}</span>
+            {/if}
+          </div>
+        {/each}
+      </div>
+    {:else}
+      <div class="progress-strip" dir="ltr">
+        {#each alphabet as letter, i}
+          <button class="strip-tile" class:current={i === currentIndex} class:passed={i < currentIndex}
+            on:click={() => goToIndex(i)} title="{letter.name_en} ({letter.transliteration})">
+            {#if i < currentIndex}
+              <span class="check">✓</span>
+            {:else}
+              <span class="tile-char" dir="rtl">{letter.char}</span>
+            {/if}
+          </button>
+        {/each}
+      </div>
+    {/if}
   {/if}
 </div>
 
@@ -452,6 +519,48 @@
     color: #059669;
     font-weight: 600;
   }
+
+  /* Practice progress */
+  .practice-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .practice-track {
+    flex: 1;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .practice-fill {
+    height: 100%;
+    background: #6366f1;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+  }
+
+  .practice-count {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    white-space: nowrap;
+  }
+
+  .restart-practice-btn {
+    padding: 0.5em 1.5em;
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .restart-practice-btn:hover { background: #4f46e5; }
 
   /* Progress strip */
   .progress-strip {

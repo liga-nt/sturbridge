@@ -1,0 +1,992 @@
+{
+  "metadata": {
+    "title": "The Aporia of the Children",
+    "subtitle": "A Socratic Journey Through the Ancient World",
+    "series": "National Greek Exam Introductory Curriculum",
+    "target_audience": "7th grade students preparing for the NGE introductory exam",
+    "reading_level": "middle school, sophisticated",
+    "narrator_primary": "Socrates (first person, retrospective)",
+    "narrator_secondary": "Plato (final chapter only)",
+    "narrative_frame": "Socrates, in prison awaiting execution, writes the story of four time-traveling children on tablets intended for oracle-commanded poems. Plato finds the manuscript after Socrates's death — having been sent to the cell by the goddess Hestia — and writes the final chapter from secondhand accounts.",
+    "central_theme": "Aporia — honest not-knowing — is not failure but the only foundation on which genuine wisdom can be built.",
+    "time_machine": "A modern sailboat belonging to the children, capable of both geographic and temporal travel. Its advanced rigging (able to tack into the wind) is one of the details that convinces Socrates the children are from the future: Greeks of his era did not know how to tack, which is why Agamemnon was stranded at Aulis and sacrificed Iphigenia.",
+    "story_arc": "Four children arrive from a future civilization in crisis, seeking a solution from the wisest people of the ancient world. Each travel block presents a compelling false hope — divine authority, heroic courage, beauty and craft, grand ambition — which is questioned and dissolved upon return to Socrates. The children arrive at the final conversation with aporia rather than answers, which Socrates reveals is precisely what they needed to find.",
+    "structural_note": "The story has four travel blocks with returns to Socrates between each. The returns mirror four Platonic dialogues: the Euthyphro (prologue meeting), Apology (Return I), Crito (Return II), and Phaedo (Return III). The final chapter is narrated by Plato. Each travel block contains one mystical experience in which a child receives a gift from their patron deity."
+  },
+
+  "characters": {
+    "socrates": {
+      "role": "narrator and teacher",
+      "description": "Athenian philosopher, approximately 70 years old in 399 BCE. Ironic, warm, relentlessly questioning. He owns nothing, knows nothing useful, and is the wisest man in Athens. He does not travel with the children but questions them each time they return, dissolving each false hope through careful examination.",
+      "death": "399 BCE, hemlock, Athens"
+    },
+    "plato": {
+      "role": "secondary narrator (final chapter only)",
+      "description": "Young Athenian philosopher, approximately 28 in 399 BCE. Student and devotee of Socrates. Historically absent from the death scene due to illness — he notes this himself in the Phaedo. Finds the manuscript and writes the epilogue. His discovery and subsequent life of dialogue-writing is the story's final lesson made flesh."
+    },
+    "phoebe": {
+      "english": "Phoebe",
+      "greek": "Φοίβη",
+      "age": 13,
+      "relation": "older sister of Klēta; cousin of Pallas and Dolios",
+      "personality": "The observer. Always notices what others miss. Has a strong moral compass and instinctively knows what is ethically right. Thoughtful before she acts.",
+      "role": "moral center, careful watcher",
+      "patron_deity": "Apollo",
+      "false_hope_most_enamored": 1,
+      "false_hope_label": "Divine authority holds the truth",
+      "gift": "A spyglass decorated with an image of the sun, given by Apollo. Lets her see the truth in any situation.",
+      "gift_chapter": "ch_01_delphi",
+      "mystical_chapter": "ch_01_delphi",
+      "culminating_moment": "ch_R3_phaedo_morning: raises the spyglass and sees Socrates with perfect clarity — an old man at peace with not knowing — the most beautiful thing she has seen through the glass"
+    },
+    "pallas": {
+      "english": "Pallas",
+      "greek": "Παλλάς",
+      "age": 13,
+      "relation": "older sister of Dolios; cousin of Phoebe and Klēta",
+      "personality": "Brave and decisive. Natural leader who acts when others hesitate. Sometimes charges in before fully thinking things through.",
+      "role": "leader, protector",
+      "patron_deity": "Athena",
+      "false_hope_most_enamored": 2,
+      "false_hope_label": "Courage and discipline save civilizations",
+      "gift": "A flute from Athena with mysterious properties — its music can calm, persuade, or inspire.",
+      "gift_chapter": "ch_06_thermopylae",
+      "mystical_chapter": "ch_06_thermopylae"
+    },
+    "kleta": {
+      "english": "Klēta",
+      "greek": "Κλήτα",
+      "age": 10,
+      "relation": "younger sister of Phoebe",
+      "personality": "Inventive and practical. Loves making things and solving problems with her hands. Quietly resourceful.",
+      "role": "builder, problem-solver",
+      "patron_deity": "Hephaestus",
+      "false_hope_most_enamored": 3,
+      "false_hope_label": "Human creativity and institutions can heal civilization",
+      "gift": "A small hammer from Hephaestus that helps her build whatever tool the group needs next.",
+      "gift_chapter": "ch_09_acropolis",
+      "mystical_chapter": "ch_09_acropolis"
+    },
+    "dolios": {
+      "english": "Dolios",
+      "greek": "Δόλιος",
+      "age": 10,
+      "relation": "younger brother of Pallas",
+      "personality": "Charming and quick-witted. Can make anyone laugh. Talks his way into — and out of — trouble with equal ease.",
+      "role": "charmer, negotiator",
+      "patron_deity": "Hermes",
+      "false_hope_most_enamored": 4,
+      "false_hope_label": "Grand vision and ambition can save everything",
+      "icarus_parallel": "Dolios, like Icarus, flies too high on confidence and charm. His mystical experience at Crete — finding the unfinished Daedalus frieze as his sandals lift him off the ground — is the moment he understands this from the inside.",
+      "gift": "Winged sandals from Hermes that make him faster and amplify his natural charm and persuasiveness.",
+      "gift_chapter": "ch_14_crete",
+      "mystical_chapter": "ch_14_crete"
+    }
+  },
+
+  "false_hopes": [
+    {
+      "id": 0,
+      "label": "Someone already has the answer",
+      "description": "The children arrive believing that wisdom exists somewhere and that finding the wisest person will give them access to it. Dissolved in the prologue when Socrates demonstrates through questioning that they cannot define the virtue they came to save.",
+      "dissolved_in": "ch_P_euthyphro",
+      "most_enamored": "all four children equally"
+    },
+    {
+      "id": 1,
+      "label": "Divine authority holds the truth",
+      "description": "If the gods know the answer and speak through oracles, divine consultation should resolve all uncertainty. But every oracle speaks in riddles requiring interpretation, and interpretation requires the very wisdom the children came to find.",
+      "travel_block": 1,
+      "dissolved_in": "ch_R1_apology",
+      "most_enamored": "phoebe"
+    },
+    {
+      "id": 2,
+      "label": "Courage and discipline save civilizations",
+      "description": "The men of Marathon and Thermopylae were brave enough to die for their civilization, and their civilization survived. Socrates questions whether courage in service of an unexamined cause is virtue at all.",
+      "travel_block": 2,
+      "dissolved_in": "ch_R2_crito",
+      "most_enamored": "pallas"
+    },
+    {
+      "id": 3,
+      "label": "Human creativity and institutions can heal civilization",
+      "description": "The Parthenon, tragedy, the court of the Areopagus — humanity can make things of transcendent beauty and build just institutions. Socrates asks whether a civilization that produced the Parthenon and is executing him can be said to have a beautiful soul.",
+      "travel_block": 3,
+      "dissolved_in": "ch_R3_phaedo_morning",
+      "most_enamored": "kleta"
+    },
+    {
+      "id": 4,
+      "label": "Grand vision and ambition can save everything",
+      "description": "Alexander's dream of unified humanity, the Library of Alexandria gathering all knowledge — a big enough solution led by a brilliant enough person can transcend small conflicts. Like Icarus, this hope flies highest and falls furthest.",
+      "travel_block": 4,
+      "dissolved_in": "ch_F_plato",
+      "most_enamored": "dolios"
+    }
+  ],
+
+  "travel_blocks": [
+    {
+      "id": 1,
+      "theme": "The Sacred World",
+      "false_hope": 1,
+      "chapters": ["ch_01_delphi", "ch_02_olympia", "ch_03_corinth", "ch_04_aegean"],
+      "mystical_experience_chapter": "ch_01_delphi",
+      "mystical_child": "phoebe"
+    },
+    {
+      "id": 2,
+      "theme": "War and Sacrifice",
+      "false_hope": 2,
+      "chapters": ["ch_05_marathon", "ch_06_thermopylae", "ch_07_sparta", "ch_08_salamis"],
+      "mystical_experience_chapter": "ch_06_thermopylae",
+      "mystical_child": "pallas"
+    },
+    {
+      "id": 3,
+      "theme": "Art, Culture, and Human Systems",
+      "false_hope": 3,
+      "chapters": ["ch_09_acropolis", "ch_10_theater", "ch_11_mycenae", "ch_12_thebes"],
+      "mystical_experience_chapter": "ch_09_acropolis",
+      "mystical_child": "kleta"
+    },
+    {
+      "id": 4,
+      "theme": "Empire, Ambition, and Grand Vision",
+      "false_hope": 4,
+      "chapters": ["ch_13_hellespont_troy", "ch_14_crete", "ch_15_eastern_med", "ch_16_alexandria", "ch_17_chaeronea", "ch_18_gaugamela"],
+      "mystical_experience_chapter": "ch_14_crete",
+      "mystical_child": "dolios"
+    }
+  ],
+
+  "socratic_arc": [
+    {
+      "moment": "Prologue",
+      "platonic_parallel": "Euthyphro",
+      "dramatic_situation": "Socrates is about to enter his trial when the children intercept him. He meets them the way he met Euthyphro — mid-thought, on his way somewhere, stopping to question.",
+      "chapter": "ch_P_euthyphro"
+    },
+    {
+      "moment": "Return I",
+      "platonic_parallel": "Apology",
+      "dramatic_situation": "Socrates has been convicted and sentenced to death. He is calm. The children return with their first false hope and he cross-examines it.",
+      "chapter": "ch_R1_apology"
+    },
+    {
+      "moment": "Return II",
+      "platonic_parallel": "Crito",
+      "dramatic_situation": "Crito is already there with the escape plan. The children add their voices, begging Socrates to travel with them. He refuses — and then questions Pallas's logic of sacrifice using Thermopylae as the test case.",
+      "chapter": "ch_R2_crito"
+    },
+    {
+      "moment": "Return III",
+      "platonic_parallel": "Phaedo (morning)",
+      "dramatic_situation": "Socrates is mid-conversation about the soul when the children arrive on the morning of the hemlock. He questions Klēta's report. Phoebe raises the spyglass and sees Socrates clearly for the first time. He sends them on their final journey.",
+      "chapter": "ch_R3_phaedo_morning"
+    },
+    {
+      "moment": "Final Scene",
+      "platonic_parallel": "Phaedo (death scene) — narrated by Plato",
+      "dramatic_situation": "Socrates's manuscript ends mid-sentence. Plato, sent from his home by Hestia, finds it in the cell. He writes the final chapter from secondhand accounts.",
+      "chapter": "ch_F_plato"
+    }
+  ],
+
+  "chapters": [
+    {
+      "id": "ch_00_storm",
+      "chapter_number": 0,
+      "title": "The Storm",
+      "type": "origin",
+      "travel_block": null,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates in reconstructed third person — this is an account he knows only from the children's telling. He notes the epistemological irony: the very first thing he tells us is something he did not see himself.",
+      "location": "The open sea of the children's own time; the coast near Athens",
+      "time_period": "Children's present day (unspecified future)",
+      "false_hope": null,
+      "most_enamored_child": null,
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The open sea of the children's own time — familiar, and then suddenly not. A modern sailboat with advanced rigging including the ability to tack into the wind. The storm arrives without warning, Homeric in scale: black sky, walls of water, wind that seems to have a voice and a purpose. When the seas calm, the children wash up on a beach near fifth-century Athens.",
+      "historical_significance": "Socrates pauses his narration to marvel at the boat's rigging and its ability to sail into the wind. He explains that in his time, if you needed wind from the wrong direction you simply waited — which is why Agamemnon was stranded at Aulis and sacrificed Iphigenia. A boat that can tack is, to Socrates, more convincing proof of the future than any claim the children could make.",
+      "deity_artifact": {
+        "deity": "Poseidon",
+        "description": "Poseidon enters the story not as a concept but as a force — the storm itself. He is not named immediately; the children experience something vast, indifferent, and overwhelming. His identity becomes something understood later, looking back."
+      },
+      "false_hope_description": null,
+      "aporia_concealed": null,
+      "narrative_description": "Four children take a sailboat out without permission, trying to escape the stress of their troubled world. The sea is calm at first, then a storm of mythological proportions arrives. The boat is flung, the children are terrified, and when the seas calm they wash up on a beach near Athens in 399 BCE. The boat, undamaged, has become their means of travel through geography and time. Socrates, narrating, pauses to explain the tacking rigging and what it implies about Agamemnon — the first of many moments where the children's future technology illuminates the Greek past.",
+      "standards_covered": [
+        "myth.deity.poseidon",
+        "geo.aegean_sea"
+      ]
+    },
+
+    {
+      "id": "ch_P_euthyphro",
+      "chapter_number": "P",
+      "title": "The Wisest Man in Athens",
+      "type": "prologue",
+      "travel_block": null,
+      "platonic_parallel": "Euthyphro",
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates in first person, present and immediate. This is his city and his day.",
+      "location": "The Agora and the steps of the King Archon's court, Athens",
+      "time_period": "399 BCE",
+      "false_hope": 0,
+      "most_enamored_child": "all",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The Agora of Athens at its height — fish market, law courts, the Stoa Poikile painted with famous battle scenes, the noise of a city certain of its own importance. The King Archon's court nearby, where Socrates is about to answer charges of impiety and corrupting the youth. The Parthenon gleams on the Acropolis above.",
+      "historical_significance": "Athens in 399 BCE is in the aftermath of the Peloponnesian War — defeated, chastened, turning on its own best minds. The Athenian Empire built by Pericles is gone. Socrates's trial is the city's attempt to resolve its anxiety by punishing the man who asked the questions it cannot answer. Young Plato is present in the crowd.",
+      "deity_artifact": null,
+      "false_hope_description": "The children arrive believing someone in the ancient world — Socrates, surely — already has the answer to their civilization's problems. They have come to receive wisdom, not to question their own assumptions.",
+      "aporia_concealed": "Socrates demonstrates immediately that he knows nothing — and that this is more honest than anyone else's certainty. The oracle did not praise his wisdom; it revealed everyone else's pretense. The children's hope for a ready answer dissolves before they have taken three steps.",
+      "narrative_description": "Socrates is on his way to the King Archon's court when four strange children intercept him. He listens to their account of the future with the polite skepticism he gives to sophists, then begins to question them. Within an hour they cannot define the virtue they came to save. He offers them not answers but a method: he will walk with them in spirit, questioning what they learn as they go. The chapter introduces all four children, establishes the stakes of their mission, and ends with Socrates entering the court.",
+      "standards_covered": [
+        "geo.athens",
+        "hist.author.plato",
+        "hist.period.athenian_empire",
+        "hist.figure.pericles"
+      ]
+    },
+
+    {
+      "id": "ch_01_delphi",
+      "chapter_number": 1,
+      "title": "What the Oracle Said",
+      "type": "travel",
+      "travel_block": 1,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates with particular irony about the oracle that once called him wise — an honor he spent thirty years trying to understand.",
+      "location": "Delphi, on the slope of Mount Parnassus",
+      "time_period": "5th century BCE",
+      "false_hope": 1,
+      "most_enamored_child": "phoebe",
+      "mystical_experience": {
+        "child": "phoebe",
+        "description": "Phoebe raises the spyglass toward the Temple of Apollo and it floods with golden light. She is certain she has seen something true — a flash of the god's knowledge, the answer they came for. She does not yet realize that what she saw was the question, not the answer."
+      },
+      "gift_given": {
+        "child": "phoebe",
+        "gift": "The spyglass decorated with an image of the sun",
+        "deity": "Apollo",
+        "manner": "The spyglass was already in Phoebe's possession — found on the boat before they left. At Delphi its power activates for the first time."
+      },
+      "place_description": "Delphi sits dramatically on the slope of Mount Parnassus, a landscape of terraced rock and thin air. The Temple of Apollo dominates, its forecourt inscribed with γνῶθι σεαυτόν — know thyself. The Pythia sits over a chasm inhaling vapors, speaking in riddles. The omphalos stone — the navel of the world — is displayed in the sanctuary. The Sacred Way winds upward past bronze dedications of battles won.",
+      "historical_significance": "Delphi is the Panhellenic authority on all matters of state and war. The oracle told Croesus that if he attacked Persia he would destroy a great empire — which he did, his own. It told the Athenians to trust their wooden walls, which Themistocles interpreted as the fleet. And it told Chaerephon that no one was wiser than Socrates — the pronouncement that sent Socrates on his life's mission of questioning.",
+      "deity_artifact": {
+        "deity": "Apollo",
+        "description": "The Temple of Apollo at Delphi is the god's most sacred earthly home. The omphalos stone marks the center of the world. The cult statue of Apollo stood inside. Above the entrance: γνῶθι σεαυτόν — know thyself — inscribed at the home of the god who claims to know everything. The contradiction is deliberate."
+      },
+      "false_hope_description": "Divine authority holds the truth. If the gods know and speak through oracles, consulting them should resolve all uncertainty. Phoebe, who seeks truth above all, is electrified by the idea that truth exists and is accessible if you ask the right question in the right place.",
+      "aporia_concealed": "Every oracle is ambiguous by design. The answer always requires interpretation, and interpretation requires the wisdom you came to find. Know thyself is inscribed above the temple that claims to know everything.",
+      "narrative_description": "The children sail to Delphi and climb the Sacred Way. Dolios attempts to charm his way past the temple priests and partly succeeds. Phoebe finds the spyglass on the boat before they leave and brings it without knowing why. At the temple she raises it toward Apollo's sanctuary and it blazes with light. She is overwhelmed, certain she has touched something true. The chapter establishes the oracle's power and its fundamental ambiguity, introduces the omphalos and the inscription γνῶθι σεαυτόν, and leaves Phoebe burning with conviction that divine knowledge is the answer.",
+      "standards_covered": [
+        "geo.delphi",
+        "myth.deity.apollo",
+        "hist.figure.darius",
+        "hist.period.persian_wars"
+      ]
+    },
+
+    {
+      "id": "ch_02_olympia",
+      "chapter_number": 2,
+      "title": "The Measure of Excellence",
+      "type": "travel",
+      "travel_block": 1,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates with particular interest in what counts as excellence and whether it can be measured.",
+      "location": "Olympia, in the river plain of the western Peloponnese",
+      "time_period": "5th century BCE, during or near the Olympic Games",
+      "false_hope": 1,
+      "most_enamored_child": "phoebe",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The sanctuary of Olympia sits in a gentle river plain, the Altis enclosure sheltering the Temple of Zeus. Inside stands Pheidias's chryselephantine statue of Zeus — one of the Seven Wonders, approximately 12 meters tall, seated, holding a small winged Nike and a scepter topped with an eagle. Every four years a sacred truce halts all warfare across Greece. Athletes compete and victors receive immortality through poetry.",
+      "historical_significance": "The Olympic Games are the closest thing the Greeks have to a unified Panhellenic identity. Victory at Olympia confers unmatched prestige — Pindar wrote epinician odes for victors. The games are simultaneously a religious festival, a diplomatic gathering, and a showcase of bodily excellence. The myth of Atalanta is told here: the fastest runner who could not be beaten until she was distracted by golden apples, raising the question of what it means to truly win.",
+      "deity_artifact": {
+        "deity": "Zeus",
+        "description": "The chryselephantine statue of Zeus at Olympia — the most famous image of the king of the gods in antiquity, created by Pheidias. Ancient sources describe visitors weeping upon seeing it. The thunderer made tender: power in the form of transcendent beauty, an embodied claim that order and strength can be beautiful."
+      },
+      "false_hope_description": "Excellence measured and rewarded publicly. The fastest man wins, clearly and undeniably. If their time could agree on what counts as excellence and honor it accordingly, strife might end.",
+      "aporia_concealed": "Bodily excellence is the easiest kind to measure and the least related to virtue of soul. The fastest man may be the cruelest. The games exist within a civilization built partly on slavery. Measuring excellence presupposes agreement about what to measure — which is precisely the question no one can answer.",
+      "narrative_description": "The children arrive during the Olympic festival and are swept into the spectacle. Dolios talks his way into restricted areas. Klēta studies the construction of the stadium and the temple. Pallas watches the athletes with barely concealed competitive envy. The chapter culminates before Pheidias's Zeus, and Socrates narrates the myth of Atalanta — whose race raises the question of whether winning by any means is really winning at all.",
+      "standards_covered": [
+        "geo.olympia",
+        "myth.deity.zeus",
+        "myth.story.atalanta"
+      ]
+    },
+
+    {
+      "id": "ch_03_corinth",
+      "chapter_number": 3,
+      "title": "The City That Has Everything",
+      "type": "travel",
+      "travel_block": 1,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates with dry irony about a city whose prosperity he finds both impressive and philosophically suspicious.",
+      "location": "Corinth, on the Isthmus connecting mainland Greece to the Peloponnese",
+      "time_period": "5th century BCE",
+      "false_hope": 1,
+      "most_enamored_child": "dolios",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "Corinth sits on the narrow isthmus and is staggeringly wealthy, controlling trade between two seas via the diolkos — a paved trackway for hauling ships overland. The Temple of Aphrodite crowns the Acrocorinth. Corinthian bronze and pottery are exported everywhere. The city smells of fish, perfume, cedar, and money. The most cosmopolitan place the children have yet seen.",
+      "historical_significance": "Corinth will become the site of Philip II's League of Corinth after Chaeronea — the forced alliance that ends Greek city-state independence, named here with deliberate irony. The Isthmian Games were second in prestige only to Olympia. Corinth represents a different model of civilization: less philosophical, more commercial, and arguably more open to the world.",
+      "deity_artifact": {
+        "deity": "Aphrodite",
+        "description": "The Temple of Aphrodite on the Acrocorinth was famous throughout the ancient world. Strabo claimed a thousand sacred attendants served the goddess there. The temple transforms the city's commercial energy into something stranger: desire as the engine of civilization, beauty as commodity, love as transaction. Aphrodite here is not the soft goddess of poetry but the raw power of wanting."
+      },
+      "false_hope_description": "Prosperity as the answer. Corinth is proof that wealth solves problems — it funds beauty, order, and peace. Perhaps their time needs more abundance, better distribution, economic flourishing. Dolios, at home in markets and conversation, finds Corinth intoxicating.",
+      "aporia_concealed": "Wealth creates its own forms of desire that are never satisfied. The richest city is not the most virtuous city. Desire by definition is not a resting place — it always reaches for what it does not have. And Corinth's wealth will not prevent its subjugation to Philip.",
+      "narrative_description": "The children explore Corinth with delight, Dolios especially at home in the markets and crowds. They climb the Acrocorinth to see the Temple of Aphrodite and look out over both seas. Socrates narrates with gentle irony about a city that has everything and is still reaching for more, introducing pleonexia — wanting more than one's share — as a civilizational disease.",
+      "standards_covered": [
+        "geo.corinth",
+        "myth.deity.aphrodite",
+        "hist.battle.chaeronea",
+        "hist.period.rise_of_macedon"
+      ]
+    },
+
+    {
+      "id": "ch_04_aegean",
+      "chapter_number": 4,
+      "title": "The Sea Between",
+      "type": "at_sea",
+      "travel_block": 1,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates the sea passage with the wonder of a man who has never sailed beyond what the army required of him.",
+      "location": "The Aegean Sea; passing Euboea; the Ionian Sea to the west; Sicily in the far distance",
+      "time_period": "5th century BCE",
+      "false_hope": null,
+      "most_enamored_child": null,
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The Aegean is a sea of islands — over 200 scattered between mainland Greece and Asia Minor like stepping stones. Euboea, the long island running parallel to the Attic coast, is visible to the northeast. The water is a deep, impossible blue. To the west, beyond the heel of Italy, Sicily is a rumor on the horizon. The Ionian Sea connects Greece to the western world the children have not yet seen.",
+      "historical_significance": "The Aegean is the highway of the Greek world — the Persian fleet crossed it, the Athenian navy controlled it, and the Delian League was organized around its shores. Euboea was strategically critical in the Persian Wars. The Ionian Sea to the west connects Greece to Sicily and the Italian colonies, reminding the children that Greek civilization extends far beyond the mainland they have been exploring.",
+      "deity_artifact": {
+        "deity": "Poseidon",
+        "description": "On the open sea, Poseidon is simply present — in the color of the water, the behavior of the wind, the way a swell can lift a boat and set it down elsewhere. The children who met him first as a storm now experience him as something calmer and more permanent."
+      },
+      "false_hope_description": null,
+      "aporia_concealed": null,
+      "narrative_description": "A transitional chapter in which the children sail from Corinth northeast toward Attica. Socrates uses the passage to survey the Greek world from above — the islands, the seas, the colonies to the west. He describes the Ionian and Adriatic seas with the reverence of a man who has never sailed them. The boat's magical properties become more evident: it seems to know where they need to go.",
+      "standards_covered": [
+        "geo.aegean_sea",
+        "geo.euboea",
+        "geo.ionian_sea",
+        "geo.sicily",
+        "myth.deity.poseidon"
+      ]
+    },
+
+    {
+      "id": "ch_R1_apology",
+      "chapter_number": "R1",
+      "title": "What the Jury Decided",
+      "type": "return",
+      "travel_block": null,
+      "platonic_parallel": "Apology",
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates his own conviction with equanimity, turning the story of his trial into a Socratic examination of Phoebe's certainty.",
+      "location": "Outside the law court, Athens",
+      "time_period": "399 BCE",
+      "false_hope": 1,
+      "most_enamored_child": "phoebe",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The children return to find Socrates emerging from his trial convicted by 280 votes to 220. He proposed as his counter-penalty free meals for life — an answer so outrageous the jury added votes to the death sentence. He is calm. The Agora around him is loud with opinion. Plato is nearby, pale and silent.",
+      "historical_significance": "The Apology is Socrates's defense speech as recorded by Plato. His refusal to beg for his life, his insistence that the unexamined life is not worth living, and his claim that no genuine harm can come to a good man are the central statements of Socratic philosophy. Pericles is discussed as an example of a great Athenian who, when questioned, could not explain what made his leadership virtuous.",
+      "deity_artifact": null,
+      "false_hope_description": "Phoebe reports the golden light at Delphi, certain she has found evidence that divine knowledge is real and accessible. She wants Socrates to confirm it.",
+      "aporia_concealed": "Socrates asks: what did you see, exactly? Light. What did the light tell you? She hesitates. He points out that the oracle told him he was wise, and he spent thirty years trying to understand what it meant. The oracle speaks; interpretation is still required; and interpretation requires wisdom. The light was real. What it meant is another question entirely.",
+      "narrative_description": "The children return from Block I to find Socrates convicted. He greets them with interest rather than distress. Phoebe presents her certainty about the oracle; Socrates questions it methodically until she arrives at honest uncertainty. He then connects this to his trial: the Athenians convicted him not because they were certain he was guilty but because his questions made them uncomfortable. Certainty, not truth, drove the verdict. The chapter ends with Socrates noting that his sentence gives the children a deadline — they had better travel quickly.",
+      "standards_covered": [
+        "geo.athens",
+        "hist.author.plato",
+        "hist.figure.pericles",
+        "hist.period.athenian_empire"
+      ]
+    },
+
+    {
+      "id": "ch_05_marathon",
+      "chapter_number": 5,
+      "title": "The Men Who Ran",
+      "type": "travel",
+      "travel_block": 2,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates Marathon with the voice of a man who has served as a soldier himself, who knows what courage feels like from the inside.",
+      "location": "The plain of Marathon, northeast of Athens",
+      "time_period": "490 BCE (witnessed through time travel)",
+      "false_hope": 2,
+      "most_enamored_child": "pallas",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The plain of Marathon is a narrow coastal flat between rocky hills and the sea. The fennel plants that give the location its name grow at the edges. The soros — the burial mound of the 192 Athenian dead — is visible as a low hill on the plain. At the shoreline the children can see where the Persian fleet beached its ships.",
+      "historical_significance": "490 BCE: Darius I sent a punitive expedition against Athens for supporting the Ionian Revolt. The Athenians asked Sparta for help; the Spartans declined, citing a religious festival. Outnumbered, the Athenians charged at a run under Miltiades to minimize exposure to Persian arrows. The Persians were routed. The victory launched Athenian confidence and became the foundational story of Athenian self-understanding. Herodotus is the primary source and can be encountered here.",
+      "deity_artifact": null,
+      "false_hope_description": "Courage and sacrifice as the answer. The men of Marathon stood alone and ran toward death and won. Their civilization survived because individuals cared enough to give everything. Pallas feels this viscerally: this is what it looks like when people stop arguing and act.",
+      "aporia_concealed": "Courage in service of what, exactly? The Athenian victory at Marathon was the seed of an empire built on coerced tribute and Athenian exceptionalism. Courage is not virtue — it is virtue only when directed toward something genuinely good. And what is genuinely good remains the unanswered question.",
+      "narrative_description": "The children stand on the plain of Marathon, witnessing the battle or arriving just after. Herodotus is present or his account is read aloud — he describes the Spartan refusal and the Athenian decision to run. Pallas is transformed: this is the chapter where she stops hesitating and starts believing. The soros anchors the chapter's final image — 192 men who chose courage and are buried where they fell.",
+      "standards_covered": [
+        "hist.battle.marathon",
+        "hist.period.persian_wars",
+        "hist.figure.darius",
+        "hist.author.herodotus"
+      ]
+    },
+
+    {
+      "id": "ch_06_thermopylae",
+      "chapter_number": 6,
+      "title": "Obedient to Their Laws",
+      "type": "travel",
+      "travel_block": 2,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates with deep feeling for Leonidas — a man who, like Socrates himself, chose death over the violation of his principles.",
+      "location": "The pass of Thermopylae, central Greece",
+      "time_period": "480 BCE (witnessed through time travel)",
+      "false_hope": 2,
+      "most_enamored_child": "pallas",
+      "mystical_experience": {
+        "child": "pallas",
+        "description": "At dusk, alone at the pass, Pallas plays the flute for the first time. The music rises up the rocky cliff face. The air changes. She feels, without seeing, the 300 standing around her — not as ghosts but as a presence, a warmth, a steadiness. Athena is in this. She is certain of it. She plays until it is fully dark."
+      },
+      "gift_given": {
+        "child": "pallas",
+        "gift": "The flute from Athena with mysterious properties — its music can calm, persuade, or inspire",
+        "deity": "Athena",
+        "manner": "The flute is found by Pallas among the rocks at the pass, as if left there. She does not question where it came from."
+      },
+      "place_description": "Thermopylae — the Hot Gates — takes its name from sulfurous hot springs that still bubble there. In 480 BCE it is a narrow coastal pass between cliffs and sea, in places barely wide enough for a cart. The geography makes it a perfect chokepoint. The springs still steam. Simonides's epitaph is carved nearby: Go, stranger, tell the Lacedaemonians that we lie here, obedient to their laws.",
+      "historical_significance": "Xerxes led the second Persian invasion. Leonidas commanded a coalition including 300 Spartans. For two days they held. A local man named Ephialtes showed the Persians a mountain path around the pass. The 300 Spartans and 700 Thespians stayed and died. Their sacrifice bought the Greek fleet time to fight at Salamis. Simonides's epitaph is one of the most famous pieces of writing in the ancient world.",
+      "deity_artifact": {
+        "deity": "Athena",
+        "description": "Athena is present at Thermopylae not through a specific artifact but through the nature of the sacrifice itself — wisdom knowing when to stand and die rather than flee. Pallas, whose name is one of Athena's own epithets, receives the flute here. The goddess of wisdom and war leaves her gift at a place where those two qualities were perfectly united."
+      },
+      "false_hope_description": "Obedience to law unto death as the answer. Leonidas and the 300 stayed because Spartan law required it and they were obedient. A civilization with laws strong enough that people obey them unto death cannot be dissolved by mere disagreement.",
+      "aporia_concealed": "The very obedience celebrated here made Sparta one of the most brutal slave societies in the ancient world. Obedience to law is only as good as the laws themselves, and the laws only as good as the wisdom behind them. Whose wisdom? Made by whom?",
+      "narrative_description": "The children arrive at the pass and find it charged with what happened there. Xerxes watches from the heights; Leonidas is the chapter's moral center — a man who knew exactly what he was doing and did it without complaint. Pallas is overwhelmed. At dusk she wanders to the pass alone and plays the flute she found in the rocks. The mystical experience arrives quietly, not dramatically. She comes back changed — not triumphant, but certain.",
+      "standards_covered": [
+        "hist.battle.thermopylae",
+        "hist.figure.leonidas",
+        "hist.figure.xerxes",
+        "hist.period.persian_wars",
+        "myth.deity.athena"
+      ]
+    },
+
+    {
+      "id": "ch_07_sparta",
+      "chapter_number": 7,
+      "title": "No Walls But These",
+      "type": "travel",
+      "travel_block": 2,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates Sparta with a philosopher's unease — this is the city Plato admired and that Socrates recognizes as the dark mirror of everything Athens claims to be.",
+      "location": "Sparta (Lacedaemon), the southern Peloponnese",
+      "time_period": "5th century BCE",
+      "false_hope": 2,
+      "most_enamored_child": "pallas",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "Sparta in the 5th century has no walls, no coinage, no theater, no philosophy, minimal monumental architecture. Boys leave their families at seven for the agoge — the brutal state education system. The city controls the helots through institutionalized terror. What Sparta has instead of everything it lacks is absolute clarity of purpose: the production of the best soldiers in the world.",
+      "historical_significance": "Sparta and Athens represent the two poles of Greek political possibility. Sparta wins the Peloponnesian War and then cannot manage the peace — its rigid system has no flexibility for anything else. The Battle of Aegospotami (405 BCE), where the Spartan navy destroyed the Athenian fleet and ended the Peloponnesian War, is discussed here. The famous statue of Ares in chains — the Ares Enyalios — symbolizes war imprisoned in service to the state.",
+      "deity_artifact": {
+        "deity": "Ares",
+        "description": "The Spartans had a sanctuary with a famous statue of Ares in chains — the Ares Enyalios. The chains symbolized that the god of war could never leave Sparta, that their military power was permanently bound to the state. The god of destruction made a prisoner of civic order. The children find it both impressive and deeply unsettling."
+      },
+      "false_hope_description": "Discipline and austerity as the answer. Sparta has no sophists, no demagogues, no luxury to soften the soul. Perhaps what their time needs is a return to simplicity and the subordination of individual desire to collective good.",
+      "aporia_concealed": "Spartan discipline rests entirely on helot slavery — a permanent, secret terror inflicted on the Messenian population. The virtue of the Spartiate depends on the absolute subjugation of others. Without helots, there is no Sparta.",
+      "narrative_description": "The children explore Sparta and find it disorienting — a powerful city that feels empty, like a weapon without a hand to hold it. They observe the agoge boys training, try to speak with Spartan citizens who answer in the fewest possible words, and find the sanctuary of Ares. Pallas still burning from Thermopylae finds Sparta's discipline beautiful. Phoebe, using the spyglass, sees something else she cannot name but that troubles her. The helots are the chapter's moral problem, introduced quietly.",
+      "standards_covered": [
+        "geo.sparta",
+        "myth.deity.ares",
+        "hist.period.peloponnesian_war",
+        "hist.event.aegospotami",
+        "hist.battle.aegospotami"
+      ]
+    },
+
+    {
+      "id": "ch_08_salamis",
+      "chapter_number": 8,
+      "title": "The Cleverest Thing",
+      "type": "travel",
+      "travel_block": 2,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates Salamis with particular interest in Themistocles — a man of extraordinary intelligence who was subsequently destroyed by the city he saved.",
+      "location": "The Strait of Salamis, between the island of Salamis and the Attic coast",
+      "time_period": "480 BCE (witnessed through time travel)",
+      "false_hope": 2,
+      "most_enamored_child": "kleta",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The Strait of Salamis is a narrow channel of deep blue water. Xerxes watched from a golden throne set up on the heights of the Attic coast. The Greek fleet, smaller but fighting in confined waters, lured the Persian fleet in and shattered it. The wreckage of Persian triremes is everywhere. The water smells of pitch and salt and smoke.",
+      "historical_significance": "Salamis was the turning point of the Persian Wars. Themistocles had persuaded Athens to build 200 triremes with the proceeds of a silver strike at Laurion. After Salamis, Xerxes retreated. The victory established Athens's naval supremacy and became the engine of the Athenian Empire. Themistocles, who saved Greece, was subsequently ostracized by the Athenians and died in Persian service.",
+      "deity_artifact": {
+        "deity": "Poseidon",
+        "description": "Before Salamis, the Greeks sacrificed to Poseidon. The Athenians believed he had sent the storm that destroyed part of Xerxes's fleet before the battle. At Salamis, Poseidon is the sea itself — the terrain on which clever strategy defeated overwhelming force. He is not benevolent; he simply is what he is, and Themistocles understood how to use him."
+      },
+      "false_hope_description": "Strategic intelligence as the answer. Themistocles was smarter than Xerxes. He built the ships before anyone knew they were needed. Intelligence — forward-looking, strategic — saves civilizations. Klēta, the practical problem-solver, finds this deeply compelling.",
+      "aporia_concealed": "Themistocles, who saved Greece, was ostracized by the Athenians and died serving Persia. Strategic intelligence is expertise in means, not ends. The same brilliance can save a civilization or betray it depending on what it serves — and the question of what to serve is, again, the unanswered one.",
+      "narrative_description": "The children witness or arrive just after the Battle of Salamis. They see Xerxes on his throne watching his fleet destroyed. The chapter focuses on Themistocles — a man who saw clearly what others could not — and on the strange fact that Athens destroyed him after he saved it. Klēta is fascinated by the triremes and tactics. The chapter closes with the children sailing away from the burning strait.",
+      "standards_covered": [
+        "hist.battle.salamis",
+        "hist.period.persian_wars",
+        "hist.figure.xerxes",
+        "myth.deity.poseidon",
+        "geo.aegean_sea"
+      ]
+    },
+
+    {
+      "id": "ch_R2_crito",
+      "chapter_number": "R2",
+      "title": "Come With Us",
+      "type": "return",
+      "travel_block": null,
+      "platonic_parallel": "Crito",
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates the Crito scene knowing his own choice — and with the tenderness of a man who finds the children's plea genuinely moving even as he refuses it.",
+      "location": "The prison of Athens",
+      "time_period": "399 BCE",
+      "false_hope": 2,
+      "most_enamored_child": "pallas",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The Athenian prison — the desmotarion — is a small building near the Agora. Socrates's cell is simple: a bench, a small window, a hearth. Crito has arrived before the children, with money and a plan. The boat is waiting. The road to Thessaly is open. All Socrates has to do is walk out.",
+      "historical_significance": "The Crito records Socrates's argument for why he will not escape: to violate the laws of Athens, even unjust ones, would undermine the civic system that makes philosophy possible. Thucydides's History of the Peloponnesian War is discussed here — the historian who tried to teach Athens what caused its destruction and whom Athens did not hear. The Peace of Nicias (421 BCE), the failed treaty that briefly ended the Peloponnesian War before collapsing, is cited as a solution that was not wisdom.",
+      "deity_artifact": null,
+      "false_hope_description": "Pallas presents her case: Leonidas stayed because his laws required it; Socrates should leave because his life's work is not finished. She plays the flute, trying to persuade him. It is the most beautiful music she has ever made. He listens with his eyes closed.",
+      "aporia_concealed": "Socrates asks Pallas: the 300 obeyed Spartan law unto death — was that virtue? She says yes. He asks: and if the law had required them to enslave an innocent people? She is silent. Obedience to law is not the same as virtue. Neither is courage. The question of what makes an action genuinely right remains open.",
+      "narrative_description": "The children arrive at the prison to find Crito already there, frantic. Together they make their plea — Pallas plays the flute, Dolios argues the practical case, Klēta points out the boat is right there. Socrates hears them all. He then conducts a quiet, devastating examination of the logic of sacrifice — using Thermopylae itself as the test case — until Pallas arrives at genuine uncertainty. The chapter ends with Socrates telling them to go and come back with whatever they find, and with the children leaving the prison in silence.",
+      "standards_covered": [
+        "geo.athens",
+        "hist.period.peloponnesian_war",
+        "hist.event.peace_of_nicias",
+        "hist.author.thucydides"
+      ]
+    },
+
+    {
+      "id": "ch_09_acropolis",
+      "chapter_number": 9,
+      "title": "Everything Beautiful",
+      "type": "travel",
+      "travel_block": 3,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates the Acropolis with genuine awe at the beauty and genuine unease at what paid for it.",
+      "location": "The Acropolis and the Hephaistion, Athens",
+      "time_period": "5th century BCE, during or just after the Periclean building program",
+      "false_hope": 3,
+      "most_enamored_child": "kleta",
+      "mystical_experience": {
+        "child": "kleta",
+        "description": "Klēta touches the stone threshold of the Hephaistion with the hammer she found on the boat. The stone hums. She feels heat that isn't there — the heat of the forge, of metal being shaped, of something being made for the first time. Hephaestus is in the stone. Not speaking, not instructing: simply present, the way craft is present in the hands of someone who truly knows how to make things."
+      },
+      "gift_given": {
+        "child": "kleta",
+        "gift": "A small hammer from Hephaestus that helps her build whatever tool the group needs next",
+        "deity": "Hephaestus",
+        "manner": "The hammer was on the boat from the beginning — Klēta has been using it practically throughout the journey. Only at the Hephaistion does she understand what it actually is."
+      },
+      "place_description": "The Acropolis blazes with color — the Parthenon's marble gleams white and its sculpted figures are painted vivid red, blue, and gold. The Propylaea, the Temple of Athena Nike, and the Erechtheion with its Caryatid porch surround the main temple. Below, in the Agora, stands the Hephaistion — the best-preserved Greek temple in existence, dedicated to the divine craftsman, overlooking the quarter where bronze-workers had their shops.",
+      "historical_significance": "Pericles commissioned the Acropolis building program as a statement of Athenian cultural supremacy, funded partly by Delian League tribute. The Athena Parthenos by Pheidias stood inside the Parthenon — 12 meters tall, gold and ivory, holding a small Nike. Outside stood the bronze Athena Promachos whose spear-tip could be seen by sailors rounding Cape Sounion. The Hephaistion was built simultaneously, honoring the craftsman who makes the things the warriors use.",
+      "deity_artifact": {
+        "deity": "Hephaestus",
+        "description": "The Hephaistion in the Agora below the Acropolis — the Temple of Hephaestus — is the best-preserved ancient Greek temple in existence. It was surrounded by the bronze-workers' workshops of the Kerameikos district: the god of the forge literally dwelt among the craftsmen. The Athena Parthenos is relevant here too: Athena is goddess of both wisdom and domestic craft, placing her in unexpected proximity to Hephaestus."
+      },
+      "false_hope_description": "Human creativity and institutions as the answer. The Parthenon is proof that humanity can produce something transcendentally beautiful and true. If their time could recover this commitment to making things well — to beauty as a civic value — civilization might repair itself. Klēta stands before the Hephaistion and feels that making things IS a form of wisdom.",
+      "aporia_concealed": "The Parthenon was built with tribute money coerced from Delian League allies. Beauty and injustice are not opposites. The most beautiful civilization in the ancient world also practiced slavery, excluded women from public life, and is preparing to execute Socrates. Beauty does not guarantee goodness.",
+      "narrative_description": "The children climb the Acropolis and are overwhelmed. Phoebe raises the spyglass and sees the Parthenon as it truly was — blazing with color. Klēta barely looks at the Parthenon; she is drawn down to the Hephaistion. She touches the threshold with her hammer and the mystical experience arrives — not dramatic but intimate, a feeling of the god present in the stone. She receives the hammer's true nature: it has been Hephaestus's gift all along.",
+      "standards_covered": [
+        "geo.athens",
+        "myth.deity.athena",
+        "myth.deity.hephaestus",
+        "hist.figure.pericles",
+        "hist.period.athenian_empire"
+      ]
+    },
+
+    {
+      "id": "ch_10_theater",
+      "chapter_number": 10,
+      "title": "What the Audience Felt",
+      "type": "travel",
+      "travel_block": 3,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates the Theater with the complex feelings of a man who was mocked in it by Aristophanes and who nevertheless believes in the moral seriousness of tragedy.",
+      "location": "The Theater of Dionysus, on the southern slope of the Acropolis, Athens",
+      "time_period": "5th century BCE, during the Dionysia festival",
+      "false_hope": 3,
+      "most_enamored_child": "phoebe",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The Theater of Dionysus is carved into the southern slope of the Acropolis and holds approximately 17,000 people. The stone proedria seats in front are reserved for priests and dignitaries — including the priest of Dionysus, whose marble throne survives today. The orchestra is an earthen circle with the altar of Dionysus (the thymele) at its center. During the Dionysia the whole city is present: theater is not entertainment but democracy's mirror.",
+      "historical_significance": "Aeschylus — the Father of Tragedy — produced the Oresteia trilogy here. Sophocles, never placed lower than second in competitions, produced Oedipus the King and Oedipus at Colonus. Euripides produced Medea and Hippolytus. The myth of Arachne is told here as a story about what happens when craft without humility challenges the gods — a warning to those who think skill alone is wisdom. Socrates notes with dry irony that Aristophanes's comedy The Clouds, which depicted him as a ridiculous fraud, was also performed in this theater.",
+      "deity_artifact": {
+        "deity": "Dionysus",
+        "description": "The altar of Dionysus stands at the center of every tragedy performed here. The god of wine, dissolution, and madness is the patron of theater because theater requires the dissolution of self: the actor becomes the character, the audience becomes the crowd in the play. The priests of Dionysus had front-row seats. His presence is in the intoxication of collective feeling."
+      },
+      "false_hope_description": "Art and catharsis as the answer. Tragedy shows us our worst possibilities and allows us to feel them safely. If people could see through great stories where their choices lead, they would change. Literature as moral education, feeling as the path to wisdom.",
+      "aporia_concealed": "Athens watched Oedipus, felt catharsis, went home — and the next day voted to massacre the Melians. The city that produced the most morally serious literature in history also committed some of the most documented atrocities of the ancient world. Feeling the truth is not the same as living by it.",
+      "narrative_description": "The children attend a performance — the Oresteia or Oedipus — and are overwhelmed. Phoebe, the moral observer, finds it more powerful than anything she has encountered. The chapter introduces all three tragedians through their works, tells the myth of Arachne as a story within the story, and ends with Socrates noting that Aristophanes mocked him on this very stage — and that the audience laughed.",
+      "standards_covered": [
+        "geo.athens",
+        "myth.deity.dionysus",
+        "hist.author.aeschylus",
+        "hist.author.sophocles",
+        "hist.author.euripides",
+        "myth.story.arachne"
+      ]
+    },
+
+    {
+      "id": "ch_11_mycenae",
+      "chapter_number": 11,
+      "title": "The Cycle That Invented Justice",
+      "type": "travel",
+      "travel_block": 3,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates Mycenae as a place where the oldest human problems — violence, revenge, justice — were first given institutional form.",
+      "location": "Mycenae, in the Argolid, northeastern Peloponnese",
+      "time_period": "5th century BCE (the ruins of a Bronze Age civilization)",
+      "false_hope": 3,
+      "most_enamored_child": "pallas",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "Mycenae sits on a rocky hill commanding the Argive plain. The Lion Gate — a carved lintel with two heraldic lions flanking a column — is one of the few surviving examples of monumental Bronze Age sculpture. The cyclopean walls surround the citadel. The Treasury of Atreus, a beehive tomb of extraordinary engineering, dates to around 1250 BCE. In the 5th century Mycenae is old, semi-ruined, and awe-inspiring — a ghost of a power that once dominated all of Greece.",
+      "historical_significance": "Mycenae is the home of Agamemnon — commander of the Greek force at Troy, murdered by his wife Clytemnestra upon his return, avenged by his son Orestes. Aeschylus dramatized this as the Oresteia, which ends with the founding of the Athenian court of the Areopagus — the mythological justification for replacing blood-vengeance with law. The myth of Perseus and Medusa is told here: Perseus was said to be the founder of Mycenae. The Argive Heraion lies nearby — one of the oldest sanctuaries of Hera in the world.",
+      "deity_artifact": {
+        "deity": "Hera",
+        "description": "The Argive Heraion near Mycenae was one of the oldest and most important sanctuaries of Hera in the Greek world. The gold and ivory cult statue of Hera by Polycleitus stood there. Hera here presides over the binding power of legitimate oaths and the sanctity of marriage — the very things Clytemnestra violated when she murdered Agamemnon, setting the Oresteia in motion."
+      },
+      "false_hope_description": "Justice systems and institutions as the answer. The Oresteia ends when Athena establishes the court of the Areopagus and human judges replace divine vengeance. The cycle of violence stops when law replaces revenge. Perhaps what their time needs is better judicial institutions — the formal, impartial replacement of conflict with process.",
+      "aporia_concealed": "The Areopagus resolved the Oresteia only because Athena cast the deciding vote — divine wisdom broke the human tie. Human courts, without access to divine wisdom, cannot break the deepest ties. The institution is only as good as the wisdom that runs it. Who teaches that wisdom?",
+      "narrative_description": "The children explore the ruins of Mycenae — the Lion Gate, the shaft graves, the Treasury of Atreus. Socrates narrates the Oresteia as the children move through the ruins. The myth of Perseus and Medusa is told in the context of the city Perseus founded. The chapter asks: what happens when you build institutions on top of unresolved violence?",
+      "standards_covered": [
+        "geo.mycenae",
+        "hist.author.aeschylus",
+        "myth.deity.hera",
+        "myth.story.perseus_medusa"
+      ]
+    },
+
+    {
+      "id": "ch_12_thebes",
+      "chapter_number": 12,
+      "title": "Know Thyself",
+      "type": "travel",
+      "travel_block": 3,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates Thebes with the particular attention of a man who found γνῶθι σεαυτόν at Delphi and has spent thirty years trying to obey it.",
+      "location": "Thebes, in Boeotia, central Greece",
+      "time_period": "5th century BCE",
+      "false_hope": 3,
+      "most_enamored_child": "kleta",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "Thebes sits on a low acropolis (the Cadmeia) in the flat plain of Boeotia. A prosperous, middling city — not as brilliant as Athens, not as austere as Sparta, but powerful in its own right. In the 5th century it bears the taint of having medized (sided with Persia) during Xerxes's invasion. The plain around it is fertile and green. Most famous in myth as the birthplace and cursed home of Oedipus.",
+      "historical_significance": "Thebes is the setting for the greatest works of Sophocles — Oedipus the King and Oedipus at Colonus. Oedipus answered the Sphinx's riddle (what walks on four legs in the morning, two at noon, three in the evening — man) and was right about humanity and wrong about himself. Thebes will later field the Sacred Band — 150 pairs of lovers who died together at Chaeronea. The chapter also introduces Demeter through the fertile Boeotian plain and Hades through the underworld dimensions of the Oedipus story.",
+      "deity_artifact": {
+        "deity": "Hades",
+        "description": "Hades enters through Oedipus — through the underworld that Oedipus approaches at Colonus, and through the deaths that accumulate around the cursed family of Thebes. The ruler of the underworld is not evil in Greek mythology; he is the one who holds what cannot be returned. The children encounter him here as the god of irreversible consequences."
+      },
+      "false_hope_description": "Self-knowledge as the answer. Know thyself — inscribed above Apollo's temple at Delphi, apparently answered by Oedipus who solved the Sphinx's riddle about humanity. If their civilization could truly know itself — its strengths, weaknesses, deepest nature — it could solve its problems.",
+      "aporia_concealed": "Oedipus knew the answer about humanity and still did not know himself. Intelligence is precisely what he had in greatest abundance and it was not enough. Knowing is not the same as wisdom. The Sphinx's riddle was answered correctly and the tragedy unfolded anyway.",
+      "narrative_description": "The children arrive in Thebes and find a city living in the shadow of a story it cannot escape. Socrates narrates Oedipus with care — this is the myth that most directly addresses his own life's project, since Oedipus answered the great question about humanity and still could not know himself. The chapter is quieter than the preceding ones: a conversation in a garden, Demeter's wheat visible in the fields beyond the walls. Block III closes with a question rather than an answer: what does it mean to truly know yourself?",
+      "standards_covered": [
+        "geo.thebes",
+        "hist.author.sophocles",
+        "myth.deity.hades",
+        "myth.deity.demeter"
+      ]
+    },
+
+    {
+      "id": "ch_R3_phaedo_morning",
+      "chapter_number": "R3",
+      "title": "I Will Be Here",
+      "type": "return",
+      "travel_block": null,
+      "platonic_parallel": "Phaedo (morning)",
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates knowing this is the last time he will send the children away. He knows that when they return he will be writing rather than speaking.",
+      "location": "The prison of Athens, early morning",
+      "time_period": "399 BCE, the day of the hemlock",
+      "false_hope": 3,
+      "most_enamored_child": "kleta",
+      "mystical_experience": {
+        "child": "phoebe",
+        "description": "This is not a gift-giving mystical experience but the culminating use of the spyglass. Phoebe raises it and looks at Socrates — not at a temple or a monument or a battle — and sees him with perfect clarity: an old man at peace with not knowing. It is the most beautiful thing she has ever seen through the glass. The spyglass was given to show her truth. This is the truest thing it has shown her."
+      },
+      "gift_given": null,
+      "place_description": "The prison on the last morning. Socrates's companions — Simmias, Cebes, Crito, and others — are already gathered. Socrates has been released from his chains for the last time. A small window shows morning light. The hearth fire burns.",
+      "historical_significance": "The Phaedo records Socrates's last conversation, about the immortality of the soul. He is calm and even cheerful. His companions weep; he does not. Plato was not present, citing illness — a detail he notes himself in the dialogue.",
+      "deity_artifact": {
+        "deity": "Hestia",
+        "description": "The hearth fire in the prison cell is Hestia's quiet presence — the goddess who stays when all the other gods go out on adventures. She is the still center, the one who does not travel. In this chapter her fire illuminates the faces of Socrates's friends and the four children, and it will still be burning when Plato arrives to find the manuscript."
+      },
+      "false_hope_description": "Klēta presents Block III's findings: the Parthenon, the theater, the Oresteia's court of justice, the Sphinx's riddle. She has never believed anything more completely.",
+      "aporia_concealed": "Socrates asks Klēta whether the beauty of making is in the thing made or in the maker, and whether a civilization that makes beautiful things can have an ugly soul. He asks whether the city that built the Parthenon and is today executing him can be said to have a beautiful soul. Klēta has no answer. Phoebe raises the spyglass and sees Socrates plainly.",
+      "narrative_description": "The children arrive on the morning of the hemlock. Socrates is mid-conversation about the soul with his companions. He pauses to greet the children. Klēta presents her case; he dismantles it gently. Phoebe uses the spyglass for the last time before the final journey — and sees a person rather than a place. Socrates tells them to make one last journey: I will be here when you return. He says this knowing it will be in writing.",
+      "standards_covered": [
+        "geo.athens",
+        "hist.author.plato",
+        "myth.deity.hestia"
+      ]
+    },
+
+    {
+      "id": "ch_13_hellespont_troy",
+      "chapter_number": 13,
+      "title": "The Place Where History Crosses",
+      "type": "travel",
+      "travel_block": 4,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates the Hellespont and Troy with the voice of a man for whom the Trojan War is history and living memory simultaneously.",
+      "location": "The Hellespont (Dardanelles) and the plain of Troy (Troad), northwestern Asia Minor",
+      "time_period": "Multiple — the children witness Xerxes bridging the strait and sense Alexander's later crossing",
+      "false_hope": 4,
+      "most_enamored_child": "dolios",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The Hellespont is a narrow strait connecting the Aegean to the Sea of Marmara and the Black Sea — the boundary between Europe and Asia. The site of Troy (Hisarlik) overlooks the plain of the Troad, where the Scamander runs to the sea. In the 5th century Troy exists as a small inhabited town on the ruins of the Bronze Age city — a pilgrimage site. The Black Sea is visible to the northeast, vast and dark.",
+      "historical_significance": "Xerxes bridged the Hellespont with boats to march his army into Greece — a feat the Greeks found simultaneously impressive and hubristic. Alexander would later cross it in the opposite direction to begin his conquest of Persia, pausing to sacrifice at Troy and weep at Achilles's tomb. The myth of Midas is told here — the Phrygian king whose wish for a golden touch destroyed everything he loved. Artemis enters through the Iphigenia story: Agamemnon's fleet stranded at Aulis because it could not tack, and the terrible price paid for the wind.",
+      "deity_artifact": {
+        "deity": "Artemis",
+        "description": "Artemis enters at Troy through the Iphigenia myth — Agamemnon's fleet was stranded at Aulis, unable to sail because the winds were against them and they could not tack. Artemis demanded the sacrifice of Iphigenia before she would release the winds. The boat that brought the children here, with its ability to tack into the wind, makes the Iphigenia sacrifice suddenly, horribly concrete: if Agamemnon's ships could have sailed into the wind, his daughter would have lived."
+      },
+      "false_hope_description": "Heroic glory as the answer. Achilles chose a short glorious life over a long obscure one. His name is still spoken three thousand years later. Perhaps what their time lacks is people willing to sacrifice comfort for lasting significance. Dolios, charming and ambitious, is drawn to the idea of doing something immortal.",
+      "aporia_concealed": "Achilles's wrath at the beginning of the Iliad causes his companions to die. His heroism is inseparable from his destructive pride. The war was started by a theft of desire — Paris and Helen — not by any recognizable justice. Heroic glory and genuine virtue are not the same thing.",
+      "narrative_description": "The children sail through the Hellespont, feeling the strange doubling of history: Xerxes's bridge of boats going west, Alexander's future crossing going east, both visible from the same water. They visit Troy and find the pilgrimage site. Socrates narrates the myth of Midas as a story told by a local innkeeper: the man who wished for the golden touch and discovered that desire satisfied is desire destroyed. The chapter opens Block IV's false hope: not just courage but immortal ambition.",
+      "standards_covered": [
+        "geo.hellespont",
+        "geo.troy",
+        "geo.black_sea",
+        "hist.figure.xerxes",
+        "hist.figure.alexander",
+        "hist.period.rise_of_macedon",
+        "hist.period.persian_wars",
+        "myth.story.midas",
+        "myth.deity.artemis"
+      ]
+    },
+
+    {
+      "id": "ch_14_crete",
+      "chapter_number": 14,
+      "title": "The Craftsman's Grief",
+      "type": "travel",
+      "travel_block": 4,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates Crete with particular attention to the Daedalus story — a craftsman who built everything asked of him and could not protect his son.",
+      "location": "Crete, the Palace of Knossos",
+      "time_period": "Mythological past, as experienced through time travel",
+      "false_hope": 4,
+      "most_enamored_child": "dolios",
+      "mystical_experience": {
+        "child": "dolios",
+        "description": "Dolios finds the unfinished frieze — the place where Daedalus attempted twice to carve Icarus falling and twice his hands failed him. The winged sandals lift Dolios slightly off the ground, just an inch, just enough. He understands suddenly what Icarus felt in the moment before the fall: not fear but joy, absolute joy, the certainty that this is worth dying for. And then he understands the rest. He comes down slowly. The sandals settle. He does not speak for a long time."
+      },
+      "gift_given": {
+        "child": "dolios",
+        "gift": "Winged sandals from Hermes that make him faster and amplify his natural charm and persuasiveness",
+        "deity": "Hermes",
+        "manner": "The sandals were on the boat from the beginning, worn by Dolios throughout the journey as ordinary footwear. Only at the unfinished frieze do they reveal their true nature — lifting him at the exact moment of his deepest understanding."
+      },
+      "place_description": "Knossos, on the northern coast of Crete, is the largest Bronze Age palace in the Aegean — a sprawling multi-story complex of storerooms, throne rooms, and light wells built around a central courtyard the Greeks mythologized as the Labyrinth. The palace of King Minos. Somewhere in the complex is the place where Daedalus's carving stops: two attempts at Icarus falling, both abandoned, the stone left unfinished.",
+      "historical_significance": "The myths of Daedalus, Icarus, and Theseus all converge at Crete. Daedalus represents techne — the knowledge of how to make things. He built the Labyrinth, made the wings. His name became a byword for ingenious artifice. The myth of Icarus is the paradigmatic story of skill without wisdom. The unfinished frieze — from the Aeneid: Daedalus covers temple doors with scenes from his life and twice tries to render Icarus and twice his hands fail him — is the craftsman's recognition that some things cannot be made.",
+      "deity_artifact": {
+        "deity": "Hermes",
+        "description": "Hermes — god of messengers, inventors, and those who move between worlds — reveals that Dolios has been wearing his gift all along. Hermes is the only Olympian who travels freely between the divine world, the human world, and the underworld. His sandals given to a charming boy who has been moving between ancient times is fitting. The question is whether he is doing it wisely."
+      },
+      "false_hope_description": "Ambition and grand vision as the answer. Daedalus built wings and flew. Icarus flew higher. The willingness to attempt the impossible — to fly where no one has flown — is what separates the transformative from the merely competent. Dolios, who has talked his way through every situation, is convinced.",
+      "aporia_concealed": "Daedalus could not finish carving his son's death. The greatest craftsman in mythology could not make the one thing he most needed to make. Skill stops at grief. Ambition without wisdom is not courage — it is the refusal to acknowledge limits. The unfinished frieze is the most honest thing Daedalus ever made.",
+      "narrative_description": "The children explore Knossos — the labyrinthine palace, the throne room, the light wells. Theseus and the Minotaur is told as a story embedded in the place itself. Then Dolios finds the unfinished frieze. The mystical experience is the chapter's quiet climax: the sandals lift him, he understands Icarus from the inside, he comes down. Socrates notes that Dolios did not tell the others what he understood for three days — and that this silence was perhaps the wisest thing the boy did on the entire journey.",
+      "standards_covered": [
+        "geo.crete",
+        "myth.story.daedalus_icarus",
+        "myth.story.theseus_minotaur",
+        "myth.deity.hermes",
+        "myth.deity.hephaestus"
+      ]
+    },
+
+    {
+      "id": "ch_15_eastern_med",
+      "chapter_number": 15,
+      "title": "The Width of the World",
+      "type": "at_sea",
+      "travel_block": 4,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates the sea passage with the wonder of a man who has never left the Aegean world and is hearing about these distant waters for the first time.",
+      "location": "The eastern Mediterranean; passing Rhodes; the coasts of Asia Minor; Sicily in the far distance; the Adriatic to the west",
+      "time_period": "5th-4th century BCE",
+      "false_hope": null,
+      "most_enamored_child": null,
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The open sea south of the Aegean, heading toward Egypt. Rhodes is visible to the southeast — a large, wealthy island at the intersection of trade routes. To the far west, beyond the heel of Italy, Sicily is a rumor on the horizon: a Greek world transplanted, the western edge of Hellenic civilization. The Adriatic lies beyond, leading to the unknown west. The sea here feels wider, deeper, less bounded than the Aegean.",
+      "historical_significance": "Rhodes was a major naval and commercial power. Sicily was the site of Athens's catastrophic expedition of 415-413 BCE — the largest military disaster in Athenian history — a reminder that Athenian ambition extended far beyond its wisdom. The Adriatic connects to the western Greek colonies, reminding the children that Hellenism is not confined to the Aegean peninsula.",
+      "deity_artifact": {
+        "deity": "Poseidon",
+        "description": "On the open sea heading south, Poseidon is the depth beneath the boat — the god who holds the world up, who causes earthquakes when he strikes his trident on the seafloor. The children have now sailed through a storm, a narrow strait, and open ocean. They have come to understand him not as a character but as a condition."
+      },
+      "false_hope_description": null,
+      "aporia_concealed": null,
+      "narrative_description": "A transitional chapter as the boat sails from Crete toward Alexandria. Socrates surveys the full breadth of the Greek world — the islands, the distant shores, the colonies that carried Greek civilization to Italy and Spain and the Black Sea. The chapter gives a sense of the scale of what Alexander will attempt to unify. Dolios, still quiet from Crete, watches the horizon. The chapter is contemplative: a breath before the grandeur of Alexandria.",
+      "standards_covered": [
+        "geo.rhodes",
+        "geo.sicily",
+        "geo.adriatic_sea",
+        "geo.ionian_sea",
+        "myth.deity.poseidon"
+      ]
+    },
+
+    {
+      "id": "ch_16_alexandria",
+      "chapter_number": 16,
+      "title": "All the Books in the World",
+      "type": "travel",
+      "travel_block": 4,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates Alexandria with genuine intellectual excitement and genuine philosophical suspicion — this is exactly the kind of institution he would have found both wonderful and dangerous.",
+      "location": "Alexandria, Egypt, and the Nile Delta",
+      "time_period": "Hellenistic period (post-323 BCE) — the children travel slightly forward in time",
+      "false_hope": 4,
+      "most_enamored_child": "phoebe",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "Alexandria was founded by Alexander in 331 BCE on the Egyptian coast, designed from scratch as the capital of a new world. The Library of Alexandria aims to collect every book ever written in every language. The Nile to the east flows from south to north, floods predictably, and deposits the fertile silt that makes Egypt the grain basket of the ancient world. The pyramids are visible on the horizon, already ancient beyond imagining.",
+      "historical_significance": "The Library of Alexandria represents the Hellenistic dream: all knowledge gathered in one place, every book copied, every tradition translated. Herodotus devoted an entire book of his Histories to Egypt. Alexander visited Egypt, was welcomed as a liberator from Persia, and consulted the Oracle of Ammon at Siwa, which may have named him the son of a god.",
+      "deity_artifact": null,
+      "false_hope_description": "Accumulated knowledge as the answer. If you gathered every book ever written in one place, you would eventually find the answer to any question. Their time needs a Library: systematic, comprehensive, universal. Phoebe, who seeks truth above all, looks at the Library and sees the most serious attempt at truth she has ever encountered.",
+      "aporia_concealed": "The Library of Alexandria was burned — several times, by several different people. But even before it burned, the accumulation of knowledge did not produce the wisdom to prevent the political collapses of the Hellenistic world. More information does not produce wisdom. The Library had every answer except the one that mattered.",
+      "narrative_description": "The children arrive in Alexandria and are overwhelmed by its ambition — a city designed to be the center of the world, a library designed to contain all human knowledge. They spend time in the library, finding scrolls about places they have already visited including Herodotus's account of Egypt. Dolios reads a scroll about Daedalus. Phoebe wants to stay. The turn comes when they realize the librarians can tell them where every book is but cannot tell them which one contains wisdom.",
+      "standards_covered": [
+        "geo.alexandria",
+        "geo.nile",
+        "hist.period.hellenistic_age",
+        "hist.figure.alexander",
+        "hist.author.herodotus"
+      ]
+    },
+
+    {
+      "id": "ch_17_chaeronea",
+      "chapter_number": 17,
+      "title": "The Lion of Chaeronea",
+      "type": "travel",
+      "travel_block": 4,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates Chaeronea with the grief of a man who loved Athens and the polis, and who knows that what dies here is the world in which his philosophy was possible.",
+      "location": "The plain of Chaeronea, Boeotia, central Greece",
+      "time_period": "338 BCE (witnessed through time travel)",
+      "false_hope": 4,
+      "most_enamored_child": "dolios",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The plain of Chaeronea in Boeotia is unremarkable agricultural land — flat, green, bounded by low hills. The stone Lion of Chaeronea stands over the grave of the Sacred Band — 150 pairs of lovers who fought to the last man and were buried together where they fell. None of them retreated. The lion faces the direction from which Philip's army came.",
+      "historical_significance": "338 BCE: Philip II of Macedon destroyed the combined forces of Athens and Thebes, ending the era of independent Greek city-states. Philip then created the League of Corinth — a forced coalition giving Greek states nominal independence but real subjugation. Alexander, 18 years old, commanded the cavalry's decisive charge. The Sacred Band — the Theban elite that had dominated Greece for a generation — was completely destroyed. Philip is said to have wept over their bodies.",
+      "deity_artifact": null,
+      "false_hope_description": "Unity under a strong leader as the answer. The city-states bickered and warred for a century; Philip united them by force and stopped the squabbling. Perhaps what their time needs is a single powerful, intelligent leader who can cut through the noise and impose order. Dolios — who has spent the journey charming his way through every situation — understands the appeal of simply being the most persuasive person in the room.",
+      "aporia_concealed": "Philip unified Greece by destroying what made Greece worth unifying — the free city-state. And his solution required him: it did not outlast him. Any solution that depends on a single extraordinary person faces the problem of succession, which power cannot answer.",
+      "narrative_description": "The children arrive at Chaeronea and find the battle's aftermath or its moment. The Sacred Band is the chapter's moral center — 150 pairs of lovers who chose to die together rather than flee. Philip weeps over their bodies. Dolios is shaken: he has admired cleverness and charm throughout the journey, and here is Philip — the cleverest political mind of his generation — weeping over the best soldiers in Greece that he just destroyed. The Lion of Chaeronea is the final image: the Thebans who built it knew they were marking the end of something.",
+      "standards_covered": [
+        "hist.battle.chaeronea",
+        "hist.figure.philip_ii",
+        "hist.period.rise_of_macedon",
+        "geo.thebes"
+      ]
+    },
+
+    {
+      "id": "ch_18_gaugamela",
+      "chapter_number": 18,
+      "title": "The Edge of the World",
+      "type": "travel",
+      "travel_block": 4,
+      "platonic_parallel": null,
+      "narrator": "socrates",
+      "narrative_mode": "Socrates narrates Gaugamela and Alexander's subsequent journey with awe and the specific philosophical suspicion of a man who has spent his life questioning what it means to be great.",
+      "location": "The plain of Gaugamela, Assyria (near modern Mosul); and in summary, Alexander's subsequent path east",
+      "time_period": "331 BCE and after (witnessed through time travel)",
+      "false_hope": 4,
+      "most_enamored_child": "dolios",
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "The plain of Gaugamela near the Tigris River — vast flat land that Darius III chose to neutralize Alexander's tactical advantages. Persian scythed chariots, war elephants, overwhelming numerical advantage. Alexander's oblique charge and his reading of Darius's formation are the elements of the battle. After Gaugamela, Persepolis fell, Darius was murdered by his own satraps, and Alexander stood at the edge of the known world.",
+      "historical_significance": "Gaugamela was preceded by the Battle of Issus (333 BCE), where Alexander first faced and routed Darius III — the decisive engagement that gave the Hellenic League control of the eastern Mediterranean coast. After Gaugamela, Alexander went to India, where his army refused to go further. He wept — not from grief but from having no more worlds to conquer. He died in Babylon in 323 BCE at age 32. His empire dissolved into the wars of the Diadochi within a generation. Note: the Darius at Gaugamela is Darius III, not Darius I of the Persian Wars, but bears the same name.",
+      "deity_artifact": null,
+      "false_hope_description": "Cosmopolitan unity — a single human civilization — as the answer. Alexander's dream was not conquest but fusion: Greek wisdom and Persian administration, a unified humanity under a wise ruler. The grandest version of the false hope, and the most seductive for someone who has traveled as widely as the children now have.",
+      "aporia_concealed": "Alexander's cosmopolitan dream required Alexander. Without him it became the wars of his successors, each claiming his legacy to justify personal ambition. The dream of unified humanity still presupposes agreement about what values that humanity shares — which brings us back, again, to the question that opened the entire story. Aporia does not dissolve at a grander scale.",
+      "narrative_description": "The children witness Gaugamela or its aftermath and follow Alexander's trajectory in compressed form — Persepolis, the road east, the moment his army refuses to go further, his return and death in Babylon. Dolios has been building toward this: Alexander is everything Dolios admires, and Alexander's failure is therefore Dolios's failure made large. The chapter ends with Alexander's death and the immediate fragmentation of everything he built. The children stand in Babylon with aporia rather than answers, ready to return.",
+      "standards_covered": [
+        "hist.battle.gaugamela",
+        "hist.battle.issus",
+        "hist.figure.alexander",
+        "hist.figure.darius",
+        "hist.period.hellenistic_age",
+        "hist.period.rise_of_macedon"
+      ]
+    },
+
+    {
+      "id": "ch_F_plato",
+      "chapter_number": "F",
+      "title": "What He Left Behind",
+      "type": "final",
+      "travel_block": null,
+      "platonic_parallel": "Phaedo (death scene)",
+      "narrator": "plato",
+      "narrative_mode": "Plato writes in first person, combining his own voice with reconstructed accounts of the final conversation he did not witness. The chapter's secondhand quality is itself the final lesson: we never fully have the thing we most need.",
+      "location": "Plato's home in Athens; then the prison cell",
+      "time_period": "399 BCE, the day of and after the hemlock",
+      "false_hope": null,
+      "most_enamored_child": null,
+      "mystical_experience": null,
+      "gift_given": null,
+      "place_description": "Plato's home in Athens, where he has been hiding in grief since the verdict. A room with a hearth. Then the prison cell, found empty of the living but full of the written — the tablets Socrates used to write this story instead of his oracle-commanded poems. The cell still smells of hemlock.",
+      "historical_significance": "Plato was ill and absent from the death of Socrates — he says so himself in the Phaedo, the only dialogue where he notes his own absence. The hemlock (conium maculatum) causes ascending paralysis beginning in the feet. Socrates's companions describe him as calm, still arguing about the immortality of the soul as the cold moved upward. His last act was asking Crito to sacrifice a cock to Asclepius — the god of healing — perhaps a joke, perhaps a statement that death was the cure for life.",
+      "deity_artifact": {
+        "deity": "Hestia",
+        "description": "Hestia appears to Plato at his own hearth — the goddess of the home fire, the one Olympian who stays, who does not travel or adventure. She appears not dramatically but simply: the fire, which has been burning all day, suddenly seems to mean something. She tells him without words to return to the cell. Her message is entirely in character: go back to the still center. What you need is there."
+      },
+      "false_hope_description": null,
+      "aporia_concealed": null,
+      "narrative_description": "Plato begins by explaining his absence — illness, the inability to face the loss — and his time hiding at home. At his hearth, Hestia's presence sends him to the prison. He finds the tablets, finds not the poems the oracle required but this story. He explains he has asked those who were present what the children's final conversation with Socrates was, and writes it as faithfully as he can — knowing his account is imperfect, secondhand, filtered through grief. The final conversation: the children return with aporia. Socrates tells them this is exactly right. He models the lesson with his death: a man who does not know what comes next, faces it without anxiety, and finds that not-knowing is not terror but a kind of freedom. The manuscript ends. Plato closes the chapter by saying that everything he has written since — every dialogue, every account of Socrates questioning and being questioned — is an attempt to finish the story the children started. He has been writing it ever since.",
+      "standards_covered": [
+        "hist.author.plato",
+        "myth.deity.hestia",
+        "geo.athens"
+      ]
+    }
+  ]
+}

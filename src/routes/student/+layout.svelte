@@ -20,10 +20,11 @@
         'mcas-grade4-math':   '/student/mcas',
         'greek-immersive':    '/student/greek',
         'persian-immersive':  '/student/persian',
+        'hebrew-immersive':   '/student/hebrew',
     };
 
     // Routes that render without class/course data (standalone pages)
-    const STANDALONE_ROUTES = ['/student/persian'];
+    const STANDALONE_ROUTES = ['/student/persian', '/student/hebrew'];
 
     function isStandalone(pathname) {
         return STANDALONE_ROUTES.some(r => pathname === r || pathname.startsWith(r + '/'));

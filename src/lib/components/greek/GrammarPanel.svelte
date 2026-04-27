@@ -13,7 +13,7 @@
   export const allSentences = [];   // reserved for future context-aware features
   export let standards = {};
 
-  $: paradigmKey = hoveredWord?.paradigm_key ?? null;
+  $: paradigmKey = hoveredWord?.paradigmKey ?? null;
   $: highlightMorph = hoveredWord?.morph ?? '';
   $: syntaxStandards = hoveredWord?.syntax_standard_refs ?? [];
 </script>
@@ -25,12 +25,12 @@
     <p class="placeholder">Hover a word to see grammar.</p>
   {:else}
     <div class="word-header">
-      <span class="dict-entry">{hoveredWord.dict_entry ?? hoveredWord.text}</span>
+      <span class="dict-entry">{hoveredWord.dictEntry ?? hoveredWord.text}</span>
       {#if hoveredWord.morph}
         <span class="morph-tag">{hoveredWord.morph}</span>
       {/if}
-      {#if hoveredWord.short_def}
-        <span class="def-text">{hoveredWord.short_def}</span>
+      {#if hoveredWord.shortDef}
+        <span class="def-text">{hoveredWord.shortDef}</span>
       {/if}
     </div>
 

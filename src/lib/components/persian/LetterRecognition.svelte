@@ -1,22 +1,36 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { keyToPersian } from '$lib/utils/persianKeyboard.js';
+  import { PLAYBACK_RATE } from '$lib/utils/persianAudio.js';
 
   export let alphabet = [];
   export let letterForms = [];
   export let showQwertyHint = true;
 
-  function buildDeck(forms) {
+  const ZWJ = '\u200D';
+
+  function formDisplay(char, label) {
+    switch (label) {
+      case 'initial':         return char + ZWJ;
+      case 'medial':          return ZWJ + char + ZWJ;
+      case 'final':
+      case 'after-connector': return ZWJ + char;
+      default:                return char;
+    }
+  }
+
+  function buildDeck(forms, alpha) {
+    const alphaMap = Object.fromEntries(alpha.map(l => [l.id, l]));
     const entries = [];
     for (const letter of forms) {
+      const alphaEntry = alphaMap[letter.id];
       for (const form of letter.forms) {
         entries.push({
           letterId:   letter.id,
           char:       letter.char,
           qwerty_key: letter.qwerty_key,
           label:      form.label,
-          text:       form.text,
-          audio_url:  form.audio_url,
+          audio_url:  alphaEntry?.audio_url ?? form.audio_url,
         });
       }
     }
@@ -44,7 +58,7 @@
 
   $: if (letterForms.length && alphabet.length && !started) {
     started = true;
-    fullDeck = buildDeck(letterForms);
+    fullDeck = buildDeck(letterForms, alphabet);
     total = fullDeck.length;
     remaining = shuffle([...fullDeck]);
     pickRound();
@@ -57,11 +71,11 @@
     const targetAlph = alphabet.find(l => l.id === target.letterId);
     tiles = shuffle([targetAlph, ...pool.slice(0, 3)]);
     flash = {};
-    if (target.audio_url) new Audio(target.audio_url).play().catch(() => {});
+    if (target.audio_url) { const a = new Audio(target.audio_url); a.playbackRate = PLAYBACK_RATE; a.play().catch(() => {}); }
   }
 
   function playTarget() {
-    if (target?.audio_url) new Audio(target.audio_url).play().catch(() => {});
+    if (target?.audio_url) { const a = new Audio(target.audio_url); a.playbackRate = PLAYBACK_RATE; a.play().catch(() => {}); }
   }
 
   function restart() {
@@ -122,21 +136,10 @@
     Object.values(flashTimers).forEach(clearTimeout);
   });
 
-  const FORM_LABELS = {
-    isolated:          'Isolated',
-    initial:           'Initial',
-    medial:            'Medial',
-    final:             'Final',
-    'after-connector': 'After ◌',
-  };
-
-  const LABEL_COLORS = {
-    isolated:          '#6366f1',
-    initial:           '#0ea5e9',
-    medial:            '#f59e0b',
-    final:             '#10b981',
-    'after-connector': '#8b5cf6',
-  };
+  // Map letter id → array of {label, char display} for tile rendering
+  $: formsMap = Object.fromEntries(
+    letterForms.map(l => [l.id, l.forms.map(f => formDisplay(l.char, f.label))])
+  );
 </script>
 
 <input
@@ -173,13 +176,7 @@
 
     <!-- Target form display -->
     <div class="target-area">
-      <div
-        class="form-badge"
-        style="background:{LABEL_COLORS[target.label]}18; color:{LABEL_COLORS[target.label]}; border-color:{LABEL_COLORS[target.label]}"
-      >
-        {FORM_LABELS[target.label] ?? target.label}
-      </div>
-      <div class="target-display" dir="rtl">{target.text}</div>
+      <div class="target-display" dir="rtl">{formDisplay(target.char, target.label)}</div>
       <button class="replay-btn" on:click={playTarget} title="Replay audio">↻</button>
     </div>
 
@@ -193,7 +190,11 @@
           on:click={() => handleTile(tile, i)}
           aria-label={tile.name_en}
         >
-          <span class="tile-char" dir="rtl">{tile.char}</span>
+          <div class="tile-forms" dir="rtl">
+            {#each formsMap[tile.id] ?? [tile.char] as form}
+              <span class="tile-form-char">{form}</span>
+            {/each}
+          </div>
           {#if showQwertyHint}
             <kbd class="tile-key">{tile.qwerty_key}</kbd>
           {/if}
@@ -265,16 +266,6 @@
     gap: 0.5rem;
   }
 
-  .form-badge {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 0.2em 0.85em;
-    border-radius: 999px;
-    border: 1.5px solid;
-  }
-
   .target-display {
     font-family: "Noto Naskh Arabic", "Scheherazade New", serif;
     font-size: 6rem;
@@ -321,10 +312,18 @@
   .tile.flash-correct { background: #d1fae5; border-color: #34d399; }
   .tile.flash-wrong   { background: #fee2e2; border-color: #f87171; }
 
-  .tile-char {
+  .tile-forms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0 0.25rem;
+  }
+
+  .tile-form-char {
     font-family: "Noto Naskh Arabic", "Scheherazade New", serif;
-    font-size: 5rem;
-    line-height: 1;
+    font-size: 2.2rem;
+    line-height: 1.3;
     color: #1e293b;
     user-select: none;
   }

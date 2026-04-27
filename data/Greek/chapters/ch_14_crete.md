@@ -1,0 +1,31 @@
+Chapter 14: The Craftsman's Grief
+
+We came to Crete with a north wind at our stern, and even I, who had never sailed further than Aegina, recognized the long pale coast as something out of the old stories. Crete is a long island lying at the southern edge of the Aegean, mountainous in the middle, fertile along the shores, and older — much older — than Athens. Pallas reminded me, with the proud tone of a child who has just learned a thing, that civilization in the Aegean had begun here, generations before any Greek city was a city. I told her she was correct, and that this is something Athenians are not always eager to admit.
+
+The palace of Knossos stood inland from the northern shore. It was not a palace as I would have understood the word — not a single building with rooms arranged sensibly around a hearth — but a vast, sprawling thing, many stories high in places, with storerooms beneath storerooms and corridors that turned back on themselves and small openings cut into the upper walls to let light fall down through the building like water down a well. We stood at the edge of the central courtyard and looked at it, and Klēta said, very softly, "Someone made this." She meant it as a craftsman speaks of another craftsman. She meant: a person sat down and decided where every wall would stand.
+
+Dolios had been quiet on the boat. Now, walking the corridors of Knossos, he became something else. His eyes shone. He moved ahead of us, turning corners as though he already knew them. I watched him and thought: this is a boy who has found a place that fits the shape of his mind.
+
+Pallas told the story of Theseus and the Minotaur as we walked, partly for the younger ones and partly, I think, because the place demanded it. King Minos of Crete had demanded tribute from Athens — seven youths and seven maidens, every nine years, sent into the Labyrinth to be devoured by the bull-headed creature at its heart. Theseus volunteered to go. Ariadne, the king's daughter, gave him a thread to unspool behind him so he could find his way back. He killed the Minotaur and followed the thread out. Phoebe asked who built the Labyrinth. Pallas said: Daedalus.
+
+And so we came, by way of the story, to the man we had really come to meet.
+
+Daedalus was the greatest craftsman in the old world. The Greeks invoke him the way they invoke Hephaestus — though Hephaestus is the god of the forge and Daedalus was only a man, which is the harder thing to be. He built whatever was asked of him. He built the wooden cow that allowed Pasiphaë to conceive the Minotaur. He built the Labyrinth to hide what she had borne. When King Minos imprisoned him in his own creation, Daedalus built wings — wings of feather and wax — for himself and for his son Icarus, and they flew out across the sea. You know the rest. The boy flew too high. The sun softened the wax. He fell.
+
+We were not looking for the unfinished frieze. Dolios found it, the way certain people find certain things — by walking faster than the rest of us and turning where no one told him to turn. When we caught up to him he was standing very still in front of a wall.
+
+It was a wall Daedalus had carved, late in his life, after everything. He had tried to set down the events of his life in stone, the way a man might try to set them down in words to make sense of them. Most of the panels were finished. The cow. The Labyrinth. The wings being fitted to a boy's shoulders. And then, at the place where the story turns, two attempts at the fall — two beginnings, both broken off, the stone roughed in and then abandoned. The chisel marks stopped. You could see where the hand had stopped. You could see where it had tried again, a little further along the wall, and stopped again.
+
+Dolios stood in front of the unfinished places and did not move. And then — I will tell this exactly as I saw it, and the reader may make of it what he wishes — Dolios rose. Not far. An inch, perhaps. His sandals, the ordinary leather sandals he had been wearing the whole journey, lifted him just clear of the floor. He hung there a moment. His face was not afraid. His face was the face of a person who has understood something all at once and has nowhere to put it.
+
+Then he came down. Slowly. The sandals settled. He did not speak.
+
+I sat down on the stone bench against the opposite wall. The others gathered near him but did not touch him. After a long while Klēta whispered, "Are those—" and Phoebe quieted her with a hand.
+
+I will tell you what I think happened, though Dolios did not say it then and did not say it for three days afterward. I think he understood, in that lifted moment, what Icarus felt before the fall. Not terror. Joy. The absolute joy of going where no one had gone, the certainty that this was worth whatever it cost. And then I think he understood the rest, which is what Daedalus understood, standing in front of the stone with the chisel in his hand: that the joy and the falling were one thing, and that no craftsman, however great, can carve his way through the part where his son hits the water.
+
+The sandals, I learned later, were a gift from Hermes — the god who moves between the living and the dead, the only one who passes freely in both directions. They had been on the boy's feet the whole time. He had been wearing them through every city we had visited, charming his way through every gate, and he had not known. It seems to me fitting that the god of messengers should give his gift to a boy who talks easily and travels far. The question the god leaves open — and gods always leave a question open — is whether the boy will fly wisely, or only high.
+
+Dolios was silent for three days. He sat at the bow of the boat with his knees drawn up and watched the water. I thought, more than once, of going to him. I did not. There are silences a person needs to keep, and the wisest thing a boy can do, sometimes, is refuse to explain himself before he understands what he has seen.
+
+I will say only this. Of all the things Dolios did on our long journey — and he did many clever things, and a few foolish ones — the silence after Knossos was, I think, the wisest. He had been given wings. He had felt them work. And he had not, in that first moment of knowing, decided that wings were the answer.

@@ -1,10 +1,10 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { keyToPersian, persianToQwerty } from '$lib/utils/persianKeyboard.js';
-  import { playUrl } from '$lib/utils/persianAudio.js';
+  import { playUrl, playSequence } from '$lib/utils/persianAudio.js';
   import {
-    loadCardStates, saveCardState, logReview,
-    getDueCards, getNewCards, getNextBatch,
+    loadCardStates, saveCardState, deleteCardState, logReview,
+    getDueCards, getNewCards,
     scheduleCard, newCard,
     Rating, State
   } from '$lib/utils/persianFsrs.js';
@@ -28,13 +28,35 @@
   let acqPos     = 0;   // index into acqActive
   let wordHidden    = false;
   let showSeparated = false;
+  let acqFlash      = null;
+  let acqFlashTimer = null;
+
+  // ── Swipe ─────────────────────────────────────────────────────────────────────
+  let touchStartX = null;
+
+  function onTouchStart(e) {
+    touchStartX = e.touches[0].clientX;
+  }
+
+  function onTouchEnd(e) {
+    if (touchStartX === null || activeTab !== 'acquisition' || !acqCurrent) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    touchStartX = null;
+    if (Math.abs(dx) < 40) return;
+    if (dx > 0) keepPracticing();
+    else goBack();
+  }
 
   let typed          = '';
   let hiddenInput;
   let promptShownAt    = null;
   let firstKeystrokeAt = null;
 
-  $: acqCurrent = acqActive.length > 0 ? acqActive[acqPos % acqActive.length] : null;
+  $: acqCurrent  = acqActive.length > 0 ? acqActive[acqPos % acqActive.length] : null;
+  $: acqDoneCount = acqBatch.length - acqActive.length;
+  $: currentLine  = (acqBatch.length > 0 && poem)
+      ? poem.lines.find(l => l.num === acqBatch[0].line_num)
+      : null;
 
   // ── Review ────────────────────────────────────────────────────────────────────
   let revQueue    = [];
@@ -91,8 +113,18 @@
     }
   });
 
+  function getNextLineBatch(states, allCards) {
+    const seen = new Set(states.keys());
+    let targetLine = null;
+    for (const card of allCards) {
+      if (!seen.has(card.id)) { targetLine = card.line_num; break; }
+    }
+    if (targetLine === null) return [];
+    return allCards.filter(c => c.line_num === targetLine && !seen.has(c.id));
+  }
+
   function initAcquisition() {
-    acqBatch  = getNextBatch(cardStates, poem.cards, 10);
+    acqBatch  = getNextLineBatch(cardStates, poem.cards);
     acqActive = [...acqBatch];
     acqDone   = [];
     acqPos    = 0;
@@ -134,7 +166,7 @@
       if (e.key === 'ArrowRight' && !e.shiftKey) { e.preventDefault(); keepPracticing(); return; }
       if (e.key === 'ArrowRight' && e.shiftKey)  { e.preventDefault(); markDone(); return; }
       if (e.key === 'ArrowUp')                   { e.preventDefault(); sendCurrentToReview(); return; }
-      if (e.key === 'Enter' && !e.shiftKey)      { e.preventDefault(); keepPracticing(); return; }
+      if (e.key === 'Enter' && !e.shiftKey)      { e.preventDefault(); submitAcquisition(); return; }
       if (e.key === 'Enter' && e.shiftKey)       { e.preventDefault(); markDone(); return; }
     }
 
@@ -190,7 +222,7 @@
     focusInput();
   }
 
-  // ── Acquisition: keep practicing (go forward) ─────────────────────────────────
+  // ── Acquisition: keep practicing (go forward, arrow nav) ─────────────────────
   function keepPracticing() {
     if (acqActive.length === 0) return;
     const card = acqCurrent;
@@ -200,6 +232,42 @@
     firstKeystrokeAt = null;
     promptShownAt    = Date.now();
     focusInput();
+  }
+
+  // ── Acquisition: Enter — check typed, flash, advance only if correct ──────────
+  function submitAcquisition() {
+    const card = acqCurrent;
+    if (!card || !typed.trim()) return;
+
+    const correct = typed.trim() === card.surface;
+    triggerAcqFlash(correct ? 'correct' : 'wrong');
+
+    if (!correct) {
+      typed = '';
+      firstKeystrokeAt = null;
+      focusInput();
+      return;
+    }
+
+    const advance = () => {
+      acqPos = (acqPos + 1) % acqActive.length;
+      typed = '';
+      firstKeystrokeAt = null;
+      promptShownAt    = Date.now();
+      focusInput();
+    };
+
+    if (card.audio_url) {
+      playSequence([card.audio_url]).then(advance);
+    } else {
+      setTimeout(advance, 500);
+    }
+  }
+
+  function triggerAcqFlash(type) {
+    if (acqFlashTimer) clearTimeout(acqFlashTimer);
+    acqFlash = type;
+    acqFlashTimer = setTimeout(() => { acqFlash = null; }, 600);
   }
 
   // ── Acquisition: done (remove from rotation, not yet in review) ───────────────
@@ -228,6 +296,7 @@
     typed = '';
     firstKeystrokeAt = null;
     promptShownAt    = Date.now();
+    initReview();
     maybeLoadNextBatch();
     focusInput();
   }
@@ -236,6 +305,7 @@
   async function sendBatchToReview() {
     const toGraduate = [...acqActive, ...acqDone];
     await Promise.all(toGraduate.map(graduateCard));
+    initReview();
     initAcquisition();
     focusInput();
   }
@@ -243,7 +313,9 @@
   async function graduateCard(card) {
     if (cardStates.has(card.id)) return; // already in review
     const graduated = scheduleCard(newCard(), Rating.Good);
+    graduated.due = new Date(); // make immediately reviewable
     cardStates.set(card.id, graduated);
+    cardStates = cardStates; // trigger Svelte reactivity on Map mutation
     await saveCardState(uid, poem.id, card.id, graduated);
   }
 
@@ -292,10 +364,23 @@
     };
 
     if (audioUrl) {
-      playUrl(audioUrl).then(() => setTimeout(advance, 400));
+      playSequence([audioUrl]).then(advance);
     } else {
       setTimeout(advance, 400);
     }
+  }
+
+  // ── Review: send back to learning ────────────────────────────────────────────
+  async function sendBackToLearning() {
+    const card = revCurrent;
+    if (!card) return;
+    cardStates.delete(card.id);
+    await deleteCardState(uid, poem.id, card.id);
+    revCurrent    = revQueue.length > 0 ? revQueue.shift() : null;
+    revTyped      = '';
+    revFirstKeyAt = null;
+    revPromptAt   = Date.now();
+    focusInput();
   }
 
   function triggerRevFlash(type) {
@@ -306,7 +391,8 @@
 
   // ── Cleanup ───────────────────────────────────────────────────────────────────
   onDestroy(() => {
-    if (revFlashTimer) clearTimeout(revFlashTimer);
+    if (revFlashTimer)  clearTimeout(revFlashTimer);
+    if (acqFlashTimer) clearTimeout(acqFlashTimer);
   });
 </script>
 
@@ -330,7 +416,7 @@
   on:input={handleInput}
 />
 
-<div class="exercise-wrap" on:click={focusInput} role="presentation">
+<div class="exercise-wrap" on:click={focusInput} on:touchstart={onTouchStart} on:touchend={onTouchEnd} role="presentation">
 
   {#if loading}
     <div class="state-msg">Loading…</div>
@@ -370,15 +456,20 @@
       {#if acqCurrent}
 
         <!-- Status row -->
+        {#if currentLine}
+          <div class="line-label">
+            <span class="line-num-badge">Line {currentLine.num}</span>
+            <span class="line-en-text">{currentLine.en}</span>
+          </div>
+        {/if}
         <div class="batch-status">
-          <span>{acqActive.length} active</span>
-          {#if acqDone.length > 0}
-            <span class="sep-dot">·</span>
-            <span>{acqDone.length} done</span>
-          {/if}
+          <span>{acqDoneCount} / {acqBatch.length} done</span>
         </div>
 
-        <div class="prompt-card">
+        <div class="prompt-card"
+          class:flash-correct={acqFlash === 'correct'}
+          class:flash-wrong={acqFlash === 'wrong'}
+        >
 
           <!-- English gloss -->
           <div class="prompt-gloss">{acqCurrent.prompt_en}</div>
@@ -433,7 +524,11 @@
           {/if}
 
           <!-- Typed display -->
-          <div class="persian-display" dir="rtl">{typed}</div>
+          <div class="persian-display"
+            class:correct={acqFlash === 'correct'}
+            class:wrong={acqFlash === 'wrong'}
+            dir="rtl"
+          >{typed}</div>
 
           <!-- Key hints (hidden when word is hidden) -->
           {#if showQwertyHint && currentHints.length > 0}
@@ -446,25 +541,10 @@
 
         </div>
 
-        <!-- Navigation row -->
-        <div class="nav-row">
-          <button
-            class="nav-btn"
-            on:click={goBack}
-            disabled={acqActive.length <= 1}
-            title="Previous (←)"
-          >←</button>
-          <button
-            class="nav-btn primary"
-            on:click={keepPracticing}
-            title="Keep Practicing (→ or Enter)"
-          >→</button>
-        </div>
-
         <!-- Action row -->
         <div class="btn-row">
           <button class="rate-btn done-btn" on:click={markDone} title="Remove from rotation (Shift+Enter)">
-            Done
+            Remove
           </button>
           <button class="rate-btn review-btn" on:click={sendCurrentToReview} title="Send to review (↑)">
             To Review ↑
@@ -486,7 +566,7 @@
           <p class="done-note">Send them to review, or keep practicing.</p>
           <div class="btn-row">
             <button class="rate-btn done-btn" on:click={() => { acqActive = [...acqDone]; acqDone = []; acqPos = 0; focusInput(); }}>
-              Keep Practicing
+              Practice Again
             </button>
             <button class="rate-btn review-btn" on:click={sendBatchToReview}>
               Send to Review
@@ -544,6 +624,10 @@
         </div>
 
         <div class="queue-info">{revQueue.length} remaining</div>
+
+        <button class="back-to-learning-btn" on:click={sendBackToLearning}>
+          ↩ Back to Learning
+        </button>
 
       {:else}
         <div class="done-panel">
@@ -622,6 +706,30 @@
     color: #78350f;
   }
 
+  /* ── Line label ── */
+  .line-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    max-width: 440px;
+    text-align: center;
+  }
+
+  .line-num-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #a5b4fc;
+  }
+
+  .line-en-text {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    font-style: italic;
+  }
+
   /* ── Batch status ── */
   .batch-status {
     font-size: 0.8rem;
@@ -629,8 +737,6 @@
     display: flex;
     gap: 0.4rem;
   }
-
-  .sep-dot { color: #d1d5db; }
 
   /* ── Prompt card ── */
   .prompt-card {
@@ -817,15 +923,10 @@
   .nav-btn:disabled { opacity: 0.3; cursor: default; }
 
   .nav-btn.primary {
-    background: #6366f1;
-    border-color: #6366f1;
-    color: white;
-    width: 3.25rem;
-    height: 3.25rem;
-    font-size: 1.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.1rem;
   }
-
-  .nav-btn.primary:hover { background: #4f46e5; border-color: #4f46e5; }
 
   /* ── Action buttons ── */
   .btn-row {
@@ -872,6 +973,20 @@
 
   /* ── Queue info ── */
   .queue-info { font-size: 0.75rem; color: #cbd5e1; }
+
+  /* ── Back to learning ── */
+  .back-to-learning-btn {
+    font-size: 0.78rem;
+    color: #9ca3af;
+    background: transparent;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    padding: 0.3em 1em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .back-to-learning-btn:hover { color: #6366f1; border-color: #a5b4fc; }
 
   /* ── Hidden input ── */
   .hidden-input {

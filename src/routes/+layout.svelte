@@ -10,10 +10,10 @@
 </script>
 
 <div class="min-h-screen bg-gray-50">
-    <nav class="bg-gray-800 text-white px-4 py-3">
-        <div class="container mx-auto flex justify-between items-center">
+    <nav class="bg-gray-800 text-white px-4 py-2">
+        <div class="mx-auto flex justify-between items-center w-full" style="max-width: 1200px; padding: 0 16px; box-sizing: border-box;">
             <a href="/" class="flex items-center">
-                <img src="/lexlogo.png" alt="LexAudio" class="h-8" />
+                <img src="/lexlogo_trans.png" alt="LexAudio" class="h-12" />
             </a>
 
             {#if $session.loading}

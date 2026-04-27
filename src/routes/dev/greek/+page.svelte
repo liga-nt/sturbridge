@@ -123,7 +123,7 @@
   // Vocab scan
   let wordFormsCache = null;
   let ngeDefCache    = null;   // { greek → full definition string } from nge_vocabulary.json
-  let vocabScanList = null;   // { dict_entry, short_def, vocab_tier }[] for VocabPanel
+  let vocabScanList = null;   // { dictEntry, shortDef, vocabTier }[] for VocabPanel
   let vocabUnrecognized = []; // surface forms not found in word_forms
   let glossLoading = false;
   let glossError = null;
@@ -133,9 +133,10 @@
   let s2SelectedVocab = new Set();  // lemmas selected for next translation (clears after each use)
   let s2TierFilter    = 'all';      // 'all' | 'intro' | 'beginning' | 'intermediate'
   let s2Search        = '';
+  let s2ParagraphText = '';         // raw paragraph input before splitting into sentences
 
   // Lesson parts (tabs in the right panel)
-  let lessonPartTab = 'story'; // 'overview' | 'grammar' | 'story' | 'story2' | 'map'
+  let lessonPartTab = 'overview'; // 'overview' | 'grammar' | 'story' | 'story2' | 'map'
 
   // Overview editor
   let overviewText = '';
@@ -212,7 +213,7 @@
     refineFeedback = '';
     greekSuggestions = {};
     vocabScanList = null;
-    lessonPartTab = 'story';
+    lessonPartTab = 'overview';
     partStandardIds = {
       overview: new Set(selectedLesson?.overview?.standardIds ?? []),
       grammar:  new Set(selectedLesson?.grammar?.standardIds  ?? []),
@@ -535,9 +536,9 @@
           if (!bare || seen.has(bare)) continue;
           seen.add(bare);
           const entry = lookupForm(bare);
-          if (entry?.dict_entry) {
-            if (!list.find(w => w.dict_entry === entry.dict_entry)) {
-              list.push({ dict_entry: entry.dict_entry, short_def: entry.short_def ?? '', vocab_tier: entry.vocab_tier ?? null });
+          if (entry?.dictEntry) {
+            if (!list.find(w => w.dictEntry === entry.dictEntry)) {
+              list.push({ dictEntry: entry.dictEntry, shortDef: entry.shortDef ?? '', vocabTier: entry.vocabTier ?? null });
             }
           } else {
             unrecog.add(bare);
@@ -557,17 +558,17 @@
     if (!wordFormsCache) return [];
     const byLemma = {};
     for (const entry of Object.values(wordFormsCache)) {
-      const de = entry.dict_entry;
+      const de = entry.dictEntry;
       if (!de || byLemma[de]) continue;
-      const fullDef = ngeDefCache?.[de] || entry.short_def || '';
-      byLemma[de] = { lemma: de, def: fullDef, tier: entry.vocab_tier ?? 'unknown' };
+      const fullDef = ngeDefCache?.[de] || entry.shortDef || '';
+      byLemma[de] = { lemma: de, def: fullDef, tier: entry.vocabTier ?? 'unknown' };
     }
     const appearances = {};
     for (const lesson of allLessons) {
       for (const item of (lesson.vocab_list ?? [])) {
-        if (!appearances[item.dict_entry]) appearances[item.dict_entry] = [];
-        if (!appearances[item.dict_entry].includes(lesson.chapter))
-          appearances[item.dict_entry].push(lesson.chapter);
+        if (!appearances[item.dictEntry]) appearances[item.dictEntry] = [];
+        if (!appearances[item.dictEntry].includes(lesson.chapter))
+          appearances[item.dictEntry].push(lesson.chapter);
       }
     }
     return Object.values(byLemma)
@@ -621,6 +622,21 @@
     markDirty(editedSentences.length - 1);
   }
 
+  function parseParagraphIntoSentences() {
+    const raw = s2ParagraphText.trim();
+    if (!raw) return;
+    const parts = raw
+      .split(/[.;]+/)
+      .map(s => s.trim())
+      .filter(s => s.length > 0);
+    editedSentences = parts.map((english, i) => ({ num: i, greek: '', english, words: [], audioGenerated: false }));
+    dirtyIndices = new Set(editedSentences.map((_, i) => i));
+    greekSuggestions = {};
+    vocabScanList = null;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveEdits, 1500);
+  }
+
   async function s2ScanVocab() {
     // Run scanVocab against s2Sentences
     scanLoading = true;
@@ -640,9 +656,9 @@
           const entry = wordFormsCache[bare]
             || wordFormsCache[token]
             || wordFormsCache[stripGreekDiacritics(bare)];
-          if (entry?.dict_entry) {
-            if (!list.find(w => w.dict_entry === entry.dict_entry))
-              list.push({ dict_entry: entry.dict_entry, short_def: entry.short_def ?? '', vocab_tier: entry.vocab_tier ?? null });
+          if (entry?.dictEntry) {
+            if (!list.find(w => w.dictEntry === entry.dictEntry))
+              list.push({ dictEntry: entry.dictEntry, shortDef: entry.shortDef ?? '', vocabTier: entry.vocabTier ?? null });
           } else {
             unrecog.add(bare);
           }
@@ -699,8 +715,8 @@
 
       // Add new dict_entries to the scan list (dedup)
       for (const entry of Object.values(glossed)) {
-        if (!vocabScanList.find(w => w.dict_entry === entry.dict_entry)) {
-          vocabScanList = [...vocabScanList, { dict_entry: entry.dict_entry, short_def: entry.short_def, vocab_tier: null }];
+        if (!vocabScanList.find(w => w.dictEntry === entry.dictEntry)) {
+          vocabScanList = [...vocabScanList, { dictEntry: entry.dictEntry, shortDef: entry.shortDef, vocabTier: null }];
         }
       }
       vocabUnrecognized = [];
@@ -725,8 +741,8 @@
   function retokenize(greekText) {
     return (greekText ?? '').trim().split(/\s+/).filter(Boolean).map((text, idx) => ({
       sentPos: idx, text,
-      dict_entry: null, short_def: null, morph: null,
-      vocab_tier: null, paradigm_key: null, engSentPos: null
+      dictEntry: null, shortDef: null, morph: null,
+      vocabTier: null, paradigmKey: null, engSentPos: null
     }));
   }
 
@@ -1449,7 +1465,7 @@
     <!-- ── Part tabs — above both columns ── -->
     {#if selectedLesson}
       <div class="flex gap-1 mb-4 border-b border-gray-200">
-        {#each [['overview','O · Overview'],['grammar','G · Grammar'],['story2','S · Story'],['story','S · Story (old)'],['map','M · Map']] as [tab, label]}
+        {#each [['overview','O · Overview'],['grammar','G · Grammar'],['story2','S · Story'],['map','M · Map']] as [tab, label]}
           <button
             on:click={() => lessonPartTab = tab}
             class="px-4 py-2 text-sm font-medium transition-colors
@@ -2308,6 +2324,27 @@
             <div class="flex-1 min-w-0 space-y-4">
 
               {#if normalizeStatus(selectedLesson?.status) === 'draft'}
+
+                <!-- Paragraph box -->
+                <div class="bg-white rounded-xl border border-gray-200 p-4">
+                  <div class="flex items-center justify-between mb-2">
+                    <h2 class="font-semibold text-gray-800 text-sm">Paragraph</h2>
+                    {#if editedSentences.length > 0}
+                      <span class="text-xs text-amber-500">Submitting will reset all sentences</span>
+                    {/if}
+                  </div>
+                  <textarea
+                    bind:value={s2ParagraphText}
+                    rows="5"
+                    placeholder="Write the full paragraph here. Sentences separated by periods or semicolons."
+                    class="w-full text-sm text-gray-700 border border-gray-200 rounded px-3 py-2 focus:outline-none focus:border-indigo-400 resize-y"
+                  ></textarea>
+                  <button
+                    on:click={parseParagraphIntoSentences}
+                    disabled={!s2ParagraphText.trim()}
+                    class="mt-2 w-full px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-40"
+                  >Split into Sentences</button>
+                </div>
 
                 <!-- Vocab selection strip -->
                 {#if s2SelectedVocab.size > 0}

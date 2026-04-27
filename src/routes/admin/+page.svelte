@@ -14,10 +14,18 @@
     onMount(async () => {
         try {
             // Dev can impersonate a school via ?schoolId=; otherwise see all
-        const effectiveSchoolId = $page.url.searchParams.get('schoolId') ?? $session.schoolId;
-        const classesRef = ($session.role === 'dev' && !effectiveSchoolId)
-            ? collection(db, 'classes')
-            : query(collection(db, 'classes'), where('schoolId', '==', effectiveSchoolId));
+            const effectiveSchoolId = $page.url.searchParams.get('schoolId') ?? $session.schoolId;
+            const unscoped = $session.role === 'dev' && !effectiveSchoolId;
+
+            if (!effectiveSchoolId && !unscoped) {
+                error = 'No school assigned to your account. Ask a dev to set your schoolId claim.';
+                loading = false;
+                return;
+            }
+
+            const classesRef = unscoped
+                ? collection(db, 'classes')
+                : query(collection(db, 'classes'), where('schoolId', '==', effectiveSchoolId));
 
             const [classesSna, coursesMap] = await Promise.all([
                 getDocs(classesRef),

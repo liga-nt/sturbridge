@@ -46,9 +46,9 @@ For each Greek surface form below, provide a complete entry with ALL inflected f
 Return a JSON object with this structure:
 {
   "<surface_form>": {
-    "dict_entry": "<lexical form with full diacritics>",
-    "short_def": "<concise English definition, 3–6 words>",
-    "paradigm_key": "<one of the keys listed below, or null>",
+    "dictEntry": "<lexical form with full diacritics>",
+    "shortDef": "<concise English definition, 3–6 words>",
+    "paradigmKey": "<one of the keys listed below, or null>",
     "standard_refs": [],
     "forms": [
       { "form": "<inflected form with full diacritics>", "morph": "<dot-notation morphology>" }
@@ -62,7 +62,7 @@ Morphology dot-notation examples:
 - adj.masc.sg.nom  adj.fem.pl.acc  adj.neut.sg.gen
 - art.masc.sg.nom  prep  conj  adv  numeral  part
 
-Valid paradigm_key values (use null if none fits):
+Valid paradigmKey values (use null if none fits):
 ${PARADIGM_KEYS.join(', ')}
 
 For the "forms" array, include EVERY distinct inflected form in the word's paradigm — all cases/numbers for nouns/adjectives, all persons/numbers/moods for verbs. Use correct polytonic diacritics throughout.
@@ -107,10 +107,10 @@ Return only valid JSON, no explanation.`;
     const added = {};
 
     for (const entry of Object.values(glossed)) {
-      const { dict_entry, short_def, paradigm_key, standard_refs, forms } = entry;
-      if (!dict_entry || !forms?.length) continue;
+      const { dictEntry, shortDef, paradigmKey, standard_refs, forms } = entry;
+      if (!dictEntry || !forms?.length) continue;
 
-      const base = { dict_entry, short_def, paradigm_key: paradigm_key ?? null, standard_refs: standard_refs ?? [], vocab_tier: null };
+      const base = { dictEntry, shortDef, paradigmKey: paradigmKey ?? null, standard_refs: standard_refs ?? [], vocabTier: null };
 
       for (const { form, morph } of forms) {
         if (!form) continue;
@@ -120,7 +120,7 @@ Return only valid JSON, no explanation.`;
         if (stripped !== form) wordForms[stripped] = wfEntry;
       }
 
-      added[dict_entry] = { dict_entry, short_def, vocab_tier: null };
+      added[dictEntry] = { dictEntry, shortDef, vocabTier: null };
     }
 
     writeFileSync(WORD_FORMS_PATH, JSON.stringify(wordForms), 'utf-8');

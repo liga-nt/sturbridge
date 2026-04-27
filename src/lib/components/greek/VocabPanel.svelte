@@ -2,7 +2,7 @@
   /**
    * VocabPanel — left panel showing vocabulary grouped by tier.
    * Props:
-   *   vocabList: { dict_entry, short_def, vocab_tier, morph? }[]
+   *   vocabList: { dictEntry, shortDef, vocabTier, morph? }[]
    */
   export let vocabList = [];
   export let headless = false; // suppress built-in title when parent provides one
@@ -20,7 +20,7 @@
     const map = new Map();
     for (const tier of TIER_ORDER) map.set(tier, []);
     for (const word of (vocabList ?? [])) {
-      const t = word.vocab_tier ?? null;
+      const t = word.vocabTier ?? null;
       if (!map.has(t)) map.set(t, []);
       map.get(t).push(word);
     }
@@ -64,8 +64,8 @@
             on:click={() => toggleExpand(word)}
           >
             <div class="word-row">
-              <span class="dict-entry">{word.dict_entry}</span>
-              <span class="short-def">{word.short_def ?? ''}</span>
+              <span class="dict-entry">{word.dictEntry}</span>
+              <span class="short-def">{word.shortDef ?? ''}</span>
             </div>
             {#if expandedWord === word && word.morph}
               <div class="word-morph">{word.morph}</div>

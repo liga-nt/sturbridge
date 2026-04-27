@@ -1,0 +1,502 @@
+{
+  "exam": "NGE Introductory Greek Exam",
+  "level": "introductory",
+  "revised": 2016,
+  "standards": [
+
+    // ─── DOMAIN II: GEOGRAPHY ─────────────────────────────────────────────────
+
+    {
+      "id": "geo.athens",
+      "domain": "geography",
+      "description": "Know the location of Athens",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.sparta",
+      "domain": "geography",
+      "description": "Know the location of Sparta",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.thebes",
+      "domain": "geography",
+      "description": "Know the location of Thebes",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.troy",
+      "domain": "geography",
+      "description": "Know the location of Troy",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.delphi",
+      "domain": "geography",
+      "description": "Know the location of Delphi",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.olympia",
+      "domain": "geography",
+      "description": "Know the location of Olympia",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.corinth",
+      "domain": "geography",
+      "description": "Know the location of Corinth",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.mycenae",
+      "domain": "geography",
+      "description": "Know the location of Mycenae",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.alexandria",
+      "domain": "geography",
+      "description": "Know the location of Alexandria",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.crete",
+      "domain": "geography",
+      "description": "Know the location of Crete",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.sicily",
+      "domain": "geography",
+      "description": "Know the location of Sicily",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.rhodes",
+      "domain": "geography",
+      "description": "Know the location of Rhodes",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.euboea",
+      "domain": "geography",
+      "description": "Know the location of Euboea",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.aegean_sea",
+      "domain": "geography",
+      "description": "Know the location of the Aegean Sea",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.ionian_sea",
+      "domain": "geography",
+      "description": "Know the location of the Ionian Sea",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.black_sea",
+      "domain": "geography",
+      "description": "Know the location of the Black Sea",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.adriatic_sea",
+      "domain": "geography",
+      "description": "Know the location of the Adriatic Sea",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.nile",
+      "domain": "geography",
+      "description": "Know the location of the Nile",
+      "type": "knowledge"
+    },
+    {
+      "id": "geo.hellespont",
+      "domain": "geography",
+      "description": "Know the location of the Hellespont",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN III: HISTORY — PERIODS ───────────────────────────────────────
+
+    {
+      "id": "hist.period.persian_wars",
+      "domain": "history",
+      "subtype": "period",
+      "description": "Know the Persian Wars (490–479 BCE): a conflict between Greece and Persia",
+      "dates": "490–479 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.period.athenian_empire",
+      "domain": "history",
+      "subtype": "period",
+      "description": "Know the Athenian Empire (479–431/404 BCE): emerged from the Delian League; the Golden Age of Athens; rise of the Athenian navy",
+      "dates": "479–431/404 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.period.peloponnesian_war",
+      "domain": "history",
+      "subtype": "period",
+      "description": "Know the Peloponnesian War (431–404 BCE): a conflict between Athens and Sparta",
+      "dates": "431–404 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.period.rise_of_macedon",
+      "domain": "history",
+      "subtype": "period",
+      "description": "Know the Rise of Macedon: Philip II attacked Greek city-states; Alexander extended Greek rule to its furthest extent",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.period.hellenistic_age",
+      "domain": "history",
+      "subtype": "period",
+      "description": "Know the Hellenistic Age: the period following the death of Alexander the Great (after 323 BCE)",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN III: HISTORY — FIGURES ───────────────────────────────────────
+
+    {
+      "id": "hist.figure.darius",
+      "domain": "history",
+      "subtype": "figure",
+      "description": "Know Darius I (the Great): a Persian leader who died in 485 BCE; associated with the Persian Wars",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.figure.xerxes",
+      "domain": "history",
+      "subtype": "figure",
+      "description": "Know Xerxes: son of Darius I; Persian leader during the Persian Wars",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.figure.leonidas",
+      "domain": "history",
+      "subtype": "figure",
+      "description": "Know Leonidas: a Spartan king who commanded the 300 Spartans at Thermopylae",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.figure.pericles",
+      "domain": "history",
+      "subtype": "figure",
+      "description": "Know Pericles: Athenian statesman and general who died in 429 BCE; promoted Athens as a cultural center and fostered Athenian democracy",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.figure.philip_ii",
+      "domain": "history",
+      "subtype": "figure",
+      "description": "Know Philip II of Macedon: a warlord who attacked Greek city-states; father of Alexander the Great",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.figure.alexander",
+      "domain": "history",
+      "subtype": "figure",
+      "description": "Know Alexander the Great: son of Philip of Macedon, died in 323 BCE; extended Greek rule to its furthest extent",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN III: HISTORY — BATTLES & EVENTS ──────────────────────────────
+
+    {
+      "id": "hist.battle.marathon",
+      "domain": "history",
+      "subtype": "battle",
+      "description": "Know the Battle of Marathon (490 BCE): Greeks defeated the Persians on the plain of Marathon; Athenians asked Spartans for help but they declined",
+      "date": "490 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.thermopylae",
+      "domain": "history",
+      "subtype": "battle",
+      "description": "Know the Battle of Thermopylae (480 BCE): 300 Spartans under Leonidas prevented the Persians from invading at a narrow pass",
+      "date": "480 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.salamis",
+      "domain": "history",
+      "subtype": "battle",
+      "description": "Know the Battle of Salamis (480 BCE): the Greek navy defeated the Persian navy",
+      "date": "480 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.event.peace_of_nicias",
+      "domain": "history",
+      "subtype": "event",
+      "description": "Know the Peace of Nicias (421 BCE): a treaty meant to end the Peloponnesian War but was subsequently undermined",
+      "date": "421 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.aegospotami",
+      "domain": "history",
+      "subtype": "battle",
+      "description": "Know the Battle of Aegospotami (405 BCE): Spartan navy destroyed the Athenian navy, ending the Peloponnesian War",
+      "date": "405 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.chaeronea",
+      "domain": "history",
+      "subtype": "battle",
+      "description": "Know the Battle of Chaeronea (338 BCE): Philip II defeated Athens and Thebes, resulting in the League of Corinth",
+      "date": "338 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.issus",
+      "domain": "history",
+      "subtype": "battle",
+      "description": "Know the Battle of Issus (333 BCE): Alexander led the Hellenic League against the Achaemenid Empire under Darius III",
+      "date": "333 BCE",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.battle.gaugamela",
+      "domain": "history",
+      "subtype": "battle",
+      "description": "Know the Battle of Gaugamela (331 BCE): Alexander and the Hellenic League decisively defeated Darius III",
+      "date": "331 BCE",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN III: HISTORY — AUTHORS ───────────────────────────────────────
+
+    {
+      "id": "hist.author.plato",
+      "domain": "history",
+      "subtype": "author",
+      "description": "Know Plato: philosopher who wrote about Socrates' philosophical dialogues; famous works include The Republic (on the ideal state) and the Apology (Socrates' defense against corrupting the youth of Athens)",
+      "genre": "philosophy",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.author.aeschylus",
+      "domain": "history",
+      "subtype": "author",
+      "description": "Know Aeschylus: called 'The Father of Tragedy'; produced the Oresteia trilogy about Agamemnon's son",
+      "genre": "tragedy",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.author.sophocles",
+      "domain": "history",
+      "subtype": "author",
+      "description": "Know Sophocles: never judged lower than 2nd place in dramatic competitions; produced Oedipus the King and Oedipus at Colonus about the tragic king of Thebes",
+      "genre": "tragedy",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.author.euripides",
+      "domain": "history",
+      "subtype": "author",
+      "description": "Know Euripides: produced Medea (about the witch married to the Argonaut Jason) and Hippolytus (on the tragic death of Theseus' son)",
+      "genre": "tragedy",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.author.herodotus",
+      "domain": "history",
+      "subtype": "author",
+      "description": "Know Herodotus: called 'The Father of History'; author of The Histories on the origins of the Persian Wars",
+      "genre": "history",
+      "type": "knowledge"
+    },
+    {
+      "id": "hist.author.thucydides",
+      "domain": "history",
+      "subtype": "author",
+      "description": "Know Thucydides: author of the History of the Peloponnesian War",
+      "genre": "history",
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN IV: MYTHOLOGY — DEITIES ──────────────────────────────────────
+
+    {
+      "id": "myth.deity.zeus",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Zeus: king of the gods; spheres include lightning and thunder; symbols are the eagle and lightning bolt",
+      "spheres": ["king of the gods", "lightning", "thunder"],
+      "symbols": ["eagle", "lightning bolt"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.hera",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Hera: queen of the gods; sphere is marriage; symbol is the peacock",
+      "spheres": ["queen of the gods", "marriage"],
+      "symbols": ["peacock"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.poseidon",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Poseidon: god of oceans, water, and earthquakes; symbols are the trident and horse",
+      "spheres": ["oceans and water", "earthquakes"],
+      "symbols": ["trident", "horse"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.hades",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Hades: ruler of the Underworld; symbol is the bident",
+      "spheres": ["Underworld"],
+      "symbols": ["bident"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.demeter",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Demeter: goddess of agriculture; symbols are the stalk of wheat and cornucopia",
+      "spheres": ["agriculture"],
+      "symbols": ["stalk of wheat", "cornucopia"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.hestia",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Hestia: goddess of the hearth (home fire); symbols are the hearth and small fire",
+      "spheres": ["hearth", "home fire"],
+      "symbols": ["hearth", "small fire"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.ares",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Ares: god of war; symbols are the spear and vulture",
+      "spheres": ["war"],
+      "symbols": ["spear", "vulture"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.athena",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Athena: goddess of wisdom, war, and domestic crafts/tasks; symbols are the owl, helmet, olive branch/tree, and aegis",
+      "spheres": ["wisdom", "war", "domestic crafts"],
+      "symbols": ["owl", "helmet", "olive branch", "olive tree", "aegis"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.hephaestus",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Hephaestus: god of blacksmithing and metalworking; symbols are the hammer and anvil",
+      "spheres": ["blacksmithing", "metalworking"],
+      "symbols": ["hammer", "anvil"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.apollo",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Apollo: god of the sun, prophecy, music, and medicine; symbols are the sun, bow and arrows, and lyre",
+      "spheres": ["sun", "prophecy", "music", "medicine"],
+      "symbols": ["sun", "bow and arrows", "lyre"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.artemis",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Artemis: goddess of the moon, hunting, and animals; symbols are the moon, bow and arrows, deer, and hunting dog",
+      "spheres": ["moon", "hunting", "animals"],
+      "symbols": ["moon", "bow and arrows", "deer", "hunting dog"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.hermes",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Hermes: god of messengers, thieves, and inventors; symbols are the caduceus (winged staff with serpents) and winged sandals",
+      "spheres": ["messengers", "thieves", "inventors"],
+      "symbols": ["caduceus", "winged sandals"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.dionysus",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Dionysus: god of wine, revelry, and insanity; symbols are grapes, grape vines, ivy, leopards, and the thyrsus (pinecone-topped staff)",
+      "spheres": ["wine", "revelry", "insanity"],
+      "symbols": ["grapes", "grape vines", "ivy", "leopards", "thyrsus"],
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.deity.aphrodite",
+      "domain": "mythology",
+      "subtype": "deity",
+      "description": "Know Aphrodite: goddess of love and beauty; symbols are doves and erotes (winged babies)",
+      "spheres": ["love", "beauty"],
+      "symbols": ["doves", "erotes"],
+      "type": "knowledge"
+    },
+
+    // ─── DOMAIN IV: MYTHOLOGY — MYTHS ────────────────────────────────────────
+
+    {
+      "id": "myth.story.arachne",
+      "domain": "mythology",
+      "subtype": "myth",
+      "description": "Know the general plot of the myth of Arachne",
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.story.midas",
+      "domain": "mythology",
+      "subtype": "myth",
+      "description": "Know the general plot of the myth of Midas",
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.story.theseus_minotaur",
+      "domain": "mythology",
+      "subtype": "myth",
+      "description": "Know the general plot of the myth of Theseus and the Minotaur",
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.story.perseus_medusa",
+      "domain": "mythology",
+      "subtype": "myth",
+      "description": "Know the general plot of the myth of Perseus and Medusa",
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.story.atalanta",
+      "domain": "mythology",
+      "subtype": "myth",
+      "description": "Know the general plot of the myth of Atalanta",
+      "type": "knowledge"
+    },
+    {
+      "id": "myth.story.daedalus_icarus",
+      "domain": "mythology",
+      "subtype": "myth",
+      "description": "Know the general plot of the myth of Daedalus and Icarus",
+      "type": "knowledge"
+    }
+  ]
+}

@@ -47,6 +47,32 @@
     {/if}
   </header>
 
+  <!-- Alphabet card — always visible once page is not in error -->
+  {#if !error}
+    <div class="lessons-list" style="margin-bottom: 0;">
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div
+        class="lesson-card alphabet-card"
+        on:click={() => goto('/student/greek/alphabet')}
+        role="button"
+        tabindex="0"
+        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && goto('/student/greek/alphabet')}
+      >
+        <div class="card-left alphabet-left">
+          <span class="alphabet-icon">Αα</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Alphabet</div>
+          <div class="card-subtitle">Learn the 24 Greek letters and their sounds</div>
+        </div>
+        <div class="card-right">
+          <span class="arrow-icon">›</span>
+        </div>
+      </div>
+    </div>
+  {/if}
+
   {#if loading}
     <div class="state-message">
       <p>Loading lessons...</p>
@@ -120,7 +146,7 @@
   }
 
   .page-header {
-    max-width: 640px;
+    max-width: 1200px;
     margin: 0 auto 24px;
   }
 
@@ -138,7 +164,7 @@
   }
 
   .state-message {
-    max-width: 640px;
+    max-width: 1200px;
     margin: 0 auto;
     font-size: 15px;
     color: #6b7280;
@@ -151,7 +177,7 @@
   }
 
   .lessons-list {
-    max-width: 640px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -251,5 +277,27 @@
     color: #9ca3af;
     font-weight: 300;
     line-height: 1;
+  }
+
+  .alphabet-card {
+    border: 1px solid #e0e7ff;
+  }
+
+  .alphabet-card:hover {
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+    border-color: #a5b4fc;
+  }
+
+  .alphabet-left {
+    background: #eef2ff;
+    border-right-color: #e0e7ff;
+  }
+
+  .alphabet-icon {
+    font-family: "GFS Didot", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #4338ca;
+    letter-spacing: -0.02em;
   }
 </style>

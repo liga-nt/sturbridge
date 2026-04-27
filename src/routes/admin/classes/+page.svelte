@@ -34,6 +34,13 @@
         try {
             const effectiveSchoolId = $page.url.searchParams.get('schoolId') ?? $session.schoolId;
             const unscoped = $session.role === 'dev' && !effectiveSchoolId;
+
+            if (!effectiveSchoolId && !unscoped) {
+                error = 'No school assigned to your account. Ask a dev to set your schoolId claim.';
+                loading = false;
+                return;
+            }
+
             const usersRef   = unscoped ? collection(db, 'users')   : query(collection(db, 'users'),   where('schoolId', '==', effectiveSchoolId));
             const classesRef = unscoped ? collection(db, 'classes') : query(collection(db, 'classes'), where('schoolId', '==', effectiveSchoolId));
 
@@ -56,14 +63,16 @@
             courses = await loadCourses();
             // Filter to school's allowed courses; if none configured, show all
             const allCourseList = Object.values(courses).sort((a, b) =>
-                (a.grade ?? '').localeCompare(b.grade ?? '') || (a.label ?? '').localeCompare(b.label ?? '')
+                String(a.grade ?? '').localeCompare(String(b.grade ?? '')) ||
+                (a.label ?? '').localeCompare(b.label ?? '')
             );
             courseList = (allowedCourseIds && allowedCourseIds.length > 0)
                 ? allCourseList.filter((c) => allowedCourseIds.includes(c.id))
                 : allCourseList;
             if (courseList.length > 0) newCourseId = courseList[0].id;
         } catch (e) {
-            error = 'Failed to load.';
+            console.error('Admin classes load error:', e);
+            error = 'Failed to load: ' + e.message;
         } finally {
             loading = false;
         }
