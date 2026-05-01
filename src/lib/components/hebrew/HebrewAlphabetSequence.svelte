@@ -76,38 +76,79 @@
   }
 
   // ── Practice mode ─────────────────────────────────────────────────
+  let practiceSubMode = 'consonants'; // 'consonants' | 'combos'
   let practiceDeck = [];
-  let practiceTotal = 0;
+  let practiceRemoved = new Set();
+  let practiceFlipped = false;
+  let practiceFrontIsHebrew = true;
   let practiceDone = false;
 
-  $: practiceLetter = practiceDeck[0] ?? null;
+  $: practiceCard = practiceDeck[0] ?? null;
 
-  function startPractice() {
-    practiceDeck = shuffle([...alphabet]);
-    practiceTotal = practiceDeck.length;
+  $: consonantCards = alphabet.map(l => ({
+    id: l.id,
+    char: l.char,
+    name: l.name_en,
+    transliteration: l.transliteration ?? '',
+    audio_url: l.name_audio_url ?? l.audio_url
+  }));
+
+  $: comboCards = alphabet.flatMap(l => {
+    const vowels = [...NIKUD, ...(l.guttural ? HATAFIM : [])];
+    return vowels.map(v => {
+      const key = v.name.toLowerCase().replace(/ /g, '_');
+      return {
+        id: `${l.id}_${key}`,
+        char: l.char + v.mark,
+        name: `${l.name_en} + ${v.name}`,
+        transliteration: (l.transliteration ?? '') + (v.sound || ''),
+        audio_url: l.vowel_audio?.[key]
+      };
+    });
+  });
+
+  function startPractice(sub = practiceSubMode) {
+    practiceSubMode = sub;
+    const all = sub === 'consonants' ? consonantCards : comboCards;
+    practiceDeck = shuffle(all.filter(c => !practiceRemoved.has(c.id)));
+    practiceFlipped = false;
     practiceDone = false;
   }
 
-  function practiceCorrect() {
-    const letter = practiceDeck[0];
-    const advance = () => {
-      practiceDeck = practiceDeck.slice(1);
-      if (practiceDeck.length === 0) practiceDone = true;
-    };
-    const url = letter?.name_audio_url ?? letter?.audio_url;
-    if (url) {
-      const a = new Audio(url);
-      a.addEventListener('ended', advance);
-      a.play().catch(() => setTimeout(advance, 400));
-    } else {
-      setTimeout(advance, 400);
+  function flipCard() {
+    if (!practiceCard) return;
+    practiceFlipped = !practiceFlipped;
+    if (practiceFlipped) {
+      const url = practiceCard.audio_url;
+      if (url) new Audio(url).play().catch(() => {});
     }
   }
 
+  function removeCard() {
+    if (!practiceCard) return;
+    practiceRemoved = new Set([...practiceRemoved, practiceCard.id]);
+    practiceDeck = practiceDeck.slice(1);
+    practiceFlipped = false;
+    if (practiceDeck.length === 0) practiceDone = true;
+  }
+
+  function keepCard() {
+    if (!practiceCard) return;
+    const card = practiceDeck[0];
+    const rest = practiceDeck.slice(1);
+    const pos = Math.floor(Math.random() * (rest.length + 1));
+    rest.splice(pos, 0, card);
+    practiceDeck = rest;
+    practiceFlipped = false;
+  }
+
+  function reshuffleAll() {
+    practiceRemoved = new Set();
+    startPractice(practiceSubMode);
+  }
+
   // ── Shared ────────────────────────────────────────────────────────
-  $: activeLetter = mode === 'groups'   ? (groupLetters[groupProgress] ?? null)
-                  : mode === 'practice' ? practiceLetter
-                  : currentLetter;
+  $: activeLetter = mode === 'groups' ? (groupLetters[groupProgress] ?? null) : currentLetter;
 
   $: displayChar = dageshMode === 'hard' && activeLetter?.dagesh_char
     ? activeLetter.dagesh_char + PATAH
@@ -144,7 +185,7 @@ function handleKey(e) {
       if (currentIndex > 0) currentIndex--;
     } else if (e.key === 'ArrowRight' && mode === 'practice') {
       e.preventDefault();
-      practiceCorrect();
+      flipCard();
     } else if (e.key === 'ArrowRight' && mode === 'groups') {
       e.preventDefault();
       groupCorrect();
@@ -298,11 +339,64 @@ function handleKey(e) {
     </div>
   {/if}
 
-  {#if mode === 'practice' && practiceDone}
-    <div class="letter-card">
-      <div class="complete-message">All {practiceTotal} letters!</div>
+  {#if mode === 'practice'}
+
+    <!-- Deck selector -->
+    <div class="practice-deck-row">
+      <button class="deck-btn" class:active={practiceSubMode === 'consonants'} on:click={() => startPractice('consonants')}>Consonants</button>
+      <button class="deck-btn" class:active={practiceSubMode === 'combos'}     on:click={() => startPractice('combos')}>Consonant + Vowel</button>
     </div>
-    <button class="restart-btn" on:click={startPractice}>Try again</button>
+
+    <!-- Orientation toggle -->
+    <div class="practice-orient-row">
+      <button class="orient-btn" class:active={practiceFrontIsHebrew}  on:click={() => { practiceFrontIsHebrew = true;  startPractice(); }}>ℵ → name</button>
+      <button class="orient-btn" class:active={!practiceFrontIsHebrew} on:click={() => { practiceFrontIsHebrew = false; startPractice(); }}>name → ℵ</button>
+    </div>
+
+    {#if practiceDone}
+      <div class="fc-done">
+        <div class="complete-message">Deck complete!</div>
+        <button class="restart-btn" on:click={reshuffleAll}>Reshuffle all ({practiceRemoved.size} removed)</button>
+      </div>
+    {:else if practiceCard}
+      <div class="flashcard" class:fc-flipped={practiceFlipped} on:click={flipCard} role="button" tabindex="0">
+        {#if !practiceFlipped}
+          <div class="fc-front">
+            {#if practiceFrontIsHebrew}
+              <div class="fc-char" dir="rtl">{practiceCard.char}</div>
+            {:else}
+              <div class="fc-prompt">{practiceCard.transliteration ? '/' + practiceCard.transliteration + '/' : practiceCard.name}</div>
+            {/if}
+            <div class="fc-tap-hint">tap to reveal</div>
+          </div>
+        {:else}
+          <div class="fc-back">
+            {#if practiceFrontIsHebrew}
+              <div class="fc-name">{practiceCard.name}</div>
+              {#if practiceCard.transliteration}
+                <div class="fc-roman">/{practiceCard.transliteration}/</div>
+              {/if}
+            {:else}
+              <div class="fc-char" dir="rtl">{practiceCard.char}</div>
+            {/if}
+          </div>
+          <div class="fc-actions">
+            <button class="fc-remove" on:click|stopPropagation={removeCard}>Remove</button>
+            <button class="fc-keep"   on:click|stopPropagation={keepCard}>Keep</button>
+          </div>
+        {/if}
+      </div>
+
+      <div class="practice-stats">
+        <span>{practiceDeck.length} remaining</span>
+        {#if practiceRemoved.size > 0}
+          <span class="removed-count">· {practiceRemoved.size} removed</span>
+        {/if}
+        <button class="reshuffle-link" on:click={reshuffleAll}>Reshuffle all</button>
+      </div>
+    {/if}
+
+    <div class="seq-hint">Click or press → to flip · Keep / Remove to advance</div>
 
   {:else}
     <div class="letter-card" class:flash-correct={flash === 'correct'}>
@@ -427,14 +521,7 @@ function handleKey(e) {
     </div>
 
     <!-- Progress strip -->
-    {#if mode === 'practice'}
-      <div class="practice-progress">
-        <div class="practice-track">
-          <div class="practice-fill" style="width:{((practiceTotal - practiceDeck.length) / practiceTotal) * 100}%"></div>
-        </div>
-        <span class="practice-count">{practiceTotal - practiceDeck.length} / {practiceTotal}</span>
-      </div>
-    {:else if mode === 'groups'}
+    {#if mode === 'groups'}
       <div class="progress-strip">
         {#each groupLetters as letter, i}
           <button class="strip-tile" class:current={i === groupProgress} class:passed={groupChecks[i]}
@@ -461,15 +548,14 @@ function handleKey(e) {
         {/each}
       </div>
     {/if}
+
+    {#if mode === 'sequence'}
+      <div class="seq-hint">Press ← → or click a tile to navigate</div>
+    {:else}
+      <div class="seq-hint">Press → or click a tile to advance through the group</div>
+    {/if}
   {/if}
 
-  {#if mode === 'sequence'}
-    <div class="seq-hint">Press ← → or click a tile to navigate</div>
-  {:else if mode === 'practice'}
-    <div class="seq-hint">Press → or click a tile to advance</div>
-  {:else}
-    <div class="seq-hint">Press → or click a tile to advance through the group</div>
-  {/if}
 </div>
 
 <style>
@@ -679,36 +765,7 @@ function handleKey(e) {
     padding: 2rem 0;
   }
 
-  .practice-progress {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    width: 100%;
-    max-width: 720px;
-  }
-
-  .practice-track {
-    flex: 1;
-    height: 6px;
-    background: #e5e7eb;
-    border-radius: 999px;
-    overflow: hidden;
-  }
-
-  .practice-fill {
-    height: 100%;
-    background: #6366f1;
-    border-radius: 999px;
-    transition: width 0.3s ease;
-  }
-
-  .practice-count {
-    font-size: 0.75rem;
-    color: #9ca3af;
-    white-space: nowrap;
-  }
-
-  .restart-btn {
+.restart-btn {
     padding: 0.5em 1.5em;
     background: #6366f1;
     color: white;
@@ -843,5 +900,141 @@ function handleKey(e) {
     color: #d1d5db;
     text-align: center;
     margin-top: -0.5rem;
+  }
+
+  /* ── Practice flashcard ── */
+  .practice-deck-row, .practice-orient-row {
+    display: flex;
+    gap: 0.35rem;
+    background: #f1f5f9;
+    padding: 0.25rem;
+    border-radius: 999px;
+  }
+
+  .deck-btn, .orient-btn {
+    padding: 0.3em 1.1em;
+    border-radius: 999px;
+    border: none;
+    background: transparent;
+    font-size: 0.85rem;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .deck-btn.active, .orient-btn.active {
+    background: white;
+    color: #4338ca;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .flashcard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 520px;
+    max-width: 760px;
+    width: 100%;
+    min-height: 260px;
+    background: white;
+    border-radius: 1.25rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    padding: 2rem 2.5rem;
+    gap: 1rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+  }
+
+  .flashcard:hover { background: #fafafa; }
+
+  .fc-front, .fc-back {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .fc-char {
+    font-family: "Noto Sans Hebrew", "SBL Hebrew", "Times New Roman", serif;
+    font-size: 7rem;
+    line-height: 1.2;
+    color: #1e293b;
+    text-align: center;
+  }
+
+  .fc-prompt {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    letter-spacing: 0.04em;
+  }
+
+  .fc-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .fc-roman {
+    font-size: 1.1rem;
+    color: #6b7280;
+    font-style: italic;
+  }
+
+  .fc-tap-hint {
+    font-size: 0.75rem;
+    color: #d1d5db;
+    margin-top: 0.5rem;
+  }
+
+  .fc-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .fc-remove, .fc-keep {
+    padding: 0.45em 1.4em;
+    border-radius: 999px;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.1s;
+  }
+
+  .fc-remove { background: #fee2e2; color: #b91c1c; }
+  .fc-keep   { background: #d1fae5; color: #065f46; }
+  .fc-remove:hover { filter: brightness(0.93); }
+  .fc-keep:hover   { filter: brightness(0.93); }
+
+  .practice-stats {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    color: #9ca3af;
+  }
+
+  .removed-count { color: #9ca3af; }
+
+  .reshuffle-link {
+    background: none;
+    border: none;
+    color: #6366f1;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+  }
+
+  .fc-done {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
 </style>

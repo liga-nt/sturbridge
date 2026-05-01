@@ -4,20 +4,34 @@
    * Props:
    *   vocabList: { dictEntry, shortDef, audioUrl, vocabTier }[]
    *
-   * Front: Hebrew dictEntry (RTL) + auto-plays audio.
-   * Back:  English shortDef.
-   * Navigation: ← → arrows or keyboard.
+   * Modes: 'he-en' (Hebrew front → English back) | 'en-he' (English front → Hebrew back)
+   * Audio plays when Hebrew side is visible (front in he-en, back in en-he).
+   * Remove: removes current card from active deck (session only).
+   * Reset: restores full deck from original vocabList.
    */
   import { onDestroy } from 'svelte';
 
   export let vocabList = [];
 
+  // Active deck — copy that can have cards removed; reset restores it
+  let activeDeck = [...vocabList];
   let index   = 0;
   let flipped = false;
+  let mode    = 'he-en'; // 'he-en' | 'en-he'
   let audio   = null;
 
-  $: card = vocabList[index] ?? null;
-  $: total = vocabList.length;
+  // Re-seed if vocabList prop changes (e.g. lesson switch)
+  $: if (vocabList !== undefined) {
+    activeDeck = [...vocabList];
+    index = 0;
+    flipped = false;
+  }
+
+  $: card  = activeDeck[index] ?? null;
+  $: total = activeDeck.length;
+
+  // Hebrew is visible on the unflipped side in he-en, and on the flipped side in en-he
+  $: hebrewVisible = mode === 'he-en' ? !flipped : flipped;
 
   function morphLabel(morph) {
     if (!morph || typeof morph !== 'object') return '';
@@ -40,7 +54,7 @@
 
   function showCard(i) {
     stopAudio();
-    index   = i;
+    index   = Math.max(0, Math.min(i, activeDeck.length - 1));
     flipped = false;
   }
 
@@ -56,8 +70,29 @@
     flipped = !flipped;
   }
 
-  // Auto-play audio when card shows (not on flip to English)
-  $: if (card && !flipped && card.audioUrl) {
+  function removeCard() {
+    if (total === 0) return;
+    activeDeck = activeDeck.filter((_, i) => i !== index);
+    index = Math.min(index, activeDeck.length - 1);
+    flipped = false;
+    stopAudio();
+  }
+
+  function resetDeck() {
+    activeDeck = [...vocabList];
+    index   = 0;
+    flipped = false;
+    stopAudio();
+  }
+
+  function setMode(m) {
+    mode    = m;
+    flipped = false;
+    stopAudio();
+  }
+
+  // Auto-play audio when Hebrew side becomes visible
+  $: if (card && hebrewVisible && card.audioUrl) {
     playAudio(card.audioUrl);
   }
 
@@ -74,37 +109,87 @@
 
 <div class="flashcard-wrap">
 
+  <!-- Mode toggle -->
+  <div class="mode-row">
+    <button class="mode-btn" class:mode-active={mode === 'he-en'} on:click={() => setMode('he-en')}>Hebrew → English</button>
+    <button class="mode-btn" class:mode-active={mode === 'en-he'} on:click={() => setMode('en-he')}>English → Hebrew</button>
+  </div>
+
   {#if total === 0}
-    <p class="empty">No vocabulary for this lesson.</p>
+    <div class="empty-state">
+      <p class="empty">All cards removed.</p>
+      <button class="reset-btn" on:click={resetDeck}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
+        </svg>
+        Reset deck ({vocabList.length} cards)
+      </button>
+    </div>
   {:else}
-    <div class="progress">{index + 1} / {total}</div>
+    <div class="progress-row">
+      <span class="progress">{index + 1} / {total}</span>
+      {#if activeDeck.length < vocabList.length}
+        <button class="reset-btn" on:click={resetDeck} title="Restore all removed cards">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
+          </svg>
+          Reset ({vocabList.length})
+        </button>
+      {/if}
+    </div>
 
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="card" class:flipped on:click={flip}>
       <div class="card-inner">
 
-        <div class="card-front" dir="rtl">
-          <div class="he-text">{card?.dictEntry ?? ''}</div>
-          {#if card?.audioUrl}
-            <button class="audio-btn" on:click|stopPropagation={() => playAudio(card.audioUrl)} title="Play audio">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-              </svg>
-            </button>
-          {/if}
-          <div class="flip-hint">tap to reveal</div>
-        </div>
+        {#if mode === 'he-en'}
+          <!-- Front: Hebrew -->
+          <div class="card-front">
+            <div class="he-text" dir="rtl">{card?.dictEntry ?? ''}</div>
+            {#if card?.audioUrl}
+              <button class="audio-btn" on:click|stopPropagation={() => playAudio(card.audioUrl)} title="Play audio">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                </svg>
+              </button>
+            {/if}
+            <div class="flip-hint">tap to reveal</div>
+          </div>
+          <!-- Back: English -->
+          <div class="card-back">
+            <div class="en-text">{card?.shortDef ?? ''}</div>
+            {#if card?.morph}
+              <div class="morph-tag">{morphLabel(card.morph)}</div>
+            {/if}
+            <div class="he-small" dir="rtl">{card?.dictEntry ?? ''}</div>
+          </div>
 
-        <div class="card-back">
-          <div class="en-text">{card?.shortDef ?? ''}</div>
-          {#if card?.morph}
-            <div class="morph-tag">{morphLabel(card.morph)}</div>
-          {/if}
-          <div class="he-small" dir="rtl">{card?.dictEntry ?? ''}</div>
-        </div>
+        {:else}
+          <!-- Front: English -->
+          <div class="card-front">
+            <div class="en-text">{card?.shortDef ?? ''}</div>
+            {#if card?.morph}
+              <div class="morph-tag">{morphLabel(card.morph)}</div>
+            {/if}
+            <div class="flip-hint">tap to reveal</div>
+          </div>
+          <!-- Back: Hebrew -->
+          <div class="card-back">
+            <div class="he-text" dir="rtl">{card?.dictEntry ?? ''}</div>
+            {#if card?.audioUrl}
+              <button class="audio-btn" on:click|stopPropagation={() => playAudio(card.audioUrl)} title="Play audio">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                </svg>
+              </button>
+            {/if}
+          </div>
+        {/if}
 
       </div>
     </div>
@@ -117,7 +202,7 @@
       </button>
 
       <div class="dot-row">
-        {#each vocabList as _, i}
+        {#each activeDeck as _, i}
           <button
             class="dot"
             class:dot-active={i === index}
@@ -134,7 +219,15 @@
       </button>
     </div>
 
-    <p class="key-hint">← → to navigate · Space to flip</p>
+    <div class="bottom-row">
+      <p class="key-hint">← → to navigate · Space to flip</p>
+      <button class="remove-btn" on:click={removeCard} title="Remove this card from the deck">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+        </svg>
+        Remove card
+      </button>
+    </div>
   {/if}
 </div>
 
@@ -148,10 +241,96 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
+  .mode-row {
+    display: flex;
+    gap: 6px;
+    background: #f3f4f6;
+    border-radius: 8px;
+    padding: 4px;
+  }
+
+  .mode-btn {
+    font-size: 13px;
+    padding: 5px 14px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+
+  .mode-btn.mode-active {
+    background: #fff;
+    color: #111827;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
   .progress {
     font-size: 13px;
     color: #9ca3af;
   }
+
+  .reset-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #6b7280;
+    background: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .reset-btn:hover { background: #f3f4f6; color: #374151; }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 48px 0;
+  }
+
+  .empty {
+    font-size: 14px;
+    color: #9ca3af;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .bottom-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .remove-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #9ca3af;
+    background: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .remove-btn:hover { background: #fef2f2; color: #dc2626; border-color: #fca5a5; }
 
   .card {
     width: 100%;

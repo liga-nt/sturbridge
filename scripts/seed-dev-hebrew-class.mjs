@@ -17,7 +17,7 @@ const db = admin.firestore();
 
 async function main() {
     await db.collection('courses').doc('hebrew-alphabet').set({
-        label:           'Hebrew Alphabet',
+        label:           'Hebrew',
         grade:           null,
         subject:         'Hebrew',
         contentKey:      'hebrew-immersive',

@@ -68,7 +68,7 @@
   }
 
   .passage {
-    font-size: 20px;
+    font-size: 25px;
     line-height: 1.9;
     color: #1a1a1a;
     margin: 0;

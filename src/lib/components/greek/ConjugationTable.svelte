@@ -268,20 +268,20 @@
   }
 
   .paradigm-label {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
     color: #374151;
     margin-bottom: 2px;
   }
 
   .paradigm-headword {
-    font-size: 14px;
+    font-size: 18px;
     color: #6b7280;
     margin-bottom: 4px;
   }
 
   .paradigm-note {
-    font-size: 11px;
+    font-size: 14px;
     color: #9ca3af;
     margin-bottom: 6px;
     font-style: italic;
@@ -289,7 +289,7 @@
 
   .paradigm-table {
     border-collapse: collapse;
-    font-size: 13px;
+    font-size: 16px;
     width: 100%;
   }
 
@@ -304,7 +304,7 @@
     background: #f3f4f6;
     font-weight: 600;
     color: #374151;
-    font-size: 11px;
+    font-size: 13px;
     white-space: nowrap;
   }
 
@@ -313,7 +313,7 @@
     font-weight: 600;
     color: #374151;
     text-align: right !important;
-    font-size: 11px;
+    font-size: 13px;
     white-space: nowrap;
   }
 
@@ -328,7 +328,7 @@
   }
 
   .paradigm-missing {
-    font-size: 12px;
+    font-size: 15px;
     color: #9ca3af;
     font-style: italic;
   }

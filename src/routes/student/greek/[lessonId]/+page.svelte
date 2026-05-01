@@ -986,19 +986,21 @@
   /* Analysis bar — Reader.svelte pattern */
   .analysis-bar {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
-    font-size: 15px;
+    font-size: 19px;
     line-height: 1.5;
-    min-height: 32px;
+    height: 48px;
     background: #fff;
     color: #111;
+    overflow: hidden;
   }
 
   .analysis-inner {
     display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
+    align-items: center;
+    flex-wrap: nowrap;
     gap: 6px;
-    padding: 6px 16px;
+    padding: 0 16px;
+    height: 100%;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
@@ -1013,7 +1015,7 @@
   }
 
   .word-form {
-    font-size: 17px;
+    font-size: 21px;
     font-weight: 700;
   }
 
