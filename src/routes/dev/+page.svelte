@@ -17,6 +17,7 @@
             <a href="/dev/algo-check" class="text-sm text-indigo-600 hover:underline">Algo Check</a>
             <a href="/dev/schools" class="text-sm text-indigo-600 hover:underline">Manage Schools</a>
             <a href="/dev/greek" class="text-sm text-indigo-600 hover:underline">Greek Workshop</a>
+            <a href="/dev/chapters" class="text-sm text-indigo-600 hover:underline">Story Editor</a>
         </div>
 
         <!-- Admin View -->

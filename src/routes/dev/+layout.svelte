@@ -28,6 +28,7 @@
                 <a href="/dev/schools" class="text-indigo-200 hover:text-white text-sm">Schools</a>
                 <a href="/dev/standards" class="text-indigo-200 hover:text-white text-sm">Standards</a>
                 <a href="/dev/greek" class="text-indigo-200 hover:text-white text-sm">Greek</a>
+                <a href="/dev/chapters" class="text-indigo-200 hover:text-white text-sm">Chapters</a>
                 <span class="mx-2 text-indigo-700">|</span>
                 <a href="/student" class="text-indigo-300 hover:text-white text-sm">Student</a>
             </div>
