@@ -1,0 +1,203 @@
+{
+  "story": "The Aporia of the Children",
+  "version": 2,
+  "chapters": [
+    {
+      "chapter_id": "ch_01_athens",
+      "title": "The Wisest Man in Athens",
+      "setting": "Athens, 401 BCE",
+      "centered_on": "Socrates — narrated in his voice; first encounter with the children",
+      "description": "Narrated by Socrates. He is debating the ideal state under a fig tree with students including Plato (scroll in hand) and Glaucon — Plato argues for philosopher-kings, Glaucon for courage, Socrates insisting no one has yet defined justice. Four children arrive on foot from the harbor. Pallas, the oldest (about thirteen, watchful), speaks first. Dolios, the youngest boy (quick-eyed, eager), offers a book as proof — a stiff-covered modern volume with an Acropolis illustration, BCE dates, a fine map of the Aegean, and a section on the Persian Wars. When a page about Socrates' own trial comes into view, Dolios closes it sharply. Socrates notes dryly that the book increases his skepticism — he distrusts writing as a substitute for dialogue. Klēta, the youngest girl (ten, sharp-eyed), then offers something better: their boat is at Piraeus. Socrates, who considers boats more honest than books, agrees to go see it. The chapter ends as the whole group walks down to the harbor.",
+      "status": "WRITTEN",
+      "standards_covered": [
+        "geo.athens",
+        "hist.author.plato"
+      ]
+    },
+    {
+      "chapter_id": "ch_02_piraeus",
+      "title": "Against the Wind",
+      "setting": "Piraeus, 401 BCE",
+      "centered_on": "Socrates — narrated in his voice; the boat, the Oresteia, the children's disagreement, Plato on the Thirty, the oracle sendoff",
+      "description": "Narrated by Socrates. He sees the boat's rigging and sits down stunned. Klēta explains patiently that it can sail against the wind. This triggers his memory of watching Aeschylus premier the Oresteia at age twelve: the backstory of Agamemnon sacrificing Iphigeneia for a favorable wind; the chain of vengeance through Clytemnestra and Orestes; Athena convening the first murder trial at the Areopagus; Orestes acquitted and the Furies transformed into the Eumenides — the court offering a justice vengeance never could. Socrates then asks the children what virtue their society has lost. All four contradict each other: Pallas wants courage and discipline, Dolios wants inspiration and unity, Klēta wants better institutions, Phoebe wants devotion to something larger. Plato, watching from a mooring post, intervenes: he recounts the Tyranny of the Thirty, fifteen hundred Athenians killed in eight months, and names Critias — one of the architects of the terror, formerly a student of Socrates and a friend of theirs. Socrates explains the oracle's declaration: not that he is wise, but that no one is wiser, because he alone knows what he does not know. He sends them to the oracle at Delphi. The chapter closes the next morning as Socrates watches their boat sail at 45 degrees into a strong headwind, fishermen stopping to stare.",
+      "status": "WRITTEN",
+      "standards_covered": [
+        "geo.athens",
+        "geo.delphi",
+        "geo.troy",
+        "hist.author.aeschylus",
+        "myth.deity.athena"
+      ]
+    },
+    {
+      "chapter_id": "ch_03_storm",
+      "title": "The Storm",
+      "setting": "Cape Cod (the Atlantic) → the Aegean",
+      "centered_on": "Phoebe — the voice of the storm; Socrates narrates retrospectively",
+      "description": "Narrated by Socrates as a retrospective digression after the children depart for Delphi. He recounts what the children told him about how they arrived: they took the boat without permission from a cove near Orleans on Cape Cod, wanting quiet, speed, a rigging test, and to keep the others safe. After an hour of happiness, the storm arrived without warning — not building, just there. Pallas took the tiller, Klēta the ropes, Dolios was washed overboard and hauled back by his ankle. Phoebe alone went still, sensing the storm had a voice and that the right response was to listen. Socrates names the voice: Poseidon. When the storm stops all at once, the coastline is wrong — deep blue water, silver-leafed hills, not Cape Cod. Pallas realizes first. Phoebe understands the shape of it: she has been carried somewhere that did not ask her permission, like Odysseus on the beach of the Phaeacians. The boat is undamaged. They sail to shore east of Piraeus and walk up toward the city. Closes with Socrates admitting he was already waiting, though he would not have said so, for a small boat to come back around the point from the east.",
+      "status": "WRITTEN",
+      "standards_covered": [
+        "geo.aegean_sea",
+        "myth.deity.poseidon"
+      ]
+    },
+    {
+      "chapter_id": "ch_04_delphi",
+      "title": "The Oracle",
+      "setting": "Delphi, 401 BCE",
+      "centered_on": "Phoebe — the inscription, the omphalos, the oracle's voice; Socrates narrates retrospectively",
+      "description": "Narrated by Socrates from what the children told him. They sail the Gulf of Corinth to Kirrha and climb to Delphi. Dolios reads every dedication on the Sacred Way aloud — Marathon, Salamis — until Phoebe observes that only the victors left dedications. At the temple entrance, Phoebe reads the inscription aloud: Γνῶθι σεαυτόν — Know thyself — and is unsettled that the god's temple hands the question back rather than answering it. Inside, Klēta circles the omphalos, Pallas interrogates a priest about whether they truly believe it is the world's center, and Dolios flatters his way to the inner sanctuary. Phoebe stands still before the omphalos, listening — as she did in the storm. The Pythia speaks in verse: four 'Go where...' lines. Outside, the children interpret it four ways: Phoebe hears a call toward truth, Pallas hears a command to go home, Klēta hears four unrelated sentences, Dolios thinks they need more questions. Socrates reflects on the Croesus and wooden-walls stories — oracles say both things and neither. Closes with Phoebe lying on the boat deck that night, watching the stars, turning 'Know thyself' over: she thinks it means knowing yourself well enough to ask the right question. She does not yet think it means anything else.",
+      "status": "WRITTEN",
+      "oracle_lines": [
+        "Go where the few faced fire but did not burn.",
+        "Go where the sorrows of kings and peasants churn.",
+        "Go where the greatest stories outstrip the author's hand.",
+        "Go where the widest sea can finally meet the land."
+      ],
+      "standards_covered": [
+        "geo.delphi",
+        "hist.battle.marathon",
+        "hist.battle.salamis",
+        "myth.deity.apollo",
+        "myth.deity.zeus",
+        "myth.story.perseus_medusa"
+      ]
+    },
+    {
+      "chapter_id": "ch_05_persian_wars",
+      "title": "Fire from the East",
+      "setting": "Marathon (490 BCE) → Thermopylae → Athens (480–479 BCE)",
+      "centered_on": "Dolios — heroism as answer; first disillusionment",
+      "description": "Narrated by Socrates retrospectively — this is the history he knows in his bones: he was three when Athens burned. Morning after Delphi: Dolios wakes first and describes a dream-visit from Hermes — the winged sandals, the caduceus (winged staff with two intertwined serpents), the god of messengers, travelers, and inventors who says he has something of Dolios in him. Hermes decodes the first oracle line: the narrow pass where the few faced the many. He will guide the ship not through space only but through time. Phoebe confirms: the first line is Dolios's. The boat moves — stars spin, seasons slip — and they arrive at the plain of Marathon (490 BCE). A young soldier tells them everything: Darius, the Persians landing on the flat shore, the Spartans declining because of the Carneia festival, the Athenians and Plataeans running at a run to close the distance before the archers could find them, six thousand Persians dead. They sleep; the boat takes them ten years forward. Xerxes crosses the Hellespont on a bridge of boats. They sail past Euboea to Thermopylae: Leonidas and three hundred Spartans. The traitor Ephialtes reveals the mountain path. The three hundred stay and die. The children sail south with the evacuating Athenian fleet. Athens burns. They hear of Salamis: the Persian fleet trapped in the narrow strait. Xerxes retreats. Dolios sits on fallen marble in the ruins. Klēta quotes Herodotus. Something has cracked. Pallas reads the second oracle line. It is hers.",
+      "status": "WRITTEN",
+      "oracle_line": "Go where the few faced fire but did not burn. (Dolios's line — now spent)",
+      "standards_covered": [
+        "hist.period.persian_wars",
+        "hist.battle.marathon",
+        "hist.battle.thermopylae",
+        "hist.battle.salamis",
+        "hist.figure.darius",
+        "hist.figure.xerxes",
+        "hist.figure.leonidas",
+        "hist.author.herodotus",
+        "myth.deity.hermes",
+        "geo.hellespont",
+        "geo.euboea"
+      ]
+    },
+    {
+      "chapter_id": "ch_06_labyrinth",
+      "title": "What the Maker Made",
+      "setting": "Athens, 401 BCE — the road to the theater",
+      "centered_on": "Pallas — Daedalus as artist; oracle line 2 is hers",
+      "description": "Narrated by Socrates. The children have returned and are walking with Socrates toward the theater of Dionysus. Socrates tells the Theseus story: Minos, the Minotaur, Daedalus building the labyrinth, Ariadne's thread, Theseus. Includes the Androgeos backstory (Marathon as the site of Athens's earlier shame). Pallas asks whether the labyrinth was beautiful. Aegeus's black sail — Klēta names the Aegean Sea from the map. Pallas anticipates the wings. Daedalus sees Icarus flying out of reach with nothing to catch him. Klēta asks if Daedalus kept building — Socrates tells the frieze story: he tried to carve Icarus, his strength failed, he left it unfinished. Aristophanes mentioned drily when Dolios asks for comic relief. Theater comes into view.",
+      "status": "WRITTEN",
+      "note": "One weakness to fix: the oracle/labyrinth opening paragraph over-explains the metaphor.",
+      "standards_covered": [
+        "geo.crete",
+        "geo.aegean_sea",
+        "myth.story.theseus_minotaur",
+        "myth.story.daedalus_icarus"
+      ]
+    },
+    {
+      "chapter_id": "ch_07_colonus",
+      "title": "Oedipus at Colonus",
+      "setting": "Athens, 401 BCE — the theater of Dionysus and the Prytaneion",
+      "centered_on": "Pallas — the theater, the crowd, the play; Phoebe — Hestia's hearth",
+      "description": "Real-time narration. The theater of Dionysus: stone tiers, the orchestra, the altar of Dionysus, 15,000 Athenians. Posthumous premiere of Sophocles's last play. Oedipus arrives blind, led by Antigone. Theseus receives him with dignity — the moment the crowd goes quiet. Pallas watches the audience, not the stage. After the play, Phoebe leads them to the Prytaneion — Hestia's hearth, the city's common fire. Phoebe whispers to a priestess; they are fed as honored guests. The priestess was told she'd receive important visitors and wouldn't see another full cycle of the sun. She releases this and takes joy with the children. Phoebe and the priestess are still whispering when Morpheus takes Socrates.",
+      "status": "WRITTEN",
+      "standards_covered": [
+        "geo.athens",
+        "geo.thebes",
+        "hist.author.sophocles",
+        "myth.deity.dionysus",
+        "myth.deity.hestia"
+      ]
+    },
+    {
+      "chapter_id": "ch_08_golden_age",
+      "title": "The Golden Age",
+      "setting": "Athens, 401 BCE (Pallas's dream of Athens at its height)",
+      "centered_on": "Pallas — alone in the dream; Arachne as first warning about art and power",
+      "description": "Pallas wakes at dawn; the old priestess leads her out of the Prytaneion alone. She feels a pull upward — the streets look too clean, the light wrong. She dreams herself to the Acropolis at Athens's peak: the Parthenon gleaming white, never weathered. Athena Promachos in full bronze armor. A woman making an offering answers Pallas's question — she's made of Marathon, Athena makes what the city needs. Is Athena kind to artists? The woman tells Arachne: weaver who told the truth about the gods in thread, whose work was not inferior, destroyed anyway. 'The gods are kind and the gods are cruel. It is best not to forget who you are.' Pallas stares into the bronze eyes. She wakes on her couch in the Prytaneion — but now 428 BCE.",
+      "status": "WRITTEN",
+      "standards_covered": [
+        "geo.athens",
+        "myth.story.arachne",
+        "myth.deity.athena",
+        "myth.deity.poseidon"
+      ]
+    },
+    {
+      "chapter_id": "ch_09_pericles",
+      "title": "Pericles",
+      "setting": "Athens, 428 BCE",
+      "centered_on": "All children — waking in the plague year; Socrates on Pericles and democracy; Phoebe's prophecy to the young priestess",
+      "description": "The children wake in the Prytaneion to find Socrates gone — the room is the same but different, the priestess young. Klēta identifies 428 BCE from the archonship. Socrates narrates his own quiet side: woke alone, read Homer, waited. The priestess tells them Pericles died a year earlier from the plague. Dolios asks who Pericles was. Socrates explains: the Areopagus stripped of political power, pay for jury service, public offices opened to all classes — Athens made a democracy in practice, not just name. Pheidias brought from Olympia. The Funeral Oration: he said Athens was worth dying for, then faced the plague without complaint. The tribute ships are still running; Socrates draws the Midas parallel. Phoebe lingers behind to give the young priestess her prophecy: travelers will arrive in 27 years, at the end of her service.",
+      "status": "WRITTEN",
+      "standards_covered": [
+        "geo.athens",
+        "geo.olympia",
+        "hist.figure.pericles",
+        "hist.period.athenian_empire",
+        "myth.story.midas"
+      ]
+    },
+    {
+      "chapter_id": "ch_10_theater",
+      "title": "What the Poets Knew",
+      "setting": "Athens, 428 BCE",
+      "centered_on": "Pallas — aporia through Euripides; Klēta — meets Thucydides",
+      "description": "Continuing in 428 BCE. The children walk through plague-diminished Athens toward the Acropolis — the Parthenon still standing but without the glow of Pallas's dream, the population grieving and distrustful. Yet the city is still going to the theater. They see Medea (revived; set in Corinth, Medea from the Black Sea) and Hippolytus at the Dionysia. A stranger speaks to Pallas after Hippolytus: even Atalanta couldn't outrun Aphrodite. Pallas fills in the Atalanta myth herself. Klēta finds Thucydides and reads the Funeral Oration (still hopeful) then the plague description (the crack). He tells her he does not know what comes next. She already knows the ending from the book — Peace of Nicias (421), Sicily, Aegospotami (405) — and decides they must go where the history is finished.",
+      "status": "PLACEHOLDER",
+      "standards_covered": [
+        "hist.period.peloponnesian_war",
+        "hist.author.euripides",
+        "hist.author.thucydides",
+        "hist.event.peace_of_nicias",
+        "hist.battle.aegospotami",
+        "myth.story.atalanta",
+        "myth.deity.aphrodite",
+        "myth.deity.artemis",
+        "myth.deity.hera",
+        "geo.corinth",
+        "geo.black_sea",
+        "geo.sparta",
+        "geo.sicily"
+      ]
+    },
+    {
+      "chapter_id": "ch_11_alexandria",
+      "status": "WRITTEN",
+      "title": "The Great Library",
+      "setting": "Alexandria, c. 240 BCE",
+      "centered_on": "Klēta — aporia (history never concludes); Dolios — the soldier's answer; Pallas — the Poetics and catharsis; Phoebe — Isis temple, oracle line 4 spent",
+      "description": "Eratosthenes is head librarian (Beta — second-best at ten things). Klēta finds the end of Thucydides mid-sentence at 411 BCE; Xenophon's account begins the next scroll without announcement. She reads Theopompus on Philip II: Chaeronea, Alexander's cavalry, the eastern campaigns (Issus, Gaugamela). The shelf keeps going. Pallas reads Aristotle's Poetics — catharsis: the darkness is the mechanism, not the failure. Dolios goes into the city; talks to a retired soldier who marched with Alexander (was at Gaugamela, third rank). 'The city exists.' Phoebe visits a temple of Isis — the goddess who searched for what was scattered. 'Not to be told that loss is temporary. To be told that someone looked.' Oracle line 4 spent at the harbor at dusk: 'the widest sea can finally meet the land.' No more lines. Nobody knows what comes next.",
+      "standards_covered": [
+        "geo.alexandria",
+        "geo.nile",
+        "hist.period.rise_of_macedon",
+        "hist.period.hellenistic_age",
+        "hist.figure.philip_ii",
+        "hist.figure.alexander",
+        "hist.battle.issus",
+        "hist.battle.gaugamela",
+        "hist.battle.chaeronea",
+        "hist.author.thucydides"
+      ]
+    },
+    {
+      "chapter_id": "ch_12_return",
+      "status": "WRITTEN",
+      "title": "We Owe a Cock to Asclepius",
+      "setting": "Athens, 399 BCE",
+      "centered_on": "Ensemble — the trial, the prison, the last morning; the scroll as the story itself",
+      "description": "Meta-fictional frame: Socrates reveals this scroll is the story he wrote in prison, fulfilling the dream-command to make music. The trial: Prytaneion proposal, one-mina fine (Plato guarantees thirty), death by larger margin than the guilty verdict. Thirty days waiting for the sacred ship — the children come every morning. Crito's escape plan; Socrates refuses. The last morning: children sneak in, Socrates gives them the scroll (this story), tells them to take it home and keep asking. Dolios silent. Phoebe sits with him without speaking. They leave before the hemlock. Dolios: 'there is nothing in death that could take away what he was in life.' Storm home; Cape Cod cove.",
+      "standards_covered": [
+        "geo.athens",
+        "hist.author.plato"
+      ]
+    }
+  ]
+}

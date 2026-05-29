@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import { db } from '$lib/firebase/client';
   import questions2019 from '../../../../data/g4-math_2019_questions.json';
   import questions2021 from '../../../../data/g4-math_2021_questions.json';
   import questions2022 from '../../../../data/g4-math_2022_questions.json';
@@ -30,17 +29,11 @@
   let approvedMap = {};
 
   onMount(async () => {
-    // Load approval state from Firestore tips collection
     try {
-      const allItemIds = Object.values(years).flat().map(q => q.item_id);
-      const snaps = await Promise.all(allItemIds.map(id => getDoc(doc(db, 'tips', id))));
-      const map = {};
-      snaps.forEach((snap, i) => {
-        if (snap.exists() && snap.data()._approved) map[allItemIds[i]] = true;
-      });
-      approvedMap = map;
+      const res = await fetch('/dev/preview/api');
+      approvedMap = await res.json();
     } catch (e) {
-      console.warn('Could not load approvals from Firestore:', e);
+      console.warn('Could not load approvals:', e);
     }
   });
 
@@ -55,7 +48,11 @@
   async function toggleApproved() {
     const newVal = !approvedMap[q.item_id];
     approvedMap = { ...approvedMap, [q.item_id]: newVal };
-    await setDoc(doc(db, 'tips', q.item_id), { _approved: newVal }, { merge: true });
+    await fetch('/dev/preview/api', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ item_id: q.item_id, approved: newVal }),
+    });
   }
 
   // ── Student UI tester ─────────────────────────────────────────────────────

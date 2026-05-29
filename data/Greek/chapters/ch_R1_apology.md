@@ -1,4 +1,4 @@
-Chapter R1: What the Jury Decided
+The Jury
 
 I came down the steps of the court with the verdict still ringing in my ears, and there they were. Four children, salt-stained and breathless, pushing through the crowd as though the crowd were a hedge they had decided to walk through.
 

@@ -1,0 +1,100 @@
+{
+  "note": "Tracks coverage of NGE Introductory Exam hist/geo/myth standards across story chapters. Status: 'covered' = written chapter, 'planned' = placeholder chapter, 'at_risk' = no chapter currently addresses this standard.",
+  "standards": [
+
+    // ─── GEOGRAPHY ───────────────────────────────────────────────────────────
+
+    { "id": "geo.athens",      "status": "covered",  "chapters": ["ch_01", "ch_02", "ch_07", "ch_08", "ch_09", "ch_12"] },
+    { "id": "geo.delphi",      "status": "covered",  "chapters": ["ch_02", "ch_04"] },
+    { "id": "geo.troy",        "status": "covered",  "chapters": ["ch_02"] },
+    { "id": "geo.aegean_sea",  "status": "covered",  "chapters": ["ch_03", "ch_06"] },
+    { "id": "geo.crete",       "status": "covered",  "chapters": ["ch_06"] },
+    { "id": "geo.euboea",      "status": "covered",  "chapters": ["ch_05"] },
+    { "id": "geo.hellespont",  "status": "covered",  "chapters": ["ch_05"] },
+    { "id": "geo.olympia",     "status": "covered",  "chapters": ["ch_09"] },
+    { "id": "geo.thebes",      "status": "covered",  "chapters": ["ch_07"] },
+    { "id": "geo.corinth",     "status": "covered",  "chapters": ["ch_02", "ch_10"] },
+    { "id": "geo.black_sea",   "status": "covered",  "chapters": ["ch_10"], "note": "Named in Medea backstory — Jason sailed to Colchis on the Black Sea" },
+    { "id": "geo.sicily",      "status": "covered",  "chapters": ["ch_10", "ch_11"], "note": "Named in ch_11 Klēta's reading — Athens sent fleet across the Ionian Sea to Sicily" },
+    { "id": "geo.sparta",      "status": "covered",  "chapters": ["ch_05", "ch_10"], "note": "Named in ch_05 (Carneia festival) and ch_10 (Thucydides — Sparta won't break)" },
+    { "id": "geo.alexandria",  "status": "covered",  "chapters": ["ch_11"] },
+    { "id": "geo.nile",        "status": "covered",  "chapters": ["ch_11"] },
+    { "id": "geo.mycenae",     "status": "covered",  "chapters": ["ch_02"], "note": "Agamemnon named as king of Mycenae in Oresteia backstory" },
+    { "id": "geo.rhodes",      "status": "covered",  "chapters": ["ch_11"], "note": "Passed in the night on voyage south to Alexandria" },
+    { "id": "geo.ionian_sea",  "status": "covered",  "chapters": ["ch_11"], "note": "Named in Klēta's reading — Athens sent fleet across the Ionian Sea to Sicily, 415 BCE" },
+    { "id": "geo.adriatic_sea","status": "at_risk",  "chapters": [], "note": "No natural placement; no chapter reaches Italy or the western Adriatic" },
+
+    // ─── HISTORY — PERIODS ───────────────────────────────────────────────────
+
+    { "id": "hist.period.persian_wars",     "status": "covered", "chapters": ["ch_05"] },
+    { "id": "hist.period.athenian_empire",  "status": "covered", "chapters": ["ch_09"] },
+    { "id": "hist.period.peloponnesian_war","status": "covered", "chapters": ["ch_10"], "note": "Thucydides describes the war unfolding; plague as its backdrop; Klēta reads the full arc in ch_11" },
+    { "id": "hist.period.rise_of_macedon",  "status": "covered", "chapters": ["ch_11"] },
+    { "id": "hist.period.hellenistic_age",  "status": "covered", "chapters": ["ch_11"] },
+
+    // ─── HISTORY — FIGURES ───────────────────────────────────────────────────
+
+    { "id": "hist.figure.darius",    "status": "covered", "chapters": ["ch_05"] },
+    { "id": "hist.figure.xerxes",    "status": "covered", "chapters": ["ch_05"] },
+    { "id": "hist.figure.leonidas",  "status": "covered", "chapters": ["ch_05"] },
+    { "id": "hist.figure.pericles",  "status": "covered", "chapters": ["ch_09"] },
+    { "id": "hist.figure.philip_ii", "status": "covered", "chapters": ["ch_11"] },
+    { "id": "hist.figure.alexander", "status": "covered", "chapters": ["ch_11"] },
+
+    // ─── HISTORY — BATTLES & EVENTS ──────────────────────────────────────────
+
+    { "id": "hist.battle.marathon",       "status": "covered", "chapters": ["ch_04", "ch_05"] },
+    { "id": "hist.battle.thermopylae",    "status": "covered", "chapters": ["ch_05"] },
+    { "id": "hist.battle.salamis",        "status": "covered", "chapters": ["ch_04", "ch_05"] },
+    { "id": "hist.event.peace_of_nicias", "status": "covered", "chapters": ["ch_10", "ch_11"], "note": "Named in ch_10 (Klēta knows the ending); Klēta reads through it in ch_11 shelves" },
+    { "id": "hist.battle.aegospotami",    "status": "covered", "chapters": ["ch_10", "ch_11"], "note": "Named in ch_10 and acknowledged as part of Klēta's reading in ch_11" },
+    { "id": "hist.battle.chaeronea",      "status": "covered", "chapters": ["ch_11"] },
+    { "id": "hist.battle.issus",          "status": "covered", "chapters": ["ch_11"] },
+    { "id": "hist.battle.gaugamela",      "status": "covered", "chapters": ["ch_11"] },
+
+    // ─── HISTORY — AUTHORS ───────────────────────────────────────────────────
+
+    { "id": "hist.author.plato",      "status": "covered", "chapters": ["ch_01", "ch_02", "ch_12"] },
+    { "id": "hist.author.aeschylus",  "status": "covered", "chapters": ["ch_02"] },
+    { "id": "hist.author.sophocles",  "status": "covered", "chapters": ["ch_07", "ch_09"] },
+    { "id": "hist.author.herodotus",  "status": "covered", "chapters": ["ch_05", "ch_09"] },
+    { "id": "hist.author.euripides",  "status": "covered", "chapters": ["ch_10"], "note": "Medea and Hippolytus performed; Pallas analyzes his approach to tragedy" },
+    { "id": "hist.author.thucydides", "status": "covered", "chapters": ["ch_10", "ch_11"], "note": "Appears in person in ch_10; Klēta reads his complete history in ch_11" },
+
+    // ─── MYTHOLOGY — DEITIES ─────────────────────────────────────────────────
+
+    { "id": "myth.deity.zeus",       "status": "covered", "chapters": ["ch_04", "ch_08", "ch_09"] },
+    { "id": "myth.deity.poseidon",   "status": "covered", "chapters": ["ch_03", "ch_06", "ch_08", "ch_10", "ch_12"] },
+    { "id": "myth.deity.athena",     "status": "covered", "chapters": ["ch_02", "ch_04", "ch_08", "ch_09", "ch_10", "ch_12"] },
+    { "id": "myth.deity.hermes",     "status": "covered", "chapters": ["ch_04", "ch_05"] },
+    { "id": "myth.deity.hestia",     "status": "covered", "chapters": ["ch_07"] },
+    { "id": "myth.deity.dionysus",   "status": "covered", "chapters": ["ch_07", "ch_09"] },
+    { "id": "myth.deity.apollo",     "status": "covered", "chapters": ["ch_04"] },
+    { "id": "myth.deity.aphrodite",  "status": "covered", "chapters": ["ch_02", "ch_10"], "note": "Named in ch_02 (caught with Ares); opens Hippolytus in ch_10 with her case" },
+    { "id": "myth.deity.hera",       "status": "covered", "chapters": ["ch_10"], "note": "Named as Jason's protector through the Argonauts in Medea backstory" },
+    { "id": "myth.deity.hades",      "status": "covered", "chapters": ["ch_05"], "note": "Persian soldier says fallen Spartans moved 'with that spirit' on their journey to Hades" },
+    { "id": "myth.deity.demeter",    "status": "covered", "chapters": ["ch_11"], "note": "Grain offering at Alexandria harbor pier; Demeter named by Dolios" },
+    { "id": "myth.deity.ares",       "status": "covered", "chapters": ["ch_02", "ch_05"], "note": "Named in Hephaestus's golden-net myth told in Piraeus opening" },
+    { "id": "myth.deity.hephaestus", "status": "covered", "chapters": ["ch_02"], "note": "Named as maker of the golden nets; Socrates uses myth to describe children's rigging" },
+    { "id": "myth.deity.artemis",    "status": "covered", "chapters": ["ch_10"], "note": "Arrives too late to save Hippolytus; Dolios notes the gods are fighting and humans are caught between them" },
+
+    // ─── MYTHOLOGY — STORIES ─────────────────────────────────────────────────
+
+    { "id": "myth.story.theseus_minotaur", "status": "covered", "chapters": ["ch_06"] },
+    { "id": "myth.story.daedalus_icarus",  "status": "covered", "chapters": ["ch_06"] },
+    { "id": "myth.story.midas",            "status": "covered", "chapters": ["ch_09"] },
+    { "id": "myth.story.arachne",          "status": "covered", "chapters": ["ch_08", "ch_09"] },
+    { "id": "myth.story.perseus_medusa",   "status": "covered", "chapters": ["ch_04"] },
+    { "id": "myth.story.atalanta",         "status": "covered", "chapters": ["ch_10"], "note": "Told by old man outside theater — race, golden apples, Aphrodite's revenge" }
+  ],
+
+  "summary": {
+    "covered": 58,
+    "planned": 0,
+    "at_risk": 1
+  },
+
+  "at_risk_list": [
+    "geo.adriatic_sea — no natural placement; no chapter reaches the waters between Greece and Italy"
+  ]
+}

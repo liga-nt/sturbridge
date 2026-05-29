@@ -1243,6 +1243,24 @@ function generate2023Q5() {
   };
 }
 
+// 2023 Q6: NumberLinePlot — plot a hundredths fraction on a 0–1 number line
+// Standard 4.NF.C.6: Use decimal notation for fractions with denominators 10 or 100.
+function generate2023Q6() {
+  // Pick a value not on a tenths boundary so the student must place between tick marks
+  const tenths = randInt(1, 8);
+  const hundredths = randInt(1, 9);
+  const num = tenths * 10 + hundredths;
+  const value = (num / 100).toFixed(2);
+
+  return {
+    question_number: '6',
+    answer_type: 'number_line_plot',
+    stimulus_params: { min: 0, max: 1, small_intervals: 10 },
+    question_text: `Plot the point that represents the location of [${num}/100] on this number line.`,
+    correct_answer: value
+  };
+}
+
 // 2023 Q2: MultipleChoice — extend an arithmetic sequence to find which day hits the target
 function generate2023Q2() {
   const scenarios = [
@@ -3245,6 +3263,314 @@ function generate2023Q19() {
     has_visual: true,
     visual_description: `Rectangle divided into ${denom} equal vertical parts with ${remaining} parts shaded (${remaining}/${denom} remaining).`,
     correct_answer: `[${remaining}/${denom}]`,
+  };
+}
+
+// ─── 2023 Q9–Q20 remaining generators ────────────────────────────────────────
+
+// 2023 Q9: MultipleChoice — 6-digit minus 4-digit subtraction
+// Standard: 4.NBT.B.4 — fluently add/subtract multi-digit whole numbers
+function generate2023Q9() {
+  const minuend = randInt(200, 800) * 1000 + randInt(100, 999);
+  const subtrahend = randInt(1000, 9999);
+  const diff = minuend - subtrahend;
+
+  const pool = shuffle([
+    { val: diff,        isCorrect: true  },
+    { val: diff + 100,  isCorrect: false }, // forgot to reduce hundreds digit after borrow
+    { val: diff + 1000, isCorrect: false }, // forgot to reduce thousands digit after borrow
+    { val: diff + 2000, isCorrect: false }, // double-missed borrow in thousands
+  ]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const correctLetter = letters[pool.findIndex(o => o.isCorrect)];
+
+  return {
+    question_number: '9',
+    answer_type: 'multiple_choice',
+    stimulus_intro: 'An expression is shown.',
+    math_expression: `${minuend.toLocaleString()} − ${subtrahend.toLocaleString()}`,
+    question_text: 'Which of these numbers is the difference of the expression?',
+    answer_options: pool.map((o, i) => ({ letter: letters[i], text: o.val.toLocaleString() })),
+    correct_answer: correctLetter,
+  };
+}
+
+// 2023 Q10: MultipleChoice — fraction of a full turn as angle degrees
+// Standard: 4.MD.C.5a — recognize angle turns through 1/n of a circle
+function generate2023Q10() {
+  const CASES = [
+    { num: 1, denom: 2, degrees: 180, distractors: [90, 120, 270]  },
+    { num: 1, denom: 3, degrees: 120, distractors: [45, 90, 180]   },
+    { num: 1, denom: 4, degrees: 90,  distractors: [45, 120, 180]  },
+    { num: 1, denom: 6, degrees: 60,  distractors: [30, 90, 120]   },
+    { num: 1, denom: 8, degrees: 45,  distractors: [30, 60, 90]    },
+    { num: 3, denom: 4, degrees: 270, distractors: [90, 180, 360]  },
+    { num: 2, denom: 3, degrees: 240, distractors: [120, 180, 270] },
+  ];
+  const c = pick(CASES);
+  const pool = shuffle([c.degrees, ...c.distractors]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const correctLetter = letters[pool.indexOf(c.degrees)];
+
+  return {
+    question_number: '10',
+    answer_type: 'multiple_choice',
+    question_text: `Which of these is the measure of an angle that turns through [${c.num}/${c.denom}] of a circle?`,
+    answer_options: pool.map((v, i) => ({ letter: letters[i], text: `${v}°` })),
+    correct_answer: correctLetter,
+  };
+}
+
+// 2023 Q12: MultipleChoice + AngleDiagram — sum of three consecutive arc angles
+// Standard: 4.MD.C.7 — add angle measures to find unknown angles
+function generate2023Q12() {
+  const baseAngle = randInt(10, 20);
+  let a, b, c, total, dAB, dBC, dAC;
+  do {
+    a = randInt(15, 55);
+    b = randInt(15, 55);
+    c = randInt(15, 45);
+    total = a + b + c;
+    dAB = a + b;   // forgot arc c
+    dBC = b + c;   // forgot arc a
+    dAC = a + c;   // forgot arc b (middle)
+  } while (
+    total < 50 || baseAngle + total > 170 ||
+    new Set([total, dAB, dBC, dAC]).size < 4
+  );
+
+  const angleT = baseAngle;
+  const angleS = angleT + c;
+  const angleR = angleS + b;
+  const angleQ = angleR + a;
+
+  const pool = shuffle([
+    { val: total, isCorrect: true  },
+    { val: dAB,   isCorrect: false },
+    { val: dBC,   isCorrect: false },
+    { val: dAC,   isCorrect: false },
+  ]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const correctLetter = letters[pool.findIndex(o => o.isCorrect)];
+
+  return {
+    question_number: '12',
+    answer_type: 'multiple_choice',
+    stimulus_intro: 'Some angle measures are shown in this diagram.',
+    stimulus_type: 'angle_diagram',
+    stimulus_params: {
+      center: 'V',
+      rays: [
+        { label: 'Q', angle: angleQ },
+        { label: 'R', angle: angleR },
+        { label: 'S', angle: angleS },
+        { label: 'T', angle: angleT },
+      ],
+      arc_labels: [
+        { between: ['Q', 'R'], text: `${a}°`, radius: 45 },
+        { between: ['R', 'S'], text: `${b}°`, radius: 52 },
+        { between: ['S', 'T'], text: `${c}°`, radius: 62 },
+      ],
+    },
+    question_text: `Angle QVR has a measure of ${a}°. Angle RVS has a measure of ${b}°. Angle SVT has a measure of ${c}°. Which of the following is the measure, in degrees, of angle QVT?`,
+    answer_options: pool.map((o, i) => ({ letter: letters[i], text: `${o.val}°` })),
+    correct_answer: correctLetter,
+  };
+}
+
+// 2023 Q14: MultipleChoice — mass unit conversion (kilograms to grams)
+// Standard: 4.MD.A.1 — know and apply relative sizes of measurement units
+function generate2023Q14() {
+  const objects = ['metal bar', 'rock', 'piece of wood', 'iron block', 'bag of sand'];
+  const obj = pick(objects);
+  const kg = randInt(2, 9);
+
+  const pool = shuffle([
+    { text: `${(kg * 10).toLocaleString()} grams`,    isCorrect: false }, // ×10 error
+    { text: `${(kg * 100).toLocaleString()} grams`,   isCorrect: false }, // ×100 error
+    { text: `${(kg * 1000).toLocaleString()} grams`,  isCorrect: true  }, // ×1000 correct
+    { text: `${(kg * 10000).toLocaleString()} grams`, isCorrect: false }, // ×10000 error
+  ]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const correctLetter = letters[pool.findIndex(o => o.isCorrect)];
+
+  return {
+    question_number: '14',
+    answer_type: 'multiple_choice',
+    question_text: `A ${obj} has a mass of ${kg} kilograms.\n\n Which of these is the mass, in <strong>grams</strong>, of the ${obj}?`,
+    answer_options: pool.map((o, i) => ({ letter: letters[i], text: o.text })),
+    correct_answer: correctLetter,
+  };
+}
+
+// 2023 Q15: MultipleChoice — perimeter equation for a rectangle
+// Standard: 4.MD.A.3 — apply perimeter formula for rectangles
+function generate2023Q15() {
+  const w = randInt(2, 12);
+  let l;
+  // l >= 3 prevents 2+2w+l equalling 2w+2l (which happens only when l=2)
+  do { l = randInt(3, 12); } while (l === w);
+
+  const perim   = 2 * w + 2 * l;
+  const area    = w * l;
+  const halfP   = w + l;
+  const wrongC  = 2 + w * 2 + l; // "2 + w × 2 + l" — order-of-operations confusion
+
+  return {
+    question_number: '15',
+    answer_type: 'multiple_choice',
+    question_text: `A rectangle has a width of ${w} inches and a length of ${l} inches.\n\n Which of these equations shows the perimeter, in inches, of the rectangle?`,
+    answer_options: [
+      { letter: 'A', text: `${w} + ${l} = ${halfP}` },
+      { letter: 'B', text: `${w} × ${l} = ${area}` },
+      { letter: 'C', text: `2 + ${w} × 2 + ${l} = ${wrongC}` },
+      { letter: 'D', text: `2 × ${w} + 2 × ${l} = ${perim}` },
+    ],
+    correct_answer: 'D',
+  };
+}
+
+// 2023 Q16: TrueFalseTable — rounding a 5-digit number to nearest hundred/thousand/ten-thousand
+// Standard: 4.NBT.A.3 — use place value understanding to round multi-digit whole numbers
+function generate2023Q16() {
+  let n, roundH, roundTH, roundTTH;
+  do {
+    n = randInt(11111, 98888);
+    roundH   = Math.round(n / 100) * 100;
+    roundTH  = Math.round(n / 1000) * 1000;
+    roundTTH = Math.round(n / 10000) * 10000;
+  } while (n % 100 === 50 || n % 1000 === 500 || n % 10000 === 5000);
+
+  // "Wrong direction" values: flip to the opposite rounding direction
+  // Each digit is the one that determines rounding at that place value
+  const tensDigit      = Math.floor((n % 100)   / 10);   // tens → nearest hundred
+  const hundredsDigit  = Math.floor((n % 1000)  / 100);  // hundreds → nearest thousand
+  const thousandsDigit = Math.floor((n % 10000) / 1000); // thousands → nearest ten-thousand
+
+  const wrongH   = tensDigit      >= 5 ? roundH   - 100   : roundH   + 100;
+  const wrongTH  = hundredsDigit  >= 5 ? roundTH  - 1000  : roundTH  + 1000;
+  const wrongTTH = thousandsDigit >= 5 ? roundTTH - 10000 : roundTTH + 10000;
+
+  // Mix of True/False — never all-true (too easy)
+  const patterns = [
+    [true,  true,  false],
+    [true,  false, true ],
+    [false, true,  true ],
+    [true,  false, false],
+    [false, true,  false],
+    [false, false, true ],
+  ];
+  const [r1, r2, r3] = pick(patterns);
+
+  const nStr = n.toLocaleString();
+  return {
+    question_number: '16',
+    answer_type: 'true_false_table',
+    stimulus_intro: `Round the number ${nStr} to the nearest hundred, the nearest thousand, and the nearest ten thousand.`,
+    question_text: 'Select "True" or "False" for each statement in the table.',
+    statements: [
+      { text: `${nStr} rounded to the nearest <strong>hundred</strong> is ${(r1 ? roundH : wrongH).toLocaleString()}.` },
+      { text: `${nStr} rounded to the nearest <strong>thousand</strong> is ${(r2 ? roundTH : wrongTH).toLocaleString()}.` },
+      { text: `${nStr} rounded to the nearest <strong>ten thousand</strong> is ${(r3 ? roundTTH : wrongTTH).toLocaleString()}.` },
+    ],
+    correct_answer: [r1, r2, r3].map(v => v ? 'True' : 'False').join(','),
+  };
+}
+
+// 2023 Q17: MultipleChoice — which total cost is a multiple of the item price?
+// Standard: 4.OA.A.3 — solve multistep word problems; interpret remainders
+function generate2023Q17() {
+  const SCENARIOS = [
+    { price: 3, item: 'juice boxes'   },
+    { price: 4, item: 'granola bars'  },
+    { price: 5, item: 'sandwiches'    },
+    { price: 6, item: 'meal kits'     },
+    { price: 7, item: 'boxed lunches' },
+    { price: 8, item: 'lunch trays'   },
+    { price: 9, item: 'meal deals'    },
+  ];
+  const sc = pick(SCENARIOS);
+  const { price, item } = sc;
+  const multiplier = randInt(5, 14);
+  const correct = price * multiplier;
+
+  // Build 3 non-multiples near correct
+  const candidates = [];
+  for (let delta = -8; delta <= 8; delta++) {
+    if (delta === 0) continue;
+    const v = correct + delta;
+    if (v > 0 && v % price !== 0) candidates.push(v);
+  }
+  const distractors = shuffle([...new Set(candidates)]).slice(0, 3);
+
+  const pool = shuffle([
+    { val: correct,        isCorrect: true  },
+    { val: distractors[0], isCorrect: false },
+    { val: distractors[1], isCorrect: false },
+    { val: distractors[2], isCorrect: false },
+  ]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const correctLetter = letters[pool.findIndex(o => o.isCorrect)];
+
+  return {
+    question_number: '17',
+    answer_type: 'multiple_choice',
+    stimulus_intro: 'A group of friends are going to eat lunch in the cafeteria.',
+    stimulus_list: [
+      `At the cafeteria, ${item} cost $${price} each.`,
+      'Each friend in the group will buy one.',
+    ],
+    question_text: `Which of these could be the <strong>total</strong> cost for all the friends in the group?`,
+    answer_options: pool.map((o, i) => ({ letter: letters[i], text: `$${o.val}` })),
+    correct_answer: correctLetter,
+  };
+}
+
+// 2023 Q20: MultipleChoice — fraction × whole number (bags of product)
+// Standard: 4.NF.B.4b — multiply a fraction by a whole number
+function generate2023Q20() {
+  // All cases produce a whole-number result
+  const CASES = [
+    { num: 3, denom: 4, bags: 8,  item: 'beans'    },
+    { num: 1, denom: 2, bags: 6,  item: 'flour'    },
+    { num: 2, denom: 3, bags: 9,  item: 'rice'     },
+    { num: 1, denom: 4, bags: 8,  item: 'sugar'    },
+    { num: 3, denom: 5, bags: 10, item: 'oats'     },
+    { num: 2, denom: 5, bags: 10, item: 'seeds'    },
+    { num: 3, denom: 4, bags: 4,  item: 'nuts'     },
+    { num: 1, denom: 3, bags: 6,  item: 'cornmeal' },
+    { num: 2, denom: 3, bags: 6,  item: 'lentils'  },
+  ];
+  const c = pick(CASES);
+  const { num, denom, bags, item } = c;
+  const correct = (num * bags) / denom; // whole number by CASES design
+
+  // Distractor A: bags ÷ denom then append numerator as fraction
+  //   (error: divide bags by denominator, ignore that numerator multiplies)
+  const whole1 = Math.floor(bags / denom);
+  const d1Text = `${whole1}[${num}/${denom}]`;
+
+  // Distractor B: bags + n/denom as mixed number (add instead of multiply)
+  const d2Text = `${bags}[${num}/${denom}]`;
+
+  // Distractor C: add all numbers together (num + denom + bags)
+  const d3Text = String(num + denom + bags);
+
+  const pool = shuffle([
+    { text: String(correct), isCorrect: true  },
+    { text: d1Text,          isCorrect: false },
+    { text: d2Text,          isCorrect: false },
+    { text: d3Text,          isCorrect: false },
+  ]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const correctLetter = letters[pool.findIndex(o => o.isCorrect)];
+
+  return {
+    question_number: '20',
+    answer_type: 'multiple_choice',
+    question_text: `A market sells ${item} in bags. Each bag has [${num}/${denom}] pound of ${item}. How many pounds of ${item} are in ${bags} bags altogether?`,
+    answer_options: pool.map((o, i) => ({ letter: letters[i], text: o.text })),
+    correct_answer: correctLetter,
   };
 }
 
@@ -5923,6 +6249,297 @@ function generate2022Q20() {
   };
 }
 
+// ─── 2025 remaining generators ───────────────────────────────────────────────
+
+// 2025 Q4: InlineChoice + RectangleDiagram — perimeter of a rectangle room
+// Standard: 4.MD.A.3
+function generate2025Q4() {
+  let w, h;
+  do {
+    w = randInt(4, 20);
+    h = randInt(4, 20);
+  } while (w === h);
+
+  const perim  = 2 * w + 2 * h;
+  const halfP  = w + h;        // forgot ×2 error
+  const area   = w * h;        // area confusion
+
+  // Sort options numerically for natural dropdown order
+  const numOpts = [halfP, perim, area].sort((a, b) => a - b).map(String);
+
+  return {
+    question_number: '4',
+    answer_type: 'inline_choice',
+    stimulus_intro: `A room has a length of ${w} feet and a width of ${h} feet.`,
+    stimulus_type: 'rectangle_diagram',
+    stimulus_params: { width: w, height: h, width_label: `${w} feet`, height_label: `${h} feet` },
+    instruction: 'Select from the drop-down menus to correctly complete the sentence.',
+    sentences: ['The floor of the room has a perimeter of [RESPONSE_A1] [RESPONSE_A2].'],
+    dropdowns: [
+      { id: 'RESPONSE_A1', options: numOpts },
+      { id: 'RESPONSE_A2', options: ['feet', 'square feet'] },
+    ],
+    correct_answer: `${perim}|feet`,
+  };
+}
+
+// 2025 Q6: MultipleChoice — round a 6-digit number to the nearest thousand
+// Standard: 4.NBT.A.3
+function generate2025Q6() {
+  let N, roundTH;
+  do {
+    N = randInt(100, 999) * 1000 + randInt(1, 999);
+    roundTH = Math.round(N / 1000) * 1000;
+  } while (N % 1000 === 500); // avoid exact halfway
+
+  const d1 = roundTH - 1000;          // wrong direction
+  const d2 = roundTH + 1000;          // other wrong direction
+  const d3 = Math.ceil(N / 10000) * 10000; // nearest ten-thousand rounded up
+
+  const pool = shuffle([
+    { val: roundTH, isCorrect: true  },
+    { val: d1,      isCorrect: false },
+    { val: d2,      isCorrect: false },
+    { val: d3,      isCorrect: false },
+  ]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const correctLetter = letters[pool.findIndex(o => o.isCorrect)];
+
+  return {
+    question_number: '6',
+    answer_type: 'multiple_choice',
+    question_text: `Which of these numbers is ${N.toLocaleString()} rounded to the nearest <strong>thousand</strong>?`,
+    answer_options: pool.map((o, i) => ({ letter: letters[i], text: o.val.toLocaleString() })),
+    correct_answer: correctLetter,
+  };
+}
+
+// 2025 Q8: MultipleSelect — which equations correctly find y from "N = M × y"?
+// Standard: 4.OA.A.2 — multiply/divide to find unknown factor
+function generate2025Q8() {
+  const SCENARIOS = [
+    { N: 36, M: 4, obj: 'jars of paint',  group: 'students' },
+    { N: 45, M: 5, obj: 'apples',          group: 'students' },
+    { N: 28, M: 4, obj: 'books',           group: 'children' },
+    { N: 42, M: 6, obj: 'crayons',         group: 'students' },
+    { N: 48, M: 8, obj: 'stickers',        group: 'friends'  },
+    { N: 30, M: 5, obj: 'pencils',         group: 'students' },
+    { N: 56, M: 7, obj: 'markers',         group: 'children' },
+    { N: 35, M: 5, obj: 'cards',           group: 'students' },
+    { N: 24, M: 4, obj: 'cookies',         group: 'students' },
+    { N: 63, M: 9, obj: 'beads',           group: 'students' },
+  ];
+  const sc = pick(SCENARIOS);
+  const { N, M, obj, group } = sc;
+
+  return {
+    question_number: '8',
+    answer_type: 'multiple_select',
+    stimulus_intro: `A teacher has ${N} ${obj}. The number of ${obj} is ${M} times the number of ${group} in the class.`,
+    question_text: `Which of these equations can be used to find y, the number of ${group} in the class? Select the three correct answers.`,
+    select_count: 3,
+    answer_options: [
+      { letter: 'A', text: `${N} ÷ ${M} = y` },
+      { letter: 'B', text: `${M} × y = ${N}` },
+      { letter: 'C', text: `y ÷ ${M} = ${N}` },   // wrong: y = N×M
+      { letter: 'D', text: `${N} × y = ${M}` },   // wrong: y = M/N
+      { letter: 'E', text: `${N} ÷ y = ${M}` },
+    ],
+    correct_answer: 'A,B,E',
+  };
+}
+
+// 2025 Q9: MultipleChoice — angle measure for a fraction of a full turn
+// Standard: 4.MD.C.5a (same concept as 2023 Q10, different item)
+function generate2025Q9() {
+  const CASES = [
+    { num: 1, denom: 2, degrees: 180, distractors: [90, 120, 270]  },
+    { num: 1, denom: 3, degrees: 120, distractors: [45, 90, 180]   },
+    { num: 1, denom: 4, degrees: 90,  distractors: [45, 120, 180]  },
+    { num: 1, denom: 6, degrees: 60,  distractors: [30, 90, 120]   },
+    { num: 1, denom: 8, degrees: 45,  distractors: [30, 60, 90]    },
+    { num: 3, denom: 4, degrees: 270, distractors: [90, 180, 360]  },
+    { num: 2, denom: 3, degrees: 240, distractors: [120, 180, 270] },
+  ];
+  const c = pick(CASES);
+  const pool = shuffle([c.degrees, ...c.distractors]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const correctLetter = letters[pool.indexOf(c.degrees)];
+
+  return {
+    question_number: '9',
+    answer_type: 'multiple_choice',
+    question_text: `What is the measure of an angle that turns through [${c.num}/${c.denom}] of a circle?`,
+    answer_options: pool.map((v, i) => ({ letter: letters[i], text: `${v}°` })),
+    correct_answer: correctLetter,
+  };
+}
+
+// 2025 Q11: MultipleChoice — j jugs × n/d gallon each = total as improper fraction
+// Standard: 4.NF.B.4b — multiply a fraction by a whole number
+function generate2025Q11() {
+  const CASES = [
+    { j: 5, n: 3, d: 4, item: 'jugs',       fluid: 'gallon'  },
+    { j: 5, n: 2, d: 3, item: 'bottles',    fluid: 'liter'   },
+    { j: 7, n: 3, d: 4, item: 'containers', fluid: 'gallon'  },
+    { j: 3, n: 5, d: 8, item: 'pails',      fluid: 'gallon'  },
+    { j: 3, n: 7, d: 8, item: 'jugs',       fluid: 'gallon'  },
+    { j: 4, n: 3, d: 5, item: 'jugs',       fluid: 'liter'   },
+  ];
+  const c = pick(CASES);
+  const { j, n, d, item, fluid } = c;
+  const correctNum = j * n;           // (j×n)/d
+
+  // Distractor formulas — each matches a named misconception:
+  const d1Num = j * d + n;            // treats j as j wholes: j×d/d + n/d = (j×d+n)/d
+  const d2Num = n;  const d2Den = d*j; // divides denominator by j instead: n/(d×j)
+  const d3Num = j*n; const d3Den = d*j; // multiplies both: (j×n)/(d×j)
+
+  const pool = shuffle([
+    { top: correctNum,  bot: d,    isCorrect: true  },
+    { top: d1Num,       bot: d,    isCorrect: false },
+    { top: d2Num,       bot: d2Den, isCorrect: false },
+    { top: d3Num,       bot: d3Den, isCorrect: false },
+  ]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const correctLetter = letters[pool.findIndex(o => o.isCorrect)];
+
+  return {
+    question_number: '11',
+    answer_type: 'multiple_choice',
+    stimulus_intro: `There are ${j} ${item} on a table. Each ${item.replace(/s$/, '')} is filled with [${n}/${d}] ${fluid} of water.`,
+    question_text: `What is the total number of ${fluid}s of water in all of the ${item}?`,
+    answer_options: pool.map((o, i) => ({ letter: letters[i], text: `[${o.top}/${o.bot}]` })),
+    correct_answer: correctLetter,
+  };
+}
+
+// 2025 Q12: MultipleChoice — find w in a subtraction equation
+// Standard: 4.NBT.B.4
+function generate2025Q12() {
+  const N = randInt(200, 900) * 100 + randInt(10, 99);  // 5-digit minuend
+  const M = randInt(10, 99) * 100 + randInt(1, 99);     // 4-digit subtrahend
+  const diff = N - M;
+  const d = M % 10 === 0 ? 3 : Math.max(2, M % 9 || 3); // divisor proxy for distractor spacing
+
+  const pool = shuffle([
+    { val: diff,       isCorrect: true  },
+    { val: diff + 10,  isCorrect: false }, // error in ones/tens
+    { val: diff + 100, isCorrect: false }, // error in hundreds
+    { val: diff + 1000, isCorrect: false }, // error in thousands
+  ]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const correctLetter = letters[pool.findIndex(o => o.isCorrect)];
+
+  return {
+    question_number: '12',
+    answer_type: 'multiple_choice',
+    stimulus_intro: 'An equation is shown.',
+    math_expression: `${N.toLocaleString()} − ${M.toLocaleString()} = w`,
+    question_text: 'What value of w makes the equation true?',
+    answer_options: pool.map((o, i) => ({ letter: letters[i], text: o.val.toLocaleString() })),
+    correct_answer: correctLetter,
+  };
+}
+
+// 2025 Q16: MultipleSelect — identify 3 factors of a given number
+// Standard: 4.OA.B.4 — find factor pairs; determine factors
+function generate2025Q16() {
+  const CASES = [
+    { n: 64, options: [6,  8,  16, 24, 64, 128], correct: [8,  16, 64]  },
+    { n: 48, options: [6,  7,  8,  12, 14, 25],  correct: [6,  8,  12]  },
+    { n: 36, options: [6,  8,  9,  12, 14, 16],  correct: [6,  9,  12]  },
+    { n: 60, options: [7,  10, 12, 14, 15, 16],  correct: [10, 12, 15]  },
+    { n: 72, options: [7,  8,  9,  10, 12, 16],  correct: [8,  9,  12]  },
+    { n: 80, options: [6,  8,  10, 12, 16, 24],  correct: [8,  10, 16]  },
+    { n: 32, options: [4,  6,  8,  10, 16, 24],  correct: [4,  8,  16]  },
+    { n: 24, options: [4,  5,  6,  8,  9,  16],  correct: [4,  6,  8]   },
+  ];
+  const c = pick(CASES);
+  const sorted = [...c.options].sort((a, b) => a - b);
+  const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+  const correctLetters = c.correct
+    .map(f => letters[sorted.indexOf(f)])
+    .sort()
+    .join(',');
+
+  return {
+    question_number: '16',
+    answer_type: 'multiple_select',
+    question_text: `Which of these numbers are factors of ${c.n}? Select the three correct answers.`,
+    select_count: 3,
+    answer_options: sorted.map((v, i) => ({ letter: letters[i], text: String(v) })),
+    correct_answer: correctLetters,
+  };
+}
+
+// 2025 Q17: ShortAnswer — write a fraction equivalent to a hundredths decimal
+// Standard: 4.NF.C.6
+function generate2025Q17() {
+  // Not on a tenths boundary so the equivalent fraction is unambiguously N/100
+  const tens = randInt(1, 8);
+  const ones = randInt(1, 9);
+  const num = tens * 10 + ones;
+  const decimal = (num / 100).toFixed(2);
+
+  return {
+    question_number: '17',
+    answer_type: 'short_answer',
+    stimulus_intro: 'A decimal number is shown.',
+    math_expression: decimal,
+    question_text: 'Write a fraction that is equivalent to the decimal number.',
+    correct_answer: `${num}/100`,
+  };
+}
+
+// 2025 Q18: MultipleChoice — quotient of a 4-digit ÷ 1-digit expression
+// Standard: 4.NBT.B.6
+function generate2025Q18() {
+  const d = randInt(2, 9);
+  const q = randInt(200, 999);
+  const N = d * q;
+
+  // Distractors are offsets modeled on standard long-division errors
+  const pool = shuffle([
+    { val: q,           isCorrect: true  },
+    { val: q + 10,      isCorrect: false }, // ones/tens place error
+    { val: q + 19 * d,  isCorrect: false }, // multi-step carry error
+    { val: q + 27 * d,  isCorrect: false }, // larger carry accumulation
+  ]);
+  const letters = ['A', 'B', 'C', 'D'];
+  const correctLetter = letters[pool.findIndex(o => o.isCorrect)];
+
+  return {
+    question_number: '18',
+    answer_type: 'multiple_choice',
+    stimulus_intro: 'An expression is shown.',
+    math_expression: `${N.toLocaleString()} ÷ ${d}`,
+    question_text: 'What is the quotient of this expression?',
+    answer_options: pool.map((o, i) => ({ letter: letters[i], text: o.val.toLocaleString() })),
+    correct_answer: correctLetter,
+  };
+}
+
+// 2025 Q19: ShortAnswer — next term in a subtraction arithmetic sequence
+// Standard: 4.OA.C.5 — generate and analyze a number pattern
+function generate2025Q19() {
+  const STEPS = [-2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12];
+  const step = pick(STEPS);
+  // Start high enough that all 5 terms stay positive
+  const start = randInt(Math.abs(step) * 5 + 10, 400);
+  const terms = [0, 1, 2, 3].map(i => start + i * step);
+  const next  = start + 4 * step;
+
+  return {
+    question_number: '19',
+    answer_type: 'short_answer',
+    stimulus_intro: 'A student wrote this subtraction pattern.',
+    math_expression: `${terms.join(', ')}, . . .`,
+    question_text: "The student uses the same rule each time to find the next number in the pattern. What is the next number in the student's pattern?",
+    correct_answer: String(next),
+  };
+}
+
 // ─── Registry (keyed by item_id — stable across years and exam positions) ────
 
 export const generators = {
@@ -5974,23 +6591,42 @@ export const generators = {
   'MA247705':    generate2023Q3,
   'MA801035466': generate2023Q4,
   'MA002128911': generate2023Q5,
+  'MA002334462': generate2023Q6,
   'MA307060':    generate2023Q7,
+  'MA002140372': generate2023Q12,
   'MA002145158': generate2023Q11,
   'MA002139080': generate2023Q8,
   'MA307317':    generate2023Q13,
   'MA704653374': generate2023Q18,
   'MA900846441': generate2023Q19,
+  'MA002034926': generate2023Q9,
+  'MA903776098': generate2023Q10,
+  'MA002135528': generate2023Q14,
+  'MA903571693': generate2023Q15,
+  'MA001851276': generate2023Q16,
+  'MA001750121': generate2023Q17,
+  'MA303324':    generate2023Q20,
   // 2025
   'MA900754381': generate2025Q1,
   'MA136448521': generate2025Q2,
-  'MA232254177': generate2025Q5,
   'MA800780887': generate2025Q3,
+  'MA010534486': generate2025Q4,
+  'MA232254177': generate2025Q5,
+  'MA202029218': generate2025Q6,
+  'MA713677363': generate2025Q7,
+  'MA900741771': generate2025Q8,
+  'MA311554':    generate2025Q9,
   'MA232261850': generate2025Q10,
+  'MA233051799': generate2025Q11,
+  'MA307314':    generate2025Q12,
   'MA900776517': generate2025Q13,
   'MA231875780': generate2025Q14,
   'MA000732007': generate2025Q15,
+  'MA900750085': generate2025Q16,
+  'MA231836735': generate2025Q17,
+  'MA311543':    generate2025Q18,
+  'MA250533':    generate2025Q19,
   'MA002162929': generate2025Q20,
-  'MA713677363': generate2025Q7,
   // 2022
   'MA900845776': generate2022Q1,
   'MA307692':    generate2022Q2,

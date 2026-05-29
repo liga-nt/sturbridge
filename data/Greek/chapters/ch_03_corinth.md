@@ -1,10 +1,10 @@
-Chapter 3: The City That Has Everything
+Corinth
 
-When the children returned to me, weeks later, they told me that the oracle at Delphi had been less helpful than they had hoped, and that on their way back through the Corinthian Gulf they had stopped at the wealthiest city in Greece. I asked them to tell me about it, because I have always been curious about Corinth, in the way a man is curious about a relative who has done suspiciously well for himself.
+I have just told you about Delphi. But I realize I have skipped something, and a man who spends his life insisting on thoroughness should not skip things. On their way back from the oracle, sailing east through the Corinthian Gulf, the children stopped at the wealthiest city in Greece. They mentioned it almost as an afterthought when they returned to me — a detour, they said, a few days at most. I pressed them on it, because I have always been curious about Corinth, in the way a man is curious about a relative who has done suspiciously well for himself and refuses to explain how.
 
-This is what they told me. I will narrate it as best I can, though I was not there.
+So. This is what they told me, set down here before I continue the larger story.
 
-They came in through the western harbor at Lechaion and saw, almost at once, the diolkos — the paved track across the isthmus on which the Corinthians, for a fee, hauled entire ships overland from one sea to the other. Klēta, of course, wanted to know how it worked. She made Pallas wait while she walked the length of a few stones, examining the grooves cut into the limestone where the ship-cradles ran. A man does not usually drag a trireme across dry land, but in Corinth, apparently, one does. For a price.
+They came in through the western harbor at Lechaion and saw, almost at once, the diolkos — the paved track across the isthmus on which the Corinthians, for a fee, hauled entire ships overland from one sea to the other. Klēta, of course, wanted to know how it worked. She made the other kids wait while she walked the length of track examining the grooves cut into the limestone where the ship-cradles ran. One does not usually drag a trireme across dry land, but in Corinth, apparently, one does. For a price.
 
 Everything in Corinth was for a price. This was the first thing Dolios noticed, and he noticed it with the joy of a fish discovering the sea. The agora was four times the size of ours in Athens, and the goods in it had come from places I have only heard named in stories — cedar from Lebanon, ivory from somewhere south of Egypt, pottery painted in the Corinthian style that is exported to every corner of the Mediterranean, perfumes whose scents Phoebe could not identify and whose names she could not pronounce. Bronze of a particular alloy that Corinthians refuse to teach to outsiders. Fish sauce. Dyed wool. Slaves. Honey.
 
@@ -24,12 +24,8 @@ Pallas, who had been quiet most of the day, said: "There's a Greek word my tutor
 
 "That's not what's happening here," Dolios said. "Here everyone is getting their share. The shares are just bigger."
 
-Phoebe, who had been watching the priestesses move through the temple courtyard, said something the others did not at first understand. She said: "But Aphrodite isn't the goddess of having. She's the goddess of wanting. If she leaves the city, the city stops working."
+Not for long, Klēta said. She had her book open on her lap and explained matter-of-factly. 39 years from now, the Greek cities, including Athens, Thebes, and Corinth will be defeated at Chaeronea by Philip II of Macedon. After their defeat, the Greek Cities will form the League of Corinth and accept Philip II's rule. The richest city in Greece, Klēta said, will host the funeral of Greek freedom. Then she turned the page and kept reading.
 
-Dolios did not have an answer to that.
+Dolios looked forsaken. With all this wealth, why didn't they fight? They did, Klēta said. They just didn't win.
 
-I will mention one thing more, because the children could not have known it, and I did not know it then either, though I have since wondered. Corinth, for all its wealth, will one day host a meeting of the Greek cities at which they will agree — under duress — to follow a Macedonian king. His name will be Philip, and his army will have just won a battle at a place called Chaeronea, and the league he founds at Corinth will mark the end of the cities ruling themselves. The richest city in Greece will host the funeral of Greek freedom, and will pay for the wine.
-
-I do not know if this is significant. I only notice that the city which had everything was not, in the end, able to keep the one thing that mattered.
-
-The children sailed out the next morning through the eastern harbor at Kenchreai. Dolios watched the diolkos recede behind them with what Phoebe described as a complicated expression. He had wanted to stay another day. He had wanted, I think, to stay forever.
+The children sailed out the next morning through the eastern harbor at Kenchreai. Dolios watched the diolkos recede behind them with longing for a home you can never quite return to.
