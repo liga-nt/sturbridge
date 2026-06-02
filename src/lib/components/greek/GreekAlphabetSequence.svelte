@@ -2,8 +2,10 @@
   import { onMount, onDestroy } from 'svelte';
   import { keyToGreek } from '$lib/utils/greekKeyboard.js';
 
-  export let alphabet = [];
-  export let showQwertyHint = true;
+  export let alphabet   = [];
+  export let showQwertyHint = true; // kept for compat
+  export let hintKeys   = [];
+  export let inputMode  = 'greek-hints'; // 'greek-hints' | 'greek' | 'translit'
 
   // Groups: vowels / stops / fricatives / nasals+liquids / other
   const GROUPS = [
@@ -77,17 +79,52 @@
     }
   }
 
+  // ── Transliteration mode ─────────────────────────────────────────
+  $: translitMode = inputMode === 'translit';
+  let translitBuffer = '';
+
+  function bareTranslit(s) {
+    return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  }
+
+  $: activeLetter, (translitBuffer = '');
+  $: if (!translitMode) translitBuffer = '';
+
   // ── Shared ───────────────────────────────────────────────────────
   $: activeLetter = mode === 'groups'   ? (groupLetters[groupProgress] ?? null)
                   : mode === 'practice' ? practiceLetter
                   : currentLetter;
+
+  $: hintKeys = (inputMode === 'greek-hints' && activeLetter && !translitMode)
+      ? [activeLetter.qwerty_key.toLowerCase()] : [];
 
   function handleKey(e) {
     if (!activeLetter) return;
     if (['Tab','Escape','Delete','Control','Shift','Alt','Meta'].includes(e.key)) return;
     if (e.ctrlKey || e.altKey || e.metaKey) return;
 
-    // Arrow key navigation in sequence/groups
+    if (translitMode) {
+      if (e.key === 'Backspace') { translitBuffer = translitBuffer.slice(0, -1); return; }
+      if (e.key.length !== 1) return;
+      e.preventDefault();
+      const target = bareTranslit(activeLetter.transliteration);
+      const buf    = translitBuffer + e.key.toLowerCase();
+      if (buf === target) {
+        translitBuffer = '';
+        triggerFlash('correct');
+        if (mode === 'practice') practiceCorrect();
+        else if (mode === 'groups') groupCorrect();
+        else playLetter();
+      } else if (target.startsWith(buf)) {
+        translitBuffer = buf;
+      } else {
+        translitBuffer = '';
+        triggerFlash('wrong');
+      }
+      return;
+    }
+
+    // Arrow key navigation in sequence mode
     if (e.key === 'ArrowRight' && mode === 'sequence') {
       e.preventDefault();
       if (currentIndex < alphabet.length - 1) currentIndex++;
@@ -103,14 +140,14 @@
     const greek = keyToGreek(e.key);
     if (!greek) return;
 
-    if (greek === activeLetter.char_lower) {
+    if (mode === 'sequence') {
+      playLetter();
+    } else if (greek === activeLetter.char_lower) {
       triggerFlash('correct');
       if (mode === 'practice') {
         practiceCorrect();
       } else if (mode === 'groups') {
         groupCorrect();
-      } else {
-        playLetter();
       }
     } else {
       triggerFlash('wrong');
@@ -201,6 +238,14 @@
   function goToIndex(i) {
     if (mode !== 'sequence') return;
     currentIndex = i;
+    const letter = alphabet[i];
+    if (letter?.audio_url) {
+      if (audioEl) audioEl.pause();
+      audioEl = new Audio(letter.audio_url);
+      audioEl.play().catch(() => {});
+    }
+    // Re-focus hidden input after the click so keyboard input keeps working
+    setTimeout(focusInput, 0);
   }
 
   let hiddenInput;
@@ -212,11 +257,12 @@
     hiddenInput.value = '';
     const greek = /[Ͱ-Ͽἀ-῿]/.test(char) ? char : keyToGreek(char);
     if (!greek) return;
-    if (greek === activeLetter.char_lower) {
+    if (mode === 'sequence') {
+      playLetter();
+    } else if (greek === activeLetter.char_lower) {
       triggerFlash('correct');
       if (mode === 'practice') practiceCorrect();
       else if (mode === 'groups') groupCorrect();
-      else playLetter();
     } else {
       triggerFlash('wrong');
     }
@@ -247,14 +293,7 @@
 
 <div class="sequence-wrapper" on:click={focusInput} role="presentation">
 
-  <!-- Mode toggle -->
-  <div class="mode-row">
-    <button class="mode-btn" class:active={mode === 'sequence'} on:click={() => setMode('sequence')}>Sequence</button>
-    <button class="mode-btn" class:active={mode === 'groups'}   on:click={() => setMode('groups')}>Groups</button>
-    <button class="mode-btn" class:active={mode === 'practice'} on:click={() => setMode('practice')}>Practice</button>
-  </div>
-
-  {#if mode === 'groups'}
+{#if mode === 'groups'}
     <div class="group-label">{GROUP_NAMES[groupIndex]} <span class="group-of">({groupIndex + 1} of {GROUPS.length})</span></div>
     <div class="group-nav">
       {#each GROUPS as _, gi}
@@ -283,8 +322,11 @@
       {#if activeLetter && !(mode === 'groups' && groupDone)}
         <div class="greek-char">{activeLetter.char_upper}</div>
         <div class="greek-char greek-char-lower">{activeLetter.char_lower}</div>
-        {#if showQwertyHint}
-          <div class="qwerty-hint"><kbd>{activeLetter.qwerty_key}</kbd></div>
+        {#if translitMode}
+          <div class="translit-buffer">
+            {#if translitBuffer}<span class="buf-typed">{translitBuffer}</span><span class="buf-cursor">|</span>
+            {:else}<span class="buf-idle">—</span>{/if}
+          </div>
         {/if}
       {:else}
         <div class="complete-message">{mode === 'groups' ? 'Group complete!' : 'All 24 letters!'}</div>
@@ -314,21 +356,19 @@
     {:else}
       <div class="progress-strip">
         {#each alphabet as letter, i}
-          <button class="strip-tile" class:current={i === currentIndex} class:passed={i < currentIndex}
-            on:click={() => goToIndex(i)} title="{letter.name_en} ({letter.transliteration})">
-            {#if i < currentIndex}
-              <span class="check">✓</span>
-            {:else}
-              <span class="tile-char">{letter.char_lower}</span>
-            {/if}
+          <button class="strip-tile" class:current={i === currentIndex}
+            on:click|stopPropagation={() => goToIndex(i)} title="{letter.name_en} ({letter.transliteration})">
+            <span class="tile-char">{letter.char_lower}</span>
           </button>
         {/each}
       </div>
     {/if}
   {/if}
 
-  {#if mode === 'sequence'}
-    <div class="seq-hint">Press ← → to navigate · Press the QWERTY key to advance</div>
+  {#if translitMode}
+    <div class="seq-hint">Type the transliteration (e.g. th · ph · ch · ps)</div>
+  {:else if mode === 'sequence'}
+    <div class="seq-hint">Press ← → or any key to explore · click any letter to jump</div>
   {:else if mode === 'practice'}
     <div class="seq-hint">Press the QWERTY key shown — type the Greek letter</div>
   {:else}
@@ -351,8 +391,48 @@
     flex-direction: column;
     align-items: center;
     gap: 1.75rem;
-    padding: 2rem 1rem;
+    padding: 1.25rem 1rem 2rem;
   }
+
+  .seq-controls { display: flex; gap: 8px; }
+
+  .mode-pill {
+    padding: 4px 14px;
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    color: #9ca3af;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: line-through;
+    transition: all 0.15s;
+  }
+  .mode-pill:hover { color: #6b7280; background: #f3f4f6; }
+  .mode-pill.pill-on {
+    background: #eef2ff;
+    border-color: #a5b4fc;
+    color: #4338ca;
+    text-decoration: none;
+  }
+
+  .translit-buffer {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #4f46e5;
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+  }
+  .buf-typed  { color: #4f46e5; }
+  .buf-cursor { color: #a5b4fc; animation: blink 1s step-end infinite; }
+  .buf-idle   { color: #e2e8f0; font-weight: 400; }
+
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
 
   .letter-card {
     display: flex;

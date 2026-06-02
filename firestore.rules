@@ -101,6 +101,14 @@ service cloud.firestore {
       allow read:   if isTeacher() || isPriv();
     }
 
+    // ── sessions — students write own; teacher/admin read same-school classes ─
+    match /sessions/{sessionId} {
+      allow create: if isAuth() && request.resource.data.studentId == request.auth.uid;
+      allow read: if isDev()
+                  || ((isTeacher() || isAdmin())
+                      && get(/databases/$(database)/documents/classes/$(resource.data.classId)).data.schoolId == schoolId());
+    }
+
     // ── question variants / templates (dev content management) ───────────────
     match /questionVariants/{variantId} {
       allow read:  if isAuth();

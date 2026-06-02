@@ -844,21 +844,27 @@
       "pos": "verb",
       "conjugation": "omega",
       "definition": "report, tell",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αγγελλω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αγγελλω_en.mp3"
     },
     {
       "greek": "ἄγω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "lead, bring, pass (time)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αγω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αγω_en.mp3"
     },
     {
       "greek": "ἀδικέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "do wrong; injure",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αδικεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αδικεω_en.mp3"
     },
     {
       "greek": "αἱρέω",
@@ -866,42 +872,54 @@
       "conjugation": "omega",
       "middle_note": "(mid.) choose",
       "definition": "take, grasp",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιρεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιρεω_en.mp3"
     },
     {
       "greek": "αἴρω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "raise",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιρω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιρω_en.mp3"
     },
     {
       "greek": "αἰτέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "ask, beg",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιτεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιτεω_en.mp3"
     },
     {
       "greek": "ἀκούω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "hear",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ακουω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ακουω_en.mp3"
     },
     {
       "greek": "ἁμαρτάνω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "miss, fail, make a mistake",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αμαρτανω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αμαρτανω_en.mp3"
     },
     {
       "greek": "ἀποθνῄσκω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "die",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αποθνησκω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αποθνησκω_en.mp3"
     },
     {
       "greek": "ἀποκρίνω",
@@ -909,14 +927,18 @@
       "conjugation": "omega",
       "middle_note": "(mid.) answer, reply",
       "definition": "separate",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αποκρινω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αποκρινω_en.mp3"
     },
     {
       "greek": "ἀποκτείνω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "kill",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αποκτεινω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αποκτεινω_en.mp3"
     },
     {
       "greek": "βοηθέω",
@@ -924,42 +946,54 @@
       "conjugation": "omega",
       "governs": "+dat.",
       "definition": "assist",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βοηθεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βοηθεω_en.mp3"
     },
     {
       "greek": "βουλεύω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "deliberate, resolve",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βουλευω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βουλευω_en.mp3"
     },
     {
       "greek": "γιγνώσκω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "know, learn, judge, think",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γιγνωσκω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γιγνωσκω_en.mp3"
     },
     {
       "greek": "δεῖ",
       "pos": "verb",
       "conjugation": "impersonal",
       "definition": "it is necessary",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δει_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δει_en.mp3"
     },
     {
       "greek": "διδάσκω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "teach",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διδασκω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διδασκω_en.mp3"
     },
     {
       "greek": "διώκω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "pursue",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διωκω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διωκω_en.mp3"
     },
     {
       "greek": "δοκεῖ",
@@ -967,91 +1001,117 @@
       "conjugation": "impersonal",
       "governs": "+dat.",
       "definition": "it seems (best) to",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δοκει_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δοκει_en.mp3"
     },
     {
       "greek": "δοκέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "seem, seem good",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δοκεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δοκεω_en.mp3"
     },
     {
       "greek": "δράω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "do",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δραω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δραω_en.mp3"
     },
     {
       "greek": "ἐάω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "allow, permit",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εαω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εαω_en.mp3"
     },
     {
       "greek": "ἐλαύνω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "drive",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ελαυνω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ελαυνω_en.mp3"
     },
     {
       "greek": "ἐρωτάω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "ask",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ερωταω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ερωταω_en.mp3"
     },
     {
       "greek": "εὑρίσκω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "find",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ευρισκω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ευρισκω_en.mp3"
     },
     {
       "greek": "ζάω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "live",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ζαω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ζαω_en.mp3"
     },
     {
       "greek": "ζητέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "seek",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ζητεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ζητεω_en.mp3"
     },
     {
       "greek": "θαυμάζω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "be amazed",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θαυμαζω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θαυμαζω_en.mp3"
     },
     {
       "greek": "θύω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "sacrifice",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θυω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θυω_en.mp3"
     },
     {
       "greek": "κινέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "move",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κινεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κινεω_en.mp3"
     },
     {
       "greek": "κομίζω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "provide for",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κομιζω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κομιζω_en.mp3"
     },
     {
       "greek": "κρατέω",
@@ -1059,63 +1119,81 @@
       "conjugation": "omega",
       "governs": "+gen.",
       "definition": "rule, conquer",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κρατεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κρατεω_en.mp3"
     },
     {
       "greek": "κρίνω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "judge, decide, determine",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κρινω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κρινω_en.mp3"
     },
     {
       "greek": "κωλύω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "prevent",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κωλυω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κωλυω_en.mp3"
     },
     {
       "greek": "λαλέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "talk, babble",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λαλεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λαλεω_en.mp3"
     },
     {
       "greek": "νικάω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "conquer, win",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νικαω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νικαω_en.mp3"
     },
     {
       "greek": "ὀνομάζω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "call by name",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ονομαζω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ονομαζω_en.mp3"
     },
     {
       "greek": "ὁράω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "see",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οραω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οραω_en.mp3"
     },
     {
       "greek": "ὁρμάω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "urge; (intr.) hurry",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ορμαω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ορμαω_en.mp3"
     },
     {
       "greek": "παρέχω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "provide",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/παρεχω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/παρεχω_en.mp3"
     },
     {
       "greek": "πειράω",
@@ -1123,21 +1201,27 @@
       "conjugation": "omega",
       "governs": "+gen.",
       "definition": "try, test",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πειραω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πειραω_en.mp3"
     },
     {
       "greek": "πίνω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "drink",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πινω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πινω_en.mp3"
     },
     {
       "greek": "πίπτω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "fall",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πιπτω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πιπτω_en.mp3"
     },
     {
       "greek": "πιστεύω",
@@ -1145,14 +1229,18 @@
       "conjugation": "omega",
       "governs": "+dat.",
       "definition": "trust, rely on, believe in",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πιστευω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πιστευω_en.mp3"
     },
     {
       "greek": "πολεμέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "make war",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολεμεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολεμεω_en.mp3"
     },
     {
       "greek": "πορεύω",
@@ -1160,77 +1248,99 @@
       "conjugation": "omega",
       "middle_note": "(mid.) go, march",
       "definition": "carry",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πορευω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πορευω_en.mp3"
     },
     {
       "greek": "πράττω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "do",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πραττω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πραττω_en.mp3"
     },
     {
       "greek": "σκοπέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "look at, examine",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σκοπεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σκοπεω_en.mp3"
     },
     {
       "greek": "σῴζω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "save",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σωζω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σωζω_en.mp3"
     },
     {
       "greek": "τάττω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "arrange",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ταττω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ταττω_en.mp3"
     },
     {
       "greek": "τέμνω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "cut",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τεμνω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τεμνω_en.mp3"
     },
     {
       "greek": "τίκτω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "give birth",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τικτω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τικτω_en.mp3"
     },
     {
       "greek": "τιμάω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "honor",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τιμαω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τιμαω_en.mp3"
     },
     {
       "greek": "τολμάω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "dare",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τολμαω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τολμαω_en.mp3"
     },
     {
       "greek": "τρέπω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "turn",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τρεπω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τρεπω_en.mp3"
     },
     {
       "greek": "τρέφω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "feed, support, educate",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τρεφω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τρεφω_en.mp3"
     },
     {
       "greek": "φαίνω",
@@ -1238,7 +1348,9 @@
       "conjugation": "omega",
       "middle_note": "(mid.) appear to be (+infin.)",
       "definition": "make appear, explain",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φαινω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φαινω_en.mp3"
     },
     {
       "greek": "φοβέω",
@@ -1246,105 +1358,135 @@
       "conjugation": "omega",
       "middle_note": "(mid.) flee, fear",
       "definition": "frighten",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φοβεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φοβεω_en.mp3"
     },
     {
       "greek": "φυλάττω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "watch, guard, defend",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φυλαττω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φυλαττω_en.mp3"
     },
     {
       "greek": "φύω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "produce",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φυω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φυω_en.mp3"
     },
     {
       "greek": "αἰσθάνομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "perceive",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αισθανομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αισθανομαι_en.mp3"
     },
     {
       "greek": "ἀφικνέομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "come to, arrive at",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αφικνεομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αφικνεομαι_en.mp3"
     },
     {
       "greek": "βούλομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "want, be willing, prefer",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βουλομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βουλομαι_en.mp3"
     },
     {
       "greek": "γίγνομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "happen, become, be born",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γιγνομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γιγνομαι_en.mp3"
     },
     {
       "greek": "δέχομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "take, accept; welcome, entertain",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεχομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεχομαι_en.mp3"
     },
     {
       "greek": "δύναμαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "be able, can",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δυναμαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δυναμαι_en.mp3"
     },
     {
       "greek": "ἕπομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "follow",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/επομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/επομαι_en.mp3"
     },
     {
       "greek": "ἐργάζομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "work",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εργαζομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εργαζομαι_en.mp3"
     },
     {
       "greek": "ἔρχομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "come, go",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ερχομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ερχομαι_en.mp3"
     },
     {
       "greek": "ἡγέομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "lead, consider",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηγεομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηγεομαι_en.mp3"
     },
     {
       "greek": "κτάομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "get, acquire",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κταομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κταομαι_en.mp3"
     },
     {
       "greek": "μάχομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "fight",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μαχομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μαχομαι_en.mp3"
     },
     {
       "greek": "πειράομαι",
@@ -1352,14 +1494,18 @@
       "conjugation": "deponent",
       "governs": "+gen.",
       "definition": "try, test",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πειραομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πειραομαι_en.mp3"
     },
     {
       "greek": "πυνθάνομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "learn, hear, inquire about",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πυνθανομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πυνθανομαι_en.mp3"
     },
     {
       "greek": "αἰτία",
@@ -1368,7 +1514,9 @@
       "gender": "f",
       "genitive": "-ας",
       "definition": "cause, origin; accusation",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιτια_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιτια_en.mp3"
     },
     {
       "greek": "ἀνάγκη",
@@ -1377,7 +1525,9 @@
       "gender": "f",
       "genitive": "-ης",
       "definition": "necessity",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αναγκη_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αναγκη_en.mp3"
     },
     {
       "greek": "ἀλήθεια",
@@ -1387,7 +1537,9 @@
       "genitive": "-ας",
       "declension_subtype": "short-alpha nom./acc.",
       "definition": "truth",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αληθεια_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αληθεια_en.mp3"
     },
     {
       "greek": "βουλή",
@@ -1396,7 +1548,9 @@
       "gender": "f",
       "genitive": "-ῆς",
       "definition": "council, plan, advice",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βουλη_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βουλη_en.mp3"
     },
     {
       "greek": "γλῶττα",
@@ -1406,7 +1560,9 @@
       "genitive": "-ης",
       "declension_subtype": "short-alpha nom./acc.",
       "definition": "tongue, language",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γλωττα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γλωττα_en.mp3"
     },
     {
       "greek": "γνώμη",
@@ -1415,7 +1571,9 @@
       "gender": "f",
       "genitive": "-ης",
       "definition": "idea, intelligence, opinion",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γνωμη_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γνωμη_en.mp3"
     },
     {
       "greek": "δόξα",
@@ -1425,7 +1583,9 @@
       "genitive": "-ης",
       "declension_subtype": "short-alpha nom./acc.",
       "definition": "opinion, judgment, glory",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δοξα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δοξα_en.mp3"
     },
     {
       "greek": "ἐπιστήμη",
@@ -1434,7 +1594,9 @@
       "gender": "f",
       "genitive": "-ης",
       "definition": "knowledge",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/επιστημη_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/επιστημη_en.mp3"
     },
     {
       "greek": "ἡδονή",
@@ -1443,7 +1605,9 @@
       "gender": "f",
       "genitive": "-ῆς",
       "definition": "pleasure, enjoyment",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηδονη_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηδονη_en.mp3"
     },
     {
       "greek": "ἡμέρα",
@@ -1452,7 +1616,9 @@
       "gender": "f",
       "genitive": "-ας",
       "definition": "day",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ημερα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ημερα_en.mp3"
     },
     {
       "greek": "θάλαττα",
@@ -1462,7 +1628,9 @@
       "genitive": "-ης",
       "declension_subtype": "short-alpha nom./acc.",
       "definition": "sea",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θαλαττα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θαλαττα_en.mp3"
     },
     {
       "greek": "θεά",
@@ -1471,7 +1639,9 @@
       "gender": "f",
       "genitive": "-ᾶς",
       "definition": "goddess",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θεα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θεα_en.mp3"
     },
     {
       "greek": "οἰκία",
@@ -1480,7 +1650,9 @@
       "gender": "f",
       "genitive": "-ας",
       "definition": "building, house",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οικια_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οικια_en.mp3"
     },
     {
       "greek": "στρατιά",
@@ -1489,7 +1661,9 @@
       "gender": "f",
       "genitive": "-ᾶς",
       "definition": "army",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/στρατια_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/στρατια_en.mp3"
     },
     {
       "greek": "σωτηρία",
@@ -1498,7 +1672,9 @@
       "gender": "f",
       "genitive": "-ας",
       "definition": "safety",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σωτηρια_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σωτηρια_en.mp3"
     },
     {
       "greek": "τροφή",
@@ -1507,7 +1683,9 @@
       "gender": "f",
       "genitive": "-ῆς",
       "definition": "nourishment, food",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τροφη_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τροφη_en.mp3"
     },
     {
       "greek": "φωνή",
@@ -1516,7 +1694,9 @@
       "gender": "f",
       "genitive": "-ῆς",
       "definition": "sound, voice",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φωνη_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φωνη_en.mp3"
     },
     {
       "greek": "χώρα",
@@ -1525,7 +1705,9 @@
       "gender": "f",
       "genitive": "-ας",
       "definition": "land, place",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χωρα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χωρα_en.mp3"
     },
     {
       "greek": "δεσπότης",
@@ -1535,7 +1717,9 @@
       "genitive": "-ου",
       "declension_subtype": "masculine",
       "definition": "master",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεσποτης_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεσποτης_en.mp3"
     },
     {
       "greek": "στρατιώτης",
@@ -1545,7 +1729,9 @@
       "genitive": "-ου",
       "declension_subtype": "masculine",
       "definition": "soldier",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/στρατιωτης_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/στρατιωτης_en.mp3"
     },
     {
       "greek": "ἀριθμός",
@@ -1554,7 +1740,9 @@
       "gender": "m",
       "genitive": "-οῦ",
       "definition": "number",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αριθμος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αριθμος_en.mp3"
     },
     {
       "greek": "δῆμος",
@@ -1563,7 +1751,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "people",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δημος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δημος_en.mp3"
     },
     {
       "greek": "δοῦλος",
@@ -1572,7 +1762,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "slave",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δουλος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δουλος_en.mp3"
     },
     {
       "greek": "θάνατος",
@@ -1581,7 +1773,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "death",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θανατος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θανατος_en.mp3"
     },
     {
       "greek": "κίνδυνος",
@@ -1590,7 +1784,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "danger",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κινδυνος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κινδυνος_en.mp3"
     },
     {
       "greek": "κόσμος",
@@ -1599,7 +1795,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "order, decoration, world",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κοσμος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κοσμος_en.mp3"
     },
     {
       "greek": "κύκλος",
@@ -1608,7 +1806,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "circle",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κυκλος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κυκλος_en.mp3"
     },
     {
       "greek": "λαός",
@@ -1617,7 +1817,9 @@
       "gender": "m",
       "genitive": "-οῦ",
       "definition": "the people, folk",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λαος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λαος_en.mp3"
     },
     {
       "greek": "λίθος",
@@ -1626,7 +1828,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "stone",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λιθος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λιθος_en.mp3"
     },
     {
       "greek": "νόμος",
@@ -1635,7 +1839,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "custom, tradition, law",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νομος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νομος_en.mp3"
     },
     {
       "greek": "νόσος",
@@ -1644,7 +1850,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "disease",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νοσος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νοσος_en.mp3"
     },
     {
       "greek": "ξένος",
@@ -1653,7 +1861,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "guest-friend, host; foreigner, stranger",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ξενος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ξενος_en.mp3"
     },
     {
       "greek": "οἶκος",
@@ -1662,7 +1872,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "house, home, family",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οικος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οικος_en.mp3"
     },
     {
       "greek": "ὅπλον",
@@ -1671,7 +1883,9 @@
       "gender": "n",
       "genitive": "-ου",
       "definition": "weapon, tool (mostly pl.)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οπλον_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οπλον_en.mp3"
     },
     {
       "greek": "οὐρανός",
@@ -1680,7 +1894,9 @@
       "gender": "m",
       "genitive": "-οῦ",
       "definition": "sky, heaven",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουρανος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουρανος_en.mp3"
     },
     {
       "greek": "ὀφθαλμός",
@@ -1689,7 +1905,9 @@
       "gender": "m",
       "genitive": "-οῦ",
       "definition": "eye",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οφθαλμος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οφθαλμος_en.mp3"
     },
     {
       "greek": "πολέμιοι",
@@ -1699,7 +1917,9 @@
       "genitive": "-ων",
       "declension_subtype": "plural only",
       "definition": "the enemy",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολεμιοι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολεμιοι_en.mp3"
     },
     {
       "greek": "πόνος",
@@ -1708,7 +1928,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "work, stress, trouble, pain",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πονος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πονος_en.mp3"
     },
     {
       "greek": "ποταμός",
@@ -1717,7 +1939,9 @@
       "gender": "m",
       "genitive": "-οῦ",
       "definition": "river",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ποταμος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ποταμος_en.mp3"
     },
     {
       "greek": "στρατηγός",
@@ -1726,7 +1950,9 @@
       "gender": "m",
       "genitive": "-οῦ",
       "definition": "general",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/στρατηγος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/στρατηγος_en.mp3"
     },
     {
       "greek": "στρατός",
@@ -1735,7 +1961,9 @@
       "gender": "m",
       "genitive": "-οῦ",
       "definition": "army",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/στρατος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/στρατος_en.mp3"
     },
     {
       "greek": "σύμμαχοι",
@@ -1745,7 +1973,9 @@
       "genitive": "-ων",
       "declension_subtype": "plural only",
       "definition": "allies",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμμαχοι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμμαχοι_en.mp3"
     },
     {
       "greek": "τόπος",
@@ -1754,7 +1984,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "place, topic",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τοπος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τοπος_en.mp3"
     },
     {
       "greek": "τρόπος",
@@ -1763,7 +1995,9 @@
       "gender": "m",
       "genitive": "-ου",
       "definition": "way, turn",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τροπος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τροπος_en.mp3"
     },
     {
       "greek": "υἱός",
@@ -1772,7 +2006,9 @@
       "gender": "m",
       "genitive": "-οῦ",
       "definition": "son",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υιος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υιος_en.mp3"
     },
     {
       "greek": "ὁδός",
@@ -1781,7 +2017,9 @@
       "gender": "f",
       "genitive": "-οῦ",
       "definition": "road",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οδος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οδος_en.mp3"
     },
     {
       "greek": "ἀργύριον",
@@ -1790,7 +2028,9 @@
       "gender": "n",
       "genitive": "-ου",
       "definition": "money, silver",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αργυριον_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αργυριον_en.mp3"
     },
     {
       "greek": "πρόσωπον",
@@ -1799,7 +2039,9 @@
       "gender": "n",
       "genitive": "-ου",
       "definition": "face, mask, person",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/προσωπον_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/προσωπον_en.mp3"
     },
     {
       "greek": "σημεῖον",
@@ -1808,7 +2050,9 @@
       "gender": "n",
       "genitive": "-ου",
       "definition": "sign",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σημειον_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σημειον_en.mp3"
     },
     {
       "greek": "τέκνον",
@@ -1817,7 +2061,9 @@
       "gender": "n",
       "genitive": "-ου",
       "definition": "child",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τεκνον_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τεκνον_en.mp3"
     },
     {
       "greek": "αἰσχρός",
@@ -1825,7 +2071,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ά -όν",
       "definition": "ugly, disgraceful",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αισχρος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αισχρος_en.mp3"
     },
     {
       "greek": "ἄλλος",
@@ -1833,7 +2081,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-η -ον",
       "definition": "other",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αλλος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αλλος_en.mp3"
     },
     {
       "greek": "ἀμφότερος",
@@ -1841,7 +2091,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "both",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αμφοτερος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αμφοτερος_en.mp3"
     },
     {
       "greek": "ἄξιος",
@@ -1849,14 +2101,18 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "worthy",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αξιος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αξιος_en.mp3"
     },
     {
       "greek": "βάρβαρος",
       "pos": "adjective",
       "declension_pattern": "2nd only",
       "definition": "barbaric, not Greek, foreign",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βαρβαρος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βαρβαρος_en.mp3"
     },
     {
       "greek": "δεινός",
@@ -1864,7 +2120,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ή -όν",
       "definition": "awesome, terrible",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεινος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεινος_en.mp3"
     },
     {
       "greek": "δῆλος",
@@ -1872,7 +2130,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-η -ον",
       "definition": "clear, visible",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δηλος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δηλος_en.mp3"
     },
     {
       "greek": "δυνατός",
@@ -1880,7 +2140,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ή -όν",
       "definition": "able",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δυνατος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δυνατος_en.mp3"
     },
     {
       "greek": "ἕκαστος",
@@ -1888,7 +2150,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-η -ον",
       "definition": "each",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εκαστος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εκαστος_en.mp3"
     },
     {
       "greek": "ἑκάτερος",
@@ -1896,7 +2160,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "each of two",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εκατερος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εκατερος_en.mp3"
     },
     {
       "greek": "ἐκεῖνος",
@@ -1904,7 +2170,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-η -ο",
       "definition": "that",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εκεινος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εκεινος_en.mp3"
     },
     {
       "greek": "ἐλεύθερος",
@@ -1912,7 +2180,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "free",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ελευθερος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ελευθερος_en.mp3"
     },
     {
       "greek": "ἐμός",
@@ -1920,7 +2190,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ή -όν",
       "definition": "my, mine",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εμος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εμος_en.mp3"
     },
     {
       "greek": "ἕτερος",
@@ -1928,7 +2200,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "other (of two)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ετερος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ετερος_en.mp3"
     },
     {
       "greek": "ἐχθρός",
@@ -1936,7 +2210,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ά -όν",
       "definition": "hated, hostile",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εχθρος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εχθρος_en.mp3"
     },
     {
       "greek": "ἡμέτερος",
@@ -1944,7 +2220,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "our",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ημετερος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ημετερος_en.mp3"
     },
     {
       "greek": "ἴδιος",
@@ -1952,7 +2230,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "one's own, private",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ιδιος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ιδιος_en.mp3"
     },
     {
       "greek": "ἱκανός",
@@ -1960,7 +2240,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ή -όν",
       "definition": "sufficient",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ικανος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ικανος_en.mp3"
     },
     {
       "greek": "ἴσος",
@@ -1969,7 +2251,9 @@
       "endings": "-η -ον",
       "governs": "+dat.",
       "definition": "equal to",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ισος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ισος_en.mp3"
     },
     {
       "greek": "κοινός",
@@ -1977,7 +2261,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ή -όν",
       "definition": "common",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κοινος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κοινος_en.mp3"
     },
     {
       "greek": "λαμπρός",
@@ -1985,7 +2271,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ά -όν",
       "definition": "bright, brilliant, famous",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λαμπρος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λαμπρος_en.mp3"
     },
     {
       "greek": "λοιπός",
@@ -1993,7 +2281,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ή -όν",
       "definition": "remaining",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λοιπος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λοιπος_en.mp3"
     },
     {
       "greek": "μέγας",
@@ -2001,7 +2291,9 @@
       "declension_pattern": "irregular",
       "endings": "μεγάλη, μέγα",
       "definition": "big",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μεγας_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μεγας_en.mp3"
     },
     {
       "greek": "μέσος",
@@ -2009,7 +2301,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-η -ον",
       "definition": "middle",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μεσος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μεσος_en.mp3"
     },
     {
       "greek": "μόνος",
@@ -2017,7 +2311,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-η -ον",
       "definition": "alone, single",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μονος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μονος_en.mp3"
     },
     {
       "greek": "ὅλος",
@@ -2025,7 +2321,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-η -ον",
       "definition": "whole, complete",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ολος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ολος_en.mp3"
     },
     {
       "greek": "ὅμοιος",
@@ -2033,7 +2331,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "like, resembling",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ομοιος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ομοιος_en.mp3"
     },
     {
       "greek": "ὀρθός",
@@ -2041,7 +2341,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ή -όν",
       "definition": "straight, true, regular",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ορθος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ορθος_en.mp3"
     },
     {
       "greek": "πλεῖστος",
@@ -2049,7 +2351,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-η -ον",
       "definition": "most, largest (superl. of πολύς)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πλειστος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πλειστος_en.mp3"
     },
     {
       "greek": "πολύς",
@@ -2057,7 +2361,9 @@
       "declension_pattern": "irregular",
       "endings": "πολλή, πολύ",
       "definition": "much, many",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολυς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολυς_en.mp3"
     },
     {
       "greek": "πονηρός",
@@ -2065,7 +2371,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ά -όν",
       "definition": "worthless, bad",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πονηρος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πονηρος_en.mp3"
     },
     {
       "greek": "ῥᾴδιος",
@@ -2073,7 +2381,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "easy",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ραδιος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ραδιος_en.mp3"
     },
     {
       "greek": "σός",
@@ -2081,7 +2391,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ή -όν",
       "definition": "your, yours (sing.)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σος_en.mp3"
     },
     {
       "greek": "σοφός",
@@ -2089,7 +2401,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ή -όν",
       "definition": "wise",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σοφος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σοφος_en.mp3"
     },
     {
       "greek": "ὑμέτερος",
@@ -2097,7 +2411,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "your, yours (pl.)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υμετερος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υμετερος_en.mp3"
     },
     {
       "greek": "φανερός",
@@ -2105,7 +2421,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-ά -όν",
       "definition": "clear, evident",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φανερος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φανερος_en.mp3"
     },
     {
       "greek": "χαλκοῦς",
@@ -2113,14 +2431,18 @@
       "declension_pattern": "2-1-2 contracted",
       "endings": "-ῆ -οῦν",
       "definition": "bronze",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χαλκους_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χαλκους_en.mp3"
     },
     {
       "greek": "ἄδικος",
       "pos": "adjective",
       "declension_pattern": "2nd only",
       "definition": "unjust",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αδικος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αδικος_en.mp3"
     },
     {
       "greek": "πᾶς",
@@ -2128,165 +2450,217 @@
       "declension_pattern": "3-1-3",
       "endings": "πᾶσα, πᾶν",
       "definition": "every, all",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πας_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πας_en.mp3"
     },
     {
       "greek": "ἆρα",
       "pos": "particle",
       "definition": "(introduces a question)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αρα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αρα_en.mp3"
     },
     {
       "greek": "γε",
       "pos": "particle",
       "definition": "at least (emphasizes preceding word)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γε_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γε_en.mp3"
     },
     {
       "greek": "μή",
       "pos": "adverb",
       "definition": "not (with non-indicative verbs)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μη_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μη_en.mp3"
     },
     {
       "greek": "οὕτως",
       "pos": "adverb",
       "definition": "in this way",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουτως_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουτως_en.mp3"
     },
     {
       "greek": "πότε",
       "pos": "adverb",
       "definition": "when?",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ποτε_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ποτε_en.mp3"
     },
     {
       "greek": "πῶς",
       "pos": "adverb",
       "definition": "how?",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πως_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πως_en.mp3"
     },
     {
       "greek": "αὐτός",
       "pos": "pronoun",
       "endings": "-ή -ό",
       "definition": "self, same; s/he/it",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αυτος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αυτος_en.mp3"
     },
     {
       "greek": "ἑαυτοῦ",
       "pos": "pronoun",
       "endings": "-ῆς -οῦ",
       "definition": "him/her/itself (reflexive)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εαυτου_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εαυτου_en.mp3"
     },
     {
       "greek": "ἐγώ",
       "pos": "pronoun",
       "definition": "I (gen. ἐμοῦ; pl. ἡμεῖς, ἡμῶν)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εγω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εγω_en.mp3"
     },
     {
       "greek": "οὐδείς",
       "pos": "pronoun",
       "endings": "οὐδεμία, οὐδέν",
       "definition": "no one, nothing",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουδεις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουδεις_en.mp3"
     },
     {
       "greek": "σύ",
       "pos": "pronoun",
       "definition": "you (gen. σοῦ; pl. ὑμεῖς, ὑμῶν)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συ_en.mp3"
     },
     {
       "greek": "τις",
       "pos": "pronoun",
       "endings": "τι",
       "definition": "someone, something (enclitic)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τις_en.mp3"
     },
     {
       "greek": "τίς",
       "pos": "pronoun",
       "endings": "τί",
       "definition": "who? what? which?",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τις_en.mp3"
     },
     {
       "greek": "ἀνά",
       "pos": "preposition",
       "governs": "+gen./dat./acc.",
       "definition": "up",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ανα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ανα_en.mp3"
     },
     {
       "greek": "εἰς",
       "pos": "preposition",
       "governs": "+acc.",
       "definition": "into, to, towards",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εις_en.mp3"
     },
     {
       "greek": "κατά",
       "pos": "preposition",
       "governs": "+gen./acc.",
       "definition": "down",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κατα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κατα_en.mp3"
     },
     {
       "greek": "γάρ",
       "pos": "conjunction",
       "definition": "for, because (postpositive)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γαρ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γαρ_en.mp3"
     },
     {
       "greek": "δέ",
       "pos": "conjunction",
       "definition": "and, but (postpositive)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δε_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δε_en.mp3"
     },
     {
       "greek": "ἐπεί",
       "pos": "conjunction",
       "definition": "after, since, when",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/επει_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/επει_en.mp3"
     },
     {
       "greek": "μέν…δέ",
       "pos": "conjunction",
       "definition": "(contrasts a pair)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μεν…δε_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μεν…δε_en.mp3"
     },
     {
       "greek": "ὅτι",
       "pos": "conjunction",
       "definition": "because, that",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οτι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οτι_en.mp3"
     },
     {
       "greek": "οὐδέ",
       "pos": "conjunction",
       "definition": "but not",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουδε_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουδε_en.mp3"
     },
     {
       "greek": "οὔτε",
       "pos": "conjunction",
       "definition": "and not",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουτε_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουτε_en.mp3"
     },
     {
       "greek": "τε",
       "pos": "conjunction",
       "definition": "and; τε…τε: both…and",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τε_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τε_en.mp3"
     },
     {
       "greek": "ὥστε",
       "pos": "conjunction",
       "definition": "that (result clause)",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ωστε_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ωστε_en.mp3"
     },
     {
       "greek": "εἷς",
@@ -2294,14 +2668,18 @@
       "endings": "μία, ἕν",
       "ordinal": "πρῶτος -η -ον (first)",
       "definition": "one",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εις_en.mp3"
     },
     {
       "greek": "δύο",
       "pos": "numeral",
       "ordinal": "δεύτερος -α -ον (second)",
       "definition": "two",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δυο_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δυο_en.mp3"
     },
     {
       "greek": "τρεῖς",
@@ -2309,7 +2687,9 @@
       "endings": "τρία",
       "ordinal": "τρίτος -η -ον (third)",
       "definition": "three",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τρεις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τρεις_en.mp3"
     },
     {
       "greek": "τέτταρες",
@@ -2317,77 +2697,99 @@
       "endings": "τέτταρα",
       "ordinal": "τέταρτος -η -ον (fourth)",
       "definition": "four",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τετταρες_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τετταρες_en.mp3"
     },
     {
       "greek": "πέντε",
       "pos": "numeral",
       "ordinal": "πέμπτος -η -ον (fifth)",
       "definition": "five",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πεντε_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πεντε_en.mp3"
     },
     {
       "greek": "ἕξ",
       "pos": "numeral",
       "ordinal": "ἕκτος -η -ον (sixth)",
       "definition": "six",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εξ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εξ_en.mp3"
     },
     {
       "greek": "ἑπτά",
       "pos": "numeral",
       "ordinal": "ἕβδομος -η -ον (seventh)",
       "definition": "seven",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/επτα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/επτα_en.mp3"
     },
     {
       "greek": "ὀκτώ",
       "pos": "numeral",
       "ordinal": "ὄγδοος -η -ον (eighth)",
       "definition": "eight",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οκτω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οκτω_en.mp3"
     },
     {
       "greek": "ἐννέα",
       "pos": "numeral",
       "ordinal": "ἔνατος -η -ον (ninth)",
       "definition": "nine",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εννεα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εννεα_en.mp3"
     },
     {
       "greek": "δέκα",
       "pos": "numeral",
       "ordinal": "δέκατος -η -ον (tenth)",
       "definition": "ten",
-      "introduced": "beginning"
+      "introduced": "beginning",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεκα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεκα_en.mp3"
     },
     {
       "greek": "ἀναιρέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "raise up; kill, destroy",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αναιρεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αναιρεω_en.mp3"
     },
     {
       "greek": "ἀξιόω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "consider worthy",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αξιοω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αξιοω_en.mp3"
     },
     {
       "greek": "ἁπαλλάττω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "release, deliver",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/απαλλαττω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/απαλλαττω_en.mp3"
     },
     {
       "greek": "ἀφαιρέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "take from, take away",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αφαιρεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αφαιρεω_en.mp3"
     },
     {
       "greek": "δέω",
@@ -2395,63 +2797,81 @@
       "conjugation": "omega",
       "governs": "+gen.",
       "definition": "lack; bind",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεω_en.mp3"
     },
     {
       "greek": "δηλόω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "show",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δηλοω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δηλοω_en.mp3"
     },
     {
       "greek": "διαφέρω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "spread, differ",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διαφερω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διαφερω_en.mp3"
     },
     {
       "greek": "διαφθείρω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "destroy",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διαφθειρω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διαφθειρω_en.mp3"
     },
     {
       "greek": "ἥκω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "have come, be present",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηκω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηκω_en.mp3"
     },
     {
       "greek": "θνήσκω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "die",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θνησκω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θνησκω_en.mp3"
     },
     {
       "greek": "καταλαμβάνω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "seize, catch up to, arrest",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/καταλαμβανω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/καταλαμβανω_en.mp3"
     },
     {
       "greek": "κατασκευάζω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "equip, furnish, make ready",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κατασκευαζω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κατασκευαζω_en.mp3"
     },
     {
       "greek": "κατηγορέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "speak against, accuse",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κατηγορεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κατηγορεω_en.mp3"
     },
     {
       "greek": "λανθάνω",
@@ -2459,49 +2879,63 @@
       "conjugation": "omega",
       "middle_note": "(mid.) forget",
       "definition": "escape notice of",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λανθανω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/λανθανω_en.mp3"
     },
     {
       "greek": "μέλλω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "intend, be about to",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μελλω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μελλω_en.mp3"
     },
     {
       "greek": "ὁμολογέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "agree",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ομολογεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ομολογεω_en.mp3"
     },
     {
       "greek": "προσήκω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "belong to, befit",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/προσηκω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/προσηκω_en.mp3"
     },
     {
       "greek": "συμβαίνω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "happen, agree, result",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμβαινω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμβαινω_en.mp3"
     },
     {
       "greek": "συμφέρω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "benefit, profit",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμφερω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμφερω_en.mp3"
     },
     {
       "greek": "τελευτάω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "finish; die",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τελευταω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τελευταω_en.mp3"
     },
     {
       "greek": "τυγχάνω",
@@ -2509,21 +2943,27 @@
       "conjugation": "omega",
       "governs": "+part. (happen to); +gen. (meet)",
       "definition": "happen to; meet",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τυγχανω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τυγχανω_en.mp3"
     },
     {
       "greek": "ὑπάρχω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "exist, be, belong to",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υπαρχω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υπαρχω_en.mp3"
     },
     {
       "greek": "ὑπολαμβάνω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "take up, reply, suppose",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υπολαμβανω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υπολαμβανω_en.mp3"
     },
     {
       "greek": "φράζω",
@@ -2531,35 +2971,45 @@
       "conjugation": "omega",
       "middle_note": "(mid.) think",
       "definition": "tell",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φραζω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φραζω_en.mp3"
     },
     {
       "greek": "φρονέω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "think",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φρονεω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φρονεω_en.mp3"
     },
     {
       "greek": "χαίρω",
       "pos": "verb",
       "conjugation": "omega",
       "definition": "be happy; χαῖρε / χαίρετε: hello, goodbye",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χαιρω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χαιρω_en.mp3"
     },
     {
       "greek": "ἁλίσκομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "be taken, be conquered",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αλισκομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αλισκομαι_en.mp3"
     },
     {
       "greek": "κεῖμαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "lie (= perf. pass. of τίθημι)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κειμαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κειμαι_en.mp3"
     },
     {
       "greek": "οἴομαι",
@@ -2567,21 +3017,27 @@
       "conjugation": "deponent",
       "variants": "οἶμαι",
       "definition": "I think (parenthetical)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οιομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οιομαι_en.mp3"
     },
     {
       "greek": "χράομαι",
       "pos": "verb",
       "conjugation": "deponent",
       "definition": "use",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χραομαι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χραομαι_en.mp3"
     },
     {
       "greek": "διαφέρει",
       "pos": "verb",
       "conjugation": "impersonal",
       "definition": "it makes a difference",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διαφερει_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διαφερει_en.mp3"
     },
     {
       "greek": "πάρεστι",
@@ -2589,49 +3045,63 @@
       "conjugation": "impersonal",
       "governs": "+dat.",
       "definition": "it depends on",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/παρεστι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/παρεστι_en.mp3"
     },
     {
       "greek": "συμφέρει",
       "pos": "verb",
       "conjugation": "impersonal",
       "definition": "it is useful",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμφερει_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμφερει_en.mp3"
     },
     {
       "greek": "χρή",
       "pos": "verb",
       "conjugation": "impersonal",
       "definition": "it is necessary",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χρη_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χρη_en.mp3"
     },
     {
       "greek": "δείκνυμι",
       "pos": "verb",
       "conjugation": "mi",
       "definition": "show",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεικνυμι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δεικνυμι_en.mp3"
     },
     {
       "greek": "δίδωμι",
       "pos": "verb",
       "conjugation": "mi",
       "definition": "give",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διδωμι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διδωμι_en.mp3"
     },
     {
       "greek": "εἶμι",
       "pos": "verb",
       "conjugation": "mi",
       "definition": "will go (future of ἔρχομαι)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ειμι_2_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ειμι_2_en.mp3"
     },
     {
       "greek": "φημί",
       "pos": "verb",
       "conjugation": "mi",
       "definition": "say",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φημι_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φημι_en.mp3"
     },
     {
       "greek": "γραφή",
@@ -2640,7 +3110,9 @@
       "gender": "f",
       "genitive": "-ῆς",
       "definition": "drawing, writing, indictment",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γραφη_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γραφη_en.mp3"
     },
     {
       "greek": "διαφορά",
@@ -2649,7 +3121,9 @@
       "gender": "f",
       "genitive": "-ᾶς",
       "definition": "difference, disagreement",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διαφορα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/διαφορα_en.mp3"
     },
     {
       "greek": "οὐσία",
@@ -2658,7 +3132,9 @@
       "gender": "f",
       "genitive": "-ας",
       "definition": "essence, property",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουσια_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουσια_en.mp3"
     },
     {
       "greek": "πολιτεία",
@@ -2667,7 +3143,9 @@
       "gender": "f",
       "genitive": "-ας",
       "definition": "constitution, republic",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολιτεια_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολιτεια_en.mp3"
     },
     {
       "greek": "συμφορά",
@@ -2676,7 +3154,9 @@
       "gender": "f",
       "genitive": "-ᾶς",
       "definition": "event, situation, disaster",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμφορα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμφορα_en.mp3"
     },
     {
       "greek": "ποιητής",
@@ -2686,7 +3166,9 @@
       "genitive": "-οῦ",
       "declension_subtype": "masculine",
       "definition": "creator, poet",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ποιητης_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ποιητης_en.mp3"
     },
     {
       "greek": "θυμός",
@@ -2695,7 +3177,9 @@
       "gender": "m",
       "genitive": "-οῦ",
       "definition": "soul, spirit",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θυμος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θυμος_en.mp3"
     },
     {
       "greek": "καιρός",
@@ -2704,7 +3188,9 @@
       "gender": "m",
       "genitive": "-οῦ",
       "definition": "the right time",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/καιρος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/καιρος_en.mp3"
     },
     {
       "greek": "νεώς",
@@ -2713,7 +3199,9 @@
       "gender": "m",
       "genitive": "νεώ",
       "definition": "temple",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νεως_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νεως_en.mp3"
     },
     {
       "greek": "νῆσος",
@@ -2722,7 +3210,9 @@
       "gender": "f",
       "genitive": "-ου",
       "definition": "island",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νησος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νησος_en.mp3"
     },
     {
       "greek": "νοῦς",
@@ -2731,7 +3221,9 @@
       "gender": "m",
       "genitive": "νοῦ",
       "definition": "mind, perception, sense",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νους_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νους_en.mp3"
     },
     {
       "greek": "χωρίον",
@@ -2740,14 +3232,18 @@
       "gender": "n",
       "genitive": "-ου",
       "definition": "place, spot, district",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χωριον_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χωριον_en.mp3"
     },
     {
       "greek": "σύμμαχος",
       "pos": "adjective",
       "declension_pattern": "2nd only",
       "definition": "allied",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμμαχος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμμαχος_en.mp3"
     },
     {
       "greek": "εἰκός",
@@ -2757,7 +3253,9 @@
       "genitive": "-ότος",
       "declension_subtype": "stem in -τ-",
       "definition": "propriety, probability",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εικος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εικος_en.mp3"
     },
     {
       "greek": "ἐλπίς",
@@ -2767,7 +3265,9 @@
       "genitive": "-ίδος",
       "declension_subtype": "stem in -δ-",
       "definition": "hope",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ελπις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ελπις_en.mp3"
     },
     {
       "greek": "μυριάς",
@@ -2777,7 +3277,9 @@
       "genitive": "-άδος",
       "declension_subtype": "stem in -δ-",
       "definition": "ten thousand (a countless amount)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μυριας_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μυριας_en.mp3"
     },
     {
       "greek": "νύξ",
@@ -2787,7 +3289,9 @@
       "genitive": "νυκτός",
       "declension_subtype": "stem in -κτ-",
       "definition": "night",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νυξ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/νυξ_en.mp3"
     },
     {
       "greek": "παῖς",
@@ -2797,7 +3301,9 @@
       "genitive": "παιδός",
       "declension_subtype": "stem in -δ-",
       "definition": "child; slave",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/παις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/παις_en.mp3"
     },
     {
       "greek": "πατρίς",
@@ -2807,7 +3313,9 @@
       "genitive": "-ίδος",
       "declension_subtype": "stem in -δ-",
       "definition": "fatherland",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πατρις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πατρις_en.mp3"
     },
     {
       "greek": "πούς",
@@ -2817,7 +3325,9 @@
       "genitive": "ποδός",
       "declension_subtype": "stem in -δ-",
       "definition": "foot",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πους_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πους_en.mp3"
     },
     {
       "greek": "προσήκοντα",
@@ -2827,7 +3337,9 @@
       "genitive": "-οντων",
       "declension_subtype": "plural only, stem in -ντ-",
       "definition": "duties",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/προσηκοντα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/προσηκοντα_en.mp3"
     },
     {
       "greek": "προσήκοντες",
@@ -2837,7 +3349,9 @@
       "genitive": "-οντων",
       "declension_subtype": "plural only, stem in -ντ-",
       "definition": "relatives",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/προσηκοντες_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/προσηκοντες_en.mp3"
     },
     {
       "greek": "συμφέρον",
@@ -2847,7 +3361,9 @@
       "genitive": "-οντος",
       "declension_subtype": "stem in -ντ-",
       "definition": "use, advantage",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμφερον_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/συμφερον_en.mp3"
     },
     {
       "greek": "ὕδωρ",
@@ -2857,7 +3373,9 @@
       "genitive": "ὕδατος",
       "declension_subtype": "stem in -ατ-",
       "definition": "water",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υδωρ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υδωρ_en.mp3"
     },
     {
       "greek": "ὑπάρχοντα",
@@ -2867,7 +3385,9 @@
       "genitive": "-οντων",
       "declension_subtype": "plural only, stem in -ντ-",
       "definition": "circumstances",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υπαρχοντα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υπαρχοντα_en.mp3"
     },
     {
       "greek": "φῶς",
@@ -2877,7 +3397,9 @@
       "genitive": "φωτός",
       "declension_subtype": "stem in -τ-",
       "definition": "light",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φως_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φως_en.mp3"
     },
     {
       "greek": "χάρις",
@@ -2887,7 +3409,9 @@
       "genitive": "-ιτος",
       "declension_subtype": "stem in -τ-",
       "definition": "favor, thanks",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χαρις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χαρις_en.mp3"
     },
     {
       "greek": "αἷμα",
@@ -2897,7 +3421,9 @@
       "genitive": "-ατος",
       "declension_subtype": "stem in -ματ-",
       "definition": "blood",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιμα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιμα_en.mp3"
     },
     {
       "greek": "γράμμα",
@@ -2907,7 +3433,9 @@
       "genitive": "-ατος",
       "declension_subtype": "stem in -ματ-",
       "definition": "letter",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γραμμα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γραμμα_en.mp3"
     },
     {
       "greek": "ὄνομα",
@@ -2917,7 +3445,9 @@
       "genitive": "-ατος",
       "declension_subtype": "stem in -ματ-",
       "definition": "name",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ονομα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ονομα_en.mp3"
     },
     {
       "greek": "πνεῦμα",
@@ -2927,7 +3457,9 @@
       "genitive": "-ατος",
       "declension_subtype": "stem in -ματ-",
       "definition": "wind, breath, spirit",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πνευμα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πνευμα_en.mp3"
     },
     {
       "greek": "πρᾶγμα",
@@ -2937,7 +3469,9 @@
       "genitive": "-ατος",
       "declension_subtype": "stem in -ματ-",
       "definition": "thing; (pl.) circumstances, affairs, business",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πραγμα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πραγμα_en.mp3"
     },
     {
       "greek": "στόμα",
@@ -2947,7 +3481,9 @@
       "genitive": "-ατος",
       "declension_subtype": "stem in -ματ-",
       "definition": "mouth",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/στομα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/στομα_en.mp3"
     },
     {
       "greek": "σχῆμα",
@@ -2957,7 +3493,9 @@
       "genitive": "-ατος",
       "declension_subtype": "stem in -ματ-",
       "definition": "form, appearance",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σχημα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σχημα_en.mp3"
     },
     {
       "greek": "σῶμα",
@@ -2967,7 +3505,9 @@
       "genitive": "-ατος",
       "declension_subtype": "stem in -ματ-",
       "definition": "body",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σωμα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σωμα_en.mp3"
     },
     {
       "greek": "χρῆμα",
@@ -2977,7 +3517,9 @@
       "genitive": "-ατος",
       "declension_subtype": "stem in -ματ-",
       "definition": "thing; (pl.) money",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χρημα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χρημα_en.mp3"
     },
     {
       "greek": "ἀγών",
@@ -2987,7 +3529,9 @@
       "genitive": "-ῶνος",
       "declension_subtype": "stem in -ν-",
       "definition": "contest",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αγων_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αγων_en.mp3"
     },
     {
       "greek": "δαίμων",
@@ -2997,7 +3541,9 @@
       "genitive": "-ονος",
       "declension_subtype": "stem in -ν-",
       "definition": "spirit, god, demon",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δαιμων_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δαιμων_en.mp3"
     },
     {
       "greek": "ἡγεμών",
@@ -3007,7 +3553,9 @@
       "genitive": "-όνος",
       "declension_subtype": "stem in -ν-",
       "definition": "guide, commander",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηγεμων_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηγεμων_en.mp3"
     },
     {
       "greek": "ἀνήρ",
@@ -3017,7 +3565,9 @@
       "genitive": "ἀνδρός",
       "declension_subtype": "stem in -ρ-",
       "definition": "man",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ανηρ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ανηρ_en.mp3"
     },
     {
       "greek": "θυγάτηρ",
@@ -3027,7 +3577,9 @@
       "genitive": "-τρός",
       "declension_subtype": "stem in -ρ-",
       "definition": "daughter",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θυγατηρ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θυγατηρ_en.mp3"
     },
     {
       "greek": "μάρτυς",
@@ -3037,7 +3589,9 @@
       "genitive": "-υρος",
       "declension_subtype": "stem in -ρ-",
       "definition": "witness",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μαρτυς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μαρτυς_en.mp3"
     },
     {
       "greek": "μήτηρ",
@@ -3047,7 +3601,9 @@
       "genitive": "μητρός",
       "declension_subtype": "stem in -ρ-",
       "definition": "mother",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μητηρ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μητηρ_en.mp3"
     },
     {
       "greek": "πατήρ",
@@ -3057,7 +3613,9 @@
       "genitive": "πατρός",
       "declension_subtype": "stem in -ρ-",
       "definition": "father",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πατηρ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πατηρ_en.mp3"
     },
     {
       "greek": "πῦρ",
@@ -3067,7 +3625,9 @@
       "genitive": "πυρός",
       "declension_subtype": "stem in -ρ-",
       "definition": "fire",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πυρ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πυρ_en.mp3"
     },
     {
       "greek": "χείρ",
@@ -3077,7 +3637,9 @@
       "genitive": "χειρός",
       "declension_subtype": "stem in -ρ-",
       "definition": "hand",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χειρ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χειρ_en.mp3"
     },
     {
       "greek": "γένος",
@@ -3087,7 +3649,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "race, family; kind, class",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γενος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γενος_en.mp3"
     },
     {
       "greek": "ἔθνος",
@@ -3097,7 +3661,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "nation",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εθνος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εθνος_en.mp3"
     },
     {
       "greek": "εἶδος",
@@ -3107,7 +3673,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "form, shape",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ειδος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ειδος_en.mp3"
     },
     {
       "greek": "ἔπος",
@@ -3117,7 +3685,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "word",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/επος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/επος_en.mp3"
     },
     {
       "greek": "ἔτος",
@@ -3127,7 +3697,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "year",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ετος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ετος_en.mp3"
     },
     {
       "greek": "μέγεθος",
@@ -3137,7 +3709,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "magnitude",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μεγεθος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μεγεθος_en.mp3"
     },
     {
       "greek": "μέρος",
@@ -3147,7 +3721,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "part, share",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μερος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μερος_en.mp3"
     },
     {
       "greek": "ὄρος",
@@ -3157,7 +3733,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "mountain, hill",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ορος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ορος_en.mp3"
     },
     {
       "greek": "πάθος",
@@ -3167,7 +3745,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "suffering, experience, emotion",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/παθος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/παθος_en.mp3"
     },
     {
       "greek": "πλῆθος",
@@ -3177,7 +3757,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "crowd",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πληθος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πληθος_en.mp3"
     },
     {
       "greek": "τεῖχος",
@@ -3187,7 +3769,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "wall",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τειχος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τειχος_en.mp3"
     },
     {
       "greek": "τέλος",
@@ -3197,7 +3781,9 @@
       "genitive": "-ους",
       "declension_subtype": "stem in -εσ-",
       "definition": "end",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τελος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/τελος_en.mp3"
     },
     {
       "greek": "δύναμις",
@@ -3207,7 +3793,9 @@
       "genitive": "-εως",
       "declension_subtype": "stem in -ι-",
       "definition": "power",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δυναμις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/δυναμις_en.mp3"
     },
     {
       "greek": "πίστις",
@@ -3217,7 +3805,9 @@
       "genitive": "-εως",
       "declension_subtype": "stem in -ι-",
       "definition": "trust, proof, guarantee",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πιστις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πιστις_en.mp3"
     },
     {
       "greek": "πόλις",
@@ -3227,7 +3817,9 @@
       "genitive": "-εως",
       "declension_subtype": "stem in -ι-",
       "definition": "city",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολις_en.mp3"
     },
     {
       "greek": "πρᾶξις",
@@ -3237,7 +3829,9 @@
       "genitive": "-εως",
       "declension_subtype": "stem in -ι-",
       "definition": "action",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πραξις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πραξις_en.mp3"
     },
     {
       "greek": "τάξις",
@@ -3247,7 +3841,9 @@
       "genitive": "-εως",
       "declension_subtype": "stem in -ι-",
       "definition": "arrangement, order",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ταξις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ταξις_en.mp3"
     },
     {
       "greek": "φύσις",
@@ -3257,7 +3853,9 @@
       "genitive": "-εως",
       "declension_subtype": "stem in -ι-",
       "definition": "nature",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φυσις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/φυσις_en.mp3"
     },
     {
       "greek": "βασιλεύς",
@@ -3267,7 +3865,9 @@
       "genitive": "-έως",
       "declension_subtype": "stem in -υ-",
       "definition": "king",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βασιλευς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βασιλευς_en.mp3"
     },
     {
       "greek": "βοῦς",
@@ -3277,7 +3877,9 @@
       "genitive": "βοός",
       "declension_subtype": "stem in -υ-",
       "definition": "bull, ox (m.); cow (f.)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βους_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βους_en.mp3"
     },
     {
       "greek": "ἱππεύς",
@@ -3287,7 +3889,9 @@
       "genitive": "-έως",
       "declension_subtype": "stem in -υ-",
       "definition": "horseman, charioteer",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ιππευς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ιππευς_en.mp3"
     },
     {
       "greek": "ναῦς",
@@ -3297,7 +3901,9 @@
       "genitive": "νεώς",
       "declension_subtype": "stem in -υ-",
       "definition": "ship",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ναυς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ναυς_en.mp3"
     },
     {
       "greek": "πρέσβυς",
@@ -3307,7 +3913,9 @@
       "genitive": "-εως",
       "declension_subtype": "stem in -υ-",
       "definition": "old man; (pl.) ambassadors",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πρεσβυς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πρεσβυς_en.mp3"
     },
     {
       "greek": "γυνή",
@@ -3317,7 +3925,9 @@
       "genitive": "γυναικός",
       "declension_subtype": "stem in -κ- (irregular)",
       "definition": "woman",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γυνη_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/γυνη_en.mp3"
     },
     {
       "greek": "αἴτιος",
@@ -3325,14 +3935,18 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "responsible, guilty",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιτιος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αιτιος_en.mp3"
     },
     {
       "greek": "ἀδύνατος",
       "pos": "adjective",
       "declension_pattern": "2nd only",
       "definition": "impossible",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αδυνατος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αδυνατος_en.mp3"
     },
     {
       "greek": "ἀληθής",
@@ -3340,7 +3954,9 @@
       "declension_pattern": "3rd only",
       "endings": "-ές",
       "definition": "true",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αληθης_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αληθης_en.mp3"
     },
     {
       "greek": "ἀμείνων",
@@ -3348,7 +3964,9 @@
       "declension_pattern": "3rd only",
       "endings": "-ον",
       "definition": "better, stronger, braver",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αμεινων_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/αμεινων_en.mp3"
     },
     {
       "greek": "ἅπας",
@@ -3356,7 +3974,9 @@
       "declension_pattern": "3-1-3",
       "endings": "-ᾶσα -αν",
       "definition": "all together",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/απας_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/απας_en.mp3"
     },
     {
       "greek": "βαρύς",
@@ -3364,7 +3984,9 @@
       "declension_pattern": "3-1-3",
       "endings": "-εῖα -ύ",
       "definition": "heavy, tedious",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βαρυς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βαρυς_en.mp3"
     },
     {
       "greek": "βελτίων",
@@ -3372,7 +3994,9 @@
       "declension_pattern": "3rd only",
       "endings": "-ον",
       "definition": "better (comp. of ἀγαθός)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βελτιων_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βελτιων_en.mp3"
     },
     {
       "greek": "βραχύς",
@@ -3380,7 +4004,9 @@
       "declension_pattern": "3-1-3",
       "endings": "-εῖα -ύ",
       "definition": "brief, short",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βραχυς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/βραχυς_en.mp3"
     },
     {
       "greek": "θεῖος",
@@ -3388,7 +4014,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "divine",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θειος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/θειος_en.mp3"
     },
     {
       "greek": "ἐλάττων",
@@ -3396,7 +4024,9 @@
       "declension_pattern": "3rd only",
       "endings": "-ον",
       "definition": "smaller, less",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ελαττων_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ελαττων_en.mp3"
     },
     {
       "greek": "ἐναντίος",
@@ -3404,7 +4034,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "opposite",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εναντιος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/εναντιος_en.mp3"
     },
     {
       "greek": "εὐθύς",
@@ -3412,7 +4044,9 @@
       "declension_pattern": "3-1-3",
       "endings": "-εῖα -ύ",
       "definition": "straight",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ευθυς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ευθυς_en.mp3"
     },
     {
       "greek": "ἡδύς",
@@ -3420,7 +4054,9 @@
       "declension_pattern": "3-1-3",
       "endings": "-εῖα -ύ",
       "definition": "sweet",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηδυς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηδυς_en.mp3"
     },
     {
       "greek": "ἥττων",
@@ -3428,7 +4064,9 @@
       "declension_pattern": "3rd only",
       "endings": "-ον",
       "definition": "less, weaker",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηττων_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ηττων_en.mp3"
     },
     {
       "greek": "κρείττων",
@@ -3436,7 +4074,9 @@
       "declension_pattern": "3rd only",
       "endings": "-ον",
       "definition": "stronger, better",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κρειττων_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/κρειττων_en.mp3"
     },
     {
       "greek": "μυρίος",
@@ -3444,7 +4084,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "countless thousands",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μυριος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μυριος_en.mp3"
     },
     {
       "greek": "οἰκεῖος",
@@ -3452,7 +4094,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "domestic, one's own",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οικειος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οικειος_en.mp3"
     },
     {
       "greek": "ὀξύς",
@@ -3460,7 +4104,9 @@
       "declension_pattern": "3-1-3",
       "endings": "-εῖα -ύ",
       "definition": "sharp, keen, shrill, pungent",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οξυς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οξυς_en.mp3"
     },
     {
       "greek": "πλείων",
@@ -3468,7 +4114,9 @@
       "declension_pattern": "3rd only",
       "endings": "πλέων, πλεῖον/πλέον",
       "definition": "more, larger (comp. of πολύς)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πλειων_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πλειων_en.mp3"
     },
     {
       "greek": "ποῖος",
@@ -3476,7 +4124,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "what sort of?",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ποιος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ποιος_en.mp3"
     },
     {
       "greek": "πολέμιος",
@@ -3484,7 +4134,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "hostile",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολεμιος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/πολεμιος_en.mp3"
     },
     {
       "greek": "πότερος",
@@ -3492,7 +4144,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "which of the two?",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ποτερος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ποτερος_en.mp3"
     },
     {
       "greek": "πρότερος",
@@ -3500,7 +4154,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "before, earlier",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/προτερος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/προτερος_en.mp3"
     },
     {
       "greek": "σαφής",
@@ -3508,7 +4164,9 @@
       "declension_pattern": "3rd only",
       "endings": "-ές",
       "definition": "clear",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σαφης_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σαφης_en.mp3"
     },
     {
       "greek": "ταχύς",
@@ -3516,7 +4174,9 @@
       "declension_pattern": "3-1-3",
       "endings": "-εῖα -ύ",
       "definition": "quick",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ταχυς_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ταχυς_en.mp3"
     },
     {
       "greek": "ὕστερος",
@@ -3524,7 +4184,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-α -ον",
       "definition": "following, next, later",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υστερος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/υστερος_en.mp3"
     },
     {
       "greek": "χρήσιμος",
@@ -3532,7 +4194,9 @@
       "declension_pattern": "2-1-2",
       "endings": "-η -ον",
       "definition": "useful",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χρησιμος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χρησιμος_en.mp3"
     },
     {
       "greek": "χείρων",
@@ -3540,104 +4204,136 @@
       "declension_pattern": "3rd only",
       "endings": "-ον",
       "definition": "worse, inferior",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χειρων_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/χειρων_en.mp3"
     },
     {
       "greek": "ὁ ἡ τό",
       "pos": "article",
       "definition": "the (definite article)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ο_η_το_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ο_η_το_en.mp3"
     },
     {
       "greek": "ὅδε",
       "pos": "pronoun",
       "endings": "ἥδε, τόδε",
       "definition": "this",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οδε_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οδε_en.mp3"
     },
     {
       "greek": "ὅς",
       "pos": "pronoun",
       "endings": "ἥ, ὅ",
       "definition": "who, which, that (relative)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ος_en.mp3"
     },
     {
       "greek": "ὅσος",
       "pos": "pronoun",
       "endings": "-η -ον",
       "definition": "however many, all",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οσος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οσος_en.mp3"
     },
     {
       "greek": "ὅσπερ",
       "pos": "pronoun",
       "endings": "ἥπερ, ὅπερ",
       "definition": "who, which, that (emphatic relative)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οσπερ_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οσπερ_en.mp3"
     },
     {
       "greek": "ὅστις",
       "pos": "pronoun",
       "endings": "ἥτις, ὅ τι",
       "definition": "anyone/anything who/which (indefinite relative)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οστις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οστις_en.mp3"
     },
     {
       "greek": "οὗτος",
       "pos": "pronoun",
       "endings": "αὕτη, τοῦτο",
       "definition": "this",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουτος_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ουτος_en.mp3"
     },
     {
       "greek": "μηδείς",
       "pos": "pronoun",
       "endings": "μηδεμία, μηδέν",
       "definition": "no one (with non-indicative verbs)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μηδεις_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/μηδεις_en.mp3"
     },
     {
       "greek": "ἵνα",
       "pos": "conjunction",
       "definition": "in order that (+subj./opt.); where (rel. adv.)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ινα_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ινα_en.mp3"
     },
     {
       "greek": "ὅπου",
       "pos": "conjunction",
       "definition": "where",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οπου_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οπου_en.mp3"
     },
     {
       "greek": "ὅπως",
       "pos": "conjunction",
       "definition": "how, as, so that",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οπως_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οπως_en.mp3"
     },
     {
       "greek": "ὅταν",
       "pos": "conjunction",
       "definition": "whenever (= ὅτε + ἄν)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οταν_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οταν_en.mp3"
     },
     {
       "greek": "ὅτε",
       "pos": "conjunction",
       "definition": "when",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οτε_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/οτε_en.mp3"
     },
     {
       "greek": "ὡς",
       "pos": "conjunction",
       "definition": "as, since, so that (+subj./opt.); that, to (indirect statement)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ως_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ως_en.mp3"
     },
     {
       "greek": "ὦ",
       "pos": "interjection",
       "definition": "oh! (vocative exclamation)",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ω_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/ω_en.mp3"
     },
     {
       "greek": "στάδιον",
@@ -3646,7 +4342,9 @@
       "gender": "n",
       "genitive": "-ου",
       "definition": "stadion/stade (~185 meters); (pl.) στάδια or στάδιοι",
-      "introduced": "intermediate"
+      "introduced": "intermediate",
+      "audio_greek_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σταδιον_gr.mp3",
+      "audio_en_url": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/vocab/σταδιον_en.mp3"
     }
   ]
 }

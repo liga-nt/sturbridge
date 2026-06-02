@@ -1,0 +1,49 @@
+<narrator>What I saw at the dock made me sit down on a large coil of abandoned rope.
+
+The boat was small. The sail was set on a pivot I had never seen. Smooth ropes ran in patterns that recalled to my mind the work of Hephaestos, the great blacksmith and metalworker. With his hammer and anvil, he fashioned nets so fine that the gods could not see them and used them to capture Ares himself, the god of war, and Aphrodite, the goddess of love, in a scene that made all the Olympians laugh. I was bewildered and Klēta saw my confusion. She took my hand to focus my attention and explained patiently — the way a child explains to a man who is very old and not entirely following along — that with this rigging the boat could sail at an angle into the wind. Not with the wind. Against it.
+
+I asked her to repeat that.
+
+She repeated it.
+
+I sat for some time until the girl Pallas interrupted me.
+
+</narrator><pallas>What are you thinking about, Mr. Socrates?</pallas><narrator> she said.
+
+I was a bit taken aback by her directness, but I could tell she meant no harm and was serious about her question. If you'd really like to know, I said, I was remembering a day when I was about your age and saw my first play in Athens' magnificent theater of Dionysus. I crowded into the theater with my fellow countrymen to watch Aeschylus, the Father of Tragedy, premiere the Oresteia — three plays in a single day as the sun crossed the sky over Athens. The back story to Aeschylus' tale was well known to any audience member, myself included. Before the Greeks set out to conquer Troy in revenge for the theft of Helen, Agamemnon — king of Mycenae — found his fleet at Aulis, becalmed and contrary-winded, unable to sail. The army he had gathered was growing restless and hungry. Some were ready to return home rather than pursue what now seemed like a false promise of glory and gold. The seers and omen readers gathered and explained to the king that in order to get a favorable wind – one that filled the sails from behind rather than driving against the shore – he would have to sacrifice his daughter Iphigenia at the altar, and beg for a favorable wind from the gods. To the horror of her mother and no doubt many other onlookers too meek to challenge a king, Agamemnon sacrificed Iphigenia on the altar and received the wind he desired.
+
+After laying siege for 10 years, the Greeks conquered Troy. And this is where Aeschylus' Oresteia begins, a spectacle of tragedy the likes of which I had never seen and have never seen since. Agamemnon returning from Troy found his wife Clytemnestra waiting not with joy at his return but with murderous rage at the loss of her child. She killed him and took a new husband. But their son Orestes, raised in exile, came of age and returned to Athens to avenge his father. He killed his own mother, an unspeakable horror that caused the Furies to pursue him to Athens. Before they could tear him limb from limb, Athena stepped in. She convened the first murder trial at the Areopagus. Orestes was acquitted by a single vote, breaking the chain of blood vengeance with a jury's verdict. The Furies, wild with rage, became the Eumenides – the gentle-minded, protectors of Athens.
+
+I was a boy, and Aeschylus' masterpiece shook me — not because the story was terrible, though it was, but because of the idea it offered: that the court, with its procedures and its civic patience, could offer a type of justice that vengeance never could.
+
+But now I am seeing something that would have prevented the cycle of tragedy from even getting started. If Agamemnon's fleet were built with these sails, with these ropes... My mind began to wander again before I caught it and brought it back to the children who were looking at me like chicks waiting for a worm.
+
+Enough about my musings, I said, and reluctantly inquired of them: Tell me what trouble are your people in? What is the virtue you are trying to recover? For surely a city that sails against the wind has also some moral art that lets it navigate periods of social strife.
+
+All four began to answer at once. Within the hour they had contradicted themselves more times than I could count. Pallas was certain the answer was courage and discipline. Dolios thought it was the ability to inspire and unite people. Klēta wanted to talk about institutions and their design. Phoebe thought it was devotion to something larger than themselves. In the end their arguments trailed off.
+
+It was at this point that the young Plato, who had followed us down from the city and settled himself on a mooring post with his scroll — the draft of what he would one day call The Republic — looked up.
+
+</narrator><plato>Even if you did agree,</plato> <narrator>he said,</narrator> <plato>consider where you have come to find your answer.</plato> <narrator>He set the scroll down.</narrator> <plato>Four years ago, thirty men appointed by Sparta ruled this city. In eight months they killed fifteen hundred Athenians — teachers, soldiers, ordinary men who had done nothing except stand in the wrong place. We drove them out. We restored our fragile democracy. But one of the men who sat on that council, one of the architects of that terror, was previously a student of the very person to whom you have now come for answers. He had asked, as you are asking now, what virtue requires. His name was Critias. He was not stupid. He was not uneducated.</plato> <narrator>Plato paused.</narrator> <plato>He was, for a time, a friend of ours.</plato>
+
+<narrator>No one spoke for a moment.</narrator>
+
+<plato>So you see,</plato> <narrator>Plato said, not unkindly,</narrator> <plato>the question of what your civilization has lost is not so different from the question of what ours is still looking for.</plato>
+
+<narrator>It was Klēta who finally broke the silence.</narrator> <kleta>We know all that,</kleta> <narrator>she said.</narrator> <kleta>It's in our books. But he is still Socrates – whom the oracle said was the wisest man in Athens.</kleta>
+
+<narrator>I had been afraid someone would mention the oracle. I sighed, which is a thing I have been doing more often in recent years, and explained to the children what the oracle had actually said — or rather, what I had come to believe it meant after some years of painful investigation. The god had not declared me wise. The god had declared that no one in Athens was wiser. There is a difference, and the difference is the whole matter. For I had gone to people who were supposed to know things — generals, poets, craftsmen, politicians — and had found that, to a person, they did not know half the things they thought they knew. While they rode their expertise in one domain to certainty about everything else, I remained quite clear that I did not know what I did not know. That small, embarrassing piece of honesty was apparently the full extent of Athenian wisdom.
+
+When I finished, the children's faces were like the sea below Piraeus when the winds were fighting on the surface and the spray was rushing this way and that.</narrator>
+
+<dolios>So you don't have the answer,</dolios> <narrator>said Dolios.
+
+I'm afraid not, I said. But I can perhaps help you find the right question to ask. And I know of someone who might do more.
+
+I gestured toward the north, toward the mountains. What you need is not Socrates. What you need is the oracle herself.</narrator>
+
+<narrator>Then Pallas — the decisive one — stepped in.</narrator> <pallas>Delphi,</pallas> <narrator>she said.</narrator> <pallas>We must ask the oracle ourselves.</pallas>
+
+<narrator>Delphi, I agreed.
+
+The next morning, I walked down to the Pireaus to see them off, not least because I wanted to see their boat in action. Perhaps, I thought, I would see that it was all deception – a spider web that had caught an old and gullible gadfly. But though a powerful wind was blowing from Crete, the children directed their boat just 45 degrees off that headwind, a perfect trajectory to follow around mainland Greece to the gulf of Corinth and the oracle's home. Many fishermen and sailors stopped to watch, certain that they were witnessing the actions of a god or goddess, not the small boat of four children from the future. When they disappeared from sight, I walked back up to the city, quite sure and quite mistaken that I would never see these strange children again.</narrator>

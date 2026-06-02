@@ -1,0 +1,148 @@
+{
+  "vocab": {
+    "text": "Type each Greek word. Use the buttons to choose the vocab you want to practice and to hide the Greek or English columns. Select your input style here:",
+    "audioUrl": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/lesson-hints/vocab.mp3",
+    "alignment": [
+      {
+        "word": "Type",
+        "start": 0,
+        "end": 0.32
+      },
+      {
+        "word": "each",
+        "start": 0.4,
+        "end": 0.72
+      },
+      {
+        "word": "Greek",
+        "start": 0.787,
+        "end": 1.122
+      },
+      {
+        "word": "word.",
+        "start": 1.234,
+        "end": 1.842
+      },
+      {
+        "word": "Use",
+        "start": 2.062,
+        "end": 2.722
+      },
+      {
+        "word": "the",
+        "start": 2.742,
+        "end": 2.802
+      },
+      {
+        "word": "buttons",
+        "start": 2.852,
+        "end": 3.202
+      },
+      {
+        "word": "to",
+        "start": 3.255,
+        "end": 3.361
+      },
+      {
+        "word": "choose",
+        "start": 3.418,
+        "end": 3.76
+      },
+      {
+        "word": "the",
+        "start": 3.78,
+        "end": 3.84
+      },
+      {
+        "word": "vocab",
+        "start": 3.933,
+        "end": 4.398
+      },
+      {
+        "word": "you",
+        "start": 4.418,
+        "end": 4.478
+      },
+      {
+        "word": "want",
+        "start": 4.51,
+        "end": 4.638
+      },
+      {
+        "word": "to",
+        "start": 4.691,
+        "end": 4.797
+      },
+      {
+        "word": "practice",
+        "start": 4.859,
+        "end": 5.355
+      },
+      {
+        "word": "and",
+        "start": 5.435,
+        "end": 5.675
+      },
+      {
+        "word": "to",
+        "start": 5.728,
+        "end": 5.834
+      },
+      {
+        "word": "hide",
+        "start": 5.914,
+        "end": 6.234
+      },
+      {
+        "word": "the",
+        "start": 6.274,
+        "end": 6.394
+      },
+      {
+        "word": "Greek",
+        "start": 6.447,
+        "end": 6.712
+      },
+      {
+        "word": "or",
+        "start": 6.792,
+        "end": 6.952
+      },
+      {
+        "word": "English",
+        "start": 7.002,
+        "end": 7.352
+      },
+      {
+        "word": "columns.",
+        "start": 7.432,
+        "end": 8.152
+      },
+      {
+        "word": "Select",
+        "start": 8.312,
+        "end": 9.272
+      },
+      {
+        "word": "your",
+        "start": 9.304,
+        "end": 9.432
+      },
+      {
+        "word": "input",
+        "start": 9.525,
+        "end": 9.99
+      },
+      {
+        "word": "style",
+        "start": 10.057,
+        "end": 10.392
+      },
+      {
+        "word": "here:",
+        "start": 10.488,
+        "end": 10.952
+      }
+    ]
+  }
+}

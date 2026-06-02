@@ -41,9 +41,20 @@ export function keyToGreek(key) {
   return QWERTY_TO_GREEK[key.toLowerCase()] ?? null;
 }
 
+// Canonical order for Greek combining marks — breathing before accent before dialytika before iota-sub
+const MARK_ORDER = {
+  '̓': 1, '̔': 1, // smooth / rough breathing
+  '́': 2, '̀': 2, '͂': 2, // acute / grave / circumflex
+  '̈': 3, // dialytika
+  'ͅ': 4, // iota subscript
+};
+
 /**
  * Apply a diacritic key to the last character of buffer (NFD toggle → NFC).
  * No-ops if last char's NFD base is not a vowel (or ρ for dasia).
+ * Sorts combining marks into canonical Greek order before NFC so that
+ * breathing+accent combinations always produce the correct precomposed character
+ * regardless of input order.
  */
 export function applyDiacritic(buffer, key) {
   const mark = DIACRITIC_MAP[key];
@@ -53,8 +64,9 @@ export function applyDiacritic(buffer, key) {
   const nfd = last.normalize('NFD');
   const base = nfd[0];
   if (!VOWELS.has(base) && !(key === '{' && (base === 'ρ' || base === 'Ρ'))) return buffer;
-  const updated = nfd.includes(mark) ? nfd.replace(mark, '') : nfd + mark;
-  chars[chars.length - 1] = updated.normalize('NFC');
+  const withMark = nfd.includes(mark) ? nfd.replace(mark, '') : nfd + mark;
+  const marks = [...withMark].slice(1).sort((a, b) => (MARK_ORDER[a] ?? 9) - (MARK_ORDER[b] ?? 9));
+  chars[chars.length - 1] = (base + marks.join('')).normalize('NFC');
   return chars.join('');
 }
 

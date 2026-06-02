@@ -19,6 +19,7 @@
         { href: `/teacher${navClassSuffix}`, label: 'Mastery Grid', path: '/teacher' },
         { href: `/teacher/standards${navClassSuffix}`, label: 'Standards', path: '/teacher/standards' },
         { href: `/teacher/assign${navClassSuffix}`, label: 'Assign', path: '/teacher/assign' },
+        { href: `/teacher/practice${navClassSuffix}`, label: 'Practice Log', path: '/teacher/practice' },
     ];
 </script>
 

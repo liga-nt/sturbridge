@@ -22,15 +22,7 @@
     }
   });
 
-  /**
-   * Linear progression: a lesson is unlocked if it's the first one,
-   * or if the previous lesson has been completed.
-   * For now, we unlock all — real locking can be added when progress tracking is wired up.
-   */
   function isUnlocked(index) {
-    // Chapter 1 is always unlocked; subsequent chapters require the previous to be completed.
-    // Without progress data here, unlock lesson 0 only for now, but allow all for dev.
-    // To keep it usable while building, unlock all published lessons.
     return true;
   }
 </script>
@@ -47,9 +39,29 @@
     {/if}
   </header>
 
-  <!-- Alphabet card — always visible once page is not in error -->
+  <!-- Fixed cards — always visible once page is not in error -->
   {#if !error}
-    <div class="lessons-list" style="margin-bottom: 0;">
+    <div class="lessons-list">
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div
+        class="lesson-card intro-card"
+        on:click={() => goto('/student/greek/introduction')}
+        role="button"
+        tabindex="0"
+        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && goto('/student/greek/introduction')}
+      >
+        <div class="card-left intro-left">
+          <span class="intro-icon">I</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">Introduction</div>
+          <div class="card-subtitle">Pronunciation, background, and what to expect</div>
+        </div>
+        <div class="card-right">
+          <span class="arrow-icon">›</span>
+        </div>
+      </div>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <div
@@ -86,7 +98,7 @@
       <p>No lessons published yet. Check back soon!</p>
     </div>
   {:else}
-    <div class="lessons-list">
+    <div class="lessons-list" style="margin-top: 10px;">
       {#each lessons as lesson, i}
         {@const unlocked = isUnlocked(i)}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -277,6 +289,28 @@
     color: #9ca3af;
     font-weight: 300;
     line-height: 1;
+  }
+
+  .intro-card {
+    border: 1px solid #d1fae5;
+  }
+
+  .intro-card:hover {
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+    border-color: #6ee7b7;
+  }
+
+  .intro-left {
+    background: #ecfdf5;
+    border-right-color: #d1fae5;
+  }
+
+  .intro-icon {
+    font-size: 18px;
+    font-weight: 700;
+    color: #059669;
+    font-style: italic;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
   }
 
   .alphabet-card {

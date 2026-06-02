@@ -59,7 +59,7 @@ const CANON = {
             gift:        'A flute from Athena with mysterious properties — its music can calm, persuade, or inspire.',
             giftChapter: null
         },
-        'Κλήτα': {
+        'Κλειώ': {
             english:     'Klēta',
             age:         10,
             relation:    'younger sister of Phoebe',

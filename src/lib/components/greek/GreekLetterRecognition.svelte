@@ -1,9 +1,8 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import { keyToGreek } from '$lib/utils/greekKeyboard.js';
+  import { onDestroy } from 'svelte';
 
   export let alphabet = [];
-  export let showQwertyHint = true;
+  export let hintKeys = []; // kept for interface compat; never set internally
 
   function shuffle(arr) {
     const a = [...arr];
@@ -14,11 +13,10 @@
     return a;
   }
 
-  // Deck: alternate uppercase→lowercase and lowercase→uppercase rounds
   let deck = [];
   let remaining = [];
-  let target = null;    // { letter, showUpper }
-  let tiles = [];       // array of alphabet letter objects
+  let target = null;
+  let tiles = [];
   let flash = {};
   let flashTimers = {};
   let done = false;
@@ -33,8 +31,8 @@
   function buildDeck() {
     const rounds = [];
     for (const letter of alphabet) {
-      rounds.push({ letter, showUpper: true });   // show uppercase, pick lowercase
-      rounds.push({ letter, showUpper: false });  // show lowercase, pick uppercase
+      rounds.push({ letter, showUpper: true });
+      rounds.push({ letter, showUpper: false });
     }
     deck = shuffle(rounds);
     total = deck.length;
@@ -61,25 +59,13 @@
   function handleTile(tile, idx) {
     if (!target || flash[idx] === 'correct') return;
     if (tile.id === target.letter.id) {
+      if (target.letter.audio_url) new Audio(target.letter.audio_url).play().catch(() => {});
       setFlash(idx, 'correct');
       remaining = remaining.slice(1);
       setTimeout(pickRound, 600);
     } else {
       setFlash(idx, 'wrong');
     }
-    setTimeout(() => hiddenInput?.focus(), 0);
-  }
-
-  function handleKey(e) {
-    if (!target || done) return;
-    if (['Tab','Escape','ArrowLeft','ArrowRight','ArrowUp','ArrowDown',
-         'Enter','Backspace','Delete','Control','Shift','Alt','Meta'].includes(e.key)) return;
-    if (e.ctrlKey || e.altKey || e.metaKey) return;
-    e.preventDefault();
-    const greek = keyToGreek(e.key);
-    if (!greek) return;
-    const idx = tiles.findIndex(t => t.char_lower === greek);
-    if (idx !== -1) handleTile(tiles[idx], idx);
   }
 
   function setFlash(index, type) {
@@ -88,42 +74,10 @@
     flashTimers[index] = setTimeout(() => { flash = { ...flash, [index]: null }; }, 400);
   }
 
-  let hiddenInput;
-  function focusInput() { hiddenInput?.focus(); }
-
-  function handleInput(e) {
-    const char = e.data;
-    if (!char || !target) return;
-    hiddenInput.value = '';
-    const greek = /[Ͱ-Ͽἀ-῿]/.test(char) ? char : keyToGreek(char);
-    if (!greek) return;
-    const idx = tiles.findIndex(t => t.char_lower === greek);
-    if (idx !== -1) handleTile(tiles[idx], idx);
-  }
-
-  onMount(() => {
-    window.addEventListener('keydown', handleKey);
-    hiddenInput?.focus();
-  });
-  onDestroy(() => {
-    window.removeEventListener('keydown', handleKey);
-    Object.values(flashTimers).forEach(clearTimeout);
-  });
+  onDestroy(() => Object.values(flashTimers).forEach(clearTimeout));
 </script>
 
-<input
-  bind:this={hiddenInput}
-  class="hidden-input"
-  type="text"
-  inputmode="text"
-  autocomplete="off"
-  autocorrect="off"
-  autocapitalize="none"
-  spellcheck="false"
-  on:input={handleInput}
-/>
-
-<div class="recognition-wrapper" on:click={focusInput} role="presentation">
+<div class="recognition-wrapper">
   {#if !started}
     <div class="loading">Loading…</div>
 
@@ -135,7 +89,6 @@
     </div>
 
   {:else if target}
-    <!-- Progress -->
     <div class="progress-row">
       <div class="progress-track">
         <div class="progress-fill" style="width:{((total - remaining.length) / total) * 100}%"></div>
@@ -143,19 +96,16 @@
       <span class="progress-text">{total - remaining.length} / {total}</span>
     </div>
 
-    <!-- Prompt label -->
     <div class="prompt-label">
       {target.showUpper ? 'Find the lowercase form' : 'Find the uppercase form'}
     </div>
 
-    <!-- Target display: show the form student must match -->
     <div class="target-area">
       <div class="target-display">
         {target.showUpper ? target.letter.char_upper : target.letter.char_lower}
       </div>
     </div>
 
-    <!-- 4 tiles: each shows both forms of a letter -->
     <div class="tile-grid">
       {#each tiles as tile, i}
         <button
@@ -163,32 +113,18 @@
           class:flash-correct={flash[i] === 'correct'}
           class:flash-wrong={flash[i] === 'wrong'}
           on:click={() => handleTile(tile, i)}
-          aria-label="{tile.name_en}"
+          aria-label={tile.name_en}
         >
           <div class="tile-char">
             {target.showUpper ? tile.char_lower : tile.char_upper}
           </div>
-          {#if showQwertyHint}
-            <kbd class="tile-key">{tile.qwerty_key}</kbd>
-          {/if}
         </button>
       {/each}
     </div>
-
-    <div class="key-hint">Press the QWERTY key or click the tile</div>
   {/if}
 </div>
 
 <style>
-  .hidden-input {
-    position: fixed;
-    top: 0; left: 0;
-    width: 1px; height: 1px;
-    opacity: 0; border: none; padding: 0; margin: 0;
-    outline: none; caret-color: transparent;
-    background: transparent; color: transparent;
-  }
-
   .recognition-wrapper {
     display: flex;
     flex-direction: column;
@@ -265,7 +201,6 @@
     width: 150px;
     min-height: 120px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1rem 0.5rem;
@@ -274,7 +209,6 @@
     border-radius: 1rem;
     cursor: pointer;
     transition: all 0.1s;
-    gap: 0.4rem;
   }
 
   .tile:hover { border-color: #a5b4fc; background: #f5f3ff; }
@@ -289,24 +223,6 @@
     line-height: 1.1;
   }
 
-  .tile-key {
-    display: block;
-    padding: 0.15em 0.5em;
-    font-size: 0.8rem;
-    font-family: monospace;
-    color: #374151;
-    background: #f3f4f6;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  }
-
-  .key-hint {
-    font-size: 0.72rem;
-    color: #d1d5db;
-    margin-top: -0.5rem;
-  }
-
   .done-screen {
     display: flex;
     flex-direction: column;
@@ -315,10 +231,7 @@
     padding: 3rem 1rem;
   }
 
-  .done-check {
-    font-size: 3rem;
-    color: #16a34a;
-  }
+  .done-check { font-size: 3rem; color: #16a34a; }
 
   .done-message {
     font-size: 1.1rem;
@@ -335,6 +248,5 @@
     font-size: 0.9rem;
     cursor: pointer;
   }
-
   .restart-btn:hover { background: #4f46e5; }
 </style>

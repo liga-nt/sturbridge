@@ -25,14 +25,48 @@
   const GENDER_ORDER = ['masc','fem','neut'];
   const NUMBER_ORDER = ['sg','pl'];
 
-  const CASE_LABELS   = { nom:'Nom', gen:'Gen', dat:'Dat', acc:'Acc', voc:'Voc' };
+  const CASE_LABELS   = { nom:'Nominative', gen:'Genitive', dat:'Dative', acc:'Accusative', voc:'Vocative' };
   const PERSON_LABELS = { '1':'1st', '2':'2nd', '3':'3rd' };
   const NUMBER_LABELS = { sg:'Singular', pl:'Plural' };
-  const GENDER_SHORT  = { masc:'M.', fem:'F.', neut:'N.' };
+  const GENDER_LABELS = { masc:'Masculine', fem:'Feminine', neut:'Neuter' };
 
   const TENSE_L = { pres:'Present', imperf:'Imperfect', aor:'Aorist', fut:'Future', perf:'Perfect', plup:'Pluperfect' };
   const MOOD_L  = { indic:'Indicative', subj:'Subjunctive', opt:'Optative', imper:'Imperative', inf:'Infinitive' };
   const VOICE_L = { act:'Active', mid:'Middle', pass:'Passive', mp:'Mid./Pass.' };
+
+  // ── Grammatical descriptions ──────────────────────────────────────────────
+  const CASE_DESC = {
+    nom: 'The <strong>nominative</strong> is the subject — the person or thing doing the action. Ask yourself: <em>Who</em> or <em>what</em> is doing it?',
+    gen: 'The <strong>genitive</strong> shows belonging or connection. It often translates as <em>of</em> or the English possessive <em>\'s</em> — like "the sword <em>of the soldier</em>" or "the soldier\'s sword."',
+    dat: 'The <strong>dative</strong> is the indirect object — the person who receives something or benefits from it. Ask yourself: <em>To whom</em> or <em>for whom</em>?',
+    acc: 'The <strong>accusative</strong> is the direct object — the person or thing directly receiving the action. Ask yourself: <em>What</em> is being acted on?',
+    voc: 'The <strong>vocative</strong> is used when speaking directly to someone. It\'s how you call out to a person by name or title — like saying "O Phoebe!" or "O teacher!"',
+  };
+
+  const NUMBER_DESC = {
+    sg: 'The <strong>singular</strong> refers to just one person or thing.',
+    pl: 'The <strong>plural</strong> refers to more than one. Greek tip: neuter plural subjects take a singular verb.',
+  };
+
+  const PERSON_DESC = {
+    '1': '<strong>First person</strong> is the speaker. Singular: <em>I</em> — Plural: <em>we</em>',
+    '2': '<strong>Second person</strong> is the person being spoken to. Singular and plural: <em>you</em>',
+    '3': '<strong>Third person</strong> is everyone else. Singular: <em>he / she / it</em> — Plural: <em>they</em>',
+  };
+
+  $: morphDesc = (() => {
+    if (!highlightMorph) return null;
+    const { pos, case: c, number: n, person } = highlightMorph;
+    const parts = [];
+    if (pos === 'verb') {
+      if (person) parts.push(PERSON_DESC[person]);
+      if (n)      parts.push(NUMBER_DESC[n]);
+    } else {
+      if (c) parts.push(CASE_DESC[c]);
+      if (n) parts.push(NUMBER_DESC[n]);
+    }
+    return parts.length ? parts : null;
+  })();
 
   // ── Paradigm fallback ─────────────────────────────────────────────────────
   $: paradigm = paradigmKey ? paradigms[paradigmKey] : null;
@@ -128,16 +162,18 @@
     }
 
     if (struct?.type === 'multi-gender') {
-      // Columns ordered: for each number, for each gender  (M.Sg F.Sg N.Sg M.Pl F.Pl N.Pl)
+      // Columns ordered: for each gender, for each number (Masc Sg/Pl, Fem Sg/Pl, Neut Sg/Pl)
       const colSpecs = [];
-      for (const n of struct.numbers) {
-        for (const g of struct.genders) {
+      for (const g of struct.genders) {
+        for (const n of struct.numbers) {
           colSpecs.push({ gender: g, number: n });
         }
       }
-      const headers = colSpecs.map(({ gender, number }) =>
-        `${GENDER_SHORT[gender] ?? gender} ${NUMBER_LABELS[number] ?? number}`
-      );
+      const headers = colSpecs.map(({ number }) => NUMBER_LABELS[number] ?? number);
+      const genderHeaders = struct.genders.map(g => ({
+        label: GENDER_LABELS[g] ?? g,
+        span: struct.numbers.length,
+      }));
       const rows = struct.cases.map(c => ({
         label:  CASE_LABELS[c] ?? c,
         rowKey: c,
@@ -145,7 +181,7 @@
           cell(wf?.[gender]?.[number]?.[c], abs?.[gender]?.[number]?.[c])
         )
       }));
-      return { headers, rows, colSpecs, struct };
+      return { headers, genderHeaders, rows, colSpecs, struct };
     }
 
     // No wordForms structure — fall back entirely to paradigm template
@@ -163,16 +199,18 @@
       const caseKeys = labels?.rows?.map(r => r.toLowerCase()) ?? CASE_ORDER;
       const caseLabels = labels?.rows ?? caseKeys.map(c => CASE_LABELS[c] ?? c);
       const colSpecs = [];
-      for (const n of numbers) for (const g of genders) colSpecs.push({ gender: g, number: n });
-      const headers = colSpecs.map(({ gender, number }) =>
-        `${GENDER_SHORT[gender] ?? gender} ${NUMBER_LABELS[number] ?? number}`
-      );
+      for (const g of genders) for (const n of numbers) colSpecs.push({ gender: g, number: n });
+      const headers = colSpecs.map(({ number }) => NUMBER_LABELS[number] ?? number);
+      const genderHeaders = genders.map(g => ({
+        label: GENDER_LABELS[g] ?? g,
+        span: numbers.length,
+      }));
       const rows = caseKeys.map((c, i) => ({
         label:  caseLabels[i] ?? CASE_LABELS[c] ?? c,
         rowKey: c,
         cells:  colSpecs.map(({ gender, number }) => forms[gender]?.[number]?.[c] ?? '—')
       }));
-      return { headers, rows, colSpecs, struct: { type:'multi-gender', genders, numbers, cases: caseKeys } };
+      return { headers, genderHeaders, rows, colSpecs, struct: { type:'multi-gender', genders, numbers, cases: caseKeys } };
     }
 
     if (pos === 'verb') {
@@ -199,6 +237,17 @@
   $: tableData = wordForms
     ? buildTable(wordForms, paradigm)
     : (paradigm ? buildFromParadigm(paradigm) : null);
+
+  // ── Movable nu display ────────────────────────────────────────────────────
+  // Appends (ν) for display only; does not affect stored forms or lookups.
+  // Rule: all -σι endings (verb 3pl, 3rd-decl dat pl) and verb -ε endings (3sg aor/imperf).
+  function movNu(form, structType) {
+    if (!form || form === '—') return form;
+    const bare = form.normalize('NFD').replace(/[̀-ͯ]/g, '');
+    if (bare.endsWith('σι')) return form + '(ν)';
+    if (structType === 'verb' && bare.endsWith('ε')) return form + '(ν)';
+    return form;
+  }
 
   // ── Highlight ─────────────────────────────────────────────────────────────
   function isHighlighted(rowKey, colIdx) {
@@ -237,12 +286,26 @@
     {/if}
     <table class="paradigm-table">
       <thead>
-        <tr>
-          <th class="corner-cell"></th>
-          {#each tableData.headers as header}
-            <th>{header}</th>
-          {/each}
-        </tr>
+        {#if tableData.genderHeaders}
+          <tr>
+            <th class="corner-cell" rowspan="2"></th>
+            {#each tableData.genderHeaders as gh}
+              <th colspan={gh.span} class="gender-header">{gh.label}</th>
+            {/each}
+          </tr>
+          <tr>
+            {#each tableData.headers as header}
+              <th>{header}</th>
+            {/each}
+          </tr>
+        {:else}
+          <tr>
+            <th class="corner-cell"></th>
+            {#each tableData.headers as header}
+              <th>{header}</th>
+            {/each}
+          </tr>
+        {/if}
       </thead>
       <tbody>
         {#each tableData.rows as row}
@@ -250,13 +313,21 @@
             <th class="row-header">{row.label}</th>
             {#each row.cells as cellVal, ci}
               <td class:highlighted={isHighlighted(row.rowKey, ci)}>
-                {cellVal ?? '—'}
+                {movNu(cellVal ?? '—', tableData.struct?.type)}
               </td>
             {/each}
           </tr>
         {/each}
       </tbody>
     </table>
+
+    {#if morphDesc}
+      <div class="morph-desc">
+        {#each morphDesc as html}
+          <p>{@html html}</p>
+        {/each}
+      </div>
+    {/if}
   </div>
 {:else if paradigmKey}
   <div class="paradigm-missing">Paradigm "{paradigmKey}" not found.</div>
@@ -308,6 +379,10 @@
     white-space: nowrap;
   }
 
+  .gender-header {
+    border-bottom: 1px solid #d1d5db;
+  }
+
   .row-header {
     background: #f9fafb;
     font-weight: 600;
@@ -331,5 +406,23 @@
     font-size: 15px;
     color: #9ca3af;
     font-style: italic;
+  }
+
+  .morph-desc {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #f8f9ff;
+    border-left: 3px solid #c7d2fe;
+    border-radius: 0 6px 6px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .morph-desc p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #374151;
   }
 </style>

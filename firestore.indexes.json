@@ -1,6 +1,14 @@
 {
   "indexes": [
     {
+      "collectionGroup": "sessions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "classId", "order": "ASCENDING" },
+        { "fieldPath": "date",    "order": "ASCENDING" }
+      ]
+    },
+    {
       "collectionGroup": "lessons",
       "queryScope": "COLLECTION",
       "fields": [

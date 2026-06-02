@@ -86,6 +86,7 @@
     transition: background-color 150ms ease-in-out;
     user-select: none;
     -webkit-user-select: none;
+    white-space: nowrap;
   }
 
   .gw:hover {

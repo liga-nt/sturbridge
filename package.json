@@ -6,7 +6,8 @@
 	"scripts": {
 		"dev": "vite dev",
 		"sync-word-forms": "python3 scripts/migrate_morph_to_json.py",
-		"prebuild": "npm run sync-word-forms",
+		"prebuild": "npm run sync-word-forms && node scripts/build-standards-coverage.mjs",
+		"build-standards": "node scripts/build-standards-coverage.mjs",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",

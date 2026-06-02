@@ -210,7 +210,7 @@ export async function loadLessons(courseId) {
         ...pubSnap.docs.map(d => ({ id: d.id, ...d.data() })),
         ...accSnap.docs.map(d => ({ id: d.id, ...d.data() }))
     ];
-    return all.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    return all.sort((a, b) => (a.chapter ?? a.order ?? 0) - (b.chapter ?? b.order ?? 0));
 }
 
 export async function loadLesson(lessonId) {
@@ -233,4 +233,40 @@ export async function savePassageProgress(uid, lessonId, data) {
         { ...data, savedAt: serverTimestamp() },
         { merge: true }
     );
+}
+
+// ---------------------------------------------------------------------------
+// Session logs (fundamentals time tracking)
+// ---------------------------------------------------------------------------
+
+/**
+ * Write a session log entry.
+ * data: { date: 'YYYY-MM-DD', standardTimes: { [stdId]: { practiceSec, masterySec } }, sessionTimeLimit }
+ */
+export async function writeSessionLog(classId, uid, data) {
+    const totalSec = Object.values(data.standardTimes)
+        .reduce((s, t) => s + (t.practiceSec ?? 0) + (t.masterySec ?? 0), 0);
+    const id = `${classId}_${uid}_${Date.now()}`;
+    await setDoc(doc(db, 'sessions', id), {
+        classId,
+        studentId: uid,
+        startedAt: serverTimestamp(),
+        overtime: totalSec > data.sessionTimeLimit,
+        ...data,
+    });
+}
+
+/**
+ * Load all session docs for a class within a date range.
+ * weekStart/weekEnd: 'YYYY-MM-DD' strings (inclusive).
+ */
+export async function loadWeeklySessions(classId, weekStart, weekEnd) {
+    const q = query(
+        collection(db, 'sessions'),
+        where('classId', '==', classId),
+        where('date', '>=', weekStart),
+        where('date', '<=', weekEnd)
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map(d => d.data());
 }

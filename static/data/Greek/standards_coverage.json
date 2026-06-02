@@ -1,0 +1,777 @@
+{
+  "note": "Tracks coverage of NGE Introductory Exam hist/geo/myth standards across story chapters. Status: 'covered' = written chapter, 'planned' = placeholder chapter, 'at_risk' = no chapter currently addresses this standard.",
+  "standards": [
+    {
+      "id": "geo.athens",
+      "domain": "geography",
+      "description": "Know the location of Athens",
+      "status": "covered",
+      "chapters": [
+        "ch_01",
+        "ch_02",
+        "ch_07",
+        "ch_08",
+        "ch_09",
+        "ch_12"
+      ]
+    },
+    {
+      "id": "geo.delphi",
+      "domain": "geography",
+      "description": "Know the location of Delphi",
+      "status": "covered",
+      "chapters": [
+        "ch_02",
+        "ch_04"
+      ]
+    },
+    {
+      "id": "geo.troy",
+      "domain": "geography",
+      "description": "Know the location of Troy",
+      "status": "covered",
+      "chapters": [
+        "ch_02"
+      ]
+    },
+    {
+      "id": "geo.aegean_sea",
+      "domain": "geography",
+      "description": "Know the location of the Aegean Sea",
+      "status": "covered",
+      "chapters": [
+        "ch_03",
+        "ch_06"
+      ]
+    },
+    {
+      "id": "geo.crete",
+      "domain": "geography",
+      "description": "Know the location of Crete",
+      "status": "covered",
+      "chapters": [
+        "ch_06"
+      ]
+    },
+    {
+      "id": "geo.euboea",
+      "domain": "geography",
+      "description": "Know the location of Euboea",
+      "status": "covered",
+      "chapters": [
+        "ch_05"
+      ]
+    },
+    {
+      "id": "geo.hellespont",
+      "domain": "geography",
+      "description": "Know the location of the Hellespont",
+      "status": "covered",
+      "chapters": [
+        "ch_05"
+      ]
+    },
+    {
+      "id": "geo.olympia",
+      "domain": "geography",
+      "description": "Know the location of Olympia",
+      "status": "covered",
+      "chapters": [
+        "ch_09"
+      ]
+    },
+    {
+      "id": "geo.thebes",
+      "domain": "geography",
+      "description": "Know the location of Thebes",
+      "status": "covered",
+      "chapters": [
+        "ch_07"
+      ]
+    },
+    {
+      "id": "geo.corinth",
+      "domain": "geography",
+      "description": "Know the location of Corinth",
+      "status": "covered",
+      "chapters": [
+        "ch_02",
+        "ch_10"
+      ]
+    },
+    {
+      "id": "geo.black_sea",
+      "domain": "geography",
+      "description": "Know the location of the Black Sea",
+      "status": "covered",
+      "chapters": [
+        "ch_10"
+      ],
+      "note": "Named in Medea backstory — Jason sailed to Colchis on the Black Sea"
+    },
+    {
+      "id": "geo.sicily",
+      "domain": "geography",
+      "description": "Know the location of Sicily",
+      "status": "covered",
+      "chapters": [
+        "ch_10",
+        "ch_11"
+      ],
+      "note": "Named in ch_11 Klēta's reading — Athens sent fleet across the Ionian Sea to Sicily"
+    },
+    {
+      "id": "geo.sparta",
+      "domain": "geography",
+      "description": "Know the location of Sparta",
+      "status": "covered",
+      "chapters": [
+        "ch_05",
+        "ch_10"
+      ],
+      "note": "Named in ch_05 (Carneia festival) and ch_10 (Thucydides — Sparta won't break)"
+    },
+    {
+      "id": "geo.alexandria",
+      "domain": "geography",
+      "description": "Know the location of Alexandria",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ]
+    },
+    {
+      "id": "geo.nile",
+      "domain": "geography",
+      "description": "Know the location of the Nile",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ]
+    },
+    {
+      "id": "geo.mycenae",
+      "domain": "geography",
+      "description": "Know the location of Mycenae",
+      "status": "covered",
+      "chapters": [
+        "ch_02"
+      ],
+      "note": "Agamemnon named as king of Mycenae in Oresteia backstory"
+    },
+    {
+      "id": "geo.rhodes",
+      "domain": "geography",
+      "description": "Know the location of Rhodes",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ],
+      "note": "Passed in the night on voyage south to Alexandria"
+    },
+    {
+      "id": "geo.ionian_sea",
+      "domain": "geography",
+      "description": "Know the location of the Ionian Sea",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ],
+      "note": "Named in Klēta's reading — Athens sent fleet across the Ionian Sea to Sicily, 415 BCE"
+    },
+    {
+      "id": "geo.adriatic_sea",
+      "domain": "geography",
+      "description": "Know the location of the Adriatic Sea",
+      "status": "at_risk",
+      "chapters": [],
+      "note": "No natural placement; no chapter reaches Italy or the western Adriatic"
+    },
+    {
+      "id": "hist.period.persian_wars",
+      "domain": "history",
+      "subtype": "period",
+      "name": "Persian Wars",
+      "description": "These wars (490–479 BCE) were a series of conflicts between Greece and the Persian Empire.",
+      "detail": "Darius I launched the first of these wars in 490 BCE; his forces were defeated by Athens at Marathon. His son Xerxes led the second invasion in 480 BCE with a massive army and navy. The Greeks held at Thermopylae, then destroyed the enemy fleet at Salamis. By 479 BCE Greece had repelled both invasions.",
+      "status": "covered",
+      "chapters": [
+        "ch_05"
+      ]
+    },
+    {
+      "id": "hist.period.athenian_empire",
+      "domain": "history",
+      "subtype": "period",
+      "name": "Athenian Empire",
+      "description": "This empire (479–404 BCE) emerged from the Delian League and encompassed the Golden Age of Athens and the rise of the Athenian navy.",
+      "detail": "Under Pericles, Athens built the Parthenon and became the cultural center of Greece. This golden age lasted until the outbreak of the Peloponnesian War in 431 BCE.",
+      "status": "covered",
+      "chapters": [
+        "ch_09"
+      ]
+    },
+    {
+      "id": "hist.period.peloponnesian_war",
+      "domain": "history",
+      "subtype": "period",
+      "name": "Peloponnesian War",
+      "description": "This war (431–404 BCE) was a devastating conflict between Athens and Sparta.",
+      "detail": "A devastating plague struck Athens in 430 BCE, killing Pericles. The Peace of Nicias (421 BCE) briefly paused the fighting, but it resumed. Athens suffered a catastrophic defeat invading Sicily (415 BCE). Sparta finally won when its navy destroyed the Athenian fleet at Aegospotami (405 BCE), and Athens surrendered in 404 BCE.",
+      "status": "covered",
+      "chapters": [
+        "ch_10"
+      ],
+      "note": "Thucydides describes the war unfolding; plague as its backdrop; Klēta reads the full arc in ch_11"
+    },
+    {
+      "id": "hist.period.rise_of_macedon",
+      "domain": "history",
+      "subtype": "period",
+      "name": "Rise of Macedon",
+      "description": "This period saw Philip II conquer the Greek city-states; his son Alexander then extended Greek rule to its furthest extent.",
+      "detail": "Philip II built a professional army with a devastating infantry formation called the phalanx. He conquered the Greek city-states and defeated Athens and Thebes at Chaeronea (338 BCE). His son Alexander the Great then used this army to conquer Persia, Egypt, and territory stretching to modern India — the largest empire the ancient world had seen.",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ]
+    },
+    {
+      "id": "hist.period.hellenistic_age",
+      "domain": "history",
+      "subtype": "period",
+      "name": "Hellenistic Age",
+      "description": "This period followed the death of Alexander the Great in 323 BCE, during which Greek culture spread throughout the Near East.",
+      "detail": "His generals — the Diadochi ('successors') — fought each other and divided his empire into separate kingdoms. Greek language and culture (Hellenism) spread throughout the Near East and Egypt. Alexandria in Egypt, founded by Alexander, became the greatest center of learning in the ancient world, home to a famous library and museum.",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ]
+    },
+    {
+      "id": "hist.figure.darius",
+      "domain": "history",
+      "subtype": "figure",
+      "name": "Darius I",
+      "description": "He was the Persian king who launched the first invasion of Greece; he died in 485 BCE before he could lead a second.",
+      "detail": "He sent a fleet to punish Athens and Eretria for supporting a revolt of Greek cities in Ionia (western Turkey). His forces landed at Marathon but were defeated by the Athenian army. He died in 485 BCE before he could launch a second invasion. His son Xerxes eventually carried it out.",
+      "status": "covered",
+      "chapters": [
+        "ch_05"
+      ]
+    },
+    {
+      "id": "hist.figure.xerxes",
+      "domain": "history",
+      "subtype": "figure",
+      "name": "Xerxes",
+      "description": "He was the son of Darius I and the Persian king who led the second invasion of Greece in 480 BCE.",
+      "detail": "He assembled an enormous army and navy — ancient sources claim over a million soldiers. His forces were delayed three days at the narrow pass of Thermopylae by 300 Spartans under Leonidas. He then burned Athens, but his navy was decisively defeated at the Battle of Salamis. He retreated and never returned to Greece.",
+      "status": "covered",
+      "chapters": [
+        "ch_05"
+      ]
+    },
+    {
+      "id": "hist.figure.leonidas",
+      "domain": "history",
+      "subtype": "figure",
+      "name": "Leonidas",
+      "description": "He was the Spartan king who commanded the famous 300 Spartans at the Battle of Thermopylae.",
+      "detail": "He led a small Greek allied force at Thermopylae in 480 BCE. They held a narrow mountain pass against Xerxes' massive Persian army for three days. A Greek traitor showed the Persians a path around the pass. He dismissed most of the Greek allies and made a last stand with his 300 Spartans, who died to the last man. He became a symbol of courage and self-sacrifice.",
+      "status": "covered",
+      "chapters": [
+        "ch_05"
+      ]
+    },
+    {
+      "id": "hist.figure.pericles",
+      "domain": "history",
+      "subtype": "figure",
+      "name": "Pericles",
+      "description": "He was the Athenian statesman and general who promoted Athens as a cultural center, fostered democracy, and died in 429 BCE.",
+      "detail": "He directed the building of the Parthenon on the Acropolis and promoted democratic reforms. He oversaw Athens at the height of its power — the Athenian Empire — and turned it into the cultural center of Greece. He guided Athens at the start of the Peloponnesian War but died in the great plague in 429 BCE.",
+      "status": "covered",
+      "chapters": [
+        "ch_09"
+      ]
+    },
+    {
+      "id": "hist.figure.philip_ii",
+      "domain": "history",
+      "subtype": "figure",
+      "name": "Philip II of Macedon",
+      "description": "He was the king who conquered the Greek city-states and was the father of Alexander the Great.",
+      "detail": "He (382–336 BCE) transformed Macedonia from a minor kingdom into the most powerful military force in Greece. He developed the Macedonian phalanx — a dense formation of infantry with long spears called sarissas. He defeated Athens and Thebes at the Battle of Chaeronea in 338 BCE and united the Greek city-states into the League of Corinth. He was assassinated in 336 BCE, and his son Alexander inherited his army and ambitions.",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ]
+    },
+    {
+      "id": "hist.figure.alexander",
+      "domain": "history",
+      "subtype": "figure",
+      "name": "Alexander the Great",
+      "description": "He was the son of Philip of Macedon who, before his death in 323 BCE, extended Greek rule to its furthest extent.",
+      "detail": "He became king at 20 and immediately launched a campaign against the Persian Empire. He won decisive victories at Issus (333 BCE) and Gaugamela (331 BCE), toppling Darius III. He conquered Egypt and founded a great city there, then pushed east to India. He died in Babylon at age 32.",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ]
+    },
+    {
+      "id": "hist.battle.marathon",
+      "domain": "history",
+      "subtype": "battle",
+      "name": "Battle of Marathon",
+      "description": "This battle (490 BCE) was a Greek victory over the Persians on an open plain; Athens fought largely alone after Sparta declined to help.",
+      "detail": "Athens sent a runner to ask Sparta for help, but the Spartans declined — they were observing a religious festival. The Athenians (with a small force from Plataea) defeated the much larger Persian army on a coastal plain. According to legend, a runner was sent from the plain to Athens to announce the victory — the origin of the 26.2 mile race run today around the world.",
+      "status": "covered",
+      "chapters": [
+        "ch_04",
+        "ch_05"
+      ]
+    },
+    {
+      "id": "hist.battle.thermopylae",
+      "domain": "history",
+      "subtype": "battle",
+      "name": "Battle of Thermopylae",
+      "description": "This battle (480 BCE) was a heroic last stand in which 300 Spartans under Leonidas held a narrow mountain pass against the invading Persian army.",
+      "detail": "The Persians could not use their numbers in the confined space. A Greek traitor named Ephialtes showed the Persians a path around the pass. Leonidas sent most allies away and died fighting with his 300 Spartans.",
+      "status": "covered",
+      "chapters": [
+        "ch_05"
+      ]
+    },
+    {
+      "id": "hist.battle.salamis",
+      "domain": "history",
+      "subtype": "battle",
+      "name": "Battle of Salamis",
+      "description": "This naval battle (480 BCE) was the decisive engagement in which the Greek fleet destroyed the Persian navy.",
+      "detail": "The Athenian general Themistocles lured the massive Persian fleet into the narrow strait, where the Persians could not maneuver. The faster, more agile Greek ships — mostly Athenian triremes — rammed and sank much of the Persian fleet. Xerxes watched from a throne on the hillside as his navy was destroyed. He retreated to Persia shortly after.",
+      "status": "covered",
+      "chapters": [
+        "ch_04",
+        "ch_05"
+      ]
+    },
+    {
+      "id": "hist.event.peace_of_nicias",
+      "domain": "history",
+      "subtype": "event",
+      "name": "Peace of Nicias",
+      "description": "The Peace of Nicias (421 BCE) was a treaty meant to end the Peloponnesian War, but it was subsequently undermined and fighting resumed.",
+      "detail": "Both sides agreed to return captured territories and prisoners. The peace was named for Nicias, its main Athenian advocate. It never fully held — several Spartan allies refused to accept it, and Athens soon launched a disastrous expedition to Sicily (415 BCE), reopening the war.",
+      "status": "covered",
+      "chapters": [
+        "ch_10",
+        "ch_11"
+      ],
+      "note": "Named in ch_10 (Klēta knows the ending); Klēta reads through it in ch_11 shelves"
+    },
+    {
+      "id": "hist.battle.aegospotami",
+      "domain": "history",
+      "subtype": "battle",
+      "name": "Battle of Aegospotami",
+      "description": "This battle (405 BCE) was the Spartan naval victory that destroyed the Athenian fleet and effectively ended the Peloponnesian War.",
+      "detail": "The Spartan admiral Lysander surprised the Athenian fleet while most of its sailors were ashore foraging for food. He captured or destroyed nearly all 170 Athenian ships and executed some 3,000 Athenian sailors. With no fleet to defend its grain supply, Athens surrendered in 404 BCE, ending the war.",
+      "status": "covered",
+      "chapters": [
+        "ch_10",
+        "ch_11"
+      ],
+      "note": "Named in ch_10 and acknowledged as part of Klēta's reading in ch_11"
+    },
+    {
+      "id": "hist.battle.chaeronea",
+      "domain": "history",
+      "subtype": "battle",
+      "name": "Battle of Chaeronea",
+      "description": "This battle (338 BCE) was Philip II's decisive defeat of Athens and Thebes, which led to the formation of the League of Corinth.",
+      "detail": "The 18-year-old Alexander commanded the Macedonian cavalry on one wing. The Sacred Band of Thebes — an elite force of 150 pairs — was annihilated. Philip's victory in this battle gave him control over the Greek mainland. He then organized the city-states into the League of Corinth under his leadership.",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ]
+    },
+    {
+      "id": "hist.battle.issus",
+      "domain": "history",
+      "subtype": "battle",
+      "name": "Battle of Issus",
+      "description": "This battle (333 BCE) was the Macedonian king's victory over the Persian king Darius III and the Achaemenid Empire.",
+      "detail": "This battle (333 BCE) was the Macedonian king's second major engagement against Persia, fought near modern-day southern Turkey. He faced the Persian king Darius III himself. Though outnumbered, his tactics broke the Persian line. Darius fled the battlefield — abandoning his mother, wife, and children, who were captured and treated well by the victor. The victory opened the way to Egypt and the Persian heartland.",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ]
+    },
+    {
+      "id": "hist.battle.gaugamela",
+      "domain": "history",
+      "subtype": "battle",
+      "name": "Battle of Gaugamela",
+      "description": "This battle (331 BCE) was Alexander's decisive defeat of Darius III that effectively ended the Achaemenid Empire.",
+      "detail": "Darius III chose a flat plain to give his war chariots full advantage and reportedly leveled the ground the night before. Alexander attacked directly at Darius, who fled once again. After this clash Alexander controlled Babylon, Persepolis, and the Persian treasury.",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ]
+    },
+    {
+      "id": "hist.author.plato",
+      "domain": "history",
+      "subtype": "author",
+      "name": "Plato",
+      "description": "This philosopher (c. 428–348 BCE) wrote dialogues featuring Socrates; his famous works include The Republic and the Apology.",
+      "detail": "He was a devoted student of Socrates. The Apology records Socrates' defense at his trial for impiety and corrupting Athenian youth. The Republic describes his vision of the ideal just state. He also founded the Academy, one of the first schools in the Western world.",
+      "status": "covered",
+      "chapters": [
+        "ch_01",
+        "ch_02",
+        "ch_12"
+      ]
+    },
+    {
+      "id": "hist.author.aeschylus",
+      "domain": "history",
+      "subtype": "author",
+      "name": "Aeschylus",
+      "description": "This tragic playwright (c. 525–456 BCE) is called 'The Father of Tragedy.' He wrote the Oresteia trilogy about the fate of Agamemnon's family.",
+      "detail": "He transformed Greek drama — adding a second speaking actor, reducing the chorus, and building dramatic conflict between characters. He wrote about 90 plays, of which 7 survive. The Oresteia is the only complete tragic trilogy to survive from ancient Greece — it tells how Agamemnon is murdered by his wife Clytemnestra on his return from Troy, and how their son Orestes avenges him.",
+      "status": "covered",
+      "chapters": [
+        "ch_02"
+      ]
+    },
+    {
+      "id": "hist.author.sophocles",
+      "domain": "history",
+      "subtype": "author",
+      "name": "Sophocles",
+      "description": "He, never ranked lower than second in dramatic competitions, wrote Oedipus the King and Oedipus at Colonus about the tragic king of Thebes.",
+      "detail": "This playwright (c. 496–406 BCE) competed in the Athenian dramatic festivals for about 60 years, winning first place more than any other dramatist. He wrote about 123 plays; 7 survive. He introduced a third actor and increased dramatic tension further. These are tragedies about the king of Thebes who unknowingly kills his father and marries his mother, and whose story ends in exile and death.",
+      "status": "covered",
+      "chapters": [
+        "ch_07",
+        "ch_09"
+      ]
+    },
+    {
+      "id": "hist.author.herodotus",
+      "domain": "history",
+      "subtype": "author",
+      "name": "Herodotus",
+      "description": "He, called 'The Father of History,' wrote The Histories, which traced the origins of the Persian Wars.",
+      "detail": "The Histories examines the origins and course of the Persian Wars and describes the cultures of Egypt, Persia, Scythia, and Greece. He traveled widely to gather accounts and was willing to report different versions of events.",
+      "status": "covered",
+      "chapters": [
+        "ch_05",
+        "ch_09"
+      ]
+    },
+    {
+      "id": "hist.author.euripides",
+      "domain": "history",
+      "subtype": "author",
+      "name": "Euripides",
+      "description": "He wrote Medea, about the witch who married the Argonaut Jason, and Hippolytus, about the tragic death of Theseus' son.",
+      "detail": "He (c. 480–406 BCE) was the third great Athenian tragedian. He was known for psychological realism — giving voice to women, slaves, and outcasts, and exploring characters' inner emotional lives. His play Medea tells the story of the sorceress who helped Jason and the Argonauts but took terrible revenge when Jason abandoned her for a Corinthian princess. Hippolytus tells of Theseus's son, who is falsely accused by his stepmother Phaedra and destroyed by his father's curse.",
+      "status": "covered",
+      "chapters": [
+        "ch_10"
+      ],
+      "note": "Medea and Hippolytus performed; Pallas analyzes his approach to tragedy"
+    },
+    {
+      "id": "hist.author.thucydides",
+      "domain": "history",
+      "subtype": "author",
+      "name": "Thucydides",
+      "description": "He wrote the History of the Peloponnesian War, a rigorous account of the conflict between Athens and Sparta.",
+      "detail": "He participated in the war himself, but was exiled for 20 years after failing to prevent the loss of a city. Unlike Herodotus, he excluded myth and focused on political and military causes. His work is considered the first truly analytical history.",
+      "status": "covered",
+      "chapters": [
+        "ch_10",
+        "ch_11"
+      ],
+      "note": "Appears in person in ch_10; Klēta reads his complete history in ch_11"
+    },
+    {
+      "id": "myth.deity.zeus",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Zeus",
+      "description": "He was king of the gods, ruling over lightning and thunder; his symbols were the eagle and the lightning bolt.",
+      "detail": "He is the father of many gods and heroes by various mothers. He defeated his father Kronos and the Titans to become ruler of the cosmos, dividing the world with his brothers: he took the sky, Poseidon the sea, and Hades the underworld.",
+      "status": "covered",
+      "chapters": [
+        "ch_04",
+        "ch_08",
+        "ch_09"
+      ]
+    },
+    {
+      "id": "myth.deity.poseidon",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Poseidon",
+      "description": "He was the god of oceans, water, and earthquakes; his symbols were the trident and the horse.",
+      "detail": "Sailors prayed to him for safe voyages. He and Athena competed to be the patron deity of Athens: he struck the Acropolis with his trident and produced a saltwater spring, but Athena won with the gift of the olive tree.",
+      "status": "covered",
+      "chapters": [
+        "ch_03",
+        "ch_06",
+        "ch_08",
+        "ch_10",
+        "ch_12"
+      ]
+    },
+    {
+      "id": "myth.deity.athena",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Athena",
+      "description": "She was the goddess of wisdom, war, and domestic crafts; her symbols were the owl, helmet, olive branch, and aegis.",
+      "detail": "She is the patron goddess of Athens, which was named after her. She was born fully grown and armored from the head of Zeus. She is a virgin goddess and one of the most powerful of the Olympians.",
+      "status": "covered",
+      "chapters": [
+        "ch_02",
+        "ch_04",
+        "ch_08",
+        "ch_09",
+        "ch_10",
+        "ch_12"
+      ]
+    },
+    {
+      "id": "myth.deity.hermes",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Hermes",
+      "description": "He was the god of messengers, thieves, and inventors; his symbols were the caduceus (a winged staff with serpents) and winged sandals.",
+      "detail": "He guides the souls of the dead down to the underworld. As a newborn, he stole Apollo's cattle and invented the lyre from a tortoise shell — then gave the lyre to Apollo as a peace offering.",
+      "status": "covered",
+      "chapters": [
+        "ch_04",
+        "ch_05"
+      ]
+    },
+    {
+      "id": "myth.deity.hestia",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Hestia",
+      "description": "She was the goddess of the hearth and home fire; her symbols were the hearth and a small flame.",
+      "detail": "Every Greek household kept a fire burning in her honor, and offerings of food were thrown into the fire for her. She was the first child of the Titans Kronos and Rhea, making her one of the most ancient of the Olympian deities. Calm and gentle, she is rarely a main character in myths — she is the still center of home and family.",
+      "status": "covered",
+      "chapters": [
+        "ch_07"
+      ]
+    },
+    {
+      "id": "myth.deity.dionysus",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Dionysus",
+      "description": "He was the god of wine, revelry, and madness; his symbols were grapes, ivy, leopards, and the thyrsus (a pinecone-topped staff).",
+      "detail": "Greek theater grew out of festivals held in his honor. He can appear as a joyful god of celebration or as a dangerous, madness-inducing force. His followers, the Maenads, were women who worshipped him in wild mountain rituals.",
+      "status": "covered",
+      "chapters": [
+        "ch_07",
+        "ch_09"
+      ]
+    },
+    {
+      "id": "myth.deity.apollo",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Apollo",
+      "description": "He was the god of the sun, prophecy, music, and medicine; his symbols were the bow and arrows and the lyre.",
+      "detail": "He is the twin brother of Artemis. His oracle at Delphi — where the priestess called the Pythia delivered prophecies — was the most famous in the ancient world. City-states and kings consulted it before major decisions. He is associated with reason, order, and beauty.",
+      "status": "covered",
+      "chapters": [
+        "ch_04"
+      ]
+    },
+    {
+      "id": "myth.deity.aphrodite",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Aphrodite",
+      "description": "She was the goddess of love and beauty; her symbols were doves and erotes (winged figures of desire).",
+      "detail": "She was born from the sea foam near Cyprus. She is married to Hephaestus but is famous for her affair with Ares. In the Judgment of Paris, she promised Paris the most beautiful mortal woman — Helen of Sparta — which led directly to the Trojan War.",
+      "status": "covered",
+      "chapters": [
+        "ch_02",
+        "ch_10"
+      ],
+      "note": "Named in ch_02 (caught with Ares); opens Hippolytus in ch_10 with her case"
+    },
+    {
+      "id": "myth.deity.hera",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Hera",
+      "description": "She was queen of the gods and goddess of marriage; her symbol was the peacock.",
+      "detail": "She is the wife and sister of Zeus and is famous for her fierce jealousy over his many love affairs. She persecuted Heracles (Hercules) throughout his life because he was Zeus's son by another woman. She supported the Greeks during the Trojan War, opposing the Trojans. Despite her quarrels with Zeus, she is steadfast in her role as queen of Olympus.",
+      "status": "covered",
+      "chapters": [
+        "ch_10"
+      ],
+      "note": "Named as Jason's protector through the Argonauts in Medea backstory"
+    },
+    {
+      "id": "myth.deity.hades",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Hades",
+      "description": "He was the ruler of the Underworld; his symbol was the bident (a two-pronged weapon).",
+      "detail": "He is the eldest brother of Zeus and Poseidon. He is not evil, but stern and impartial — all mortals come to his realm after death. He abducted Persephone, daughter of Demeter, to be his queen. When Demeter grieved and stopped all plants from growing, Zeus arranged for Persephone to spend part of the year with him and part on earth — explaining the seasons.",
+      "status": "covered",
+      "chapters": [
+        "ch_05"
+      ],
+      "note": "Persian soldier says fallen Spartans moved 'with that spirit' on their journey to Hades"
+    },
+    {
+      "id": "myth.deity.demeter",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Demeter",
+      "description": "She was the goddess of agriculture and the harvest; her symbols were the stalk of wheat and the cornucopia.",
+      "detail": "When her daughter Persephone was abducted by Hades, she was so grief-stricken that she stopped all grain and plants from growing, threatening all life on earth. Zeus intervened and arranged a compromise: Persephone spends part of the year below (winter, when the goddess mourns) and part above (spring and summer, when she rejoices and the earth grows).",
+      "status": "covered",
+      "chapters": [
+        "ch_11"
+      ],
+      "note": "Grain offering at Alexandria harbor pier; Demeter named by Dolios"
+    },
+    {
+      "id": "myth.deity.ares",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Ares",
+      "description": "He was the god of war; his symbols were the spear and the vulture.",
+      "detail": "He is the son of Zeus and Hera and is disliked by both parents for his violent nature. Unlike Athena, who represents strategic warfare, he represents brutal, undisciplined combat. He had a love affair with Aphrodite; Hephaestus, her husband, crafted a golden net to catch them together and expose them before the gods.",
+      "status": "covered",
+      "chapters": [
+        "ch_02",
+        "ch_05"
+      ],
+      "note": "Named in Hephaestus's golden-net myth told in Piraeus opening"
+    },
+    {
+      "id": "myth.deity.hephaestus",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Hephaestus",
+      "description": "He was the god of blacksmithing and metalworking; his symbols were the hammer and anvil.",
+      "detail": "He is the craftsman of the gods — he made Zeus's lightning bolts, Achilles' armor, the golden palaces on Olympus, and the golden net that caught Ares and Aphrodite. He is lame — thrown from Olympus as an infant (accounts differ: by Hera because he was ugly, or by Zeus during a quarrel) — but his skill is unmatched among the gods.",
+      "status": "covered",
+      "chapters": [
+        "ch_02"
+      ],
+      "note": "Named as maker of the golden nets; Socrates uses myth to describe children's rigging"
+    },
+    {
+      "id": "myth.deity.artemis",
+      "domain": "mythology",
+      "subtype": "deity",
+      "name": "Artemis",
+      "description": "She was the goddess of the moon, hunting, and animals; her symbols were the bow and arrows, deer, and hunting dog.",
+      "detail": "She is the twin sister of Apollo. She is a virgin goddess who protects young girls and women in childbirth. She demands strict purity from her followers. When the hunter Actaeon accidentally stumbled upon her bathing, she transformed him into a stag and he was torn apart by his own hounds.",
+      "status": "covered",
+      "chapters": [
+        "ch_10"
+      ],
+      "note": "Arrives too late to save Hippolytus; Dolios notes the gods are fighting and humans are caught between them"
+    },
+    {
+      "id": "myth.story.theseus_minotaur",
+      "domain": "mythology",
+      "subtype": "myth",
+      "name": "Theseus & the Minotaur",
+      "description": "This myth tells how an Athenian hero sailed to Crete and killed a monstrous half-bull half-man in its labyrinth.",
+      "detail": "Every nine years, Athens was forced to send 7 young men and 7 young women to Crete as tribute — to be fed to a monster with a human body and a bull's head, kept in a labyrinth built by Daedalus. The son of the Athenian king volunteered to go and kill it. King Minos's daughter Ariadne fell in love with him and gave him a ball of thread to unwind as he entered the labyrinth so he could find his way back out. He slew the monster and escaped, but later abandoned Ariadne on the island of Naxos.",
+      "status": "covered",
+      "chapters": [
+        "ch_06"
+      ]
+    },
+    {
+      "id": "myth.story.daedalus_icarus",
+      "domain": "mythology",
+      "subtype": "myth",
+      "name": "Daedalus & Icarus",
+      "description": "This myth tells how a master craftsman built wings of wax and feathers to escape Crete, and how his son flew too close to the sun.",
+      "detail": "This man was the greatest craftsman in the ancient world — he built the labyrinth for the Minotaur in Crete. After the Minotaur was killed, King Minos imprisoned him and his son on Crete. He warned his son: do not fly too low (the sea spray would wet the feathers) and do not fly too high (the sun would melt the wax). The boy ignored his father and soared too high. The wax melted and he fell into the sea.",
+      "status": "covered",
+      "chapters": [
+        "ch_06"
+      ]
+    },
+    {
+      "id": "myth.story.midas",
+      "domain": "mythology",
+      "subtype": "myth",
+      "name": "King Midas",
+      "description": "This myth tells how the king of Phrygia was granted the golden touch and learned that turning everything to gold brings ruin rather than happiness.",
+      "detail": "This king of Phrygia found Silenus — a satyr and companion of Dionysus — wandering drunk in his garden. He treated him kindly and returned him to Dionysus, who rewarded the king with one wish. At first he was delighted, turning branches, stones, and columns to gold. But when his food and drink turned to gold too, he begged to be released from the curse. Dionysus told him to wash in the river Pactolus, which became rich in gold.",
+      "status": "covered",
+      "chapters": [
+        "ch_09"
+      ]
+    },
+    {
+      "id": "myth.story.arachne",
+      "domain": "mythology",
+      "subtype": "myth",
+      "name": "Arachne",
+      "description": "This myth tells how a mortal weaver's boast that she surpassed Athena led to a contest and her transformation into the first spider.",
+      "detail": "Athena disguised herself as an old woman and warned this weaver to show humility. She refused, so Athena revealed herself and challenged her to a contest. Both wove tapestries — Athena depicted the gods in glory, while this mortal depicted their shameful love affairs, technically perfectly. Enraged, Athena tore up the tapestry and struck her. Ashamed, she hanged herself. Athena transformed her into a spider, condemned to weave forever — explaining the origin of spiders (arachnids).",
+      "status": "covered",
+      "chapters": [
+        "ch_08",
+        "ch_09"
+      ]
+    },
+    {
+      "id": "myth.story.perseus_medusa",
+      "domain": "mythology",
+      "subtype": "myth",
+      "name": "Perseus & Medusa",
+      "description": "This myth tells how a hero beheaded the snake-haired Gorgon and used her severed head as a weapon.",
+      "detail": "This hero was set the seemingly impossible task of bringing back the head of one of three Gorgon sisters whose gaze turned anyone who looked at them directly to stone. The gods Hermes and Athena helped him: Hermes gave him winged sandals, and Athena gave him a mirrored shield. He used the shield as a mirror to approach the Gorgon without meeting her gaze and cut off her head.",
+      "status": "covered",
+      "chapters": [
+        "ch_04"
+      ]
+    },
+    {
+      "id": "myth.story.atalanta",
+      "domain": "mythology",
+      "subtype": "myth",
+      "name": "Atalanta",
+      "description": "This myth tells how a swift huntress who refused to marry was finally outrun by a suitor who scattered golden apples in her path.",
+      "detail": "Any man who lost the race was killed. A young man named Hippomenes (or Melanion) prayed to Aphrodite for help. The goddess gave him three golden apples from the garden of the Hesperides. During the race, Hippomenes rolled the apples one by one across the track. The huntress stopped to pick each one up, distracted by their divine beauty. Hippomenes won the race and married her.",
+      "status": "covered",
+      "chapters": [
+        "ch_10"
+      ],
+      "note": "Told by old man outside theater — race, golden apples, Aphrodite's revenge"
+    }
+  ],
+  "summary": {
+    "covered": 58,
+    "planned": 0,
+    "at_risk": 1
+  },
+  "at_risk_list": [
+    "geo.adriatic_sea — no natural placement; no chapter reaches the waters between Greece and Italy"
+  ]
+}

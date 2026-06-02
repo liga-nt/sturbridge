@@ -1,0 +1,512 @@
+{
+  "sequence": {
+    "text": "Click a tile or type a letter to hear it. Choose your input style here.",
+    "audioUrl": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/alphabet-hints/sequence.mp3",
+    "alignment": [
+      {
+        "word": "Click",
+        "start": 0,
+        "end": 0.16
+      },
+      {
+        "word": "a",
+        "start": 0.2,
+        "end": 0.24
+      },
+      {
+        "word": "tile",
+        "start": 0.336,
+        "end": 0.72
+      },
+      {
+        "word": "or",
+        "start": 0.827,
+        "end": 1.041
+      },
+      {
+        "word": "type",
+        "start": 1.105,
+        "end": 1.361
+      },
+      {
+        "word": "a",
+        "start": 1.401,
+        "end": 1.441
+      },
+      {
+        "word": "letter",
+        "start": 1.487,
+        "end": 1.763
+      },
+      {
+        "word": "to",
+        "start": 1.816,
+        "end": 1.922
+      },
+      {
+        "word": "hear",
+        "start": 1.986,
+        "end": 2.242
+      },
+      {
+        "word": "it.",
+        "start": 2.322,
+        "end": 2.562
+      },
+      {
+        "word": "Choose",
+        "start": 2.745,
+        "end": 3.843
+      },
+      {
+        "word": "your",
+        "start": 3.875,
+        "end": 4.003
+      },
+      {
+        "word": "input",
+        "start": 4.07,
+        "end": 4.405
+      },
+      {
+        "word": "style",
+        "start": 4.485,
+        "end": 4.885
+      },
+      {
+        "word": "here.",
+        "start": 4.965,
+        "end": 5.365
+      }
+    ]
+  },
+  "flashcards": {
+    "text": "Practice the letter names and their transliteration. Use the buttons below if you want to focus on one or the other.",
+    "audioUrl": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/alphabet-hints/flashcards.mp3",
+    "alignment": [
+      {
+        "word": "Practice",
+        "start": 0,
+        "end": 0.4
+      },
+      {
+        "word": "the",
+        "start": 0.44,
+        "end": 0.56
+      },
+      {
+        "word": "letter",
+        "start": 0.606,
+        "end": 0.882
+      },
+      {
+        "word": "names",
+        "start": 0.935,
+        "end": 1.2
+      },
+      {
+        "word": "and",
+        "start": 1.24,
+        "end": 1.36
+      },
+      {
+        "word": "their",
+        "start": 1.4,
+        "end": 1.6
+      },
+      {
+        "word": "transliteration.",
+        "start": 1.657,
+        "end": 2.718
+      },
+      {
+        "word": "Use",
+        "start": 2.938,
+        "end": 3.598
+      },
+      {
+        "word": "the",
+        "start": 3.638,
+        "end": 3.758
+      },
+      {
+        "word": "buttons",
+        "start": 3.798,
+        "end": 4.078
+      },
+      {
+        "word": "below",
+        "start": 4.158,
+        "end": 4.558
+      },
+      {
+        "word": "if",
+        "start": 4.611,
+        "end": 4.717
+      },
+      {
+        "word": "you",
+        "start": 4.737,
+        "end": 4.797
+      },
+      {
+        "word": "want",
+        "start": 4.829,
+        "end": 4.957
+      },
+      {
+        "word": "to",
+        "start": 5.01,
+        "end": 5.116
+      },
+      {
+        "word": "focus",
+        "start": 5.196,
+        "end": 5.596
+      },
+      {
+        "word": "on",
+        "start": 5.649,
+        "end": 5.755
+      },
+      {
+        "word": "one",
+        "start": 5.875,
+        "end": 6.235
+      },
+      {
+        "word": "or",
+        "start": 6.288,
+        "end": 6.394
+      },
+      {
+        "word": "the",
+        "start": 6.414,
+        "end": 6.474
+      },
+      {
+        "word": "other.",
+        "start": 6.541,
+        "end": 7.596
+      }
+    ]
+  },
+  "recognition": {
+    "text": "Click the upper or lower case letter that matches the letter shown.",
+    "audioUrl": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/alphabet-hints/recognition.mp3",
+    "alignment": [
+      {
+        "word": "Click",
+        "start": 0,
+        "end": 0.24
+      },
+      {
+        "word": "the",
+        "start": 0.3,
+        "end": 0.48
+      },
+      {
+        "word": "upper",
+        "start": 0.533,
+        "end": 0.798
+      },
+      {
+        "word": "or",
+        "start": 0.878,
+        "end": 1.038
+      },
+      {
+        "word": "lower",
+        "start": 1.091,
+        "end": 1.356
+      },
+      {
+        "word": "case",
+        "start": 1.42,
+        "end": 1.676
+      },
+      {
+        "word": "letter",
+        "start": 1.722,
+        "end": 1.998
+      },
+      {
+        "word": "that",
+        "start": 2.078,
+        "end": 2.398
+      },
+      {
+        "word": "matches",
+        "start": 2.458,
+        "end": 2.878
+      },
+      {
+        "word": "the",
+        "start": 2.918,
+        "end": 3.038
+      },
+      {
+        "word": "letter",
+        "start": 3.072,
+        "end": 3.276
+      },
+      {
+        "word": "shown.",
+        "start": 3.369,
+        "end": 4.074
+      }
+    ]
+  },
+  "diacritics": {
+    "text": "Type each word with its correct accent and breathing marks. Choose your input style.",
+    "audioUrl": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/alphabet-hints/diacritics.mp3",
+    "alignment": [
+      {
+        "word": "Type",
+        "start": 0,
+        "end": 0.32
+      },
+      {
+        "word": "each",
+        "start": 0.384,
+        "end": 0.64
+      },
+      {
+        "word": "word",
+        "start": 0.704,
+        "end": 0.96
+      },
+      {
+        "word": "with",
+        "start": 1.024,
+        "end": 1.28
+      },
+      {
+        "word": "its",
+        "start": 1.32,
+        "end": 1.44
+      },
+      {
+        "word": "correct",
+        "start": 1.5,
+        "end": 1.92
+      },
+      {
+        "word": "accent",
+        "start": 2,
+        "end": 2.48
+      },
+      {
+        "word": "and",
+        "start": 2.56,
+        "end": 2.8
+      },
+      {
+        "word": "breathing",
+        "start": 2.832,
+        "end": 3.12
+      },
+      {
+        "word": "marks.",
+        "start": 3.227,
+        "end": 4.082
+      },
+      {
+        "word": "Choose",
+        "start": 4.253,
+        "end": 5.279
+      },
+      {
+        "word": "your",
+        "start": 5.327,
+        "end": 5.519
+      },
+      {
+        "word": "input",
+        "start": 5.612,
+        "end": 6.077
+      },
+      {
+        "word": "style.",
+        "start": 6.157,
+        "end": 6.877
+      }
+    ]
+  },
+  "vocab": {
+    "text": "This is all the vocabulary you will need to memorize for the National Greek Exam. For now you can practice typing and transliterating while you get familiar with the vocab. Choose your input style.",
+    "audioUrl": "https://storage.googleapis.com/sturbridge-e59d9.firebasestorage.app/greek/alphabet-hints/vocab.mp3",
+    "alignment": [
+      {
+        "word": "This",
+        "start": 0,
+        "end": 0.08
+      },
+      {
+        "word": "is",
+        "start": 0.133,
+        "end": 0.239
+      },
+      {
+        "word": "all",
+        "start": 0.279,
+        "end": 0.399
+      },
+      {
+        "word": "the",
+        "start": 0.439,
+        "end": 0.559
+      },
+      {
+        "word": "vocabulary",
+        "start": 0.624,
+        "end": 1.274
+      },
+      {
+        "word": "you",
+        "start": 1.334,
+        "end": 1.514
+      },
+      {
+        "word": "will",
+        "start": 1.546,
+        "end": 1.674
+      },
+      {
+        "word": "need",
+        "start": 1.706,
+        "end": 1.834
+      },
+      {
+        "word": "to",
+        "start": 1.887,
+        "end": 1.993
+      },
+      {
+        "word": "memorize",
+        "start": 2.046,
+        "end": 2.551
+      },
+      {
+        "word": "for",
+        "start": 2.591,
+        "end": 2.711
+      },
+      {
+        "word": "the",
+        "start": 2.731,
+        "end": 2.791
+      },
+      {
+        "word": "National",
+        "start": 2.844,
+        "end": 3.268
+      },
+      {
+        "word": "Greek",
+        "start": 3.321,
+        "end": 3.586
+      },
+      {
+        "word": "Exam.",
+        "start": 3.714,
+        "end": 4.306
+      },
+      {
+        "word": "For",
+        "start": 4.566,
+        "end": 5.346
+      },
+      {
+        "word": "now",
+        "start": 5.506,
+        "end": 5.986
+      },
+      {
+        "word": "you",
+        "start": 6.026,
+        "end": 6.146
+      },
+      {
+        "word": "can",
+        "start": 6.186,
+        "end": 6.306
+      },
+      {
+        "word": "practice",
+        "start": 6.359,
+        "end": 6.783
+      },
+      {
+        "word": "typing",
+        "start": 6.863,
+        "end": 7.343
+      },
+      {
+        "word": "and",
+        "start": 7.363,
+        "end": 7.423
+      },
+      {
+        "word": "transliterating",
+        "start": 7.492,
+        "end": 8.786
+      },
+      {
+        "word": "while",
+        "start": 8.813,
+        "end": 8.948
+      },
+      {
+        "word": "you",
+        "start": 8.968,
+        "end": 9.028
+      },
+      {
+        "word": "get",
+        "start": 9.088,
+        "end": 9.268
+      },
+      {
+        "word": "familiar",
+        "start": 9.321,
+        "end": 9.745
+      },
+      {
+        "word": "with",
+        "start": 9.777,
+        "end": 9.905
+      },
+      {
+        "word": "the",
+        "start": 9.925,
+        "end": 9.985
+      },
+      {
+        "word": "vocab.",
+        "start": 10.092,
+        "end": 11.267
+      },
+      {
+        "word": "Choose",
+        "start": 11.358,
+        "end": 11.904
+      },
+      {
+        "word": "your",
+        "start": 11.968,
+        "end": 12.224
+      },
+      {
+        "word": "input",
+        "start": 12.291,
+        "end": 12.626
+      },
+      {
+        "word": "style.",
+        "start": 12.706,
+        "end": 13.186
+      }
+    ]
+  }
+}

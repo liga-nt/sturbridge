@@ -423,16 +423,18 @@ function genOmegaForms(stem) {
 
 // Epsilon contract: stem ends in ε, contractions applied
 function genEpsilonContractForms(stem) {
-    // stem already includes the ε (e.g. "καλε")
+    // Strip accents first — the stem may have a precomposed accented ε (e.g. πλέ → U+03AD)
+    // that won't match the bare /ε$/ regex in NFC form.
+    const base = stripAccents(stem).replace(/ε$/, '');
     return [
-        [stem.replace(/ε$/, 'ῶ'),       'verb.pres.indic.act.1sg'],  // ε+ω → ω (circumflex)
-        [stem.replace(/ε$/, 'εῖς'),     'verb.pres.indic.act.2sg'],  // ε+εις → εῖς
-        [stem.replace(/ε$/, 'εῖ'),      'verb.pres.indic.act.3sg'],  // ε+ει → εῖ
-        [stem.replace(/ε$/, 'οῦμεν'),   'verb.pres.indic.act.1pl'],  // ε+ομεν → οῦμεν
-        [stem.replace(/ε$/, 'εῖτε'),    'verb.pres.indic.act.2pl'],  // ε+ετε → εῖτε
-        [stem.replace(/ε$/, 'οῦσι'),    'verb.pres.indic.act.3pl'],  // ε+ουσι → οῦσι
-        [stem.replace(/ε$/, 'οῦσιν'),   'verb.pres.indic.act.3pl'],
-        [stem.replace(/ε$/, 'εῖν'),     'verb.pres.inf.act'],        // ε+ειν → εῖν
+        [base + 'ῶ',      'verb.pres.indic.act.1sg'],  // ε+ω → ῶ
+        [base + 'εῖς',    'verb.pres.indic.act.2sg'],  // ε+εις → εῖς
+        [base + 'εῖ',     'verb.pres.indic.act.3sg'],  // ε+ει → εῖ
+        [base + 'οῦμεν',  'verb.pres.indic.act.1pl'],  // ε+ομεν → οῦμεν
+        [base + 'εῖτε',   'verb.pres.indic.act.2pl'],  // ε+ετε → εῖτε
+        [base + 'οῦσι',   'verb.pres.indic.act.3pl'],  // ε+ουσι → οῦσι
+        [base + 'οῦσιν',  'verb.pres.indic.act.3pl'],
+        [base + 'εῖν',    'verb.pres.inf.act'],        // ε+ειν → εῖν
     ];
 }
 
@@ -729,15 +731,21 @@ function process3rdDeclNoun(entry) {
     else if (genStripped.endsWith('ους')) stem3 = gen.slice(0, -3);  // -εως type
     else return;
 
+    // Dental stops (δ, τ, θ) drop before σ: παιδ+σι → παισί
+    const stem3Stripped = stripAccents(stem3).toLowerCase();
+    const datPlStem = stem3Stripped.endsWith('δ') || stem3Stripped.endsWith('τ') || stem3Stripped.endsWith('θ')
+        ? stem3.slice(0, -1)
+        : stem3;
+
     // Common 3rd decl endings (simplified, not all types)
     const cases3 = [
-        [`${stem3}ος`, `noun.${genderMorph}.sg.gen`],
-        [`${stem3}ι`,  `noun.${genderMorph}.sg.dat`],
-        [`${stem3}α`,  `noun.${genderMorph}.sg.acc`],
-        [`${stem3}ες`, `noun.${genderMorph}.pl.nom`],
-        [`${stem3}ων`, `noun.${genderMorph}.pl.gen`],
-        [`${stem3}σι`, `noun.${genderMorph}.pl.dat`],
-        [`${stem3}ας`, `noun.${genderMorph}.pl.acc`],
+        [`${stem3}ος`,     `noun.${genderMorph}.sg.gen`],
+        [`${stem3}ι`,      `noun.${genderMorph}.sg.dat`],
+        [`${stem3}α`,      `noun.${genderMorph}.sg.acc`],
+        [`${stem3}ες`,     `noun.${genderMorph}.pl.nom`],
+        [`${stem3}ων`,     `noun.${genderMorph}.pl.gen`],
+        [`${datPlStem}σι`, `noun.${genderMorph}.pl.dat`],
+        [`${stem3}ας`,     `noun.${genderMorph}.pl.acc`],
     ];
 
     const nomAccPos = accentPosition(greek);

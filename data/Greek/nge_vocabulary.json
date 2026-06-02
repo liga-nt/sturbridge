@@ -1,6 +1,12 @@
 {
   "entries": [
     {
+      "greek": "ὁ ἡ τό",
+      "pos": "article",
+      "definition": "the (definite article)",
+      "introduced": "intro"
+    },
+    {
       "greek": "ἄρχω",
       "pos": "verb",
       "conjugation": "omega",
@@ -3368,12 +3374,6 @@
       "declension_pattern": "3rd only",
       "endings": "-ον",
       "definition": "worse, inferior",
-      "introduced": "intermediate"
-    },
-    {
-      "greek": "ὁ ἡ τό",
-      "pos": "article",
-      "definition": "the (definite article)",
       "introduced": "intermediate"
     },
     {

@@ -1,5 +1,3 @@
-The Wisest Man in Athens
-
 The spring I am about to describe was one of the last mild ones, and I was spending it as I spent most mild days: out of doors, in an argument.
 
 My companions that afternoon — among them the young Plato, who had recently taken to carrying a scroll everywhere and writing things down, a habit I had always discouraged and now found I could not stop — had been debating, with considerable energy and very little agreement, the nature of the ideal state. Plato thought the ideal Republic would have philosopher-kings. His companion Glaucon thought it required courage above all. I had been pointing out, as patiently as I could manage, that none of us had yet established what justice actually was, which seemed like a reasonable thing to know before designing a city meant to contain it. We had been at this for some time. The afternoon light was agreeable. A fig tree provided adequate shade. I was, by my own modest accounting, quite content.

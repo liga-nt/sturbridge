@@ -31,16 +31,25 @@ admin.initializeApp({
 
 const ELEVEN_KEY  = process.env.ELEVEN_LABS_API_KEY;
 const DAVID_ID    = '62eXAzXYsxMOUszcxeJ4'; // ElevenLabs David voice
-const MODEL_MULTI = 'eleven_multilingual_v2'; // for Greek
-const MODEL_EN    = 'eleven_monolingual_v1';  // better for English-only
+const MODEL_MULTI = 'eleven_v3'; // for Greek (multilingual)
+const MODEL_EN    = 'eleven_v3'; // for English definitions
 const CONCURRENCY = 3;
 
 const args  = process.argv.slice(2);
 const has   = flag => args.includes(flag);
 const FORCE = has('--force');
 
+// --tiers intro beginning intermediate  (default: intro only)
+const TIERS = (() => {
+    const idx = args.indexOf('--tiers');
+    if (idx === -1) return ['intro'];
+    const tiers = [];
+    for (let i = idx + 1; i < args.length && !args[i].startsWith('--'); i++) tiers.push(args[i]);
+    return tiers.length ? tiers : ['intro'];
+})();
+
 if (!has('--letters') && !has('--vocab')) {
-    console.log('Usage: node scripts/gen-greek-audio.mjs [--letters] [--vocab] [--force]');
+    console.log('Usage: node scripts/gen-greek-audio.mjs [--letters] [--vocab] [--tiers intro beginning intermediate] [--force]');
     process.exit(0);
 }
 
@@ -117,17 +126,28 @@ if (has('--vocab')) {
     const data     = JSON.parse(fs.readFileSync(filePath, 'utf8'));
     const entries  = data.entries;
 
-    const intro = entries.filter(e => e.introduced === 'intro');
-    const todo  = intro.filter(e => FORCE || !e.audio_greek_url || !e.audio_en_url);
+    // Pre-assign unique slugs across all entries in array order so collisions
+    // (e.g. εἰμί vs εἶμι both strip to ειμι) get stable unique filenames.
+    const usedSlugs = new Map();
+    for (const entry of entries) {
+        const base = slug(entry.greek);
+        const count = usedSlugs.get(base) ?? 0;
+        usedSlugs.set(base, count + 1);
+        entry._slug = count === 0 ? base : `${base}_${count + 1}`;
+    }
 
-    console.log(`\n── Vocab: ${todo.length} / ${intro.length} intro words to generate ──`);
+    const TIER_FIELD = e => e.vocabTier ?? e.introduced;
+    const pool = entries.filter(e => TIERS.includes(TIER_FIELD(e)));
+    const todo = pool.filter(e => FORCE || !e.audio_greek_url || !e.audio_en_url);
+
+    console.log(`\n── Vocab: ${todo.length} / ${pool.length} words to generate (tiers: ${TIERS.join(', ')}) ──`);
 
     const tasks = todo.map(entry => async () => {
-        const id = slug(entry.greek);
+        const id = entry._slug;
         console.log(`  ${entry.greek} (${id})`);
 
         const [grBuf, enBuf] = await Promise.all([
-            !entry.audio_greek_url || FORCE ? tts(entry.greek, MODEL_MULTI)       : null,
+            !entry.audio_greek_url || FORCE ? tts(entry.greek, MODEL_MULTI)   : null,
             !entry.audio_en_url    || FORCE ? tts(entry.definition, MODEL_EN) : null,
         ]);
 
@@ -138,6 +158,10 @@ if (has('--vocab')) {
     });
 
     await runPool(tasks, CONCURRENCY);
+
+    // Strip internal _slug field before writing
+    for (const entry of entries) delete entry._slug;
+
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
     console.log(`Done. Updated ${filePath}`);
 }

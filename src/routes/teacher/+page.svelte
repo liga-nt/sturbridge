@@ -29,6 +29,7 @@
     // Pace settings (fundamentals only)
     let showSettings = false;
     let settingsDrafts = {};  // { [standardId]: { timeLimit, problemsPerPage } }
+    let sessionTimeLimitDraft = 10;  // minutes
     let settingsSaving = false;
     let settingsSaved  = false;
     let settingsError  = null;
@@ -71,6 +72,7 @@
 
             // Build pace settings drafts (fundamentals only)
             if (course?.contentKey === 'fundamentals-math') {
+                sessionTimeLimitDraft = Math.round((classDoc.sessionTimeLimit ?? 600) / 60);
                 for (const id of (classDoc.standardProgression || [])) {
                     const override = classDoc.standardSettings?.[id] ?? {};
                     settingsDrafts[id] = {
@@ -139,8 +141,9 @@
                     problemsPerPage: Number(vals.problemsPerPage)
                 };
             }
-            await setDoc(doc(db, 'classes', classId), { standardSettings }, { merge: true });
-            classDoc = { ...classDoc, standardSettings };
+            const sessionTimeLimit = Math.max(1, Number(sessionTimeLimitDraft)) * 60;
+            await setDoc(doc(db, 'classes', classId), { standardSettings, sessionTimeLimit }, { merge: true });
+            classDoc = { ...classDoc, standardSettings, sessionTimeLimit };
             settingsSaved = true;
             setTimeout(() => settingsSaved = false, 2500);
         } catch (e) {
@@ -287,6 +290,17 @@
                     <p class="text-xs text-gray-400 mt-2 mb-3">
                         Override the default timer and problem count for each standard in this class.
                     </p>
+
+                    <div class="mb-4 flex items-center gap-3">
+                        <label class="text-sm text-gray-700 font-medium">Session time limit</label>
+                        <input
+                            type="number" min="1" max="60"
+                            bind:value={sessionTimeLimitDraft}
+                            class="w-16 text-center border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-indigo-400"
+                        />
+                        <span class="text-sm text-gray-500">min <span class="text-xs text-gray-400">(total active time per session)</span></span>
+                    </div>
+
                     <div class="bg-white rounded-lg shadow overflow-hidden max-w-2xl">
                         <table class="w-full text-sm">
                             <thead class="bg-gray-50 border-b border-gray-200">

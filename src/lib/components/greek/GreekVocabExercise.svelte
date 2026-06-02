@@ -1,734 +1,905 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import {
-    keyToGreek, applyDiacritic, processFinalSigma,
-    stripGreekDiacritics, greekToQwerty, DIACRITIC_MAP
-  } from '$lib/utils/greekKeyboard.js';
-  import {
-    loadCardStates, saveCardState, deleteCardState,
-    getDueCards, getNewCards,
-    scheduleCard, newCard,
-    Rating, State
-  } from '$lib/utils/greekFsrs.js';
+  import { keyToGreek, applyDiacritic, processFinalSigma, stripGreekDiacritics, DIACRITIC_MAP, greekToQwerty } from '$lib/utils/greekKeyboard.js';
 
-  export let vocabList = [];   // [{ id, surface, dictEntry, shortDef, morph }]
-  export let uid = '';
-  export let courseId = '';
-  export let enforceAccents = false;
+  // ── Transliteration ──────────────────────────────────────────────────────────
+  const GREEK_TO_TRANSLIT = {
+    'α':'a','β':'b','γ':'g','δ':'d','ε':'e','ζ':'z','η':'e',
+    'θ':'th','ι':'i','κ':'k','λ':'l','μ':'m','ν':'n','ξ':'x',
+    'ο':'o','π':'p','ρ':'r','σ':'s','ς':'s','τ':'t','υ':'y',
+    'φ':'ph','χ':'ch','ψ':'ps','ω':'o',
+  };
+  function greekToTranslit(str) {
+    const base = str.normalize('NFD').replace(/[̀-ͯ]/g, '').normalize('NFC');
+    return [...base].map(ch => GREEK_TO_TRANSLIT[ch.toLowerCase()] ?? '').join('');
+  }
 
-  // ── State ─────────────────────────────────────────────────────────────────────
-  let cardStates = new Map();
-  let loading = true;
-  let error = null;
-  let activeTab = 'acquisition';
+  export let vocabList  = [];
+  export let hintKeys   = [];
+  export let inputMode  = null; // null = standalone (shows own button); else 'greek-hints'|'greek'|'translit'
 
-  // ── Acquisition ───────────────────────────────────────────────────────────────
-  let acqActive = [];
-  let acqDone   = [];
-  let acqPos    = 0;
-  let acqFlash      = null;
-  let acqFlashTimer = null;
+  let localInputMode = 'greek-hints';
+  $: effectiveMode   = inputMode ?? localInputMode;
 
-  $: acqCurrent = acqActive.length > 0 ? acqActive[acqPos % acqActive.length] : null;
+  function cycleLocalMode() {
+    localInputMode = localInputMode === 'greek-hints' ? 'greek'
+                   : localInputMode === 'greek'       ? 'translit'
+                   :                                    'greek-hints';
+  }
 
-  // ── Review ────────────────────────────────────────────────────────────────────
-  let revQueue   = [];
-  let revCurrent = null;
-  let revFlash      = null;
-  let revFlashTimer = null;
+  // Combining mark → e.key value
+  const MARK_TO_EKEY = {
+    '́': ';', '̀': '`', '̓': '[',
+    '̔': '{', '͂': '=', 'ͅ': '|', '̈': '"',
+  };
 
-  // ── Typing buffer ─────────────────────────────────────────────────────────────
-  let typed    = '';
-  let revTyped = '';
-  let hiddenInput;
+  // With cycling input, only the base key is needed — marks come from repeated presses.
+  function keysForChar(ch) {
+    if (!ch) return [];
+    const base = [...ch.normalize('NFD')][0];
+    const baseKey = greekToQwerty(base.toLowerCase());
+    return baseKey ? [baseKey.toLowerCase()] : [];
+  }
 
-  // ── Counts for tab labels ─────────────────────────────────────────────────────
-  $: dueCount    = getDueCards(cardStates, vocabList).length;
-  $: newRemaining = getNewCards(cardStates, vocabList).length;
-
-  // ── Key hints ─────────────────────────────────────────────────────────────────
-  $: hintSource   = activeTab === 'acquisition' ? acqCurrent : revCurrent;
-  $: currentHints = hintSource
-    ? [...(hintSource.surface ?? '')].map(ch => greekToQwerty(ch) ?? '?').filter(h => h !== '?')
-    : [];
-
-  // ── Load ──────────────────────────────────────────────────────────────────────
-  onMount(async () => {
-    try {
-      cardStates = await loadCardStates(uid, courseId);
-      initAcquisition();
-      initReview();
-      loading = false;
-      focusInput();
-    } catch (e) {
-      error = e.message;
-      loading = false;
+  // Return hint keys for the next keystroke needed.
+  // If the last typed char is in "cycling mode" (base matches target but marks are missing),
+  // hint the base key again; otherwise hint the base key for the next unmatched position.
+  function nextCharKeys(target, typed) {
+    const targetChars = [...(target ?? '')];
+    const typedChars  = [...(typed  ?? '')];
+    const pos = typedChars.length;
+    if (pos > 0) {
+      const lastChar = typedChars[pos - 1];
+      const targetAtLast = targetChars[pos - 1];
+      if (targetAtLast) {
+        const lastBase = [...lastChar.normalize('NFD')][0];
+        const targetBase = [...targetAtLast.normalize('NFD')][0];
+        if (lastBase === targetBase && lastChar !== targetAtLast) {
+          return keysForChar(targetAtLast);
+        }
+      }
     }
-  });
-
-  function initAcquisition() {
-    acqActive = [...vocabList];
-    acqDone   = [];
-    acqPos    = 0;
-    typed     = '';
-  }
-
-  function initReview() {
-    revQueue   = [...getDueCards(cardStates, vocabList)];
-    revCurrent = revQueue.length > 0 ? revQueue.shift() : null;
-    revTyped   = '';
-  }
-
-  function focusInput() {
-    setTimeout(() => hiddenInput?.focus(), 50);
-  }
-
-  function switchTab(tab) {
-    activeTab = tab;
-    typed    = '';
-    revTyped = '';
-    if (tab === 'review') initReview();
-    focusInput();
-  }
-
-  // ── Acquisition navigation ────────────────────────────────────────────────────
-  function goBack() {
-    if (acqActive.length === 0) return;
-    acqPos = (acqPos - 1 + acqActive.length) % acqActive.length;
-    typed  = '';
-    focusInput();
-  }
-
-  function goForward() {
-    if (acqActive.length === 0) return;
-    acqPos = (acqPos + 1) % acqActive.length;
-    typed  = '';
-    focusInput();
-  }
-
-  // ── Acquisition submit: check typed, flash, advance only if correct ────────────
-  function submitAcquisition() {
-    const card = acqCurrent;
-    if (!card || !typed.trim()) return;
-
-    const correct = compare(processFinalSigma(typed.trim()), card.surface);
-    triggerAcqFlash(correct ? 'correct' : 'wrong');
-
-    if (!correct) {
-      typed = '';
-      focusInput();
-      return;
+    for (let i = 0; i < targetChars.length; i++) {
+      if ((typedChars[i] ?? '') !== targetChars[i]) return keysForChar(targetChars[i]);
     }
-
-    setTimeout(() => {
-      acqPos = (acqPos + 1) % acqActive.length;
-      typed  = '';
-      focusInput();
-    }, 400);
+    return [];
   }
 
-  function triggerAcqFlash(type) {
-    if (acqFlashTimer) clearTimeout(acqFlashTimer);
-    acqFlash = type;
-    acqFlashTimer = setTimeout(() => { acqFlash = null; }, 500);
+  let focusedDictEntry = null;
+
+  let vocabTab = 'typing';
+
+  const TIER_COLORS  = { intro: '#1d4ed8', beginning: '#065f46', intermediate: '#92400e', prose: '#4b5563', glossed: '#6b7280' };
+  const TIER_BG      = { intro: '#dbeafe', beginning: '#d1fae5', intermediate: '#fef3c7', prose: '#f3f4f6', glossed: '#f9fafb' };
+  const TIER_BORDER  = { intro: '#bfdbfe', beginning: '#6ee7b7', intermediate: '#fde68a', prose: '#e5e7eb', glossed: '#f3f4f6' };
+  const TIER_LABELS_SHORT = { intro: 'Intro', beginning: 'Beginning', intermediate: 'Intermediate', prose: 'Prose', glossed: 'Glossed' };
+  function tierKey(t) { return t ?? 'glossed'; }
+
+  export let playingDictEntry = null;
+
+  // ── Typing tab ────────────────────────────────────────────────────────────────
+  export let showGreek   = true;
+  export let showEnglish = true;
+  let typedValues = {};
+
+  $: translitMode = effectiveMode === 'translit';
+  $: translitMode, (typedValues = {});
+
+  $: vocabList, (typedValues = {});
+
+  // List tier filter
+  let excludedTiers = new Set();
+  $: presentTiers = ['intro', 'beginning', 'intermediate', 'prose', null].filter(
+    t => vocabList.some(w => (w.vocabTier ?? null) === t)
+  );
+  const TIER_ORDER = ['intro', 'beginning', 'intermediate', 'prose', null];
+  $: filteredList = vocabList
+    .filter(w => !excludedTiers.has(w.vocabTier ?? null))
+    .sort((a, b) => {
+      const ai = TIER_ORDER.indexOf(a.vocabTier ?? null);
+      const bi = TIER_ORDER.indexOf(b.vocabTier ?? null);
+      return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+    });
+
+  $: if (vocabTab === 'typing' && focusedDictEntry && !translitMode && effectiveMode === 'greek-hints') {
+    hintKeys = nextCharKeys(focusedDictEntry, typedValues[focusedDictEntry] ?? '');
+  } else if (vocabTab === 'flashcards' && flashTyping && currentCard && !flashTranslitMode && effectiveMode === 'greek-hints') {
+    hintKeys = nextCharKeys(currentCard.dictEntry, flashTyped);
+  } else {
+    hintKeys = [];
   }
 
-  function markDone() {
-    const card = acqCurrent;
-    if (!card) return;
-    acqActive = acqActive.filter(c => c.id !== card.id);
-    acqDone   = [...acqDone, card];
-    if (acqPos >= acqActive.length) acqPos = 0;
-    typed = '';
-    focusInput();
-  }
-
-  async function sendAllToReview() {
-    const toGraduate = [...acqActive, ...acqDone];
-    await Promise.all(toGraduate.map(graduateCard));
-    initReview();
-    initAcquisition();
-    switchTab('review');
-  }
-
-  async function graduateCard(card) {
-    if (cardStates.has(card.id)) return;
-    const graduated = scheduleCard(newCard(), Rating.Good);
-    graduated.due = new Date();
-    cardStates.set(card.id, graduated);
-    cardStates = cardStates;
-    await saveCardState(uid, courseId, card.id, graduated);
-  }
-
-  // ── Review submit ─────────────────────────────────────────────────────────────
-  async function submitReview(button) {
-    const card = revCurrent;
-    if (!card) return;
-
-    const correct = compare(processFinalSigma(revTyped.trim()), card.surface);
-    triggerRevFlash(correct ? 'correct' : 'wrong');
-
-    const rating = correct
-      ? (button === 'easy' ? Rating.Easy : Rating.Good)
-      : Rating.Again;
-
-    const existing = cardStates.get(card.id) ?? newCard();
-    const updated  = scheduleCard(existing, rating);
-    cardStates.set(card.id, updated);
-    cardStates = cardStates;
-    await saveCardState(uid, courseId, card.id, updated);
-
-    if (!correct) {
-      const insertAt = Math.min(3, revQueue.length);
-      revQueue.splice(insertAt, 0, card);
-    }
-
-    setTimeout(() => {
-      revCurrent = revQueue.length > 0 ? revQueue.shift() : null;
-      revTyped   = '';
-      focusInput();
-    }, 400);
-  }
-
-  // ── Review: send back to learning ─────────────────────────────────────────────
-  async function sendBackToLearning() {
-    const card = revCurrent;
-    if (!card) return;
-    cardStates.delete(card.id);
-    cardStates = cardStates;
-    await deleteCardState(uid, courseId, card.id);
-    revCurrent = revQueue.length > 0 ? revQueue.shift() : null;
-    revTyped   = '';
-    focusInput();
-  }
-
-  function triggerRevFlash(type) {
-    if (revFlashTimer) clearTimeout(revFlashTimer);
-    revFlash = type;
-    revFlashTimer = setTimeout(() => { revFlash = null; }, 400);
-  }
-
-  // ── Comparison ────────────────────────────────────────────────────────────────
   function compare(a, b) {
     if (!a || !b) return false;
-    if (enforceAccents) return a.normalize('NFC') === b.normalize('NFC');
     return stripGreekDiacritics(a) === stripGreekDiacritics(b);
   }
 
-  // ── Keyboard ──────────────────────────────────────────────────────────────────
-  const WORD_END_KEYS = new Set([' ', '.', ',', ';']);
+  const SKIP_KEYS = new Set([
+    'Tab','Escape','ArrowLeft','ArrowRight','ArrowUp','ArrowDown',
+    'Enter','Delete','Control','Shift','Alt','Meta','CapsLock',
+    'F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F11','F12',
+  ]);
 
-  function handleKeydown(e) {
-    if (activeTab === 'acquisition' && acqCurrent) {
-      if (e.key === 'ArrowLeft')                          { e.preventDefault(); goBack(); return; }
-      if (e.key === 'ArrowRight')                         { e.preventDefault(); goForward(); return; }
-      if (e.key === 'ArrowUp')                            { e.preventDefault(); sendAllToReview(); return; }
-      if (e.key === 'Enter' && e.shiftKey)                { e.preventDefault(); markDone(); return; }
-      if (e.key === 'Enter' && !e.shiftKey && acqFlash === null) { e.preventDefault(); submitAcquisition(); return; }
-    }
-
-    if (activeTab === 'review' && e.key === 'Enter' && !e.shiftKey && revFlash === null) {
-      e.preventDefault();
-      submitReview('hard');
-      return;
-    }
-
-    const SKIP = new Set([
-      'Tab','Escape','ArrowLeft','ArrowRight','ArrowUp','ArrowDown',
-      'Enter','Delete','Control','Shift','Alt','Meta',
-      'F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F11','F12',
-    ]);
-    if (SKIP.has(e.key) || e.ctrlKey || e.metaKey || e.altKey) return;
-
+  function handleTypingKey(e, dictEntry) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (SKIP_KEYS.has(e.key)) return;
     e.preventDefault();
+    const cur = typedValues[dictEntry] ?? '';
+    const curChars = [...cur];
 
     if (e.key === 'Backspace') {
-      if (activeTab === 'acquisition') typed    = [...typed].slice(0, -1).join('');
-      else                             revTyped = [...revTyped].slice(0, -1).join('');
+      if (curChars.length === 0) return;
+      const lastNFD = [...curChars[curChars.length - 1].normalize('NFD')];
+      if (lastNFD.length > 1) {
+        lastNFD.pop();
+        curChars[curChars.length - 1] = lastNFD.join('').normalize('NFC');
+      } else {
+        curChars.pop();
+      }
+      typedValues = { ...typedValues, [dictEntry]: curChars.join('') };
       return;
     }
 
-    if (e.key in DIACRITIC_MAP) {
-      if (activeTab === 'acquisition') typed    = applyDiacritic(typed, e.key);
-      else                             revTyped = applyDiacritic(revTyped, e.key);
-      return;
-    }
+    // Diacritic keys ignored — diacritics come from cycling (press base key repeatedly)
+    if (e.key in DIACRITIC_MAP) return;
 
     const greek = keyToGreek(e.key);
     if (!greek) return;
 
-    if (activeTab === 'acquisition') {
-      typed    = (WORD_END_KEYS.has(greek) ? processFinalSigma(typed) : typed) + greek;
-    } else {
-      revTyped = (WORD_END_KEYS.has(greek) ? processFinalSigma(revTyped) : revTyped) + greek;
+    const targetChars = [...dictEntry];
+    const pos = curChars.length;
+
+    // Shift+letter → uppercase Greek; plain letter → lowercase
+    const isUpper = e.key.length === 1 && e.key === e.key.toUpperCase() && e.key !== e.key.toLowerCase();
+    const greekCased = isUpper ? greek.toUpperCase() : greek;
+
+    // Cycling mode: last char has same base as target at that position but is incomplete
+    if (pos > 0) {
+      const lastChar = curChars[pos - 1];
+      const lastNFD = [...lastChar.normalize('NFD')];
+      const lastBase = lastNFD[0];
+      const targetAtLast = targetChars[pos - 1];
+      const targetAtLastNFD = targetAtLast ? [...targetAtLast.normalize('NFD')] : [];
+      if (targetAtLastNFD[0] === lastBase && lastChar !== targetAtLast) {
+        if (greekCased === lastBase) {
+          const lastMarkSet = new Set(lastNFD.slice(1));
+          const nextMark = targetAtLastNFD.slice(1).find(m => !lastMarkSet.has(m));
+          if (nextMark) {
+            const ekey = MARK_TO_EKEY[nextMark];
+            if (ekey) {
+              curChars[pos - 1] = applyDiacritic(lastChar, ekey);
+              typedValues = { ...typedValues, [dictEntry]: curChars.join('') };
+            }
+          }
+        }
+        return;
+      }
     }
+
+    if (pos >= targetChars.length) return;
+    const targetBase = [...targetChars[pos].normalize('NFD')][0];
+    if (greekCased !== targetBase) return;
+    curChars.push(greekCased);
+    typedValues = { ...typedValues, [dictEntry]: curChars.join('') };
   }
 
-  function handleInput(e) {
-    const char = e.data;
-    hiddenInput.value = '';
-    if (!char) return;
-    if (/[Ͱ-Ͽἀ-῿]/u.test(char)) {
-      if (activeTab === 'acquisition') typed    = typed + char;
-      else                             revTyped = revTyped + char;
+  $: statusMap = Object.fromEntries(
+    filteredList.map(w => {
+      const t = typedValues[w.dictEntry] ?? '';
+      if (!t) return [w.dictEntry, 'empty'];
+      if (translitMode) {
+        const target = greekToTranslit(w.dictEntry).toLowerCase();
+        const inp    = t.toLowerCase();
+        if (target === inp) return [w.dictEntry, 'correct'];
+        return [w.dictEntry, target.startsWith(inp) ? 'typing' : 'wrong'];
+      }
+      return [w.dictEntry, compare(processFinalSigma(t), w.dictEntry) ? 'correct' : 'typing'];
+    })
+  );
+
+  $: typingDoneCount = filteredList.filter(w => statusMap[w.dictEntry] === 'correct').length;
+
+  // ── Flashcard tab ─────────────────────────────────────────────────────────────
+  $: flashList = vocabList.filter(w => !excludedTiers.has(w.vocabTier ?? null));
+
+  let deck = [];
+  let currentIdx = 0;
+  let flipped = false;
+  let cardResults = {};
+  let flashTyping = false;
+  let flashTyped  = '';
+  let flashFront  = 'greek'; // 'greek' | 'english'
+
+  $: flashTranslitMode = effectiveMode === 'translit';
+  $: flashTranslitMode, (flashTyped = '');
+
+  $: flashCorrect = flashTyped.length > 0 && currentCard
+    ? (flashTranslitMode
+        ? greekToTranslit(currentCard.dictEntry).toLowerCase() === flashTyped.toLowerCase()
+        : compare(processFinalSigma(flashTyped), currentCard.dictEntry))
+    : false;
+
+  function handleFlashKey(e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (SKIP_KEYS.has(e.key)) return;
+    e.preventDefault();
+
+    const target = currentCard?.dictEntry ?? '';
+    const targetChars = [...target];
+    const curChars = [...flashTyped];
+
+    if (e.key === 'Backspace') {
+      if (curChars.length === 0) return;
+      const lastNFD = [...curChars[curChars.length - 1].normalize('NFD')];
+      if (lastNFD.length > 1) {
+        lastNFD.pop();
+        curChars[curChars.length - 1] = lastNFD.join('').normalize('NFC');
+      } else {
+        curChars.pop();
+      }
+      flashTyped = curChars.join('');
       return;
     }
-    const greek = keyToGreek(char);
+
+    if (e.key in DIACRITIC_MAP) return;
+
+    const greek = keyToGreek(e.key);
     if (!greek) return;
-    if (activeTab === 'acquisition') typed    = typed + greek;
-    else                             revTyped = revTyped + greek;
+
+    const isUpper = e.key.length === 1 && e.key === e.key.toUpperCase() && e.key !== e.key.toLowerCase();
+    const greekCased = isUpper ? greek.toUpperCase() : greek;
+
+    const pos = curChars.length;
+
+    if (pos > 0) {
+      const lastChar = curChars[pos - 1];
+      const lastNFD = [...lastChar.normalize('NFD')];
+      const lastBase = lastNFD[0];
+      const targetAtLast = targetChars[pos - 1];
+      const targetAtLastNFD = targetAtLast ? [...targetAtLast.normalize('NFD')] : [];
+      if (targetAtLastNFD[0] === lastBase && lastChar !== targetAtLast) {
+        if (greekCased === lastBase) {
+          const lastMarkSet = new Set(lastNFD.slice(1));
+          const nextMark = targetAtLastNFD.slice(1).find(m => !lastMarkSet.has(m));
+          if (nextMark) {
+            const ekey = MARK_TO_EKEY[nextMark];
+            if (ekey) {
+              curChars[pos - 1] = applyDiacritic(lastChar, ekey);
+              flashTyped = curChars.join('');
+            }
+          }
+        }
+        return;
+      }
+    }
+
+    if (pos >= targetChars.length) return;
+    const targetBase = [...targetChars[pos].normalize('NFD')][0];
+    if (greekCased !== targetBase) return;
+    curChars.push(greekCased);
+    flashTyped = curChars.join('');
   }
 
-  onDestroy(() => {
-    if (acqFlashTimer) clearTimeout(acqFlashTimer);
-    if (revFlashTimer) clearTimeout(revFlashTimer);
-  });
+  $: currentCard  = deck[currentIdx] ?? null;
+  $: correctCount = Object.values(cardResults).filter(r => r === 'correct').length;
+  $: allDone      = deck.length > 0 && correctCount === deck.length;
+
+  // ── Audio ─────────────────────────────────────────────────────────────────────
+  $: audioMap = Object.fromEntries(
+    vocabList.filter(w => w.audioGreekUrl).map(w => [w.dictEntry, w.audioGreekUrl])
+  );
+
+  $: enAudioMap = Object.fromEntries(
+    vocabList.filter(w => w.audioEnUrl).map(w => [w.dictEntry, w.audioEnUrl])
+  );
+
+  function playVocabAudio(dictEntry) {
+    const url = audioMap[dictEntry];
+    if (url) new Audio(url).play().catch(() => {});
+  }
+
+  function playWordAudio(dictEntry) {
+    const grUrl = audioMap[dictEntry];
+    const enUrl = enAudioMap[dictEntry];
+    if (grUrl) {
+      const a = new Audio(grUrl);
+      a.addEventListener('ended', () => {
+        if (enUrl) setTimeout(() => new Audio(enUrl).play().catch(() => {}), 300);
+      }, { once: true });
+      a.play().catch(() => {});
+    } else if (enUrl) {
+      new Audio(enUrl).play().catch(() => {});
+    }
+  }
+
+  // Play when a word first becomes correct in typing tab
+  let _prevCorrect = new Set();
+  $: {
+    const now = new Set(Object.entries(statusMap).filter(([, v]) => v === 'correct').map(([k]) => k));
+    for (const de of now) { if (!_prevCorrect.has(de)) playVocabAudio(de); }
+    _prevCorrect = now;
+  }
+
+  // Flip card and play audio
+  function flipCard() {
+    flipped = !flipped;
+    if (flipped && currentCard) playWordAudio(currentCard.dictEntry);
+  }
+
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function initDeck() {
+    const list = vocabList.filter(w => !excludedTiers.has(w.vocabTier ?? null));
+    deck = shuffle([...list]);
+    currentIdx  = 0;
+    flipped     = false;
+    cardResults = {};
+  }
+
+  function markCard(result) {
+    if (!currentCard) return;
+    playWordAudio(currentCard.dictEntry);
+    cardResults = { ...cardResults, [currentCard.dictEntry]: result };
+    flipped = false;
+    flashTyped = '';
+    for (let i = 1; i <= deck.length; i++) {
+      const idx = (currentIdx + i) % deck.length;
+      if (cardResults[deck[idx]?.dictEntry] !== 'correct') {
+        currentIdx = idx;
+        return;
+      }
+    }
+  }
+
+  function reshuffle() {
+    const list = vocabList.filter(w => !excludedTiers.has(w.vocabTier ?? null));
+    deck = shuffle([...list]);
+    currentIdx  = 0;
+    flipped     = false;
+    cardResults = {};
+    flashTyped  = '';
+  }
+
+  $: if (vocabTab === 'flashcards' && deck.length === 0 && vocabList.length > 0) initDeck();
 </script>
 
-<input
-  bind:this={hiddenInput}
-  class="hidden-input"
-  type="text"
-  inputmode="text"
-  autocomplete="off"
-  autocorrect="off"
-  autocapitalize="none"
-  spellcheck="false"
-  on:keydown={handleKeydown}
-  on:input={handleInput}
-/>
+<div class="vocab-wrap">
+  <!-- Sub-tabs -->
+  <div class="sub-tabs">
+    <button class="sub-tab" class:active={vocabTab === 'typing'} on:click={() => vocabTab = 'typing'}>List</button>
+    <button class="sub-tab" class:active={vocabTab === 'flashcards'} on:click={() => { vocabTab = 'flashcards'; if (!deck.length) initDeck(); }}>Flashcards</button>
+  </div>
 
-<div class="exercise-wrap" on:click={focusInput} role="presentation">
+  <!-- ── Typing ── -->
+  {#if vocabTab === 'typing'}
+    <div class="typing-wrap">
+      <div class="typing-controls">
+        <button class="toggle-btn" class:on={showGreek} on:click={() => showGreek = !showGreek}>Greek</button>
+        <button class="toggle-btn" class:on={showEnglish} on:click={() => showEnglish = !showEnglish}>English</button>
+        {#if inputMode === null}
+          <button class="input-mode-btn mode-{localInputMode}" on:click={cycleLocalMode}>
+            {localInputMode === 'greek-hints' ? 'Greek + keyboard' : localInputMode === 'greek' ? 'Greek' : 'Transliterate'}
+          </button>
+        {/if}
+        <span class="typing-progress">{typingDoneCount} / {filteredList.length}</span>
+        <button class="reset-btn" on:click={() => typedValues = {}}>Reset</button>
+        <div class="tier-pills-group">
+          {#each presentTiers as tier}
+            {@const tkey = tierKey(tier)}
+            {@const excluded = excludedTiers.has(tier ?? null)}
+            <button
+              class="tier-pill"
+              style={excluded
+                ? 'color:#9ca3af;background:#f3f4f6;border-color:#e5e7eb;opacity:0.55'
+                : `color:${TIER_COLORS[tkey]};background:${TIER_BG[tkey]};border-color:${TIER_BORDER[tkey]}`}
+              on:click={() => { const k = tier ?? null; const s = new Set(excludedTiers); s.has(k) ? s.delete(k) : s.add(k); excludedTiers = s; }}
+            >{TIER_LABELS_SHORT[tkey]}</button>
+          {/each}
+        </div>
+      </div>
 
-  {#if loading}
-    <div class="state-msg">Loading…</div>
+      <table class="typing-table">
+        <thead>
+          <tr>
+            {#if showGreek}<th class="th-greek">Greek</th>{/if}
+            {#if showEnglish}<th class="th-eng">English</th>{/if}
+            <th class="th-input">Type it</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each filteredList as w (w.dictEntry)}
+            {@const status = statusMap[w.dictEntry] ?? 'empty'}
+            <tr class="typing-row" class:row-correct={status === 'correct'} class:row-playing={w.dictEntry === playingDictEntry}>
+              {#if showGreek}
+                <td class="td-greek" style="color:{TIER_COLORS[tierKey(w.vocabTier)]}">{w.dictEntry}</td>
+              {/if}
+              {#if showEnglish}
+                <td class="td-eng">{w.shortDef ?? '—'}</td>
+              {/if}
+              <td class="td-input">
+                <div class="input-wrap"
+                  class:inp-correct={status === 'correct'}
+                  class:inp-typing={status === 'typing'}
+                  class:inp-wrong={status === 'wrong'}>
+                  {#if translitMode}
+                    <input
+                      class="greek-input translit-input"
+                      value={typedValues[w.dictEntry] ?? ''}
+                      on:input={(e) => { typedValues = { ...typedValues, [w.dictEntry]: e.target.value }; }}
+                      on:focus={() => focusedDictEntry = w.dictEntry}
+                      on:blur={() => focusedDictEntry = null}
+                      spellcheck="false"
+                      autocomplete="off"
+                      autocorrect="off"
+                      autocapitalize="off"
+                      placeholder="e.g. archo…"
+                    />
+                  {:else}
+                    <input
+                      class="greek-input"
+                      value={typedValues[w.dictEntry] ?? ''}
+                      on:focus={() => focusedDictEntry = w.dictEntry}
+                      on:blur={() => focusedDictEntry = null}
+                      on:keydown={(e) => handleTypingKey(e, w.dictEntry)}
+                      spellcheck="false"
+                      autocomplete="off"
+                      autocorrect="off"
+                      autocapitalize="off"
+                      placeholder="type Greek…"
+                    />
+                  {/if}
+                  {#if status === 'correct'}
+                    <span class="check-icon">✓</span>
+                  {/if}
+                </div>
+              </td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
 
-  {:else if error}
-    <div class="state-msg error">{error}</div>
-
-  {:else if vocabList.length === 0}
-    <div class="empty-state">
-      <div class="empty-icon">📖</div>
-      <div class="empty-title">No vocab for this lesson</div>
-      <p class="empty-note">Switch to the Story tab to read the passage.</p>
+      {#if typingDoneCount === filteredList.length && filteredList.length > 0}
+        <div class="typing-done">All {filteredList.length} words typed correctly!</div>
+      {/if}
     </div>
 
+  <!-- ── Flashcards ── -->
   {:else}
+    <div class="flash-wrap">
+      <div class="flash-progress">
+        {#each deck as w (w.dictEntry)}
+          {@const r = cardResults[w.dictEntry]}
+          <span class="dot"
+            class:dot-correct={r === 'correct'}
+            class:dot-wrong={r === 'wrong'}
+            class:dot-current={!allDone && deck[currentIdx]?.dictEntry === w.dictEntry}
+          ></span>
+        {/each}
+        <span class="progress-label">{correctCount} / {deck.length}</span>
+      </div>
 
-    <!-- Tab bar -->
-    <div class="tab-bar">
-      <button class="tab-btn" class:active={activeTab === 'acquisition'}
-        on:click|stopPropagation={() => switchTab('acquisition')}>
-        Learning
-        {#if newRemaining > 0}<span class="tab-count">{newRemaining}</span>{/if}
-      </button>
-      <button class="tab-btn" class:active={activeTab === 'review'}
-        on:click|stopPropagation={() => switchTab('review')}>
-        Review
-        {#if dueCount > 0}<span class="tab-count due">{dueCount}</span>{/if}
-      </button>
-    </div>
-
-    <!-- ── Acquisition tab ── -->
-    {#if activeTab === 'acquisition'}
-
-      {#if acqCurrent}
-        <div class="card-status">
-          <span class="status-count">{acqDone.length} / {vocabList.length} done</span>
+      <div class="flash-toolbar">
+        <button class="toggle-btn" on:click={() => { flashFront = flashFront === 'greek' ? 'english' : 'greek'; flipped = false; }}>
+          {flashFront === 'greek' ? 'English front' : 'Greek front'}
+        </button>
+        <button class="toggle-btn" class:on={flashTyping} on:click={() => { flashTyping = !flashTyping; flashTyped = ''; }}>Typing</button>
+        {#if inputMode === null}
+          <button class="input-mode-btn mode-{localInputMode}" on:click={cycleLocalMode}>
+            {localInputMode === 'greek-hints' ? 'Greek + keyboard' : localInputMode === 'greek' ? 'Greek' : 'Transliterate'}
+          </button>
+        {/if}
+        <div class="tier-pills-group">
+          {#each presentTiers as tier}
+            {@const tkey = tierKey(tier)}
+            {@const excluded = excludedTiers.has(tier ?? null)}
+            <button
+              class="tier-pill"
+              style={excluded
+                ? 'color:#9ca3af;background:#f3f4f6;border-color:#e5e7eb;opacity:0.55'
+                : `color:${TIER_COLORS[tkey]};background:${TIER_BG[tkey]};border-color:${TIER_BORDER[tkey]}`}
+              on:click={() => { const k = tier ?? null; const s = new Set(excludedTiers); s.has(k) ? s.delete(k) : s.add(k); excludedTiers = s; initDeck(); }}
+            >{TIER_LABELS_SHORT[tkey]}</button>
+          {/each}
         </div>
+      </div>
 
-        <div class="prompt-card"
-          class:flash-correct={acqFlash === 'correct'}
-          class:flash-wrong={acqFlash === 'wrong'}
-        >
-          <div class="prompt-gloss">{acqCurrent.shortDef ?? acqCurrent.dictEntry}</div>
-          {#if acqCurrent.dictEntry && acqCurrent.dictEntry !== acqCurrent.surface}
-            <div class="prompt-dict">{acqCurrent.dictEntry}</div>
-          {/if}
-          {#if acqCurrent.morph && typeof acqCurrent.morph === 'object'}
-            {@const m = acqCurrent.morph}
-            <div class="prompt-morph">{m.pos ?? ''}{m.number ? ` ${m.number}` : ''}{m.case ? ` ${m.case}` : ''}</div>
-          {:else if acqCurrent.morph && typeof acqCurrent.morph === 'string'}
-            <div class="prompt-morph">{acqCurrent.morph}</div>
-          {/if}
-
-          <div class="surface-word">{acqCurrent.surface}</div>
-
-          <div class="greek-display">{typed}<span class="cursor">|</span></div>
-
-          {#if currentHints.length > 0}
-            <div class="key-hints">
-              {#each currentHints as hint}<kbd>{hint}</kbd>{/each}
+      {#if allDone}
+        <div class="flash-done">
+          <div class="done-text">All done!</div>
+          <button class="reshuffle-btn" on:click={reshuffle}>Shuffle again</button>
+        </div>
+      {:else if currentCard}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <div class="card-scene" class:card-green={flashCorrect} on:click={flipCard}>
+          <div class="card-inner" class:flipped>
+            <div class="card-face card-front" class:face-green={flashCorrect}>
+              {#if flashFront === 'greek'}
+                <span class="card-greek">{currentCard.dictEntry}</span>
+              {:else}
+                <span class="card-english">{currentCard.shortDef ?? '—'}</span>
+              {/if}
+              <span class="card-hint">{flashCorrect ? '✓' : 'tap to reveal'}</span>
             </div>
-          {/if}
-        </div>
-
-        <div class="nav-row">
-          <button class="nav-btn" on:click={goBack} title="Previous (←)">←</button>
-          <button class="nav-btn" on:click={goForward} title="Next (→)">→</button>
-        </div>
-
-        <div class="btn-row">
-          <button class="rate-btn done-btn" on:click={markDone} title="Remove from rotation (Shift+Enter)">
-            Remove
-          </button>
-          <button class="rate-btn review-btn" on:click={sendAllToReview} title="Send all to review (↑)">
-            Send to Review ↑
-          </button>
-        </div>
-
-        <div class="acq-hint">Enter to check · ← → navigate · Shift+Enter remove · ↑ send all to review</div>
-
-      {:else if acqDone.length > 0}
-        <div class="done-panel">
-          <div class="done-sub">{acqDone.length} word{acqDone.length === 1 ? '' : 's'} ready</div>
-          <p class="done-note">Send them to review, or keep practicing.</p>
-          <div class="btn-row">
-            <button class="rate-btn done-btn" on:click={() => { acqActive = [...acqDone]; acqDone = []; acqPos = 0; focusInput(); }}>
-              Practice Again
-            </button>
-            <button class="rate-btn review-btn" on:click={sendAllToReview}>
-              Send to Review
-            </button>
+            <div class="card-face card-back">
+              {#if flashFront === 'greek'}
+                <span class="card-greek card-sm">{currentCard.dictEntry}</span>
+                <span class="card-english">{currentCard.shortDef ?? '—'}</span>
+              {:else}
+                <span class="card-english card-eng-sm">{currentCard.shortDef ?? '—'}</span>
+                <span class="card-greek">{currentCard.dictEntry}</span>
+              {/if}
+            </div>
           </div>
         </div>
 
-      {:else}
-        <div class="done-panel">
-          <div class="done-sub">All words sent to review!</div>
-          <p class="done-note">Switch to Review to practice with spaced repetition.</p>
-          <button class="rate-btn review-btn" on:click|stopPropagation={() => switchTab('review')}>
-            Go to Review →
+        {#if flashTyping}
+          <div class="flash-input-wrap" class:inp-correct={flashCorrect}>
+            {#if flashTranslitMode}
+              <input
+                class="flash-greek-input flash-translit-input"
+                value={flashTyped}
+                on:input={(e) => { flashTyped = e.target.value; }}
+                spellcheck="false"
+                autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off"
+                placeholder="e.g. archo…"
+              />
+            {:else}
+              <input
+                class="flash-greek-input"
+                value={flashTyped}
+                on:keydown={handleFlashKey}
+                spellcheck="false"
+                autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off"
+                placeholder="type Greek…"
+              />
+            {/if}
+            {#if flashCorrect}<span class="flash-check">✓</span>{/if}
+          </div>
+        {/if}
+
+        <div class="flash-buttons">
+          <button class="mark-btn mark-wrong" on:click={() => markCard('wrong')}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+          <button class="mark-btn mark-correct" on:click={() => markCard('correct')}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
           </button>
         </div>
+
+        <button class="reshuffle-btn" on:click={reshuffle}>Reshuffle</button>
       {/if}
-
-    <!-- ── Review tab ── -->
-    {:else}
-
-      {#if revCurrent}
-        <div class="prompt-card"
-          class:flash-correct={revFlash === 'correct'}
-          class:flash-wrong={revFlash === 'wrong'}
-        >
-          <div class="prompt-gloss">{revCurrent.shortDef ?? revCurrent.dictEntry}</div>
-          {#if revCurrent.morph && typeof revCurrent.morph === 'object'}
-            {@const m = revCurrent.morph}
-            <div class="prompt-morph">{m.pos ?? ''}{m.number ? ` ${m.number}` : ''}{m.case ? ` ${m.case}` : ''}</div>
-          {:else if revCurrent.morph && typeof revCurrent.morph === 'string'}
-            <div class="prompt-morph">{revCurrent.morph}</div>
-          {/if}
-
-          <div class="greek-display"
-            class:correct={revFlash === 'correct'}
-            class:wrong={revFlash === 'wrong'}
-          >{revTyped || ' '}</div>
-
-          {#if revFlash === 'wrong'}
-            <div class="correct-answer">{revCurrent.surface}</div>
-          {/if}
-        </div>
-
-        <div class="phase-label">review · {revQueue.length} remaining</div>
-
-        <div class="btn-row">
-          <button class="rate-btn hard-btn" on:click={() => submitReview('hard')}>Hard</button>
-          <button class="rate-btn easy-btn" on:click={() => submitReview('easy')}>Easy</button>
-        </div>
-
-        <div class="acq-hint">Enter → Hard</div>
-
-        <button class="back-to-learning-btn" on:click={sendBackToLearning}>
-          ↩ Back to Learning
-        </button>
-
-      {:else}
-        <div class="done-panel">
-          <div class="done-sub">No reviews due</div>
-          <p class="done-note">
-            {#if vocabList.length > 0}
-              Complete the Learning tab to add words to your review queue.
-            {:else}
-              Words you've learned will appear here for spaced repetition review.
-            {/if}
-          </p>
-        </div>
-      {/if}
-
-    {/if}
-
+    </div>
   {/if}
-
 </div>
 
 <style>
-  .hidden-input {
-    position: fixed;
-    top: 0; left: 0;
-    width: 1px; height: 1px;
-    opacity: 0; border: none; padding: 0; margin: 0;
-    outline: none; caret-color: transparent;
-    background: transparent; color: transparent;
-  }
-
-  .exercise-wrap {
+  .vocab-wrap {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-    padding: 1.5rem 1rem 3rem;
-    min-height: 60vh;
+    padding: 16px 0 64px;
   }
 
-  /* ── Tabs ── */
-  .tab-bar {
+  .sub-tabs {
     display: flex;
-    gap: 0.5rem;
-    background: white;
-    border-radius: 999px;
-    padding: 0.25rem;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
-    width: 100%;
-    max-width: 440px;
+    gap: 0;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 20px;
   }
-
-  .tab-btn {
-    flex: 1;
-    padding: 0.5em 1em;
-    border-radius: 999px;
-    border: none;
-    background: transparent;
-    font-size: 0.88rem;
+  .sub-tab {
+    padding: 8px 20px;
+    font-size: 13px;
     font-weight: 500;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
     color: #9ca3af;
     cursor: pointer;
+    margin-bottom: -1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .sub-tab:hover { color: #374151; }
+  .sub-tab.active { color: #4338ca; border-bottom-color: #4338ca; }
+
+  /* Typing */
+  .typing-wrap { max-width: 700px; margin: 0 auto; width: 100%; }
+
+  .typing-controls {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    transition: all 0.15s;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
   }
 
-  .tab-btn.active { background: #6366f1; color: white; font-weight: 600; }
+  .tier-pills-group {
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+    flex-wrap: wrap;
+  }
 
-  .tab-count {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 1.4em;
-    height: 1.4em;
+  .toggle-btn {
+    padding: 4px 14px;
     border-radius: 999px;
-    font-size: 0.75em;
-    font-weight: 700;
-    background: rgba(255,255,255,0.25);
-    color: inherit;
-    padding: 0 0.3em;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
   }
+  .toggle-btn.on { background: #eef2ff; border-color: #a5b4fc; color: #4338ca; }
 
-  .tab-count.due { background: #fbbf24; color: #78350f; }
+  .input-mode-btn {
+    padding: 4px 14px;
+    border-radius: 999px;
+    border: 1px solid;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: filter 0.15s;
+  }
+  .input-mode-btn:hover { filter: brightness(0.97); }
+  .input-mode-btn.mode-greek-hints { background: #eef2ff; border-color: #a5b4fc; color: #4338ca; }
+  .input-mode-btn.mode-greek       { background: #f9fafb; border-color: #d1d5db; color: #6b7280; }
+  .input-mode-btn.mode-translit    { background: #fdf4ff; border-color: #e9d5ff; color: #7e22ce; }
 
-  /* ── Card status ── */
-  .card-status { font-size: 0.8rem; color: #9ca3af; }
+  .typing-progress { margin-left: auto; font-size: 12px; color: #9ca3af; }
 
-  /* ── Prompt card ── */
-  .prompt-card {
-    width: 100%;
-    max-width: 440px;
+  .reset-btn {
+    padding: 4px 12px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
     background: white;
-    border-radius: 1.25rem;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-    padding: 2rem 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    text-align: center;
-    transition: background 0.15s;
+    color: #6b7280;
+    font-size: 12px;
+    cursor: pointer;
   }
+  .reset-btn:hover { background: #f9fafb; }
 
-  .prompt-card.flash-correct { background: #d1fae5; }
-  .prompt-card.flash-wrong   { background: #fee2e2; }
-
-  .prompt-gloss {
-    font-size: 1.3rem;
+  .tier-pill {
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid;
+    font-size: 11px;
     font-weight: 600;
-    color: #1e293b;
-    line-height: 1.4;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    white-space: nowrap;
   }
 
-  .prompt-dict {
-    font-family: "GFS Didot", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
-    font-size: 0.95rem;
-    color: #6b7280;
-  }
+  .typing-table { width: 100%; border-collapse: collapse; }
 
-  .prompt-morph {
-    font-size: 0.8rem;
-    color: #6b7280;
-    font-style: italic;
-    margin-top: -0.25rem;
+  .typing-table th {
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #9ca3af;
+    padding: 0 12px 8px;
+    border-bottom: 1px solid #e5e7eb;
   }
+  .th-greek { width: 28%; }
+  .th-eng   { width: 36%; }
+  .th-input { width: 36%; }
 
-  .surface-word {
-    font-family: "GFS Didot", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
-    font-size: 3.5rem;
-    line-height: 1.2;
-    color: #1e293b;
-    user-select: text;
+  .typing-row { border-bottom: 1px solid #f3f4f6; }
+  .typing-row:hover { background: #fafafa; }
+  .typing-row.row-correct { background: #f0fdf4; }
+  .typing-row.row-playing { background: #fef9c3; }
+  .typing-row.row-playing .td-greek { color: #854d0e; }
+
+  .td-greek {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    font-size: 18px;
+    color: #111827;
+    padding: 10px 12px;
   }
+  .td-eng { font-size: 13px; color: #6b7280; padding: 10px 12px; }
+  .td-input { padding: 8px 12px; }
 
-  /* ── Greek typed display ── */
-  .greek-display {
+  .input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 4px 8px;
+    background: white;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .input-wrap:focus-within { border-color: #6366f1; }
+  .input-wrap.inp-typing   { border-color: #fbbf24; background: #fffbeb; }
+  .input-wrap.inp-wrong    { border-color: #ef4444; background: #fef2f2; }
+  .input-wrap.inp-correct  { border-color: #22c55e; background: #f0fdf4; }
+  .input-wrap.inp-correct .greek-input { color: #15803d; }
+
+  .greek-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    font-size: 16px;
+    color: #111827;
+    min-width: 0;
     width: 100%;
-    font-family: "GFS Didot", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
-    font-size: 2.25rem;
+  }
+  .greek-input::placeholder { color: #d1d5db; font-size: 13px; font-family: inherit; }
+  .translit-input { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; }
+
+  .check-icon { color: #22c55e; font-size: 14px; flex-shrink: 0; }
+
+  .typing-done {
     text-align: center;
-    border-bottom: 2px solid #e5e7eb;
-    color: #1e293b;
-    padding: 0.25rem 0;
-    min-height: 3.5rem;
-    transition: border-color 0.15s;
-  }
-
-  .greek-display.correct { border-bottom-color: #16a34a; }
-  .greek-display.wrong   { border-bottom-color: #dc2626; }
-
-  .cursor {
-    opacity: 0.4;
-    animation: blink 1s step-end infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 0.4; }
-    50%       { opacity: 0; }
-  }
-
-  .correct-answer {
-    font-family: "GFS Didot", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
-    font-size: 1.5rem;
+    margin-top: 24px;
+    padding: 16px;
+    background: #f0fdf4;
+    border-radius: 10px;
     color: #16a34a;
     font-weight: 600;
+    font-size: 15px;
   }
 
-  /* ── Key hints ── */
-  .key-hints {
+  /* Flashcards */
+  .flash-wrap {
     display: flex;
-    gap: 0.3rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding-top: 8px;
+  }
+
+  .flash-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: min(640px, 92vw);
+  }
+
+  .card-scene.card-green .card-front,
+  .card-face.face-green {
+    border-color: #86efac;
+    background: #f0fdf4;
+  }
+
+  .flash-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 8px;
+    padding: 6px 12px;
+    background: white;
+    width: min(280px, 80vw);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .flash-input-wrap:focus-within { border-color: #6366f1; }
+  .flash-input-wrap.inp-correct  { border-color: #22c55e; background: #f0fdf4; }
+
+  .flash-greek-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    font-size: 18px;
+    text-align: center;
+    color: #111827;
+    min-width: 0;
+  }
+  .flash-greek-input::placeholder { color: #d1d5db; font-size: 13px; font-family: inherit; }
+  .flash-translit-input { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 15px; }
+
+  .flash-check { color: #22c55e; font-size: 16px; flex-shrink: 0; }
+
+  .flash-progress {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 0.25rem;
   }
 
-  kbd {
-    display: inline-block;
-    padding: 0.15em 0.45em;
-    font-size: 0.8rem;
-    font-family: monospace;
-    color: #374151;
-    background: #f3f4f6;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.08);
-  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #e5e7eb; transition: background 0.2s; }
+  .dot-correct { background: #22c55e; }
+  .dot-wrong   { background: #ef4444; }
+  .dot-current { background: #6366f1; }
 
-  /* ── Nav row ── */
-  .nav-row { display: flex; gap: 1rem; }
+  .progress-label { font-size: 12px; color: #9ca3af; margin-left: 6px; }
 
-  .nav-btn {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    border: 1.5px solid #e2e8f0;
-    background: white;
-    font-size: 1.2rem;
-    color: #64748b;
+  .card-scene {
+    width: min(640px, 92vw);
+    height: 440px;
+    perspective: 1200px;
     cursor: pointer;
+  }
+
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease;
+  }
+  .card-inner.flipped { transform: rotateY(180deg); }
+
+  .card-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .card-front { background: white; border: 1px solid #e5e7eb; }
+  .card-back  { background: #eef2ff; border: 1px solid #c7d2fe; transform: rotateY(180deg); }
+
+  .card-greek { font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif; font-size: 36px; color: #111827; line-height: 1.2; }
+  .card-greek.card-sm { font-size: 18px; color: #6366f1; }
+  .card-english { font-size: 22px; color: #1f2937; font-weight: 500; }
+  .card-english.card-eng-sm { font-size: 14px; color: #6366f1; font-weight: 500; }
+  .card-hint { font-size: 11px; color: #d1d5db; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .flash-buttons { display: flex; gap: 32px; }
+
+  .mark-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.1s;
-  }
-
-  .nav-btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
-
-  /* ── Action buttons ── */
-  .btn-row {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .rate-btn {
-    padding: 0.6em 1.5em;
-    border-radius: 999px;
-    font-size: 0.9rem;
-    font-weight: 600;
     cursor: pointer;
-    border: none;
-    transition: all 0.1s;
-  }
-
-  .done-btn   { background: #e2e8f0; color: #475569; }
-  .done-btn:hover   { background: #cbd5e1; }
-  .review-btn { background: #6366f1; color: white; }
-  .review-btn:hover { background: #4f46e5; }
-  .hard-btn   { background: #e2e8f0; color: #475569; }
-  .hard-btn:hover   { background: #cbd5e1; }
-  .easy-btn   { background: #d1fae5; color: #065f46; }
-  .easy-btn:hover   { background: #a7f3d0; }
-
-  /* ── Phase label ── */
-  .phase-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #cbd5e1;
-  }
-
-  /* ── Hint text ── */
-  .acq-hint { font-size: 0.7rem; color: #e2e8f0; text-align: center; }
-
-  /* ── Back to learning ── */
-  .back-to-learning-btn {
-    font-size: 0.78rem;
-    color: #9ca3af;
-    background: transparent;
-    border: 1px solid #e5e7eb;
-    border-radius: 999px;
-    padding: 0.3em 1em;
-    cursor: pointer;
+    background: white;
     transition: all 0.15s;
   }
+  .mark-wrong   { border-color: #fca5a5; color: #ef4444; }
+  .mark-correct { border-color: #86efac; color: #22c55e; }
+  .mark-wrong:hover   { background: #fef2f2; border-color: #ef4444; transform: scale(1.06); }
+  .mark-correct:hover { background: #f0fdf4; border-color: #22c55e; transform: scale(1.06); }
 
-  .back-to-learning-btn:hover { color: #6366f1; border-color: #a5b4fc; }
+  .reshuffle-btn {
+    padding: 6px 18px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    color: #6b7280;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .reshuffle-btn:hover { background: #f3f4f6; color: #374151; }
 
-  /* ── Empty / done states ── */
-  .state-msg { margin-top: 4rem; font-size: 1rem; color: #9ca3af; text-align: center; }
-  .state-msg.error { color: #dc2626; }
-
-  .empty-state {
-    margin-top: 3rem;
-    text-align: center;
+  .flash-done {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: 16px;
+    padding: 40px 0;
   }
-
-  .empty-icon  { font-size: 2.5rem; }
-  .empty-title { font-size: 1rem; font-weight: 600; color: #374151; }
-  .empty-note  { font-size: 0.85rem; color: #9ca3af; margin: 0; }
-
-  .done-panel {
-    margin-top: 3rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .done-sub  { font-size: 1.1rem; font-weight: 600; color: #16a34a; }
-  .done-note { font-size: 0.85rem; color: #9ca3af; max-width: 280px; margin: 0; }
+  .done-text { font-size: 24px; font-weight: 700; color: #16a34a; }
 </style>

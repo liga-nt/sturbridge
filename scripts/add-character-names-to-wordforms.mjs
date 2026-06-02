@@ -20,11 +20,10 @@ const ENTRIES = [
     ['Φοίβῃ',  'Φοίβη', 'Phoebe',                               'noun.fem.sg.dat', '1st_declension_feminine_eta'],
     ['Φοίβην', 'Φοίβη', 'Phoebe',                               'noun.fem.sg.acc', '1st_declension_feminine_eta'],
 
-    // ── Κλήτα — 1st decl. fem. α-type ────────────────────────────────────────
-    ['Κλήτα',  'Κλήτα', 'Klēta (builder; patron: Hephaestus)',  'noun.fem.sg.nom', '1st_declension_feminine_alpha'],
-    ['Κλήτης', 'Κλήτα', 'Klēta',                                'noun.fem.sg.gen', '1st_declension_feminine_alpha'],
-    ['Κλήτῃ',  'Κλήτα', 'Klēta',                                'noun.fem.sg.dat', '1st_declension_feminine_alpha'],
-    ['Κλήτην', 'Κλήτα', 'Klēta',                                'noun.fem.sg.acc', '1st_declension_feminine_alpha'],
+    // ── Κλειώ — contracted fem. (Muse of history) ────────────────────────────
+    ['Κλειώ',   'Κλειώ', '11-year-old, sister of Phoebe; Muse of history, meaning famous', 'noun.fem.sg.nom', null],
+    ['Κλειοῦς', 'Κλειώ', '11-year-old, sister of Phoebe; Muse of history, meaning famous', 'noun.fem.sg.gen', null],
+    ['Κλειοῖ',  'Κλειώ', '11-year-old, sister of Phoebe; Muse of history, meaning famous', 'noun.fem.sg.dat', null],
 
     // ── Παλλάς — 3rd decl. (no paradigm template yet) ────────────────────────
     ['Παλλάς',   'Παλλάς', 'Pallas (leader; patron: Athena)',   'noun.masc.sg.nom', null],

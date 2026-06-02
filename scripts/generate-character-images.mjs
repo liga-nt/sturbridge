@@ -70,7 +70,7 @@ const CHARACTERS = [
   },
   {
     slot: 3,
-    name: 'Klēta (Κλήτα)',
+    name: 'Kleio (Κλειώ)',
     prompt: STYLE +
       'Klēta is a 10-year-old Greek girl — visibly a young child, noticeably shorter and younger-looking than a 13-year-old. ' +
       'She has dark hair, olive skin, and clever focused eyes. ' +

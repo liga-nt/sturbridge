@@ -2,22 +2,41 @@
   import { onMount, onDestroy } from 'svelte';
   import { keyToGreek, applyDiacritic, greekToQwerty, DIACRITIC_MAP } from '$lib/utils/greekKeyboard.js';
 
-  export let vocab = [];      // intro vocab entries — deck derived from these
-  export let alphabet = [];   // for audio_url lookup by base letter
-  export let showQwertyHint = true;
+  export let vocab = [];
+  export let alphabet = [];
+  export let showQwertyHint = true; // kept for compat
+  export let hintKeys = [];
 
-  // Reverse map: combining mark codepoint → keyboard key
-  const MARK_TO_KEY = {
-    '́': ';',   // acute
-    '̀': '`',   // grave
-    '̓': '[',   // smooth breathing
-    '̔': '⇧[',  // rough breathing (Shift+[)
-    '͂': '=',   // circumflex
-    'ͅ': '⇧\\', // iota subscript (Shift+\)
-    '̈': '⇧\'', // dialytika (Shift+')
+  // Combining mark → e.key (used internally to apply diacritics via applyDiacritic)
+  const MARK_TO_EKEY = {
+    '́': ';',
+    '̀': '`',
+    '̓': '[',
+    '̔': '{',
+    '͂': '=',
+    'ͅ': '|',
+    '̈': '"',
   };
 
-function buildDeck(vocab) {
+  // Mothballed — old approach where each diacritic had its own key:
+  // Students had to press `;` for acute, `[` for smooth breathing, etc.
+  // Replaced by cycling: pressing the base letter key repeatedly adds each diacritic in order.
+  //
+  // function handleKeydown_old(e) {
+  //   ...
+  //   if (e.key in DIACRITIC_MAP) {
+  //     if (typed) updateTyped(applyDiacritic(typed, e.key));
+  //     return;
+  //   }
+  //   const greek = keyToGreek(e.key);
+  //   if (greek) updateTyped(greek); // replace — single-char practice
+  // }
+  //
+  // $: hintKeys = (target && baseKey)
+  //   ? [baseKey.toLowerCase(), ...marks.map(m => MARK_TO_EKEY[m]).filter(Boolean)]
+  //   : [];
+
+  function buildDeck(vocab) {
     const seen = new Set();
     const chars = [];
     for (const word of vocab) {
@@ -75,6 +94,11 @@ function buildDeck(vocab) {
   $: baseChar  = targetNfd[0] ?? null;
   $: marks     = targetNfd.slice(1);
   $: baseKey   = baseChar ? greekToQwerty(baseChar) : null;
+
+  // Cycling approach: always just highlight the base letter key.
+  // Pressing it once gives the base; each additional press adds the next diacritic.
+  $: hintKeys = (target && baseKey) ? [baseKey.toLowerCase()] : [];
+
   $: audioEntry = baseChar && alphabet.length
     ? alphabet.find(l => l.char_lower === baseChar || l.char_upper === baseChar)
     : null;
@@ -124,6 +148,18 @@ function buildDeck(vocab) {
 
   function focusInput() { hiddenInput?.focus(); }
 
+  // Cycling input: pressing the base letter key repeatedly steps through
+  // base → base+mark1 → base+mark1+mark2 → match → advance
+  function applyNextMark() {
+    const typedNFD    = typed ? [...typed.normalize('NFD')] : [];
+    const typedMarkSet = new Set(typedNFD.slice(1));
+    const nextMark    = marks.find(m => !typedMarkSet.has(m));
+    if (nextMark) {
+      const ekey = MARK_TO_EKEY[nextMark];
+      if (ekey) updateTyped(applyDiacritic(typed, ekey));
+    }
+  }
+
   function handleKeydown(e) {
     if (done || !target) return;
     const SKIP = ['Tab','Escape','ArrowLeft','ArrowRight','ArrowUp','ArrowDown',
@@ -134,7 +170,6 @@ function buildDeck(vocab) {
     if (e.key === 'Backspace') {
       const nfd = [...typed.normalize('NFD')];
       if (nfd.length > 1) {
-        // Remove last combining mark
         nfd.pop();
         updateTyped(nfd.join('').normalize('NFC'));
       } else {
@@ -143,22 +178,43 @@ function buildDeck(vocab) {
       return;
     }
 
-    if (e.key in DIACRITIC_MAP) {
-      if (typed) updateTyped(applyDiacritic(typed, e.key));
+    // Diacritic keys are ignored — diacritics are added by re-pressing the base letter
+    if (e.key in DIACRITIC_MAP) return;
+
+    const greek = keyToGreek(e.key);
+    if (!greek) return;
+
+    if (greek !== baseChar) {
+      triggerFlash('wrong');
       return;
     }
 
-    const greek = keyToGreek(e.key);
-    if (greek) updateTyped(greek); // replace — single-char practice
+    // Correct base letter key
+    const typedNFD = typed ? [...typed.normalize('NFD')] : [];
+    if (typedNFD.length === 0 || typedNFD[0] !== baseChar) {
+      // First press: set the base letter
+      updateTyped(greek);
+    } else {
+      // Subsequent press: add the next missing diacritic
+      applyNextMark();
+    }
   }
 
   function handleInput(e) {
     const char = e.data;
     hiddenInput.value = '';
     if (!char || !target) return;
+    // Accept a directly-typed polytonic character (e.g. from a Greek mobile keyboard)
     if (/[Ͱ-Ͽἀ-῿]/u.test(char)) { updateTyped(char); return; }
+    // Otherwise treat as a base letter press and apply cycling logic
     const greek = keyToGreek(char);
-    if (greek) updateTyped(greek);
+    if (!greek || greek !== baseChar) return;
+    const typedNFD = typed ? [...typed.normalize('NFD')] : [];
+    if (typedNFD.length === 0 || typedNFD[0] !== baseChar) {
+      updateTyped(greek);
+    } else {
+      applyNextMark();
+    }
   }
 
   onMount(() => {
@@ -202,22 +258,8 @@ function buildDeck(vocab) {
     </div>
 
     <!-- Target card -->
-    <div class="target-card" class:flash-correct={flash === 'correct'}>
+    <div class="target-card" class:flash-correct={flash === 'correct'} class:flash-wrong={flash === 'wrong'}>
       <div class="target-char">{target}</div>
-
-      {#if showQwertyHint}
-        <div class="hint-row">
-          {#if baseKey}
-            <kbd class="hint-key base-key">{baseKey}</kbd>
-          {/if}
-          {#each marks as mark}
-            {#if MARK_TO_KEY[mark]}
-              <span class="hint-plus">+</span>
-              <kbd class="hint-key">{MARK_TO_KEY[mark]}</kbd>
-            {/if}
-          {/each}
-        </div>
-      {/if}
     </div>
 
     <!-- Typed display -->
@@ -226,7 +268,7 @@ function buildDeck(vocab) {
       <span class="cursor-blink">|</span>
     </div>
 
-    <div class="key-hint">Type the base letter, then add diacritics · Backspace removes last mark</div>
+    <div class="key-hint">Press the letter key once for each mark · Backspace removes last mark</div>
   {/if}
 
 </div>
@@ -292,6 +334,7 @@ function buildDeck(vocab) {
   }
 
   .target-card.flash-correct { background: #d1fae5; }
+  .target-card.flash-wrong   { background: #fee2e2; }
 
   .target-char {
     font-family: "GFS Didot", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
@@ -301,38 +344,7 @@ function buildDeck(vocab) {
     user-select: none;
   }
 
-  .hint-row {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .hint-plus {
-    font-size: 1rem;
-    color: #d1d5db;
-    line-height: 1;
-  }
-
-  .hint-key {
-    display: inline-block;
-    padding: 0.2em 0.55em;
-    font-size: 0.85rem;
-    font-family: monospace;
-    color: #374151;
-    background: #f3f4f6;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  }
-
-  .base-key {
-    font-size: 1rem;
-    padding: 0.25em 0.65em;
-  }
-
-.typed-row {
+  .typed-row {
     display: flex;
     align-items: baseline;
     gap: 0.1rem;

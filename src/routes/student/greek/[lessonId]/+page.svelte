@@ -9,6 +9,12 @@
   import ConjugationTable from '$lib/components/greek/ConjugationTable.svelte';
   import MediterraneanMap from '$lib/components/greek/MediterraneanMap.svelte';
   import GreekVocabExercise from '$lib/components/greek/GreekVocabExercise.svelte';
+  import HistMythFlashcard from '$lib/components/greek/HistMythFlashcard.svelte';
+  import { QWERTY_TO_GREEK } from '$lib/utils/greekKeyboard.js';
+
+  const LETTER_ROW1 = ['q','w','e','r','t','y','u','i','o','p'];
+  const LETTER_ROW2 = ['a','s','d','f','g','h','j','k','l'];
+  const LETTER_ROW3 = ['z','x','c','v','b','n','m'];
 
   const ctx = getContext('student');
 
@@ -24,17 +30,28 @@
     try {
       const res = await fetch('/data/Greek/word_forms.json');
       const raw = await res.json();
-      // Merge Firestore glosses
+      // Merge Firestore glosses — preserve vocabTier from static file when Firestore has null
       const snap = await getDoc(doc(db, 'word_glosses', 'grade7-greek'));
-      if (snap.exists()) Object.assign(raw, snap.data().forms ?? {});
+      if (snap.exists()) {
+        for (const [k, v] of Object.entries(snap.data().forms ?? {})) {
+          if (!v.vocabTier && raw[k]?.vocabTier) v.vocabTier = raw[k].vocabTier;
+          raw[k] = v;
+        }
+      }
       // Build a stripped-key secondary map so lookup works even without diacritics,
       // without needing pre-stored unaccented duplicates in the JSON.
       const stripped = {};
+      const withNu = {};
       for (const [k, v] of Object.entries(raw)) {
         const bare = stripGreekDiacritics(k);
-        if (bare !== k) stripped[bare] = v;  // only add if different
+        if (bare !== k) stripped[bare] = v;
+        // Add nu-variant so tokens written with movable nu resolve to the same entry
+        const kb = stripGreekDiacritics(k);
+        if (kb.endsWith('σι') || (v.morph?.pos === 'verb' && kb.endsWith('ε'))) {
+          withNu[k + 'ν'] = v;
+        }
       }
-      wordFormsCache = { ...raw, ...stripped };
+      wordFormsCache = { ...raw, ...stripped, ...withNu };
     } catch (e) {
       console.warn('loadWordFormsCache failed:', e.message);
     }
@@ -67,7 +84,7 @@
    * Scan sentence tokens against wordFormsCache — same logic as dev scanVocab.
    * Returns { dictEntry, shortDef, vocabTier }[] deduplicated.
    */
-  function scanVocabFromCache(sents, cache) {
+  function scanVocabFromCache(sents, cache, audioMap = {}) {
     if (!cache) return [];
     const seen = new Set();
     const list = [];
@@ -77,9 +94,9 @@
         if (!bare || seen.has(bare)) continue;
         seen.add(bare);
         const entry = cache[bare] || cache[token] || cache[stripGreekDiacritics(bare)];
-        if (entry?.dictEntry && entry.vocabTier) {
+        if (entry?.dictEntry && (entry.vocabTier || entry.paradigmKey)) {
           if (!list.find(w => w.dictEntry === entry.dictEntry)) {
-            list.push({ dictEntry: entry.dictEntry, shortDef: entry.shortDef ?? '', vocabTier: entry.vocabTier });
+            list.push({ dictEntry: entry.dictEntry, shortDef: entry.shortDef ?? '', vocabTier: entry.vocabTier ?? null, audioGreekUrl: audioMap[entry.dictEntry] ?? null });
           }
         }
       }
@@ -169,11 +186,46 @@
     return Object.keys(grid).length ? grid : null;
   }
 
+  // ── Vocab audio map ───────────────────────────────────────────────────────────
+  let vocabAudioMap = {};   // dictEntry → audio_greek_url
+  let vocabEnAudioMap = {}; // dictEntry → audio_en_url
+  let vocabDefMap = {};     // dictEntry → full definition
+
+  async function loadVocabAudioMap() {
+    try {
+      const res = await fetch('/data/Greek/nge_vocabulary.json');
+      const raw = await res.json();
+      for (const e of raw.entries ?? []) {
+        if (e.greek && e.audio_greek_url) vocabAudioMap[e.greek]   = e.audio_greek_url;
+        if (e.greek && e.audio_en_url)    vocabEnAudioMap[e.greek] = e.audio_en_url;
+        if (e.greek && e.definition)      vocabDefMap[e.greek]     = e.definition;
+      }
+    } catch (e) {
+      console.warn('loadVocabAudioMap failed:', e.message);
+    }
+  }
+
+  // ── Standards coverage (history/myth flashcards) ─────────────────────────────
+  let allStandardsCoverage = [];
+
+  async function loadStandardsCoverage() {
+    try {
+      const res = await fetch('/data/Greek/standards_coverage.json');
+      const raw = await res.json();
+      allStandardsCoverage = raw.standards ?? [];
+    } catch (e) {
+      console.warn('loadStandardsCoverage failed:', e.message);
+    }
+  }
+
   onMount(async () => {
     try {
       const [lessonSnap] = await Promise.all([
         getDoc(doc(db, 'lessons', $page.params.lessonId)),
-        loadWordFormsCache()
+        loadWordFormsCache(),
+        loadStandardsCoverage(),
+        loadVocabAudioMap(),
+        fetch('/data/Greek/lesson_hints.json').then(r => r.json()).then(d => { lessonHints = d; }).catch(() => {})
       ]);
       if (lessonSnap.exists()) lesson = { id: lessonSnap.id, ...lessonSnap.data() };
       else error = 'Lesson not found.';
@@ -186,17 +238,142 @@
 
   $: sentences = lesson?.sentences ?? [];
   // Same scan+merge logic as dev page — fresh, accurate, uses loaded cache
-  $: vocabList = wordFormsCache ? scanVocabFromCache(sentences, wordFormsCache) : (lesson?.vocab_list ?? []);
+  $: vocabList = wordFormsCache
+    ? scanVocabFromCache(sentences, wordFormsCache, vocabAudioMap).map(w => ({
+        ...w,
+        shortDef:   vocabDefMap[w.dictEntry]    ?? w.shortDef,
+        audioEnUrl: vocabEnAudioMap[w.dictEntry] ?? null
+      }))
+    : (lesson?.vocab_list ?? []);
+
+  // ── Term highlighting (history/myth standards in overview text) ──────────────
+  let selectedTermStandard = null;
+
+  const TERM_STOP_WORDS = new Set([
+    'the','of','in','at','and','or','for','with','age','war','wars',
+    'era','rise','battle','peace','great','know','upon','from','their',
+    'king','queen','lord','lady','prince','princess','general','emperor',
+  ]);
+
+  const TERM_SUBTYPE_LABELS = {
+    period: 'Period', figure: 'Figure', battle: 'Battle',
+    event: 'Event', author: 'Author', deity: 'Deity', myth: 'Myth',
+  };
+
+  const TERM_DOMAIN_COLORS = {
+    history:   { bg: '#eff6ff', border: '#bfdbfe', text: '#1d4ed8' },
+    mythology: { bg: '#fdf4ff', border: '#e9d5ff', text: '#7e22ce' },
+  };
+
+  // Maps normalized word → standard for ALL hist/myth standards (not just this chapter).
+  $: termStandardMap = (() => {
+    const map = {};
+    for (const s of allStandardsCoverage) {
+      if (s.domain === 'geography' || !s.detail || !s.name) continue;
+      for (const w of s.name.split(/\s+/)) {
+        const key = w.toLowerCase().replace(/[^a-z]/g, '');
+        if (key.length > 3 && !TERM_STOP_WORDS.has(key) && !map[key]) map[key] = s;
+      }
+    }
+    return map;
+  })();
+
+  function termToStandard(text) {
+    const key = text.toLowerCase().replace(/[.,;:·?!'"'""]/g, '').replace(/[^a-z]/g, '');
+    if (key.length < 4) return null;
+    return termStandardMap[key] ?? null;
+  }
+
+  function handleTermClick(std) {
+    selectedTermStandard = selectedTermStandard?.id === std.id ? null : std;
+  }
+
+  // Parse image caption into { title, author, url }
+  // Format: "Title. By Author. https://..."
+  function parseCaption(text) {
+    if (!text) return { title: '', author: '', url: null };
+    const urlMatch = text.match(/https?:\/\/\S+/);
+    const url = urlMatch ? urlMatch[0] : null;
+    const rest = text.replace(/https?:\/\/\S+/, '').trim().replace(/[.\s]+$/, '');
+    const parts = rest.split(/\.\s+/);
+    return {
+      title:  parts[0]?.replace(/\.$/, '').trim() ?? '',
+      author: parts[1]?.replace(/\.$/, '').trim() ?? '',
+      url,
+    };
+  }
+
+  // History/myth standards for this chapter (excludes geography).
+  // lesson.chapter is a number (1, 2, …); standards_coverage uses "ch_01" strings.
+  $: chapterStandards = (() => {
+    const num = lesson?.chapter;
+    if (!num || !allStandardsCoverage.length) return [];
+    const chKey = `ch_${String(num).padStart(2, '0')}`;
+    return allStandardsCoverage.filter(s =>
+      s.domain !== 'geography' &&
+      s.detail &&
+      Array.isArray(s.chapters) && s.chapters.includes(chKey)
+    );
+  })();
+  $: chapterHistStandards = chapterStandards.filter(s => s.domain === 'history');
+  $: chapterMythStandards = chapterStandards.filter(s => s.domain === 'mythology');
+
+  // ── Lightbox ─────────────────────────────────────────────────────────────────
+  let lightboxSrc = null;
+
+  // Split overview text into word spans for highlighting.
+  // Each token is { type: 'word'|'space', text, idx? } where idx maps to alignment array.
+  // When multi-voice segments exist, build from segments so word indices stay in sync with
+  // overviewSegWordOffsets (both use the same source, no drift from text-vs-segments mismatch).
+  $: overviewWordParas = (() => {
+    const segs = lesson?.overview?.segments ?? [];
+    let idx = 0;
+    const tokenizePara = para => para.split(/(\s+)/).map(tok => {
+      if (/^\s+$/.test(tok)) return { type: 'space', text: tok };
+      if (!tok) return null;
+      return { type: 'word', text: tok, idx: idx++ };
+    }).filter(Boolean);
+
+    if (segs.length) {
+      const allParas = [];
+      for (const seg of segs) {
+        const plain = seg.text.replace(/\[[^\]]*\]/g, '').replace(/[ \t]+/g, ' ');
+        for (const para of plain.split(/\n\n+/).map(p => p.trim()).filter(Boolean)) {
+          const tokens = tokenizePara(para);
+          if (tokens.some(t => t.type === 'word')) allParas.push(tokens);
+        }
+      }
+      return allParas;
+    }
+
+    const raw = lesson?.overview?.text ?? '';
+    const text = raw.replace(/<\/\w+>/gi, ' ').replace(/<[^>]+>/gi, '').replace(/\[[^\]]*\]/g, '').replace(/[ \t]+/g, ' ');
+    return text.split(/\n\n+/).map(p => p.trim()).filter(Boolean).map(tokenizePara);
+  })();
 
   // ── Hover word ────────────────────────────────────────────────────────────────
   let hoveredWord = null;
 
   function handleWordHover(e) {
-    hoveredWord = e.detail?.word ?? null;
+    const word = e.detail?.word ?? null;
+    if (word !== null) hoveredWord = word;
   }
 
   $: paradigmKey = hoveredWord?.paradigmKey ?? null;
-  $: highlightMorph = hoveredWord?.morph ?? null;
+
+  // Resolve morph from cache when possible — canonical and accent-variant safe.
+  // Words annotated by Claude (e.g. grave-accented forms missed by the cloud function's
+  // non-stripped lookup) may have null or inconsistent morph objects in Firestore.
+  // The student-page cache has a stripped fallback map, so grave ↔ acute variants resolve correctly.
+  $: _hoveredCacheEntry = (() => {
+    if (!hoveredWord?.text || !wordFormsCache) return null;
+    const bare = hoveredWord.text.replace(PUNCT_RE, '');
+    return wordFormsCache[bare]
+      || wordFormsCache[stripGreekDiacritics(bare)]
+      || null;
+  })();
+  $: highlightMorph = _hoveredCacheEntry?.morph ?? hoveredWord?.morph ?? null;
+
   // Build forms for the hovered word, then select the relevant sub-paradigm
   $: _allWordForms = hoveredWord && wordFormsCache ? buildWordForms(hoveredWord.dictEntry) : null;
   $: wordForms = selectWordForms(_allWordForms, highlightMorph);
@@ -207,75 +384,342 @@
 
   // Available parts in order — derived once lesson loads
   $: availableParts = lesson ? [
-    lesson.overview?.text                          ? 'overview' : null,
+    lesson.overview?.text                          ? 'overview'   : null,
     'vocab',
-    (lesson.sentences?.length ?? 0) > 0           ? 'story'    : null,
-    lesson.map?.description                        ? 'map'      : null,
+    (lesson.sentences?.length ?? 0) > 0           ? 'story'      : null,
+    lesson.map?.description                        ? 'map'        : null,
+    chapterHistStandards.length > 0               ? 'history'    : null,
+    chapterMythStandards.length > 0               ? 'mythology'  : null,
   ].filter(Boolean) : [];
 
   // Default to first available part when lesson loads
   $: if (lesson && !availableParts.includes(lessonPart)) lessonPart = availableParts[0] ?? 'story';
 
-  const PART_LABELS = { overview: 'Overview', vocab: 'Vocab', story: 'Story', map: 'Map' };
+  const PART_LABELS = { overview: 'Story', vocab: 'Vocab', story: 'Greek', map: 'Map', history: 'History', mythology: 'Myth' };
 
-  // ── Enforce accents toggle (persisted in localStorage) ───────────────────────
-  let enforceAccents = false;
-
-  function toggleEnforceAccents() {
-    enforceAccents = !enforceAccents;
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('greek_enforce_accents', String(enforceAccents));
-    }
-  }
-
-  // Load enforce-accents preference on mount
-  $: if (typeof localStorage !== 'undefined') {
-    enforceAccents = localStorage.getItem('greek_enforce_accents') === 'true';
-  }
-
-  // ── Simple audio highlighting for overview / map ───────────────────────────
-  let simpleHighlightIndex = -1;  // index into alignment array
+  // ── Simple audio highlighting for overview / map ─────────────────────────
+  let simpleHighlightIndex = -1;
   let simpleAudio = null;
   let simpleAudioPlaying = false;
   let simpleAudioPart = null;
+  let simpleAudioCurrentTime = 0;
+  let simpleAudioDuration = 0;
 
-  function playSimpleAudio(part) {
-    const data = lesson?.[part];
-    if (!data?.audioUrl) return;
-    stopSimpleAudio();
-    simpleAudioPart = part;
-    simpleAudioPlaying = true;
-    simpleHighlightIndex = -1;
-    const audio = new Audio(data.audioUrl);
+  // Segment queue state (overview multi-voice)
+  let overviewSegIdx = 0;
+  let overviewPauseTimer = null;
+
+  // Derived from lesson.overview.segments — cumulative time offset before each segment
+  // and cumulative word-index offset before each segment (for global highlight mapping).
+  $: overviewSegments = lesson?.overview?.segments ?? [];
+
+  $: overviewSegOffsets = (() => {
+    let t = 0;
+    return overviewSegments.map(s => {
+      const off = t;
+      t += s.alignment?.at(-1)?.end ?? 0;
+      return off;
+    });
+  })();
+
+  $: overviewTotalDuration = overviewSegments.length
+    ? (overviewSegOffsets.at(-1) ?? 0) + (overviewSegments.at(-1)?.alignment?.at(-1)?.end ?? 0)
+    : 0;
+
+  // Word count offset per segment — maps local alignment index to global display word index.
+  // Must strip brackets (voice directives) the same way overviewWordParas does, or offsets drift.
+  $: overviewSegWordOffsets = (() => {
+    let w = 0;
+    return overviewSegments.map(s => {
+      const off = w;
+      const plain = s.text.replace(/<\/\w+>/g, ' ').replace(/<[^>]+>/g, '').replace(/\[[^\]]*\]/g, '');
+      w += plain.trim().split(/\s+/).filter(Boolean).length;
+      return off;
+    });
+  })();
+
+  function formatTime(s) {
+    if (!s || !isFinite(s)) return '0:00';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  // Play a single segment, update global time + highlight, chain to next on end.
+  function playSegment(segIdx, startOffset = 0) {
+    if (!simpleAudioPlaying || simpleAudioPart !== 'overview') return;
+    const seg = overviewSegments[segIdx];
+    if (!seg?.audioUrl) { simpleAudioPlaying = false; return; }
+
+    if (simpleAudio) { simpleAudio.pause(); simpleAudio.src = ''; simpleAudio = null; }
+    overviewSegIdx = segIdx;
+
+    const audio = new Audio(seg.audioUrl);
+    audio.playbackRate = englishRate;
     simpleAudio = audio;
-    const alignment = data.alignment ?? [];
+
+    const al = seg.alignment ?? [];
+    const segOffset = overviewSegOffsets[segIdx] ?? 0;
+    const wordOffset = overviewSegWordOffsets[segIdx] ?? 0;
+
     let rafId;
     function tick() {
       if (!simpleAudio || simpleAudio !== audio) return;
       const t = audio.currentTime;
-      let idx = -1;
-      for (let i = 0; i < alignment.length; i++) {
-        if (t >= alignment[i].start && t <= alignment[i].end) { idx = i; break; }
+      simpleAudioCurrentTime = segOffset + t;
+      let localIdx = -1;
+      for (let i = 0; i < al.length; i++) {
+        if (t >= al[i].start && t <= al[i].end) { localIdx = i; break; }
       }
-      simpleHighlightIndex = idx;
+      simpleHighlightIndex = localIdx >= 0 ? wordOffset + localIdx : -1;
       rafId = requestAnimationFrame(tick);
     }
-    audio.addEventListener('play', () => requestAnimationFrame(tick));
+    audio.addEventListener('play', () => { rafId = requestAnimationFrame(tick); }, { once: true });
     audio.addEventListener('ended', () => {
-      simpleAudioPlaying = false;
-      simpleHighlightIndex = -1;
       cancelAnimationFrame(rafId);
-    });
-    audio.play();
+      if (segIdx + 1 < overviewSegments.length) {
+        const nextSeg = overviewSegments[segIdx + 1];
+        const speakerChange = nextSeg?.speaker !== seg?.speaker;
+        if (speakerChange) {
+          overviewPauseTimer = setTimeout(() => { overviewPauseTimer = null; playSegment(segIdx + 1, 0); }, 450);
+        } else {
+          playSegment(segIdx + 1, 0);
+        }
+      } else {
+        simpleAudioPlaying = false;
+        simpleHighlightIndex = -1;
+        simpleAudioCurrentTime = 0;
+        overviewSegIdx = 0;
+      }
+    }, { once: true });
+
+    if (startOffset > 0) {
+      audio.addEventListener('loadedmetadata', () => { audio.currentTime = startOffset; }, { once: true });
+    }
+    audio.play().catch(() => {});
+  }
+
+  function playSimpleAudio(part) {
+    stopSimpleAudio();
+    simpleAudioPart = part;
+    simpleAudioPlaying = true;
+    simpleHighlightIndex = -1;
+
+    if (part === 'overview' && overviewSegments.length) {
+      playSegment(0, 0);
+    } else {
+      // Single-audio path (map, or overview without segments)
+      const data = lesson?.[part];
+      if (!data?.audioUrl) { simpleAudioPlaying = false; return; }
+      const audio = new Audio(data.audioUrl);
+      audio.playbackRate = englishRate;
+      simpleAudio = audio;
+      const al = data.alignment ?? [];
+      let rafId;
+      function tick() {
+        if (!simpleAudio || simpleAudio !== audio) return;
+        const t = audio.currentTime;
+        simpleAudioCurrentTime = t;
+        let idx = -1;
+        for (let i = 0; i < al.length; i++) {
+          if (t >= al[i].start && t <= al[i].end) { idx = i; break; }
+        }
+        simpleHighlightIndex = idx;
+        rafId = requestAnimationFrame(tick);
+      }
+      audio.addEventListener('loadedmetadata', () => { simpleAudioDuration = audio.duration; }, { once: true });
+      audio.addEventListener('play', () => { rafId = requestAnimationFrame(tick); }, { once: true });
+      audio.addEventListener('ended', () => {
+        simpleAudioPlaying = false;
+        simpleHighlightIndex = -1;
+        simpleAudioCurrentTime = 0;
+        cancelAnimationFrame(rafId);
+      }, { once: true });
+      audio.play();
+    }
   }
 
   function stopSimpleAudio() {
+    if (overviewPauseTimer) { clearTimeout(overviewPauseTimer); overviewPauseTimer = null; }
     if (simpleAudio) { simpleAudio.pause(); simpleAudio.src = ''; simpleAudio = null; }
     simpleAudioPlaying = false;
     simpleHighlightIndex = -1;
+    simpleAudioCurrentTime = 0;
+    overviewSegIdx = 0;
   }
 
-  $: if (lessonPart) stopSimpleAudio();
+  function seekSimpleAudio(e) {
+    const T = Number(e.target.value);
+    simpleAudioCurrentTime = T;
+
+    if (simpleAudioPart === 'overview' && overviewSegments.length) {
+      // Find which segment T falls in
+      let segIdx = 0;
+      for (let i = overviewSegOffsets.length - 1; i >= 0; i--) {
+        if (T >= overviewSegOffsets[i]) { segIdx = i; break; }
+      }
+      const within = T - (overviewSegOffsets[segIdx] ?? 0);
+      // Update highlight immediately
+      const al = overviewSegments[segIdx]?.alignment ?? [];
+      const wordOffset = overviewSegWordOffsets[segIdx] ?? 0;
+      let localIdx = -1;
+      for (let i = 0; i < al.length; i++) {
+        if (within >= al[i].start && within <= al[i].end) { localIdx = i; break; }
+      }
+      simpleHighlightIndex = localIdx >= 0 ? wordOffset + localIdx : -1;
+      // If playing, jump to new segment/offset
+      if (simpleAudioPlaying) playSegment(segIdx, within);
+      else overviewSegIdx = segIdx;
+    } else {
+      if (simpleAudio) simpleAudio.currentTime = T;
+      const al = lesson?.[simpleAudioPart ?? 'overview']?.alignment ?? [];
+      let idx = -1;
+      for (let i = 0; i < al.length; i++) {
+        if (T >= al[i].start && T <= al[i].end) { idx = i; break; }
+      }
+      simpleHighlightIndex = idx;
+    }
+  }
+
+  $: if (lessonPart) { stopSimpleAudio(); stopVocabList(); simpleAudioDuration = 0; }
+
+  // Duration: computed from alignment data for segments (no audio probe needed),
+  // or from audio loadedmetadata for single-audio (map).
+  $: if (lessonPart === 'overview' && overviewTotalDuration > 0) simpleAudioDuration = overviewTotalDuration;
+  $: if (lessonPart === 'map' && lesson?.map?.audioUrl && simpleAudioDuration === 0) {
+    const probe = new Audio(lesson.map.audioUrl);
+    probe.addEventListener('loadedmetadata', () => { simpleAudioDuration = probe.duration; }, { once: true });
+  }
+
+  // ── Lesson hints (tab instruction voiceovers) ─────────────────────────────────
+  let lessonHints = {};
+  let lessonHintAudio = null;
+  let lessonHintPlayingTab = null;
+  let lessonHintWordIdx = -1;
+  let lessonHintRaf = null;
+
+  function stopLessonHintAudio() {
+    if (lessonHintRaf) { cancelAnimationFrame(lessonHintRaf); lessonHintRaf = null; }
+    if (lessonHintAudio) { lessonHintAudio.pause(); lessonHintAudio.src = ''; lessonHintAudio = null; }
+    lessonHintPlayingTab = null;
+    lessonHintWordIdx = -1;
+  }
+
+  function toggleLessonHintAudio(tabId) {
+    if (lessonHintPlayingTab === tabId) { stopLessonHintAudio(); return; }
+    stopLessonHintAudio();
+    const hint = lessonHints[tabId];
+    if (!hint?.audioUrl) return;
+    const audio = new Audio(hint.audioUrl);
+    lessonHintAudio = audio;
+    lessonHintPlayingTab = tabId;
+    lessonHintWordIdx = -1;
+    const al = hint.alignment ?? [];
+    function tick() {
+      if (!lessonHintAudio || lessonHintAudio !== audio) return;
+      const t = audio.currentTime;
+      let idx = -1;
+      for (let i = 0; i < al.length; i++) {
+        if (t >= al[i].start && t <= al[i].end) { idx = i; break; }
+      }
+      lessonHintWordIdx = idx;
+      lessonHintRaf = requestAnimationFrame(tick);
+    }
+    audio.addEventListener('play', () => { lessonHintRaf = requestAnimationFrame(tick); }, { once: true });
+    audio.addEventListener('ended', () => {
+      cancelAnimationFrame(lessonHintRaf); lessonHintRaf = null;
+      lessonHintPlayingTab = null; lessonHintWordIdx = -1;
+    }, { once: true });
+    audio.play().catch(() => {});
+  }
+
+  $: lessonPart, stopLessonHintAudio();
+
+  // ── Vocab input mode + keyboard ───────────────────────────────────────────────
+  let vocabInputMode = 'greek-hints'; // 'greek-hints' | 'greek' | 'translit'
+  let hintKeys = [];
+  let lastKey = null;
+  let lastKeyTimer = null;
+
+  $: showKeyboard = vocabInputMode === 'greek-hints' && lessonPart === 'vocab';
+  $: if (lessonPart !== 'vocab') hintKeys = [];
+
+  function cycleVocabInputMode() {
+    vocabInputMode = vocabInputMode === 'greek-hints' ? 'greek'
+                  : vocabInputMode === 'greek'       ? 'translit'
+                  :                                    'greek-hints';
+  }
+
+  function handleKeyMap(e) {
+    if (!showKeyboard) return;
+    if (lastKeyTimer) clearTimeout(lastKeyTimer);
+    lastKey = e.key;
+    lastKeyTimer = setTimeout(() => { lastKey = null; }, 800);
+  }
+
+  // ── Vocab playback ────────────────────────────────────────────────────────────
+  let vocabPlaying = false;
+  let vocabPlayingDictEntry = null;
+  let vocabShowGreek   = true;
+  let vocabShowEnglish = true;
+  let _vocabAudioEl = null;
+
+  async function playOne(url) {
+    return new Promise(resolve => {
+      const audio = new Audio(url);
+      _vocabAudioEl = audio;
+      audio.addEventListener('ended', resolve, { once: true });
+      audio.addEventListener('error', resolve, { once: true });
+      audio.play().catch(resolve);
+    });
+  }
+
+  const VOCAB_TIER_ORDER = ['intro', 'beginning', 'intermediate', 'prose'];
+
+  async function playVocabList() {
+    stopVocabList();
+    vocabPlaying = true;
+    const pause = (ms) => new Promise(r => setTimeout(r, ms));
+
+    const toPlay = vocabList
+      .filter(w => w.vocabTier !== null)
+      .sort((a, b) => {
+        const ai = VOCAB_TIER_ORDER.indexOf(a.vocabTier);
+        const bi = VOCAB_TIER_ORDER.indexOf(b.vocabTier);
+        return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+      });
+
+    for (const word of toPlay) {
+      if (!vocabPlaying) break;
+      vocabPlayingDictEntry = word.dictEntry;
+
+      if (vocabShowGreek && word.audioGreekUrl) {
+        await playOne(word.audioGreekUrl);
+        _vocabAudioEl = null;
+        if (!vocabPlaying) break;
+        if (vocabShowEnglish && word.audioEnUrl) await pause(250);
+      }
+
+      if (!vocabPlaying) break;
+
+      if (vocabShowEnglish && word.audioEnUrl) {
+        await playOne(word.audioEnUrl);
+        _vocabAudioEl = null;
+      }
+
+      if (!vocabPlaying) break;
+      await pause(700);
+    }
+
+    vocabPlayingDictEntry = null;
+    vocabPlaying = false;
+  }
+
+  function stopVocabList() {
+    vocabPlaying = false;
+    vocabPlayingDictEntry = null;
+    if (_vocabAudioEl) { _vocabAudioEl.pause(); _vocabAudioEl.src = ''; _vocabAudioEl = null; }
+  }
 
   // ── Audio state ───────────────────────────────────────────────────────────────
   let audioMode = 'greek'; // 'greek' | 'english' | 'alternating'
@@ -296,7 +740,7 @@
   let showInfoModal = false;
   let infoModalTab = 'desktop';
 
-  onDestroy(stopAudio);
+  onDestroy(() => { stopAudio(); stopVocabList(); stopLessonHintAudio(); });
 
   function clearHighlights() {
     highlightVersion++;
@@ -476,6 +920,8 @@
     stopAudio();
     isPlaying = true;
 
+    const pause = (ms) => new Promise(r => setTimeout(r, ms));
+
     for (let i = 0; i < sentences.length; i++) {
       if (!isPlaying) break;
       const sentence = sentences[i];
@@ -483,6 +929,7 @@
       for (const mode of modes) {
         if (!isPlaying) break;
         await playSentence(sentence, mode, i);
+        if (isPlaying) await pause(600);
       }
     }
 
@@ -492,16 +939,32 @@
   }
 
   function togglePlayPause() {
-    if (isPlaying) stopAudio();
-    else playAll();
+    if (lessonPart === 'overview' || lessonPart === 'map') {
+      if (simpleAudioPlaying && simpleAudioPart === lessonPart) stopSimpleAudio();
+      else playSimpleAudio(lessonPart);
+    } else if (lessonPart === 'vocab') {
+      if (vocabPlaying) stopVocabList();
+      else playVocabList();
+    } else {
+      if (isPlaying) stopAudio();
+      else playAll();
+    }
   }
+
+  $: effectivePlaying = (lessonPart === 'overview' || lessonPart === 'map')
+    ? (simpleAudioPlaying && simpleAudioPart === lessonPart)
+    : lessonPart === 'vocab'
+    ? vocabPlaying
+    : isPlaying;
 </script>
+
+<svelte:window on:keydown={handleKeyMap} />
 
 <svelte:head>
   <title>{lesson?.title ?? 'Lesson'} — Greek</title>
 </svelte:head>
 
-<div class="lesson-page">
+<div class="lesson-page" class:has-keyboard={showKeyboard}>
 
   <!-- ── Fixed top bar ─────────────────────────────────────────────────────── -->
   <div class="top-bar">
@@ -515,8 +978,8 @@
       </button>
 
       <!-- Play / Pause -->
-      <button class="play-pause-btn" on:click={togglePlayPause} aria-label={isPlaying ? 'Pause' : 'Play'} disabled={!lesson}>
-        {#if isPlaying}
+      <button class="play-pause-btn" on:click={togglePlayPause} aria-label={effectivePlaying ? 'Pause' : 'Play'} disabled={!lesson || (lessonPart === 'overview' && !overviewSegments.length && !lesson.overview?.audioUrl) || (lessonPart === 'map' && !lesson.map?.audioUrl) || (lessonPart === 'vocab' && vocabList.length === 0)}>
+        {#if effectivePlaying}
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
             <line x1="10" y1="4" x2="10" y2="43"/>
             <line x1="30" y1="4" x2="30" y2="43"/>
@@ -541,7 +1004,8 @@
         </svg>
       </button>
 
-      <!-- Info button -->
+      <!-- Info button (Greek tab only) -->
+      {#if lessonPart === 'story'}
       <button
         class="icon-btn"
         on:click={() => showInfoModal = true}
@@ -554,6 +1018,7 @@
           <line x1="12" y1="8" x2="12.01" y2="8"/>
         </svg>
       </button>
+      {/if}
 
       <!-- Title -->
       {#if lesson}
@@ -561,18 +1026,6 @@
         {#if lesson.chapter}
           <span class="chapter-badge">Ch. {lesson.chapter}</span>
         {/if}
-      {/if}
-
-      <!-- Enforce accents toggle (vocab tab) -->
-      {#if lessonPart === 'vocab'}
-        <button
-          class="accent-toggle"
-          class:accent-on={enforceAccents}
-          on:click={toggleEnforceAccents}
-          title={enforceAccents ? 'Accents required — click to relax' : 'Accents optional — click to require'}
-        >
-          {enforceAccents ? 'Accents: on' : 'Accents: off'}
-        </button>
       {/if}
 
       <!-- Part tabs -->
@@ -589,24 +1042,23 @@
       </div>
     </div>
 
-    <!-- Analysis bar — Reader.svelte style -->
-    <div class="analysis-bar" class:analysis-placeholder={!hoveredWord}>
-      <div class="analysis-inner">
-        {#if hoveredWord}
-          <strong class="word-form">{hoveredWord.dictEntry ?? hoveredWord.text}</strong>
-          {#if hoveredWord.shortDef}
-            <span class="sep">|</span>
-            <span class="definition">"{hoveredWord.shortDef}"</span>
-          {/if}
-          {#if hoveredWord.morph}
-            <span class="sep">|</span>
-            <span class="morph-tag">{morphToDisplay(hoveredWord.morph)}</span>
-          {/if}
-        {:else}
-          Hover a word to see analysis
-        {/if}
+    <!-- Progress bar — Story tab only -->
+    {#if lessonPart === 'overview' && simpleAudioDuration > 0}
+      <div class="progress-bar-row">
+        <span class="progress-time">{formatTime(simpleAudioCurrentTime)}</span>
+        <input
+          type="range"
+          min="0"
+          max={simpleAudioDuration}
+          step="0.1"
+          value={simpleAudioCurrentTime}
+          on:input={seekSimpleAudio}
+          class="progress-slider"
+        />
+        <span class="progress-time">{formatTime(simpleAudioDuration)}</span>
       </div>
-    </div>
+    {/if}
+
   </div>
 
   <!-- ── Single scrollable area ─────────────────────────────────────────────── -->
@@ -620,11 +1072,24 @@
     {#if lessonPart === 'vocab'}
       <div class="scroll-area">
         <div class="vocab-exercise-wrap">
+          <div class="tab-hint">
+            <button class="hint-play-btn" class:hint-playing={lessonHintPlayingTab === 'vocab'} disabled={!lessonHints.vocab?.audioUrl} on:click={() => toggleLessonHintAudio('vocab')} aria-label="Play instructions">
+              {#if lessonHintPlayingTab === 'vocab'}<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="4" width="4" height="16"/><rect x="15" y="4" width="4" height="16"/></svg>{:else}<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>{/if}
+            </button>
+            <span class="hint-text">
+              {#each (lessonHints.vocab?.alignment ?? []) as w, i}<span class="hw" class:hw-active={lessonHintPlayingTab === 'vocab' && lessonHintWordIdx === i}>{w.word}</span>{' '}{/each}{#if !lessonHints.vocab?.alignment}Type each Greek word. Use the buttons to choose the vocab you want to practice and to hide the Greek or English columns. Select your input style here:{/if}
+            </span>
+            <button class="input-mode-btn mode-{vocabInputMode}" on:click={cycleVocabInputMode}>
+              {vocabInputMode === 'greek-hints' ? 'Greek + keyboard' : vocabInputMode === 'greek' ? 'Greek' : 'Transliterate'}
+            </button>
+          </div>
           <GreekVocabExercise
-            vocabList={lesson.vocab_list ?? []}
-            uid={ctx.uid}
-            courseId="grade7-greek"
-            {enforceAccents}
+            {vocabList}
+            inputMode={vocabInputMode}
+            bind:hintKeys
+            bind:showGreek={vocabShowGreek}
+            bind:showEnglish={vocabShowEnglish}
+            playingDictEntry={vocabPlayingDictEntry}
           />
         </div>
       </div>
@@ -632,23 +1097,64 @@
     <!-- ── Overview part ───────────────────────────────────────────────────── -->
     {:else if lessonPart === 'overview'}
       {@const ov = lesson.overview ?? {}}
-      {@const alignment = ov.alignment ?? []}
-      {@const words = ov.text ? ov.text.match(/\S+/g) ?? [] : []}
       <div class="scroll-area">
-        <div class="simple-part">
-          {#if ov.imageUrl}
-            <img src={ov.imageUrl} alt="Chapter overview illustration" class="part-image" />
-          {/if}
-          <div class="part-text">
-            {#each words as word, i}
-              <span class="simple-word {simpleAudioPart === 'overview' && simpleHighlightIndex >= 0 && alignment[simpleHighlightIndex]?.word === word ? 'word-highlight' : ''}">{word} </span>
-            {/each}
+        <div class="overview-layout" class:overview-has-sidebar={!!selectedTermStandard}>
+          <div class="simple-part">
+            {#if ov.imageUrl}
+              <figure class="part-image-figure">
+                <img src={ov.imageUrl} alt="Chapter overview illustration" class="part-image" />
+                {#if ov.imageCaption}
+                  {@const cap = parseCaption(ov.imageCaption)}
+                  <figcaption class="part-image-caption">
+                    {#if cap.title}<strong>{cap.title}.</strong>{/if}
+                    {#if cap.author} <strong>{cap.author}.</strong>{/if}
+                    {#if cap.url}
+                      {' '}<a href={cap.url} target="_blank" rel="noopener noreferrer" class="caption-info-link" title="View image source">ℹ</a>
+                    {/if}
+                  </figcaption>
+                {/if}
+              </figure>
+            {/if}
+            <div class="part-text prose">
+              {#each overviewWordParas as paraWords}
+                <p>{#each paraWords as tok}{#if tok.type === 'space'}{tok.text}{:else}{@const std = termToStandard(tok.text)}{#if std}<span
+                    class="story-word term-word"
+                    class:word-highlight={tok.idx === simpleHighlightIndex}
+                    class:term-active={selectedTermStandard?.id === std.id}
+                    on:click={() => handleTermClick(std)}
+                    role="button" tabindex="0"
+                    on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && handleTermClick(std)}
+                  >{tok.text}</span>{:else}<span class="story-word" class:word-highlight={tok.idx === simpleHighlightIndex}>{tok.text}</span>{/if}{/if}{/each}</p>
+              {/each}
+            </div>
           </div>
-          {#if ov.audioUrl}
-            <button on:click={() => simpleAudioPlaying && simpleAudioPart === 'overview' ? stopSimpleAudio() : playSimpleAudio('overview')}
-              class="audio-play-btn">
-              {simpleAudioPlaying && simpleAudioPart === 'overview' ? '⏹ Stop' : '▶ Listen'}
-            </button>
+
+          <!-- Term info sidebar -->
+          {#if selectedTermStandard}
+            {@const dc = TERM_DOMAIN_COLORS[selectedTermStandard.domain] ?? TERM_DOMAIN_COLORS.history}
+            <aside class="term-sidebar">
+              <button class="term-sidebar-close" on:click={() => selectedTermStandard = null} aria-label="Close">×</button>
+              <span class="term-sidebar-badge" style="background:{dc.bg};border-color:{dc.border};color:{dc.text}">
+                {TERM_SUBTYPE_LABELS[selectedTermStandard.subtype] ?? selectedTermStandard.domain}
+              </span>
+              {#if selectedTermStandard.subtype === 'deity'}
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <!-- svelte-ignore a11y-no-static-element-interactions -->
+                <img
+                  src="/images/divinities/{selectedTermStandard.name}.png"
+                  alt={selectedTermStandard.name}
+                  class="term-sidebar-deity-img"
+                  on:click={() => lightboxSrc = `/images/divinities/${selectedTermStandard.name}.png`}
+                />
+              {/if}
+              <h2 class="term-sidebar-name">{selectedTermStandard.name}</h2>
+              <p class="term-sidebar-detail">
+                {#if selectedTermStandard.description}
+                  <strong>{selectedTermStandard.description.replace(/^Know\s+/, '')}</strong>{' '}
+                {/if}
+                {selectedTermStandard.detail}
+              </p>
+            </aside>
           {/if}
         </div>
       </div>
@@ -656,7 +1162,7 @@
     <!-- ── Story part ──────────────────────────────────────────────────────── -->
     {:else if lessonPart === 'story'}
       <div class="scroll-area">
-        <div class="three-col">
+        <div class="two-col">
           <aside class="col col-vocab">
             <div class="col-label">Vocabulary</div>
             <VocabPanel {vocabList} headless />
@@ -677,37 +1183,43 @@
                 <img src={lesson.image_url} alt="Chapter illustration" class="lesson-image" />
               </div>
             {/if}
-          </main>
-          <aside class="col col-paradigm">
+
+            <!-- Inline word analysis -->
+            <div class="inline-analysis">
+              {#if hoveredWord}
+                <strong class="ia-form">{hoveredWord.dictEntry ?? hoveredWord.text}</strong>
+                {#if hoveredWord.shortDef}
+                  {' '}<span class="ia-def">"{hoveredWord.shortDef}"</span>
+                {/if}
+                {#if highlightMorph}
+                  {' '}<span class="ia-morph">{morphToDisplay(highlightMorph)}</span>
+                {/if}
+              {:else}
+                <span class="ia-placeholder">hover a word</span>
+              {/if}
+            </div>
+
             {#if paradigmKey || wordForms}
-              <div class="col-label">Paradigm</div>
-              <ConjugationTable {paradigmKey} {highlightMorph} {wordForms} {dictEntry} />
-            {:else if hoveredWord}
-              <p class="empty-note">No paradigm for this word.</p>
-            {:else}
-              <p class="empty-note muted">Hover a word…</p>
+              <div class="inline-paradigm">
+                <ConjugationTable {paradigmKey} {highlightMorph} {wordForms} {dictEntry} />
+              </div>
             {/if}
-          </aside>
+          </main>
         </div>
       </div>
 
     <!-- ── Map part ────────────────────────────────────────────────────────── -->
     {:else if lessonPart === 'map'}
       {@const mp = lesson.map ?? {}}
-      {@const alignment = mp.alignment ?? []}
-      {@const words = mp.description ? mp.description.match(/\S+/g) ?? [] : []}
+      {@const mapParas = (mp.description ?? '').split(/\n\n+/).map(p => p.trim()).filter(Boolean)}
       <div class="scroll-area">
         <div class="simple-part">
-          <div class="part-text">
-            {#each words as word, i}
-              <span class="simple-word {simpleAudioPart === 'map' && simpleHighlightIndex >= 0 && alignment[simpleHighlightIndex]?.word === word ? 'word-highlight' : ''}">{word} </span>
-            {/each}
-          </div>
-          {#if mp.audioUrl}
-            <button on:click={() => simpleAudioPlaying && simpleAudioPart === 'map' ? stopSimpleAudio() : playSimpleAudio('map')}
-              class="audio-play-btn">
-              {simpleAudioPlaying && simpleAudioPart === 'map' ? '⏹ Stop' : '▶ Listen'}
-            </button>
+          {#if mapParas.length > 0}
+            <div class="part-text prose">
+              {#each mapParas as para}
+                <p>{para}</p>
+              {/each}
+            </div>
           {/if}
           <div class="map-wrap">
             {#if mp.imageUrl}
@@ -722,11 +1234,74 @@
           </div>
         </div>
       </div>
+
+    <!-- ── History part ─────────────────────────────────────────────────────── -->
+    {:else if lessonPart === 'history'}
+      <div class="scroll-area">
+        <div class="vocab-exercise-wrap">
+          <HistMythFlashcard standards={chapterHistStandards} />
+        </div>
+      </div>
+
+    <!-- ── Mythology part ────────────────────────────────────────────────────── -->
+    {:else if lessonPart === 'mythology'}
+      <div class="scroll-area">
+        <div class="vocab-exercise-wrap">
+          <HistMythFlashcard standards={chapterMythStandards} />
+        </div>
+      </div>
     {/if}
 
   {/if}
 
 </div>
+
+<!-- ── Keyboard panel ─────────────────────────────────────────────────────── -->
+{#if showKeyboard}
+  <div class="keyboard-panel">
+    <div class="keyboard-inner">
+      <div class="key-row">
+        {#each LETTER_ROW1 as k}
+          <div class="key-cap"
+            class:key-active={lastKey === k || lastKey === k.toUpperCase()}
+            class:hint-0={hintKeys[0] === k || hintKeys[0] === k.toUpperCase()}>
+            <span class="key-qwerty">{k}</span>
+            <span class="key-greek">{QWERTY_TO_GREEK[k] ?? ''}</span>
+          </div>
+        {/each}
+      </div>
+      <div class="key-row">
+        {#each LETTER_ROW2 as k}
+          <div class="key-cap"
+            class:key-active={lastKey === k || lastKey === k.toUpperCase()}
+            class:hint-0={hintKeys[0] === k || hintKeys[0] === k.toUpperCase()}>
+            <span class="key-qwerty">{k}</span>
+            <span class="key-greek">{QWERTY_TO_GREEK[k] ?? ''}</span>
+          </div>
+        {/each}
+      </div>
+      <div class="key-row">
+        {#each LETTER_ROW3 as k}
+          <div class="key-cap"
+            class:key-active={lastKey === k || lastKey === k.toUpperCase()}
+            class:hint-0={hintKeys[0] === k || hintKeys[0] === k.toUpperCase()}>
+            <span class="key-qwerty">{k}</span>
+            <span class="key-greek">{QWERTY_TO_GREEK[k] ?? ''}</span>
+          </div>
+        {/each}
+      </div>
+    </div>
+  </div>
+{/if}
+
+<!-- ── Lightbox ────────────────────────────────────────────────────────────── -->
+{#if lightboxSrc}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div class="lightbox-overlay" on:click={() => lightboxSrc = null}>
+    <img src={lightboxSrc} alt="Full size" class="lightbox-img" />
+  </div>
+{/if}
 
 <!-- ── Settings modal ─────────────────────────────────────────────────────── -->
 {#if showSettingsModal}
@@ -742,46 +1317,50 @@
       </div>
       <div class="modal-body">
 
-        <section class="settings-section">
-          <h3>Audio Language</h3>
-          <div class="settings-options">
-            <label class="setting-option">
-              <input type="radio" name="audioMode" value="greek"
-                checked={audioMode === 'greek'}
-                on:change={() => { stopAudio(); audioMode = 'greek'; }} />
-              <span>Greek</span>
-            </label>
-            <label class="setting-option">
-              <input type="radio" name="audioMode" value="english"
-                checked={audioMode === 'english'}
-                on:change={() => { stopAudio(); audioMode = 'english'; }} />
-              <span>English</span>
-            </label>
-            <label class="setting-option">
-              <input type="radio" name="audioMode" value="alternating"
-                checked={audioMode === 'alternating'}
-                on:change={() => { stopAudio(); audioMode = 'alternating'; }} />
-              <span>Alternating (Greek then English per sentence)</span>
-            </label>
-          </div>
-        </section>
+        {#if lessonPart === 'story'}
+          <section class="settings-section">
+            <h3>Audio Language</h3>
+            <div class="settings-options">
+              <label class="setting-option">
+                <input type="radio" name="audioMode" value="greek"
+                  checked={audioMode === 'greek'}
+                  on:change={() => { stopAudio(); audioMode = 'greek'; }} />
+                <span>Greek</span>
+              </label>
+              <label class="setting-option">
+                <input type="radio" name="audioMode" value="english"
+                  checked={audioMode === 'english'}
+                  on:change={() => { stopAudio(); audioMode = 'english'; }} />
+                <span>English</span>
+              </label>
+              <label class="setting-option">
+                <input type="radio" name="audioMode" value="alternating"
+                  checked={audioMode === 'alternating'}
+                  on:change={() => { stopAudio(); audioMode = 'alternating'; }} />
+                <span>Alternating (Greek then English per sentence)</span>
+              </label>
+            </div>
+          </section>
+        {/if}
 
         <section class="settings-section">
           <h3>Playback Speed</h3>
           <div class="settings-options">
-            <div class="rate-control">
-              <label>Greek Speed</label>
-              <div class="rate-control-slider">
-                <input
-                  type="range" min="0.5" max="2" step="0.05"
-                  value={greekRate}
-                  on:input={(e) => handleRateChange('greek', Number(e.target.value))}
-                />
-                <span class="rate-value">{greekRate.toFixed(2)}x</span>
+            {#if lessonPart === 'story'}
+              <div class="rate-control">
+                <label>Greek Speed</label>
+                <div class="rate-control-slider">
+                  <input
+                    type="range" min="0.5" max="2" step="0.05"
+                    value={greekRate}
+                    on:input={(e) => handleRateChange('greek', Number(e.target.value))}
+                  />
+                  <span class="rate-value">{greekRate.toFixed(2)}x</span>
+                </div>
               </div>
-            </div>
+            {/if}
             <div class="rate-control">
-              <label>English Speed</label>
+              <label>{lessonPart === 'story' ? 'English Speed' : 'Playback Speed'}</label>
               <div class="rate-control-slider">
                 <input
                   type="range" min="0.5" max="2" step="0.05"
@@ -794,19 +1373,21 @@
           </div>
         </section>
 
-        <section class="settings-section">
-          <h3>Highlighting</h3>
-          <div class="settings-options">
-            <label class="setting-option">
-              <input
-                type="checkbox"
-                checked={highlightingEnabled}
-                on:change={(e) => { highlightingEnabled = e.target.checked; }}
-              />
-              <span>Enable word highlighting during playback</span>
-            </label>
-          </div>
-        </section>
+        {#if lessonPart === 'story'}
+          <section class="settings-section">
+            <h3>Highlighting</h3>
+            <div class="settings-options">
+              <label class="setting-option">
+                <input
+                  type="checkbox"
+                  checked={highlightingEnabled}
+                  on:change={(e) => { highlightingEnabled = e.target.checked; }}
+                />
+                <span>Enable word highlighting during playback</span>
+              </label>
+            </div>
+          </section>
+        {/if}
 
       </div>
     </div>
@@ -888,6 +1469,76 @@
     overflow: hidden;
   }
 
+  .lesson-page.has-keyboard { padding-bottom: 140px; }
+
+  /* ── Keyboard panel ── */
+  .keyboard-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1e293b;
+    border-top: 1px solid #334155;
+    padding: 8px 10px 12px;
+    z-index: 50;
+  }
+  .keyboard-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .key-row { display: flex; gap: 3px; justify-content: center; align-items: flex-end; }
+  .key-cap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 48px;
+    background: #334155;
+    border-radius: 6px;
+    border: 1px solid #475569;
+    transition: background 0.12s, border-color 0.12s, box-shadow 0.12s;
+    gap: 2px;
+  }
+  .key-cap.key-active { background: #4f46e5; border-color: #818cf8; box-shadow: 0 0 0 2px rgba(129,140,248,0.4); }
+  .key-cap.hint-0 { background: #1e3a5f; border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59,130,246,0.35); }
+  .key-qwerty { font-size: 9px; color: #64748b; text-transform: uppercase; line-height: 1; }
+  .key-greek  { font-size: 16px; color: #e2e8f0; font-family: "Palatino Linotype", Georgia, serif; line-height: 1; }
+
+  /* ── Progress bar ── */
+  .progress-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 16px;
+    border-top: 1px solid #f3f4f6;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .progress-slider {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    accent-color: #4338ca;
+    cursor: pointer;
+  }
+
+  .progress-time {
+    font-size: 11px;
+    color: #9ca3af;
+    font-variant-numeric: tabular-nums;
+    min-width: 32px;
+  }
+
+  .progress-time:last-child { text-align: right; }
+
   /* ── Top bar ── */
   .top-bar {
     flex-shrink: 0;
@@ -904,7 +1555,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 4px 16px;
+    padding: 8px 16px;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
@@ -947,8 +1598,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     border: none;
     background: none;
     cursor: pointer;
@@ -964,7 +1615,7 @@
   }
 
   .lesson-title {
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 600;
     color: #111827;
     white-space: nowrap;
@@ -974,54 +1625,14 @@
   }
 
   .chapter-badge {
-    font-size: 11px;
+    font-size: 13px;
     background: #f3f4f6;
     color: #6b7280;
-    padding: 2px 7px;
+    padding: 3px 9px;
     border-radius: 10px;
     white-space: nowrap;
     flex-shrink: 0;
   }
-
-  /* Analysis bar — Reader.svelte pattern */
-  .analysis-bar {
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
-    font-size: 19px;
-    line-height: 1.5;
-    height: 48px;
-    background: #fff;
-    color: #111;
-    overflow: hidden;
-  }
-
-  .analysis-inner {
-    display: flex;
-    align-items: center;
-    flex-wrap: nowrap;
-    gap: 6px;
-    padding: 0 16px;
-    height: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .analysis-placeholder {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    color: #9ca3af;
-    font-style: italic;
-  }
-
-  .word-form {
-    font-size: 21px;
-    font-weight: 700;
-  }
-
-  .sep { color: #9ca3af; }
-  .definition { color: #374151; font-style: italic; }
-  .morph-tag { color: #6b7280; }
 
   /* ── Scroll area ── */
   .scroll-area {
@@ -1030,12 +1641,12 @@
     overflow-x: hidden;
   }
 
-  /* Three-column layout — all columns flow with the page scroll */
-  .three-col {
+  /* Two-column layout — vocab strip + passage */
+  .two-col {
     display: grid;
-    grid-template-columns: 200px 1fr 260px;
+    grid-template-columns: 200px 1fr;
     align-items: start;
-    max-width: 1200px;
+    max-width: 960px;
     margin: 0 auto;
     width: 100%;
   }
@@ -1049,11 +1660,29 @@
   }
 
   .col-passage {
-    min-width: 0; /* allow grid cell to shrink and text to wrap */
+    min-width: 0;
   }
 
-  .col-paradigm {
-    border-left: 1px solid #e5e7eb;
+  /* Inline word analysis — below passage, no box */
+  .inline-analysis {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #f3f4f6;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    font-size: 18px;
+    line-height: 1.5;
+    min-height: 2em;
+    color: #111;
+  }
+
+  .ia-form { font-weight: 700; }
+  .ia-def  { color: #374151; font-style: italic; }
+  .ia-morph { color: #6b7280; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; }
+  .ia-placeholder { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px; color: #d1d5db; font-style: italic; }
+
+  /* Paradigm below analysis */
+  .inline-paradigm {
+    margin-top: 16px;
   }
 
   .lesson-image-wrap {
@@ -1076,9 +1705,9 @@
     margin-left: auto;
   }
   .part-tab {
-    padding: 4px 12px;
+    padding: 6px 16px;
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     background: transparent;
     border: 1px solid transparent;
@@ -1089,22 +1718,6 @@
   .part-tab:hover { color: #374151; background: #f3f4f6; }
   .part-tab-active { background: #eef2ff; color: #4338ca; border-color: #c7d2fe; }
 
-  /* ── Enforce-accents toggle ── */
-  .accent-toggle {
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 999px;
-    border: 1px solid #e5e7eb;
-    background: white;
-    color: #9ca3af;
-    cursor: pointer;
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: all 0.15s;
-  }
-
-  .accent-toggle:hover  { background: #f3f4f6; color: #374151; }
-  .accent-toggle.accent-on { background: #eef2ff; border-color: #a5b4fc; color: #4338ca; font-weight: 600; }
 
   /* ── Vocab tab wrapper ── */
   .vocab-exercise-wrap {
@@ -1113,18 +1726,127 @@
     width: 100%;
   }
 
+  .tab-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 12px 0 0;
+    padding: 0 1rem;
+    line-height: 2;
+  }
+
+  .hint-play-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid #a5b4fc;
+    background: #eef2ff;
+    color: #4338ca;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .hint-play-btn:hover:not(:disabled) { background: #e0e7ff; border-color: #818cf8; }
+  .hint-play-btn.hint-playing { background: #4338ca; border-color: #4338ca; color: white; }
+  .hint-play-btn:disabled { opacity: 0.35; cursor: default; }
+
+  .hint-text { display: inline; font-weight: 600; }
+
+  .hw { display: inline; border-radius: 3px; transition: background 0.08s; }
+  .hw-active { background: #fef08a; }
+
+  .input-mode-btn {
+    font-size: 0.8rem;
+    border-radius: 999px;
+    padding: 0.25em 0.9em;
+    cursor: pointer;
+    border: 1px solid #e5e7eb;
+    font-weight: 500;
+    transition: filter 0.15s;
+  }
+  .input-mode-btn.mode-greek-hints { background: #eef2ff; border-color: #a5b4fc; color: #4338ca; }
+  .input-mode-btn.mode-greek       { background: #f9fafb; border-color: #e5e7eb; color: #6b7280; }
+  .input-mode-btn.mode-translit    { background: #fdf4ff; border-color: #e9d5ff; color: #7e22ce; }
+  .input-mode-btn:hover            { filter: brightness(0.97); }
+
+  /* ── Video + text layout (overview with HeyGen avatar) ── */
+  .overview-video-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 48px;
+    align-items: start;
+    padding: 32px 48px 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .avatar-col {
+    position: sticky;
+    top: 16px;
+  }
+
+  .avatar-video {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: 8px;
+  }
+
+  .story-text-col {
+    padding-top: 4px;
+  }
+
   /* ── Simple part layout (overview, map) ── */
   .simple-part {
     max-width: 640px;
     margin: 0 auto;
     padding: 32px 0 64px;
   }
+  .part-image-figure {
+    margin: 0 0 24px;
+  }
   .part-image {
     width: 100%;
     border-radius: 10px;
-    margin-bottom: 24px;
     display: block;
+    margin-bottom: 0;
   }
+  .part-image-caption {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #6b7280;
+    text-align: center;
+  }
+
+  .caption-info-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    color: #6b7280;
+    font-size: 10px;
+    font-style: normal;
+    text-decoration: none;
+    vertical-align: middle;
+    transition: background 0.15s, color 0.15s;
+  }
+  .caption-info-link:hover { background: #d1d5db; color: #374151; }
   .part-text {
     font-size: 16px;
     line-height: 28px;
@@ -1132,10 +1854,126 @@
     margin-bottom: 20px;
   }
   .simple-word { display: inline; }
-  .word-highlight {
-    background: #fef08a;
+
+  .part-text.prose p {
+    margin: 0 0 1.2em 0;
+    font-size: 16px;
+    line-height: 1.75;
+    color: #1f2937;
+  }
+  .part-text.prose p:last-child { margin-bottom: 0; }
+  .story-word {
+    display: inline;
     border-radius: 3px;
     padding: 0 2px;
+  }
+  .word-highlight {
+    background: #fef08a;
+  }
+
+  /* ── Overview layout with term sidebar ── */
+  .overview-layout {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .overview-layout.overview-has-sidebar {
+    max-width: min(1080px, 95vw);
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 48px;
+    align-items: start;
+    padding: 0 24px;
+  }
+
+  /* Highlighted key terms */
+  .term-word {
+    color: #92400e;
+    cursor: pointer;
+    border-bottom: 1px dotted #d97706;
+    border-radius: 0;
+    background: none;
+    font-weight: 500;
+  }
+  .term-word:hover { background: #fef3c7; border-radius: 2px; }
+  .term-active { background: #fef3c7 !important; border-bottom-style: solid; border-bottom-color: #92400e; }
+
+  /* Term info sidebar */
+  .term-sidebar {
+    position: sticky;
+    top: 24px;
+    background: white;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    padding: 24px 22px 28px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .term-sidebar-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .term-sidebar-close:hover { background: #f3f4f6; color: #374151; }
+  .term-sidebar-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid;
+    align-self: flex-start;
+  }
+  .term-sidebar-name {
+    font-size: 26px;
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .term-sidebar-deity-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    cursor: zoom-in;
+  }
+
+  /* ── Lightbox ── */
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    cursor: zoom-out;
+  }
+  .lightbox-img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+  .term-sidebar-detail {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: #374151;
+    margin: 0;
   }
   .audio-play-btn {
     padding: 8px 20px;

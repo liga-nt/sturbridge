@@ -2,7 +2,7 @@
     import { onMount, onDestroy, getContext, tick } from 'svelte';
     import { get } from 'svelte/store';
     import { generatePage, gradePage } from '$lib/utils/fundamentals.js';
-    import { saveStandardState, subscribeLeaderboard, updateLeaderboard } from '$lib/utils/studentStore.js';
+    import { saveStandardState, subscribeLeaderboard, updateLeaderboard, writeSessionLog } from '$lib/utils/studentStore.js';
     import { session } from '$lib/stores/session';
 
     const ctx = getContext('student');
@@ -37,6 +37,81 @@
     let timerRunning   = false;
     let timerInterval  = null;
 
+    // ── Session timer ──────────────────────────────────────────────────────────
+
+    let sessionTimeLimit = 600;      // seconds; loaded from classDoc
+    let standardTimes = {};          // { [standardId]: { practiceSec, masterySec } }
+    let sessionActive = false;
+    let stintStartMs = null;
+    let stintStandardId = null;
+    let stintMode = null;
+    let isIdle = false;
+    let lastActivityMs = Date.now();
+    let sessionDisplayInterval = null;
+    let sessionDisplaySec = 0;
+
+    function onActivity() {
+        lastActivityMs = Date.now();
+        if (isIdle) resumeStint();
+    }
+
+    function startStint() {
+        stintStartMs = Date.now();
+        stintStandardId = standard?.id ?? null;
+        stintMode = mode;
+        sessionActive = true;
+        isIdle = false;
+    }
+
+    function pauseStint(markIdle = false) {
+        if (stintStartMs && stintStandardId) {
+            const elapsed = (Date.now() - stintStartMs) / 1000;
+            if (!standardTimes[stintStandardId]) {
+                standardTimes[stintStandardId] = { practiceSec: 0, masterySec: 0 };
+            }
+            if (stintMode === 'master') {
+                standardTimes[stintStandardId].masterySec += elapsed;
+            } else {
+                standardTimes[stintStandardId].practiceSec += elapsed;
+            }
+        }
+        stintStartMs = null;
+        isIdle = markIdle;
+    }
+
+    function resumeStint() {
+        startStint();
+    }
+
+    function switchMode(newMode) {
+        pauseStint();
+        mode = newMode;
+        startStint();
+    }
+
+    async function saveSession() {
+        const totalSec = Object.values(standardTimes)
+            .reduce((s, t) => s + (t.practiceSec ?? 0) + (t.masterySec ?? 0), 0);
+        if (!sessionActive || totalSec < 5) return;
+        const roundedTimes = {};
+        for (const [id, t] of Object.entries(standardTimes)) {
+            roundedTimes[id] = {
+                practiceSec: Math.round(t.practiceSec),
+                masterySec: Math.round(t.masterySec)
+            };
+        }
+        const date = new Date().toISOString().slice(0, 10);
+        try {
+            await writeSessionLog(classDoc.classId, uid, {
+                date,
+                standardTimes: roundedTimes,
+                sessionTimeLimit
+            });
+        } catch (e) {
+            console.error('Error saving session log:', e);
+        }
+    }
+
     // ── Leaderboard ────────────────────────────────────────────────────────────
 
     let leaderboard = [];
@@ -56,14 +131,33 @@
         const states = get(standardStates);
         const idx = standards.findIndex(s => !states[s.id]?.mastered);
         standardIndex = idx !== -1 ? idx : standards.length - 1;
+        sessionTimeLimit = classDoc?.sessionTimeLimit ?? 600;
         newPage();
         loadLeaderboard();
+        startStint();
+        sessionDisplayInterval = setInterval(() => {
+            if (Date.now() - lastActivityMs > 10_000 && !isIdle) pauseStint(true);
+            const elapsed = stintStartMs ? (Date.now() - stintStartMs) / 1000 : 0;
+            const base = Object.values(standardTimes)
+                .reduce((s, t) => s + (t.practiceSec ?? 0) + (t.masterySec ?? 0), 0);
+            sessionDisplaySec = Math.round(base + (isIdle ? 0 : elapsed));
+        }, 1000);
+        window.addEventListener('beforeunload', handleBeforeUnload);
     });
 
     onDestroy(() => {
         if (timerInterval) clearInterval(timerInterval);
+        if (sessionDisplayInterval) clearInterval(sessionDisplayInterval);
         if (unsubLeaderboard) unsubLeaderboard();
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+        pauseStint();
+        saveSession();
     });
+
+    function handleBeforeUnload() {
+        pauseStint();
+        saveSession();
+    }
 
     // Reload leaderboard when standard changes
     $: if (standard?.id) loadLeaderboard();
@@ -133,7 +227,7 @@
 
     function startMaster() {
         stopTimer();
-        mode = 'master';
+        switchMode('master');
         timerRemaining = setting(standard.id, 'timeLimit', standard.timeLimit ?? 60);
         newPage();
         timerRunning = true;
@@ -175,9 +269,11 @@
 
     function jumpToStandard(idx) {
         stopTimer();
+        pauseStint();
         mode = 'practice';
         standardIndex = idx;
         newPage();
+        startStint();
     }
 
     function tryAgain() {
@@ -186,30 +282,38 @@
 
     function keepPracticing() {
         stopTimer();
-        mode = 'practice';
+        switchMode('practice');
         newPage();
     }
 
     function goNextStandard() {
         stopTimer();
+        pauseStint();
         mode = 'practice';
         const states = get(standardStates);
         let next = standards.findIndex((s, i) => i > standardIndex && !states[s.id]?.mastered);
         if (next === -1) next = standards.findIndex(s => !states[s.id]?.mastered);
         standardIndex = next !== -1 ? next : standardIndex;
         newPage();
+        startStint();
     }
 
     function devSkipForward() {
-        stopTimer(); mode = 'practice';
+        stopTimer();
+        pauseStint();
+        mode = 'practice';
         if (standardIndex < standards.length - 1) standardIndex++;
         newPage();
+        startStint();
     }
 
     function devSkipBack() {
-        stopTimer(); mode = 'practice';
+        stopTimer();
+        pauseStint();
+        mode = 'practice';
         if (standardIndex > 0) standardIndex--;
         newPage();
+        startStint();
     }
 
     // ── Derived ────────────────────────────────────────────────────────────────
@@ -245,6 +349,8 @@
         return '';
     }
 </script>
+
+<svelte:window on:keydown={onActivity} />
 
 <div class="min-h-screen bg-gray-100 py-8 px-4">
 
@@ -290,7 +396,23 @@
                         </span>
                         <span class="text-sm font-medium text-gray-700">{standard.label}</span>
                     </div>
-                    <span class="text-xs text-gray-400">{masteredCount} / {standards.length} mastered</span>
+                    <div class="flex items-center gap-3">
+                        {#if sessionActive}
+                            {@const remaining = sessionTimeLimit - sessionDisplaySec}
+                            <span class="text-xs font-mono
+                                {remaining < 0 ? 'text-amber-600 font-semibold' :
+                                 isIdle ? 'text-gray-400' : 'text-gray-500'}">
+                                {#if isIdle}
+                                    Paused
+                                {:else if remaining >= 0}
+                                    {formatTime(remaining)} left
+                                {:else}
+                                    +{formatTime(-remaining)} over
+                                {/if}
+                            </span>
+                        {/if}
+                        <span class="text-xs text-gray-400">{masteredCount} / {standards.length} mastered</span>
+                    </div>
                 </div>
 
                 <!-- Timer bar -->
