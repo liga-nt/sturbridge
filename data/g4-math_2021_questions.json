@@ -736,7 +736,7 @@
     "parts": [
       {
         "label": "A",
-        "question_text": "The shopper bought [54/100] pound of peppers.\n\nWhat is the decimal equivalent of the fraction [54/100]?\n\nEnter your answer in the box.",
+        "question_text": "The shopper bought [54/100] pound of peppers.\n\nWhat is the decimal equivalent of the fraction [54/100]?",
         "answer_type": "short_answer",
         "math_expression_prefix": "[54/100] =",
         "correct_answer": "0.54"
@@ -949,7 +949,7 @@
     "answer_options": null,
     "parts": null,
     "select_count": null,
-    "correct_answer": ">",
+    "correct_answer": "3/6 > 4/12",
     "preview_url": "https://mcas.digitalitemlibrary.com/home?subject=Math&grades=Grade%204&view=ALL&itemUIN=MA803746135"
   }
 ]

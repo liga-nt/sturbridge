@@ -110,7 +110,7 @@
 
   function compare(a, b) {
     if (!a || !b) return false;
-    return stripGreekDiacritics(a) === stripGreekDiacritics(b);
+    return a.normalize('NFC') === b.normalize('NFC');
   }
 
   const SKIP_KEYS = new Set([

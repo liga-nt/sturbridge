@@ -11,11 +11,11 @@
 
   const TIER_ORDER = ['intro', 'beginning', 'intermediate', 'prose', null];
   const TIER_LABELS = {
-    intro: 'Intro Vocabulary',
+    intro: 'Intro',
     beginning: 'Beginning',
     intermediate: 'Intermediate',
     prose: 'Prose',
-    null: 'Glossed'
+    null: 'non-exam'
   };
 
   $: grouped = (() => {
@@ -47,7 +47,7 @@
 
   function handleWordClick(word) {
     toggleExpand(word);
-    if (word.audioUrl) playAudio(word.audioUrl);
+    if (word.audioGreekUrl) playAudio(word.audioGreekUrl);
   }
 
   function toggleExpand(word) {
@@ -82,9 +82,7 @@
 
   {#each grouped as group}
     <div class="vocab-group">
-      {#if group.tier !== null}
-        <div class="group-label tier-{group.tier}">{group.label}</div>
-      {/if}
+      <div class="group-label tier-{group.tier ?? 'glossed'}">{group.label}</div>
       <ul class="word-list">
         {#each group.words as word}
           <!-- svelte-ignore a11y-click-events-have-key-events -->

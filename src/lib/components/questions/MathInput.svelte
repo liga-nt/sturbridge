@@ -367,7 +367,10 @@
     wrapEl.addEventListener('focusout', (e) => {
       if (!isRendered && !wrapEl.contains(e.relatedTarget)) {
         const vals = currentInputs.map(inp => inp.value.trim());
-        if (vals.every(v => v.length > 0)) enterRenderMode(vals);
+        if (vals.every(v => v.length > 0)) {
+          enterRenderMode(vals);
+          extractValue(); // sync flush so value is ready before any click handler fires
+        }
       }
     });
 
@@ -518,7 +521,10 @@
     wrapEl.addEventListener('focusout', (e) => {
       if (!isRendered && !wrapEl.contains(e.relatedTarget)) {
         const vals = currentInputs.map(inp => inp.value.trim());
-        if (vals.every(v => v.length > 0)) enterRenderMode(vals);
+        if (vals.every(v => v.length > 0)) {
+          enterRenderMode(vals);
+          extractValue(); // sync flush so value is ready before any click handler fires
+        }
       }
     });
 

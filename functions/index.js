@@ -827,7 +827,7 @@ exports.alignGreekLesson = onCall(
             throw new HttpsError('permission-denied', 'Only dev can align Greek lessons.');
         }
 
-        const { lessonId } = request.data;
+        const { lessonId, sentenceIndex } = request.data;
         if (!lessonId) throw new HttpsError('invalid-argument', 'lessonId is required.');
 
         const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
@@ -837,13 +837,18 @@ exports.alignGreekLesson = onCall(
         const lesson = lessonSnap.data();
         const sentences = lesson.sentences;
 
+        // When sentenceIndex is provided, only annotate + align that one sentence.
+        const isSingle = sentenceIndex != null;
+        const targetSentences = isSingle ? [sentences[sentenceIndex]].filter(Boolean) : sentences;
+        if (targetSentences.length === 0) throw new HttpsError('invalid-argument', 'Sentence not found.');
+
         // ── Annotate first (Steps 2–3–5) ──────────────────────────────────
         // Ensures all words have morph/syntax/paradigm regardless of how they
         // were created (initial generation, manual edit, or lightweight refine).
-        await annotateGreekSentences(sentences, client, lesson.courseId);
+        await annotateGreekSentences(targetSentences, client, lesson.courseId);
 
-        // Build numbered translations for each sentence (used in prompt + post-processing)
-        const sentenceMeta = sentences.map(s => {
+        // Build numbered translations for each target sentence (used in prompt + post-processing)
+        const sentenceMeta = targetSentences.map(s => {
             const { numbered, positionMap } = numberEngTranslation(s.english);
             const numberedGreek = s.words
                 .slice()
@@ -869,7 +874,7 @@ exports.alignGreekLesson = onCall(
                 num: m.num,
                 greek_numbered: m.numberedGreek,
                 english_numbered: m.numberedEng,
-                words: sentences.find(s => s.num === m.num).words.map(w => ({
+                words: targetSentences.find(s => s.num === m.num).words.map(w => ({
                     sentPos: w.sentPos, text: w.text, morph: w.morph
                 }))
             }))),
@@ -890,9 +895,9 @@ exports.alignGreekLesson = onCall(
             throw new HttpsError('internal', 'Align: Claude returned invalid JSON for engSentPos.');
         }
 
-        // Merge engSentPos
+        // Merge engSentPos (targetSentences are references into the sentences array)
         for (const aResult of alignResult) {
-            const sent = sentences.find(s => s.num === aResult.num);
+            const sent = targetSentences.find(s => s.num === aResult.num);
             if (!sent) continue;
             for (const align of aResult.alignments ?? []) {
                 const word = sent.words.find(w => w.sentPos === align.sentPos);
@@ -901,34 +906,35 @@ exports.alignGreekLesson = onCall(
         }
 
         // Compute preEng/postEng deterministically using the position maps
-        for (const sent of sentences) {
+        for (const sent of targetSentences) {
             const meta = sentenceMeta.find(m => m.num === sent.num);
             computeEngAlignment(sent, meta.positionMap);
         }
 
-        // Mark all sentences as needing audio
-        for (const sent of sentences) {
+        // Mark target sentences as needing audio
+        for (const sent of targetSentences) {
             sent.audioGenerated = false;
         }
 
-        // Rebuild vocab_list from freshly annotated words
-        const seenVocab = new Set();
-        const vocabList = [];
-        for (const sent of sentences) {
-            for (const word of sent.words ?? []) {
-                if (word.vocabTier && word.dictEntry && !seenVocab.has(word.dictEntry)) {
-                    seenVocab.add(word.dictEntry);
-                    vocabList.push({ dictEntry: word.dictEntry, shortDef: word.shortDef, vocabTier: word.vocabTier });
+        const update = { sentences, updatedAt: Timestamp.now() };
+
+        if (!isSingle) {
+            // Full align: rebuild vocab_list + advance status
+            const seenVocab = new Set();
+            const vocabList = [];
+            for (const sent of sentences) {
+                for (const word of sent.words ?? []) {
+                    if (word.vocabTier && word.dictEntry && !seenVocab.has(word.dictEntry)) {
+                        seenVocab.add(word.dictEntry);
+                        vocabList.push({ dictEntry: word.dictEntry, shortDef: word.shortDef, vocabTier: word.vocabTier });
+                    }
                 }
             }
+            update.vocab_list = vocabList;
+            update.status = 'aligned';
         }
 
-        await db.collection('lessons').doc(lessonId).update({
-            sentences,
-            vocab_list: vocabList,
-            status:    'aligned',
-            updatedAt: Timestamp.now()
-        });
+        await db.collection('lessons').doc(lessonId).update(update);
 
         return { sentences };
     }
@@ -1090,7 +1096,7 @@ exports.generateGreekAudio = onCall(
             method: 'POST',
             headers: { 'xi-api-key': elevenKey, 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                text: normalizedGreek.replace(/\s*$/, ' [short pause]'),
+                text: normalizedGreek,
                 model_id: 'eleven_v3',
                 voice_settings: { stability: 0.8, similarity_boost: 0.7, style: 0.3 },
                 language_code: 'el'
@@ -1155,7 +1161,7 @@ const DEFAULT_GREEK_VOICES = {
     narrator: '62eXAzXYsxMOUszcxeJ4',
     dolios:   'bTrXJpbeuC5KgriLhQeC',
     pallas:   'iukn3a1vSSNFmdi5NZS4',
-    kleta:    'n7Wi4g1bhpw4Bs8HK5ph',
+    kleio:    'n7Wi4g1bhpw4Bs8HK5ph',
     phoebe:   'wJqPPQ618aTW29mptyoc',
     plato:    ''
 };
@@ -1170,6 +1176,7 @@ function greekVoiceSettings(speaker) {
     const isKid = speaker !== 'narrator';
     return { stability: 0.8, similarity_boost: 0.75, style: 0.3, use_speaker_boost: isKid };
 }
+
 
 function parseTaggedText(taggedText) {
     const segments = [];
@@ -1233,18 +1240,43 @@ function segContentHash(speaker, text) {
 }
 
 function buildAlignmentFromCharData(alignmentData) {
+    if (!alignmentData?.characters || !alignmentData.character_start_times_seconds) return [];
     const chars  = alignmentData.characters;
     const starts = alignmentData.character_start_times_seconds;
     const ends   = alignmentData.character_end_times_seconds;
-    const fullText = chars.join('');
-    const wordRe = /\S+/g;
+
+    // Walk by array index (not string position) so starts/ends are indexed correctly
+    // even if any chars[i] is empty or multi-char. Skip [bracket] regions including
+    // multi-word ones like [short pause] that would otherwise split into two tokens.
     const alignment = [];
-    let m;
-    while ((m = wordRe.exec(fullText)) !== null) {
-        const s = m.index;
-        const e = s + m[0].length - 1;
-        if (s < starts.length && e < ends.length && !/^\[.*\]$/.test(m[0])) {
-            alignment.push({ word: m[0], start: starts[s], end: ends[e] });
+    let wordStart = -1;
+    let inBracket = false;
+
+    for (let i = 0; i <= chars.length; i++) {
+        const ch = i < chars.length ? chars[i] : null;
+
+        if (!inBracket && ch === '[') {
+            if (wordStart !== -1) {
+                alignment.push({ word: chars.slice(wordStart, i).join(''), start: starts[wordStart], end: ends[i - 1] });
+                wordStart = -1;
+            }
+            inBracket = true;
+            continue;
+        }
+        if (inBracket) {
+            if (ch === ']') inBracket = false;
+            continue;
+        }
+
+        const isWord = ch !== null && !/\s/.test(ch);
+        if (isWord && wordStart === -1) {
+            wordStart = i;
+        } else if (!isWord && wordStart !== -1) {
+            const endIdx = i - 1;
+            if (wordStart < starts.length && endIdx < ends.length) {
+                alignment.push({ word: chars.slice(wordStart, i).join(''), start: starts[wordStart], end: ends[endIdx] });
+            }
+            wordStart = -1;
         }
     }
     return alignment;
@@ -1283,7 +1315,7 @@ exports.regenerateOverviewSpeaker = onCall(
 
         const elevenKey = process.env.ELEVENLABS_API_KEY;
         const voices    = await getGreekVoices();
-        const voiceId   = voices[speaker] ?? voices.narrator;
+        const voiceId   = voices[speaker] || voices.narrator;
         const updated   = [...existing];
         let   count     = 0;
 
@@ -1372,7 +1404,7 @@ exports.regenerateOverviewSegment = onCall(
         });
 
         const seg       = parsed[segmentIndex];
-        const voiceId   = voices[seg.speaker] ?? voices.narrator;
+        const voiceId   = voices[seg.speaker] || voices.narrator;
         const elevenKey = process.env.ELEVENLABS_API_KEY;
 
         const resp = await fetch(
@@ -1405,15 +1437,93 @@ exports.regenerateOverviewSegment = onCall(
     }
 );
 
+const stripCurly = t => t.replace(/\{[^}]*\}/g, '').replace(/<[^>]+>/g, '').replace(/[|]/g, '').replace(/\s+/g, ' ').trim();
+
+function splitBySections(rawText) {
+    const parts = rawText.split(/(?=\{#{2,3}\s)/);
+    return parts.map(p => p.trim()).filter(Boolean);
+}
+
+function extractSectionTitle(rawSection) {
+    const m = rawSection.match(/\{#{2,3}\s+([^}]+)\}/);
+    return m ? m[1].trim() : '';
+}
+
+// Split a JSON blocks array into sections at heading boundaries.
+// Each section's voicedText is the concatenation of all voiced content within it.
+// voicedItems maps word ranges back to specific blocks/cells for highlight sync.
+function blocksToSections(blocks) {
+    const sections = [];
+    let currentTitle = '';
+    let currentStart = 0;  // index into blocks[] after the heading
+
+    function flush(end) {
+        const slice = blocks.slice(currentStart, end);
+        const voicedItems = [];
+        let wordCount = 0;
+        for (let i = 0; i < slice.length; i++) {
+            const block = slice[i];
+            const blockIdx = currentStart + i;
+            if (block.type === 'heading' && block.voiced) {
+                const words = block.voiced.trim().split(/\s+/).filter(Boolean);
+                voicedItems.push({ type: 'heading', blockIdx, text: block.voiced, wordStart: wordCount, wordEnd: wordCount + words.length - 1 });
+                wordCount += words.length;
+            } else if (block.type === 'paragraph' && block.voiced) {
+                const words = block.voiced.trim().split(/\s+/).filter(Boolean);
+                voicedItems.push({ type: 'paragraph', blockIdx, text: block.voiced, wordStart: wordCount, wordEnd: wordCount + words.length - 1 });
+                wordCount += words.length;
+            } else if (block.type === 'table') {
+                for (let r = 0; r < (block.rows?.length ?? 0); r++) {
+                    for (let c = 0; c < (block.rows[r].cells?.length ?? 0); c++) {
+                        const cell = block.rows[r].cells[c];
+                        if (cell.voiced) {
+                            const words = cell.voiced.trim().split(/\s+/).filter(Boolean);
+                            voicedItems.push({ type: 'cell', blockIdx, rowIdx: r, cellIdx: c, text: cell.voiced, wordStart: wordCount, wordEnd: wordCount + words.length - 1 });
+                            wordCount += words.length;
+                        }
+                    }
+                }
+            }
+        }
+        let voicedText = '';
+        let prevItem = null;
+        for (const item of voicedItems) {
+            if (voicedText) {
+                const prevRowKey = prevItem?.type === 'cell' ? `${prevItem.blockIdx}:${prevItem.rowIdx}` : null;
+                const currRowKey = item.type === 'cell' ? `${item.blockIdx}:${item.rowIdx}` : null;
+                let sep = ' ';
+                if (prevRowKey !== null && currRowKey !== null) {
+                    sep = prevRowKey !== currRowKey ? '. ' : ', ';
+                }
+                voicedText += sep;
+            }
+            voicedText += item.text;
+            prevItem = item;
+        }
+        voicedText = voicedText.trim();
+        if (voicedText) sections.push({ title: currentTitle, voicedText, voicedItems });
+    }
+
+    for (let i = 0; i < blocks.length; i++) {
+        if (blocks[i].type === 'heading') {
+            flush(i);
+            currentTitle = blocks[i].text ?? '';
+            currentStart = blocks[i].voiced ? i : i + 1;
+        }
+    }
+    flush(blocks.length);
+    return sections;
+}
+
 exports.generateOverviewAudio = onCall(
-    { secrets: ['ELEVENLABS_API_KEY'], timeoutSeconds: 540 },
+    { secrets: ['ELEVENLABS_API_KEY'], timeoutSeconds: 1800 },
     async (request) => {
         if (request.auth?.token?.role !== 'dev') {
             throw new HttpsError('permission-denied', 'Only dev can generate audio.');
         }
-        const { lessonId, part = 'overview' } = request.data;
+        const { lessonId, part = 'overview', force = false } = request.data;
         if (!lessonId) throw new HttpsError('invalid-argument', 'lessonId is required.');
-        if (!['overview', 'map'].includes(part)) throw new HttpsError('invalid-argument', 'part must be overview or map.');
+        if (!['overview', 'map', 'grammar', 'introduction', 'pronunciation', 'typing'].includes(part)) throw new HttpsError('invalid-argument', 'part must be overview, map, grammar, introduction, pronunciation, or typing.');
 
         const [lessonSnap, voices] = await Promise.all([
             db.collection('lessons').doc(lessonId).get(),
@@ -1423,6 +1533,65 @@ exports.generateOverviewAudio = onCall(
         const lesson = lessonSnap.data();
         const partData = lesson[part] ?? {};
         const elevenKey = process.env.ELEVENLABS_API_KEY;
+
+        // ── Path D: JSON blocks format ────────────────────────────────────────
+        if (partData.blocks?.length) {
+            const sections = blocksToSections(partData.blocks);
+            if (!sections.length) throw new HttpsError('invalid-argument', `${part}.blocks has no voiced content.`);
+
+            const existingCache = {};
+            for (const s of (partData.segments ?? [])) {
+                if (s.voicedText && s.audioUrl && s.audioUrl.includes(segContentHash('narrator', s.voicedText)))
+                    existingCache[s.voicedText] = s;
+            }
+
+            const segmentMeta = await Promise.all(sections.map(async (sec, i) => {
+                const cached = !force && existingCache[sec.voicedText];
+                if (cached) {
+                    return { section: sec.title, voicedText: sec.voicedText, audioUrl: cached.audioUrl, alignment: cached.alignment, voicedItems: sec.voicedItems };
+                }
+
+                const resp = await fetch(
+                    `https://api.elevenlabs.io/v1/text-to-speech/${voices.narrator}/with-timestamps`,
+                    { method: 'POST', headers: { 'xi-api-key': elevenKey, 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ text: sec.voicedText + ' [short pause]', model_id: 'eleven_v3',
+                          voice_settings: greekVoiceSettings('narrator'), language_code: 'en' }) }
+                );
+                if (!resp.ok) {
+                    const err = await resp.text();
+                    throw new HttpsError('internal', `ElevenLabs TTS failed for section ${i} ("${sec.title}"): ${resp.status} ${err}`);
+                }
+                const data = await resp.json();
+                const buf = Buffer.from(data.audio_base64, 'base64');
+
+                const segPath = `greek/lessons/${lessonId}/${part}_blk_${segContentHash('narrator', sec.voicedText)}_narrator.mp3`;
+                const segFile = getStorage().bucket().file(segPath);
+                await segFile.save(buf, { contentType: 'audio/mpeg', metadata: { cacheControl: 'no-cache, no-store' } });
+                await segFile.makePublic();
+                const segUrl = `https://storage.googleapis.com/${getStorage().bucket().name}/${segPath}?v=${Date.now()}`;
+
+                return { section: sec.title, voicedText: sec.voicedText, audioUrl: segUrl, alignment: buildAlignmentFromCharData(data.alignment), voicedItems: sec.voicedItems };
+            }));
+
+            await db.collection('lessons').doc(lessonId).update({
+                [`${part}.segments`]: segmentMeta,
+                [`${part}.audioUrl`]: FieldValue.delete(),
+                [`${part}.alignment`]: FieldValue.delete(),
+                updatedAt: Timestamp.now()
+            });
+
+            const activePaths = new Set(segmentMeta.map(s => {
+                const m = s.audioUrl?.split('?')[0].match(/storage\.googleapis\.com\/[^/]+\/(.+)/);
+                return m ? m[1] : null;
+            }).filter(Boolean));
+            const bucket = getStorage().bucket();
+            const [files] = await bucket.getFiles({ prefix: `greek/lessons/${lessonId}/${part}_blk_` });
+            await Promise.all(files.filter(f => !activePaths.has(f.name)).map(f => f.delete()));
+
+            const generated = segmentMeta.filter(s => !existingCache[s.voicedText]).length;
+            const reused    = segmentMeta.filter(s =>  existingCache[s.voicedText]).length;
+            return { lessonId, part, segmentCount: segmentMeta.length, generated, reused };
+        }
 
         const rawText = part === 'map' ? (partData.description ?? '') : (partData.text ?? '');
         if (!rawText.trim()) throw new HttpsError('invalid-argument', `lessons/${lessonId}.${part} has no text.`);
@@ -1458,11 +1627,11 @@ exports.generateOverviewAudio = onCall(
                     continue;
                 }
 
-                const voiceId = voices[seg.speaker] ?? voices.narrator;
+                const voiceId = voices[seg.speaker] || voices.narrator;
                 const resp = await fetch(
                     `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/with-timestamps`,
                     { method: 'POST', headers: { 'xi-api-key': elevenKey, 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ text: seg.text.replace(/\s*$/, ' [short pause]'), model_id: 'eleven_v3',
+                      body: JSON.stringify({ text: stripCurly(seg.text).replace(/\s*$/, ' [short pause]'), model_id: 'eleven_v3',
                           voice_settings: greekVoiceSettings(seg.speaker), language_code: 'en' }) }
                 );
                 if (!resp.ok) {
@@ -1504,7 +1673,76 @@ exports.generateOverviewAudio = onCall(
             return { lessonId, part, segmentCount: segmentMeta.length, generated, reused };
 
         } else {
-            // ── Single-voice path (map, or untagged overview) ─────────────────
+            // ── Path C: narrator-only sections (split by {## / {### markers) ──
+            const sections = splitBySections(rawText);
+            if (sections.length > 1) {
+                const segments = expandSegments(sections.map(s => ({ speaker: 'narrator', text: s })));
+
+                const existingCache = {};
+                for (const s of (lesson[part]?.segments ?? [])) {
+                    if (s.text && s.audioUrl && s.audioUrl.includes(segContentHash('narrator', s.text)))
+                        existingCache[`narrator::${s.text}`] = s;
+                }
+
+                // Resolve cached segments immediately; fire all uncached TTS calls in parallel.
+                const slotResults = await Promise.all(segments.map(async (seg, i) => {
+                    const cacheKey = `narrator::${seg.text}`;
+                    if (existingCache[cacheKey]) {
+                        const cached = existingCache[cacheKey];
+                        return { cached: true, meta: { speaker: 'narrator', section: extractSectionTitle(seg.text), text: seg.text, audioUrl: cached.audioUrl, alignment: cached.alignment } };
+                    }
+
+                    const resp = await fetch(
+                        `https://api.elevenlabs.io/v1/text-to-speech/${voices.narrator}/with-timestamps`,
+                        { method: 'POST', headers: { 'xi-api-key': elevenKey, 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ text: stripCurly(seg.text).replace(/\s*$/, ' [short pause]'), model_id: 'eleven_v3',
+                              voice_settings: greekVoiceSettings('narrator'), language_code: 'en' }) }
+                    );
+                    if (!resp.ok) {
+                        const err = await resp.text();
+                        throw new HttpsError('internal', `ElevenLabs TTS failed for section ${i}: ${resp.status} ${err}`);
+                    }
+                    const data = await resp.json();
+                    const buf = Buffer.from(data.audio_base64, 'base64');
+
+                    const segPath = `greek/lessons/${lessonId}/${part}_sec_${segContentHash('narrator', seg.text)}_narrator.mp3`;
+                    const segFile = getStorage().bucket().file(segPath);
+                    await segFile.save(buf, { contentType: 'audio/mpeg', metadata: { cacheControl: 'no-cache, no-store' } });
+                    await segFile.makePublic();
+                    const segUrl = `https://storage.googleapis.com/${getStorage().bucket().name}/${segPath}?v=${Date.now()}`;
+
+                    return { cached: false, meta: { speaker: 'narrator', section: extractSectionTitle(seg.text), text: seg.text, audioUrl: segUrl, alignment: buildAlignmentFromCharData(data.alignment) } };
+                }));
+
+                const segmentMeta = slotResults.map(r => r.meta);
+                const generated = slotResults.filter(r => !r.cached).length;
+                const reused    = slotResults.filter(r =>  r.cached).length;
+
+                await db.collection('lessons').doc(lessonId).update({
+                    [`${part}.segments`]: segmentMeta,
+                    [`${part}.audioUrl`]:  FieldValue.delete(),
+                    [`${part}.alignment`]: FieldValue.delete(),
+                    updatedAt: Timestamp.now()
+                });
+
+                const activePaths = new Set(segmentMeta.map(s => {
+                    const m = s.audioUrl.split('?')[0].match(/storage\.googleapis\.com\/[^/]+\/(.+)/);
+                    return m ? m[1] : null;
+                }).filter(Boolean));
+                const bucket = getStorage().bucket();
+                const [files] = await bucket.getFiles({ prefix: `greek/lessons/${lessonId}/${part}_sec_` });
+                await Promise.all(files.filter(f => !activePaths.has(f.name)).map(f => f.delete()));
+
+                return { lessonId, part, segmentCount: segmentMeta.length, generated, reused };
+            }
+
+            // ── Single-voice path (map, grammar, or short untagged text) ─────
+            const ttsText = stripCurly(rawText);
+            console.log(`[${part}] single-voice path, text length: ${ttsText.length}, voice: ${voices.narrator}`);
+            if (ttsText.length > 4800) {
+                throw new HttpsError('invalid-argument',
+                    `${part} text is ${ttsText.length} chars — ElevenLabs limit is ~4800. Shorten the text or add voice tags to use multi-segment mode.`);
+            }
             const VOICE_ID = voices.narrator;
             const resp = await fetch(
                 `https://api.elevenlabs.io/v1/text-to-speech/${VOICE_ID}/with-timestamps`,
@@ -1512,26 +1750,37 @@ exports.generateOverviewAudio = onCall(
                     method: 'POST',
                     headers: { 'xi-api-key': elevenKey, 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        text: rawText,
+                        text: ttsText,
                         model_id: 'eleven_v3',
                         voice_settings: greekVoiceSettings('narrator'),
                         language_code: 'en'
                     })
                 }
             );
-            if (!resp.ok) throw new HttpsError('internal', `ElevenLabs TTS failed: ${resp.status}`);
-            const data = await resp.json();
+            if (!resp.ok) {
+                const errBody = await resp.text().catch(() => '');
+                throw new HttpsError('internal', `ElevenLabs TTS failed: ${resp.status} ${errBody}`);
+            }
+            let data;
+            try { data = await resp.json(); } catch (e) {
+                throw new HttpsError('internal', `ElevenLabs returned non-JSON response: ${e.message}`);
+            }
+            if (!data.audio_base64) throw new HttpsError('internal', `ElevenLabs returned no audio_base64 (keys: ${Object.keys(data).join(',')})`);
             audioBase64 = data.audio_base64;
             alignment   = buildAlignmentFromCharData(data.alignment);
         }
 
         const audioUrl = (await uploadAudio(lessonId, part, 'en', audioBase64)) + `?v=${Date.now()}`;
 
-        await db.collection('lessons').doc(lessonId).update({
-            [`${part}.audioUrl`]:  audioUrl,
-            [`${part}.alignment`]: alignment,
-            updatedAt:             Timestamp.now()
-        });
+        try {
+            await db.collection('lessons').doc(lessonId).update({
+                [`${part}.audioUrl`]:  audioUrl,
+                [`${part}.alignment`]: alignment,
+                updatedAt:             Timestamp.now()
+            });
+        } catch (e) {
+            throw new HttpsError('internal', `Firestore update failed: ${e.message} — alignment length: ${alignment?.length}, sample: ${JSON.stringify(alignment?.slice(0,2))}`);
+        }
 
         return { lessonId, part, audioUrl };
     }
@@ -2178,5 +2427,190 @@ exports.generateOverviewVideo = onCall(
         });
 
         return { lessonId, videoUrl, videoStartOffset };
+    }
+);
+
+// ---------------------------------------------------------------------------
+// generateGreekQuestion — generate one NGE-format question for a standard
+// Returns the question JSON without writing to Firestore (client edits + approves)
+// ---------------------------------------------------------------------------
+exports.generateGreekQuestion = onCall(
+    { secrets: ['ANTHROPIC_API_KEY'] },
+    async (request) => {
+        if (request.auth?.token?.role !== 'dev') {
+            throw new HttpsError('permission-denied', 'Only the dev role can generate questions.');
+        }
+
+        const {
+            standardId,
+            standardDescription,
+            level = 'intro',
+            chapterTitle = '',
+            directorNote = '',
+            exampleQuestions = []
+        } = request.data;
+
+        if (!standardId || !standardDescription) {
+            throw new HttpsError('invalid-argument', 'standardId and standardDescription are required.');
+        }
+
+        // exampleQuestions is 0 or 1 selected model question
+        const modelQuestion = exampleQuestions[0];
+        const exampleBlock = modelQuestion
+            ? `Model question (match this style and format):\nQuestion: ${modelQuestion.text}\n${modelQuestion.choices.map(c => `${c.id}) ${c.text}`).join('\n')}\nCorrect: ${modelQuestion.correct}`
+            : '';
+
+        const prompt = [
+            `You are writing a question for the National Greek Exam (NGE) ${level} level.`,
+            `Format: multiple choice, exactly 4 options (a/b/c/d), one correct answer.`,
+            `Style: clear, unambiguous, tests a single concept, appropriate for high school students.`,
+            ``,
+            `Standard being tested: ${standardId}`,
+            `Standard description: ${standardDescription}`,
+            chapterTitle ? `Chapter context: ${chapterTitle}` : '',
+            ``,
+            exampleBlock ? exampleBlock : '',
+            ``,
+            directorNote ? `Director's note — what to focus on: ${directorNote}` : '',
+            ``,
+            `Generate ONE new question for this standard. Do NOT reuse exact wording from the model question.`,
+            `Return ONLY valid JSON (no markdown, no prose):`,
+            `{`,
+            `  "text": "question text here",`,
+            `  "choices": [{"id":"a","text":"..."},{"id":"b","text":"..."},{"id":"c","text":"..."},{"id":"d","text":"..."}],`,
+            `  "correct": "a",`,
+            `  "standard_ids": ["${standardId}"],`,
+            `  "level": "${level}",`,
+            `  "notes": "brief note on what this tests"`,
+            `}`
+        ].filter(Boolean).join('\n');
+
+        const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+        const message = await client.messages.create({
+            model: 'claude-sonnet-4-6',
+            max_tokens: 1500,
+            messages: [{ role: 'user', content: prompt }]
+        });
+
+        let question;
+        try {
+            const text = message.content[0].text.trim();
+            const jsonMatch = text.match(/\{[\s\S]*\}/);
+            question = JSON.parse(jsonMatch ? jsonMatch[0] : text);
+        } catch {
+            throw new HttpsError('internal', 'AI returned invalid JSON. Raw: ' + message.content[0].text.slice(0, 300));
+        }
+
+        return { question };
+    }
+);
+
+// ---------------------------------------------------------------------------
+// generateGreekPassageQuiz — generate a reading passage + questions
+// Uses cumulative vocab/grammar; auto-glosses unknown words.
+// Returns { passage, questions } without writing to Firestore.
+// ---------------------------------------------------------------------------
+exports.generateGreekPassageQuiz = onCall(
+    { secrets: ['ANTHROPIC_API_KEY'] },
+    async (request) => {
+        if (request.auth?.token?.role !== 'dev') {
+            throw new HttpsError('permission-denied', 'Only the dev role can generate passage quizzes.');
+        }
+
+        const {
+            directorNote,
+            chapterTitle = '',
+            cumulativeVocab = [],
+            cumulativeGrammar = [],
+            standardsToTest = []
+        } = request.data;
+
+        if (!directorNote) {
+            throw new HttpsError('invalid-argument', 'directorNote is required.');
+        }
+
+        await ensureGlossesLoaded();
+
+        const vocabList = cumulativeVocab.slice(0, 120).join(', ');
+        const grammarList = cumulativeGrammar.slice(0, 40).join(', ');
+
+        const passagePrompt = [
+            `You are writing a short Ancient Greek reading passage for a student who has studied Greek for several months.`,
+            ``,
+            `Chapter context: ${chapterTitle}`,
+            `Director's note (topic / content): ${directorNote}`,
+            ``,
+            `CONSTRAINTS — you MUST follow these exactly:`,
+            `- Use ONLY vocabulary from this cumulative list (plus proper nouns): ${vocabList}`,
+            `- Use ONLY grammar structures from: ${grammarList}`,
+            `- Length: 5–6 lines of simple prose`,
+            `- Each line should be one short sentence or clause`,
+            `- All words must be correct Attic Greek with diacritics`,
+            ``,
+            `After the passage, generate ${standardsToTest.length > 0 ? '5–7' : '4–5'} multiple-choice questions (4 options a/b/c/d).`,
+            standardsToTest.length > 0
+                ? `Questions should test these standards: ${standardsToTest.join(', ')}`
+                : `Questions should test reading comprehension, morphology, and vocabulary.`,
+            ``,
+            `Return ONLY valid JSON (no markdown):`,
+            `{`,
+            `  "title": "short English title",`,
+            `  "lines": [{"num":1,"greek":"..."},{"num":2,"greek":"..."},...],`,
+            `  "questions": [`,
+            `    {`,
+            `      "text": "question text",`,
+            `      "choices": [{"id":"a","text":"..."},{"id":"b","text":"..."},{"id":"c","text":"..."},{"id":"d","text":"..."}],`,
+            `      "correct": "a",`,
+            `      "standard_ids": ["lang.reading.passage"]`,
+            `    }`,
+            `  ]`,
+            `}`
+        ].filter(Boolean).join('\n');
+
+        const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+        const message = await client.messages.create({
+            model: 'claude-sonnet-4-6',
+            max_tokens: 3000,
+            messages: [{ role: 'user', content: passagePrompt }]
+        });
+
+        let result;
+        try {
+            const text = message.content[0].text.trim();
+            const jsonMatch = text.match(/\{[\s\S]*\}/);
+            result = JSON.parse(jsonMatch ? jsonMatch[0] : text);
+        } catch {
+            throw new HttpsError('internal', 'AI returned invalid JSON. Raw: ' + message.content[0].text.slice(0, 300));
+        }
+
+        // Auto-gloss: annotate words not in cumulativeVocab using wordForms lookup
+        const vocabSet = new Set(cumulativeVocab.map(w => w.toLowerCase()));
+        const wordAnnotations = {};
+
+        for (const line of (result.lines ?? [])) {
+            const tokens = (line.greek ?? '').split(/[\s,.:;·—()\[\]]+/).filter(Boolean);
+            for (const token of tokens) {
+                if (!token) continue;
+                const entry = wordForms[token];
+                if (!entry) continue;
+                const dictEntry = entry.dictEntry ?? token;
+                // Gloss if this dictEntry isn't in the student's cumulative vocab
+                if (!vocabSet.has(dictEntry.toLowerCase()) && !wordAnnotations[token]) {
+                    wordAnnotations[token] = {
+                        dictEntry,
+                        shortDef: entry.shortDef ?? ''
+                    };
+                }
+            }
+        }
+
+        return {
+            passage: {
+                title: result.title ?? '',
+                lines: result.lines ?? [],
+                wordAnnotations
+            },
+            questions: result.questions ?? []
+        };
     }
 );

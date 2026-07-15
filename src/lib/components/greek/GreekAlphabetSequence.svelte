@@ -110,7 +110,7 @@
       const target = bareTranslit(activeLetter.transliteration);
       const buf    = translitBuffer + e.key.toLowerCase();
       if (buf === target) {
-        translitBuffer = '';
+        translitBuffer = buf;
         triggerFlash('correct');
         if (mode === 'practice') practiceCorrect();
         else if (mode === 'groups') groupCorrect();

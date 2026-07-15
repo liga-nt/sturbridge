@@ -2,30 +2,42 @@
   import { onMount } from 'svelte';
   import { db, storage } from '$lib/firebase/client';
   import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
-  import { doc, getDoc, getDocs, addDoc, collection, query, where, updateDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
+  import { doc, getDoc, getDocs, addDoc, collection, query, where, updateDoc, deleteDoc, setDoc, serverTimestamp } from 'firebase/firestore';
   import { getFunctions, httpsCallable } from 'firebase/functions';
   import { getApp } from 'firebase/app';
   import VocabPanel from '$lib/components/greek/VocabPanel.svelte';
   import MediterraneanMap from '$lib/components/greek/MediterraneanMap.svelte';
+  import GrammarFlashcardExercise from '$lib/components/greek/GrammarFlashcardExercise.svelte';
 
   export let data; // from +page.server.js
 
   const functions = getFunctions(getApp());
   const STORY_BIBLE_ID = 'grade7-greek';
   const COURSE_ID = 'grade7-greek';
+  const INTRO_LESSON_ID = 'grade7-greek-intro';
+  const INTRO_TABS = [
+    { id: 'introduction', label: 'Introduction' },
+    { id: 'pronunciation', label: 'Pronunciation' },
+    { id: 'typing',        label: 'Typing' },
+  ];
 
-  // ── Curriculum JSON data (server-loaded) ──────────────────────────────────
+  // ── Curriculum data derived from Firestore lessons ────────────────────────
   $: curriculumByChapter = Object.fromEntries(
-    (data.curriculum ?? []).map(c => [c.chapter_id, c])
+    allLessons
+      .filter(l => l.chapter_id)
+      .map(l => [l.chapter_id, { chapter_id: l.chapter_id, grammar: l.standardIds ?? [] }])
   );
-  $: bibleChapters = (data.curriculum ?? []).map((c, i) => {
-    const chNum = i + 1;
-    const vocab = Object.entries(storyBible?.vocab?.introduced ?? {})
-      .filter(([, v]) => v.chapter === chNum && v.tier === 'intro')
-      .map(([word]) => word)
-      .sort();
-    return { ...c, num: chNum, title: data.chapterTitles?.[c.chapter_id] ?? c.chapter_id, vocab };
-  });
+  $: bibleChapters = allLessons
+    .filter(l => l.chapter_id)
+    .map(l => {
+      const chNum = l.chapter;
+      const vocab = Object.entries(storyBible?.vocab?.introduced ?? {})
+        .filter(([, v]) => v.chapter === chNum && v.tier === 'intro')
+        .map(([word]) => word)
+        .sort();
+      const langIds = (l.standardIds ?? []).filter(sid => sid.startsWith('lang.'));
+      return { chapter_id: l.chapter_id, grammar: langIds, num: chNum, title: data.chapterTitles?.[l.chapter_id] ?? l.chapter_id, vocab };
+    });
   $: bibleVocabMap = (() => {
     const map = {};
     for (const ch of bibleChapters) {
@@ -38,19 +50,27 @@
   $: unusedIntroVocab = (data.introVocab ?? []).filter(
     e => !storyBible?.vocab?.introduced?.[e.greek]
   );
-  $: bibleGrammarRows = (data.curriculum ?? [])
-    .flatMap((ch, i) =>
-      (ch.grammar ?? []).map(gid => {
+  $: bibleGrammarRows = allLessons
+    .filter(l => l.chapter_id)
+    .flatMap(l =>
+      (l.standardIds ?? []).filter(sid => sid.startsWith('lang.')).map(gid => {
         const std = (data.grammarStandards ?? []).find(s => s.id === gid);
-        return { chNum: i + 1, chapterId: ch.chapter_id, id: gid, description: std?.description ?? gid };
+        return { chNum: l.chapter, chapterId: l.chapter_id, id: gid, description: std?.description ?? gid };
       })
     );
-  $: coverageByChapter = (() => {
+  // { chapter_id → non-language standardIds[] } — for the story bible chapters table
+  $: coverageByChapter = Object.fromEntries(
+    allLessons.filter(l => l.chapter_id).map(l => [
+      l.chapter_id,
+      (l.standardIds ?? []).filter(sid => !sid.startsWith('lang.'))
+    ])
+  );
+  // { standardId → chapter_ids[] } — non-language only, for the story bible coverage section
+  $: coverageByStandard = (() => {
     const map = {};
-    for (const entry of data.standardsCoverage ?? []) {
-      for (const chPrefix of entry.chapters ?? []) {
-        map[chPrefix] ??= [];
-        map[chPrefix].push(entry.id);
+    for (const lesson of allLessons) {
+      for (const sid of (lesson.standardIds ?? []).filter(s => !s.startsWith('lang.'))) {
+        (map[sid] ??= []).push(lesson.chapter_id);
       }
     }
     return map;
@@ -79,15 +99,8 @@
     }
   }
 
-  // ── Standards ─────────────────────────────────────────────────────────────────
-  let allStandards = [];
-
-  async function loadAllStandards() {
-    const snap = await getDocs(query(collection(db, 'standards'), where('courseId', '==', COURSE_ID)));
-    allStandards = snap.docs
-      .map(d => ({ id: d.id, ...d.data() }))
-      .sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
-  }
+  // ── Standards — sourced from nge_intro_standards.json via server load ─────────
+  $: allStandards = data.allNgeStandards ?? [];
 
   function groupStandardsByDomain(standards, coveredIds) {
     const covered = new Set(coveredIds ?? []);
@@ -157,6 +170,195 @@
   // Actions
   let workshopAction = 'idle'; // 'generating' | 'aligning' | 'accepting' | 'saving'
   let workshopError = null;
+
+  // Intro mode (Introduction chapter)
+  let introMode = false;
+  let introDoc = null;
+  let introTab = 'introduction';
+  let introTabText = {};
+  let introTabSaving = {};
+  let introTabAudioStatus = {};
+
+  // Block composer state
+  let editorBlocks = [];
+  let editorBlocksSaving = false;
+  const CELL_STYLES = ['', 'greek-xl', 'greek-md', 'label', 'em', 'dim'];
+  const PARA_STYLES = ['', 'em', 'dim'];
+  const HEADING_STYLES = ['h3', 'h2'];
+
+  function newHeading() { return { type: 'heading', text: '', style: 'h3' }; }
+  function newParagraph() { return { type: 'paragraph', voiced: '' }; }
+  function newTable() { return { type: 'table', headers: [], rows: [{ cells: [newCell(), newCell()] }] }; }
+  function newCell() { return { voiced: '' }; }
+  function newRow(colCount) { return { cells: Array.from({ length: colCount }, newCell) }; }
+
+  function blockUp(i) { if (i > 0) { const b = [...editorBlocks]; [b[i-1], b[i]] = [b[i], b[i-1]]; editorBlocks = b; } }
+  function blockDown(i) { if (i < editorBlocks.length - 1) { const b = [...editorBlocks]; [b[i], b[i+1]] = [b[i+1], b[i]]; editorBlocks = b; } }
+  function removeBlock(i) { editorBlocks = editorBlocks.filter((_, j) => j !== i); }
+  function addRow(blockIdx) { const b = [...editorBlocks]; const cols = b[blockIdx].rows[0]?.cells?.length ?? 2; b[blockIdx] = { ...b[blockIdx], rows: [...b[blockIdx].rows, newRow(cols)] }; editorBlocks = b; }
+  function removeRow(blockIdx, rowIdx) { const b = [...editorBlocks]; b[blockIdx] = { ...b[blockIdx], rows: b[blockIdx].rows.filter((_, i) => i !== rowIdx) }; editorBlocks = b; }
+  function addCol(blockIdx) { const b = [...editorBlocks]; b[blockIdx] = { ...b[blockIdx], headers: [...(b[blockIdx].headers ?? []), ''], rows: b[blockIdx].rows.map(r => ({ cells: [...r.cells, newCell()] })) }; editorBlocks = b; }
+  function removeCol(blockIdx, colIdx) { const b = [...editorBlocks]; b[blockIdx] = { ...b[blockIdx], headers: (b[blockIdx].headers ?? []).filter((_, i) => i !== colIdx), rows: b[blockIdx].rows.map(r => ({ cells: r.cells.filter((_, i) => i !== colIdx) })) }; editorBlocks = b; }
+
+  // cell mode: 'voiced' | 'display' | 'both'
+  function cellMode(cell) {
+    if (cell.voiced && cell.display) return 'both';
+    if (cell.display && !cell.voiced) return 'display';
+    return 'voiced';
+  }
+  function setCellMode(blockIdx, rowIdx, cellIdx, mode) {
+    const b = [...editorBlocks];
+    const cell = { ...b[blockIdx].rows[rowIdx].cells[cellIdx] };
+    if (mode === 'voiced') { cell.voiced = cell.voiced || cell.display || ''; delete cell.display; }
+    else if (mode === 'display') { cell.display = cell.display || cell.voiced || ''; delete cell.voiced; }
+    else { cell.display = cell.display || cell.voiced || ''; cell.voiced = cell.voiced || ''; }
+    b[blockIdx] = { ...b[blockIdx], rows: b[blockIdx].rows.map((r, ri) => ri !== rowIdx ? r : { cells: r.cells.map((c, ci) => ci !== cellIdx ? c : cell) }) };
+    editorBlocks = b;
+  }
+  function updateCell(blockIdx, rowIdx, cellIdx, field, value) {
+    const b = [...editorBlocks];
+    b[blockIdx] = { ...b[blockIdx], rows: b[blockIdx].rows.map((r, ri) => ri !== rowIdx ? r : { cells: r.cells.map((c, ci) => ci !== cellIdx ? c : { ...c, [field]: value }) }) };
+    editorBlocks = b;
+  }
+
+  function headingMode(block) {
+    if (block.voiced === undefined) return 'display';
+    if (block.voiced === (block.text ?? '')) return 'voiced';
+    return 'both';
+  }
+  function setHeadingMode(bi, mode) {
+    const b = [...editorBlocks];
+    const c = b[bi];
+    if (mode === 'display') b[bi] = { ...c, voiced: undefined };
+    else if (mode === 'voiced') b[bi] = { ...c, voiced: c.text ?? '' };
+    else b[bi] = { ...c, voiced: c.voiced !== undefined ? c.voiced : (c.text ?? '') };
+    editorBlocks = b;
+  }
+
+  function paraMode(block) {
+    const hasV = block.voiced !== undefined;
+    const hasD = block.display !== undefined;
+    if (hasV && hasD) return 'both';
+    if (!hasV && hasD) return 'display';
+    return 'voiced';
+  }
+  function setParaMode(bi, mode) {
+    const b = [...editorBlocks];
+    const c = b[bi];
+    if (mode === 'voiced') { b[bi] = { ...c, voiced: c.voiced ?? c.display ?? '', display: undefined }; }
+    else if (mode === 'display') { b[bi] = { ...c, display: c.display ?? c.voiced ?? '', voiced: undefined }; }
+    else { b[bi] = { ...c, voiced: c.voiced ?? '', display: c.display ?? c.voiced ?? '' }; }
+    editorBlocks = b;
+  }
+  function toggleCellVoiced(bi, ri, ci) {
+    const m = cellMode(editorBlocks[bi].rows[ri].cells[ci]);
+    setCellMode(bi, ri, ci, m === 'both' ? 'display' : m === 'display' ? 'both' : 'display');
+  }
+  function toggleCellDisplay(bi, ri, ci) {
+    const m = cellMode(editorBlocks[bi].rows[ri].cells[ci]);
+    setCellMode(bi, ri, ci, m === 'both' ? 'voiced' : m === 'voiced' ? 'both' : 'voiced');
+  }
+
+  function parseCell(raw) {
+    const t = raw.trim();
+    const fullMatch = t.match(/^\{([^}]*)\}$/);
+    if (fullMatch) return { display: fullMatch[1].trim() };
+    const voiced = t.replace(/\*\*/g, '').replace(/\*/g, '').trim();
+    return { voiced };
+  }
+
+  function convertToBlocks(tab) {
+    const text = introTabText[tab] ?? '';
+    if (!text.trim()) { editorBlocks = [newParagraph()]; return; }
+
+    const lines = text.split('\n');
+    const blocks = [];
+    let paraLines = [];
+    let i = 0;
+
+    function flushPara() {
+      const joined = paraLines.join(' ').trim();
+      paraLines = [];
+      if (!joined) return;
+      const voiced = joined
+        .replace(/\{[^}]*\}/g, '')
+        .replace(/\*\*/g, '').replace(/\*/g, '')
+        .replace(/\s+/g, ' ').trim();
+      if (voiced) blocks.push({ type: 'paragraph', voiced });
+    }
+
+    while (i < lines.length) {
+      const line = lines[i];
+      const trimmed = line.trim();
+
+      if (!trimmed) { flushPara(); i++; continue; }
+
+      // {## Title} or {### Title}
+      const curlyHeading = trimmed.match(/^\{(#{2,3})\s+([^}]+)\}$/);
+      if (curlyHeading) {
+        flushPara();
+        blocks.push({ type: 'heading', text: curlyHeading[2].trim(), style: curlyHeading[1].length === 3 ? 'h3' : 'h2' });
+        i++; continue;
+      }
+
+      // ## Title or ### Title (bare markdown)
+      const bareHeading = trimmed.match(/^(#{2,3})\s+(.+)$/);
+      if (bareHeading) {
+        flushPara();
+        blocks.push({ type: 'heading', text: bareHeading[2].trim(), style: bareHeading[1].length === 3 ? 'h3' : 'h2' });
+        i++; continue;
+      }
+
+      // Table: collect consecutive | lines
+      if (trimmed.startsWith('|')) {
+        flushPara();
+        const tableLines = [];
+        while (i < lines.length && lines[i].trim().startsWith('|')) {
+          tableLines.push(lines[i].trim());
+          i++;
+        }
+        const rows = tableLines.map(l => l.split('|').slice(1, -1).map(c => c.trim()));
+        const isSepRow = row => row.every(c => /^\{?-+\}?$/.test(c));
+        const sepIdx = rows.findIndex(isSepRow);
+        let headers = [];
+        let dataRows = rows;
+        if (sepIdx > 0) {
+          headers = rows[0].map(h => h.replace(/\{([^}]*)\}/g, '$1').replace(/\*\*/g, '').replace(/\*/g, '').trim());
+          dataRows = rows.slice(sepIdx + 1);
+        } else if (sepIdx === 0) {
+          dataRows = rows.slice(1);
+        }
+        const parsedRows = dataRows
+          .map(row => ({ cells: row.map(c => parseCell(c)) }))
+          .filter(r => r.cells.some(c => c.voiced || c.display));
+        if (parsedRows.length) blocks.push({ type: 'table', headers, rows: parsedRows });
+        continue;
+      }
+
+      paraLines.push(trimmed);
+      i++;
+    }
+
+    flushPara();
+    editorBlocks = blocks.length ? blocks : [newParagraph()];
+  }
+
+  let editorBlocksSaveStatus = ''; // '' | 'saving' | 'saved' | 'error'
+  async function saveIntroTabBlocks(tab) {
+    editorBlocksSaving = true;
+    editorBlocksSaveStatus = 'saving';
+    try {
+      await updateDoc(doc(db, 'lessons', INTRO_LESSON_ID), { [`${tab}.blocks`]: editorBlocks });
+      introDoc = { ...introDoc, [tab]: { ...introDoc?.[tab], blocks: editorBlocks } };
+      editorBlocksSaveStatus = 'saved';
+      setTimeout(() => { editorBlocksSaveStatus = ''; }, 2000);
+    } catch (e) {
+      console.error('saveIntroTabBlocks error:', e);
+      editorBlocksSaveStatus = 'error';
+    } finally {
+      editorBlocksSaving = false;
+    }
+  }
   let audioProgress = '';
 
   // Alignment editor
@@ -242,6 +444,11 @@
   let overviewImageCaption = '';
   let overviewImageCaptionSaving = false;
 
+  // Grammar module
+  let grammarText = '';
+  let grammarTextSaving = false;
+  let grammarAudioStatus = 'idle';
+
   // Map module
   let mapDescription = '';
   let mapDescSaving = false;
@@ -255,6 +462,27 @@
   let stdPickerDomain = 'all';
   let stdPickerSaving = false;
   let partStandardIds = { overview: new Set(), grammar: new Set(), story: new Set(), map: new Set() };
+
+  // ── Quiz tab state ────────────────────────────────────────────────────────────
+  let quizMode = 'single';              // 'single' | 'passage'
+  let quizStandardId = null;
+  let quizPendingQuestion = null;
+  let quizGenStatus = 'idle';           // 'idle' | 'generating' | 'error'
+  let quizGenError = null;
+  let quizStoredQuestions = [];
+  let quizStoredLoading = false;
+  let quizEditingId = null;
+  let quizEditDraft = null;
+  let quizDirectorNotes = {};           // { [standardId]: string }
+  let quizSelectedExampleIds = {};      // { [standardId]: nge question id | null }
+  let passageDirectorNote = '';
+  let passagePending = null;            // { passage: { title, lines, wordAnnotations }, questions: [] }
+  let passageGenStatus = 'idle';
+  let passageGenError = null;
+  let passageStoredQuizzes = [];
+  let passageStoredLoading = false;
+  let passageEditingQuestionIdx = null;
+  let passageStandardsToTest = new Set();
 
   $: stdDomains = ['all', ...[...new Set(allStandards.map(s => s.domain ?? s.id.split('.')[0]))]];
   $: filteredStandards = (stdPickerDomain === 'all'
@@ -282,16 +510,75 @@
 
   // Auto-select geo domain when switching to map tab
   $: if (lessonPartTab === 'map' && stdPickerDomain === 'all') stdPickerDomain = 'geography';
-  $: if (lessonPartTab !== 'map' && stdPickerDomain === 'geography') stdPickerDomain = 'all';
+
+  // ── Quiz tab reactive computations ───────────────────────────────────────────
+  // Index NGE reference questions by standard_id (one question can map to multiple standards)
+  $: ngeByStandard = (() => {
+    const map = {};
+    for (const q of (data.ngeQuestions?.questions ?? [])) {
+      for (const sid of (q.standard_ids ?? [])) {
+        (map[sid] ??= []).push(q);
+      }
+    }
+    return map;
+  })();
+
+  // All standard IDs for the current chapter — union of all lesson part standardIds + chapter-level standardIds
+  $: quizChapterStandardIds = [
+    ...new Set([
+      ...partStandardIds.overview,
+      ...partStandardIds.grammar,
+      ...partStandardIds.map,
+      ...(curriculumByChapter[selectedLesson?.chapter_id]?.grammar ?? []),
+    ])
+  ];
+  $: quizKnownStandardIds   = quizChapterStandardIds.filter(sid => !!ngeStandardsById[sid]);
+  $: quizOrphanedStandardIds = quizChapterStandardIds.filter(sid => !ngeStandardsById[sid]);
+
+  // All NGE standards indexed by id for description lookups
+  $: ngeStandardsById = Object.fromEntries(
+    (data.allNgeStandards ?? []).map(s => [s.id, s])
+  );
+
+  // Cumulative vocab (all dict entries introduced up to and including this chapter)
+  $: cumulativeVocab = (() => {
+    const chapterNum = selectedLesson?.chapter ?? 0;
+    return Object.entries(storyBible?.vocab?.introduced ?? {})
+      .filter(([, v]) => (v.chapter ?? 999) <= chapterNum)
+      .map(([word]) => word);
+  })();
+
+  // Cumulative grammar standard IDs through this chapter
+  $: cumulativeGrammar = (() => {
+    const chapterNum = selectedLesson?.chapter ?? 0;
+    return (data.curriculum ?? [])
+      .filter((_, i) => i + 1 <= chapterNum)
+      .flatMap(c => c.grammar ?? []);
+  })();
+
+  // Quiz stored questions count per standard (for pill badges)
+  $: quizCountByStandard = (() => {
+    const counts = {};
+    for (const q of quizStoredQuestions) {
+      const sid = q.standardId ?? q.standard_ids?.[0];
+      if (sid) counts[sid] = (counts[sid] ?? 0) + 1;
+    }
+    return counts;
+  })();
 
   // Per-sentence Greek translation suggestions
   let greekSuggestions = {};  // { [i]: { greek, loading } }
+
+  // Per-sentence re-align / re-voice status
+  let sentenceAlignStatus = {}; // { [i]: 'idle'|'running'|'done'|'error' }
+  let sentenceVoiceStatus = {}; // { [i]: 'idle'|'running'|'done'|'error' }
 
   $: nextChapterNum = (allLessons.length
     ? Math.max(...allLessons.map(l => l.chapter ?? 0))
     : 0) + 1;
 
   async function selectLesson(lessonId) {
+    introMode = false;
     // Flush any pending edits to the current lesson before switching
     if (saveTimer !== null && (dirtyIndices.size > 0 || reorderPending)) {
       clearTimeout(saveTimer);
@@ -312,6 +599,8 @@
     chatHistory = [];
     refineFeedback = '';
     greekSuggestions = {};
+    sentenceAlignStatus = {};
+    sentenceVoiceStatus = {};
     const savedScan = sessionStorage.getItem(`greek-scan-${lessonId}`);
     if (savedScan) {
       const { list, unrecog } = JSON.parse(savedScan);
@@ -337,10 +626,11 @@
     overviewVideoError   = null;
     speakerRegenStatus   = {};
     segmentRegenStatus   = {};
+    grammarText          = selectedLesson?.grammar?.text           ?? '';
+    grammarAudioStatus   = selectedLesson?.grammar?.audioUrl      ? 'done' : 'idle';
     mapDescription       = selectedLesson?.map?.description       ?? '';
     mapAudioStatus       = selectedLesson?.map?.audioUrl          ? 'done' : 'idle';
-    const currEntry = curriculumByChapter[selectedLesson?.chapter_id];
-    lessonStandardIds    = new Set(currEntry?.grammar ?? selectedLesson?.standardIds ?? []);
+    lessonStandardIds    = new Set(selectedLesson?.standardIds ?? []);
     s2SelectedVocab      = new Set((selectedLesson?.vocab_list ?? []).map(v => v.dictEntry));
     vocabDirty           = false;
     s2TranslationVocab   = new Set();
@@ -359,6 +649,65 @@
     mapHighlighted       = new Set(selectedLesson?.map?.highlighted  ?? []);
     mapActiveRouteId     = selectedLesson?.map?.activeRouteId        ?? null;
     mapImageSaveStatus   = 'idle';
+  }
+
+  async function selectIntroMode() {
+    if (saveTimer !== null && (dirtyIndices.size > 0 || reorderPending)) {
+      clearTimeout(saveTimer);
+      saveTimer = null;
+      await saveEdits();
+    }
+    introMode = true;
+    selectedLessonId = INTRO_LESSON_ID;
+    selectedLesson = null;
+    newChapterMode = false;
+    introTab = 'introduction';
+    const ref = doc(db, 'lessons', INTRO_LESSON_ID);
+    const snap = await getDoc(ref);
+    introDoc = snap.exists() ? snap.data() : {};
+    if (!snap.exists()) await setDoc(ref, { courseType: 'intro' });
+    introTabText = {
+      introduction: introDoc?.introduction?.text ?? '',
+      pronunciation: introDoc?.pronunciation?.text ?? '',
+      typing:        introDoc?.typing?.text        ?? '',
+    };
+    introTabSaving      = { introduction: false, pronunciation: false, typing: false };
+    introTabAudioStatus = {
+      introduction: (introDoc?.introduction?.segments?.length || introDoc?.introduction?.audioUrl) ? 'done' : 'idle',
+      pronunciation: (introDoc?.pronunciation?.segments?.length || introDoc?.pronunciation?.audioUrl) ? 'done' : 'idle',
+      typing:        (introDoc?.typing?.segments?.length        || introDoc?.typing?.audioUrl)        ? 'done' : 'idle',
+    };
+    editorBlocks = introDoc?.[introTab]?.blocks ?? [];
+  }
+
+  async function saveIntroTab(tab) {
+    introTabSaving = { ...introTabSaving, [tab]: true };
+    try {
+      await setDoc(doc(db, 'lessons', INTRO_LESSON_ID),
+        { [tab]: { ...(introDoc?.[tab] ?? {}), text: introTabText[tab] } },
+        { merge: true }
+      );
+      introDoc = { ...introDoc, [tab]: { ...(introDoc?.[tab] ?? {}), text: introTabText[tab] } };
+    } finally {
+      introTabSaving = { ...introTabSaving, [tab]: false };
+    }
+  }
+
+  async function generateIntroAudio(tab, { force = false } = {}) {
+    const isBlocks = !!(introDoc?.[tab]?.blocks?.length);
+    if (!isBlocks && !introTabText[tab]?.trim()) return;
+    if (!isBlocks) await saveIntroTab(tab);
+    introTabAudioStatus = { ...introTabAudioStatus, [tab]: 'generating' };
+    try {
+      const fn = httpsCallable(functions, 'generateOverviewAudio', { timeout: 540000 });
+      await fn({ lessonId: INTRO_LESSON_ID, part: tab, force });
+      introTabAudioStatus = { ...introTabAudioStatus, [tab]: 'done' };
+      const snap = await getDoc(doc(db, 'lessons', INTRO_LESSON_ID));
+      if (snap.exists()) introDoc = snap.data();
+    } catch (e) {
+      console.error('generateIntroAudio error:', e);
+      introTabAudioStatus = { ...introTabAudioStatus, [tab]: 'error' };
+    }
   }
 
   async function startNewChapter() {
@@ -496,6 +845,50 @@
     await updateDoc(doc(db, 'lessons', selectedLessonId), { status: 'aligned' });
     await selectLesson(selectedLessonId);
     await loadAllLessons();
+  }
+
+  async function alignSentence(i) {
+    if (!selectedLessonId) return;
+    clearTimeout(saveTimer);
+    await saveEdits();
+    sentenceAlignStatus = { ...sentenceAlignStatus, [i]: 'running' };
+    try {
+      const fn = httpsCallable(functions, 'alignGreekLesson', { timeout: 300000 });
+      await fn({ lessonId: selectedLessonId, sentenceIndex: i });
+      const snap = await getDoc(doc(db, 'lessons', selectedLessonId));
+      if (snap.exists()) {
+        selectedLesson = { lessonId: snap.id, ...snap.data() };
+        editedSentences = JSON.parse(JSON.stringify(snap.data().sentences));
+        dirtyIndices = new Set();
+      }
+      sentenceAlignStatus = { ...sentenceAlignStatus, [i]: 'done' };
+    } catch (e) {
+      console.error('alignSentence error:', e);
+      sentenceAlignStatus = { ...sentenceAlignStatus, [i]: 'error' };
+    }
+  }
+
+  async function voiceSentence(i) {
+    if (!selectedLessonId) return;
+    // Ensure audioGenerated: false is written so the CF doesn't skip
+    editedSentences[i] = { ...editedSentences[i], audioGenerated: false };
+    dirtyIndices = new Set([...dirtyIndices, i]);
+    clearTimeout(saveTimer);
+    await saveEdits();
+    sentenceVoiceStatus = { ...sentenceVoiceStatus, [i]: 'running' };
+    try {
+      const fn = httpsCallable(functions, 'generateGreekAudio');
+      await fn({ lessonId: selectedLessonId, sentenceIndex: i });
+      const snap = await getDoc(doc(db, 'lessons', selectedLessonId));
+      if (snap.exists()) {
+        selectedLesson = { lessonId: snap.id, ...snap.data() };
+        editedSentences = JSON.parse(JSON.stringify(snap.data().sentences));
+      }
+      sentenceVoiceStatus = { ...sentenceVoiceStatus, [i]: 'done' };
+    } catch (e) {
+      console.error('voiceSentence error:', e);
+      sentenceVoiceStatus = { ...sentenceVoiceStatus, [i]: 'error' };
+    }
   }
 
   async function acceptAndGenerateAudio() {
@@ -999,23 +1392,25 @@
     const ids = [...next];
     stdPickerSaving = true;
     try {
-      const chapterId = selectedLesson?.chapter_id;
-      await Promise.all([
-        chapterId && fetch('/dev/greek', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chapter_id: chapterId, grammar: ids })
-        }),
-        updateDoc(doc(db, 'lessons', selectedLessonId), {
-          standardIds: ids, updatedAt: serverTimestamp()
-        })
-      ]);
+      await updateDoc(doc(db, 'lessons', selectedLessonId), {
+        standardIds: ids, updatedAt: serverTimestamp()
+      });
       allLessons = allLessons.map(l =>
         l.lessonId === selectedLessonId ? { ...l, standardIds: ids } : l
       );
     } finally {
       stdPickerSaving = false;
     }
+  }
+
+  async function removeOrphanedStandard(stdId) {
+    if (!selectedLessonId) return;
+    const ids = (selectedLesson?.standardIds ?? []).filter(id => id !== stdId);
+    await updateDoc(doc(db, 'lessons', selectedLessonId), { standardIds: ids, updatedAt: serverTimestamp() });
+    lessonStandardIds = new Set(ids);
+    allLessons = allLessons.map(l =>
+      l.lessonId === selectedLessonId ? { ...l, standardIds: ids } : l
+    );
   }
 
   let vocabDirty = false;
@@ -1044,6 +1439,35 @@
       vocabDirty = false;
     } finally {
       vocabSaving = false;
+    }
+  }
+
+  async function saveGrammarText() {
+    if (!selectedLessonId) return;
+    grammarTextSaving = true;
+    try {
+      await updateDoc(doc(db, 'lessons', selectedLessonId), {
+        'grammar.text': grammarText, updatedAt: serverTimestamp()
+      });
+      selectedLesson = { ...selectedLesson, grammar: { ...(selectedLesson.grammar ?? {}), text: grammarText } };
+    } finally {
+      grammarTextSaving = false;
+    }
+  }
+
+  async function generateGrammarAudio() {
+    if (!selectedLessonId || !grammarText.trim()) return;
+    await saveGrammarText();
+    grammarAudioStatus = 'generating';
+    try {
+      const fn = httpsCallable(functions, 'generateOverviewAudio', { timeout: 540000 });
+      await fn({ lessonId: selectedLessonId, part: 'grammar' });
+      grammarAudioStatus = 'done';
+      const snap = await getDoc(doc(db, 'lessons', selectedLessonId));
+      selectedLesson = snap.exists() ? { lessonId: snap.id, ...snap.data() } : selectedLesson;
+    } catch (e) {
+      console.error('generateGrammarAudio error:', e);
+      grammarAudioStatus = 'error';
     }
   }
 
@@ -1437,11 +1861,158 @@
     }
   }
 
+  // ── Quiz functions ────────────────────────────────────────────────────────────
+  async function loadQuizData(lessonId) {
+    if (!lessonId) return;
+    quizStoredLoading = true;
+    passageStoredLoading = true;
+    try {
+      const [qSnap, pSnap] = await Promise.all([
+        getDocs(query(collection(db, 'greek_questions'), where('lessonId', '==', lessonId))),
+        getDocs(query(collection(db, 'greek_passage_quizzes'), where('lessonId', '==', lessonId)))
+      ]);
+      quizStoredQuestions = qSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+      passageStoredQuizzes = pSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+    } catch (e) {
+      console.error('loadQuizData error', e);
+    } finally {
+      quizStoredLoading = false;
+      passageStoredLoading = false;
+    }
+  }
+
+  async function generateQuizQuestion() {
+    if (!quizStandardId) return;
+    quizGenStatus = 'generating';
+    quizGenError = null;
+    quizPendingQuestion = null;
+    try {
+      const std = ngeStandardsById[quizStandardId];
+      const selectedId = quizSelectedExampleIds[quizStandardId];
+      const allExamples = ngeByStandard[quizStandardId] ?? [];
+      const selectedExample = selectedId
+        ? allExamples.find(q => q.id === selectedId)
+        : null;
+      const examples = selectedExample
+        ? [{ text: selectedExample.text, choices: selectedExample.choices, correct: selectedExample.correct }]
+        : [];
+      const fn = httpsCallable(functions, 'generateGreekQuestion');
+      const result = await fn({
+        standardId: quizStandardId,
+        standardDescription: std?.description ?? quizStandardId,
+        level: 'intro',
+        chapterTitle: selectedLesson?.title ? `Chapter ${selectedLesson.chapter}: ${selectedLesson.title}` : '',
+        directorNote: quizDirectorNotes[quizStandardId] ?? '',
+        exampleQuestions: examples
+      });
+      quizPendingQuestion = result.data.question;
+    } catch (e) {
+      quizGenError = e.message ?? 'Generation failed';
+    } finally {
+      quizGenStatus = 'idle';
+    }
+  }
+
+  async function approveQuizQuestion() {
+    if (!quizPendingQuestion || !selectedLessonId) return;
+    try {
+      await addDoc(collection(db, 'greek_questions'), {
+        ...quizPendingQuestion,
+        lessonId: selectedLessonId,
+        standardId: quizStandardId,
+        source: 'generated',
+        approvedAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+      quizPendingQuestion = null;
+      await loadQuizData(selectedLessonId);
+    } catch (e) {
+      quizGenError = e.message;
+    }
+  }
+
+  async function deleteQuizQuestion(docId) {
+    try {
+      await deleteDoc(doc(db, 'greek_questions', docId));
+      quizStoredQuestions = quizStoredQuestions.filter(q => q.id !== docId);
+    } catch (e) {
+      console.error('deleteQuizQuestion error', e);
+    }
+  }
+
+  async function saveQuizEdit(docId) {
+    if (!quizEditDraft) return;
+    try {
+      await updateDoc(doc(db, 'greek_questions', docId), {
+        ...quizEditDraft,
+        updatedAt: serverTimestamp()
+      });
+      quizStoredQuestions = quizStoredQuestions.map(q => q.id === docId ? { ...q, ...quizEditDraft } : q);
+      quizEditingId = null;
+      quizEditDraft = null;
+    } catch (e) {
+      console.error('saveQuizEdit error', e);
+    }
+  }
+
+  async function generatePassageQuiz() {
+    passageGenStatus = 'generating';
+    passageGenError = null;
+    passagePending = null;
+    try {
+      const fn = httpsCallable(functions, 'generateGreekPassageQuiz');
+      const result = await fn({
+        directorNote: passageDirectorNote,
+        chapterTitle: selectedLesson?.title ? `Chapter ${selectedLesson.chapter}: ${selectedLesson.title}` : '',
+        cumulativeVocab,
+        cumulativeGrammar,
+        standardsToTest: [...passageStandardsToTest]
+      });
+      passagePending = result.data;
+    } catch (e) {
+      passageGenError = e.message ?? 'Generation failed';
+    } finally {
+      passageGenStatus = 'idle';
+    }
+  }
+
+  async function approvePassageQuiz() {
+    if (!passagePending || !selectedLessonId) return;
+    try {
+      await addDoc(collection(db, 'greek_passage_quizzes'), {
+        lessonId: selectedLessonId,
+        level: 'intro',
+        ...passagePending.passage,
+        questions: passagePending.questions,
+        standardsTestedIds: [...passageStandardsToTest],
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      });
+      passagePending = null;
+      passageDirectorNote = '';
+      passageStandardsToTest = new Set();
+      await loadQuizData(selectedLessonId);
+    } catch (e) {
+      console.error('approvePassageQuiz error', e);
+    }
+  }
+
+  async function deletePassageQuiz(docId) {
+    try {
+      await deleteDoc(doc(db, 'greek_passage_quizzes', docId));
+      passageStoredQuizzes = passageStoredQuizzes.filter(q => q.id !== docId);
+    } catch (e) {
+      console.error('deletePassageQuiz error', e);
+    }
+  }
+
+  // Load quiz data reactively when quiz tab is activated
+  $: if (lessonPartTab === 'quiz' && selectedLessonId) loadQuizData(selectedLessonId);
+
   // ── Init ──────────────────────────────────────────────────────────────────────
   onMount(async () => {
     await Promise.all([
       loadStoryBible(),
-      loadAllStandards(),
       loadNgeVocab(),
       loadAllLessons(),
       loadVoices()
@@ -1513,7 +2084,7 @@
         </thead>
         <tbody class="divide-y divide-gray-100">
           {#each bibleChapters as ch}
-            {@const stdIds = coverageByChapter[ch.chapter_id.replace(/_.+$/, '')] ?? []}
+            {@const stdIds = coverageByChapter[ch.chapter_id] ?? []}
             <tr class="hover:bg-gray-50 align-top">
               <td class="px-3 py-2 text-gray-400">{ch.num}</td>
               <td class="px-3 py-2 font-medium text-gray-800">{ch.title}</td>
@@ -1616,37 +2187,19 @@
   <!-- Standards coverage -->
   <div class="bg-white rounded-xl border border-gray-200 p-5">
     <h2 class="font-semibold text-gray-800 mb-1">Standards Coverage</h2>
-    <p class="text-xs text-gray-400 mb-4">From standards_coverage.json — which chapters cover each standard.</p>
-    {#each [data.standardsCoverage ?? []] as allCoverage}
-      {@const covered = allCoverage.filter(s => s.status === 'covered')}
-      {@const atRisk  = allCoverage.filter(s => s.status === 'at_risk')}
-      <div class="flex gap-4 text-sm mb-4">
-        <span class="text-green-700 font-medium">{covered.length} covered</span>
-        {#if atRisk.length}
-          <span class="text-amber-600 font-medium">{atRisk.length} at risk</span>
-        {/if}
-      </div>
-      {#if atRisk.length}
-        <div class="mb-4 p-3 rounded-lg bg-amber-50 border border-amber-200">
-          <div class="text-xs font-semibold text-amber-700 uppercase tracking-wide mb-1">At Risk</div>
-          {#each atRisk as s}
-            <div class="text-sm text-amber-800">{s.id}{#if s.note} — <span class="text-amber-600">{s.note}</span>{/if}</div>
-          {/each}
-        </div>
-      {/if}
-      <div class="space-y-0.5">
-        {#each covered as s}
-          <div class="flex items-start gap-3 text-sm">
-            <span class="text-xs font-mono text-gray-500 shrink-0 w-40 truncate">{s.id}</span>
-            <div class="flex flex-wrap gap-1">
-              {#each s.chapters ?? [] as ch}
-                <span class="px-1.5 py-0 rounded bg-indigo-50 text-indigo-700 text-xs">{ch}</span>
-              {/each}
-            </div>
+    <p class="text-xs text-gray-400 mb-4">Derived from lesson standardIds — {Object.keys(coverageByStandard).length} standards covered across {allLessons.length} chapters.</p>
+    <div class="space-y-0.5">
+      {#each Object.entries(coverageByStandard).sort(([a],[b]) => a.localeCompare(b)) as [sid, chapters]}
+        <div class="flex items-start gap-3 text-sm">
+          <span class="text-xs font-mono text-gray-500 shrink-0 w-40 truncate">{sid}</span>
+          <div class="flex flex-wrap gap-1">
+            {#each chapters as ch}
+              <span class="px-1.5 py-0 rounded bg-indigo-50 text-indigo-700 text-xs">{ch}</span>
+            {/each}
           </div>
-        {/each}
-      </div>
-    {/each}
+        </div>
+      {/each}
+    </div>
   </div>
 
   <!-- Recompute -->
@@ -1686,6 +2239,17 @@
 
   <!-- Lesson tile strip -->
   <div class="flex flex-wrap gap-2 mb-6">
+    <!-- Intro pseudo-lesson -->
+    <button
+      on:click={selectIntroMode}
+      class="flex items-center gap-2 px-3 py-2 rounded-lg border text-sm transition-colors
+        {introMode
+          ? 'border-indigo-400 bg-indigo-50 text-indigo-800'
+          : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50'}"
+    >
+      <span class="font-semibold">Intro</span>
+    </button>
+
     {#each allLessons as lesson}
       <button
         on:click={() => selectLesson(lesson.lessonId)}
@@ -1713,7 +2277,7 @@
   </div>
 
   <!-- Editor -->
-  {#if !selectedLesson && !newChapterMode}
+  {#if !selectedLesson && !newChapterMode && !introMode}
     <div class="flex items-center justify-center h-48 text-gray-300 text-sm">
       Select a chapter above or generate a new one.
     </div>
@@ -1723,7 +2287,7 @@
     <!-- ── Part tabs — above both columns ── -->
     {#if selectedLesson}
       <div class="flex gap-1 mb-4 border-b border-gray-200">
-        {#each [['overview','S · Story'],['grammar','G · Grammar'],['story2','G · Greek'],['map','M · Map']] as [tab, label]}
+        {#each [['overview','S · Story'],['grammar','G · Grammar'],['flashcards','F · Flashcards'],['story2','G · Greek'],['map','M · Map'],['quiz','Q · Quiz']] as [tab, label]}
           <button
             on:click={() => lessonPartTab = tab}
             class="px-4 py-2 text-sm font-medium transition-colors
@@ -1731,6 +2295,18 @@
                 ? 'text-indigo-700 border-b-2 border-indigo-600 -mb-px'
                 : 'text-gray-500 hover:text-gray-800'}"
           >{label}</button>
+        {/each}
+      </div>
+    {:else if introMode}
+      <div class="flex gap-1 mb-4 border-b border-gray-200">
+        {#each INTRO_TABS as tab}
+          <button
+            on:click={() => { introTab = tab.id; editorBlocks = introDoc?.[tab.id]?.blocks ?? []; }}
+            class="px-4 py-2 text-sm font-medium transition-colors
+              {introTab === tab.id
+                ? 'text-indigo-700 border-b-2 border-indigo-600 -mb-px'
+                : 'text-gray-500 hover:text-gray-800'}"
+          >{tab.label}</button>
         {/each}
       </div>
     {/if}
@@ -2003,8 +2579,8 @@
 
         {/if}<!-- end story2 controls -->
 
-        <!-- Standards picker — chapter level (hidden on Greek tab) -->
-        {#if selectedLessonId && lessonPartTab !== 'story2'}
+        <!-- Standards picker — chapter level (hidden on Greek tab and intro mode) -->
+        {#if selectedLessonId && lessonPartTab !== 'story2' && !introMode}
           <div class="bg-white rounded-xl border border-gray-200 p-4">
             <div class="flex items-center justify-between mb-2">
               <h2 class="font-semibold text-gray-800 text-sm">Standards</h2>
@@ -2058,7 +2634,7 @@
         {/if}
 
         <!-- Delete chapter -->
-        {#if selectedLessonId}
+        {#if selectedLessonId && !introMode}
           <button
             on:click={async () => {
               if (!confirm(`Delete Chapter ${selectedLesson?.chapter}? This cannot be undone.`)) return;
@@ -2326,8 +2902,75 @@
 
         <!-- Grammar tab -->
         {:else if selectedLesson && lessonPartTab === 'grammar'}
-          <div class="bg-white rounded-xl border border-gray-200 p-5 flex items-center justify-center min-h-48">
-            <p class="text-gray-300 text-sm italic">Grammar lesson design — coming soon.</p>
+          <div class="space-y-4">
+
+            <!-- Grammar standards covered -->
+            {#if selectedLesson?.grammar?.standardIds?.length}
+              <div class="bg-white rounded-xl border border-gray-200 p-5">
+                <h2 class="font-semibold text-gray-800 mb-2">Standards</h2>
+                <div class="flex flex-wrap gap-2">
+                  {#each selectedLesson.grammar.standardIds as sid}
+                    <span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 text-xs rounded border border-indigo-200 font-mono">{sid}</span>
+                  {/each}
+                </div>
+                <p class="text-xs text-gray-400 mt-2">Generate lesson text: <code class="bg-gray-100 px-1 rounded">node scripts/gen-greek-grammar.mjs --chapter {selectedLesson.chapter_id}</code></p>
+              </div>
+            {/if}
+
+            <!-- Grammar text + audio -->
+            <div class="bg-white rounded-xl border border-gray-200 p-5">
+              <h2 class="font-semibold text-gray-800 mb-1">Grammar Lesson</h2>
+              <p class="text-xs text-gray-400 mb-3">Voice-ready English text read aloud on the Grammar tab. Use [short pause] markers for pacing.</p>
+              <textarea bind:value={grammarText} rows="12"
+                placeholder="Grammar lesson text with [short pause] markers…"
+                class="w-full border border-gray-300 rounded px-3 py-2 text-sm resize-y focus:outline-none focus:border-indigo-400 font-mono leading-relaxed"
+              ></textarea>
+              <div class="mt-3 flex items-center gap-3">
+                <button on:click={saveGrammarText} disabled={grammarTextSaving}
+                  class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50">
+                  {grammarTextSaving ? 'Saving…' : 'Save'}
+                </button>
+                {#if grammarAudioStatus === 'generating'}
+                  <span class="flex items-center gap-2 text-sm text-gray-500">
+                    <span class="inline-block w-4 h-4 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin"></span>
+                    Generating audio…
+                  </span>
+                {:else}
+                  <button on:click={generateGrammarAudio} disabled={!grammarText.trim()}
+                    class="px-4 py-2 border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium rounded-lg transition-colors disabled:opacity-50">
+                    {grammarAudioStatus === 'done' ? '↺ Regenerate Audio' : '▶ Generate Audio'}
+                  </button>
+                  {#if grammarAudioStatus === 'done'}
+                    <span class="text-xs text-green-600">Audio ready</span>
+                  {:else if grammarAudioStatus === 'error'}
+                    <span class="text-xs text-red-500">Audio failed</span>
+                  {/if}
+                {/if}
+              </div>
+              {#if selectedLesson?.grammar?.audioUrl}
+                <audio controls src={selectedLesson.grammar.audioUrl} class="mt-3 w-full h-8" />
+              {/if}
+            </div>
+
+          </div>
+
+        <!-- Flashcards tab -->
+        {:else if selectedLesson && lessonPartTab === 'flashcards'}
+          {@const grammarStdIds = (selectedLesson?.standardIds ?? []).filter(sid => sid.startsWith('lang.'))}
+          {@const flashSets = grammarStdIds.flatMap(sid => data.grammarFlashcards?.[sid]?.sets ?? [])}
+          <div class="bg-white rounded-xl border border-gray-200 p-5">
+            {#if flashSets.length}
+              <GrammarFlashcardExercise sets={flashSets} />
+            {:else}
+              <p class="text-sm text-gray-400 italic">No flashcard data for this lesson's grammar standards yet.</p>
+              {#if grammarStdIds.length}
+                <div class="mt-2 flex flex-wrap gap-1">
+                  {#each grammarStdIds as sid}
+                    <span class="px-2 py-0.5 bg-gray-100 text-gray-500 text-xs rounded font-mono">{sid}</span>
+                  {/each}
+                </div>
+              {/if}
+            {/if}
           </div>
 
         <!-- Map tab -->
@@ -2559,7 +3202,7 @@
                   <span class="text-sm font-medium text-gray-700">{selectedLesson.title}</span>
                 {/if}
               </div>
-              <span class="text-xs text-gray-400">Click a sentence to edit alignment</span>
+              <span class="text-xs text-gray-400">Click a sentence to edit</span>
             </div>
 
             <div class="space-y-4">
@@ -2574,17 +3217,26 @@
                     <div class="flex items-start gap-3 mb-2">
                       <span class="text-xs text-gray-300 font-mono mt-1 w-5 shrink-0 text-right">{i + 1}</span>
                       <div class="flex-1">
-                        <p class="text-gray-800 text-sm leading-relaxed mb-1">{sent.greek}</p>
-                        {#if normalizeStatus(selectedLesson?.status) !== 'accepted'}
-                          <input
-                            value={sent.english}
-                            on:input={e => { editedSentences[i] = { ...editedSentences[i], english: e.target.value }; markDirty(i); }}
-                            class="w-full text-sm text-gray-600 italic border-0 border-b border-dashed border-gray-300 bg-transparent focus:outline-none focus:border-indigo-400 py-0.5"
-                            placeholder="English translation..."
-                          />
+                        {#if isExpanded}
+                          <textarea
+                            value={sent.greek ?? ''}
+                            on:input={e => {
+                              editedSentences[i] = { ...editedSentences[i], greek: e.target.value, words: retokenize(e.target.value) };
+                              markDirty(i);
+                            }}
+                            rows="2"
+                            class="w-full text-gray-800 text-sm border border-gray-200 rounded px-2 py-1 focus:outline-none focus:border-indigo-400 resize-none mb-1"
+                          ></textarea>
                         {:else}
-                          <p class="text-sm text-gray-500 italic">{sent.english}</p>
+                          <p class="text-gray-800 text-sm leading-relaxed mb-1">{sent.greek}</p>
                         {/if}
+                        <input
+                          value={sent.english}
+                          on:input={e => { editedSentences[i] = { ...editedSentences[i], english: e.target.value }; markDirty(i); }}
+                          class="w-full text-sm text-gray-600 italic border-0 border-b border-dashed border-gray-300 bg-transparent focus:outline-none focus:border-indigo-400 py-0.5 {isExpanded ? '' : 'pointer-events-none'}"
+                          placeholder="English translation..."
+                          readonly={!isExpanded && normalizeStatus(selectedLesson?.status) === 'accepted'}
+                        />
                       </div>
                       <div class="flex items-center gap-2 shrink-0">
                         {#if audioOk}
@@ -2596,7 +3248,7 @@
                           <button
                             on:click={() => expandedSentence = isExpanded ? null : i}
                             class="text-xs text-gray-400 hover:text-indigo-600 transition-colors">
-                            {isExpanded ? 'Hide ▲' : 'Align ▼'}
+                            {isExpanded ? 'Hide ▲' : 'Edit ▼'}
                           </button>
                         {/if}
                       </div>
@@ -2605,7 +3257,8 @@
 
                   <!-- Word alignment table -->
                   {#if isExpanded}
-                    {@const isAccepted = normalizeStatus(selectedLesson?.status) === 'accepted'}
+                    {@const aStatus = sentenceAlignStatus[i] ?? 'idle'}
+                    {@const vStatus = sentenceVoiceStatus[i] ?? 'idle'}
                     <div class="border-t border-gray-100 overflow-x-auto">
                       <table class="w-full text-xs">
                         <thead class="bg-gray-50 text-gray-400 uppercase tracking-wide">
@@ -2625,51 +3278,61 @@
                               <td class="px-3 py-1.5 text-gray-300">{word.sentPos}</td>
                               <td class="px-3 py-1.5 font-medium text-gray-700">{word.text}</td>
                               <td class="px-3 py-1.5 text-gray-400 font-mono">{word.morph ?? '—'}</td>
-                              <!-- Pre Eng — read-only, derived -->
                               <td class="px-3 py-1.5 text-gray-400">{word.preEng ?? ''}</td>
-                              <!-- English word — dimmed, populated by Recompute -->
                               <td class="px-3 py-1.5 text-gray-300 italic">{word.english ?? '—'}</td>
-                              <!-- Pos — editable when aligned -->
                               <td class="px-3 py-1.5">
-                                {#if isAccepted}
-                                  <span class="text-gray-400">{word.engSentPos ?? '—'}</span>
-                                {:else}
-                                  <input type="number"
-                                    value={word.engSentPos ?? ''}
-                                    on:input={e => {
-                                      const v = e.target.value === '' ? null : parseInt(e.target.value);
-                                      editedSentences[i] = { ...editedSentences[i],
-                                        words: editedSentences[i].words.map((w, j) => j === wi ? { ...w, engSentPos: v } : w)
-                                      };
-                                      markDirty(i);
-                                    }}
-                                    class="w-12 border border-gray-200 rounded px-1 py-0.5 text-center text-gray-700 focus:outline-none focus:border-indigo-400"
-                                  />
-                                {/if}
+                                <input type="number"
+                                  value={word.engSentPos ?? ''}
+                                  on:input={e => {
+                                    const v = e.target.value === '' ? null : parseInt(e.target.value);
+                                    editedSentences[i] = { ...editedSentences[i],
+                                      words: editedSentences[i].words.map((w, j) => j === wi ? { ...w, engSentPos: v } : w)
+                                    };
+                                    markDirty(i);
+                                  }}
+                                  class="w-12 border border-gray-200 rounded px-1 py-0.5 text-center text-gray-700 focus:outline-none focus:border-indigo-400"
+                                />
                               </td>
-                              <!-- Post Eng — read-only, derived -->
                               <td class="px-3 py-1.5 text-gray-400">{word.postEng ?? ''}</td>
                             </tr>
                           {/each}
                         </tbody>
                       </table>
-                      {#if !isAccepted}
-                        <div class="px-3 py-2 border-t border-gray-100 flex justify-end">
+                      <div class="px-3 py-2 border-t border-gray-100 flex items-center justify-between gap-2">
+                        <div class="flex gap-2">
                           <button
-                            on:click={async () => {
-                              editedSentences[i] = recomputeAlignment(editedSentences[i]);
-                              editedSentences[i] = { ...editedSentences[i], audioGenerated: false };
-                              dirtyIndices = new Set([...dirtyIndices, i]);
-                              vocabScanList = null;
-                              clearTimeout(saveTimer);
-                              saveTimer = null;
-                              await saveEdits();
-                            }}
-                            class="text-xs px-3 py-1 rounded bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-colors">
-                            Recompute ↺
+                            on:click={() => alignSentence(i)}
+                            disabled={aStatus === 'running'}
+                            class="text-xs px-3 py-1 rounded border transition-colors disabled:opacity-50
+                              {aStatus === 'done' ? 'border-blue-300 bg-blue-50 text-blue-700' :
+                               aStatus === 'error' ? 'border-red-300 bg-red-50 text-red-600' :
+                               'border-blue-200 bg-blue-50 text-blue-600 hover:bg-blue-100'}">
+                            {aStatus === 'running' ? '…aligning' : aStatus === 'done' ? '✓ Aligned' : 'Re-align ↺'}
+                          </button>
+                          <button
+                            on:click={() => voiceSentence(i)}
+                            disabled={vStatus === 'running'}
+                            class="text-xs px-3 py-1 rounded border transition-colors disabled:opacity-50
+                              {vStatus === 'done' ? 'border-green-300 bg-green-50 text-green-700' :
+                               vStatus === 'error' ? 'border-red-300 bg-red-50 text-red-600' :
+                               'border-green-200 bg-green-50 text-green-600 hover:bg-green-100'}">
+                            {vStatus === 'running' ? '…voicing' : vStatus === 'done' ? '✓ Voiced' : 'Voice ↺'}
                           </button>
                         </div>
-                      {/if}
+                        <button
+                          on:click={async () => {
+                            editedSentences[i] = recomputeAlignment(editedSentences[i]);
+                            editedSentences[i] = { ...editedSentences[i], audioGenerated: false };
+                            dirtyIndices = new Set([...dirtyIndices, i]);
+                            vocabScanList = null;
+                            clearTimeout(saveTimer);
+                            saveTimer = null;
+                            await saveEdits();
+                          }}
+                          class="text-xs px-3 py-1 rounded bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-colors">
+                          Recompute ↺
+                        </button>
+                      </div>
                     </div>
                   {/if}
                 </div>
@@ -2932,7 +3595,7 @@
                         <span class="text-sm font-medium text-gray-700">{selectedLesson.title}</span>
                       {/if}
                     </div>
-                    <span class="text-xs text-gray-400">Click a sentence to edit alignment</span>
+                    <span class="text-xs text-gray-400">Click a sentence to edit</span>
                   </div>
                   <div class="space-y-4">
                     {#each editedSentences as sent, i}
@@ -2944,17 +3607,26 @@
                           <div class="flex items-start gap-3 mb-2">
                             <span class="text-xs text-gray-300 font-mono mt-1 w-5 shrink-0 text-right">{i + 1}</span>
                             <div class="flex-1">
-                              <p class="text-gray-800 text-sm leading-relaxed mb-1">{sent.greek}</p>
-                              {#if normalizeStatus(selectedLesson?.status) !== 'accepted'}
-                                <input
-                                  value={sent.english}
-                                  on:input={e => { editedSentences[i] = { ...editedSentences[i], english: e.target.value }; markDirty(i); }}
-                                  class="w-full text-sm text-gray-600 italic border-0 border-b border-dashed border-gray-300 bg-transparent focus:outline-none focus:border-indigo-400 py-0.5"
-                                  placeholder="English translation..."
-                                />
+                              {#if isExpanded}
+                                <textarea
+                                  value={sent.greek ?? ''}
+                                  on:input={e => {
+                                    editedSentences[i] = { ...editedSentences[i], greek: e.target.value, words: retokenize(e.target.value) };
+                                    markDirty(i);
+                                  }}
+                                  rows="2"
+                                  class="w-full text-gray-800 text-sm border border-gray-200 rounded px-2 py-1 focus:outline-none focus:border-indigo-400 resize-none mb-1"
+                                ></textarea>
                               {:else}
-                                <p class="text-sm text-gray-500 italic">{sent.english}</p>
+                                <p class="text-gray-800 text-sm leading-relaxed mb-1">{sent.greek}</p>
                               {/if}
+                              <input
+                                value={sent.english}
+                                on:input={e => { editedSentences[i] = { ...editedSentences[i], english: e.target.value }; markDirty(i); }}
+                                class="w-full text-sm text-gray-600 italic border-0 border-b border-dashed border-gray-300 bg-transparent focus:outline-none focus:border-indigo-400 py-0.5"
+                                placeholder="English translation..."
+                                readonly={!isExpanded && normalizeStatus(selectedLesson?.status) === 'accepted'}
+                              />
                             </div>
                             <div class="flex items-center gap-2 shrink-0">
                               {#if audioOk}
@@ -2964,13 +3636,14 @@
                               {/if}
                               <button on:click={() => expandedSentence = isExpanded ? null : i}
                                 class="text-xs text-gray-400 hover:text-indigo-600 transition-colors">
-                                {isExpanded ? 'Hide ▲' : 'Align ▼'}
+                                {isExpanded ? 'Hide ▲' : 'Edit ▼'}
                               </button>
                             </div>
                           </div>
                         </div>
                         {#if isExpanded}
-                          {@const isAccepted = normalizeStatus(selectedLesson?.status) === 'accepted'}
+                          {@const aStatus = sentenceAlignStatus[i] ?? 'idle'}
+                          {@const vStatus = sentenceVoiceStatus[i] ?? 'idle'}
                           <div class="border-t border-gray-100 overflow-x-auto">
                             <table class="w-full text-xs">
                               <thead class="bg-gray-50 text-gray-400 uppercase tracking-wide">
@@ -2993,44 +3666,58 @@
                                     <td class="px-3 py-1.5 text-gray-400">{word.preEng ?? ''}</td>
                                     <td class="px-3 py-1.5 text-gray-300 italic">{word.english ?? '—'}</td>
                                     <td class="px-3 py-1.5">
-                                      {#if isAccepted}
-                                        <span class="text-gray-400">{word.engSentPos ?? '—'}</span>
-                                      {:else}
-                                        <input type="number"
-                                          value={word.engSentPos ?? ''}
-                                          on:input={e => {
-                                            const v = e.target.value === '' ? null : parseInt(e.target.value);
-                                            editedSentences[i] = { ...editedSentences[i],
-                                              words: editedSentences[i].words.map((w, j) => j === wi ? { ...w, engSentPos: v } : w)
-                                            };
-                                            markDirty(i);
-                                          }}
-                                          class="w-12 border border-gray-200 rounded px-1 py-0.5 text-center text-gray-700 focus:outline-none focus:border-indigo-400"
-                                        />
-                                      {/if}
+                                      <input type="number"
+                                        value={word.engSentPos ?? ''}
+                                        on:input={e => {
+                                          const v = e.target.value === '' ? null : parseInt(e.target.value);
+                                          editedSentences[i] = { ...editedSentences[i],
+                                            words: editedSentences[i].words.map((w, j) => j === wi ? { ...w, engSentPos: v } : w)
+                                          };
+                                          markDirty(i);
+                                        }}
+                                        class="w-12 border border-gray-200 rounded px-1 py-0.5 text-center text-gray-700 focus:outline-none focus:border-indigo-400"
+                                      />
                                     </td>
                                     <td class="px-3 py-1.5 text-gray-400">{word.postEng ?? ''}</td>
                                   </tr>
                                 {/each}
                               </tbody>
                             </table>
-                            {#if !isAccepted}
-                              <div class="px-3 py-2 border-t border-gray-100 flex justify-end">
+                            <div class="px-3 py-2 border-t border-gray-100 flex items-center justify-between gap-2">
+                              <div class="flex gap-2">
                                 <button
-                                  on:click={async () => {
-                                    editedSentences[i] = recomputeAlignment(editedSentences[i]);
-                                    editedSentences[i] = { ...editedSentences[i], audioGenerated: false };
-                                    dirtyIndices = new Set([...dirtyIndices, i]);
-                                    vocabScanList = null;
-                                    clearTimeout(saveTimer);
-                                    saveTimer = null;
-                                    await saveEdits();
-                                  }}
-                                  class="text-xs px-3 py-1 rounded bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-colors">
-                                  Recompute ↺
+                                  on:click={() => alignSentence(i)}
+                                  disabled={aStatus === 'running'}
+                                  class="text-xs px-3 py-1 rounded border transition-colors disabled:opacity-50
+                                    {aStatus === 'done' ? 'border-blue-300 bg-blue-50 text-blue-700' :
+                                     aStatus === 'error' ? 'border-red-300 bg-red-50 text-red-600' :
+                                     'border-blue-200 bg-blue-50 text-blue-600 hover:bg-blue-100'}">
+                                  {aStatus === 'running' ? '…aligning' : aStatus === 'done' ? '✓ Aligned' : 'Re-align ↺'}
+                                </button>
+                                <button
+                                  on:click={() => voiceSentence(i)}
+                                  disabled={vStatus === 'running'}
+                                  class="text-xs px-3 py-1 rounded border transition-colors disabled:opacity-50
+                                    {vStatus === 'done' ? 'border-green-300 bg-green-50 text-green-700' :
+                                     vStatus === 'error' ? 'border-red-300 bg-red-50 text-red-600' :
+                                     'border-green-200 bg-green-50 text-green-600 hover:bg-green-100'}">
+                                  {vStatus === 'running' ? '…voicing' : vStatus === 'done' ? '✓ Voiced' : 'Voice ↺'}
                                 </button>
                               </div>
-                            {/if}
+                              <button
+                                on:click={async () => {
+                                  editedSentences[i] = recomputeAlignment(editedSentences[i]);
+                                  editedSentences[i] = { ...editedSentences[i], audioGenerated: false };
+                                  dirtyIndices = new Set([...dirtyIndices, i]);
+                                  vocabScanList = null;
+                                  clearTimeout(saveTimer);
+                                  saveTimer = null;
+                                  await saveEdits();
+                                }}
+                                class="text-xs px-3 py-1 rounded bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-colors">
+                                Recompute ↺
+                              </button>
+                            </div>
                           </div>
                         {/if}
                       </div>
@@ -3107,6 +3794,624 @@
 
           </div>
         {/if}<!-- end selectedLesson guard for story2 -->
+
+        <!-- ── Quiz tab ── -->
+        {:else if selectedLesson && lessonPartTab === 'quiz'}
+          <div class="space-y-5">
+
+            <!-- Mode toggle -->
+            <div class="flex gap-2">
+              {#each [['single','Single Questions'],['passage','Passage Quiz']] as [m, label]}
+                <button
+                  on:click={() => { quizMode = m; quizPendingQuestion = null; passagePending = null; }}
+                  class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors
+                    {quizMode === m ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}"
+                >{label}</button>
+              {/each}
+            </div>
+
+            <!-- ── SINGLE QUESTION MODE ── -->
+            {#if quizMode === 'single'}
+
+              {#if quizKnownStandardIds.length === 0 && quizOrphanedStandardIds.length === 0}
+                <p class="text-sm text-gray-400 italic">No standards tagged on this chapter yet. Add standards using the other tabs.</p>
+              {:else}
+
+                <!-- One row per standard — Generate button always visible -->
+                <div class="space-y-3">
+                  {#each quizKnownStandardIds as sid}
+                    {@const std = ngeStandardsById[sid]}
+                    {@const domain = std?.domain ?? sid.split('.')[0]}
+                    {@const storedForStd = quizStoredQuestions.filter(q => (q.standardId ?? q.standard_ids?.[0]) === sid)}
+                    {@const ngeExamples = ngeByStandard[sid] ?? []}
+                    {@const isGenerating = quizGenStatus === 'generating' && quizStandardId === sid}
+                    {@const hasPending = quizPendingQuestion && quizStandardId === sid}
+
+                    <div class="bg-white rounded-xl border {hasPending ? 'border-indigo-300' : 'border-gray-200'} overflow-hidden">
+
+                      <!-- Standard header row -->
+                      <div class="flex items-center gap-3 px-4 py-3">
+                        <span class="shrink-0 text-xs font-medium px-2 py-0.5 rounded-full
+                          {domain === 'geography'  ? 'bg-emerald-100 text-emerald-700'
+                          : domain === 'history'   ? 'bg-amber-100 text-amber-700'
+                          : domain === 'mythology' ? 'bg-purple-100 text-purple-700'
+                          : domain === 'alphabet'  ? 'bg-sky-100 text-sky-700'
+                          : domain === 'language'  ? 'bg-rose-100 text-rose-700'
+                          : domain === 'derivatives' ? 'bg-teal-100 text-teal-700'
+                          : 'bg-gray-100 text-gray-600'}">{domain}</span>
+                        <div class="flex-1 min-w-0">
+                          <span class="text-xs font-mono text-gray-400">{sid}</span>
+                          {#if std?.description}
+                            <p class="text-sm text-gray-700 truncate">{std.description}</p>
+                          {/if}
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                          {#if storedForStd.length > 0}
+                            <span class="text-xs text-gray-400">{storedForStd.length} saved</span>
+                          {/if}
+                          {#if isGenerating}
+                            <span class="flex items-center gap-1.5 text-xs text-indigo-500">
+                              <span class="inline-block w-3 h-3 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin"></span>
+                              Generating…
+                            </span>
+                          {/if}
+                        </div>
+                      </div>
+
+                      <!-- Director's note + model selection -->
+                      <div class="border-t border-gray-100 px-4 py-3 space-y-3">
+                        <div>
+                          <label class="text-xs font-medium text-gray-500 mb-1 block">Director's note</label>
+                          <textarea
+                            value={quizDirectorNotes[sid] ?? ''}
+                            on:input={e => quizDirectorNotes = { ...quizDirectorNotes, [sid]: e.target.value }}
+                            rows="2"
+                            placeholder="Specify what you want tested — angle, difficulty, context…"
+                            class="w-full border border-gray-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-indigo-400 resize-none"
+                          ></textarea>
+                        </div>
+
+                        <!-- NGE reference questions with radio selection -->
+                        {#if ngeExamples.length > 0}
+                          <div>
+                            <label class="text-xs font-medium text-gray-500 mb-1.5 block">
+                              Model question
+                              <span class="font-normal text-gray-400 ml-1">— select one to use as a style example (optional)</span>
+                            </label>
+                            <div class="space-y-2">
+                              {#each ngeExamples as q}
+                                {@const isSelected = (quizSelectedExampleIds[sid] ?? null) === q.id}
+                                <label class="flex items-start gap-2.5 cursor-pointer group">
+                                  <input
+                                    type="radio"
+                                    name="model-{sid}"
+                                    value={q.id}
+                                    checked={isSelected}
+                                    on:change={() => {
+                                      quizSelectedExampleIds = {
+                                        ...quizSelectedExampleIds,
+                                        [sid]: isSelected ? null : q.id
+                                      };
+                                    }}
+                                    class="mt-0.5 shrink-0 accent-indigo-600"
+                                  />
+                                  <div class="flex-1 min-w-0 rounded-lg p-2 -m-2 transition-colors {isSelected ? 'bg-indigo-50' : 'group-hover:bg-gray-50'}">
+                                    <div class="flex items-start gap-1.5 mb-1">
+                                      <span class="text-xs text-gray-400 font-mono shrink-0">Q{q.num}</span>
+                                      <p class="text-xs text-gray-800">{q.text}</p>
+                                      {#if q.needs_verification}<span class="shrink-0 text-xs text-amber-400" title="Needs verification">⚠</span>{/if}
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-x-4 ml-8">
+                                      {#each q.choices as c}
+                                        <span class="text-xs {c.id === q.correct ? 'text-green-600 font-medium' : 'text-gray-400'}">{c.id}) {c.text}</span>
+                                      {/each}
+                                    </div>
+                                  </div>
+                                </label>
+                              {/each}
+                              {#if quizSelectedExampleIds[sid]}
+                                <button
+                                  on:click={() => quizSelectedExampleIds = { ...quizSelectedExampleIds, [sid]: null }}
+                                  class="text-xs text-gray-400 hover:text-gray-600 pl-6"
+                                >✕ Clear selection</button>
+                              {/if}
+                            </div>
+                          </div>
+                        {/if}
+
+                        <!-- Generate button (moved here, next to inputs) -->
+                        <div class="flex items-center gap-3 pt-1">
+                          <button
+                            on:click={() => { quizStandardId = sid; quizPendingQuestion = null; quizGenError = null; generateQuizQuestion(); }}
+                            disabled={quizGenStatus === 'generating'}
+                            class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
+                          >
+                            {#if isGenerating}
+                              <span class="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                              Generating…
+                            {:else}
+                              + Generate Question
+                            {/if}
+                          </button>
+                          {#if quizGenError && quizStandardId === sid}
+                            <span class="text-xs text-red-500">{quizGenError}</span>
+                          {/if}
+                        </div>
+                      </div>
+
+                      <!-- Pending question editor (inline under its standard) -->
+                      {#if hasPending}
+                        <div class="border-t border-indigo-200 bg-indigo-50 p-4 space-y-3">
+                          <div class="flex items-center justify-between">
+                            <h3 class="text-sm font-semibold text-indigo-800">Review & Edit</h3>
+                            <button on:click={() => quizPendingQuestion = null} class="text-indigo-400 hover:text-indigo-600 text-sm">✕ Discard</button>
+                          </div>
+                          <div>
+                            <label class="text-xs text-indigo-600 font-medium mb-1 block">Question</label>
+                            <textarea bind:value={quizPendingQuestion.text} rows="2"
+                              class="w-full border border-indigo-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-indigo-500 bg-white"></textarea>
+                          </div>
+                          <div class="grid grid-cols-2 gap-2">
+                            {#each quizPendingQuestion.choices as choice, i}
+                              <div class="flex items-center gap-2">
+                                <input type="radio" name="pending-correct" value={choice.id}
+                                  bind:group={quizPendingQuestion.correct} class="shrink-0 accent-indigo-600" />
+                                <span class="text-xs text-gray-500 shrink-0">{choice.id})</span>
+                                <input type="text" bind:value={quizPendingQuestion.choices[i].text}
+                                  class="flex-1 border border-indigo-200 rounded px-2 py-1 text-sm focus:outline-none focus:border-indigo-400 bg-white" />
+                              </div>
+                            {/each}
+                          </div>
+                          <p class="text-xs text-indigo-600">Correct: {quizPendingQuestion.correct ?? '—'} · Click radio to change</p>
+                          <div>
+                            <label class="text-xs text-indigo-600 font-medium mb-1 block">Notes (optional)</label>
+                            <input type="text" bind:value={quizPendingQuestion.notes}
+                              class="w-full border border-indigo-200 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-indigo-400 bg-white" />
+                          </div>
+                          <button on:click={approveQuizQuestion}
+                            class="px-5 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors">
+                            ✓ Approve & Save
+                          </button>
+                        </div>
+                      {/if}
+
+                      <!-- Stored questions for this standard -->
+                      {#if storedForStd.length > 0}
+                        <div class="border-t border-gray-100 divide-y divide-gray-100">
+                          {#each storedForStd as q}
+                            <div class="px-4 py-3">
+                              {#if quizEditingId === q.id && quizEditDraft}
+                                <div class="space-y-2">
+                                  <textarea bind:value={quizEditDraft.text} rows="2"
+                                    class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-indigo-400" />
+                                  <div class="grid grid-cols-2 gap-2">
+                                    {#each quizEditDraft.choices as choice, i}
+                                      <div class="flex items-center gap-1.5">
+                                        <input type="radio" name="edit-correct-{q.id}" value={choice.id}
+                                          bind:group={quizEditDraft.correct} class="shrink-0 accent-indigo-600" />
+                                        <span class="text-xs text-gray-500 shrink-0">{choice.id})</span>
+                                        <input type="text" bind:value={quizEditDraft.choices[i].text}
+                                          class="flex-1 border border-gray-200 rounded px-2 py-1 text-xs focus:outline-none focus:border-indigo-400" />
+                                      </div>
+                                    {/each}
+                                  </div>
+                                  <div class="flex gap-2">
+                                    <button on:click={() => saveQuizEdit(q.id)}
+                                      class="px-4 py-1.5 bg-indigo-600 text-white text-xs rounded-lg hover:bg-indigo-700">Save</button>
+                                    <button on:click={() => { quizEditingId = null; quizEditDraft = null; }}
+                                      class="px-4 py-1.5 text-gray-600 text-xs rounded-lg hover:bg-gray-100">Cancel</button>
+                                  </div>
+                                </div>
+                              {:else}
+                                <div class="flex items-start gap-2">
+                                  <div class="flex-1 min-w-0">
+                                    <p class="text-sm text-gray-800 mb-1">{q.text}</p>
+                                    <div class="grid grid-cols-2 gap-x-4 gap-y-0">
+                                      {#each (q.choices ?? []) as choice}
+                                        <span class="text-xs {choice.id === q.correct ? 'text-green-700 font-medium' : 'text-gray-400'}">
+                                          {choice.id}) {choice.text}
+                                        </span>
+                                      {/each}
+                                    </div>
+                                  </div>
+                                  <div class="flex gap-1 shrink-0 mt-0.5">
+                                    <button on:click={() => { quizEditingId = q.id; quizEditDraft = JSON.parse(JSON.stringify(q)); }}
+                                      class="text-xs text-gray-400 hover:text-indigo-600 px-2 py-0.5 rounded hover:bg-indigo-50">Edit</button>
+                                    <button on:click={() => deleteQuizQuestion(q.id)}
+                                      class="text-xs text-gray-400 hover:text-red-500 px-2 py-0.5 rounded hover:bg-red-50">Delete</button>
+                                  </div>
+                                </div>
+                              {/if}
+                            </div>
+                          {/each}
+                        </div>
+                      {/if}
+
+                    </div><!-- end standard card -->
+                  {/each}
+                </div>
+
+                <!-- Orphaned standard IDs: in Firestore but not in the NGE standards index -->
+                {#if quizOrphanedStandardIds.length > 0}
+                  <div class="mt-3 p-3 rounded-lg bg-amber-50 border border-amber-200">
+                    <p class="text-xs font-semibold text-amber-700 mb-2">Unrecognized standard IDs — remove to clean up</p>
+                    <div class="flex flex-wrap gap-2">
+                      {#each quizOrphanedStandardIds as sid}
+                        <div class="flex items-center gap-1.5 px-2 py-1 rounded bg-white border border-amber-300">
+                          <span class="text-xs font-mono text-amber-800">{sid}</span>
+                          <button on:click={() => removeOrphanedStandard(sid)}
+                            class="text-amber-400 hover:text-red-500 transition-colors text-xs leading-none">✕</button>
+                        </div>
+                      {/each}
+                    </div>
+                  </div>
+                {/if}
+
+              {/if}<!-- end quizChapterStandardIds check -->
+
+            <!-- ── PASSAGE QUIZ MODE ── -->
+            {:else if quizMode === 'passage'}
+
+              <div class="space-y-4">
+                <!-- Context summary -->
+                <div class="bg-gray-50 rounded-xl border border-gray-200 p-4">
+                  <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Cumulative Context</h3>
+                  <p class="text-sm text-gray-700">
+                    Grammar through ch_{selectedLesson?.chapter_id ?? '?'}: {cumulativeGrammar.length} standards ·
+                    {cumulativeVocab.length} intro vocab words
+                  </p>
+                </div>
+
+                <!-- Director's note -->
+                <div class="bg-white rounded-xl border border-gray-200 p-4 space-y-3">
+                  <div>
+                    <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">Director's Note</label>
+                    <p class="text-xs text-gray-400 mb-2">Describe the topic, characters, or scenario for the passage. Claude will use only cumulative vocabulary and grammar.</p>
+                    <textarea
+                      bind:value={passageDirectorNote}
+                      rows="3"
+                      placeholder="e.g. A student asks their teacher about the gods. Use Phoebe, Dolios, and Pallas. Focus on basic present-tense statements."
+                      class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-indigo-400 resize-none"
+                    ></textarea>
+                  </div>
+
+                  <!-- Standards to test -->
+                  <div>
+                    <label class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 block">Standards to Test (language)</label>
+                    <div class="flex flex-wrap gap-1.5">
+                      {#each quizChapterStandardIds.filter(s => s.startsWith('lang.')) as sid}
+                        <button
+                          on:click={() => {
+                            const next = new Set(passageStandardsToTest);
+                            if (next.has(sid)) next.delete(sid); else next.add(sid);
+                            passageStandardsToTest = next;
+                          }}
+                          class="px-2.5 py-1 rounded-full text-xs font-medium border transition-colors
+                            {passageStandardsToTest.has(sid)
+                              ? 'bg-rose-600 text-white border-rose-600'
+                              : 'bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100'}"
+                        >{sid}</button>
+                      {/each}
+                    </div>
+                  </div>
+
+                  <!-- Generate button -->
+                  <div class="flex items-center gap-3">
+                    <button
+                      on:click={generatePassageQuiz}
+                      disabled={!passageDirectorNote.trim() || passageGenStatus === 'generating'}
+                      class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
+                    >
+                      {#if passageGenStatus === 'generating'}
+                        <span class="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                        Generating passage…
+                      {:else}
+                        + Generate Passage Quiz
+                      {/if}
+                    </button>
+                    {#if passageGenError}
+                      <span class="text-xs text-red-500">{passageGenError}</span>
+                    {/if}
+                  </div>
+                </div>
+
+                <!-- Pending passage display -->
+                {#if passagePending}
+                  <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 space-y-4">
+                    <div class="flex items-center justify-between">
+                      <h3 class="text-sm font-semibold text-indigo-800">{passagePending.passage.title || 'Generated Passage'}</h3>
+                      <button on:click={() => passagePending = null} class="text-indigo-400 hover:text-indigo-600 text-sm">✕ Discard</button>
+                    </div>
+
+                    <!-- Passage lines with word annotation hover -->
+                    <div class="bg-white rounded-lg border border-indigo-100 p-3 space-y-1.5">
+                      {#each (passagePending.passage.lines ?? []) as line}
+                        <div class="flex gap-3 text-sm">
+                          <span class="text-xs text-gray-400 font-mono w-4 shrink-0 mt-0.5">{line.num}</span>
+                          <p class="text-gray-800 leading-relaxed">
+                            {#each line.greek.split(/(\s+)/) as token}
+                              {#if token.trim()}
+                                {@const annotation = passagePending.passage.wordAnnotations?.[token.trim()]}
+                                {#if annotation}
+                                  <span class="relative group cursor-help underline decoration-dotted decoration-indigo-400">
+                                    {token}
+                                    <span class="absolute bottom-full left-0 mb-1 px-2 py-1 bg-indigo-700 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                                      {annotation.shortDef}
+                                    </span>
+                                  </span>
+                                {:else}
+                                  {token}
+                                {/if}
+                              {:else}
+                                {token}
+                              {/if}
+                            {/each}
+                          </p>
+                        </div>
+                      {/each}
+                    </div>
+
+                    <!-- Questions -->
+                    <div class="space-y-3">
+                      <h4 class="text-xs font-semibold text-indigo-700 uppercase tracking-wide">Questions ({passagePending.questions.length})</h4>
+                      {#each passagePending.questions as q, qi}
+                        <div class="bg-white rounded-lg border border-indigo-100 p-3 space-y-2">
+                          <textarea
+                            bind:value={passagePending.questions[qi].text}
+                            rows="2"
+                            class="w-full border border-indigo-200 rounded px-2 py-1.5 text-sm focus:outline-none focus:border-indigo-400"
+                          ></textarea>
+                          <div class="grid grid-cols-2 gap-1.5">
+                            {#each q.choices as choice, ci}
+                              <div class="flex items-center gap-1.5">
+                                <input type="radio" name="passage-correct-{qi}" value={choice.id}
+                                  bind:group={passagePending.questions[qi].correct} class="shrink-0 accent-indigo-600" />
+                                <span class="text-xs text-gray-500 shrink-0">{choice.id})</span>
+                                <input type="text" bind:value={passagePending.questions[qi].choices[ci].text}
+                                  class="flex-1 border border-gray-200 rounded px-1.5 py-1 text-xs focus:outline-none focus:border-indigo-400" />
+                              </div>
+                            {/each}
+                          </div>
+                        </div>
+                      {/each}
+                    </div>
+
+                    <button
+                      on:click={approvePassageQuiz}
+                      class="px-5 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors"
+                    >✓ Approve & Save All</button>
+                  </div>
+                {/if}
+
+                <!-- Stored passage quizzes -->
+                {#if passageStoredLoading}
+                  <p class="text-xs text-gray-400">Loading…</p>
+                {:else if passageStoredQuizzes.length > 0}
+                  <div class="space-y-2">
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Saved Passage Quizzes ({passageStoredQuizzes.length})</h3>
+                    {#each passageStoredQuizzes as pq}
+                      <div class="bg-white rounded-xl border border-gray-200 p-4">
+                        <div class="flex items-start justify-between gap-2 mb-3">
+                          <p class="text-sm font-medium text-gray-800">{pq.title || 'Untitled passage'}</p>
+                          <button on:click={() => deletePassageQuiz(pq.id)}
+                            class="text-xs text-gray-400 hover:text-red-500 px-2 py-0.5 rounded hover:bg-red-50 transition-colors shrink-0">Delete</button>
+                        </div>
+                        <p class="text-xs text-gray-500">{(pq.lines ?? []).length} lines · {(pq.questions ?? []).length} questions</p>
+                      </div>
+                    {/each}
+                  </div>
+                {/if}
+
+              </div><!-- end passage mode -->
+
+            {/if}<!-- end quizMode -->
+
+          </div><!-- end quiz tab -->
+
+        {:else if introMode}
+          <div class="space-y-4">
+            <div class="bg-white rounded-xl border border-gray-200 p-5">
+              <h2 class="font-semibold text-gray-800 mb-3">
+                {INTRO_TABS.find(t => t.id === introTab)?.label ?? introTab}
+              </h2>
+
+              {#if introDoc?.[introTab]?.blocks != null}
+                <!-- ── Block composer ── -->
+                <div class="space-y-3 mb-4">
+                  {#each editorBlocks as block, bi}
+                    <div class="border border-gray-200 rounded-lg p-3 bg-gray-50">
+                      <div class="flex items-center gap-2 mb-2">
+                        <span class="text-xs font-mono text-gray-400 uppercase">{block.type}</span>
+                        <div class="ml-auto flex gap-1">
+                          <button on:click={() => blockUp(bi)} class="px-1.5 py-0.5 text-xs text-gray-500 hover:text-gray-800 disabled:opacity-30" disabled={bi === 0}>↑</button>
+                          <button on:click={() => blockDown(bi)} class="px-1.5 py-0.5 text-xs text-gray-500 hover:text-gray-800 disabled:opacity-30" disabled={bi === editorBlocks.length - 1}>↓</button>
+                          <button on:click={() => removeBlock(bi)} class="px-1.5 py-0.5 text-xs text-red-400 hover:text-red-600">×</button>
+                        </div>
+                      </div>
+
+                      {#if block.type === 'heading'}
+                        <div class="flex items-center gap-1 mb-1.5">
+                          {#each [['voiced','🔊'],['display','👁'],['both','🔊👁']] as [mode, icon]}
+                            <button on:click={() => setHeadingMode(bi, mode)}
+                              class="px-2 py-0.5 text-xs rounded {headingMode(block) === mode ? 'bg-indigo-100 text-indigo-700 font-semibold' : 'text-gray-400 hover:text-gray-600'}">
+                              {icon}
+                            </button>
+                          {/each}
+                          <select bind:value={editorBlocks[bi].style}
+                            class="ml-auto border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none">
+                            {#each HEADING_STYLES as s}<option value={s}>{s}</option>{/each}
+                          </select>
+                        </div>
+                        <input bind:value={editorBlocks[bi].text} placeholder="Heading text…"
+                          class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-indigo-400" />
+                        {#if headingMode(block) === 'both'}
+                          <input bind:value={editorBlocks[bi].voiced} placeholder="Voiced text (different from heading)…"
+                            class="w-full mt-1 border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-indigo-400 font-mono italic" />
+                        {/if}
+
+                      {:else if block.type === 'paragraph'}
+                        <div class="flex items-center gap-1 mb-1.5">
+                          {#each [['voiced','🔊'],['display','👁'],['both','🔊👁']] as [mode, icon]}
+                            <button on:click={() => setParaMode(bi, mode)}
+                              class="px-2 py-0.5 text-xs rounded {paraMode(block) === mode ? 'bg-indigo-100 text-indigo-700 font-semibold' : 'text-gray-400 hover:text-gray-600'}">
+                              {icon}
+                            </button>
+                          {/each}
+                          <select bind:value={editorBlocks[bi].style}
+                            class="ml-auto border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none">
+                            {#each PARA_STYLES as s}<option value={s}>{s || '(none)'}</option>{/each}
+                          </select>
+                        </div>
+                        {#if paraMode(block) !== 'display'}
+                          <textarea bind:value={editorBlocks[bi].voiced} rows="3" placeholder="Voiced text…"
+                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm resize-y focus:outline-none focus:border-indigo-400 font-mono leading-relaxed {paraMode(block) === 'both' ? 'mb-1' : ''}"
+                          ></textarea>
+                        {/if}
+                        {#if paraMode(block) !== 'voiced'}
+                          <textarea bind:value={editorBlocks[bi].display} rows="3" placeholder="{paraMode(block) === 'display' ? 'Display only (not voiced)…' : 'Display text (what the student sees)…'}"
+                            class="w-full border border-gray-300 rounded px-2 py-1 text-sm resize-y focus:outline-none focus:border-indigo-400 font-mono leading-relaxed italic"
+                          ></textarea>
+                        {/if}
+
+                      {:else if block.type === 'table'}
+                        <!-- Column headers -->
+                        <div class="flex gap-1 mb-1 items-center">
+                          <span class="text-xs text-gray-400 w-16 shrink-0">Headers:</span>
+                          {#each (block.headers ?? []) as _h, ci}
+                            <input bind:value={editorBlocks[bi].headers[ci]} placeholder="Col {ci+1}"
+                              class="w-24 border border-gray-300 rounded px-1.5 py-0.5 text-xs focus:outline-none focus:border-indigo-400" />
+                            <button on:click={() => removeCol(bi, ci)} class="text-xs text-red-400 hover:text-red-600 px-1">×</button>
+                          {/each}
+                          <button on:click={() => addCol(bi)} class="text-xs text-indigo-500 hover:text-indigo-700 px-2">+ Col</button>
+                        </div>
+                        <!-- Rows -->
+                        {#each block.rows as row, ri}
+                          <div class="flex gap-1 mb-2 items-start">
+                            <span class="text-xs text-gray-400 w-16 shrink-0 pt-1">Row {ri+1}:</span>
+                            <div class="flex-1 space-y-1">
+                              <div class="flex gap-1 flex-wrap">
+                                {#each row.cells as cell, ci}
+                                  <div class="border border-gray-200 rounded p-1.5 bg-white min-w-[140px] flex-1">
+                                    <div class="flex items-center gap-0.5 mb-1">
+                                      <button on:click={() => toggleCellVoiced(bi, ri, ci)}
+                                        class="px-1.5 py-0.5 text-xs rounded {cellMode(cell) !== 'display' ? 'bg-indigo-100 text-indigo-700' : 'text-gray-300 hover:text-gray-500'}"
+                                        title="Toggle voice">🔊</button>
+                                      <button on:click={() => toggleCellDisplay(bi, ri, ci)}
+                                        class="px-1.5 py-0.5 text-xs rounded {cellMode(cell) !== 'voiced' ? 'bg-indigo-100 text-indigo-700' : 'text-gray-300 hover:text-gray-500'}"
+                                        title="Toggle display">👁</button>
+                                      <select value={cell.style ?? ''} on:change={e => updateCell(bi, ri, ci, 'style', e.target.value)}
+                                        class="ml-auto border border-gray-200 rounded px-1 py-0.5 text-xs focus:outline-none">
+                                        {#each CELL_STYLES as s}<option value={s}>{s || '—'}</option>{/each}
+                                      </select>
+                                    </div>
+                                    {#if cellMode(cell) === 'both'}
+                                      <input value={cell.display ?? ''} on:input={e => updateCell(bi, ri, ci, 'display', e.target.value)}
+                                        placeholder="Display…" class="w-full border border-gray-200 rounded px-1.5 py-0.5 text-xs mb-0.5 focus:outline-none focus:border-indigo-300" />
+                                      <input value={cell.voiced ?? ''} on:input={e => updateCell(bi, ri, ci, 'voiced', e.target.value)}
+                                        placeholder="Voiced…" class="w-full border border-gray-200 rounded px-1.5 py-0.5 text-xs focus:outline-none focus:border-indigo-300 font-mono" />
+                                    {:else if cellMode(cell) === 'display'}
+                                      <input value={cell.display ?? ''} on:input={e => updateCell(bi, ri, ci, 'display', e.target.value)}
+                                        placeholder="Display only…" class="w-full border border-gray-200 rounded px-1.5 py-0.5 text-xs focus:outline-none focus:border-indigo-300 italic" />
+                                    {:else}
+                                      <input value={cell.voiced ?? ''} on:input={e => updateCell(bi, ri, ci, 'voiced', e.target.value)}
+                                        placeholder="Voiced…" class="w-full border border-gray-200 rounded px-1.5 py-0.5 text-xs focus:outline-none focus:border-indigo-300 font-mono" />
+                                    {/if}
+                                  </div>
+                                {/each}
+                              </div>
+                            </div>
+                            <button on:click={() => removeRow(bi, ri)} class="text-xs text-red-400 hover:text-red-600 pt-1">×</button>
+                          </div>
+                        {/each}
+                        <button on:click={() => addRow(bi)} class="text-xs text-indigo-500 hover:text-indigo-700">+ Row</button>
+                      {/if}
+                    </div>
+                  {/each}
+                </div>
+
+                <!-- Add block toolbar -->
+                <div class="flex gap-2 mb-4">
+                  <button on:click={() => editorBlocks = [...editorBlocks, newHeading()]}
+                    class="px-3 py-1.5 border border-gray-300 hover:bg-gray-50 text-gray-600 text-xs rounded-lg">+ Heading</button>
+                  <button on:click={() => editorBlocks = [...editorBlocks, newParagraph()]}
+                    class="px-3 py-1.5 border border-gray-300 hover:bg-gray-50 text-gray-600 text-xs rounded-lg">+ Paragraph</button>
+                  <button on:click={() => editorBlocks = [...editorBlocks, newTable()]}
+                    class="px-3 py-1.5 border border-gray-300 hover:bg-gray-50 text-gray-600 text-xs rounded-lg">+ Table</button>
+                </div>
+
+                <!-- Save + audio -->
+                <div class="flex items-center gap-3">
+                  <button on:click={() => saveIntroTabBlocks(introTab)} disabled={editorBlocksSaving}
+                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50">
+                    {editorBlocksSaving ? 'Saving…' : 'Save Blocks'}
+                  </button>
+                  {#if editorBlocksSaveStatus === 'saved'}
+                    <span class="text-xs text-green-600 font-medium">✓ Saved</span>
+                  {:else if editorBlocksSaveStatus === 'error'}
+                    <span class="text-xs text-red-500 font-medium">✗ Save failed — check console</span>
+                  {/if}
+                  {#if introTabAudioStatus[introTab] === 'generating'}
+                    <span class="flex items-center gap-2 text-sm text-gray-500">
+                      <span class="inline-block w-4 h-4 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin"></span>
+                      Generating audio…
+                    </span>
+                  {:else}
+                    <button on:click={() => generateIntroAudio(introTab)}
+                      class="px-4 py-2 border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium rounded-lg transition-colors">
+                      {introTabAudioStatus[introTab] === 'done' ? '↺ Regenerate Audio' : '▶ Generate Audio'}
+                    </button>
+                    {#if introTabAudioStatus[introTab] === 'done'}
+                      <button on:click={() => generateIntroAudio(introTab, { force: true })}
+                        class="px-3 py-2 border border-orange-300 hover:bg-orange-50 text-orange-600 text-sm font-medium rounded-lg transition-colors"
+                        title="Re-record all sections even if text is unchanged">
+                        ↺ Force re-record
+                      </button>
+                      <span class="text-xs text-green-600">Audio ready</span>
+                    {:else if introTabAudioStatus[introTab] === 'error'}
+                      <span class="text-xs text-red-500">Audio failed</span>
+                    {/if}
+                  {/if}
+                </div>
+
+              {:else}
+                <!-- ── Textarea fallback + convert button ── -->
+                <p class="text-xs text-gray-400 mb-3">Voice-ready text. Use [short pause] for pacing.</p>
+                <textarea bind:value={introTabText[introTab]} rows="14"
+                  placeholder="{INTRO_TABS.find(t => t.id === introTab)?.label} text…"
+                  class="w-full border border-gray-300 rounded px-3 py-2 text-sm resize-y focus:outline-none focus:border-indigo-400 font-mono leading-relaxed"
+                ></textarea>
+                <div class="mt-3 flex items-center gap-3 flex-wrap">
+                  <button on:click={() => saveIntroTab(introTab)} disabled={introTabSaving[introTab]}
+                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50">
+                    {introTabSaving[introTab] ? 'Saving…' : 'Save'}
+                  </button>
+                  <button on:click={() => { convertToBlocks(introTab); saveIntroTabBlocks(introTab); }}
+                    class="px-4 py-2 border border-indigo-300 hover:bg-indigo-50 text-indigo-600 text-sm font-medium rounded-lg transition-colors">
+                    Convert to blocks →
+                  </button>
+                  {#if introTabAudioStatus[introTab] === 'generating'}
+                    <span class="flex items-center gap-2 text-sm text-gray-500">
+                      <span class="inline-block w-4 h-4 border-2 border-indigo-400 border-t-transparent rounded-full animate-spin"></span>
+                      Generating audio…
+                    </span>
+                  {:else}
+                    <button on:click={() => generateIntroAudio(introTab)} disabled={!introTabText[introTab]?.trim()}
+                      class="px-4 py-2 border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium rounded-lg transition-colors disabled:opacity-50">
+                      {introTabAudioStatus[introTab] === 'done' ? '↺ Regenerate Audio' : '▶ Generate Audio'}
+                    </button>
+                    {#if introTabAudioStatus[introTab] === 'done'}
+                      <span class="text-xs text-green-600">Audio ready</span>
+                    {:else if introTabAudioStatus[introTab] === 'error'}
+                      <span class="text-xs text-red-500">Audio failed</span>
+                    {/if}
+                  {/if}
+                </div>
+                {#if introDoc?.[introTab]?.audioUrl}
+                  <audio controls src={introDoc[introTab].audioUrl} class="mt-3 w-full h-8" />
+                {/if}
+              {/if}
+            </div>
+          </div>
 
         {/if}<!-- end overview/grammar/story/story2/map -->
       </div>

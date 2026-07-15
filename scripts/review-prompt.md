@@ -3,82 +3,87 @@
 ## How to use this
 Paste this into a new Claude Code session (or open this file as context). Then tell Claude which year to review, e.g.:
 
-> "Review 2021 questions using this prompt."
+> "Debug 2019 questions using this prompt."
 
 ---
 
 ## Project Context
-Read `scripts/agent-brief.md` first — it has the full project context. Key points:
 - SvelteKit + Svelte 5, Tailwind CSS 4, Firebase
 - Goal: pixel-accurate recreation of TestNav digital exam questions
-- Source of truth for each question: `data/items/<itemID>/` (PNG + HTML)
 - Question JSON files: `data/g4-math_<year>_questions.json`
 - Component files: `src/lib/components/questions/`
 - Generator registry: `src/lib/utils/generators.js` (flat, keyed by item_id)
 - Grading registry: `src/lib/utils/grading.js`
-- Dev preview: `/dev/preview` (side-by-side component vs. PNG reference)
+- Dev preview: `/dev/preview` (side-by-side component vs. reference; year dropdown + question strip)
+
+**Status: All questions and generators are built. This is a debugging session.**
 
 ---
 
-## Task
-Review all 20 questions for the target year. For each question, work through the checklist below. Fix issues as you find them. Build must pass before moving to the next question.
+## What to debug
+
+All the questions, generators, and graders are already implemented. The task is to find and fix bugs — things that look wrong in the dev preview or misbehave during student interaction. Do NOT rebuild or refactor unless a fix genuinely requires it.
+
+Common bug categories:
+- Generator produces wrong correct_answer (math error, fraction simplification mistake)
+- Distractor is degenerate (same value as correct, or unreachable)
+- Grader accepts wrong answers or rejects correct ones
+- Component renders wrong initial state (e.g. pre-filled answer, wrong pre-placed marks)
+- Component doesn't reset when parent clears `answer` (add `$: if (value === null) { ... }`)
+- Missing `stimulus_intro` or wrong `question_text` vs. what the digital item shows
+- Label mismatch between JSON data and component tick labels (e.g. "1[1/2]" vs "1[2/4]")
 
 ---
 
-## Per-Question Checklist
+## Per-Question Debug Checklist
 
-### 1. Read the source
-- Read `data/items/<itemID>/<itemID>.png` — understand the visual layout
-- Read `data/items/<itemID>/<itemID>.html` — extract exact question text, options, labels, instructions
+### 1. Open the dev preview
+Navigate to `/dev/preview`, select the year, click the question. Observe:
+- Does the component render correctly (layout, text, stimulus)?
+- Does interaction work (drag, click, type)?
+- Does the generated variant look correct?
+- Does grading produce the right result after submitting?
 
-### 2. Verify the JSON
-Open `data/g4-math_<year>_questions.json` and check the question's entry:
-- `question_text` matches HTML exactly (including line breaks, fractions in `[n/d]` notation)
-- `answer_options` letters/text match HTML exactly
-- `correct_answer` matches the CSV source of truth: `data/4th_grade_standards_released_questions.xlsx - All Years Combined.csv`
-- `stimulus_type`, `stimulus_params` match the visual stimulus in the PNG
-- `parts` structure (for multi-part questions) matches HTML exactly
-- `statements`, `sentences`, `dropdowns`, `tiles`, `rows` etc. match HTML exactly
+If something looks wrong, read the relevant source files to diagnose.
 
-### 3. Verify the generator
-Find the generator in `src/lib/utils/generators.js` (keyed by `item_id`):
-- Run it mentally or via `node -e "const {generate} = await import('./src/lib/utils/generators.js'); console.log(JSON.stringify(generate('<itemID>'), null, 2))"` a few times
-- The generated `correct_answer` is always mathematically correct
-- All distractors are pedagogically motivated (each = a named student misconception)
-- No degenerate outputs (division by zero, negative counts, duplicate options, etc.)
-- Parameter ranges are appropriate for Grade 4
-- People/names vary via the PEOPLE array where applicable
+### 2. Quick source check (only if needed)
+- `data/items/<itemID>/<itemID>.png` — visual reference
+- `data/items/<itemID>/<itemID>.html` — exact text from digital item
+- `data/4th_grade_standards_released_questions.xlsx - All Years Combined.csv` — correct_answer source of truth
 
-### 4. Verify grading
-Find the grader in `src/lib/utils/grading.js`:
-- `gradeQuestion({ answer: correct_answer }, question)` returns `score === total`
-- Common correct phrasings also pass (e.g. "8" and "8 dollars" for a money answer)
-- Wrong answers correctly fail
+### 3. Check the generator
+```
+node -e "const {generate} = await import('./src/lib/utils/generators.js'); console.log(JSON.stringify(generate('<itemID>'), null, 2))"
+```
+Run a few times to verify correct_answer is always right, no degenerate outputs.
 
-### 5. Check for known bug patterns
-See `memory/feedback_generator_bugs.md` for patterns to watch for:
-- Duplicate-looking distractors (same shape + fraction + operator)
-- Parallelogram skew too small (obtuse angle must be ≥ 105°)
-- Wide labels on narrow shapes (assign by shape type, not area)
+### 4. Check the grader
+```
+node -e "
+const {gradeQuestion} = await import('./src/lib/utils/grading.js');
+const {generate} = await import('./src/lib/utils/generators.js');
+const q = generate('<itemID>');
+console.log(gradeQuestion({answer: q.correct_answer}, q));
+"
+```
 
-### 6. Build
-After fixing any issues: `npm run build` — must pass before moving on.
+### 5. Build
+After any fix: `npm run build` — must pass before moving on.
 
 ---
 
 ## Output Format
 After each question, note one of:
-- `✓ Q<N> (<itemID>)` — no issues
+- `✓ Q<N> (<itemID>)` — no issues found
 - `FIXED Q<N> (<itemID>): <what was fixed>`
-- `SKIP Q<N> (<itemID>): <why it was skipped, what needs follow-up>`
+- `SKIP Q<N> (<itemID>): <reason, what needs follow-up>`
 
 At the end of the session, summarize all fixes and any unresolved issues.
 
 ---
 
 ## Rules
-- Never guess item_id mappings — always read from the PNG/HTML files in `data/items/`
-- Do NOT use paper JSON files (`gr4-math_*_paper.json`) — wrong item_ids
 - Fix one question at a time; build after each fix
 - Stop after 2 failed fix attempts on the same question — report it, move on
 - Do not refactor or clean up code outside the specific fix needed
+- Never guess item_id — verify from `data/items/` directory listing if unsure

@@ -18,6 +18,7 @@
   export let highlightMorph = null;
   export let dictEntry    = null;
   export let paradigmKey  = null;
+  export let hoveredForm  = null; // surface form of the hovered word, for value-based matching
 
   // ── Canonical orderings ───────────────────────────────────────────────────
   const CASE_ORDER   = ['nom','gen','dat','acc','voc'];
@@ -106,7 +107,7 @@
     const genders = GENDER_ORDER.filter(g => topKeys.includes(g));
     const numbers = NUMBER_ORDER.filter(n => topKeys.includes(n));
 
-    if (genders.length > 0) {
+    if (genders.length > 1) {
       const allNums = NUMBER_ORDER.filter(n =>
         genders.some(g => n in (wf[g] ?? {}))
       );
@@ -249,9 +250,25 @@
     return form;
   }
 
+  // Strip breathing marks only (keep accents/subscripts) so ἀδελφή matches αδελφή
+  // but ἀδελφῇ (circumflex+subscript) does not match ἀδελφή (acute only).
+  function stripBreathings(s) {
+    if (!s) return s;
+    return s.normalize('NFD').replace(/[̓̔]/g, '').normalize('NFC');
+  }
+
   // ── Highlight ─────────────────────────────────────────────────────────────
-  function isHighlighted(rowKey, colIdx) {
-    if (!highlightMorph || !tableData) return false;
+  function isHighlighted(rowKey, colIdx, cellVal = null) {
+    if (!tableData) return false;
+
+    // Value-based match: highlight every cell whose form matches the hovered word.
+    // Uses breathing-stripped comparison so polytonic text matches monotonic table entries,
+    // while still distinguishing forms that differ only in accent (e.g. ή vs ῇ).
+    if (hoveredForm && cellVal && cellVal !== '—') {
+      if (stripBreathings(cellVal) === stripBreathings(hoveredForm)) return true;
+    }
+
+    if (!highlightMorph) return false;
     const m = highlightMorph;
     const { struct } = tableData;
 
@@ -312,7 +329,7 @@
           <tr>
             <th class="row-header">{row.label}</th>
             {#each row.cells as cellVal, ci}
-              <td class:highlighted={isHighlighted(row.rowKey, ci)}>
+              <td class:highlighted={isHighlighted(row.rowKey, ci, cellVal)}>
                 {movNu(cellVal ?? '—', tableData.struct?.type)}
               </td>
             {/each}

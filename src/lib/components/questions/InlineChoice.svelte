@@ -80,7 +80,7 @@
 
 <div class="question-body">
   {#if stimulus_intro}
-    <p class="q-text">{@html renderMath(stimulus_intro)}</p>
+    <div class="q-text">{@html renderMath(stimulus_intro)}</div>
   {/if}
 
   {#if stimulus_type === 'symmetry_figure'}
@@ -160,6 +160,11 @@
   .q-text     { margin: 0 0 10px; }
   .stimulus-wrap { margin: 4px 0 10px; text-align: center; }
   .instruction   { margin: 0 0 6px; }
+
+  /* Spacing for {#html} stimulus_intro content (Tailwind resets these) */
+  :global(.question-body .q-text p)  { margin: 0 0 8px; }
+  :global(.question-body .q-text ul) { margin: 0 0 8px; padding-left: 20px; }
+  :global(.question-body .q-text li) { margin-bottom: 6px; }
 
   .inline-sentence {
     margin: 4px 0 16px;

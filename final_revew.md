@@ -1,0 +1,3 @@
+- data/g4-math_<year>_questions.json — the base question data (what renders when there's no generated variant)
+- src/lib/utils/generators.js — generates randomized variants; correct_answer in the variant overrides the JSON for grading
+- src/lib/utils/grading.js — gradeQuestion() grades student answers against question.correct_answer and question.answer_type

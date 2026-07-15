@@ -166,5 +166,16 @@ service cloud.firestore {
       allow read:  if isAuth();
       allow write: if isDev();
     }
+
+    // ── NGE quiz question bank — dev-authored, student-readable ──────────────
+    match /greek_questions/{docId} {
+      allow read:  if isAuth();
+      allow write: if isDev();
+    }
+
+    match /greek_passage_quizzes/{docId} {
+      allow read:  if isAuth();
+      allow write: if isDev();
+    }
   }
 }

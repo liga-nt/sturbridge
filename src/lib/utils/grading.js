@@ -80,7 +80,9 @@ function toDecimal(str) {
 // Values must match the expected pair exactly; only the operator direction can vary.
 function gradeComparison(student, expected) {
   function parseComp(str) {
-    const m = String(str).trim().match(/^([0-9.]+)\s*([<>=])\s*([0-9.]+)$/);
+    // Strip zero-width/invisible Unicode that fraction tools may inject
+    const cleaned = String(str).replace(/[​‌‍﻿]/g, '').trim();
+    const m = cleaned.match(/^([\d./]+)\s*([<>=])\s*([\d./]+)$/);
     if (!m) return null;
     const left = toDecimal(m[1]);
     const right = toDecimal(m[3]);
@@ -89,16 +91,28 @@ function gradeComparison(student, expected) {
   }
   const exp = parseComp(expected);
   const stu = parseComp(student);
-  if (!exp || !stu) return false;
-  // Values must match (either order)
-  const sameOrder   = exp.left === stu.left  && exp.right === stu.right;
-  const reverseOrder = exp.left === stu.right && exp.right === stu.left;
-  if (!sameOrder && !reverseOrder) return false;
-  // Student's comparison must be mathematically true
-  const { left: sl, op, right: sr } = stu;
-  if (op === '<') return sl < sr;
-  if (op === '>') return sl > sr;
-  return sl === sr;
+  if (exp && stu) {
+    // Values must match (either order)
+    const sameOrder    = exp.left === stu.left  && exp.right === stu.right;
+    const reverseOrder = exp.left === stu.right && exp.right === stu.left;
+    if (!sameOrder && !reverseOrder) return false;
+    // Student's comparison must be mathematically true
+    const { left: sl, op, right: sr } = stu;
+    if (op === '<') return sl < sr;
+    if (op === '>') return sl > sr;
+    return sl === sr;
+  }
+  // Fallback: fraction-tool output couldn't be parsed (e.g. non-ASCII spacing between
+  // parts). Accept if student included the correct operator, a conflicting operator is
+  // absent, AND they included at least one digit (so bare ">" alone is rejected).
+  if (exp) {
+    const sStr = String(student).replace(/[​‌‍﻿]/g, '');
+    const hasDigit   = /\d/.test(sStr);
+    const hasCorrect = sStr.includes(exp.op);
+    const hasOther   = ['<', '>', '='].filter(o => o !== exp.op).some(o => sStr.includes(o));
+    return hasDigit && hasCorrect && !hasOther;
+  }
+  return false;
 }
 
 // Keep parseFractionValue for the gradePart short_answer trigger check
@@ -121,6 +135,25 @@ export function gradeOrderedList(studentAnswer, correctAnswer) {
   const student = tokenize(studentAnswer);
   if (student.length < expected.length) return false;
   return expected.every((exp, i) => fuzzyMatch(student[i], exp));
+}
+
+// ─── Time Grading ────────────────────────────────────────────────────────────
+// Parses a time from the START of a string (student may write work after the answer).
+// Accepts: "7am" "7 am" "7:00 am" "7:00 a.m." "8 15 am" "8:15am" "11:40 a.m."
+// Returns { hour, minute, period } or null.
+function parseTimeFromStart(str) {
+  const s = String(str ?? '')
+    .toLowerCase()
+    .replace(/a\.m\./g, 'am')
+    .replace(/p\.m\./g, 'pm')
+    .trim();
+  const m = s.match(/^(\d{1,2})(?:[: ](\d{2}))?\s*(am|pm)/);
+  if (!m) return null;
+  const hour = parseInt(m[1]);
+  const minute = m[2] !== undefined ? parseInt(m[2]) : 0;
+  const period = m[3];
+  if (hour < 1 || hour > 12 || minute < 0 || minute > 59) return null;
+  return { hour, minute, period };
 }
 
 // ─── Main Grading Function ───────────────────────────────────────────────────
@@ -147,14 +180,16 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
       if (cStr.includes(',')) {
         return { correct: gradeOrderedList(s, cStr) };
       }
-      // Comparison expression: "0.29 < 0.8", "1/3 > 1/4", etc.
-      if (/^[0-9.]+\s*[<>=]\s*[0-9.]+$/.test(cStr.trim())) {
-        return { correct: gradeComparison(String(s), cStr) };
+      // Strip thousands-separator commas from numeric student answers ("70,898" → "70898")
+      const sStr = /^[\d,]+$/.test(String(s).trim()) ? String(s).replace(/,/g, '') : String(s);
+      // Comparison expression: "0.29 < 0.8", "1/3 > 1/4", "3/6 > 4/12", etc.
+      if (/^[\d./]+\s*[<>=]\s*[\d./]+$/.test(cStr.trim())) {
+        return { correct: gradeComparison(sStr, cStr) };
       }
       if (parseFractionValue(cStr)) {
-        return { correct: fractionsEqual(String(s), cStr) };
+        return { correct: fractionsEqual(sStr, cStr) };
       }
-      return { correct: fuzzyMatch(String(s), cStr) };
+      return { correct: fuzzyMatch(sStr, cStr) };
     }
 
     case 'yes_no_explanation':
@@ -165,6 +200,7 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
       if (/^[<>=]$/.test(cStr)) {
         return { correct: String(s).includes(cStr) };
       }
+
       // Expanded form: correct answer is digits, spaces, and + signs with at least one +
       if (/^[\d\s+]+$/.test(cStr) && cStr.includes('+')) {
         const extractNums = str => (String(str).replace(/,/g, '').match(/\d+/g) || []).map(Number);
@@ -195,7 +231,23 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
       if (parseFractionValue(cStr)) {
         return { correct: fractionsEqual(String(s), cStr) };
       }
+      // Time answer: if correct value parses as a time, route to time grading
+      const cNorm = cStr.toLowerCase().replace(/a\.m\./g, 'am').replace(/p\.m\./g, 'pm');
+      if (parseTimeFromStart(cNorm)) {
+        return gradePart(s, String(c), 'time');
+      }
       return { correct: fuzzyMatch(String(s), cStr) };
+    }
+
+    case 'time': {
+      // correctAnswer stored as "H MM am/pm" (e.g. "7 00 am", "4 45 pm").
+      // Student may write work after the time — parse only from the start.
+      // On-the-hour: accept student omitting minutes ("7 am" == "7 00 am").
+      const expected = parseTimeFromStart(String(c));
+      const student  = parseTimeFromStart(String(s));
+      if (!expected || !student) return { correct: false };
+      const minuteOk = expected.minute === 0 || student.minute === expected.minute;
+      return { correct: student.hour === expected.hour && minuteOk && student.period === expected.period };
     }
 
     case 'number_with_work': {
@@ -334,10 +386,18 @@ export function gradeQuestion(answers, question) {
   }
 
   if (question.answer_type === 'multi_part' && question.parts) {
-    const topCA = typeof question.correct_answer === 'object' ? question.correct_answer : {};
+    // typeof null === 'object', so guard explicitly
+    const topCA = (question.correct_answer != null && typeof question.correct_answer === 'object')
+      ? question.correct_answer : null;
+    // When JSON has no per-part answer map, fall back to registry grader
+    if (!topCA && !question.parts.some(p => p.correct_answer != null)) {
+      const grader = graders[question.item_id];
+      if (grader) return grader.grade(answers);
+    }
+    const caMap = topCA ?? {};
     const parts = question.parts.map(p => ({
       label: p.label,
-      correct: gradePart(answers[p.label] ?? '', p.correct_answer ?? topCA[p.label], p.answer_type).correct,
+      correct: gradePart(answers[p.label] ?? '', p.correct_answer ?? caMap[p.label], p.answer_type).correct,
     }));
     const score = parts.filter(p => p.correct).length;
     return { parts, score, total: parts.length };
@@ -503,10 +563,10 @@ export const graders = {
     'Select exactly two letters (B and E). Both required, order does not matter.'),
 
   'MA287484': multi('MA287484', [
-    { label: 'A', correctAnswer: '7 00 am', answerType: 'constructed_response' },
-    { label: 'B', correctAnswer: '8 15 am', answerType: 'constructed_response' },
-    { label: 'C', correctAnswer: '11 40 am', answerType: 'constructed_response' },
-    { label: 'D', correctAnswer: '4 45 pm', answerType: 'constructed_response' },
+    { label: 'A', correctAnswer: '7 00 am', answerType: 'time' },
+    { label: 'B', correctAnswer: '8 15 am', answerType: 'time' },
+    { label: 'C', correctAnswer: '11 40 am', answerType: 'time' },
+    { label: 'D', correctAnswer: '4 45 pm', answerType: 'time' },
   ], 'A: 7:00 a.m. B: 8:15 a.m. C: 11:40 a.m. D: 4:45 p.m.'),
 
   'MA713629341': single('MA713629341', '32,7', 'inline_choice',

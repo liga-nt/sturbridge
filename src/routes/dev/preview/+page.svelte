@@ -202,6 +202,7 @@
           question_text={q.question_text}
           input_widget={q.input_widget ?? 'text'}
           answer_suffix={q.answer_suffix ?? null}
+          input_width={q.input_width ?? '60px'}
         />
       {:else if q.answer_type === 'multiple_select'}
         <MultipleSelect
@@ -382,6 +383,7 @@
             question_text={generated.question_text}
             input_widget={generated.input_widget ?? 'text'}
             answer_suffix={generated.answer_suffix ?? null}
+            input_width={generated.input_width ?? '60px'}
             bind:value={testAnswer}
           />
         {:else if generated.answer_type === 'multiple_select'}
@@ -412,6 +414,7 @@
           />
         {:else if generated.answer_type === 'inline_choice'}
           <InlineChoice
+            stimulus_intro={generated.stimulus_intro ?? null}
             question_text={generated.question_text}
             stimulus_type={generated.stimulus_type ?? null}
             stimulus_params={generated.stimulus_params ?? null}
@@ -435,7 +438,7 @@
             bind:value={testAnswer}
           />
         {:else if generated.answer_type === 'category_sort'}
-          <CategorySort question_text={generated.question_text} tiles={generated.tiles ?? []} categories={generated.categories ?? []} />
+          <CategorySort question_text={generated.question_text} tiles={generated.tiles ?? []} categories={generated.categories ?? []} bind:value={testAnswer} />
         {:else if generated.answer_type === 'drag_drop_inequality'}
           <DragDropInequality
             question_text={generated.question_text}
@@ -471,7 +474,7 @@
             <span class="text-xs text-indigo-600 italic">Learn clicked</span>
           {/if}
           <span class="flex-1"></span>
-          <button on:click={handleSubmit}
+          <button on:mousedown|preventDefault on:click={handleSubmit}
             class="px-5 py-1.5 bg-[#3b81c9] hover:bg-[#2d6bac] text-white text-sm font-semibold rounded transition-colors">
             Submit
           </button>

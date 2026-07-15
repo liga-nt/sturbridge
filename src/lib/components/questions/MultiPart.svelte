@@ -12,7 +12,7 @@
   import NumberLinePlot from './NumberLinePlot.svelte';
   import StepPattern from './stimuli/StepPattern.svelte';
   import { renderMath } from '$lib/utils/math.js';
-  import { gradePart } from '$lib/utils/grading.js';
+  import { gradePart, graders } from '$lib/utils/grading.js';
   import { fillTemplate, extractParams } from '$lib/utils/feedback.js';
 
   const dispatch = createEventDispatcher();
@@ -41,6 +41,9 @@
   export let value = {};
   let partAnswers = {};
   $: value = partAnswers;
+  // Work text for composite answer types (number_with_work, yes_no_explanation, dimension_pair)
+  // Kept separate so ShortAnswerInput doesn't overwrite the graded answer portion.
+  let partWork = {};
   // Per-part inline-choice selections: { partLabel: { dropdownId: selectedValue } }
   let inlineSelections = {};
   // table_fill: { partLabel: string[] } — one entry per fillable row
@@ -87,8 +90,19 @@
     const answer = partAnswers[label];
     if (answer === undefined || answer === null || answer === '') return;
 
-    const correctAnswer = question.correct_answer?.[label] ?? part.correct_answer;
-    const correct = gradePart(answer, correctAnswer, part.answer_type).correct;
+    const jsonCorrect = question.correct_answer?.[label] ?? part.correct_answer;
+    let correct;
+    if (jsonCorrect != null) {
+      correct = gradePart(answer, jsonCorrect, part.answer_type).correct;
+    } else {
+      const grader = graders[question.item_id];
+      if (grader) {
+        const result = grader.grade({ ...partAnswers, [label]: answer });
+        correct = result.parts?.find(p => p.label === label)?.correct ?? false;
+      } else {
+        correct = false;
+      }
+    }
     const params = extractParams(question);
 
     if (correct) {
@@ -363,33 +377,32 @@
         <p class="fill-in-row">
           <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false"
             on:input={(e) => {
-              const work = (partAnswers[part.label] ?? '').split('|')[1] ?? '';
-              partAnswers = { ...partAnswers, [part.label]: e.target.value + '|' + work };
+              partAnswers = { ...partAnswers, [part.label]: e.target.value };
             }} />
           {#if part.answer_unit}
             <span class="fill-in-suffix">{part.answer_unit}</span>
           {/if}
         </p>
         <p class="answer-instruction">{part.work_instruction ?? 'Show your work or explain how you got your answer.'}</p>
-        <ShortAnswerInput bind:value={partAnswers[part.label]} />
+        <ShortAnswerInput bind:value={partWork[part.label]} />
       {:else if part.answer_type === 'yes_no_explanation'}
         <p class="answer-instruction">Enter your answer.</p>
         <div class="yes-no-row">
           <label class="yes-no-option">
             <input type="radio" name="yn-{part.label}" value="yes"
               checked={partAnswers[part.label]?.startsWith('yes')}
-              on:change={() => partAnswers[part.label] = 'yes|' + (partAnswers[part.label]?.split('|')[1] ?? '')} />
+              on:change={() => partAnswers[part.label] = 'yes'} />
             Yes
           </label>
           <label class="yes-no-option">
             <input type="radio" name="yn-{part.label}" value="no"
               checked={partAnswers[part.label]?.startsWith('no')}
-              on:change={() => partAnswers[part.label] = 'no|' + (partAnswers[part.label]?.split('|')[1] ?? '')} />
+              on:change={() => partAnswers[part.label] = 'no'} />
             No
           </label>
         </div>
         <p class="answer-instruction">Explain your reasoning in the space provided.</p>
-        <ShortAnswerInput bind:value={partAnswers[part.label]} />
+        <ShortAnswerInput bind:value={partWork[part.label]} />
       {:else if part.answer_type === 'dimension_pair'}
         <p class="answer-instruction">Enter the length and width.</p>
         <div class="dimension-row">
@@ -397,19 +410,19 @@
             <input class="fill-in-box" type="text" aria-label="length" autocomplete="off" spellcheck="false"
               on:input={(e) => {
                 const parts2 = (partAnswers[part.label] ?? '').split('|');
-                partAnswers[part.label] = e.target.value + '|' + (parts2[1] ?? '') + '|' + (parts2[2] ?? '');
+                partAnswers[part.label] = e.target.value + '|' + (parts2[1] ?? '');
               }} /> feet
           </label>
           <label class="dimension-label">Width:
             <input class="fill-in-box" type="text" aria-label="width" autocomplete="off" spellcheck="false"
               on:input={(e) => {
                 const parts2 = (partAnswers[part.label] ?? '').split('|');
-                partAnswers[part.label] = (parts2[0] ?? '') + '|' + e.target.value + '|' + (parts2[2] ?? '');
+                partAnswers[part.label] = (parts2[0] ?? '') + '|' + e.target.value;
               }} /> feet
           </label>
         </div>
         <p class="answer-instruction">Show your work or explain how you know your answer is correct.</p>
-        <ShortAnswerInput bind:value={partAnswers[part.label]} />
+        <ShortAnswerInput bind:value={partWork[part.label]} />
       {:else if part.answer_type === 'short_answer' || part.answer_type === 'constructed_response'}
         {#if part.answer_type === 'constructed_response'}
           {#if part.answer_instruction}
@@ -540,33 +553,32 @@
               <p class="fill-in-row">
                 <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false"
                   on:input={(e) => {
-                    const work = (partAnswers[part.label] ?? '').split('|')[1] ?? '';
-                    partAnswers = { ...partAnswers, [part.label]: e.target.value + '|' + work };
+                    partAnswers = { ...partAnswers, [part.label]: e.target.value };
                   }} />
                 {#if part.answer_unit}
                   <span class="fill-in-suffix">{part.answer_unit}</span>
                 {/if}
               </p>
               <p class="answer-instruction">{part.work_instruction ?? 'Show your work or explain how you got your answer.'}</p>
-              <ShortAnswerInput bind:value={partAnswers[part.label]} />
+              <ShortAnswerInput bind:value={partWork[part.label]} />
             {:else if part.answer_type === 'yes_no_explanation'}
               <p class="answer-instruction">Enter your answer.</p>
               <div class="yes-no-row">
                 <label class="yes-no-option">
                   <input type="radio" name="yn-{part.label}" value="yes"
                     checked={partAnswers[part.label]?.startsWith('yes')}
-                    on:change={() => partAnswers[part.label] = 'yes|' + (partAnswers[part.label]?.split('|')[1] ?? '')} />
+                    on:change={() => partAnswers[part.label] = 'yes'} />
                   Yes
                 </label>
                 <label class="yes-no-option">
                   <input type="radio" name="yn-{part.label}" value="no"
                     checked={partAnswers[part.label]?.startsWith('no')}
-                    on:change={() => partAnswers[part.label] = 'no|' + (partAnswers[part.label]?.split('|')[1] ?? '')} />
+                    on:change={() => partAnswers[part.label] = 'no'} />
                   No
                 </label>
               </div>
               <p class="answer-instruction">Explain your reasoning in the space provided.</p>
-              <ShortAnswerInput bind:value={partAnswers[part.label]} />
+              <ShortAnswerInput bind:value={partWork[part.label]} />
             {:else if part.answer_type === 'dimension_pair'}
               <p class="answer-instruction">Enter the length and width.</p>
               <div class="dimension-row">
@@ -574,19 +586,19 @@
                   <input class="fill-in-box" type="text" aria-label="length" autocomplete="off" spellcheck="false"
                     on:input={(e) => {
                       const parts2 = (partAnswers[part.label] ?? '').split('|');
-                      partAnswers[part.label] = e.target.value + '|' + (parts2[1] ?? '') + '|' + (parts2[2] ?? '');
+                      partAnswers[part.label] = e.target.value + '|' + (parts2[1] ?? '');
                     }} /> feet
                 </label>
                 <label class="dimension-label">Width:
                   <input class="fill-in-box" type="text" aria-label="width" autocomplete="off" spellcheck="false"
                     on:input={(e) => {
                       const parts2 = (partAnswers[part.label] ?? '').split('|');
-                      partAnswers[part.label] = (parts2[0] ?? '') + '|' + e.target.value + '|' + (parts2[2] ?? '');
+                      partAnswers[part.label] = (parts2[0] ?? '') + '|' + e.target.value;
                     }} /> feet
                 </label>
               </div>
               <p class="answer-instruction">Show your work or explain how you know your answer is correct.</p>
-              <ShortAnswerInput bind:value={partAnswers[part.label]} />
+              <ShortAnswerInput bind:value={partWork[part.label]} />
             {:else if part.answer_type === 'constructed_response'}
               <p class="answer-instruction">Enter your answer and your work or explanation in the space provided.</p>
               <ShortAnswerInput bind:value={partAnswers[part.label]} />

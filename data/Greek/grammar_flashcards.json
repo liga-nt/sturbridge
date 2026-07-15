@@ -1,0 +1,85 @@
+{
+  "lang.morph.noun_1st_decl": {
+    "label": "1st Declension Nouns",
+    "sets": [
+      {
+        "id": "noun_forms",
+        "label": "Noun Forms",
+        "cards": [
+          { "id": "nf_adelphe_nom_voc_sg", "prompt": "nominative / vocative singular", "case": "nom_voc", "number": "singular", "stem": "ἀδελφ", "ending": "ή", "form": "ἀδελφή", "lemma": "ἀδελφή", "meaning": "sister" },
+          { "id": "nf_adelphe_gen_sg",     "prompt": "genitive singular",              "case": "genitive",  "number": "singular", "stem": "ἀδελφ", "ending": "ῆς",  "form": "ἀδελφῆς",  "lemma": "ἀδελφή", "meaning": "sister" },
+          { "id": "nf_adelphe_dat_sg",     "prompt": "dative singular",                "case": "dative",    "number": "singular", "stem": "ἀδελφ", "ending": "ῇ",   "form": "ἀδελφῇ",   "lemma": "ἀδελφή", "meaning": "sister" },
+          { "id": "nf_adelphe_acc_sg",     "prompt": "accusative singular",            "case": "accusative","number": "singular", "stem": "ἀδελφ", "ending": "ήν",  "form": "ἀδελφήν",  "lemma": "ἀδελφή", "meaning": "sister" },
+          { "id": "nf_adelphe_nom_voc_pl", "prompt": "nominative / vocative plural",   "case": "nom_voc",   "number": "plural",   "stem": "ἀδελφ", "ending": "αί",  "form": "ἀδελφαί",  "lemma": "ἀδελφή", "meaning": "sisters" },
+          { "id": "nf_adelphe_gen_pl",     "prompt": "genitive plural",                "case": "genitive",  "number": "plural",   "stem": "ἀδελφ", "ending": "ῶν",  "form": "ἀδελφῶν",  "lemma": "ἀδελφή", "meaning": "sisters" },
+          { "id": "nf_adelphe_dat_pl",     "prompt": "dative plural",                  "case": "dative",    "number": "plural",   "stem": "ἀδελφ", "ending": "αῖς", "form": "ἀδελφαῖς", "lemma": "ἀδελφή", "meaning": "sisters" },
+          { "id": "nf_adelphe_acc_pl",     "prompt": "accusative plural",              "case": "accusative","number": "plural",   "stem": "ἀδελφ", "ending": "άς",  "form": "ἀδελφάς",  "lemma": "ἀδελφή", "meaning": "sisters" },
+
+          { "id": "nf_arete_nom_voc_sg",   "prompt": "nominative / vocative singular", "case": "nom_voc",   "number": "singular", "stem": "ἀρετ", "ending": "ή",   "form": "ἀρετή",    "lemma": "ἀρετή",  "meaning": "excellence, virtue" },
+          { "id": "nf_arete_gen_sg",       "prompt": "genitive singular",              "case": "genitive",  "number": "singular", "stem": "ἀρετ", "ending": "ῆς",  "form": "ἀρετῆς",   "lemma": "ἀρετή",  "meaning": "excellence, virtue" },
+          { "id": "nf_arete_dat_sg",       "prompt": "dative singular",                "case": "dative",    "number": "singular", "stem": "ἀρετ", "ending": "ῇ",   "form": "ἀρετῇ",    "lemma": "ἀρετή",  "meaning": "excellence, virtue" },
+          { "id": "nf_arete_acc_sg",       "prompt": "accusative singular",            "case": "accusative","number": "singular", "stem": "ἀρετ", "ending": "ήν",  "form": "ἀρετήν",   "lemma": "ἀρετή",  "meaning": "excellence, virtue" },
+          { "id": "nf_arete_nom_voc_pl",   "prompt": "nominative / vocative plural",   "case": "nom_voc",   "number": "plural",   "stem": "ἀρετ", "ending": "αί",  "form": "ἀρεταί",   "lemma": "ἀρετή",  "meaning": "excellences, virtues" },
+          { "id": "nf_arete_gen_pl",       "prompt": "genitive plural",                "case": "genitive",  "number": "plural",   "stem": "ἀρετ", "ending": "ῶν",  "form": "ἀρετῶν",   "lemma": "ἀρετή",  "meaning": "excellences, virtues" },
+          { "id": "nf_arete_dat_pl",       "prompt": "dative plural",                  "case": "dative",    "number": "plural",   "stem": "ἀρετ", "ending": "αῖς", "form": "ἀρεταῖς",  "lemma": "ἀρετή",  "meaning": "excellences, virtues" },
+          { "id": "nf_arete_acc_pl",       "prompt": "accusative plural",              "case": "accusative","number": "plural",   "stem": "ἀρετ", "ending": "άς",  "form": "ἀρετάς",   "lemma": "ἀρετή",  "meaning": "excellences, virtues" },
+
+          { "id": "nf_time_nom_voc_sg",    "prompt": "nominative / vocative singular", "case": "nom_voc",   "number": "singular", "stem": "τιμ", "ending": "ή",   "form": "τιμή",     "lemma": "τιμή",   "meaning": "honor, value" },
+          { "id": "nf_time_gen_sg",        "prompt": "genitive singular",              "case": "genitive",  "number": "singular", "stem": "τιμ", "ending": "ῆς",  "form": "τιμῆς",    "lemma": "τιμή",   "meaning": "honor, value" },
+          { "id": "nf_time_dat_sg",        "prompt": "dative singular",                "case": "dative",    "number": "singular", "stem": "τιμ", "ending": "ῇ",   "form": "τιμῇ",     "lemma": "τιμή",   "meaning": "honor, value" },
+          { "id": "nf_time_acc_sg",        "prompt": "accusative singular",            "case": "accusative","number": "singular", "stem": "τιμ", "ending": "ήν",  "form": "τιμήν",    "lemma": "τιμή",   "meaning": "honor, value" },
+          { "id": "nf_time_nom_voc_pl",    "prompt": "nominative / vocative plural",   "case": "nom_voc",   "number": "plural",   "stem": "τιμ", "ending": "αί",  "form": "τιμαί",    "lemma": "τιμή",   "meaning": "honors, values" },
+          { "id": "nf_time_gen_pl",        "prompt": "genitive plural",                "case": "genitive",  "number": "plural",   "stem": "τιμ", "ending": "ῶν",  "form": "τιμῶν",    "lemma": "τιμή",   "meaning": "honors, values" },
+          { "id": "nf_time_dat_pl",        "prompt": "dative plural",                  "case": "dative",    "number": "plural",   "stem": "τιμ", "ending": "αῖς", "form": "τιμαῖς",   "lemma": "τιμή",   "meaning": "honors, values" },
+          { "id": "nf_time_acc_pl",        "prompt": "accusative plural",              "case": "accusative","number": "plural",   "stem": "τιμ", "ending": "άς",  "form": "τιμάς",    "lemma": "τιμή",   "meaning": "honors, values" }
+        ]
+      },
+      {
+        "id": "articles",
+        "label": "Definite Articles",
+        "cards": [
+          { "id": "art_nom_sg", "prompt": "nominative singular", "case": "nominative", "number": "singular", "form": "ἡ",    "meaning": "the (feminine)" },
+          { "id": "art_gen_sg", "prompt": "genitive singular",   "case": "genitive",   "number": "singular", "form": "τῆς",  "meaning": "the (feminine)" },
+          { "id": "art_dat_sg", "prompt": "dative singular",     "case": "dative",     "number": "singular", "form": "τῇ",   "meaning": "the (feminine)" },
+          { "id": "art_acc_sg", "prompt": "accusative singular", "case": "accusative", "number": "singular", "form": "τήν",  "meaning": "the (feminine)" },
+          { "id": "art_nom_pl", "prompt": "nominative plural",   "case": "nominative", "number": "plural",   "form": "αἱ",   "meaning": "the (feminine)" },
+          { "id": "art_gen_pl", "prompt": "genitive plural",     "case": "genitive",   "number": "plural",   "form": "τῶν",  "meaning": "the (feminine)" },
+          { "id": "art_dat_pl", "prompt": "dative plural",       "case": "dative",     "number": "plural",   "form": "ταῖς", "meaning": "the (feminine)" },
+          { "id": "art_acc_pl", "prompt": "accusative plural",   "case": "accusative", "number": "plural",   "form": "τάς",  "meaning": "the (feminine)" }
+        ]
+      },
+      {
+        "id": "article_noun",
+        "label": "Article + Noun",
+        "cards": [
+          { "id": "an_adelphe_nom_sg", "prompt": "nominative singular", "case": "nominative", "number": "singular", "article": "ἡ",    "stem": "ἀδελφ", "ending": "ή",   "noun_form": "ἀδελφή",  "form": "ἡ ἀδελφή",    "lemma": "ἀδελφή", "meaning": "the sister" },
+          { "id": "an_adelphe_gen_sg", "prompt": "genitive singular",   "case": "genitive",   "number": "singular", "article": "τῆς",  "stem": "ἀδελφ", "ending": "ῆς",  "noun_form": "ἀδελφῆς", "form": "τῆς ἀδελφῆς", "lemma": "ἀδελφή", "meaning": "of the sister" },
+          { "id": "an_adelphe_dat_sg", "prompt": "dative singular",     "case": "dative",     "number": "singular", "article": "τῇ",   "stem": "ἀδελφ", "ending": "ῇ",   "noun_form": "ἀδελφῇ",  "form": "τῇ ἀδελφῇ",   "lemma": "ἀδελφή", "meaning": "to/for the sister" },
+          { "id": "an_adelphe_acc_sg", "prompt": "accusative singular", "case": "accusative", "number": "singular", "article": "τήν",  "stem": "ἀδελφ", "ending": "ήν",  "noun_form": "ἀδελφήν", "form": "τήν ἀδελφήν", "lemma": "ἀδελφή", "meaning": "the sister (object)" },
+          { "id": "an_adelphe_nom_pl", "prompt": "nominative plural",   "case": "nominative", "number": "plural",   "article": "αἱ",   "stem": "ἀδελφ", "ending": "αί",  "noun_form": "ἀδελφαί", "form": "αἱ ἀδελφαί",  "lemma": "ἀδελφή", "meaning": "the sisters" },
+          { "id": "an_adelphe_gen_pl", "prompt": "genitive plural",     "case": "genitive",   "number": "plural",   "article": "τῶν",  "stem": "ἀδελφ", "ending": "ῶν",  "noun_form": "ἀδελφῶν", "form": "τῶν ἀδελφῶν", "lemma": "ἀδελφή", "meaning": "of the sisters" },
+          { "id": "an_adelphe_dat_pl", "prompt": "dative plural",       "case": "dative",     "number": "plural",   "article": "ταῖς", "stem": "ἀδελφ", "ending": "αῖς", "noun_form": "ἀδελφαῖς","form": "ταῖς ἀδελφαῖς","lemma": "ἀδελφή", "meaning": "to/for the sisters" },
+          { "id": "an_adelphe_acc_pl", "prompt": "accusative plural",   "case": "accusative", "number": "plural",   "article": "τάς",  "stem": "ἀδελφ", "ending": "άς",  "noun_form": "ἀδελφάς", "form": "τάς ἀδελφάς", "lemma": "ἀδελφή", "meaning": "the sisters (object)" },
+
+          { "id": "an_arete_nom_sg",   "prompt": "nominative singular", "case": "nominative", "number": "singular", "article": "ἡ",    "stem": "ἀρετ", "ending": "ή",   "noun_form": "ἀρετή",   "form": "ἡ ἀρετή",     "lemma": "ἀρετή",  "meaning": "the excellence" },
+          { "id": "an_arete_gen_sg",   "prompt": "genitive singular",   "case": "genitive",   "number": "singular", "article": "τῆς",  "stem": "ἀρετ", "ending": "ῆς",  "noun_form": "ἀρετῆς",  "form": "τῆς ἀρετῆς",  "lemma": "ἀρετή",  "meaning": "of the excellence" },
+          { "id": "an_arete_dat_sg",   "prompt": "dative singular",     "case": "dative",     "number": "singular", "article": "τῇ",   "stem": "ἀρετ", "ending": "ῇ",   "noun_form": "ἀρετῇ",   "form": "τῇ ἀρετῇ",    "lemma": "ἀρετή",  "meaning": "to/for the excellence" },
+          { "id": "an_arete_acc_sg",   "prompt": "accusative singular", "case": "accusative", "number": "singular", "article": "τήν",  "stem": "ἀρετ", "ending": "ήν",  "noun_form": "ἀρετήν",  "form": "τήν ἀρετήν",  "lemma": "ἀρετή",  "meaning": "excellence (object)" },
+          { "id": "an_arete_nom_pl",   "prompt": "nominative plural",   "case": "nominative", "number": "plural",   "article": "αἱ",   "stem": "ἀρετ", "ending": "αί",  "noun_form": "ἀρεταί",  "form": "αἱ ἀρεταί",   "lemma": "ἀρετή",  "meaning": "the excellences" },
+          { "id": "an_arete_gen_pl",   "prompt": "genitive plural",     "case": "genitive",   "number": "plural",   "article": "τῶν",  "stem": "ἀρετ", "ending": "ῶν",  "noun_form": "ἀρετῶν",  "form": "τῶν ἀρετῶν",  "lemma": "ἀρετή",  "meaning": "of the excellences" },
+          { "id": "an_arete_dat_pl",   "prompt": "dative plural",       "case": "dative",     "number": "plural",   "article": "ταῖς", "stem": "ἀρετ", "ending": "αῖς", "noun_form": "ἀρεταῖς", "form": "ταῖς ἀρεταῖς","lemma": "ἀρετή",  "meaning": "to/for the excellences" },
+          { "id": "an_arete_acc_pl",   "prompt": "accusative plural",   "case": "accusative", "number": "plural",   "article": "τάς",  "stem": "ἀρετ", "ending": "άς",  "noun_form": "ἀρετάς",  "form": "τάς ἀρετάς",  "lemma": "ἀρετή",  "meaning": "excellences (object)" },
+
+          { "id": "an_time_nom_sg",    "prompt": "nominative singular", "case": "nominative", "number": "singular", "article": "ἡ",    "stem": "τιμ", "ending": "ή",   "noun_form": "τιμή",    "form": "ἡ τιμή",      "lemma": "τιμή",   "meaning": "the honor" },
+          { "id": "an_time_gen_sg",    "prompt": "genitive singular",   "case": "genitive",   "number": "singular", "article": "τῆς",  "stem": "τιμ", "ending": "ῆς",  "noun_form": "τιμῆς",   "form": "τῆς τιμῆς",   "lemma": "τιμή",   "meaning": "of the honor" },
+          { "id": "an_time_dat_sg",    "prompt": "dative singular",     "case": "dative",     "number": "singular", "article": "τῇ",   "stem": "τιμ", "ending": "ῇ",   "noun_form": "τιμῇ",    "form": "τῇ τιμῇ",     "lemma": "τιμή",   "meaning": "to/for the honor" },
+          { "id": "an_time_acc_sg",    "prompt": "accusative singular", "case": "accusative", "number": "singular", "article": "τήν",  "stem": "τιμ", "ending": "ήν",  "noun_form": "τιμήν",   "form": "τήν τιμήν",   "lemma": "τιμή",   "meaning": "the honor (object)" },
+          { "id": "an_time_nom_pl",    "prompt": "nominative plural",   "case": "nominative", "number": "plural",   "article": "αἱ",   "stem": "τιμ", "ending": "αί",  "noun_form": "τιμαί",   "form": "αἱ τιμαί",    "lemma": "τιμή",   "meaning": "the honors" },
+          { "id": "an_time_gen_pl",    "prompt": "genitive plural",     "case": "genitive",   "number": "plural",   "article": "τῶν",  "stem": "τιμ", "ending": "ῶν",  "noun_form": "τιμῶν",   "form": "τῶν τιμῶν",   "lemma": "τιμή",   "meaning": "of the honors" },
+          { "id": "an_time_dat_pl",    "prompt": "dative plural",       "case": "dative",     "number": "plural",   "article": "ταῖς", "stem": "τιμ", "ending": "αῖς", "noun_form": "τιμαῖς",  "form": "ταῖς τιμαῖς", "lemma": "τιμή",   "meaning": "to/for the honors" },
+          { "id": "an_time_acc_pl",    "prompt": "accusative plural",   "case": "accusative", "number": "plural",   "article": "τάς",  "stem": "τιμ", "ending": "άς",  "noun_form": "τιμάς",   "form": "τάς τιμάς",   "lemma": "τιμή",   "meaning": "the honors (object)" }
+        ]
+      }
+    ]
+  }
+}

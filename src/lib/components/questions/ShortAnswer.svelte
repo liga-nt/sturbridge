@@ -17,6 +17,7 @@
   export let question_text;
   export let input_widget = 'text';   // 'text' | 'equation_editor'
   export let answer_suffix = null;
+  export let input_width = '60px';
 
   let answer = '';
   export let value = null;
@@ -80,6 +81,7 @@
         type="text"
         bind:value={answer}
         class="answer-box"
+        style="width: {input_width}"
         spellcheck="false"
         autocomplete="off"
       />

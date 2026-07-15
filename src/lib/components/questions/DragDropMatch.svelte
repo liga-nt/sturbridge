@@ -15,11 +15,20 @@
 
   $: usedTiles = placed.flat().filter(Boolean);
 
-  function isTileAvailable(tile) {
-    const inBank = tiles.filter(t => t === tile).length;
-    const inUse  = usedTiles.filter(t => t === tile).length;
-    return inUse < inBank;
-  }
+  // Tiles still in the bank — respects duplicates
+  $: availableTiles = (() => {
+    const useCount = {};
+    for (const t of usedTiles) useCount[t] = (useCount[t] ?? 0) + 1;
+    const emitted = {};
+    const result = [];
+    for (const t of tiles) {
+      emitted[t] = (emitted[t] ?? 0) + 1;
+      const total = tiles.filter(x => x === t).length;
+      const used  = useCount[t] ?? 0;
+      if (emitted[t] <= total - used) result.push(t);
+    }
+    return result;
+  })();
 
   function updateValue() {
     const anyPlaced = placed.some(row => row.some(s => s !== null));
@@ -32,7 +41,6 @@
   // ── Drag sources ──────────────────────────────────────────────────────────
 
   function bankDragStart(e, tile) {
-    if (!isTileAvailable(tile)) { e.preventDefault(); return; }
     dragging = { source: 'bank', tile };
     e.dataTransfer.setData('text', tile);
     e.dataTransfer.effectAllowed = 'move';
@@ -86,13 +94,11 @@
   <!-- Tile bank -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div class="tile-bank" on:dragover|preventDefault on:drop={bankDrop}>
-    {#each tiles as tile, idx}
-      {@const available = isTileAvailable(tile)}
+    {#each availableTiles as tile}
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <div
         class="tile"
-        class:tile--used={!available}
-        draggable={available}
+        draggable="true"
         on:dragstart={(e) => bankDragStart(e, tile)}
       >{tile}</div>
     {/each}
@@ -169,13 +175,6 @@
     margin-right: 4px;
     margin-bottom: 4px;
     font-family: inherit;
-  }
-
-  .tile--used {
-    border-color: #ccc;
-    color: #ccc;
-    cursor: default;
-    background: #f9f9f9;
   }
 
   .equation-rows {

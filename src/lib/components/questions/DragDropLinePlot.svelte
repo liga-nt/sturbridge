@@ -50,6 +50,9 @@
   let droppedCol  = null;   // column index where the X was dropped
   let hoveredCol  = null;
 
+  // Reset visual state when parent clears the answer (e.g. after a wrong guess)
+  $: if (value === null) { droppedCol = null; hoveredCol = null; }
+
   function onTileDragStart(e) {
     dragging = true;
     e.dataTransfer.setData('text/plain', 'X');
@@ -143,22 +146,21 @@
         {#each ticks as tick, colIdx}
           {@const prePlaced = getPrePlaced(tick.label)}
           <!-- svelte-ignore a11y-no-static-element-interactions -->
-          <div
-            class="grid-col"
-            on:dragover={(e) => onColDragOver(e, colIdx)}
-            on:dragleave={(e) => onColDragLeave(e, colIdx)}
-            on:drop={(e) => onColDrop(e, colIdx)}
-          >
+          <div class="grid-col">
             {#each Array(ROWS) as _, rowIdx}
               {@const rowFromBottom = ROWS - 1 - rowIdx}
               {@const isFilled   = rowFromBottom < prePlaced}
               {@const isDropped  = droppedCol === colIdx && rowFromBottom === prePlaced}
               {@const isHovered  = hoveredCol === colIdx && droppedCol === null && rowFromBottom === prePlaced}
+              <!-- svelte-ignore a11y-no-static-element-interactions -->
               <div
                 class="box"
                 class:box-filled={isFilled}
                 class:box-dropped={isDropped}
                 class:box-hovered={isHovered}
+                on:dragover|preventDefault={(e) => { e.dataTransfer.dropEffect = 'move'; hoveredCol = colIdx; }}
+                on:dragleave={() => { hoveredCol = null; }}
+                on:drop={(e) => onColDrop(e, colIdx)}
               >{#if isFilled || isDropped}X{/if}</div>
             {/each}
           </div>

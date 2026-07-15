@@ -1,0 +1,805 @@
+{
+  "_note": "NGE question bank. Levels: intro | beginning | intermediate | prose. Questions keyed to standard IDs from nge_intro_standards.json.",
+  "passages": [
+    {
+      "id": "nge-intro-2025-passage-01",
+      "level": "intro",
+      "year": 2025,
+      "title": "Nauplios tricks the Greek fleet",
+      "lines": [
+        { "num": 1, "greek": "ὁ Ναύπλιος ἐθέλει δίκην λαμβάνειν," },
+        { "num": 2, "greek": "διότι οἱ κύριοι τῶν Ἑλλήνων λύουσι τὸν υἱὸν αὐτοῦ ἐν τῷ πολέμῳ τῆς Τροίας." },
+        { "num": 3, "greek": "ὅτε τὰ τῶν Ἑλλήνων πλοῖα οἴκαδε πλεῖ," },
+        { "num": 4, "greek": "ὁ Ναύπλιος πείθει τὴν Ἀθήναν τὴν θύελλαν πέμπειν." },
+        { "num": 5, "greek": "ὁ Ναύπλιος πρὸς τὰς πέτρας τὸν πυρσὸν φέρει," },
+        { "num": 6, "greek": "ὥστε τὰ πλοῖα τῶν κυρίων αἵ μακραὶ πέτραι λύουσιν." }
+      ],
+      "glosses": {
+        "δίκην λαμβάνειν": "to take vengeance",
+        "διότι": "because",
+        "αὐτοῦ": "his",
+        "ὅτε": "when",
+        "οἴκαδε": "homeward",
+        "τὸ πλοῖον": "the ship",
+        "ἡ θύελλα": "storm",
+        "ἡ πέτρα": "the rock",
+        "ὁ πυρσός": "the fire signal",
+        "ὥστε": "so that"
+      }
+    }
+  ],
+  "images": [
+    {
+      "id": "nge-intro-2025-map-01",
+      "level": "intro",
+      "year": 2025,
+      "type": "map",
+      "description": "Map of ancient Greece and surrounding regions with numbered locations 1–7. Cyan/turquoise water, white land masses.",
+      "numbered_locations": { "1": null, "2": null, "3": null, "4": null, "5": null, "6": null, "7": null },
+      "url": null,
+      "notes": "Location numbers to be filled in when the map image is generated using MediterraneanMap component."
+    }
+  ],
+  "questions": [
+    {
+      "id": "nge-intro-2025-01",
+      "level": "intro",
+      "year": 2025,
+      "num": 1,
+      "text": "The letter psi in the Greek alphabet is",
+      "choices": [
+        { "id": "a", "text": "π" },
+        { "id": "b", "text": "ρ" },
+        { "id": "c", "text": "χ" },
+        { "id": "d", "text": "ψ" }
+      ],
+      "correct": "d",
+      "standard_ids": ["alpha.names"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Greek letter naming — psi"
+    },
+    {
+      "id": "nge-intro-2025-02",
+      "level": "intro",
+      "year": 2025,
+      "num": 2,
+      "text": "The letter directly following ζ (zeta) in the Greek alphabet is",
+      "choices": [
+        { "id": "a", "text": "ω (omega)" },
+        { "id": "b", "text": "ε (epsilon)" },
+        { "id": "c", "text": "η (eta)" },
+        { "id": "d", "text": "ι (iota)" }
+      ],
+      "correct": "c",
+      "standard_ids": ["alpha.adjacent", "alpha.order"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Alphabet sequence: zeta → eta"
+    },
+    {
+      "id": "nge-intro-2025-03",
+      "level": "intro",
+      "year": 2025,
+      "num": 3,
+      "text": "The capital letter of ξ (xi) is",
+      "choices": [
+        { "id": "a", "text": "Ψ" },
+        { "id": "b", "text": "Φ" },
+        { "id": "c", "text": "Ξ" },
+        { "id": "d", "text": "Σ" }
+      ],
+      "correct": "c",
+      "standard_ids": ["alpha.case_transform"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Lowercase → uppercase: ξ → Ξ"
+    },
+    {
+      "id": "nge-intro-2025-04",
+      "level": "intro",
+      "year": 2025,
+      "num": 4,
+      "text": "The letter that comes directly before κ (kappa) is",
+      "choices": [
+        { "id": "a", "text": "λ (lambda)" },
+        { "id": "b", "text": "ι (iota)" },
+        { "id": "c", "text": "θ (theta)" },
+        { "id": "d", "text": "μ (mu)" }
+      ],
+      "correct": "b",
+      "standard_ids": ["alpha.adjacent", "alpha.order"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Alphabet sequence: iota precedes kappa"
+    },
+    {
+      "id": "nge-intro-2025-05",
+      "level": "intro",
+      "year": 2025,
+      "num": 5,
+      "text": "The name of the letter Γ is",
+      "choices": [
+        { "id": "a", "text": "gamma" },
+        { "id": "b", "text": "lambda" },
+        { "id": "c", "text": "delta" },
+        { "id": "d", "text": "zeta" }
+      ],
+      "correct": "a",
+      "standard_ids": ["alpha.names"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Greek letter naming — gamma (uppercase)"
+    },
+    {
+      "id": "nge-intro-2025-06",
+      "level": "intro",
+      "year": 2025,
+      "num": 6,
+      "text": "The word ἰσχυρός transliterated to English would be",
+      "choices": [
+        { "id": "a", "text": "iskiros" },
+        { "id": "b", "text": "ixiros" },
+        { "id": "c", "text": "ichsyros" },
+        { "id": "d", "text": "ischyros" }
+      ],
+      "correct": "d",
+      "standard_ids": ["alpha.transliterate_gk_en"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Transliteration — including chi (χ = ch) and upsilon (υ = y)"
+    },
+    {
+      "id": "nge-intro-2025-07",
+      "level": "intro",
+      "year": 2025,
+      "num": 7,
+      "text": "The name Herakleitos written in Greek characters is",
+      "choices": [
+        { "id": "a", "text": "Ἡράκλειτος" },
+        { "id": "b", "text": "Ἐράκλειτος" },
+        { "id": "c", "text": "Ἡρακλιτος" },
+        { "id": "d", "text": "Ἐπάκλειτος" }
+      ],
+      "correct": "a",
+      "standard_ids": ["alpha.transliterate_gk_en", "alpha.names"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Transliteration EN→GK including rough breathing (H → Ἡ)"
+    },
+    {
+      "id": "nge-intro-2025-08",
+      "level": "intro",
+      "year": 2025,
+      "num": 8,
+      "text": "Xenophon's Anabasis is about a journey. According to the title, the reader might expect the journey to involve",
+      "choices": [
+        { "id": "a", "text": "crossing the sea" },
+        { "id": "b", "text": "wandering through the desert" },
+        { "id": "c", "text": "descending to the underworld" },
+        { "id": "d", "text": "climbing mountains" }
+      ],
+      "correct": "d",
+      "standard_ids": ["lang.reading.sentences"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": true,
+      "notes": "Anabasis = ἀνά (up) + βάσις (going) = going up/climbing. Xenophon not in intro standards as named author. Agent extraction said b; correct is likely d."
+    },
+    {
+      "id": "nge-intro-2025-09",
+      "level": "intro",
+      "year": 2025,
+      "num": 9,
+      "text": "The term 'eustress' refers to stress that is",
+      "choices": [
+        { "id": "a", "text": "overwhelming" },
+        { "id": "b", "text": "nonexistent" },
+        { "id": "c", "text": "frightening" },
+        { "id": "d", "text": "beneficial" }
+      ],
+      "correct": "d",
+      "standard_ids": ["deriv.eu"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "εὐ- = good/well; eustress = good/beneficial stress"
+    },
+    {
+      "id": "nge-intro-2025-10",
+      "level": "intro",
+      "year": 2025,
+      "num": 10,
+      "text": "The small equivalent of the capital letter Λ is",
+      "choices": [
+        { "id": "a", "text": "α" },
+        { "id": "b", "text": "δ" },
+        { "id": "c", "text": "λ" },
+        { "id": "d", "text": "σ" }
+      ],
+      "correct": "c",
+      "standard_ids": ["alpha.case_transform"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Uppercase → lowercase: Λ → λ (lambda)"
+    },
+    {
+      "id": "nge-intro-2025-11",
+      "level": "intro",
+      "year": 2025,
+      "num": 11,
+      "text": "Diseases that are zoonotic are transmitted via",
+      "choices": [
+        { "id": "a", "text": "water" },
+        { "id": "b", "text": "air" },
+        { "id": "c", "text": "animals" },
+        { "id": "d", "text": "humans" }
+      ],
+      "correct": "c",
+      "standard_ids": ["lang.reading.sentences"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Greek derivative: ζῷον = animal (no specific deriv standard for zoo-)"
+    },
+    {
+      "id": "nge-intro-2025-12",
+      "level": "intro",
+      "year": 2025,
+      "num": 12,
+      "text": "In the sentence τὴν δίκην ὁ χρόνος φέρει τοῖς ἀγαθοῖς, the subject is",
+      "choices": [
+        { "id": "a", "text": "δίκην" },
+        { "id": "b", "text": "χρόνος" },
+        { "id": "c", "text": "ἀγαθοῖς" },
+        { "id": "d", "text": "included in the verb" }
+      ],
+      "correct": "b",
+      "standard_ids": ["lang.reading.sentences", "lang.morph.noun_2nd_decl"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Subject identification: χρόνος = nominative 2nd decl. = subject"
+    },
+    {
+      "id": "nge-intro-2025-13",
+      "level": "intro",
+      "year": 2025,
+      "num": 13,
+      "text": "In the above sentence (Q12), ἀγαθοῖς is",
+      "choices": [
+        { "id": "a", "text": "accusative plural" },
+        { "id": "b", "text": "genitive singular" },
+        { "id": "c", "text": "dative singular" },
+        { "id": "d", "text": "dative plural" }
+      ],
+      "correct": "d",
+      "standard_ids": ["lang.morph.adjective_1st_2nd_decl"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Case/number: ἀγαθοῖς = dative plural (2nd decl. adj.)"
+    },
+    {
+      "id": "nge-intro-2025-14",
+      "level": "intro",
+      "year": 2025,
+      "num": 14,
+      "text": "Which word is NOT a derivative of χρόνος?",
+      "choices": [
+        { "id": "a", "text": "chromosome" },
+        { "id": "b", "text": "asynchronous" },
+        { "id": "c", "text": "chronicle" },
+        { "id": "d", "text": "anachronism" }
+      ],
+      "correct": "a",
+      "standard_ids": ["lang.reading.sentences"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": true,
+      "notes": "chromosome = χρωμα (color) + σῶμα (body), NOT from χρόνος. Agent extraction said d; correct is likely a."
+    },
+    {
+      "id": "nge-intro-2025-15",
+      "level": "intro",
+      "year": 2025,
+      "num": 15,
+      "text": "Which of the following is true, according to the sentence in question 12 (τὴν δίκην ὁ χρόνος φέρει τοῖς ἀγαθοῖς)?",
+      "choices": [
+        { "id": "a", "text": "Justice comes from good people" },
+        { "id": "b", "text": "Good people spend time bringing justice" },
+        { "id": "c", "text": "Time brings justice to good people" },
+        { "id": "d", "text": "Good people's justice should be swift" }
+      ],
+      "correct": "c",
+      "standard_ids": ["lang.reading.sentences"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Reading comprehension: χρόνος (time) φέρει (brings) δίκην (justice) τοῖς ἀγαθοῖς (to good people)"
+    },
+    {
+      "id": "nge-intro-2025-16",
+      "level": "intro",
+      "year": 2025,
+      "num": 16,
+      "text": "What is the plural equivalent of δίκη in the nominative case?",
+      "choices": [
+        { "id": "a", "text": "δίκαι" },
+        { "id": "b", "text": "δικῶν" },
+        { "id": "c", "text": "δίκαις" },
+        { "id": "d", "text": "δίκας" }
+      ],
+      "correct": "a",
+      "standard_ids": ["lang.morph.noun_1st_decl"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "1st decl. nominative plural: δίκη → δίκαι"
+    },
+    {
+      "id": "nge-intro-2025-17",
+      "level": "intro",
+      "year": 2025,
+      "num": 17,
+      "text": "According to the sentence ὁ κακὸς ἄνθρωπος ἀπὸ τῆς μάχης φεύγει, the man is",
+      "choices": [
+        { "id": "a", "text": "beautiful" },
+        { "id": "b", "text": "cowardly" },
+        { "id": "c", "text": "old" },
+        { "id": "d", "text": "strong" }
+      ],
+      "correct": "b",
+      "standard_ids": ["lang.reading.adjectives", "lang.reading.sentences"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "κακός = bad/cowardly; flees from battle = cowardly"
+    },
+    {
+      "id": "nge-intro-2025-18",
+      "level": "intro",
+      "year": 2025,
+      "num": 18,
+      "text": "The case following ἀπό in the sentence in question 17 is",
+      "choices": [
+        { "id": "a", "text": "nominative" },
+        { "id": "b", "text": "accusative" },
+        { "id": "c", "text": "genitive" },
+        { "id": "d", "text": "dative" }
+      ],
+      "correct": "c",
+      "standard_ids": ["lang.reading.prepositional_phrases"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "ἀπό governs the genitive: ἀπὸ τῆς μάχης"
+    },
+    {
+      "id": "nge-intro-2025-19",
+      "level": "intro",
+      "year": 2025,
+      "num": 19,
+      "text": "The word ἀπό in the sentence in question 17 has",
+      "choices": [
+        { "id": "a", "text": "smooth breathing and a grave accent" },
+        { "id": "b", "text": "rough breathing and an acute accent" },
+        { "id": "c", "text": "smooth breathing and an acute accent" },
+        { "id": "d", "text": "rough breathing and a grave accent" }
+      ],
+      "correct": "a",
+      "standard_ids": ["alpha.order", "alpha.transliterate_gk_en"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "ἀπό in sentence-medial position: smooth breathing on ἀ, grave accent on ό→ὸ"
+    },
+    {
+      "id": "nge-intro-2025-20",
+      "level": "intro",
+      "year": 2025,
+      "num": 20,
+      "text": "The phrase that is the closest equivalent in meaning to ἀπὸ τῆς μάχης is",
+      "choices": [
+        { "id": "a", "text": "διὰ τῆς μάχης" },
+        { "id": "b", "text": "ἐν τῇ μάχῃ" },
+        { "id": "c", "text": "εἰς τὴν μάχην" },
+        { "id": "d", "text": "ἐκ τῆς μάχης" }
+      ],
+      "correct": "d",
+      "standard_ids": ["lang.reading.prepositional_phrases", "deriv.ek"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "ἀπό (away from) ≈ ἐκ (out of, from): both denote separation/source with genitive"
+    },
+    {
+      "id": "nge-intro-2025-21",
+      "level": "intro",
+      "year": 2025,
+      "num": 21,
+      "text": "The plural equivalent of φεύγει is",
+      "choices": [
+        { "id": "a", "text": "φεύγεις" },
+        { "id": "b", "text": "φεύγετε" },
+        { "id": "c", "text": "φεύγουσιν" },
+        { "id": "d", "text": "φεύγομεν" }
+      ],
+      "correct": "c",
+      "standard_ids": ["lang.morph.verb_present_indicative_active"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "φεύγει = 3rd sg. → φεύγουσιν = 3rd pl. present active indicative"
+    },
+    {
+      "id": "nge-intro-2025-22",
+      "level": "intro",
+      "year": 2025,
+      "num": 22,
+      "text": "Plato's Apology is",
+      "choices": [
+        { "id": "a", "text": "a description of an ideal society" },
+        { "id": "b", "text": "a defense speech of Socrates" },
+        { "id": "c", "text": "a glorification of Athens" },
+        { "id": "d", "text": "a warning about Alexander the Great" }
+      ],
+      "correct": "b",
+      "standard_ids": ["hist.author.plato"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Plato's Apology = Socrates' defense at his trial; The Republic = ideal society (a)"
+    },
+    {
+      "id": "nge-intro-2025-23",
+      "level": "intro",
+      "year": 2025,
+      "num": 23,
+      "text": "Which deity is associated with ivy, leopards, and the thyrsus?",
+      "choices": [
+        { "id": "a", "text": "Dionysus" },
+        { "id": "b", "text": "Apollo" },
+        { "id": "c", "text": "Aphrodite" },
+        { "id": "d", "text": "Artemis" }
+      ],
+      "correct": "a",
+      "standard_ids": ["myth.deity.dionysus"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Dionysus symbols: ivy, leopards, thyrsus (pinecone-topped staff), grapes"
+    },
+    {
+      "id": "nge-intro-2025-24",
+      "level": "intro",
+      "year": 2025,
+      "num": 24,
+      "text": "Which of these characters best illustrates the folly of challenging a deity?",
+      "choices": [
+        { "id": "a", "text": "Perseus" },
+        { "id": "b", "text": "Midas" },
+        { "id": "c", "text": "Atalanta" },
+        { "id": "d", "text": "Arachne" }
+      ],
+      "correct": "d",
+      "standard_ids": ["myth.story.arachne"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Arachne challenged Athena to a weaving contest and was punished"
+    },
+    {
+      "id": "nge-intro-2025-25",
+      "level": "intro",
+      "year": 2025,
+      "num": 25,
+      "text": "Who was defeated at the Battle of Gaugamela?",
+      "choices": [
+        { "id": "a", "text": "Darius I" },
+        { "id": "b", "text": "Philip" },
+        { "id": "c", "text": "Darius III" },
+        { "id": "d", "text": "Leonidas" }
+      ],
+      "correct": "c",
+      "standard_ids": ["hist.battle.gaugamela", "hist.figure.alexander", "hist.period.rise_of_macedon"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Gaugamela 331 BCE: Alexander defeated Darius III (not Darius I)"
+    },
+    {
+      "id": "nge-intro-2025-26",
+      "level": "intro",
+      "year": 2025,
+      "num": 26,
+      "text": "ὁ μὲν βίος ἐστι μικρὸς ἀλλὰ ἡ τέχνη ἐστι μακρά. This sentence contrasts",
+      "choices": [
+        { "id": "a", "text": "humans and nature" },
+        { "id": "b", "text": "wisdom and foolishness" },
+        { "id": "c", "text": "wealth and poverty" },
+        { "id": "d", "text": "life and art" }
+      ],
+      "correct": "d",
+      "standard_ids": ["lang.reading.sentences"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "βίος = life, τέχνη = art/skill; μέν…ἀλλά = on the one hand…but"
+    },
+    {
+      "id": "nge-intro-2025-27",
+      "level": "intro",
+      "year": 2025,
+      "num": 27,
+      "text": "The statement in question 26 tells us that",
+      "choices": [
+        { "id": "a", "text": "life is too short to do unenjoyable work" },
+        { "id": "b", "text": "art outlasts human life" },
+        { "id": "c", "text": "art makes life more meaningful" },
+        { "id": "d", "text": "great art is rare nowadays" }
+      ],
+      "correct": "b",
+      "standard_ids": ["lang.reading.sentences"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "βίος μικρός (life is short) but τέχνη μακρά (art is long) = art outlasts life"
+    },
+    {
+      "id": "nge-intro-2025-28",
+      "level": "intro",
+      "year": 2025,
+      "num": 28,
+      "text": "In the sentence τὰ ἔργα τῶν ἀνθρώπων βλέπετε, τῶν ἀνθρώπων means",
+      "choices": [
+        { "id": "a", "text": "of humans" },
+        { "id": "b", "text": "humans" },
+        { "id": "c", "text": "for humans" },
+        { "id": "d", "text": "with humans" }
+      ],
+      "correct": "a",
+      "standard_ids": ["lang.morph.noun_2nd_decl"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Genitive plural τῶν ἀνθρώπων = 'of humans'"
+    },
+    {
+      "id": "nge-intro-2025-29",
+      "level": "intro",
+      "year": 2025,
+      "num": 29,
+      "text": "The gender of ἔργα is",
+      "choices": [
+        { "id": "a", "text": "masculine" },
+        { "id": "b", "text": "feminine" },
+        { "id": "c", "text": "neuter" },
+        { "id": "d", "text": "the same form for masculine and feminine" }
+      ],
+      "correct": "c",
+      "standard_ids": ["lang.morph.article_all_genders", "lang.morph.noun_2nd_decl"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "ἔργον = neuter 2nd decl.; τὰ ἔργα (neuter article τά confirms gender)"
+    },
+    {
+      "id": "nge-intro-2025-30",
+      "level": "intro",
+      "year": 2025,
+      "num": 30,
+      "text": "In the sentence in question 28, τὰ ἔργα is in the _______ case",
+      "choices": [
+        { "id": "a", "text": "nominative" },
+        { "id": "b", "text": "genitive" },
+        { "id": "c", "text": "accusative" },
+        { "id": "d", "text": "dative" }
+      ],
+      "correct": "c",
+      "standard_ids": ["lang.morph.noun_2nd_decl", "lang.morph.article_all_genders"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "τὰ ἔργα = neuter accusative plural (object of βλέπετε)"
+    },
+    {
+      "id": "nge-intro-2025-31",
+      "level": "intro",
+      "year": 2025,
+      "num": 31,
+      "text": "The subject of the sentence in question 28 (τὰ ἔργα τῶν ἀνθρώπων βλέπετε) is",
+      "choices": [
+        { "id": "a", "text": "you" },
+        { "id": "b", "text": "they" },
+        { "id": "c", "text": "we" },
+        { "id": "d", "text": "she" }
+      ],
+      "correct": "a",
+      "standard_ids": ["lang.morph.verb_present_indicative_active"],
+      "passage_id": null,
+      "image_id": null,
+      "needs_verification": true,
+      "notes": "βλέπετε = 2nd pl. present active = 'you (all) see'; subject = you. Agent extraction said b (they); correct is a."
+    },
+    {
+      "id": "nge-intro-2025-32",
+      "level": "intro",
+      "year": 2025,
+      "num": 32,
+      "text": "Who wants vengeance?",
+      "choices": [
+        { "id": "a", "text": "Athena" },
+        { "id": "b", "text": "Nauplios" },
+        { "id": "c", "text": "Nauplios's son" },
+        { "id": "d", "text": "the Greek leaders" }
+      ],
+      "correct": "b",
+      "standard_ids": ["lang.reading.passage"],
+      "passage_id": "nge-intro-2025-passage-01",
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Passage line 1: ὁ Ναύπλιος ἐθέλει δίκην λαμβάνειν"
+    },
+    {
+      "id": "nge-intro-2025-33",
+      "level": "intro",
+      "year": 2025,
+      "num": 33,
+      "text": "In line 2 of the passage, the best definition of λύουσι is",
+      "choices": [
+        { "id": "a", "text": "they take" },
+        { "id": "b", "text": "they leave" },
+        { "id": "c", "text": "they say" },
+        { "id": "d", "text": "they destroy" }
+      ],
+      "correct": "d",
+      "standard_ids": ["lang.reading.passage", "lang.morph.verb_present_indicative_active"],
+      "passage_id": "nge-intro-2025-passage-01",
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "λύω = to loosen/destroy; in context 'they destroy/kill his son in the war of Troy'"
+    },
+    {
+      "id": "nge-intro-2025-34",
+      "level": "intro",
+      "year": 2025,
+      "num": 34,
+      "text": "The plural equivalent of τῷ πολέμῳ (from the same passage) is",
+      "choices": [
+        { "id": "a", "text": "οἱ πόλεμοι" },
+        { "id": "b", "text": "τῶν πολέμων" },
+        { "id": "c", "text": "τοῖς πολέμοις" },
+        { "id": "d", "text": "τούς πολέμους" }
+      ],
+      "correct": "c",
+      "standard_ids": ["lang.morph.noun_2nd_decl", "lang.morph.article_all_genders"],
+      "passage_id": "nge-intro-2025-passage-01",
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "τῷ πολέμῳ = dative singular; dative plural = τοῖς πολέμοις"
+    },
+    {
+      "id": "nge-intro-2025-35",
+      "level": "intro",
+      "year": 2025,
+      "num": 35,
+      "text": "The meaning of τῶν Ἑλλήνων is",
+      "choices": [
+        { "id": "a", "text": "because of the Greeks" },
+        { "id": "b", "text": "with the Greeks" },
+        { "id": "c", "text": "for the Greeks" },
+        { "id": "d", "text": "of the Greeks" }
+      ],
+      "correct": "d",
+      "standard_ids": ["lang.morph.noun_2nd_decl"],
+      "passage_id": "nge-intro-2025-passage-01",
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Genitive plural τῶν Ἑλλήνων = 'of the Greeks'"
+    },
+    {
+      "id": "nge-intro-2025-36",
+      "level": "intro",
+      "year": 2025,
+      "num": 36,
+      "text": "The object of πείθει (line 4) is",
+      "choices": [
+        { "id": "a", "text": "τὴν θύελλαν" },
+        { "id": "b", "text": "ὁ Ναύπλιος" },
+        { "id": "c", "text": "τὴν Ἀθήναν" },
+        { "id": "d", "text": "τὰ πλοῖα" }
+      ],
+      "correct": "c",
+      "standard_ids": ["lang.reading.passage", "lang.reading.sentences"],
+      "passage_id": "nge-intro-2025-passage-01",
+      "image_id": null,
+      "needs_verification": true,
+      "notes": "Line 4: ὁ Ναύπλιος πείθει τὴν Ἀθήναν — Nauplios persuades Athena. Agent extraction said d (τὰ πλοῖα); correct is c."
+    },
+    {
+      "id": "nge-intro-2025-37",
+      "level": "intro",
+      "year": 2025,
+      "num": 37,
+      "text": "πέμπειν means",
+      "choices": [
+        { "id": "a", "text": "she sends" },
+        { "id": "b", "text": "to send" },
+        { "id": "c", "text": "I send" },
+        { "id": "d", "text": "send!" }
+      ],
+      "correct": "b",
+      "standard_ids": ["lang.morph.verb_infinitive_active"],
+      "passage_id": "nge-intro-2025-passage-01",
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "πέμπειν = present active infinitive of πέμπω = 'to send'"
+    },
+    {
+      "id": "nge-intro-2025-38",
+      "level": "intro",
+      "year": 2025,
+      "num": 38,
+      "text": "The purpose of Nauplios' beacon fire was to",
+      "choices": [
+        { "id": "a", "text": "cause the ships to be wrecked on the rocks" },
+        { "id": "b", "text": "lure the ships into enemy territory" },
+        { "id": "c", "text": "glorify Athena by letting her rescue the ships" },
+        { "id": "d", "text": "falsely announce that Troy has fallen" }
+      ],
+      "correct": "a",
+      "standard_ids": ["lang.reading.passage"],
+      "passage_id": "nge-intro-2025-passage-01",
+      "image_id": null,
+      "needs_verification": false,
+      "notes": "Lines 5-6: fire signal → ships follow it → rocks destroy them"
+    },
+    {
+      "id": "nge-intro-2025-39",
+      "level": "intro",
+      "year": 2025,
+      "num": 39,
+      "text": "Which number on the map represents Troy?",
+      "choices": [
+        { "id": "a", "text": "5" },
+        { "id": "b", "text": "3" },
+        { "id": "c", "text": "2" },
+        { "id": "d", "text": "6" }
+      ],
+      "correct": null,
+      "standard_ids": ["geo.troy"],
+      "passage_id": null,
+      "image_id": "nge-intro-2025-map-01",
+      "needs_verification": true,
+      "notes": "Correct answer depends on map image. To be filled in when map is generated."
+    },
+    {
+      "id": "nge-intro-2025-40",
+      "level": "intro",
+      "year": 2025,
+      "num": 40,
+      "text": "The number 4 on the map indicates",
+      "choices": [
+        { "id": "a", "text": "Sparta" },
+        { "id": "b", "text": "Mycenae" },
+        { "id": "c", "text": "Delphi" },
+        { "id": "d", "text": "Athens" }
+      ],
+      "correct": null,
+      "standard_ids": ["geo.athens", "geo.sparta", "geo.mycenae", "geo.delphi"],
+      "passage_id": null,
+      "image_id": "nge-intro-2025-map-01",
+      "needs_verification": true,
+      "notes": "Correct answer depends on map image. Multiple geo standards listed because the question tests all four locations."
+    }
+  ]
+}

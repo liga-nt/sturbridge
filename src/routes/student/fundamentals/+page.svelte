@@ -546,7 +546,7 @@
                                         Next →
                                     </button>
                                 {/if}
-                                <button on:click={handleSubmit}
+                                <button on:mousedown|preventDefault on:click={handleSubmit}
                                     class="px-6 py-1.5 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors">
                                     Submit
                                 </button>

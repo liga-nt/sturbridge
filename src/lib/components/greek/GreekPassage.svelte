@@ -77,7 +77,7 @@
 
   /* Inline span — no layout shift on highlight */
   .gw {
-    display: inline;
+    display: inline-block;
     position: relative;
     margin-right: 0.2em;
     cursor: pointer;
@@ -86,7 +86,6 @@
     transition: background-color 150ms ease-in-out;
     user-select: none;
     -webkit-user-select: none;
-    white-space: nowrap;
   }
 
   .gw:hover {

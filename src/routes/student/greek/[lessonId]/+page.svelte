@@ -10,6 +10,7 @@
   import MediterraneanMap from '$lib/components/greek/MediterraneanMap.svelte';
   import GreekVocabExercise from '$lib/components/greek/GreekVocabExercise.svelte';
   import HistMythFlashcard from '$lib/components/greek/HistMythFlashcard.svelte';
+  import GrammarFlashcardExercise from '$lib/components/greek/GrammarFlashcardExercise.svelte';
   import { QWERTY_TO_GREEK } from '$lib/utils/greekKeyboard.js';
 
   const LETTER_ROW1 = ['q','w','e','r','t','y','u','i','o','p'];
@@ -58,6 +59,13 @@
   }
 
   const PUNCT_RE = /[.,;:·?!]/g;
+
+  function splitByCurly(str) {
+    return str.split(/(\{[^}]*\})/).map(part => {
+      const isCurly = /^\{.*\}$/.test(part);
+      return { text: isCurly ? part.slice(1, -1) : part, isCurly };
+    });
+  }
 
   function morphToDisplay(m) {
     if (!m || typeof m !== 'object') return typeof m === 'string' ? m : '';
@@ -161,6 +169,18 @@
         }
         result[num] ??= {};
         result[num][case_] = preferForm(result[num][case_], form);
+      }
+    }
+    // Nom/voc syncretism: where nom is absent but voc exists, copy voc → nom
+    const NUMS = ['sg','pl'];
+    const GENS = ['masc','fem','neut'];
+    for (const n of NUMS) {
+      if (result[n] && !result[n].nom && result[n].voc) result[n].nom = result[n].voc;
+    }
+    for (const g of GENS) {
+      if (!result[g]) continue;
+      for (const n of NUMS) {
+        if (result[g][n] && !result[g][n].nom && result[g][n].voc) result[g][n].nom = result[g][n].voc;
       }
     }
     return Object.keys(result).length ? result : null;
@@ -328,11 +348,17 @@
   $: overviewWordParas = (() => {
     const segs = lesson?.overview?.segments ?? [];
     let idx = 0;
-    const tokenizePara = para => para.split(/(\s+)/).map(tok => {
-      if (/^\s+$/.test(tok)) return { type: 'space', text: tok };
-      if (!tok) return null;
-      return { type: 'word', text: tok, idx: idx++ };
-    }).filter(Boolean);
+    const tokenizePara = para => {
+      const tokens = [];
+      for (const { text: seg, isCurly } of splitByCurly(para)) {
+        for (const tok of seg.split(/(\s+)/)) {
+          if (/^\s+$/.test(tok)) { tokens.push({ type: 'space', text: tok }); continue; }
+          if (!tok) continue;
+          tokens.push({ type: 'word', text: tok, idx: isCurly ? null : idx++, isCurly: isCurly || undefined });
+        }
+      }
+      return tokens;
+    };
 
     if (segs.length) {
       const allParas = [];
@@ -350,6 +376,68 @@
     const text = raw.replace(/<\/\w+>/gi, ' ').replace(/<[^>]+>/gi, '').replace(/\[[^\]]*\]/g, '').replace(/[ \t]+/g, ' ');
     return text.split(/\n\n+/).map(p => p.trim()).filter(Boolean).map(tokenizePara);
   })();
+
+  // Grammar word spans for highlighting — strip [short pause] tags, tokenize like overview.
+  // Splits on single \n to preserve line breaks. Marks tokens containing Greek characters.
+  $: grammarWordParas = (() => {
+    const raw = lesson?.grammar?.text ?? '';
+    if (!raw) return [];
+    let idx = 0;
+    return raw.split(/\n/).map(p => p.trim()).filter(Boolean).map(line => {
+      // Strip [short pause] markers, collapse spaces
+      const clean = line.replace(/\[[^\]]*\]/g, '').replace(/[ \t]+/g, ' ').trim();
+      if (!clean) return null;
+      // Whole-line bold: **entire line**
+      const lineBold = /^\*\*[^*].+[^*]\*\*$/.test(clean) || /^\*\*\S+\*\*$/.test(clean);
+      const src = lineBold ? clean.slice(2, -2) : clean;
+      const tokens = [];
+      for (const { text: cseg, isCurly } of splitByCurly(src)) {
+        cseg.split(/(\s+)/).forEach(tok => {
+          if (/^\s+$/.test(tok)) { tokens.push({ type: 'space', text: tok }); return; }
+          if (!tok) return;
+          if (isCurly) { tokens.push({ type: 'word', text: tok, idx: null, isCurly: true }); return; }
+          // Whole-token bold (line-level or **word**)
+          if (lineBold) {
+            const isGreek = /[Ͱ-Ͽἀ-῿]/.test(tok);
+            tokens.push({ type: 'word', text: tok, idx: idx++, isGreek, bold: true }); return;
+          }
+          if (/^\*\*\S/.test(tok) && tok.endsWith('**')) {
+            const display = tok.slice(2, -2);
+            const isGreek = /[Ͱ-Ͽἀ-῿]/.test(display);
+            tokens.push({ type: 'word', text: display, idx: idx++, isGreek, bold: true }); return;
+          }
+          // Mid-word bold: split into parts sharing one idx
+          if (tok.includes('**')) {
+            const parts = [];
+            const re = /\*\*([^*]*)\*\*/g;
+            let last = 0, m;
+            while ((m = re.exec(tok)) !== null) {
+              if (m.index > last) parts.push({ text: tok.slice(last, m.index), bold: false });
+              if (m[1]) parts.push({ text: m[1], bold: true });
+              last = m.index + m[0].length;
+            }
+            if (last < tok.length) parts.push({ text: tok.slice(last), bold: false });
+            if (parts.length > 1) {
+              const fullText = parts.map(p => p.text).join('');
+              tokens.push({ type: 'word', text: fullText, parts, idx: idx++, isGreek: /[Ͱ-Ͽἀ-῿]/.test(fullText) }); return;
+            }
+          }
+          const isGreek = /[Ͱ-Ͽἀ-῿]/.test(tok);
+          tokens.push({ type: 'word', text: tok, idx: idx++, isGreek, bold: false });
+        });
+      }
+      return tokens.length ? tokens : null;
+    }).filter(Boolean);
+  })();
+
+  function handleGrammarWordHover(text) {
+    if (!wordFormsCache) return;
+    const bare = text.replace(PUNCT_RE, '');
+    const entry = wordFormsCache[bare] || wordFormsCache[stripGreekDiacritics(bare)];
+    hoveredWord = entry
+      ? { text: bare, dictEntry: entry.dictEntry ?? bare, shortDef: entry.shortDef ?? entry.short_def ?? null, paradigmKey: entry.paradigmKey ?? entry.paradigm_key ?? null, morph: entry.morph ?? null }
+      : { text: bare, dictEntry: bare, shortDef: null, paradigmKey: null, morph: null };
+  }
 
   // ── Hover word ────────────────────────────────────────────────────────────────
   let hoveredWord = null;
@@ -379,23 +467,48 @@
   $: wordForms = selectWordForms(_allWordForms, highlightMorph);
   $: dictEntry = hoveredWord?.dictEntry ?? null;
 
+  // ── Grammar flashcards ────────────────────────────────────────────────────────
+  let grammarSubTab = 'lesson'; // 'lesson' | 'flashcards'
+  let grammarFlashcards = null; // loaded once on demand
+
+  async function loadGrammarFlashcards() {
+    if (grammarFlashcards) return;
+    try {
+      const res = await fetch('/data/Greek/grammar_flashcards.json');
+      grammarFlashcards = await res.json();
+    } catch (e) {
+      console.warn('loadGrammarFlashcards failed:', e.message);
+    }
+  }
+
+  $: grammarFlashSets = (() => {
+    if (!grammarFlashcards || !lesson) return [];
+    return (lesson.standardIds ?? [])
+      .filter(sid => sid.startsWith('lang.'))
+      .flatMap(sid => grammarFlashcards[sid]?.sets ?? []);
+  })();
+
+  // Load flashcard data reactively when the flashcards sub-tab is opened
+  $: if (lessonPart === 'grammar' && grammarSubTab === 'flashcards') loadGrammarFlashcards();
+
   // ── Lesson part navigation ────────────────────────────────────────────────────
   let lessonPart = 'overview'; // 'overview' | 'vocab' | 'story' | 'map'
 
   // Available parts in order — derived once lesson loads
   $: availableParts = lesson ? [
     lesson.overview?.text                          ? 'overview'   : null,
+    lesson.grammar?.text                           ? 'grammar'    : null,
     'vocab',
     (lesson.sentences?.length ?? 0) > 0           ? 'story'      : null,
-    lesson.map?.description                        ? 'map'        : null,
     chapterHistStandards.length > 0               ? 'history'    : null,
     chapterMythStandards.length > 0               ? 'mythology'  : null,
+    'quiz',
   ].filter(Boolean) : [];
 
   // Default to first available part when lesson loads
   $: if (lesson && !availableParts.includes(lessonPart)) lessonPart = availableParts[0] ?? 'story';
 
-  const PART_LABELS = { overview: 'Story', vocab: 'Vocab', story: 'Greek', map: 'Map', history: 'History', mythology: 'Myth' };
+  const PART_LABELS = { overview: 'Story', grammar: 'Grammar', vocab: 'Vocab', story: 'Reading', map: 'Map', history: 'History', mythology: 'Mythology', quiz: 'Quiz' };
 
   // ── Simple audio highlighting for overview / map ─────────────────────────
   let simpleHighlightIndex = -1;
@@ -432,8 +545,8 @@
     let w = 0;
     return overviewSegments.map(s => {
       const off = w;
-      const plain = s.text.replace(/<\/\w+>/g, ' ').replace(/<[^>]+>/g, '').replace(/\[[^\]]*\]/g, '');
-      w += plain.trim().split(/\s+/).filter(Boolean).length;
+      const plain = s.text.replace(/\{[^}]*\}/g, '').replace(/<\/\w+>/g, ' ').replace(/<[^>]+>/g, '').replace(/\[[^\]]*\]/g, '').replace(/\s+/g, ' ').trim();
+      w += plain.split(/\s+/).filter(Boolean).length;
       return off;
     });
   })();
@@ -590,6 +703,10 @@
     const probe = new Audio(lesson.map.audioUrl);
     probe.addEventListener('loadedmetadata', () => { simpleAudioDuration = probe.duration; }, { once: true });
   }
+  $: if (lessonPart === 'grammar' && lesson?.grammar?.audioUrl && simpleAudioDuration === 0) {
+    const probe = new Audio(lesson.grammar.audioUrl);
+    probe.addEventListener('loadedmetadata', () => { simpleAudioDuration = probe.duration; }, { once: true });
+  }
 
   // ── Lesson hints (tab instruction voiceovers) ─────────────────────────────────
   let lessonHints = {};
@@ -682,7 +799,6 @@
     const pause = (ms) => new Promise(r => setTimeout(r, ms));
 
     const toPlay = vocabList
-      .filter(w => w.vocabTier !== null)
       .sort((a, b) => {
         const ai = VOCAB_TIER_ORDER.indexOf(a.vocabTier);
         const bi = VOCAB_TIER_ORDER.indexOf(b.vocabTier);
@@ -929,7 +1045,6 @@
       for (const mode of modes) {
         if (!isPlaying) break;
         await playSentence(sentence, mode, i);
-        if (isPlaying) await pause(600);
       }
     }
 
@@ -939,7 +1054,7 @@
   }
 
   function togglePlayPause() {
-    if (lessonPart === 'overview' || lessonPart === 'map') {
+    if (lessonPart === 'overview' || lessonPart === 'map' || lessonPart === 'grammar') {
       if (simpleAudioPlaying && simpleAudioPart === lessonPart) stopSimpleAudio();
       else playSimpleAudio(lessonPart);
     } else if (lessonPart === 'vocab') {
@@ -951,7 +1066,7 @@
     }
   }
 
-  $: effectivePlaying = (lessonPart === 'overview' || lessonPart === 'map')
+  $: effectivePlaying = (lessonPart === 'overview' || lessonPart === 'map' || lessonPart === 'grammar')
     ? (simpleAudioPlaying && simpleAudioPart === lessonPart)
     : lessonPart === 'vocab'
     ? vocabPlaying
@@ -978,7 +1093,7 @@
       </button>
 
       <!-- Play / Pause -->
-      <button class="play-pause-btn" on:click={togglePlayPause} aria-label={effectivePlaying ? 'Pause' : 'Play'} disabled={!lesson || (lessonPart === 'overview' && !overviewSegments.length && !lesson.overview?.audioUrl) || (lessonPart === 'map' && !lesson.map?.audioUrl) || (lessonPart === 'vocab' && vocabList.length === 0)}>
+      <button class="play-pause-btn" on:click={togglePlayPause} aria-label={effectivePlaying ? 'Pause' : 'Play'} disabled={!lesson || lessonPart === 'quiz' || (lessonPart === 'overview' && !overviewSegments.length && !lesson.overview?.audioUrl) || (lessonPart === 'map' && !lesson.map?.audioUrl) || (lessonPart === 'grammar' && !lesson.grammar?.audioUrl) || (lessonPart === 'vocab' && vocabList.length === 0)}>
         {#if effectivePlaying}
           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
             <line x1="10" y1="4" x2="10" y2="43"/>
@@ -1043,7 +1158,7 @@
     </div>
 
     <!-- Progress bar — Story tab only -->
-    {#if lessonPart === 'overview' && simpleAudioDuration > 0}
+    {#if (lessonPart === 'overview' || lessonPart === 'grammar') && simpleAudioDuration > 0}
       <div class="progress-bar-row">
         <span class="progress-time">{formatTime(simpleAudioCurrentTime)}</span>
         <input
@@ -1124,7 +1239,7 @@
                     on:click={() => handleTermClick(std)}
                     role="button" tabindex="0"
                     on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && handleTermClick(std)}
-                  >{tok.text}</span>{:else}<span class="story-word" class:word-highlight={tok.idx === simpleHighlightIndex}>{tok.text}</span>{/if}{/if}{/each}</p>
+                  >{tok.text}</span>{:else if tok.isCurly}<span class="story-word display-only">{tok.text}</span>{:else}<span class="story-word" class:word-highlight={tok.idx === simpleHighlightIndex}>{tok.text}</span>{/if}{/if}{/each}</p>
               {/each}
             </div>
           </div>
@@ -1201,7 +1316,7 @@
 
             {#if paradigmKey || wordForms}
               <div class="inline-paradigm">
-                <ConjugationTable {paradigmKey} {highlightMorph} {wordForms} {dictEntry} />
+                <ConjugationTable {paradigmKey} {highlightMorph} {wordForms} {dictEntry} hoveredForm={hoveredWord?.text} />
               </div>
             {/if}
           </main>
@@ -1235,6 +1350,76 @@
         </div>
       </div>
 
+    <!-- ── Grammar part ─────────────────────────────────────────────────────── -->
+    {:else if lessonPart === 'grammar'}
+      <div class="scroll-area">
+
+        <!-- Grammar sub-tab bar -->
+        <div class="grammar-sub-tabs">
+          <button class="grammar-sub-tab" class:active={grammarSubTab === 'lesson'}
+            on:click={() => grammarSubTab = 'lesson'}>Lesson</button>
+          <button class="grammar-sub-tab" class:active={grammarSubTab === 'flashcards'}
+            on:click={() => { grammarSubTab = 'flashcards'; stopSimpleAudio(); }}>Flashcards</button>
+        </div>
+
+        {#if grammarSubTab === 'lesson'}
+          <div class="grammar-two-col">
+            <main class="grammar-col-text">
+              <div class="part-text prose">
+                {#each grammarWordParas as paraWords}
+                  <p>{#each paraWords as tok}{#if tok.type === 'space'}{tok.text}{:else if tok.parts}<!-- svelte-ignore a11y-mouse-events-have-key-events --><span
+                      class="story-word"
+                      class:gw={tok.isGreek}
+                      class:word-highlight={tok.idx === simpleHighlightIndex}
+                      on:mouseenter={() => tok.isGreek && handleGrammarWordHover(tok.text)}
+                      on:mouseleave={() => tok.isGreek && (hoveredWord = null)}
+                    >{#each tok.parts as p}{#if p.bold}<strong>{p.text}</strong>{:else}{p.text}{/if}{/each}</span>{:else if tok.isGreek}<!-- svelte-ignore a11y-mouse-events-have-key-events --><span
+                      class="story-word gw"
+                      class:word-highlight={tok.idx === simpleHighlightIndex}
+                      class:gw-bold={tok.bold}
+                      on:mouseenter={() => handleGrammarWordHover(tok.text)}
+                      on:mouseleave={() => hoveredWord = null}
+                    >{tok.text}</span>{:else if tok.isCurly}<span class="story-word display-only">{tok.text}</span>{:else if tok.bold}<strong class="story-word" class:word-highlight={tok.idx === simpleHighlightIndex}>{tok.text}</strong>{:else}<span class="story-word" class:word-highlight={tok.idx === simpleHighlightIndex}>{tok.text}</span>{/if}{/each}</p>
+                {/each}
+              </div>
+            </main>
+            <aside class="grammar-col-paradigm">
+              <div class="inline-analysis">
+                {#if hoveredWord?.text}
+                  <strong class="ia-form">{hoveredWord.dictEntry ?? hoveredWord.text}</strong>
+                  {#if hoveredWord.shortDef}
+                    {' '}<span class="ia-def">"{hoveredWord.shortDef}"</span>
+                  {/if}
+                  {#if highlightMorph}
+                    {' '}<span class="ia-morph">{morphToDisplay(highlightMorph)}</span>
+                  {/if}
+                {:else}
+                  <span class="ia-placeholder">hover a Greek word</span>
+                {/if}
+              </div>
+              {#if paradigmKey || wordForms}
+                <div class="inline-paradigm">
+                  <ConjugationTable {paradigmKey} {highlightMorph} {wordForms} {dictEntry} hoveredForm={hoveredWord?.text} />
+                </div>
+              {/if}
+            </aside>
+          </div>
+
+        {:else}
+          <!-- Flashcards sub-tab -->
+          <div class="grammar-flashcard-wrap">
+            {#if grammarFlashSets.length}
+              <GrammarFlashcardExercise sets={grammarFlashSets} />
+            {:else if !grammarFlashcards}
+              <p class="grammar-flash-empty">Loading…</p>
+            {:else}
+              <p class="grammar-flash-empty">No flashcard exercises for this lesson yet.</p>
+            {/if}
+          </div>
+        {/if}
+
+      </div>
+
     <!-- ── History part ─────────────────────────────────────────────────────── -->
     {:else if lessonPart === 'history'}
       <div class="scroll-area">
@@ -1248,6 +1433,14 @@
       <div class="scroll-area">
         <div class="vocab-exercise-wrap">
           <HistMythFlashcard standards={chapterMythStandards} />
+        </div>
+      </div>
+
+    <!-- ── Quiz part (placeholder) ───────────────────────────────────────────── -->
+    {:else if lessonPart === 'quiz'}
+      <div class="scroll-area">
+        <div class="quiz-placeholder">
+          <p class="quiz-placeholder-text">Quiz coming soon.</p>
         </div>
       </div>
     {/if}
@@ -1459,6 +1652,18 @@
 {/if}
 
 <style>
+  .quiz-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 60px 20px;
+  }
+  .quiz-placeholder-text {
+    font-size: 16px;
+    color: #9ca3af;
+  }
+
   /* Full-viewport layout */
   .lesson-page {
     display: flex;
@@ -1661,6 +1866,72 @@
 
   .col-passage {
     min-width: 0;
+  }
+
+  /* Grammar sub-tabs */
+  .grammar-sub-tabs {
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px 0;
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .grammar-sub-tab {
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px 6px 0 0;
+    border: 1px solid #e5e7eb;
+    border-bottom: none;
+    background: #f9fafb;
+    color: #6b7280;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .grammar-sub-tab.active {
+    background: white;
+    color: #111827;
+    border-color: #d1d5db;
+  }
+
+  .grammar-flashcard-wrap {
+    padding: 16px;
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .grammar-flash-empty {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 14px;
+    font-style: italic;
+    padding: 40px 0;
+  }
+
+  /* Grammar two-column: prose left, paradigm right */
+  .grammar-two-col {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    align-items: start;
+    max-width: 960px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .grammar-col-text {
+    padding: 20px 24px 20px 16px;
+    min-width: 0;
+  }
+
+  .grammar-col-paradigm {
+    padding: 20px 16px;
+    border-left: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
   }
 
   /* Inline word analysis — below passage, no box */
@@ -1869,6 +2140,10 @@
   }
   .word-highlight {
     background: #fef08a;
+  }
+  .display-only {
+    color: #94a3b8;
+    font-style: italic;
   }
 
   /* ── Overview layout with term sidebar ── */

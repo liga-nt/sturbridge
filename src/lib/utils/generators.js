@@ -724,7 +724,7 @@ function generateQ13() {
     { shape_name: 'square',             stimulus_params: { shape: { type: 'square', size: 120 }, line: { from: [-75, 0], to: [75, 0] } },           correct_answer: 'is,4 lines'     },
     { shape_name: 'square',             stimulus_params: { shape: { type: 'square', size: 120 }, line: { from: [-75, -75], to: [75, 75] } },        correct_answer: 'is,4 lines'     },
     { shape_name: 'rectangle',          stimulus_params: { shape: { type: 'rect', width: 150, height: 80 }, line: { from: [-85, 0], to: [85, 0] } }, correct_answer: 'is,2 lines'    },
-    { shape_name: 'rectangle',          stimulus_params: { shape: { type: 'rect', width: 150, height: 80 }, line: { from: [-70, -40], to: [70, 40] } }, correct_answer: 'is not,2 lines' },
+    { shape_name: 'rectangle',          stimulus_params: { shape: { type: 'rect', width: 150, height: 80 }, line: { from: [-75, -40], to: [75, 40] } }, correct_answer: 'is not,2 lines' },
     { shape_name: 'equilateral triangle', stimulus_params: { shape: { type: 'triangle', kind: 'equilateral', size: 120 }, line: { from: [0, -70], to: [0, 38] } }, correct_answer: 'is,3 lines' },
     { shape_name: 'isosceles triangle', stimulus_params: { shape: { type: 'triangle', kind: 'isosceles', base: 120, height: 100 }, line: { from: [0, -68], to: [0, 36] } }, correct_answer: 'is,1 line' },
     { shape_name: 'isosceles triangle', stimulus_params: { shape: { type: 'triangle', kind: 'isosceles', base: 120, height: 100 }, line: { from: [-74, 0], to: [74, 0] } }, correct_answer: 'is not,1 line' },
@@ -775,6 +775,16 @@ function generateQ15() {
       intro: (a, b, d) => `Lin has ${a} tiles in one box and ${b} tiles in another box. She is making rows on a board. Lin uses ${d} tiles in each row.`,
       question: 'What is the total number of rows Lin can make with the tiles?',
       divisors: [3, 4]
+    },
+    {
+      intro: (a, b, d) => `Jaylen has ${a} crayons in one bin and ${b} crayons in another bin. He is making art kits. Jaylen puts ${d} crayons in each kit.`,
+      question: 'What is the total number of art kits Jaylen can make with the crayons?',
+      divisors: [4, 6]
+    },
+    {
+      intro: (a, b, d) => `Nadia has ${a} marbles in one jar and ${b} marbles in another jar. She is filling small bags with the marbles. Nadia puts ${d} marbles in each bag.`,
+      question: 'What is the total number of bags Nadia can fill with the marbles?',
+      divisors: [5, 6]
     }
   ];
 
@@ -865,7 +875,7 @@ function generateQ18() {
     question_number: '18',
     answer_type: 'short_answer',
     input_widget: 'equation_editor',
-    question_text: sc.text(N, numer, denom),
+    question_text: sc.text(N, numer, denom) + '\n\nEnter your answer as a whole number, fraction, or mixed number.',
     correct_answer: correct
   };
 }
@@ -960,20 +970,44 @@ function generateQ9() {
     };
   }
 
-  // Pick 2 obtuse builders and 3 non-obtuse builders
-  const obtuseBuilders = shuffle([pentagon, parallelogram, obtuseTriSticker]).slice(0, 2);
-  const plainBuilders  = shuffle([stickerRect, equilateralTriSticker, rightTriSticker]);
+  // Regular hexagon — flat top/bottom, all interior angles 120° (no acute angles)
+  function hexagon(cx) {
+    const r = 40;
+    const cy = BASELINE - r * Math.sqrt(3) / 2;
+    const pts = [];
+    for (let i = 0; i < 6; i++) {
+      const a = i * 60 * Math.PI / 180;
+      pts.push([+(cx + r * Math.cos(a)).toFixed(1), +(cy + r * Math.sin(a)).toFixed(1)]);
+    }
+    return { shape: 'polygon', points: pts };
+  }
 
-  const positions = shuffle([0, 1, 2, 3, 4]);
-  const obtusePos  = positions.slice(0, 2).sort((a, b) => a - b);
-  const plainPos   = positions.slice(2).sort((a, b) => a - b);
+  // Variant: 'obtuse' → identify shapes with obtuse angles; 'acute' → identify shapes with acute angles
+  const partAVariant = Math.random() < 0.5 ? 'obtuse' : 'acute';
+
+  let correctBuilders, distractorBuilders, partAText;
+  if (partAVariant === 'obtuse') {
+    correctBuilders   = shuffle([pentagon, parallelogram, obtuseTriSticker]).slice(0, 2);
+    distractorBuilders = shuffle([stickerRect, equilateralTriSticker, rightTriSticker]);
+    partAText = 'The first set has five stickers, as shown.\n\nSelect <strong>two</strong> stickers in this set that appear to have at least one obtuse angle.';
+  } else {
+    // acute: equilateral (all 60°), right tri (two acute), parallelogram (two acute)
+    // distractors: rect (all right), pentagon (all 108°), hexagon (all 120°)
+    correctBuilders   = shuffle([equilateralTriSticker, rightTriSticker, parallelogram]).slice(0, 2);
+    distractorBuilders = shuffle([stickerRect, pentagon, hexagon]);
+    partAText = 'The first set has five stickers, as shown.\n\nSelect <strong>two</strong> stickers in this set that appear to have at least one acute angle.';
+  }
+
+  const positions   = shuffle([0, 1, 2, 3, 4]);
+  const correctPos   = positions.slice(0, 2).sort((a, b) => a - b);
+  const distractorPos = positions.slice(2).sort((a, b) => a - b);
 
   // Build shapes
   const shapeData = Array.from({ length: 5 }, (_, i) => {
     const cx = A_CX[i];
-    const isObtuse = obtusePos.includes(i);
-    const idx = isObtuse ? obtusePos.indexOf(i) : plainPos.indexOf(i);
-    const geo = isObtuse ? obtuseBuilders[idx](cx) : plainBuilders[idx](cx);
+    const isCorrect = correctPos.includes(i);
+    const idx = isCorrect ? correctPos.indexOf(i) : distractorPos.indexOf(i);
+    const geo = isCorrect ? correctBuilders[idx](cx) : distractorBuilders[idx](cx);
     return { slotIdx: i, geo, area: geoArea(geo) };
   });
 
@@ -1000,7 +1034,7 @@ function generateQ9() {
     .map(e => ({ id: String(e.slotIdx + 1), ...e.geo, label: e.label }));
 
   // Correct answer = sorted 1-indexed sticker IDs (matches StickerSet value export)
-  const correctA = obtusePos.map(i => String(i + 1)).sort().join(',');
+  const correctA = correctPos.map(i => String(i + 1)).sort().join(',');
 
   // ── Part B: 3 triangle slots ──
   // viewBox "0 0 413 81" — triangles fill the height
@@ -1046,7 +1080,7 @@ function generateQ9() {
     parts: [
       {
         label: 'A',
-        text: 'The first set has five stickers, as shown.\n\nSelect <strong>two</strong> stickers in this set that appear to have at least one obtuse angle.',
+        text: partAText,
         answer_type: 'hotspot',
         select_count: 2,
         stimulus_type: 'sticker_set',
@@ -3172,23 +3206,15 @@ function generate2021Q2() {
   const dB = multiplier;          // b = M × M  (uses multiplier as the age)
   const dD = correctProduct;      // b = (N×M) × M  (re-multiplies result)
 
-  // Build shuffled option values with correct answer always = age × multiplier
-  const optionValues = [
-    { value: dA,           label: `b = ${dA} × ${multiplier}` },
-    { value: dB,           label: `b = ${dB} × ${multiplier}` },
-    { value: age,          label: `b = ${age} × ${multiplier}` },   // CORRECT
-    { value: dD,           label: `b = ${dD} × ${multiplier}` },
-  ];
-
-  // Assign letters A–D in order (options already in a fixed pedagogical order)
+  const rawOptions2 = shuffle([
+    { label: `b = ${dA} × ${multiplier}`,  isCorrect: false },
+    { label: `b = ${dB} × ${multiplier}`,  isCorrect: false },
+    { label: `b = ${age} × ${multiplier}`, isCorrect: true  },
+    { label: `b = ${dD} × ${multiplier}`,  isCorrect: false },
+  ]);
   const letters = ['A', 'B', 'C', 'D'];
-  const answerOptions = optionValues.map((opt, i) => ({
-    letter: letters[i],
-    text: opt.label,
-  }));
-
-  // Correct answer is the entry whose value === age (always index 2 = 'C')
-  const correctLetter = 'C';
+  const answerOptions = rawOptions2.map((opt, i) => ({ letter: letters[i], text: opt.label }));
+  const correctLetter = letters[rawOptions2.findIndex(o => o.isCorrect)];
 
   return {
     item_id: 'MA307079',
@@ -3416,17 +3442,19 @@ function generate2023Q15() {
   const halfP   = w + l;
   const wrongC  = 2 + w * 2 + l; // "2 + w × 2 + l" — order-of-operations confusion
 
+  const rawOpts15 = shuffle([
+    { text: `${w} + ${l} = ${halfP}`,           isCorrect: false },
+    { text: `${w} × ${l} = ${area}`,            isCorrect: false },
+    { text: `2 + ${w} × 2 + ${l} = ${wrongC}`, isCorrect: false },
+    { text: `2 × ${w} + 2 × ${l} = ${perim}`,  isCorrect: true  },
+  ]);
+  const ABCD15 = ['A', 'B', 'C', 'D'];
   return {
     question_number: '15',
     answer_type: 'multiple_choice',
     question_text: `A rectangle has a width of ${w} inches and a length of ${l} inches.\n\n Which of these equations shows the perimeter, in inches, of the rectangle?`,
-    answer_options: [
-      { letter: 'A', text: `${w} + ${l} = ${halfP}` },
-      { letter: 'B', text: `${w} × ${l} = ${area}` },
-      { letter: 'C', text: `2 + ${w} × 2 + ${l} = ${wrongC}` },
-      { letter: 'D', text: `2 × ${w} + 2 × ${l} = ${perim}` },
-    ],
-    correct_answer: 'D',
+    answer_options: rawOpts15.map((o, i) => ({ letter: ABCD15[i], text: o.text })),
+    correct_answer: ABCD15[rawOpts15.findIndex(o => o.isCorrect)],
   };
 }
 
@@ -3598,19 +3626,16 @@ function generate2021Q3() {
   const distractor2 = `${tensDigit * 10}.0`;     // e.g. "80.0"  — treated as whole number
   const distractor3 = `0.0${tensDigit}`;         // e.g. "0.08"  — hundredths confusion
 
-  // Build the five answer options in fixed TestNav order: 0.N0, N.0, 0.0N, N0.0, 0.N
-  const options = [
-    { letter: 'A', text: correct1,    isCorrect: true  },
-    { letter: 'B', text: distractor1, isCorrect: false },
-    { letter: 'C', text: distractor3, isCorrect: false },
-    { letter: 'D', text: distractor2, isCorrect: false },
-    { letter: 'E', text: correct2,    isCorrect: true  },
-  ];
-
-  const correctLetters = options
-    .filter(o => o.isCorrect)
-    .map(o => o.letter)
-    .join(',');
+  const rawOpts3 = shuffle([
+    { text: correct1,    isCorrect: true  },
+    { text: distractor1, isCorrect: false },
+    { text: distractor3, isCorrect: false },
+    { text: distractor2, isCorrect: false },
+    { text: correct2,    isCorrect: true  },
+  ]);
+  const ABCDE3 = ['A', 'B', 'C', 'D', 'E'];
+  const options = rawOpts3.map((o, i) => ({ letter: ABCDE3[i], text: o.text, isCorrect: o.isCorrect }));
+  const correctLetters = options.filter(o => o.isCorrect).map(o => o.letter).sort().join(',');
 
   return {
     item_id: 'MA229063',
@@ -3668,13 +3693,13 @@ function generate2021Q4() {
     `${subject} ${item.verb} ${count} ${item.noun}. Each ${item.singular} ${item.measure} ` +
     `[1/${denom}] ${item.unit}${item.measure_suffix}.\n\nWhat is the total ${item.quantity}, in ${item.unit_plural}, of the ${count} ${item.noun}?`;
 
-  const answerOptions = [
-    { letter: 'A', text: `[${correctNum}/${correctDen}]` },  // CORRECT
-    { letter: 'B', text: `[${bNum}/${bDen}]` },
-    { letter: 'C', text: `[${cNum}/${cDen}]` },
-    { letter: 'D', text: `[${dNum}/${dDen}]` },
-  ];
-
+  const rawOpts4 = shuffle([
+    { text: `[${correctNum}/${correctDen}]`, isCorrect: true  },
+    { text: `[${bNum}/${bDen}]`,             isCorrect: false },
+    { text: `[${cNum}/${cDen}]`,             isCorrect: false },
+    { text: `[${dNum}/${dDen}]`,             isCorrect: false },
+  ]);
+  const ABCD4 = ['A', 'B', 'C', 'D'];
   return {
     item_id: 'MA297973',
     question_number: '4',
@@ -3684,10 +3709,10 @@ function generate2021Q4() {
     stimulus_params: null,
     math_expression: null,
     question_text: questionText,
-    answer_options: answerOptions,
+    answer_options: rawOpts4.map((o, i) => ({ letter: ABCD4[i], text: o.text })),
     parts: null,
     select_count: null,
-    correct_answer: 'A',
+    correct_answer: ABCD4[rawOpts4.findIndex(o => o.isCorrect)],
   };
 }
 
@@ -3951,14 +3976,13 @@ function generate2021Q7() {
 
   const unitLabel = scenario.unit === 'inch' ? 'square inches' : 'square feet';
 
-  // Build options: correct = C, shuffle the distractors into A, B, D positions
-  const answer_options = [
-    { letter: 'A', text: `${twoSide} ${unitLabel}` },
-    { letter: 'B', text: `${perimeter} ${unitLabel}` },
-    { letter: 'C', text: `${area} ${unitLabel}` },
-    { letter: 'D', text: `${wrongFactor} ${unitLabel}` },
-  ];
-
+  const rawOpts7 = shuffle([
+    { text: `${twoSide} ${unitLabel}`,     isCorrect: false },
+    { text: `${perimeter} ${unitLabel}`,   isCorrect: false },
+    { text: `${area} ${unitLabel}`,        isCorrect: true  },
+    { text: `${wrongFactor} ${unitLabel}`, isCorrect: false },
+  ]);
+  const ABCD7 = ['A', 'B', 'C', 'D'];
   return {
     item_id: 'MA306940',
     question_number: '7',
@@ -3968,10 +3992,10 @@ function generate2021Q7() {
     stimulus_params: null,
     math_expression: null,
     question_text: `A ${scenario.object} is in the shape of a square. Each side of the ${scenario.object} has a length of ${side} ${scenario.unit}s.\n\nWhat is the area of the ${scenario.object}?`,
-    answer_options,
+    answer_options: rawOpts7.map((o, i) => ({ letter: ABCD7[i], text: o.text })),
     parts: null,
     select_count: null,
-    correct_answer: 'C',
+    correct_answer: ABCD7[rawOpts7.findIndex(o => o.isCorrect)],
   };
 }
 
@@ -4025,19 +4049,63 @@ function generate2021Q8() {
 }
 
 function generate2021Q9() {
-  // Q9 (2021): Complete a line plot showing snowfall amounts in inches for 8 towns.
-  // The line plot pre-places 7 of the 8 X marks; the student drags the last X to
-  // the correct quarter-inch position to complete the plot.
-  //
-  // Data: 2¼, 1½, 2, 2¾, 1½, ¾, 2¾, 1¼
-  // Distribution: ¾×1, 1¼×1, 1½×2, 2×1, 2¼×1, 2¾×2
-  // Missing mark: the second 2¾ — student places it at the 2¾ column, second level.
+  // Q9 (2021): Complete a line plot of snowfall (in inches) for 8 towns.
+  // 7 distinct quarter-inch positions (¼–2¾); one appears twice — that's the missing mark.
+  // data_point labels must use unsimplified form ('1[2/4]' not '1[1/2]') to match the
+  // tick labels the DragDropLinePlot component generates.
 
-  // Randomize: swap which value is "missing" among the ones with count ≥ 2
-  // (1½ appears twice, 2¾ appears twice). The missing mark is one of these
-  // second occurrences, or we can vary the dataset slightly.
-  // For simplicity, keep the dataset fixed (it matches the actual test item)
-  // and always return the same missing value.
+  const DEN = 4;
+
+  // Quarter steps ¼–2¾ (steps 1–11, avoiding 0 and 3 as edge values)
+  const allSteps = [1,2,3,4,5,6,7,8,9,10,11];
+
+  // Tick label as component generates it (unsimplified)
+  function tickLabel(step) {
+    const whole = Math.floor(step / DEN);
+    const rem   = step % DEN;
+    if (rem === 0)    return String(whole);
+    if (whole === 0)  return `[${rem}/${DEN}]`;
+    return `${whole}[${rem}/${DEN}]`;
+  }
+
+  // Display label for the student list (simplified ½ etc.)
+  function displayLabel(step) {
+    const whole = Math.floor(step / DEN);
+    const rem   = step % DEN;
+    if (rem === 0) return String(whole);
+    const sNum = rem === 2 ? 1 : rem;
+    const sDen = rem === 2 ? 2 : DEN;
+    if (whole === 0) return `[${sNum}/${sDen}]`;
+    return `${whole}[${sNum}/${sDen}]`;
+  }
+
+  // Pick 6 distinct positions → 8 readings total with 2 positions each appearing twice.
+  // This matches the original: some snowfall amounts naturally appear more than once,
+  // and the missing mark is a second reading at one of those doubled positions.
+  const positions = shuffle(allSteps).slice(0, 6).sort((a, b) => a - b);
+
+  // Give count=2 to 2 distinct positions chosen at random
+  const doubleIdxs = shuffle([0, 1, 2, 3, 4, 5]).slice(0, 2);
+  const counts = positions.map((_, i) => doubleIdxs.includes(i) ? 2 : 1);
+
+  // Missing mark is one of the two doubled positions
+  const missingIdx   = doubleIdxs[randInt(0, 1)];
+  const missingStep  = positions[missingIdx];
+  const missingLabel = tickLabel(missingStep);
+
+  const data_points = positions.map((step, i) => ({
+    label: tickLabel(step),
+    count: counts[i],
+  }));
+
+  // Build the shuffled list of all 8 values for the student to read
+  const allValues = [];
+  for (let i = 0; i < positions.length; i++) {
+    for (let j = 0; j < counts[i]; j++) {
+      allValues.push(displayLabel(positions[i]));
+    }
+  }
+  const math_expression = shuffle(allValues).join(',  ');
 
   return {
     item_id: 'MA800763292',
@@ -4049,18 +4117,11 @@ function generate2021Q9() {
       axis_label: 'Snowfall (inches)',
       min: 0,
       max: 3,
-      denominator: 4,
-      missing_label: '2[3/4]',
-      data_points: [
-        { label: '[3/4]',   count: 1 },
-        { label: '1[1/4]',  count: 1 },
-        { label: '1[1/2]',  count: 2 },
-        { label: '2',       count: 1 },
-        { label: '2[1/4]',  count: 1 },
-        { label: '2[3/4]',  count: 2 },
-      ],
+      denominator: DEN,
+      missing_label: missingLabel,
+      data_points,
     },
-    math_expression: '2[1/4],  1[1/2],  2,  2[3/4],  1[1/2],  [3/4],  2[3/4],  1[1/4]',
+    math_expression,
     answer_type: 'drag_drop_line_plot',
     question_text:
       'This line plot also shows some of the snowfall amounts. One of the snowfall amounts is missing from the line plot.\n\n' +
@@ -4068,7 +4129,7 @@ function generate2021Q9() {
     answer_options: null,
     parts: null,
     select_count: null,
-    correct_answer: '2[3/4]',
+    correct_answer: missingLabel,
   };
 }
 
@@ -4100,13 +4161,13 @@ function generate2021Q10() {
   // Distractor D: student adds sum + known instead of subtracting
   const distractorD = sum + known;
 
-  const options = [
-    { letter: 'A', text: String(correct) },
-    { letter: 'B', text: String(distractorB) },
-    { letter: 'C', text: String(safeC) },
-    { letter: 'D', text: String(distractorD) },
-  ];
-
+  const rawOpts10 = shuffle([
+    { text: String(correct),     isCorrect: true  },
+    { text: String(distractorB), isCorrect: false },
+    { text: String(safeC),       isCorrect: false },
+    { text: String(distractorD), isCorrect: false },
+  ]);
+  const ABCD10 = ['A', 'B', 'C', 'D'];
   return {
     item_id: 'MA270627',
     question_number: '10',
@@ -4116,10 +4177,10 @@ function generate2021Q10() {
     math_expression: `${sum} = ${known} + {?}`,
     answer_type: 'multiple_choice',
     question_text: 'What is the value of {?} that makes this number sentence true?',
-    answer_options: options,
+    answer_options: rawOpts10.map((o, i) => ({ letter: ABCD10[i], text: o.text })),
     parts: null,
     select_count: null,
-    correct_answer: 'A',
+    correct_answer: ABCD10[rawOpts10.findIndex(o => o.isCorrect)],
   };
 }
 
@@ -4195,17 +4256,28 @@ function generate2021Q11() {
 
 // ─── 2021 Q12: Equivalent fractions — find x in N/10 = x/100 ────────────────
 function generate2021Q12() {
-  // The original item: 7/10 = x/100, correct answer 70.
-  // Generator varies the tenths numerator N (1–9), correct = N*10.
+  // Original: 7/10 = x/100, answer 70.
+  // Varies denominator pair and direction to cover all tenths/hundredths/thousandths equivalences.
   //
-  // Pedagogically motivated distractors:
-  //   B: student keeps numerator the same (N) — ignores the ×10 denominator scale
-  //   C: student adds 10 to numerator instead of multiplying (N + 10)
-  //   D: student multiplies denominator by N rather than numerator (stays N, wrong denomination awareness)
-  //      Actually: student divides 100 by denominator: 100/10=10, then picks 10 as answer (place value confusion)
+  // Pairs (scale factor):
+  //   10  ↔ 100   (×10)
+  //   10  ↔ 1000  (×100)
+  //   100 ↔ 1000  (×10)
+  //
+  // Direction: forward (x in larger denom) or reverse (x in smaller denom).
 
-  const N = randInt(1, 9);
-  const correct = N * 10;
+  const pair = pick([
+    { small: 10,  large: 100,  factor: 10  },
+    { small: 10,  large: 1000, factor: 100 },
+    { small: 100, large: 1000, factor: 10  },
+  ]);
+
+  // N = numerator of the small-denominator fraction (avoid values that make x > 999)
+  const maxN = Math.floor(999 / pair.factor);
+  const N = randInt(1, Math.min(9, maxN));
+  const X = N * pair.factor;   // numerator of the large-denominator fraction
+
+  const reverse = randInt(0, 1) === 1;
 
   return {
     item_id: 'MA736379417',
@@ -4213,7 +4285,9 @@ function generate2021Q12() {
     stimulus_intro: 'What value of x makes this equation true?',
     stimulus_type: null,
     stimulus_params: null,
-    math_expression: `[${N}/10] = [x/100]`,
+    math_expression: reverse
+      ? `[x/${pair.small}] = [${X}/${pair.large}]`
+      : `[${N}/${pair.small}] = [x/${pair.large}]`,
     answer_type: 'short_answer',
     question_text: null,
     input_widget: 'text',
@@ -4221,7 +4295,7 @@ function generate2021Q12() {
     answer_options: null,
     parts: null,
     select_count: null,
-    correct_answer: String(correct),
+    correct_answer: reverse ? String(N) : String(X),
   };
 }
 
@@ -4238,22 +4312,23 @@ function generate2021Q13() {
   //   D — inverted wide triangle with right angle at bottom: NOT obtuse
   //   E — scalene triangle with clear obtuse angle at top-left: IS obtuse ✓
 
+  const rawTris13 = shuffle([
+    { vertices: [[-38,-48],[32,60],[32,-48]],    isCorrect: false }, // right triangle
+    { vertices: [[-120,22],[120,22],[0,-22]],     isCorrect: true  }, // very wide obtuse
+    { vertices: [[0,-52],[46,36],[-46,36]],       isCorrect: false }, // equilateral-looking
+    { vertices: [[-70,-28],[70,-28],[0,32]],      isCorrect: false }, // inverted with right angle
+    { vertices: [[-70,-60],[70,80],[-50,80]],     isCorrect: true  }, // scalene obtuse
+  ]);
+  const ABCDE13 = ['A', 'B', 'C', 'D', 'E'];
   return {
     item_id: 'MA311574',
     question_number: '13',
     answer_type: 'multiple_select',
     select_count: 2,
     question_text: 'Which of these triangles have at least one obtuse angle?',
-    answer_options: [
-      { letter: 'A', shape: { type: 'polygon', vertices: [[-38,-48],[32,60],[32,-48]] } },
-      { letter: 'B', shape: { type: 'polygon', vertices: [[-120,22],[120,22],[0,-22]] } },
-      { letter: 'C', shape: { type: 'polygon', vertices: [[0,-52],[46,36],[-46,36]] } },
-      { letter: 'D', shape: { type: 'polygon', vertices: [[-70,-28],[70,-28],[0,32]] } },
-      { letter: 'E', shape: { type: 'polygon', vertices: [[-70,-60],[70,80],[-50,80]] } },
-    ],
+    answer_options: rawTris13.map((t, i) => ({ letter: ABCDE13[i], shape: { type: 'polygon', vertices: t.vertices } })),
     parts: null,
-    select_count: 2,
-    correct_answer: 'B,E',
+    correct_answer: ABCDE13.filter((_, i) => rawTris13[i].isCorrect).join(','),
   };
 }
 
@@ -4540,8 +4615,7 @@ function generate2021Q16() {
         label: 'A',
         question_text:
           `The shopper bought [${numA}/100] pound of ${sc.shopItem1}.\n\n` +
-          `What is the decimal equivalent of the fraction [${numA}/100]?\n\n` +
-          `Enter your answer in the box.`,
+          `What is the decimal equivalent of the fraction [${numA}/100]?`,
         answer_type: 'short_answer',
         math_expression_prefix: `[${numA}/100] =`,
         correct_answer: fmt2(decimalA),
@@ -4626,45 +4700,19 @@ function generate2021Q17() {
     answer_type: 'multiple_choice',
     question_text:
       `Based on the model, which of these models is shaded to represent a fraction that is equivalent to ${whole}[${num}/${denom}]?`,
-    answer_options: [
-      // Option A: strips (rows=1) showing off-by-one fraction — different visual structure
-      {
-        letter: 'A',
-        model: {
-          left:     { type: 'rect', numerator: denom, denominator: denom },
-          operator: '',
-          right:    { type: 'rect', numerator: distA_right, denominator: denom },
-        },
-      },
-      // Option B: grid, too few shaded
-      {
-        letter: 'B',
-        model: {
-          left:     rect(fullShading),
-          operator: '',
-          right:    rect(distB_right),
-        },
-      },
-      // Option C: grid, close-but-wrong count
-      {
-        letter: 'C',
-        model: {
-          left:     rect(fullShading),
-          operator: '',
-          right:    rect(distC_right),
-        },
-      },
-      // Option D (correct): grid, correct equivalent fraction
-      {
-        letter: 'D',
-        model: {
-          left:     rect(fullShading),
-          operator: '',
-          right:    rect(correctRight),
-        },
-      },
-    ],
-    correct_answer: 'D',
+    ...(() => {
+      const rawOpts17 = shuffle([
+        { model: { left: { type: 'rect', numerator: denom, denominator: denom }, operator: '', right: { type: 'rect', numerator: distA_right, denominator: denom } }, isCorrect: false },
+        { model: { left: rect(fullShading), operator: '', right: rect(distB_right) }, isCorrect: false },
+        { model: { left: rect(fullShading), operator: '', right: rect(distC_right) }, isCorrect: false },
+        { model: { left: rect(fullShading), operator: '', right: rect(correctRight) }, isCorrect: true },
+      ]);
+      const ABCD17 = ['A', 'B', 'C', 'D'];
+      return {
+        answer_options: rawOpts17.map((o, i) => ({ letter: ABCD17[i], model: o.model })),
+        correct_answer: ABCD17[rawOpts17.findIndex(o => o.isCorrect)],
+      };
+    })(),
   };
 }
 
@@ -4831,7 +4879,7 @@ function generate2021Q20() {
     stimulus_intro: `A parent bought equal amounts of ${clothA} cloth and ${clothB} cloth to make a costume. The parent used [${nA}/${dA}] of the ${clothA} cloth and [${nB}/${dB}] of the ${clothB} cloth.`,
     question_text: `Write a comparison using >, <, or = to correctly compare the fractions [${nA}/${dA}] and [${nB}/${dB}].`,
     input_widget: 'equation_editor',
-    correct_answer: symbol,
+    correct_answer: `${nA}/${dA} ${symbol} ${nB}/${dB}`,
   };
 }
 
@@ -5019,18 +5067,66 @@ function generate2022Q3() {
   // Row 3 — angle SPQ: angle at P between sides PS and PQ → Yes (E)
   // Row 4 — angle SQR: requires S-Q which is a diagonal, not a side → No (H)
   //
-  // The figure SVG is fixed; no numeric variation possible for this item.
+  // Quadrilateral with 4 labeled vertices (shape fixed, labels vary):
+  //   tl=top-left, tr=top-right, br=bottom-right, bl=bottom-left
+  // Sides: tl-tr (top), tr-br (right), br-bl (bottom), bl-tl (left)
+  // Diagonals: tl-br, tr-bl
+  //
+  // Rows: 1 side (Yes), 1 diagonal (No), 1 valid angle (Yes), 1 invalid angle (No) -- shuffled.
+  // Valid angle: vertex's two adjacent sides both exist (e.g., angle tr-tl-bl at tl).
+  // Invalid angle: one ray goes along a diagonal (e.g., angle tr-bl-br -- tr is diagonal from bl).
 
-  const svgFigure = '<p>A student created this figure by drawing line segments and angles.</p>' +
-    '<p style="text-align:center;">' +
-    '<svg width="230" height="145" viewBox="0 0 230 145" xmlns="http://www.w3.org/2000/svg" ' +
-    'style="font-family:\'Helvetica Neue\',Helvetica,Arial,sans-serif;">' +
-    '<polygon points="30,20 160,20 195,120 25,120" fill="none" stroke="#333" stroke-width="1.5"/>' +
-    '<text x="22" y="14" font-size="14" font-style="italic">P</text>' +
-    '<text x="163" y="14" font-size="14" font-style="italic">S</text>' +
-    '<text x="199" y="130" font-size="14" font-style="italic">R</text>' +
-    '<text x="12" y="130" font-size="14" font-style="italic">Q</text>' +
-    '</svg></p>';
+  const labelSets = [
+    ['P', 'S', 'R', 'Q'],
+    ['A', 'B', 'C', 'D'],
+    ['E', 'F', 'G', 'H'],
+    ['J', 'K', 'L', 'M'],
+    ['W', 'X', 'Y', 'Z'],
+    ['M', 'N', 'R', 'T'],
+  ];
+  const [tl, tr, br, bl] = pick(labelSets);
+
+  const allSides = [[tl,tr],[tr,br],[br,bl],[bl,tl]];
+  const allDiagonals = [[tl,br],[tr,bl]];
+
+  // Valid angles: [outer1, vertex, outer2] -- both outer vertices adjacent to vertex
+  const validAngles = [
+    [tr,tl,bl], // at tl
+    [tl,tr,br], // at tr
+    [tr,br,bl], // at br
+    [br,bl,tl], // at bl
+  ];
+
+  // Invalid angles: one outer vertex is the diagonal endpoint from the middle vertex
+  const invalidAngles = [
+    [br,tl,tr],[br,tl,bl], // at tl, br is diagonal
+    [bl,tr,tl],[bl,tr,br], // at tr, bl is diagonal
+    [tl,br,tr],[tl,br,bl], // at br, tl is diagonal
+    [tr,bl,br],[tr,bl,tl], // at bl, tr is diagonal
+  ];
+
+  const yesSide  = pick(allSides);
+  const noDiag   = pick(allDiagonals);
+  const yesAngle = pick(validAngles);
+  const noAngle  = pick(invalidAngles);
+
+  const rows = shuffle([
+    { text: `line segment <em>${yesSide[0]}${yesSide[1]}</em>`,           correct: true  },
+    { text: `line segment <em>${noDiag[0]}${noDiag[1]}</em>`,             correct: false },
+    { text: `angle <em>${yesAngle[0]}${yesAngle[1]}${yesAngle[2]}</em>`, correct: true  },
+    { text: `angle <em>${noAngle[0]}${noAngle[1]}${noAngle[2]}</em>`,    correct: false },
+  ]);
+
+  const svgFigure = `<p>A student created this figure by drawing line segments and angles.</p>` +
+    `<p style="text-align:center;">` +
+    `<svg width="230" height="145" viewBox="0 0 230 145" xmlns="http://www.w3.org/2000/svg" ` +
+    `style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">` +
+    `<polygon points="30,20 160,20 195,120 25,120" fill="none" stroke="#333" stroke-width="1.5"/>` +
+    `<text x="22" y="14" font-size="14" font-style="italic">${tl}</text>` +
+    `<text x="163" y="14" font-size="14" font-style="italic">${tr}</text>` +
+    `<text x="199" y="130" font-size="14" font-style="italic">${br}</text>` +
+    `<text x="12" y="130" font-size="14" font-style="italic">${bl}</text>` +
+    `</svg></p>`;
 
   return {
     item_id: 'MA704652242',
@@ -5046,33 +5142,40 @@ function generate2022Q3() {
     column_label: 'Line Segment or Angle',
     true_label: 'Yes',
     false_label: 'No',
-    statements: [
-      { text: 'line segment <em>PR</em>' },
-      { text: 'line segment <em>PQ</em>' },
-      { text: 'angle <em>SPQ</em>' },
-      { text: 'angle <em>SQR</em>' },
-    ],
+    statements: rows.map(r => ({ text: r.text })),
     answer_options: null,
     parts: null,
     select_count: null,
     has_visual: true,
-    correct_answer: 'False,True,True,False',
+    correct_answer: rows.map(r => r.correct ? 'True' : 'False').join(','),
   };
 }
 
 function generate2022Q4() {
-  // Place value: "ten times" relationship between digit positions.
-  // We pick a reference number where a chosen digit D appears in the tens place
-  // (value = D×10). The answer must have D in the hundreds place (value = D×100 = 10×).
-  // Distractors:
-  //   A — D in the ones place (confuses ones with hundreds; 1/10 of target)
-  //   C — D in the tens place (same position as reference; not 10× greater)
-  //   D — D in the thousands place (100× greater, not 10×)
+  // Place value: digit D in a 4-digit number; ask which answer has D at a value
+  // that is one / ten / one hundred / one thousand times the value in the reference.
+  // Positions: 0=ones, 1=tens, 2=hundreds, 3=thousands.
+  // All 4 answer choices put D in a different position; correct = targetPlace.
 
   const digits = [3, 4, 6, 7, 8, 9];
   const D = pick(digits);
 
-  // Reference number: D in the tens place, other digits distinct and non-zero/non-D
+  const multipliers = [
+    { word: 'one',          shift: 0 },
+    { word: 'ten',          shift: 1 },
+    { word: 'one hundred',  shift: 2 },
+    { word: 'one thousand', shift: 3 },
+  ];
+
+  // All valid (multiplier, refPlace) pairs where targetPlace = refPlace + shift <= 3
+  const validPairs = [];
+  for (const mo of multipliers) {
+    for (let refPlace = 0; refPlace + mo.shift <= 3; refPlace++) {
+      validPairs.push({ word: mo.word, shift: mo.shift, refPlace, targetPlace: refPlace + mo.shift });
+    }
+  }
+  const { word, shift, refPlace, targetPlace } = pick(validPairs);
+
   function otherDigits(count, exclude) {
     const pool = [1,2,3,4,5,6,7,8,9].filter(x => !exclude.includes(x));
     const result = [];
@@ -5084,28 +5187,24 @@ function generate2022Q4() {
     return result;
   }
 
-  // Reference: 4-digit number, D in tens place: _ _ D _  (thousands, hundreds, tens, ones)
-  const [rThous, rHund, rOnes] = otherDigits(3, [D]);
-  const refNum = rThous * 1000 + rHund * 100 + D * 10 + rOnes;
-  const refStr = refNum.toLocaleString('en-US');
-
-  // Correct answer (B): D in hundreds place
-  const [cThous, cTens, cOnes] = otherDigits(3, [D]);
-  const correctNum = cThous * 1000 + D * 100 + cTens * 10 + cOnes;
-
-  // Distractor A: D in ones place (1/10 of correct, too small)
-  const [aThous, aHund, aTens] = otherDigits(3, [D]);
-  const distractorA = aThous * 1000 + aHund * 100 + aTens * 10 + D;
-
-  // Distractor C: D in tens place (same position as reference — not 10× greater)
-  const [cDThous, cDHund, cDOnes] = otherDigits(3, [D]);
-  const distractorC = cDThous * 1000 + cDHund * 100 + D * 10 + cDOnes;
-
-  // Distractor D: D in thousands place (100× greater than reference, not 10×)
-  const [dDHund, dDTens, dDOnes] = otherDigits(3, [D]);
-  const distractorD = D * 1000 + dDHund * 100 + dDTens * 10 + dDOnes;
+  // Build a 4-digit number with D in the given place (0=ones..3=thousands)
+  function buildNum(dPlace) {
+    const others = otherDigits(3, [D]);
+    const d = [0, 0, 0, 0]; // indices match position: d[0]=ones, d[1]=tens, etc.
+    d[dPlace] = D;
+    let oi = 0;
+    for (let i = 0; i <= 3; i++) { if (i !== dPlace) d[i] = others[oi++]; }
+    return d[3] * 1000 + d[2] * 100 + d[1] * 10 + d[0];
+  }
 
   const fmt = n => n.toLocaleString('en-US');
+
+  const refNum = buildNum(refPlace);
+  const times = shift === 0 ? 'time' : 'times';
+
+  // One answer choice per position (0-3), shuffled; correct = targetPlace
+  const rawOpts = shuffle([0, 1, 2, 3].map(p => ({ text: fmt(buildNum(p)), isCorrect: p === targetPlace })));
+  const ABCD = ['A', 'B', 'C', 'D'];
 
   return {
     item_id: 'MA307310',
@@ -5115,17 +5214,12 @@ function generate2022Q4() {
     stimulus_params: null,
     stimulus_list: null,
     math_expression: null,
-    question_text: `In which of these numbers does the ${D} have a value that is <strong>ten</strong> times the value of the ${D} in ${refStr}?`,
+    question_text: `In which of these numbers does the ${D} have a value that is <strong>${word}</strong> ${times} the value of the ${D} in ${fmt(refNum)}?`,
     answer_type: 'multiple_choice',
-    answer_options: [
-      { letter: 'A', text: fmt(distractorA) },
-      { letter: 'B', text: fmt(correctNum) },
-      { letter: 'C', text: fmt(distractorC) },
-      { letter: 'D', text: fmt(distractorD) },
-    ],
+    answer_options: rawOpts.map((o, i) => ({ letter: ABCD[i], text: o.text })),
+    correct_answer: ABCD[rawOpts.findIndex(o => o.isCorrect)],
     parts: null,
     select_count: null,
-    correct_answer: 'B',
   };
 }
 
@@ -5172,6 +5266,7 @@ function generate2022Q5() {
     answer_type: 'short_answer',
     question_text: `Write a comparison using >, <, or = to compare the numbers ${a} and ${b}.\n\nEnter your comparison in the space provided. Enter <strong>only</strong> your comparison.`,
     input_widget: 'text',
+    input_width: '160px',
     answer_suffix: null,
     answer_options: null,
     parts: null,
@@ -5191,10 +5286,13 @@ function generate2022Q6() {
   // Each variant: { svg, symmetry, label (for visual_description) }
   const VARIANTS = [
     // ── 1 line: isosceles right (45-45-90), apex at top-center ──────────────
+    // Right angle marker: diamond polygon oriented along the two legs.
+    // Apex (88,12). Left leg unit (-0.676,0.736), right leg unit (0.676,0.736).
+    // Step 9px along each leg: P1=(81,19), P2=(94,19). P3=P1+(P2-apex)=(87,26).
     {
       symmetry: 1,
       label: 'isosceles right triangle (45-45-90)',
-      svg: `<svg width="176" height="100" viewBox="0 0 176 100" xmlns="http://www.w3.org/2000/svg"><polygon points="88,5 10,90 166,90" fill="none" stroke="#333" stroke-width="1.5"/><rect x="81" y="5" width="10" height="10" fill="none" stroke="#333" stroke-width="1.2"/><text x="22" y="88" font-size="13" fill="#333" text-anchor="start">45°</text><text x="140" y="88" font-size="13" fill="#333" text-anchor="start">45°</text></svg>`,
+      svg: `<svg width="176" height="108" viewBox="0 0 176 108" xmlns="http://www.w3.org/2000/svg"><polygon points="88,12 10,96 166,96" fill="none" stroke="#333" stroke-width="1.5"/><polygon points="88,12 81,19 88,26 95,19" fill="none" stroke="#333" stroke-width="1.2"/><text x="16" y="108" font-size="13" fill="#333">45°</text><text x="138" y="108" font-size="13" fill="#333">45°</text></svg>`,
     },
     // ── 1 line: isosceles right, right angle at bottom-left ─────────────────
     {
@@ -5206,31 +5304,31 @@ function generate2022Q6() {
     {
       symmetry: 1,
       label: 'isosceles triangle (70-70-40)',
-      svg: `<svg width="176" height="110" viewBox="0 0 176 110" xmlns="http://www.w3.org/2000/svg"><polygon points="88,5 20,100 156,100" fill="none" stroke="#333" stroke-width="1.5"/><text x="22" y="98" font-size="13" fill="#333">70°</text><text x="132" y="98" font-size="13" fill="#333">70°</text><text x="78" y="22" font-size="13" fill="#333">40°</text></svg>`,
+      svg: `<svg width="176" height="118" viewBox="0 0 176 118" xmlns="http://www.w3.org/2000/svg"><polygon points="88,8 20,96 156,96" fill="none" stroke="#333" stroke-width="1.5"/><text x="14" y="112" font-size="13" fill="#333">70°</text><text x="132" y="112" font-size="13" fill="#333">70°</text><text x="78" y="28" font-size="13" fill="#333">40°</text></svg>`,
     },
     // ── 1 line: isosceles obtuse (120-30-30) ─────────────────────────────────
     {
       symmetry: 1,
       label: 'isosceles obtuse triangle (120-30-30)',
-      svg: `<svg width="176" height="80" viewBox="0 0 176 80" xmlns="http://www.w3.org/2000/svg"><polygon points="88,10 8,70 168,70" fill="none" stroke="#333" stroke-width="1.5"/><text x="10" y="68" font-size="13" fill="#333">30°</text><text x="144" y="68" font-size="13" fill="#333">30°</text><text x="74" y="26" font-size="13" fill="#333">120°</text></svg>`,
+      svg: `<svg width="176" height="94" viewBox="0 0 176 94" xmlns="http://www.w3.org/2000/svg"><polygon points="88,12 8,72 168,72" fill="none" stroke="#333" stroke-width="1.5"/><text x="4" y="88" font-size="13" fill="#333">30°</text><text x="144" y="88" font-size="13" fill="#333">30°</text><text x="72" y="34" font-size="13" fill="#333">120°</text></svg>`,
     },
     // ── 0 lines: scalene acute (50-60-70) ────────────────────────────────────
     {
       symmetry: 0,
       label: 'scalene acute triangle (50-60-70)',
-      svg: `<svg width="176" height="100" viewBox="0 0 176 100" xmlns="http://www.w3.org/2000/svg"><polygon points="55,10 8,90 168,90" fill="none" stroke="#333" stroke-width="1.5"/><text x="10" y="88" font-size="13" fill="#333">70°</text><text x="140" y="88" font-size="13" fill="#333">60°</text><text x="48" y="26" font-size="13" fill="#333">50°</text></svg>`,
+      svg: `<svg width="176" height="104" viewBox="0 0 176 104" xmlns="http://www.w3.org/2000/svg"><polygon points="55,10 8,84 168,84" fill="none" stroke="#333" stroke-width="1.5"/><text x="2" y="100" font-size="13" fill="#333">70°</text><text x="142" y="100" font-size="13" fill="#333">60°</text><text x="48" y="26" font-size="13" fill="#333">50°</text></svg>`,
     },
     // ── 0 lines: scalene obtuse (110-40-30) ──────────────────────────────────
     {
       symmetry: 0,
       label: 'scalene obtuse triangle (110-40-30)',
-      svg: `<svg width="176" height="90" viewBox="0 0 176 90" xmlns="http://www.w3.org/2000/svg"><polygon points="20,10 8,80 168,80" fill="none" stroke="#333" stroke-width="1.5"/><text x="10" y="78" font-size="13" fill="#333">110°</text><text x="140" y="78" font-size="13" fill="#333">30°</text><text x="18" y="26" font-size="13" fill="#333">40°</text></svg>`,
+      svg: `<svg width="176" height="94" viewBox="0 0 176 94" xmlns="http://www.w3.org/2000/svg"><polygon points="20,10 8,74 168,74" fill="none" stroke="#333" stroke-width="1.5"/><text x="2" y="90" font-size="13" fill="#333">110°</text><text x="144" y="90" font-size="13" fill="#333">30°</text><text x="22" y="26" font-size="13" fill="#333">40°</text></svg>`,
     },
     // ── 0 lines: scalene right (30-60-90) ────────────────────────────────────
     {
       symmetry: 0,
       label: 'scalene right triangle (30-60-90)',
-      svg: `<svg width="176" height="100" viewBox="0 0 176 100" xmlns="http://www.w3.org/2000/svg"><polygon points="10,10 10,90 166,90" fill="none" stroke="#333" stroke-width="1.5"/><rect x="10" y="80" width="10" height="10" fill="none" stroke="#333" stroke-width="1.2"/><text x="14" y="30" font-size="13" fill="#333">60°</text><text x="22" y="88" font-size="13" fill="#333">90°</text><text x="130" y="88" font-size="13" fill="#333">30°</text></svg>`,
+      svg: `<svg width="176" height="106" viewBox="0 0 176 106" xmlns="http://www.w3.org/2000/svg"><polygon points="10,10 10,84 166,84" fill="none" stroke="#333" stroke-width="1.5"/><rect x="10" y="74" width="10" height="10" fill="none" stroke="#333" stroke-width="1.2"/><text x="14" y="46" font-size="13" fill="#333">60°</text><text x="14" y="102" font-size="13" fill="#333">90°</text><text x="132" y="102" font-size="13" fill="#333">30°</text></svg>`,
     },
   ];
 
@@ -5539,14 +5637,18 @@ function generate2022Q10() {
   const dCeil = correct + 1; // rounded up the remainder
   const dHigh = correct + 2; // added an extra sheet
 
-  const optionValues = [dLow, correct, dCeil, dHigh];
-  // Map to letters A–D in ascending order (they're already sorted)
+  const rawOpts10b = shuffle([
+    { val: correct, isCorrect: true  },
+    { val: dLow,    isCorrect: false },
+    { val: dCeil,   isCorrect: false },
+    { val: dHigh,   isCorrect: false },
+  ]);
   const letters = ['A', 'B', 'C', 'D'];
-  const correctLetter = letters[optionValues.indexOf(correct)];
+  const correctLetter = letters[rawOpts10b.findIndex(o => o.isCorrect)];
 
-  const answer_options = optionValues.map((v, i) => ({
+  const answer_options = rawOpts10b.map((o, i) => ({
     letter: letters[i],
-    text: `${v} ${sc.unit}s`,
+    text: `${o.val} ${sc.unit}s`,
   }));
 
   return {
@@ -6029,22 +6131,19 @@ function generate2022Q17() {
     `[${n * 11}/100]`,    // scaled denom but also added n to numerator
   ];
 
-  // Build options in a fixed pedagogically-meaningful order (matches original layout)
-  // Order: n/1, (10n)/1, n/10, (11n)/10, n/100, (10n)/100, (11n)/100
-  const allOptions = [
-    `[${n}/1]`,
-    `[${n * 10}/1]`,
-    `[${n}/10]`,
-    `[${n * 11}/10]`,
-    `[${n}/100]`,
-    `[${n * 10}/100]`,
-    `[${n * 11}/100]`,
-  ];
+  const rawOpts17b = shuffle([
+    { text: `[${n}/1]`,         isCorrect: false },
+    { text: `[${n * 10}/1]`,    isCorrect: false },
+    { text: `[${n}/10]`,        isCorrect: true  },
+    { text: `[${n * 11}/10]`,   isCorrect: false },
+    { text: `[${n}/100]`,       isCorrect: false },
+    { text: `[${n * 10}/100]`,  isCorrect: true  },
+    { text: `[${n * 11}/100]`,  isCorrect: false },
+  ]);
+  const letters17b = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+  const answer_options = rawOpts17b.map((o, i) => ({ letter: letters17b[i], text: o.text }));
+  const correct17b = letters17b.filter((_, i) => rawOpts17b[i].isCorrect).join(',');
 
-  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-  const answer_options = allOptions.map((text, i) => ({ letter: letters[i], text }));
-
-  // Correct answers are always C (n/10) and F (10n/100) in this fixed order
   return {
     question_number: '17',
     item_id: 'MA903134963',
@@ -6058,7 +6157,7 @@ function generate2022Q17() {
     math_expression: null,
     answer_options,
     parts: null,
-    correct_answer: 'C,F',
+    correct_answer: correct17b,
   };
 }
 

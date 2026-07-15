@@ -28,8 +28,9 @@
     }
   }
 
-  // Initialise whenever tiles change
+  // Initialise whenever tiles change, or when parent clears the answer
   $: tiles, initPlacement();
+  $: if (value === null) initPlacement();
 
   // Selected category for click-to-assign
   let selectedCategory = null;
@@ -108,19 +109,16 @@
     emitValue();
   }
 
-  function tilesInCategory(label) {
-    return tiles.filter(t => placement[tileKey(t)] === label);
-  }
-
-  function tilesInPool() {
-    return tiles.filter(t => placement[tileKey(t)] === null);
-  }
+  // Reactive derived lists — explicit so Svelte 5 tracks placement changes
+  $: poolTiles = tiles.filter(t => placement[tileKey(t)] === null);
+  $: placedByCategory = Object.fromEntries(
+    categories.map(cat => [cat.label, tiles.filter(t => placement[tileKey(t)] === cat.label)])
+  );
 
   function emitValue() {
     const obj = {};
     for (const cat of categories) {
-      const placed = tilesInCategory(cat.label).map(tileKey).sort();
-      obj[cat.label] = placed;
+      obj[cat.label] = tiles.filter(t => placement[tileKey(t)] === cat.label).map(tileKey).sort();
     }
     value = JSON.stringify(obj);
   }
@@ -135,24 +133,28 @@
 
   <!-- Tile pool (unplaced tiles) — also a drop zone to return tiles -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <div class="tile-bank" on:dragover={poolDragOver} on:drop={poolDrop}>
-    {#each tilesInPool() as tile}
-      <button
+  <div class="tile-bank" on:dragover|preventDefault on:drop={poolDrop}>
+    {#each poolTiles as tile (tileKey(tile))}
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div
         class="tile {isShapeTile(tile) ? 'tile-shape' : ''} {selectedCategory !== null ? 'tile-ready' : ''}"
+        role="button"
+        tabindex="0"
         draggable="true"
         on:click={() => assignTile(tile)}
+        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && assignTile(tile)}
         on:dragstart={(e) => tileDragStart(e, tile)}
         on:dragend={dragEnd}
         title={selectedCategory !== null ? `Place in ${selectedCategory}` : 'Drag to a category or select a category first'}
       >
         {#if isShapeTile(tile)}
-          <SymmetryFigure params={tile.shape} />
+          <div style="pointer-events: none;"><SymmetryFigure params={tile.shape} /></div>
         {:else}
           {@html renderMath(tile)}
         {/if}
-      </button>
+      </div>
     {/each}
-    {#if tilesInPool().length === 0}
+    {#if poolTiles.length === 0}
       <span class="pool-empty">All tiles placed</span>
     {/if}
   </div>
@@ -160,33 +162,45 @@
   <!-- Category boxes -->
   <div class="category-row">
     {#each categories as cat}
-      <button
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div
         class="category-box {selectedCategory === cat.label ? 'cat-selected' : ''}"
+        role="group"
         on:click={() => selectCategory(cat.label)}
-        on:dragover={catDragOver}
+        on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && selectCategory(cat.label)}
+        on:dragover|preventDefault={(e) => { e.dataTransfer.dropEffect = 'move'; }}
         on:drop={(e) => catDrop(e, cat.label)}
-        aria-pressed={selectedCategory === cat.label}
       >
-        <div class="category-label">{cat.label}</div>
-        <div class="category-content">
-          {#each tilesInCategory(cat.label) as tile}
-            <button
+        <div class="category-label" style="pointer-events: none;">{cat.label}</div>
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <div class="category-content"
+          on:dragover|preventDefault={(e) => { e.dataTransfer.dropEffect = 'move'; }}
+          on:drop|stopPropagation={(e) => catDrop(e, cat.label)}
+        >
+          {#each (placedByCategory[cat.label] ?? []) as tile (tileKey(tile))}
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
+            <div
               class="tile tile-placed {isShapeTile(tile) ? 'tile-shape' : ''}"
+              role="button"
+              tabindex="0"
               draggable="true"
+              style="pointer-events: auto;"
               on:click|stopPropagation={() => removeTileFromCategory(tile)}
+              on:keydown|stopPropagation={(e) => (e.key === 'Enter' || e.key === ' ') && removeTileFromCategory(tile)}
               on:dragstart={(e) => placedTileDragStart(e, tile)}
               on:dragend={dragEnd}
-              title="Drag to another category or back to pool"
+              on:dragover|preventDefault|stopPropagation={(e) => { e.dataTransfer.dropEffect = 'move'; }}
+              on:drop|stopPropagation={(e) => catDrop(e, cat.label)}
             >
               {#if isShapeTile(tile)}
-                <SymmetryFigure params={tile.shape} />
+                <div style="pointer-events: none;"><SymmetryFigure params={tile.shape} /></div>
               {:else}
                 {@html renderMath(typeof tile === 'string' ? tile : tile.text ?? '')}
               {/if}
-            </button>
+            </div>
           {/each}
         </div>
-      </button>
+      </div>
     {/each}
   </div>
 </div>
@@ -275,11 +289,8 @@
     flex-direction: column;
     cursor: pointer;
     background: #fafafa;
-    text-align: left;
-    padding: 0;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
+    box-sizing: border-box;
+    user-select: none;
   }
 
   /* Separator between adjacent boxes: collapse the shared border */
