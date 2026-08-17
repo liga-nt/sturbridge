@@ -1,5 +1,4 @@
 <script>
-  import { renderMath } from '$lib/utils/math.js';
   import MathInput from './MathInput.svelte';
   import SymmetryFigure from './stimuli/SymmetryFigure.svelte';
   import AngleDiagram from './stimuli/AngleDiagram.svelte';
@@ -9,6 +8,8 @@
   import DataTable from './stimuli/DataTable.svelte';
   import DecimalGrid from './stimuli/DecimalGrid.svelte';
   import ProtractorImage from './stimuli/ProtractorImage.svelte';
+  import AudioText from './AudioText.svelte';
+  import { STATIC_INSTRUCTIONS } from '$lib/utils/staticInstructions.js';
 
   export let stimulus_intro = null;
   export let stimulus_type = null;
@@ -19,14 +20,17 @@
   export let answer_suffix = null;
   export let input_width = '60px';
 
-  let answer = '';
+  export let audio = {};
+  export let currentTime = 0;
+
   export let value = null;
+  let answer = value ?? '';
   $: value = answer;
 </script>
 
 <div class="question-body">
   {#if stimulus_intro}
-    <p class="q-text">{@html renderMath(stimulus_intro)}</p>
+    <p class="q-text"><AudioText text={stimulus_intro} alignment={audio.stimulus_intro?.alignment ?? null} active={audio.stimulus_intro?.active ?? false} {currentTime} /></p>
   {/if}
 
   {#if stimulus_type === 'symmetry_figure'}
@@ -64,18 +68,18 @@
   {/if}
 
   {#if math_expression}
-    <p class="math-expr">{@html renderMath(math_expression)}</p>
+    <p class="math-expr"><AudioText text={math_expression} alignment={audio.math_expression?.alignment ?? null} active={audio.math_expression?.active ?? false} {currentTime} /></p>
   {/if}
 
   {#if question_text}
-    <p class="q-text">{@html renderMath(question_text)}</p>
+    <p class="q-text"><AudioText text={question_text} alignment={audio.question_text?.alignment ?? null} active={audio.question_text?.active ?? false} {currentTime} /></p>
   {/if}
 
   {#if input_widget === 'equation_editor'}
-    <p class="q-text">Enter your answer in the space provided. Enter <strong>only</strong> your answer.</p>
+    <p class="q-text"><AudioText text={STATIC_INSTRUCTIONS.shortAnswerEquation} alignment={audio.answer_instruction?.alignment ?? null} active={audio.answer_instruction?.active ?? false} {currentTime} /></p>
     <MathInput bind:value={answer} answer_suffix={answer_suffix} />
   {:else}
-    <p class="q-text">Enter your answer in the box.</p>
+    <p class="q-text"><AudioText text={STATIC_INSTRUCTIONS.shortAnswerBox} alignment={audio.answer_instruction?.alignment ?? null} active={audio.answer_instruction?.active ?? false} {currentTime} /></p>
     <div class="answer-row">
       <input
         type="text"

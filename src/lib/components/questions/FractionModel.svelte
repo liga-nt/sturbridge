@@ -7,7 +7,8 @@
   //   • Click Reset to clear back to the starting state
   //
   // Props
-  //   question_text  — HTML string, rendered with {@html}
+  //   question_text  — HTML string, rendered word-by-word via AudioText (may
+  //                    contain \n\n-separated paragraphs)
   //   math_expression — HTML string, rendered centred between paragraphs
   //   instruction    — secondary instruction text (HTML string)
   //   numerator      — correct answer numerator (for reference only)
@@ -15,7 +16,8 @@
   //   models         — array of { numerator, denominator, label? } for multi-model layout
   //                    When provided, each model has independent interactive state.
 
-  import { renderMath } from '$lib/utils/math.js';
+  import AudioText from './AudioText.svelte';
+  import { countSpokenWords } from '$lib/utils/audioAlign.js';
 
   export let question_text = '';
   export let math_expression = null;
@@ -23,6 +25,22 @@
   export let numerator = 1;     // eslint-disable-line no-unused-vars (correct answer ref)
   export let denominator = 1;   // starting division count
   export let models = null;
+  export let audio = {};
+  export let currentTime = 0;
+
+  // question_text is spoken as ONE clip (renderSpokenFields) but some
+  // generators embed \n\n to display it as separate paragraphs — each gets
+  // its own AudioText instance, so each needs to know how many spoken words
+  // came before it in the single underlying clip. Mirrors MultiPart.svelte's
+  // paragraphsWithOffset.
+  $: questionParagraphs = (() => {
+    let offset = 0;
+    return (question_text ?? '').split('\n\n').map((para) => {
+      const p = { text: para, wordOffset: offset };
+      offset += countSpokenWords(para);
+      return p;
+    });
+  })();
 
   // ── Geometry (match the real widget) ──────────────────────────────────────
   const SVG_W   = 260;
@@ -109,17 +127,21 @@
 <div class="fraction-model-widget">
   <!-- Question text -->
   {#if question_text}
-    <div class="question-body">{@html renderMath(question_text)}</div>
+    <div class="question-body">
+      {#each questionParagraphs as para}
+        <p><AudioText text={para.text} wordOffset={para.wordOffset} alignment={audio.question_text?.alignment ?? null} active={audio.question_text?.active ?? false} {currentTime} /></p>
+      {/each}
+    </div>
   {/if}
 
   <!-- Optional centred math expression -->
   {#if math_expression}
-    <div class="math-expr">{@html renderMath(math_expression)}</div>
+    <div class="math-expr"><AudioText text={math_expression} alignment={audio.math_expression?.alignment ?? null} active={audio.math_expression?.active ?? false} {currentTime} /></div>
   {/if}
 
   <!-- Optional secondary instruction -->
   {#if instruction}
-    <div class="instruction">{@html renderMath(instruction)}</div>
+    <div class="instruction"><AudioText text={instruction} alignment={audio.instruction?.alignment ?? null} active={audio.instruction?.active ?? false} {currentTime} /></div>
   {/if}
 
   <!-- Models (one SVG per model, side-by-side) -->

@@ -194,9 +194,9 @@ function generateQ20() {
 // Q10: MultipleChoice — unit conversion
 function generateQ10() {
   const conversions = [
-    { unit: 'yards', toUnit: 'feet', factor: 3, scenario: 'rope' },
-    { unit: 'yards', toUnit: 'feet', factor: 3, scenario: 'ribbon' },
-    { unit: 'feet', toUnit: 'inches', factor: 12, scenario: 'board' },
+    { unit: 'yards', unitSingular: 'yard', toUnit: 'feet', toUnitSingular: 'foot', factor: 3, scenario: 'rope' },
+    { unit: 'yards', unitSingular: 'yard', toUnit: 'feet', toUnitSingular: 'foot', factor: 3, scenario: 'ribbon' },
+    { unit: 'feet', unitSingular: 'foot', toUnit: 'inches', toUnitSingular: 'inch', factor: 12, scenario: 'board' },
   ];
   const conv = conversions[Math.floor(Math.random() * conversions.length)];
   const qty = randInt(2, 10);
@@ -218,7 +218,15 @@ function generateQ10() {
     answer_type: 'multiple_choice',
     question_text: `${buyer.charAt(0).toUpperCase() + buyer.slice(1)} bought ${qty} ${conv.unit} of ${conv.scenario}. Which of the following is equivalent to ${qty} ${conv.unit}?`,
     answer_options: options.map((o, i) => ({ letter: letters[i], text: `${o.val} ${conv.toUnit}` })),
-    correct_answer: correctLetter
+    correct_answer: correctLetter,
+    _params: {
+      unit: conv.unit,
+      unitSingular: conv.unitSingular,
+      toUnit: conv.toUnit,
+      toUnitSingular: conv.toUnitSingular,
+      factor: String(conv.factor),
+      qty: String(qty)
+    }
   };
 }
 
@@ -299,7 +307,7 @@ function generateQ12() {
   return {
     question_number: '12',
     answer_type: 'short_answer',
-    question_text: `What is <em>${words}</em> written in standard form? Enter your answer in the box.`,
+    question_text: `What is <em>${words}</em> written in standard form?`,
     correct_answer: String(n)
   };
 }
@@ -469,6 +477,9 @@ function generateQ3() {
         B: orderedList,
         C: closestItem,
       },
+      _params: {
+        itemNoun: sc.colHeader.toLowerCase(),
+      },
     };
   }
 
@@ -490,17 +501,14 @@ function generateQ4() {
   // Express target as fraction over denom for comparison
   const targetNumer = totalWhole * denom + totalNum;
 
-  function val(expr) {
-    // expr is array of {w, n, d} terms; returns numerator over denom
-    return expr.reduce((s, t) => s + t.w * denom + t.n, 0);
-  }
-
   // Correct options (equal to target): commuted, rewritten, decomposed
   const correct1 = { text: `[${totalNum}/denom] + ${totalWhole}`.replace('denom', denom), numer: totalWhole * denom + totalNum };
   // swap fractions
   const correct2 = { text: `${wholeA} + ${wholeB} + [${numB}/${denom}] + [${numA}/${denom}]`, numer: targetNumer };
-  // split one fraction unit: numA/denom = (numA-1)/denom + 1/denom
-  const correct3 = { text: `${wholeA} + ${wholeB} + [${numA > 1 ? numA - 1 : numA + 1}/${denom}] + [${numB}/${denom}] + [1/${denom}]`, numer: numA > 1 ? targetNumer : targetNumer + 1 };
+  // convert one whole unit from wholeA into denom/denom, fold into numA's fraction — always
+  // valid regardless of numA/numB ordering (unlike a numA-vs-numB split, which only works
+  // one direction and silently produces a second "not equal" option the other direction)
+  const correct3text = `${wholeA - 1} + ${wholeB} + [${denom + numA}/${denom}] + [${numB}/${denom}]`;
 
   // Wrong option: adds extra 1/denom (not equal)
   const wrongNumer = targetNumer + 1;
@@ -510,7 +518,7 @@ function generateQ4() {
   const pool = shuffle([
     { text: correct1.text, isCorrect: correct1.numer === targetNumer },
     { text: correct2.text, isCorrect: correct2.numer === targetNumer },
-    { text: `${wholeA} + ${wholeB} + [${numA}/${denom}] + [${numA}/${denom}] + [${numB > numA ? numB - numA : 1}/${denom}]`, isCorrect: (wholeA + wholeB) * denom + numA + numA + (numB > numA ? numB - numA : 1) === targetNumer },
+    { text: correct3text, isCorrect: true },
     { text: wrong.text, isCorrect: false }
   ]);
 
@@ -587,7 +595,13 @@ function generateQ7() {
     select_count: 2,
     question_text: `Which pairs of models show a correct comparison of [${an}/${ad}] and [${bn}/${bd}]?`,
     answer_options: options.map((o, i) => ({ letter: letters[i], model: o.model })),
-    correct_answer: correctLetters
+    correct_answer: correctLetters,
+    _params: {
+      fractionA: `${an}/${ad}`,
+      fractionB: `${bn}/${bd}`,
+      correctOperator: trueOp,
+      correctLetters,
+    },
   };
 }
 
@@ -711,6 +725,17 @@ function generateQ6() {
       B: String(big),
       C: String(total),
     },
+    // Raw values exposed for teaching-prompt placeholders (see
+    // src/lib/utils/feedbackTemplates.js extractParams) — otherwise they'd
+    // have to be reverse-engineered out of the composed correct_answer.A
+    // equation string, which is fragile.
+    _params: {
+      multiplier:    String(multiplier),
+      smallLength:   String(small),
+      A_equation:    `${sc.v}=${multiplier}x${small}`,
+      B_length:      String(big),
+      C_totalLength: String(total),
+    },
   };
 }
 
@@ -749,7 +774,12 @@ function generateQ13() {
       { id: 'RESPONSE_A1', options: ['is', 'is not'] },
       { id: 'RESPONSE_A2', options: ['0 lines', '1 line', '2 lines', '3 lines', '4 lines', '5 lines'] }
     ],
-    correct_answer: chosen.correct_answer
+    correct_answer: chosen.correct_answer,
+    _params: {
+      shapeName: chosen.shape_name,
+      isSymmetric: chosen.correct_answer.split(',')[0],
+      lineCount: chosen.correct_answer.split(',')[1],
+    },
   };
 }
 
@@ -838,7 +868,13 @@ function generateQ16() {
       { text: `${nStr} rounded to the nearest hundred is ${TStr}` },
       { text: `${nStr} rounded to the nearest thousand is ${TStr}` }
     ],
-    correct_answer
+    correct_answer,
+    _params: {
+      originalNumber: nStr,
+      roundedTarget: TStr,
+      row1Answer: row1True ? 'True' : 'False',
+      row2Answer: row2True ? 'True' : 'False',
+    },
   };
 }
 
@@ -1100,7 +1136,13 @@ function generateQ9() {
         ]
       }
     ],
-    correct_answer: { A: correctA, B: correctB }
+    correct_answer: { A: correctA, B: correctB },
+    _params: {
+      A_correctStickers: correctA,
+      A_targetAngle: partAVariant,
+      B_correctTriangle: correctB.split(',')[0],
+      B_angleReason: correctB.split(',')[1],
+    },
   };
 }
 
@@ -1138,7 +1180,21 @@ function generateQ17() {
 // ─── 2023 generators ─────────────────────────────────────────────────────────
 
 // 2023 Q1: MultipleChoice + ItemArray — N×M grid, "X times as many" division
+//
+// GOODS: each entry needs a matching icon registered in ItemArray.svelte's
+// svgMap (key = `item`, value = path under static/). cookie/donut are
+// Twemoji (CC-BY 4.0); cupcake is the original svgrepo asset. Add more
+// entries here once new SVGs land in static/, keeping the `item` key in
+// sync with the svgMap key.
+const Q1_GOODS = [
+  { item: 'cupcake', word: 'cupcakes' },
+  { item: 'cookie', word: 'cookies' },
+  { item: 'donut', word: 'donuts' },
+];
+
 function generate2023Q1() {
+  const [maker, comparator] = shuffle(PEOPLE).slice(0, 2);
+  const good = pick(Q1_GOODS);
   const multiplier = randInt(2, 3);
 
   // Pick rows/cols so total is divisible by multiplier and Tommy's count is at least 4
@@ -1163,28 +1219,26 @@ function generate2023Q1() {
   return {
     question_number: '1',
     answer_type: 'multiple_choice',
-    stimulus_intro: 'Lily made some cupcakes, as shown.',
+    stimulus_intro: `${maker.name} made some ${good.word}, as shown.`,
     stimulus_type: 'item_array',
-    stimulus_params: { rows, cols, item: 'cupcake' },
-    question_text: `Lily made ${multiplier} times as many cupcakes as Tommy made. How many cupcakes did Tommy make?`,
+    stimulus_params: { rows, cols, item: good.item },
+    question_text: `${maker.name} made ${multiplier} times as many ${good.word} as ${comparator.name} made. How many ${good.word} did ${comparator.name} make?`,
     answer_options: vals.map((o, i) => ({ letter: letters[i], text: String(o.v) })),
     correct_answer: correctLetter
   };
 }
 
-// 2023 Q3: MultipleChoice — which shape has MORE THAN one line of symmetry?
+// 2023 Q3: MultipleChoice — which shape has {more than one / exactly one / zero} lines of symmetry?
 // Shapes annotated with their symmetry line count so the generator self-documents.
+// Question wording varies the target line count; the shape pool is filtered per-variant.
 function generate2023Q3() {
   // family tag prevents visually similar correct/wrong pairs (e.g. equilateral + isosceles)
-  const correct = [
+  const ALL_SHAPES = [
     { shape: { type: 'circle',   r: 55 },                                             lines: Infinity, family: 'round' },
     { shape: { type: 'square',   size: 100 },                                         lines: 4,        family: 'quad'  },
     { shape: { type: 'triangle', kind: 'equilateral', size: 100 },                    lines: 3,        family: 'tri'   },
     { shape: { type: 'rect',     width: 130, height: 78 },                            lines: 2,        family: 'quad'  },
     { shape: { type: 'star',     points: 4, outer_r: 60, inner_r: 25 },              lines: 4,        family: 'star'  },
-  ];
-
-  const wrong = [
     // Isosceles — 1 line; students guess more because it "looks symmetric"
     { shape: { type: 'triangle', kind: 'isosceles', base: 110, height: 85 },          lines: 1, family: 'tri'   },
     // Semicircle — 1 line (vertical only)
@@ -1199,16 +1253,48 @@ function generate2023Q3() {
     { shape: { type: 'triangle', kind: 'right', legs: [100, 60], rotation: 12 },      lines: 0, family: 'tri'   },
   ];
 
-  const chosen = pick(correct);
+  const QUESTION_TYPES = [
+    {
+      text: 'Which of the following shapes has <strong>more than</strong> one line of symmetry?',
+      correctFilter: s => s.lines > 1,
+      wrongFilter: s => s.lines <= 1,
+    },
+    {
+      text: 'Which of the following shapes has <strong>exactly one</strong> line of symmetry?',
+      correctFilter: s => s.lines === 1,
+      wrongFilter: s => s.lines !== 1,
+    },
+    {
+      text: 'Which of the following shapes has <strong>no</strong> lines of symmetry?',
+      correctFilter: s => s.lines === 0,
+      wrongFilter: s => s.lines !== 0,
+    },
+  ];
+
+  const qType = pick(QUESTION_TYPES);
+  const correctPool = ALL_SHAPES.filter(qType.correctFilter);
+  const wrongPool = ALL_SHAPES.filter(qType.wrongFilter);
+
+  const chosen = pick(correctPool);
   const correctFamily = chosen.family;
 
+  // "{{symmetryLineCount}} line(s)" leaked the literal "(s)" to students since
+  // flat templates can't branch on count — describe the count as one
+  // pre-pluralized phrase instead so the template just drops it in whole.
+  const describeLineCount = (n) => {
+    if (!Number.isFinite(n)) return 'infinitely many lines';
+    if (n === 0) return 'no lines';
+    if (n === 1) return '1 line';
+    return `${n} lines`;
+  };
+
   // Prefer distractors from different families; fall back to any remaining if needed
-  const eligible = wrong.filter(w => w.family !== correctFamily);
-  const fallback = wrong.filter(w => w.family === correctFamily);
+  const eligible = wrongPool.filter(w => w.family !== correctFamily);
+  const fallback = wrongPool.filter(w => w.family === correctFamily);
   const pool = eligible.length >= 3
     ? eligible
     : [...eligible, ...shuffle(fallback)];
-  const distractors = pool.slice(0, 3);
+  const distractors = shuffle(pool).slice(0, 3);
   const opts = shuffle([chosen, ...distractors]);
 
   const letters = ['A', 'B', 'C', 'D'];
@@ -1217,43 +1303,65 @@ function generate2023Q3() {
   return {
     question_number: '3',
     answer_type: 'multiple_choice',
-    question_text: 'Which of the following shapes has <strong>more than</strong> one line of symmetry?',
+    question_text: qType.text,
     answer_options: opts.map((o, i) => ({ letter: letters[i], shape: o.shape })),
-    correct_answer: correctLetter
+    correct_answer: correctLetter,
+    _params: {
+      correctLetter,
+      correctShapeType: chosen.shape.type,
+      symmetryLineCount: Number.isFinite(chosen.lines) ? String(chosen.lines) : 'infinite',
+      symmetryLineDesc: describeLineCount(chosen.lines),
+    },
   };
 }
 
-// 2023 Q5: ShortAnswer + SymmetryFigure stimulus — count acute angles in a scalene triangle.
+// 2023 Q5: ShortAnswer + SymmetryFigure stimulus — count acute/obtuse/right angles in a
+// scalene triangle.
 //
 // Pedagogy: A scalene triangle always has exactly 3 angles; the generator varies WHICH
-// angle is obtuse (so the answer is always 2 acute angles) and also creates "all acute"
-// triangle variants where the answer is 3. This keeps the question non-trivial — students
-// must visually inspect the triangle rather than recalling a rule.
+// angle (if any) is obtuse or right, and also varies WHICH angle type the question asks
+// about. This keeps the question non-trivial — students must visually inspect the
+// triangle rather than recalling a rule.
 //
 // Triangle families:
-//   "obtuse-left"   → obtuse angle at lower-left, 2 acute angles → answer 2
-//   "obtuse-right"  → obtuse angle at lower-right, 2 acute angles → answer 2
-//   "obtuse-top"    → obtuse angle at apex, 2 acute angles → answer 2
-//   "all-acute"     → acute scalene, 3 acute angles → answer 3
+//   "obtuse-left"   → obtuse angle at lower-left:  1 obtuse, 2 acute, 0 right
+//   "obtuse-right"  → obtuse angle at lower-right: 1 obtuse, 2 acute, 0 right
+//   "obtuse-top"    → obtuse angle at apex:        1 obtuse, 2 acute, 0 right
+//   "all-acute"     → acute scalene:               0 obtuse, 3 acute, 0 right
+//   "all-acute-2"   → acute scalene (variant):     0 obtuse, 3 acute, 0 right
+//   "right-left"    → right angle at lower-left:   0 obtuse, 2 acute, 1 right
+//   "right-right"   → right angle at lower-right:  0 obtuse, 2 acute, 1 right
 //
 // Vertices are given as [x, y] offsets from center so SymmetryFigure centers them
 // correctly. Width ~180px, height ~104px to match the original item proportions.
 function generate2023Q5() {
-  // Each entry: vertices (centered at 0,0) + correct acute count
+  // Each entry: vertices (centered at 0,0) + acute/obtuse/right angle counts
   const triangles = [
     // Obtuse at lower-left — matches original item
-    { vertices: [[ 55, -52], [-90,  52], [ 90,  52]], acuteCount: 2, label: 'obtuse-left'  },
+    { vertices: [[ 55, -52], [-90,  52], [ 90,  52]], acute: 2, obtuse: 1, right: 0, label: 'obtuse-left'  },
     // Obtuse at lower-right
-    { vertices: [[-55, -52], [-90,  52], [ 90,  52]], acuteCount: 2, label: 'obtuse-right' },
+    { vertices: [[-55, -52], [-90,  52], [ 90,  52]], acute: 2, obtuse: 1, right: 0, label: 'obtuse-right' },
     // Obtuse at apex (wide flat triangle)
-    { vertices: [[  0, -30], [-95,  55], [ 95,  55]], acuteCount: 2, label: 'obtuse-top'   },
+    { vertices: [[  0, -30], [-95,  55], [ 95,  55]], acute: 2, obtuse: 1, right: 0, label: 'obtuse-top'   },
     // Acute scalene — all three angles are acute
-    { vertices: [[ 20, -55], [-75,  45], [ 80,  45]], acuteCount: 3, label: 'all-acute'    },
+    { vertices: [[ 20, -55], [-75,  45], [ 80,  45]], acute: 3, obtuse: 0, right: 0, label: 'all-acute'    },
     // Another acute scalene — slightly different proportions
-    { vertices: [[-10, -58], [-80,  48], [ 70,  48]], acuteCount: 3, label: 'all-acute-2'  },
+    { vertices: [[-10, -58], [-80,  48], [ 70,  48]], acute: 3, obtuse: 0, right: 0, label: 'all-acute-2'  },
+    // Right angle at lower-left (legs horizontal/vertical, hypotenuse slanted)
+    { vertices: [[-90,  52], [ 90,  52], [-90, -48]], acute: 2, obtuse: 0, right: 1, label: 'right-left'   },
+    // Right angle at lower-right
+    { vertices: [[-90,  52], [ 90,  52], [ 90, -48]], acute: 2, obtuse: 0, right: 1, label: 'right-right'  },
+  ];
+
+  const QUESTION_TYPES = [
+    { key: 'acute',  text: 'What is the total number of acute angles the triangle appears to have?' },
+    { key: 'obtuse', text: 'What is the total number of obtuse angles the triangle appears to have?' },
+    { key: 'right',  text: 'What is the total number of right angles the triangle appears to have?' },
   ];
 
   const t = pick(triangles);
+  const qType = pick(QUESTION_TYPES);
+  const answer = t[qType.key];
 
   return {
     item_id: 'MA002128911',
@@ -1265,15 +1373,20 @@ function generate2023Q5() {
       shape: { type: 'polygon', vertices: t.vertices },
       padding: 16
     },
-    question_text: 'What is the total number of acute angles the triangle appears to have?',
+    question_text: qType.text,
     math_expression: null,
     input_widget: 'text',
     answer_options: null,
     parts: null,
     select_count: null,
+    // The question asks about acute, obtuse, OR right angles (qType varies) —
+    // without exposing which, the template can only hardcode one and is
+    // simply wrong 2/3 of the time (caught live: hint talked about right
+    // angles for a question asking about acute angles).
+    _params: { angleTypePlural: `${qType.key} angles` },
     has_visual: true,
-    visual_description: `A scalene triangle (${t.label}). Correct answer: ${t.acuteCount}.`,
-    correct_answer: String(t.acuteCount)
+    visual_description: `A scalene triangle (${t.label}). Correct answer: ${answer} ${qType.key} angle(s).`,
+    correct_answer: String(answer)
   };
 }
 
@@ -1336,7 +1449,19 @@ function generate2023Q2() {
     ],
     question_text: `Each day, ${name} continued to ${infin} ${step} more ${activity} than the day before. On which day did ${pronoun} ${infin} ${target} ${activity}?`,
     answer_options: dayOrdinals.map((d, i) => ({ letter: letters[i], text: `the ${d} day` })),
-    correct_answer: correctLetter
+    correct_answer: correctLetter,
+    // No _params previously — the model had no way to know which of the 6
+    // scenarios (name/activity pairing) was actually picked, and hardcoded
+    // one regardless (caught live: a "math problems" question whose
+    // feedback talked about push-ups throughout).
+    _params: {
+      name,
+      pronoun,
+      activity,
+      step: String(step),
+      start: String(start),
+      target: String(target)
+    }
   };
 }
 
@@ -1789,6 +1914,19 @@ function generate2023Q13() {
       B: annualMiles,
       C: totalMiles,
     },
+    // No _params previously — the model had no way to know which of the 5
+    // scenarios (subject/pronoun/workplace) was actually picked, and
+    // hardcoded one regardless (caught live: a librarian/"he" question whose
+    // feedback referred to "she"/"her" and a hospital throughout).
+    _params: {
+      subject: theSubject.toLowerCase(),
+      pronoun: sc.pronoun,
+      workplace: sc.workplace,
+      daysPerWeek: String(daysPerWeek),
+      milesPerDay: String(milesPerDay),
+      weeksPerYear: String(weeksPerYear),
+      years: String(years)
+    },
   };
 }
 
@@ -1928,10 +2066,11 @@ function generate2025Q3() {
         question_text:
           `Of all the desserts sold on Saturday, [${pc.clC}/${pc.clCD}] of the desserts were sold in the first two hours.\n\n` +
           `A worker at the cafe created this equation to represent the fraction of all the desserts sold in the first two hours.\n\n` +
-          `Is the worker's equation correct? Show or explain how you got your answer.`,
+          `Is the worker's equation correct?`,
         math_expression: `[${pc.wA}/${pc.wAD}] + [${pc.wB}/${pc.wBD}] = [${pc.clC}/${pc.clCD}]`,
-        answer_type: 'constructed_response',
-        correct_answer: `No; [${pc.wA}/${pc.wAD}] + [${pc.wB}/${pc.wBD}] = [${pc.actN}/${pc.actD}]`,
+        answer_type: 'yes_no_explanation',
+        // The claimed sum is always wrong by construction (partCPool), so "No" every time
+        correct_answer: 'no',
       },
       {
         label: 'D',
@@ -1945,7 +2084,7 @@ function generate2025Q3() {
     correct_answer: {
       A: correctLetter,
       B: `[${cookiesN}/8]`,
-      C: `No; [${pc.wA}/${pc.wAD}] + [${pc.wB}/${pc.wBD}] = [${pc.actN}/${pc.actD}]`,
+      C: 'no',
       D: `${pd.soldW}[${pd.soldF}/8]`,
     },
   };
@@ -2066,15 +2205,23 @@ function generate2025Q14() {
           `Show or explain how you got your answer.`,
         answer_type: 'constructed_response',
         // Any value strictly between lowGrams and massKg*1000
-        correct_answer: `Any value between ${lowGrams.toLocaleString()} and ${(massKg * 1000).toLocaleString()} grams (exclusive)`
+        correct_answer: `>${lowGrams},<${massKg * 1000}`
       }
     ],
     correct_answer: {
       A: String(cylinderValue),
       B: String(mLAnswer),
       C: String(timeChoice.total),
-      D: `Any value between ${lowGrams.toLocaleString()} and ${(massKg * 1000).toLocaleString()} grams (exclusive)`,
+      D: `>${lowGrams},<${massKg * 1000}`,
     },
+    // Part D's correct_answer is raw range notation (">4700,<5000") — the
+    // generic multi_part rule exposes that literally as D_correctValue,
+    // which reads like answer-key shorthand, not a sentence a 4th grader can
+    // parse. These give the reveal clean, prose-ready boundary numbers instead.
+    _params: {
+      D_lowGrams: lowGrams.toLocaleString(),
+      D_highGrams: (massKg * 1000).toLocaleString()
+    }
   };
 }
 
@@ -2140,6 +2287,7 @@ function generate2023Q18() {
           `Enter your equation in the space provided. Enter <strong>only</strong> your equation. ` +
           `Click <strong>Save</strong> after entering your answer.`,
         answer_type: 'short_answer',
+        input_widget: 'math',
         correct_answer: `${factorA} \u00d7 ${baseA} = ${productA}`
       },
       {
@@ -2155,13 +2303,19 @@ function generate2023Q18() {
           { id: 'RESPONSE_B1', options: opts },
           { id: 'RESPONSE_B2', options: opts }
         ],
-        correct_answer: `RESPONSE_B1=${productB};RESPONSE_B2=${baseB}`
+        // MultiPart's own inline_choice renderer (used for parts nested inside a
+        // multi_part question) joins selections with commas, not pipes \u2014 that's a
+        // separate implementation from the standalone InlineChoice.svelte component.
+        correct_answer: `${productB},${baseB}`
       }
     ],
     select_count: null,
     has_visual: false,
     visual_description: null,
-    correct_answer: `RESPONSE_B1=${productB};RESPONSE_B2=${baseB}`
+    correct_answer: {
+      A: `${factorA} \u00d7 ${baseA} = ${productA}`,
+      B: `${productB},${baseB}`,
+    }
   };
 }
 
@@ -2209,7 +2363,7 @@ function generate2025Q13() {
       show_whole: true
     },
     question_text: `Write a decimal number that is <strong>less than</strong> the decimal number represented in the model.`,
-    correct_answer: `Any decimal less than ${chosen.decimal}`
+    correct_answer: `<${chosen.decimal}`
   };
 }
 
@@ -2277,7 +2431,29 @@ function generate2023Q7() {
     answer_type: 'multiple_choice',
     question_text: 'Which of these shapes appears to be a quadrilateral with perpendicular sides?',
     answer_options: opts.map((o, i) => ({ letter: letters[i], shape: o.shape })),
-    correct_answer: correctLetter
+    correct_answer: correctLetter,
+    _params: {
+      correctLetter,
+      // .label is an internal disambiguation tag for the distractor pool
+      // (e.g. "rectangle-tall", "kite-wide") — strip to the plain shape
+      // family name before exposing, or it leaks straight into the reveal
+      // as a raw internal identifier a student can't parse.
+      correctShapeLabel: chosen.label.split('-')[0],
+      // d1/d2/d3 each come from a DIFFERENT misconception family (parallelogram
+      // = right side count, wrong angles; pentagon = right angles, wrong side
+      // count; kite/rhombus = right side count, perpendicular DIAGONALS not
+      // sides) — giving one shared reason for all three produced unsound or
+      // imprecise reveals ("a rectangle IS a parallelogram" contradictions).
+      // Exposing each one's actual reason directly removes the need to
+      // synthesize a single explanation that has to be simultaneously true
+      // for three structurally different shapes.
+      distractor1Label: d1.label.split('-')[0],
+      distractor1Reason: 'has four sides, but its corners are not right angles',
+      distractor2Label: d2.label.split('-')[0],
+      distractor2Reason: 'has right angles, but five sides instead of four — it is not even a quadrilateral',
+      distractor3Label: d3.label.split('-')[0],
+      distractor3Reason: 'has four sides, but the right angle is between its two diagonal lines, not between its sides',
+    },
   };
 }
 
@@ -2308,9 +2484,9 @@ function generate2025Q5() {
   // Right trapezoids: one pair of horizontal parallel sides, right angle at one corner.
   // Varying proportions keep each variant visually distinct.
   const rightTrapezoids = [
-    { type: 'polygon', vertices: [[-28, 38], [28, 38], [28, -18], [-2, -38]] },
-    { type: 'polygon', vertices: [[-30, 40], [25, 40], [25, -25], [-5, -40]] },
-    { type: 'polygon', vertices: [[-22, 35], [30, 35], [30, -30], [2, -35]]  },
+    { type: 'polygon', vertices: [[-28, 38], [28, 38], [28, -38], [-2, -38]] },
+    { type: 'polygon', vertices: [[-30, 40], [25, 40], [25, -40], [-5, -40]] },
+    { type: 'polygon', vertices: [[-22, 35], [30, 35], [30, -35], [2, -35]]  },
   ];
 
   // Parallelograms: both pairs of sides parallel, tilted so students must reason geometrically.
@@ -2373,6 +2549,7 @@ function generate2025Q5() {
     question_text: 'Which of these shapes appear to have <strong>at least</strong> one pair of parallel sides?',
     answer_options: allOpts.map((o, i) => ({ letter: letters[i], shape: o.shape })),
     correct_answer: correctLetters,
+    _params: { correctLetters: correctLetters.split(',').join(', ') },
   };
 }
 
@@ -2604,11 +2781,6 @@ function generate2025Q15() {
   const mOptions = shuffle([mAngle, ...mDistractors]).sort((a, b) => a - b);
   const kOptions = shuffle([kAngle, ...kDistractors]).sort((a, b) => a - b);
 
-  // Determine correct answer letters (A=1st, B=2nd, C=3rd, D=4th in each dropdown)
-  const letters = ['A', 'B', 'C', 'D'];
-  const mLetter = letters[mOptions.indexOf(mAngle)];
-  const kLetter = letters[kOptions.indexOf(kAngle)];
-
   return {
     question_number: '15',
     answer_type: 'inline_choice',
@@ -2632,7 +2804,16 @@ function generate2025Q15() {
       { id: 'RESPONSE_A1', options: mOptions.map(String) },
       { id: 'RESPONSE_A2', options: kOptions.map(String) }
     ],
-    correct_answer: `${mLetter},${kLetter}`
+    // InlineChoice.svelte (standalone, used for top-level inline_choice questions)
+    // emits pipe-separated raw selections in dropdown order — not letter codes.
+    correct_answer: `${mAngle}|${kAngle}`,
+    // stimulus_params.rays is an array of objects — the generic extractor
+    // deliberately doesn't flatten those (too structured to do safely), so
+    // without this the LLM has no way to know the actual angle measures at all.
+    _params: {
+      PLM_angle: String(mAngle),
+      KLP_angle: String(kAngle)
+    }
   };
 }
 
@@ -2683,8 +2864,11 @@ function generate2023Q4() {
   // numerator < half denominator → clearly less than 1/2
   const buckDNum   = randInt(1, Math.floor(buckDDenom / 2) - 1);
 
-  // Part D benchmark is 1/2; students must write a fraction < 1/2
-  const benchmarkN = 1, benchmarkD = 2;
+  // Part D benchmark: students must write a fraction less than this value.
+  // Pool sticks to denominators already used elsewhere in the question (2,3,4,6,8).
+  const [benchmarkN, benchmarkD] = pick([
+    [1, 2], [1, 3], [2, 3], [1, 4], [3, 4], [1, 6], [5, 6], [1, 8], [3, 8], [5, 8], [7, 8],
+  ]);
 
   // ── Comparison helper ────────────────────────────────────────────────────────
   // Returns ">", "<", or "=" for a/b vs c/d
@@ -2749,13 +2933,16 @@ function generate2023Q4() {
           'Explain how you got your answer.\n\n' +
           'Enter your answer and your explanation in the space provided.',
         // C > D always by construction (bcNum/bcDenom > buckDNum/buckDDenom)
-        correct_answer: 'Bucket C',
+        // Accept the bare letter too, not just "Bucket C"
+        correct_answer: 'Bucket C|C',
       },
       {
         label: 'C',
         question_text:
           "This diagram shows all of the friends' buckets and the fraction of each bucket " +
-          'that was filled with rainwater.',
+          "that was filled with rainwater.\n\n" +
+          `One of the friends says that Bucket B and Bucket C were filled with the same amount of rainwater since [${bcNum}/${bcDenom}] of each bucket was filled with rainwater.\n\n` +
+          'Is the friend correct?',
         stimulus_type: 'bucket_diagram',
         stimulus_params: {
           buckets: [
@@ -2765,13 +2952,9 @@ function generate2023Q4() {
             { label: 'Bucket D', numerator: buckDNum,  denominator: buckDDenom },
           ]
         },
-        answer_type: 'constructed_response',
-        answer_instruction:
-          `One of the friends says that Bucket B and Bucket C were filled with the same amount of rainwater since [${bcNum}/${bcDenom}] of each bucket was filled with rainwater.\n\n` +
-          'Is the friend correct? Explain your reasoning.\n\n' +
-          'Enter your answer and your explanation in the space provided.',
+        answer_type: 'yes_no_explanation',
         // B and C share the same fraction by construction, so the friend IS correct
-        correct_answer: `Yes; both Bucket B and Bucket C are [${bcNum}/${bcDenom}] full, so they have the same amount.`,
+        correct_answer: 'yes',
       },
       {
         label: 'D',
@@ -2784,7 +2967,8 @@ function generate2023Q4() {
         stimulus_params: null,
         answer_type: 'constructed_response',
         answer_instruction: 'Enter your answer and your explanation in the space provided.',
-        correct_answer: `Any fraction less than [${benchmarkN}/${benchmarkD}]`,
+        // Any fraction strictly less than the benchmark is accepted
+        correct_answer: `<${benchmarkN}/${benchmarkD}`,
       },
     ],
     select_count: null,
@@ -2795,9 +2979,9 @@ function generate2023Q4() {
       `Part C shows all four buckets.`,
     correct_answer: {
       A: `[${buckANum}/${buckADenom}] ${partAOp} [${bcNum}/${bcDenom}]`,
-      B: 'Bucket C',
-      C: `Yes; both Bucket B and Bucket C are [${bcNum}/${bcDenom}] full, so they have the same amount.`,
-      D: `Any fraction less than [${benchmarkN}/${benchmarkD}]`,
+      B: 'Bucket C|C',
+      C: 'yes',
+      D: `<${benchmarkN}/${benchmarkD}`,
     },
   };
 }
@@ -2993,6 +3177,22 @@ function generate2025Q7() {
       A: correct_matches,
       B: partBAnswer,
     },
+    // Part B is a true_false_table, but the generic multi_part rule only
+    // derives {label}_correctValue from a plain string/number correct_answer
+    // — it doesn't know to zip statements against a true_false_table's row
+    // encoding the way the TOP-LEVEL generic rule does. Without this, the
+    // only thing exposed was the raw "True,False,True" encoding, which
+    // leaked straight into the reveal instead of the actual on-screen labels
+    // ("Less Than {{B_referenceNumber}}" / "Greater Than {{B_referenceNumber}}").
+    _params: {
+      B_referenceNumber: Rstr,
+      B_row1_statement: statements[0].text,
+      B_row1_answer: shuffledComparisons[0].relation === 'less' ? `Less Than ${Rstr}` : `Greater Than ${Rstr}`,
+      B_row2_statement: statements[1].text,
+      B_row2_answer: shuffledComparisons[1].relation === 'less' ? `Less Than ${Rstr}` : `Greater Than ${Rstr}`,
+      B_row3_statement: statements[2].text,
+      B_row3_answer: shuffledComparisons[2].relation === 'less' ? `Less Than ${Rstr}` : `Greater Than ${Rstr}`,
+    },
   };
 }
 
@@ -3070,6 +3270,12 @@ function generate2023Q11() {
     has_visual: true,
     visual_description: `Tile bank: ${tiles.join(', ')}. Three rows: ${fixed1} > [blank], ${fixed2} < [blank], ${fixed3} > [blank].`,
     correct_answer,
+    _params: {
+      decimalA: fmt(A),
+      decimalB: fmt(B),
+      decimalC: fmt(C),
+      fixed1, fixed2, fixed3,
+    },
   };
 }
 
@@ -3120,6 +3326,11 @@ function generate2025Q2() {
     has_visual: false,
     visual_description: null,
     correct_answer: `Composite: ${chosenComposites.join(', ')}; Prime: ${chosenPrimes.join(', ')}`,
+    _params: {
+      compositeNumbers: chosenComposites.join(', '),
+      primeNumbers: chosenPrimes.join(', '),
+      trickyComposite: String(trickyComposite),
+    },
   };
 }
 
@@ -3508,17 +3719,54 @@ function generate2023Q16() {
 // 2023 Q17: MultipleChoice — which total cost is a multiple of the item price?
 // Standard: 4.OA.A.3 — solve multistep word problems; interpret remainders
 function generate2023Q17() {
-  const SCENARIOS = [
-    { price: 3, item: 'juice boxes'   },
-    { price: 4, item: 'granola bars'  },
-    { price: 5, item: 'sandwiches'    },
-    { price: 6, item: 'meal kits'     },
-    { price: 7, item: 'boxed lunches' },
-    { price: 8, item: 'lunch trays'   },
-    { price: 9, item: 'meal deals'    },
+  const SETTINGS = [
+    {
+      place: 'the cafeteria',
+      activity: 'eat lunch in the cafeteria',
+      items: [
+        { price: 3, item: 'juice boxes'   },
+        { price: 4, item: 'granola bars'  },
+        { price: 5, item: 'sandwiches'    },
+        { price: 6, item: 'meal kits'     },
+        { price: 7, item: 'boxed lunches' },
+        { price: 8, item: 'lunch trays'   },
+        { price: 9, item: 'meal deals'    },
+      ],
+    },
+    {
+      place: 'the school store',
+      activity: 'shop at the school store',
+      items: [
+        { price: 3, item: 'pencils'        },
+        { price: 4, item: 'erasers'        },
+        { price: 5, item: 'folders'        },
+        { price: 6, item: 'notebooks'      },
+        { price: 7, item: 'water bottles'  },
+        { price: 8, item: 'pencil pouches' },
+        { price: 9, item: 'school hats'    },
+      ],
+    },
+    {
+      place: 'the bake sale',
+      activity: 'buy treats at the bake sale',
+      items: [
+        { price: 3, item: 'cookies'    },
+        { price: 4, item: 'brownies'   },
+        { price: 5, item: 'cupcakes'   },
+        { price: 6, item: 'muffins'    },
+        { price: 7, item: 'pie slices' },
+        { price: 8, item: 'gift boxes' },
+        { price: 9, item: 'treat bags' },
+      ],
+    },
   ];
-  const sc = pick(SCENARIOS);
+  const GROUP_WORDS = ['friends', 'classmates', 'teammates', 'neighbors'];
+
+  const setting = pick(SETTINGS);
+  const sc = pick(setting.items);
   const { price, item } = sc;
+  const group = pick(GROUP_WORDS);
+  const groupSingular = group.slice(0, -1); // "friends" → "friend"
   const multiplier = randInt(5, 14);
   const correct = price * multiplier;
 
@@ -3543,14 +3791,22 @@ function generate2023Q17() {
   return {
     question_number: '17',
     answer_type: 'multiple_choice',
-    stimulus_intro: 'A group of friends are going to eat lunch in the cafeteria.',
+    stimulus_intro: `A group of ${group} are going to ${setting.activity}.`,
     stimulus_list: [
-      `At the cafeteria, ${item} cost $${price} each.`,
-      'Each friend in the group will buy one.',
+      `At ${setting.place}, ${item} cost $${price} each.`,
+      `Each ${groupSingular} in the group will buy one.`,
     ],
-    question_text: `Which of these could be the <strong>total</strong> cost for all the friends in the group?`,
+    question_text: `Which of these could be the <strong>total</strong> cost for all the ${group} in the group?`,
     answer_options: pool.map((o, i) => ({ letter: letters[i], text: `$${o.val}` })),
     correct_answer: correctLetter,
+    // The per-item price lives inside stimulus_list (plain display strings),
+    // not stimulus_params, so the generic extractor can't pull it out —
+    // without this the LLM has no number to build a skip-counting/
+    // factor-pair technique around at all.
+    _params: {
+      price: String(price),
+      groupSingular
+    }
   };
 }
 
@@ -4045,6 +4301,10 @@ function generate2021Q8() {
     parts: null,
     select_count: null,
     correct_answer: '{"0 lines of symmetry": ["parallelogram", "trapezoid"], "1 line of symmetry": [], "2 lines of symmetry": ["rectangle"], "4 lines of symmetry": ["square"]}',
+    // Fixed content — this generator never randomizes (same 4 shapes every time).
+    _params: {
+      categorySummary: 'trapezoid and parallelogram have 0 lines of symmetry; rectangle has 2 lines of symmetry; square has 4 lines of symmetry',
+    },
   };
 }
 
@@ -4257,20 +4517,11 @@ function generate2021Q11() {
 // ─── 2021 Q12: Equivalent fractions — find x in N/10 = x/100 ────────────────
 function generate2021Q12() {
   // Original: 7/10 = x/100, answer 70.
-  // Varies denominator pair and direction to cover all tenths/hundredths/thousandths equivalences.
-  //
-  // Pairs (scale factor):
-  //   10  ↔ 100   (×10)
-  //   10  ↔ 1000  (×100)
-  //   100 ↔ 1000  (×10)
-  //
+  // Standard 4.NF.C.6 caps denominators at 10 or 100 for 4th grade (thousandths is
+  // 5th-grade content), so only the 10↔100 pair is used.
   // Direction: forward (x in larger denom) or reverse (x in smaller denom).
 
-  const pair = pick([
-    { small: 10,  large: 100,  factor: 10  },
-    { small: 10,  large: 1000, factor: 100 },
-    { small: 100, large: 1000, factor: 10  },
-  ]);
+  const pair = { small: 10, large: 100, factor: 10 };
 
   // N = numerator of the small-denominator fraction (avoid values that make x > 999)
   const maxN = Math.floor(999 / pair.factor);
@@ -4329,6 +4580,9 @@ function generate2021Q13() {
     answer_options: rawTris13.map((t, i) => ({ letter: ABCDE13[i], shape: { type: 'polygon', vertices: t.vertices } })),
     parts: null,
     correct_answer: ABCDE13.filter((_, i) => rawTris13[i].isCorrect).join(','),
+    _params: {
+      correctLetters: ABCDE13.filter((_, i) => rawTris13[i].isCorrect).join(', '),
+    },
   };
 }
 
@@ -4451,39 +4705,48 @@ function generate2021Q14() {
 //                  adds wrong (A+B without multiplying), correct total, over-count.
 //   Bags options: floor division (ignores remainder), ±1 around correct, correct.
 function generate2021Q15() {
+  // stimulus_intro/stimulus_list are kept SEPARATE (plain sentence + bullet
+  // array), matching every other generator's convention — not one combined
+  // HTML block. AudioText/renderSpokenFields only understand narrated text
+  // through those two fields; a hand-built <p>+<ul><li> HTML blob bypasses
+  // both (no highlighting, even though audio for the whole blob still gets
+  // synthesized as one opaque string).
   const PAIR_SCENARIOS = [
     {
       person1: 'Alonzo', person2: 'Mindy',
-      item: 'pretzels', container: 'bags',
-      intro: (a, mult, cap) =>
-        `<p>${'Alonzo'} and ${'Mindy'} are buying pretzels to share with their class. They will put all the pretzels into bags.</p>` +
-        `<ul><li>${'Alonzo'} buys ${a} pretzels.</li>` +
-        `<li>${'Mindy'} buys ${mult} times as many pretzels as ${'Alonzo'}.</li>` +
-        `<li>Each bag will hold up to ${cap} pretzels.</li></ul>`,
+      item: 'pretzels', container: 'bags', containerSingular: 'bag',
+      introText: () => 'Alonzo and Mindy are buying pretzels to share with their class. They will put all the pretzels into bags.',
+      introList: (a, mult, cap) => [
+        `Alonzo buys ${a} pretzels.`,
+        `Mindy buys ${mult} times as many pretzels as Alonzo.`,
+        `Each bag will hold up to ${cap} pretzels.`,
+      ],
       question: (p1, p2) => `${p1} and ${p2} want to know the least number of bags they need to hold all the pretzels.`,
       sentence1: (p1, p2) => `${p1} and ${p2} have a total of [RESPONSE_A1] pretzels.`,
       sentence2: (p1, p2) => `${p1} and ${p2} need [RESPONSE_A2] bags to hold all the pretzels.`,
     },
     {
       person1: 'Carmen', person2: 'Noah',
-      item: 'stickers', container: 'bags',
-      intro: (a, mult, cap) =>
-        `<p>Carmen and Noah are collecting stickers to share with their class. They will put all the stickers into bags.</p>` +
-        `<ul><li>Carmen has ${a} stickers.</li>` +
-        `<li>Noah has ${mult} times as many stickers as Carmen.</li>` +
-        `<li>Each bag will hold up to ${cap} stickers.</li></ul>`,
+      item: 'stickers', container: 'bags', containerSingular: 'bag',
+      introText: () => 'Carmen and Noah are collecting stickers to share with their class. They will put all the stickers into bags.',
+      introList: (a, mult, cap) => [
+        `Carmen has ${a} stickers.`,
+        `Noah has ${mult} times as many stickers as Carmen.`,
+        `Each bag will hold up to ${cap} stickers.`,
+      ],
       question: (p1, p2) => `${p1} and ${p2} want to know the least number of bags they need to hold all the stickers.`,
       sentence1: (p1, p2) => `${p1} and ${p2} have a total of [RESPONSE_A1] stickers.`,
       sentence2: (p1, p2) => `${p1} and ${p2} need [RESPONSE_A2] bags to hold all the stickers.`,
     },
     {
       person1: 'Marcus', person2: 'Sofia',
-      item: 'marbles', container: 'boxes',
-      intro: (a, mult, cap) =>
-        `<p>Marcus and Sofia are collecting marbles to share with their class. They will put all the marbles into boxes.</p>` +
-        `<ul><li>Marcus has ${a} marbles.</li>` +
-        `<li>Sofia has ${mult} times as many marbles as Marcus.</li>` +
-        `<li>Each box will hold up to ${cap} marbles.</li></ul>`,
+      item: 'marbles', container: 'boxes', containerSingular: 'box',
+      introText: () => 'Marcus and Sofia are collecting marbles to share with their class. They will put all the marbles into boxes.',
+      introList: (a, mult, cap) => [
+        `Marcus has ${a} marbles.`,
+        `Sofia has ${mult} times as many marbles as Marcus.`,
+        `Each box will hold up to ${cap} marbles.`,
+      ],
       question: (p1, p2) => `${p1} and ${p2} want to know the least number of boxes they need to hold all the marbles.`,
       sentence1: (p1, p2) => `${p1} and ${p2} have a total of [RESPONSE_A1] marbles.`,
       sentence2: (p1, p2) => `${p1} and ${p2} need [RESPONSE_A2] boxes to hold all the marbles.`,
@@ -4542,7 +4805,8 @@ function generate2021Q15() {
     item_id: 'MA713629341',
     question_number: '15',
     answer_type: 'inline_choice',
-    stimulus_intro: sc.intro(a, mult, cap),
+    stimulus_intro: sc.introText(),
+    stimulus_list: sc.introList(a, mult, cap),
     stimulus_type: null,
     stimulus_params: null,
     question_text: sc.question(sc.person1, sc.person2),
@@ -4556,6 +4820,23 @@ function generate2021Q15() {
       { id: 'RESPONSE_A2', options: bagOptions.map(String) },
     ],
     correct_answer: `${total},${minBags}`,
+    // sc.item/sc.container are the ACTUAL randomly-picked nouns for this
+    // sample (marbles/boxes, stickers/bags, pretzels/bags) — without exposing
+    // them, the model has no way to know which scenario it's writing about
+    // and hardcodes a fixed/wrong one from training bias instead (caught
+    // live: a "marbles" question whose tips talked about "pretzels").
+    _params: {
+      person1: sc.person1,
+      person2: sc.person2,
+      item: sc.item,
+      container: sc.container,
+      containerSingular: sc.containerSingular,
+      amountA: String(a),
+      multiplier: String(mult),
+      capacity: String(cap),
+      totalItems: String(total),
+      minBags: String(minBags),
+    },
   };
 }
 
@@ -4624,14 +4905,23 @@ function generate2021Q16() {
         label: 'B',
         question_text:
           `The shopper bought ${fmt2(decimalB)} pound of ${sc.shopItem2}.\n\n` +
-          `Plot the point that represents where ${fmt2(decimalB)} is located on this number line.\n\n` +
-          `Select a place on the number line to plot the point.`,
+          `Plot the point that represents where ${fmt2(decimalB)} is located on this number line.`,
         answer_type: 'number_line_plot',
         stimulus_params: { min: 0, max: 1, small_intervals: 10 },
         correct_answer: fmt2(decimalB),
       },
     ],
     correct_answer: `${fmt2(decimalA)};${fmt2(decimalB)}`,
+    // Top-level correct_answer here is a semicolon-joined string, not the
+    // standard {A,B} object shape, so the generic multi_part rule doesn't
+    // apply — exposed directly instead.
+    _params: {
+      A_numerator: String(numA),
+      A_correctValue: fmt2(decimalA),
+      B_correctValue: fmt2(decimalB),
+      shopItem1: sc.shopItem1,
+      shopItem2: sc.shopItem2,
+    },
   };
 }
 
@@ -4708,9 +4998,15 @@ function generate2021Q17() {
         { model: { left: rect(fullShading), operator: '', right: rect(correctRight) }, isCorrect: true },
       ]);
       const ABCD17 = ['A', 'B', 'C', 'D'];
+      const correctLetter = ABCD17[rawOpts17.findIndex(o => o.isCorrect)];
       return {
         answer_options: rawOpts17.map((o, i) => ({ letter: ABCD17[i], model: o.model })),
-        correct_answer: ABCD17[rawOpts17.findIndex(o => o.isCorrect)],
+        correct_answer: correctLetter,
+        _params: {
+          mixedNumber: `${whole} ${num}/${denom}`,
+          equivalentFraction: `${eqNum}/${eqDenom}`,
+          correctLetter,
+        },
       };
     })(),
   };
@@ -5419,6 +5715,11 @@ function generate2022Q7() {
       { division: div3, slots: slots3 },
     ],
     correct_answer: `${slots1[0]}×${slots1[1]}=${slots1[2]}, ${slots2[0]}×${slots2[1]}=${slots2[2]}, ${slots3[0]}×${slots3[1]}=${slots3[2]}`,
+    _params: {
+      divisionRow1: div1, multiplicationRow1: `${slots1[0]}×${slots1[1]}=${slots1[2]}`,
+      divisionRow2: div2, multiplicationRow2: `${slots2[0]}×${slots2[1]}=${slots2[2]}`,
+      divisionRow3: div3, multiplicationRow3: `${slots3[0]}×${slots3[1]}=${slots3[2]}`,
+    },
   };
 }
 
@@ -5533,6 +5834,12 @@ function generate2022Q8() {
       C: 'yes',
       D: `halfPerim=${halfPerim},maxArea=${gardenArea}`,
     },
+    _params: {
+      D_halfPerim: String(halfPerim),
+      D_maxArea: String(gardenArea),
+      D_exampleLen: String(flowerLen),
+      D_exampleWid: String(flowerWid),
+    },
   };
 }
 
@@ -5601,6 +5908,7 @@ function generate2022Q10() {
       item: 'stickers',
       container: 'sheets',
       purpose: 'decorating posters',
+      verb: 'decorate',
       unit: 'poster',
     },
     {
@@ -5608,6 +5916,7 @@ function generate2022Q10() {
       item: 'stickers',
       container: 'pages',
       purpose: 'making cards',
+      verb: 'make',
       unit: 'card',
     },
     {
@@ -5615,6 +5924,7 @@ function generate2022Q10() {
       item: 'stamps',
       container: 'sheets',
       purpose: 'mailing envelopes',
+      verb: 'mail',
       unit: 'envelope',
     },
   ];
@@ -5662,16 +5972,42 @@ function generate2022Q10() {
     stimulus_type: null,
     stimulus_params: null,
     math_expression: null,
-    question_text: `What is the <strong>greatest</strong> number of ${sc.unit}s the ${sc.actor.toLowerCase().replace('a ', '')} can ${sc.purpose.split(' ')[0]}?`,
+    question_text: `What is the <strong>greatest</strong> number of ${sc.unit}s the ${sc.actor.toLowerCase().replace('a ', '')} can ${sc.verb}?`,
     answer_options,
     parts: null,
     select_count: null,
     correct_answer: correctLetter,
+    // No _params previously — the model had no way to know which of the 3
+    // scenarios (teacher/stickers/posters, student/stickers/cards,
+    // parent/stamps/envelopes) was actually picked, and hardcoded one
+    // regardless (caught live: a stamps/envelopes question whose feedback
+    // talked about stickers and posters throughout).
+    _params: {
+      actor: sc.actor.toLowerCase().replace('a ', ''),
+      item: sc.item,
+      container: sc.container,
+      unit: sc.unit,
+      sheets: String(sheets),
+      perSheet: String(perSheet),
+      perPoster: String(perPoster)
+    },
   };
 }
 
 // 2022 Q11 — Multi-part: unit conversion table (minutes→seconds) + ordering distances
 function generate2022Q11() {
+  // ── Semantic variation: person + event/activity labels ──
+  const person = pick(PEOPLE);
+  const SCENARIOS = [
+    { event: 'field day',            raceLabel: 'races',        throwLabel: 'softball throws' },
+    { event: 'sports day',           raceLabel: 'races',        throwLabel: 'frisbee throws' },
+    { event: 'track and field day',  raceLabel: 'sprints',      throwLabel: 'javelin throws' },
+    { event: 'the school olympics',  raceLabel: 'relay races',  throwLabel: 'discus throws' },
+    { event: 'field day',            raceLabel: 'races',        throwLabel: 'shot put throws' },
+    { event: 'summer camp',          raceLabel: 'swim races',   throwLabel: 'beanbag throws' },
+  ];
+  const sc = pick(SCENARIOS);
+
   // ── Part A: time conversion ──
   // Generate 3 race finish times. Each time has a whole-minute component and
   // an optional extra-seconds component. The student must convert to total seconds.
@@ -5751,14 +6087,14 @@ function generate2022Q11() {
     question_number: '11',
     answer_type: 'multi_part',
     layout: 'stacked',
-    question_text: "On field day, a student recorded his finish times for three different races. He also recorded the distances of four of his softball throws.",
+    question_text: `On ${sc.event}, ${person.name} recorded ${person.poss} finish times for three different ${sc.raceLabel}. ${person.pronoun.charAt(0).toUpperCase() + person.pronoun.slice(1)} also recorded the distances of four of ${person.poss} ${sc.throwLabel}.`,
     stimulus_type: null,
     stimulus_params: null,
     stimulus_list: null,
     parts: [
       {
         label: 'A',
-        question_text: `This table shows the student's finish times for the three races.\n\nWhat is the student's finish time, in <strong>seconds</strong>, for each race?\n\nEnter a number into each box to complete the table.`,
+        question_text: `This table shows ${person.poss} finish times for the three ${sc.raceLabel}.\n\nWhat is ${person.poss} finish time, in <strong>seconds</strong>, for each race?\n\nEnter a number into each box to complete the table.`,
         answer_type: 'table_fill',
         table_params: {
           title: 'Finish Times',
@@ -5769,7 +6105,7 @@ function generate2022Q11() {
       },
       {
         label: 'B',
-        question_text: `The distances of the student's four softball throws were recorded using different units of measurement.\n\nOrder the distances from <strong>least to greatest</strong>.\n\nDrag and drop the distances into the boxes in the correct order.`,
+        question_text: `The distances of ${person.poss} four ${sc.throwLabel} were recorded using different units of measurement.\n\nOrder the distances from <strong>least to greatest</strong>.\n\nDrag and drop the distances into the boxes in the correct order.`,
         answer_type: 'ordering',
         tiles,
         correct_order: correctOrder,
@@ -5804,8 +6140,10 @@ function generate2022Q12() {
 
   const fact = pick(baseFacts);
   const { a, b, c } = fact;
-  const bigB = b * 100;
-  const answer = c * 100;
+  const zeros = randInt(1, 3);
+  const scale = 10 ** zeros;
+  const bigB = b * scale;
+  const answer = c * scale;
 
   // Distractors:
   // - forgetting the ×100 scale: just c (forgot to scale)
@@ -5836,8 +6174,12 @@ function generate2022Q12() {
 //
 function generate2022Q13() {
   // Pick from common protractor-reading angles on major/mid ticks
+  // Note: ProtractorImage flips the baseline ray to the left whenever the
+  // rendered ray's angle exceeds 90°, so the readable measure at that point
+  // comes off the inner scale (180 - angle), not the raw render angle.
   const candidateAngles = [30, 40, 45, 50, 55, 60, 65, 70, 80, 90, 100, 110, 120, 130, 135, 140, 150];
   const angle = pick(candidateAngles);
+  const measure = angle > 90 ? 180 - angle : angle;
 
   return {
     question_number: '13',
@@ -5853,7 +6195,7 @@ function generate2022Q13() {
     question_text: 'What is the measure, in degrees, of angle <em>A</em>?',
     input_widget: 'text',
     answer_suffix: 'degrees',
-    correct_answer: String(angle),
+    correct_answer: String(measure),
   };
 }
 
@@ -5904,52 +6246,61 @@ function generate2022Q14() {
 }
 
 // ─── 2022 Q15: MultiPart — Growing square-triangle pattern (4 parts) ─────────
-// Pattern: Step N has N squares and 2N triangles.
-// Part A (short_answer): triangles in step 4 = 8
-// Part B (constructed_response): squares in step 6 = 6
-// Part C (constructed_response): triangles in step 9, explain via multiplication = 18
-// Part D (constructed_response): step with 64 triangles → 32 squares
+// StepPattern stimulus only supports two fixed-ratio layouts:
+//   'square_center': 1 square + 2 triangles per step  (triangles = 2 × squares)
+//   'triangle_center': 1 triangle + 2 squares per step (squares = 2 × triangles)
+// Generator picks between them each time for setup variation, instead of
+// always doubling squares. Whichever shape is NOT doubled uses count = N;
+// the doubled shape uses count = 2N.
+//
+// Part A (short_answer): triangles in step 4
+// Part B (constructed_response): triangles in step 6
+// Part C (constructed_response): squares in step 9, explain via multiplication
+// Part D (constructed_response): step with N triangles → squares
 //
 // Generator varies the step numbers asked about:
-//   Part A target step: 4-6  → triangles = 2*stepA
-//   Part B target step: 5-8  → squares = stepB
-//   Part C target step: 7-10 → triangles = 2*stepC  (via multiplication)
-//   Part D total triangles: chosen so triangles/2 gives a clean integer step number
+//   Part A target step: 4-6
+//   Part B target step: 5-9
+//   Part C target step: 7-12
+//   Part D total triangles: chosen so it maps back to a clean step number
 //
 function generate2022Q15() {
-  // New pattern: 1 triangle (center) + 2 squares per step
-  // Step N: N triangles, 2N squares
+  const variant = pick(['square_center', 'triangle_center']);
+  const perStepTri = variant === 'square_center' ? 2 : 1;
+  const perStepSq  = variant === 'square_center' ? 1 : 2;
+  const introText = variant === 'square_center'
+    ? 'A student uses squares and triangles to make a pattern. In each step of the pattern, the student adds 1 square and 2 triangles, as shown.'
+    : 'A student uses triangles and squares to make a pattern. In each step of the pattern, the student adds 1 triangle and 2 squares, as shown.';
 
-  // Part A: total triangles in Step stepA (1 triangle per step)
+  // Part A: total triangles in Step stepA
   const stepA = randInt(4, 8);
-  const triA = stepA;
+  const triA = stepA * perStepTri;
 
   // Part B: total triangles in Step stepB
   let stepB = randInt(5, 9);
   if (stepB === stepA) stepB = stepB < 9 ? stepB + 1 : stepB - 1;
-  const triB = stepB;  // 1 triangle per step
+  const triB = stepB * perStepTri;
 
-  // Part C: total squares in Step stepC (2 squares per step — uses multiplication)
+  // Part C: total squares in Step stepC (uses multiplication)
   let stepC = randInt(7, 12);
   while (stepC === stepA || stepC === stepB) {
     stepC = stepC < 12 ? stepC + 1 : 7;
   }
-  const sqC = stepC * 2;  // 2 squares per step
+  const sqC = stepC * perStepSq;
 
-  // Part D: given triangles (= step number), find squares
+  // Part D: given triangles, find squares
   const stepD = pick([8, 9, 10, 11, 12, 13, 14, 15]);
-  const triD = stepD;
-  const sqD = stepD * 2;
+  const triD = stepD * perStepTri;
+  const sqD = stepD * perStepSq;
 
   return {
     question_number: '15',
     item_id: 'MA311579A',
     answer_type: 'multi_part',
     question_text: 'The student continues the pattern.',
-    stimulus_intro:
-      'A student uses triangles and squares to make a pattern. In each step of the pattern, the student adds 1 triangle and 2 squares, as shown.',
+    stimulus_intro: introText,
     stimulus_type: 'step_pattern',
-    stimulus_params: { steps: 3, variant: 'triangle_center' },
+    stimulus_params: { steps: 3, variant },
     stimulus_list: null,
     math_expression: null,
     layout: null,
@@ -6104,6 +6455,12 @@ function generate2022Q16() {
     parts: null,
     select_count: null,
     correct_answer: `${fmt(nearestThousand)}|${fmt(nearestTenThousand)}|${fmt(nearestHundredThousand)}`,
+    _params: {
+      originalNumber: fmtNum,
+      nearestThousand: fmt(nearestThousand),
+      nearestTenThousand: fmt(nearestTenThousand),
+      nearestHundredThousand: fmt(nearestHundredThousand),
+    },
   };
 }
 
@@ -6166,7 +6523,7 @@ function generate2022Q18() {
   // perpendicular refers to adjacent side pairs meeting at 90°.
   const SHAPE_LIB = {
     right_trapezoid:      { v: [[-50,-45],[50,-45],[50,45],[-70,45]],   parallel: 1, perp: 1 },
-    right_trapezoid_alt:  { v: [[-50,-45],[50,-45],[20,45],[-60,45]],   parallel: 1, perp: 1 },
+    right_trapezoid_alt:  { v: [[-50,-45],[50,-45],[20,45],[-50,45]],   parallel: 1, perp: 1 },
     rectangle:            { v: [[-55,-25],[55,-25],[55,25],[-55,25]],   parallel: 2, perp: 2 },
     tall_rectangle:       { v: [[-30,-50],[30,-50],[30,50],[-30,50]],   parallel: 2, perp: 2 },
     square_upright:       { v: [[-40,-40],[40,-40],[40,40],[-40,40]],   parallel: 2, perp: 2 },
@@ -6179,6 +6536,20 @@ function generate2022Q18() {
     right_triangle:       { v: [[-45,-45],[-45,45],[50,45]],            parallel: 0, perp: 1 },
     general_triangle:     { v: [[-50,40],[0,-50],[60,40]],              parallel: 0, perp: 0 },
     kite:                 { v: [[0,-60],[-35,0],[0,50],[35,0]],         parallel: 0, perp: 0 },
+  };
+
+  // Clean student-facing names for the internal SHAPE_LIB keys (which use
+  // snake_case disambiguation suffixes like _alt/_upright/_tilted purely to
+  // pick a distinct polygon — those must never leak into the reveal verbatim).
+  const SHAPE_DISPLAY_NAMES = {
+    right_trapezoid: 'right trapezoid', right_trapezoid_alt: 'right trapezoid',
+    rectangle: 'rectangle', tall_rectangle: 'rectangle',
+    square_upright: 'square', square_tilted: 'square',
+    parallelogram: 'parallelogram', parallelogram_alt: 'parallelogram',
+    rhombus: 'rhombus',
+    isosceles_trapezoid: 'isosceles trapezoid', isosceles_trap_alt: 'isosceles trapezoid',
+    right_triangle: 'right triangle', general_triangle: 'triangle',
+    kite: 'kite',
   };
 
   // Three question variants, each with exactly select_count correct answers among 5 options.
@@ -6241,6 +6612,11 @@ function generate2022Q18() {
     answer_options,
     parts: null,
     correct_answer: correctLetters,
+    _params: {
+      correctLetters: correctLetters.split(',').join(', '),
+      correctShapeNames: variant.correct_names.map(n => SHAPE_DISPLAY_NAMES[n] ?? n.replace(/_/g, ' ')).join(', '),
+      perpWanted: variant.question.includes('<strong>no</strong>') ? 'no' : 'yes',
+    },
   };
 }
 
@@ -6257,7 +6633,7 @@ function generate2022Q19() {
         correct: `[${n}/10]`,
         distractors: n >= 2
           ? [`[1/${n}]`, `[${n}/100]`, `[1/${n * 10}]`]
-          : [`[1/10]`, `[1/100]`, `[10/100]`],
+          : [`[1/1]`, `[1/100]`, `[10/1]`],
       };
     }),
     // Common hundredths
@@ -6379,6 +6755,10 @@ function generate2025Q4() {
       { id: 'RESPONSE_A2', options: ['feet', 'square feet'] },
     ],
     correct_answer: `${perim}|feet`,
+    // inline_choice's correct_answer is a raw pipe-joined string, not covered
+    // by the generic extractor — without this the reveal has no placeholder
+    // for the actual perimeter value at all.
+    _params: { perimeter: String(perim) }
   };
 }
 
@@ -6431,20 +6811,24 @@ function generate2025Q8() {
   const sc = pick(SCENARIOS);
   const { N, M, obj, group } = sc;
 
+  const rawOpts = shuffle([
+    { text: `${N} ÷ ${M} = y`, isCorrect: true  },
+    { text: `${M} × y = ${N}`, isCorrect: true  },
+    { text: `y ÷ ${M} = ${N}`, isCorrect: false }, // wrong: y = N×M
+    { text: `${N} × y = ${M}`, isCorrect: false }, // wrong: y = M/N
+    { text: `${N} ÷ y = ${M}`, isCorrect: true  },
+  ]);
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+  const correct_answer = letters.filter((_, i) => rawOpts[i].isCorrect).join(',');
+
   return {
     question_number: '8',
     answer_type: 'multiple_select',
     stimulus_intro: `A teacher has ${N} ${obj}. The number of ${obj} is ${M} times the number of ${group} in the class.`,
-    question_text: `Which of these equations can be used to find y, the number of ${group} in the class? Select the three correct answers.`,
+    question_text: `Which of these equations can be used to find y, the number of ${group} in the class?`,
     select_count: 3,
-    answer_options: [
-      { letter: 'A', text: `${N} ÷ ${M} = y` },
-      { letter: 'B', text: `${M} × y = ${N}` },
-      { letter: 'C', text: `y ÷ ${M} = ${N}` },   // wrong: y = N×M
-      { letter: 'D', text: `${N} × y = ${M}` },   // wrong: y = M/N
-      { letter: 'E', text: `${N} ÷ y = ${M}` },
-    ],
-    correct_answer: 'A,B,E',
+    answer_options: rawOpts.map((o, i) => ({ letter: letters[i], text: o.text })),
+    correct_answer,
   };
 }
 
@@ -6460,7 +6844,17 @@ function generate2025Q9() {
     { num: 3, denom: 4, degrees: 270, distractors: [90, 180, 360]  },
     { num: 2, denom: 3, degrees: 240, distractors: [120, 180, 270] },
   ];
+  const SCENARIOS = [
+    (frac) => `What is the measure of an angle that turns through ${frac} of a circle?`,
+    (frac) => `A ceiling fan blade turns through ${frac} of a full rotation. What is the measure of that turn?`,
+    (frac) => `The minute hand on a clock sweeps through ${frac} of the clock face. What is the measure of that turn?`,
+    (frac) => `A spinner turns through ${frac} of a full circle. What is the measure of that turn?`,
+    (frac) => `A steering wheel is turned through ${frac} of a full turn. What is the measure of that turn?`,
+    (frac) => `A wheel completes ${frac} of one full turn. What is the measure of that turn?`,
+  ];
+
   const c = pick(CASES);
+  const template = pick(SCENARIOS);
   const pool = shuffle([c.degrees, ...c.distractors]);
   const letters = ['A', 'B', 'C', 'D'];
   const correctLetter = letters[pool.indexOf(c.degrees)];
@@ -6468,7 +6862,7 @@ function generate2025Q9() {
   return {
     question_number: '9',
     answer_type: 'multiple_choice',
-    question_text: `What is the measure of an angle that turns through [${c.num}/${c.denom}] of a circle?`,
+    question_text: template(`[${c.num}/${c.denom}]`),
     answer_options: pool.map((v, i) => ({ letter: letters[i], text: `${v}°` })),
     correct_answer: correctLetter,
   };
@@ -6565,21 +6959,28 @@ function generate2025Q16() {
   return {
     question_number: '16',
     answer_type: 'multiple_select',
-    question_text: `Which of these numbers are factors of ${c.n}? Select the three correct answers.`,
+    question_text: `Which of these numbers are factors of ${c.n}?`,
     select_count: 3,
     answer_options: sorted.map((v, i) => ({ letter: letters[i], text: String(v) })),
     correct_answer: correctLetters,
   };
 }
 
-// 2025 Q17: ShortAnswer — write a fraction equivalent to a hundredths decimal
-// Standard: 4.NF.C.6
+// 2025 Q17: ShortAnswer — write a fraction equivalent to a decimal
+// Standard: 4.NF.C.6 — denominators 10 or 100 only (thousandths is out of scope for 4th grade)
 function generate2025Q17() {
-  // Not on a tenths boundary so the equivalent fraction is unambiguously N/100
-  const tens = randInt(1, 8);
-  const ones = randInt(1, 9);
-  const num = tens * 10 + ones;
-  const decimal = (num / 100).toFixed(2);
+  const denom = pick([10, 100]);
+  let num, decimal;
+  if (denom === 10) {
+    num = randInt(1, 9);
+    decimal = (num / 10).toFixed(1);
+  } else {
+    // Not on a tenths boundary so the equivalent fraction is unambiguously N/100
+    const tens = randInt(1, 8);
+    const ones = randInt(1, 9);
+    num = tens * 10 + ones;
+    decimal = (num / 100).toFixed(2);
+  }
 
   return {
     question_number: '17',
@@ -6587,7 +6988,8 @@ function generate2025Q17() {
     stimulus_intro: 'A decimal number is shown.',
     math_expression: decimal,
     question_text: 'Write a fraction that is equivalent to the decimal number.',
-    correct_answer: `${num}/100`,
+    input_width: '110px',
+    correct_answer: `${num}/${denom}`,
   };
 }
 

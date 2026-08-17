@@ -1,11 +1,13 @@
 <script>
-  import { renderMath } from '$lib/utils/math.js';
+  import AudioText from './AudioText.svelte';
 
   export let question_text = '';
   export let instruction2 = '';
   export let tiles = [];
   export let rows = [];
   export let correct_answer = {};  // eslint-disable-line no-unused-vars
+  export let audio = {};
+  export let currentTime = 0;
 
   // ── Drag-and-drop state ──────────────────────────────────────────────
   let placed = {};       // { slotId: tileValue }
@@ -63,10 +65,10 @@
 
 <div class="question-body">
   {#if question_text}
-    <p class="q-text">{@html renderMath(question_text)}</p>
+    <p class="q-text"><AudioText text={question_text} alignment={audio.question_text?.alignment ?? null} active={audio.question_text?.active ?? false} {currentTime} /></p>
   {/if}
   {#if instruction2}
-    <p class="q-text">{@html instruction2}</p>
+    <p class="q-text"><AudioText text={instruction2} alignment={audio.instruction2?.alignment ?? null} active={audio.instruction2?.active ?? false} {currentTime} /></p>
   {/if}
 
   <!-- Tile bank -->

@@ -50,13 +50,18 @@ service cloud.firestore {
 
     // ── classes ──────────────────────────────────────────────────────────────
     // - Read: same school (teacher, student, admin all need it)
-    // - Write: dev always; admin for same school; teacher for own classIds
+    // - Create/update: dev always; admin for same school; teacher for own classIds
+    // - Delete: dev always; admin for same school (split out because
+    //   request.resource is null on delete, so it can't be checked the same
+    //   way as create/update)
     match /classes/{classId} {
       allow read: if isDev()
                   || (isAuth() && resource.data.schoolId == schoolId());
-      allow write: if isDev()
-                   || (isAdmin() && request.resource.data.schoolId == schoolId())
-                   || (isTeacher() && request.auth.token.classIds.hasAny([classId]));
+      allow create, update: if isDev()
+                             || (isAdmin() && request.resource.data.schoolId == schoolId())
+                             || (isTeacher() && request.auth.token.classIds.hasAny([classId]));
+      allow delete: if isDev()
+                    || (isAdmin() && resource.data.schoolId == schoolId());
     }
 
     // ── invites ───────────────────────────────────────────────────────────────
@@ -77,33 +82,84 @@ service cloud.firestore {
       allow read: if isDev()
                   || ((isTeacher() || isAdmin())
                       && get(/databases/$(database)/documents/users/$(uid)).data.schoolId == schoolId());
+      allow write: if isDev();
 
       match /standards/{standardId} {
         allow read, write: if isAuth() && request.auth.uid == uid;
         allow read: if isDev()
                     || ((isTeacher() || isAdmin())
                         && get(/databases/$(database)/documents/users/$(uid)).data.schoolId == schoolId());
+        allow write: if isDev();
+      }
+
+      match /variantHistory/{historyId} {
+        allow read, write: if isAuth() && request.auth.uid == uid;
+        allow read: if isDev()
+                    || ((isTeacher() || isAdmin())
+                        && get(/databases/$(database)/documents/users/$(uid)).data.schoolId == schoolId());
+        allow write: if isDev();
       }
     }
 
-    // ── assignments — teacher writes own class; same-school reads ─────────────
-    match /assignments/{classId} {
+    // ── quizzes — teacher builds/owns for their class; same-school reads ─────
+    match /quizzes/{quizId} {
       allow read: if isDev()
-                  || (isAuth()
-                      && get(/databases/$(database)/documents/classes/$(classId)).data.schoolId == schoolId());
+                  || (isAuth() && resource.data.schoolId == schoolId());
       allow write: if isDev()
-                   || (isTeacher() && request.auth.token.classIds.hasAny([classId]));
+                   || (isTeacher()
+                       && request.resource.data.schoolId == schoolId()
+                       && request.auth.token.classIds.hasAny([request.resource.data.classId]));
+
+      match /versions/{versionId} {
+        allow read: if isDev()
+                    || (isAuth()
+                        && get(/databases/$(database)/documents/quizzes/$(quizId)).data.schoolId == schoolId());
+        allow write: if isDev()
+                     || (isTeacher()
+                         && request.auth.token.classIds.hasAny(
+                              [get(/databases/$(database)/documents/quizzes/$(quizId)).data.classId]));
+      }
     }
 
-    // ── responses — students write own; teacher/admin/dev read ───────────────
-    match /responses/{responseId} {
+    // ── quizAssignments — one assign event; teacher writes own class; same-school reads ─
+    match /quizAssignments/{assignmentId} {
+      allow read: if isDev()
+                  || (isAuth() && resource.data.schoolId == schoolId());
+      allow create: if isDev()
+                    || (isTeacher()
+                        && request.resource.data.schoolId == schoolId()
+                        && request.auth.token.classIds.hasAny([request.resource.data.classId]));
+      allow update: if isDev()
+                    || (isTeacher() && request.auth.token.classIds.hasAny([resource.data.classId]));
+      allow delete: if isDev()
+                    || (isTeacher() && request.auth.token.classIds.hasAny([resource.data.classId]));
+    }
+
+    // ── quizProgress — student owns their own doc; teacher/admin same-school read+write (freeze on end) ─
+    match /quizProgress/{progressId} {
       allow create: if isAuth() && request.resource.data.studentId == request.auth.uid;
-      allow read:   if isTeacher() || isPriv();
+      // resource == null (doc not created yet) must be allowed through here —
+      // getOrCreateQuizProgress's first getDoc() is on a doc that doesn't
+      // exist yet, and resource.data on a null resource denies the whole
+      // rule rather than just this clause, even for the doc's future owner.
+      allow read: if isAuth() && (resource == null || resource.data.studentId == request.auth.uid);
+      allow update: if isAuth() && resource.data.studentId == request.auth.uid;
+      allow read: if isDev()
+                  || ((isTeacher() || isAdmin()) && resource.data.schoolId == schoolId());
+      allow write: if isDev()
+                   || ((isTeacher() || isAdmin())
+                       && resource.data.schoolId == schoolId()
+                       && request.auth.token.classIds.hasAny([resource.data.classId]));
     }
 
-    // ── sessions — students write own; teacher/admin read same-school classes ─
+    // ── sessions — students write own and read own; teacher/admin read same-school classes ─
     match /sessions/{sessionId} {
-      allow create: if isAuth() && request.resource.data.studentId == request.auth.uid;
+      allow create: if isDev()
+                    || (isAuth() && request.resource.data.studentId == request.auth.uid);
+      // update: same student re-flushing their own doc through a visit (writeSessionLog
+      // reuses sessionId and re-writes repeatedly, not just once at page exit).
+      allow read, update: if isDev()
+                          || (isAuth() && resource.data.studentId == request.auth.uid);
       allow read: if isDev()
                   || ((isTeacher() || isAdmin())
                       && get(/databases/$(database)/documents/classes/$(resource.data.classId)).data.schoolId == schoolId());
@@ -116,6 +172,12 @@ service cloud.firestore {
     }
 
     match /questionTemplates/{itemId} {
+      allow read:  if isAuth();
+      allow write: if isDev();
+    }
+
+    // ── aligned audio cache (content-hash keyed, dev/script-generated) ────────
+    match /audioSegments/{hash} {
       allow read:  if isAuth();
       allow write: if isDev();
     }
@@ -176,6 +238,12 @@ service cloud.firestore {
     match /greek_passage_quizzes/{docId} {
       allow read:  if isAuth();
       allow write: if isDev();
+    }
+
+    // ── bugReports — testers file their own; dev reads/triages ──────────────
+    match /bugReports/{reportId} {
+      allow create: if isAuth() && request.resource.data.uid == request.auth.uid;
+      allow read, update, delete: if isDev();
     }
   }
 }

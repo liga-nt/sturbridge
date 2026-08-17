@@ -92,7 +92,20 @@ exports.activateAccount = onCall(async (request) => {
     }
 
     const invite = inviteSnap.data();
-    const { role, classIds = [], schoolId = 'default' } = invite;
+    const { role, schoolId = 'default' } = invite;
+    let classIds = invite.classIds || [];
+
+    // If this student is already active (e.g. re-invited to add a second
+    // class after their first invite was already consumed), merge with their
+    // existing enrollment instead of replacing it — otherwise the new invite
+    // silently drops every class they were already assigned to.
+    if (role === 'student') {
+        const existingUserSnap = await db.collection('users').doc(uid).get();
+        if (existingUserSnap.exists() && existingUserSnap.data().role === 'student') {
+            const existingClassIds = existingUserSnap.data().classIds || [];
+            classIds = Array.from(new Set([...existingClassIds, ...classIds]));
+        }
+    }
 
     // Set custom claim
     await auth.setCustomUserClaims(uid, { role, classIds, schoolId });
@@ -145,6 +158,44 @@ exports.revokeAccess = onCall(async (request) => {
     await auth.setCustomUserClaims(uid, {});
     await db.collection('users').doc(uid).update({ role: null });
     return { success: true };
+});
+
+/**
+ * syncUserClaims — admin/dev-gated. Re-applies a user's custom claims
+ * (role, classIds, schoolId) from their current Firestore users/{uid} doc.
+ * Needed because Firestore security rules read classIds off the auth token,
+ * not the user doc — any code path that updates users/{uid}.classIds directly
+ * (e.g. assigning an existing teacher to a new class) leaves the teacher's
+ * token stale until this runs, causing permission-denied on writes gated by
+ * request.auth.token.classIds (quizzes, classes, quizAssignments, etc).
+ */
+exports.syncUserClaims = onCall(async (request) => {
+    const callerRole = request.auth?.token?.role;
+    if (callerRole !== 'admin' && callerRole !== 'dev') {
+        throw new HttpsError('permission-denied', 'Only admin or dev can sync claims.');
+    }
+    const { uid } = request.data;
+    if (!uid) throw new HttpsError('invalid-argument', 'uid is required.');
+
+    const db = getFirestore();
+    const auth = getAuth();
+
+    const userSnap = await db.collection('users').doc(uid).get();
+    if (!userSnap.exists) throw new HttpsError('not-found', 'User not found.');
+    const { role, classIds = [], schoolId = 'default' } = userSnap.data();
+
+    if (callerRole === 'admin' && schoolId !== request.auth.token.schoolId) {
+        throw new HttpsError('permission-denied', 'Cannot sync claims for a user outside your school.');
+    }
+
+    try {
+        await auth.setCustomUserClaims(uid, { role, classIds, schoolId });
+    } catch (e) {
+        // Mock/demo users (e.g. seed-demo.mjs) exist only as Firestore docs with
+        // no real Auth account, so there are no claims to sync — not an error.
+        if (e.code !== 'auth/user-not-found') throw e;
+    }
+    return { role, classIds, schoolId };
 });
 
 const db = getFirestore();

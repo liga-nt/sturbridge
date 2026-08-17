@@ -44,12 +44,21 @@ const SCHOOLS = [
 const COURSES = [
   {
     id: 'grade4-math',
-    label: '4th Grade Fundamentals',
+    label: '4th Grade Standards',
     grade: '4',
     subject: 'math',
     contentKey: 'mcas-grade4-math',   // code-side generator/grader registry key
     progressionType: 'mastery',
     schoolId: null                     // null = available to all schools
+  },
+  {
+    id: 'grade4-fundamentals-math',
+    label: '4th Grade Fundamentals',
+    grade: '4',
+    subject: 'math',
+    contentKey: 'fundamentals-math',
+    progressionType: 'mastery',
+    schoolId: null
   },
   {
     id: 'grade5-math',

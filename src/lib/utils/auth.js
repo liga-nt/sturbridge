@@ -9,8 +9,8 @@ import { functions } from '$lib/firebase/client';
 // Role home routes
 export const ROLE_HOME = {
     student: '/student',
-    teacher: '/teacher',
-    admin: '/admin',
+    teacher: '/teacher/classes',
+    admin: '/admin/classes',
     dev: '/dev'
 };
 
@@ -21,6 +21,20 @@ export const ROLE_HOME = {
 export async function activateAccount() {
     const fn = httpsCallable(functions, 'activateAccount');
     const result = await fn();
+    return result.data;
+}
+
+/**
+ * Re-apply a user's custom claims (role, classIds, schoolId) from their
+ * current Firestore users/{uid} doc. Call this after any code path that
+ * updates users/{uid}.classIds directly — Firestore rules check the claim
+ * on the auth token, not the user doc, so without this the user's writes
+ * gated by classIds (quizzes, classes, quizAssignments) stay permission-denied
+ * until their token happens to refresh. Admin/dev only.
+ */
+export async function syncUserClaims(uid) {
+    const fn = httpsCallable(functions, 'syncUserClaims');
+    const result = await fn({ uid });
     return result.data;
 }
 

@@ -26,5 +26,13 @@ function devItemsMiddleware() {
 }
 
 export default defineConfig({
-	plugins: [tailwindcss(), sveltekit(), devItemsMiddleware()]
+	plugins: [tailwindcss(), sveltekit(), devItemsMiddleware()],
+	server: {
+		watch: {
+			// The dev preview's approve toggle writes here at runtime; without this,
+			// Vite sees the change and triggers a full page reload, resetting the
+			// preview UI back to its default year/index.
+			ignored: ['**/data/approvals.json']
+		}
+	}
 });

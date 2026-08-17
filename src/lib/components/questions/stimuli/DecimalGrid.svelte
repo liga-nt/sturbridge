@@ -6,13 +6,13 @@
   // }
   export let params = {};
 
-  const cellSize = params.cell_size ?? 20;
-  const shaded = Math.min(100, Math.max(0, params.shaded ?? 0));
-  const showWhole = params.show_whole ?? true;
+  $: cellSize = params.cell_size ?? 20;
+  $: shaded = Math.min(100, Math.max(0, params.shaded ?? 0));
+  $: showWhole = params.show_whole ?? true;
 
   const COLS = 10;
   const ROWS = 10;
-  const gridSize = COLS * cellSize; // 200px by default
+  $: gridSize = COLS * cellSize; // 200px by default
 
   // Color matching TestNav screenshots: medium gray fill for shaded cells
   const SHADED_FILL = '#b0b0b0';

@@ -1,12 +1,15 @@
 <script>
   import { renderMath } from '$lib/utils/math.js';
   import SymmetryFigure from '$lib/components/questions/stimuli/SymmetryFigure.svelte';
+  import AudioText from './AudioText.svelte';
 
   export let question_text;
   export let tiles = [];
   // tiles can be strings OR objects: { label, shape: { shape, padding } }
   export let categories = []; // [{label, correct_tiles:[string|object]}]
   export let value = null;
+  export let audio = {};
+  export let currentTime = 0;
 
   function isShapeTile(tile) {
     return typeof tile === 'object' && tile !== null && tile.shape;
@@ -125,7 +128,7 @@
 </script>
 
 <div class="question-body">
-  <p class="q-text">{@html renderMath(question_text)}</p>
+  <p class="q-text"><AudioText text={question_text} alignment={audio.question_text?.alignment ?? null} active={audio.question_text?.active ?? false} {currentTime} /></p>
 
   {#if selectedCategory !== null}
     <p class="instruction">Click a tile to place it in <strong>{selectedCategory}</strong>, or click a different category.</p>

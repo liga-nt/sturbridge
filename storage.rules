@@ -25,5 +25,11 @@ service firebase.storage {
       allow write: if request.auth.token.role == 'dev';
     }
 
+    // MCAS teaching-prompt/question narration audio — script writes via
+    // Admin SDK (bypasses rules); authenticated reads
+    match /mcas/audio/{file} {
+      allow read: if request.auth != null;
+    }
+
   }
 }

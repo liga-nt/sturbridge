@@ -74,6 +74,7 @@ export function updateAfterAnswer(studentState, standardState, standardId, corre
         } else if (std.streak >= 2 && !std.mastered) {
             // Mastered — remove from active, slide in next standard
             std.mastered = true;
+            std.masteredAt = Date.now(); // wall-clock stamp so the Practice Log can count masteries per day
             st.activeStandardIds = st.activeStandardIds.filter((id) => id !== standardId);
             st = slideInNextStandard(st, classProgression);
         }

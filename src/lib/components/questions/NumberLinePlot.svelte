@@ -1,8 +1,11 @@
 <script>
-  import { renderMath } from '$lib/utils/math.js';
+  import AudioText from './AudioText.svelte';
+  import { STATIC_INSTRUCTIONS } from '$lib/utils/staticInstructions.js';
 
   export let question_text;
   export let stimulus_params = {};
+  export let audio = {};
+  export let currentTime = 0;
 
   const min            = stimulus_params.min            ?? 0;
   const max            = stimulus_params.max            ?? 1;
@@ -110,8 +113,8 @@
 </script>
 
 <div class="question-body">
-  <p class="q-text">{@html renderMath(question_text)}</p>
-  <p class="q-text">Select a place on the number line to plot the point.</p>
+  <p class="q-text"><AudioText text={question_text} alignment={audio.question_text?.alignment ?? null} active={audio.question_text?.active ?? false} {currentTime} /></p>
+  <p class="q-text"><AudioText text={STATIC_INSTRUCTIONS.numberLinePlot} alignment={audio.answer_instruction?.alignment ?? null} active={audio.answer_instruction?.active ?? false} {currentTime} /></p>
 
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->

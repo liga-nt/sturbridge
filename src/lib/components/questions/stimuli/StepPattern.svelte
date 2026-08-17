@@ -7,8 +7,8 @@
   // 'triangle_center': each unit = 1 triangle (center) + 2 squares (top and bottom)
   export let params;
 
-  const steps = params?.steps ?? 3;
-  const variant = params?.variant ?? 'square_center';
+  $: steps = params?.steps ?? 3;
+  $: variant = params?.variant ?? 'square_center';
 
   // Shared layout constants
   const pad    = 10;    // horizontal gap between steps
@@ -25,12 +25,17 @@
   const tc_triH       = 22;   // center triangle height
   const tc_unitH      = tc_squareSide + tc_triH + tc_squareSide;
 
-  const unitH    = variant === 'triangle_center' ? tc_unitH    : sc_unitH;
-  const cellSize = variant === 'triangle_center' ? tc_squareSide : sc_cellSize;
+  $: unitH    = variant === 'triangle_center' ? tc_unitH    : sc_unitH;
+  $: cellSize = variant === 'triangle_center' ? tc_squareSide : sc_cellSize;
 
-  const svgH = labelH + unitH + 10;
+  $: svgH = labelH + unitH + 10;
 
-  function getSteps() {
+  // steps/cellSize are passed explicitly (not read from closure) so Svelte's
+  // dependency tracking for the `$: stepData = getSteps(...)` statement below
+  // actually sees them — a plain no-arg closure read wouldn't be re-run when
+  // params changes, since Svelte only tracks identifiers referenced in the
+  // reactive statement itself, not inside a called function's body.
+  function getSteps(steps, cellSize) {
     const result = [];
     let x = margin;
     for (let s = 1; s <= steps; s++) {
@@ -40,8 +45,8 @@
     return result;
   }
 
-  const stepData = getSteps();
-  const totalW = stepData.reduce((acc, sd) => Math.max(acc, sd.x + sd.n * cellSize + margin), 0);
+  $: stepData = getSteps(steps, cellSize);
+  $: totalW = stepData.reduce((acc, sd) => Math.max(acc, sd.x + sd.n * cellSize + margin), 0);
 
   // square_center unit: [up-tri][square][down-tri]
   function unitPathsSquareCenter(cx, cy) {
@@ -64,7 +69,7 @@
     return [topSq, tri, botSq];
   }
 
-  function unitPaths(cx, cy) {
+  function unitPaths(cx, cy, variant) {
     const cy0 = labelH + (variant === 'triangle_center' ? 0 : sc_triH);
     if (variant === 'triangle_center') return unitPathsTriCenter(cx, cy0);
     return unitPathsSquareCenter(cx, cy0);
@@ -88,7 +93,7 @@
       <!-- Unit cells -->
       {#each Array(sd.n) as _, i}
         {@const cx = sd.x + i * cellSize}
-        {#each unitPaths(cx, 0) as d}
+        {#each unitPaths(cx, 0, variant) as d}
           <path {d} fill="white" stroke="#333" stroke-width="1.5" />
         {/each}
       {/each}

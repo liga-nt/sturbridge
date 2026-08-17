@@ -243,7 +243,7 @@
                                             class="text-xs font-medium text-gray-600 hover:text-gray-900 whitespace-nowrap"
                                         >Edit</a>
                                         <a
-                                            href="/admin?schoolId={school.id}"
+                                            href="/admin/classes?schoolId={school.id}"
                                             class="text-xs font-medium text-indigo-600 hover:text-indigo-800 whitespace-nowrap"
                                         >View as Admin →</a>
                                         <button

@@ -6,9 +6,9 @@
   // }
   export let params = {};
 
-  const rays = params.rays || [];
-  const centerLabel = params.center_label ?? 'L';
-  const baseLabel = params.base_label ?? 'P';
+  $: rays = params.rays || [];
+  $: centerLabel = params.center_label ?? 'L';
+  $: baseLabel = params.base_label ?? 'P';
 
   const W = 340;
   const H = 190;

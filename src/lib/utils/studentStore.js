@@ -11,6 +11,7 @@ import {
     setDoc,
     updateDoc,
     collection,
+    addDoc,
     getDocs,
     onSnapshot,
     serverTimestamp,
@@ -19,6 +20,7 @@ import {
     query
 } from 'firebase/firestore';
 import { db } from '$lib/firebase/client';
+import { unpackQuestions } from './quizStore.js';
 
 // ---------------------------------------------------------------------------
 // Student state (top-level doc)
@@ -62,6 +64,40 @@ export async function loadAllStandardStates(uid) {
 }
 
 // ---------------------------------------------------------------------------
+// Variant history (subcollection) — one doc per mastery question a student
+// completes, capturing the exact variant shown (not just the item_id
+// already tracked in standardState.questionsSeenIds). No pool doc lookup
+// is required to read this back: for pool-sourced variants `variantId`
+// points at questionVariants/{variantId}, but `variant` is always a full
+// standalone snapshot of what was actually shown — including for
+// live-generated variants, which have no pool doc / stable id at all.
+// ---------------------------------------------------------------------------
+
+// Firestore's JS SDK rejects `undefined` field values; this also drops
+// functions/symbols, matching scripts/pregenerate-pool.mjs's same approach
+// for persisting generator output.
+function sanitize(value) {
+    return JSON.parse(JSON.stringify(value));
+}
+
+/**
+ * @param {string} uid
+ * @param {object} entry - { standardId, itemId, variantId, variant, correct, attempts, assisted }
+ */
+export async function recordVariantSeen(uid, entry) {
+    await addDoc(collection(db, 'studentProgress', uid, 'variantHistory'), {
+        standardId: entry.standardId,
+        itemId: entry.itemId,
+        variantId: entry.variantId ?? null,
+        variant: sanitize(entry.variant),
+        correct: entry.correct,
+        attempts: entry.attempts,
+        assisted: entry.assisted,
+        answeredAt: serverTimestamp()
+    });
+}
+
+// ---------------------------------------------------------------------------
 // Tips
 // ---------------------------------------------------------------------------
 
@@ -81,6 +117,9 @@ export function subscribeLeaderboard(classId, standardId, callback) {
     );
 }
 
+// Stores every student's best time, unbounded — the teacher-configured display
+// cap (classDoc.leaderboardSize) is applied at read time so raising it later
+// doesn't need already-discarded data back.
 export async function updateLeaderboard(classId, standardId, uid, name, bestTime) {
     const ref = doc(db, 'leaderboards', `${classId}_${standardId}`);
     const snap = await getDoc(ref);
@@ -88,7 +127,7 @@ export async function updateLeaderboard(classId, standardId, uid, name, bestTime
     entries = entries.filter(e => e.uid !== uid);
     entries.push({ uid, name, bestTime });
     entries.sort((a, b) => a.bestTime - b.bestTime);
-    await setDoc(ref, { entries: entries.slice(0, 5) });
+    await setDoc(ref, { entries });
 }
 
 // ---------------------------------------------------------------------------
@@ -109,40 +148,41 @@ export async function loadAllClassIds() {
 }
 
 // ---------------------------------------------------------------------------
-// Assignment listener (real-time)
+// Quiz assignment listener (real-time)
 // ---------------------------------------------------------------------------
 
 /**
- * Subscribe to live assignment pushes for a class.
- * Calls onAssignment(data) when active=true, onClear() when active=false.
- * Returns unsubscribe function.
+ * Subscribe to active quiz assignments and find the one (if any) targeting
+ * this student. Mirrors the classic "whole/partial collection listener,
+ * filtered client-side" pattern already used elsewhere in this codebase —
+ * avoids needing a composite index for classId+active. The schoolId filter
+ * is required, not just an optimization: Firestore rules only allow a query
+ * to succeed if it can prove every possible result satisfies
+ * `resource.data.schoolId == schoolId()` from the query's own where clauses —
+ * without it, the whole query is denied (not merely filtered) even when the
+ * student's own assignment is the only matching document.
+ * Calls onActive(quizAssignmentData with .id) when one targets this student,
+ * onNone() otherwise. Returns unsubscribe function.
  */
-export function subscribeAssignment(classId, onAssignment, onClear) {
-    return onSnapshot(doc(db, 'assignments', classId), (snap) => {
-        if (!snap.exists()) return;
-        const data = snap.data();
-        if (data.active) {
-            onAssignment(data);
-        } else {
-            onClear();
-        }
-    });
-}
-
-// ---------------------------------------------------------------------------
-// Write assignment response
-// ---------------------------------------------------------------------------
-
-export async function writeResponse(classId, uid, responseData) {
-    await setDoc(
-        doc(db, 'responses', `${classId}_${uid}_${Date.now()}`),
-        {
-            ...responseData,
-            classId,
-            studentId: uid,
-            submittedAt: serverTimestamp()
-        }
+export function subscribeQuizAssignments(uid, classId, schoolId, onActive, onNone) {
+    const q = query(
+        collection(db, 'quizAssignments'),
+        where('schoolId', '==', schoolId),
+        where('active', '==', true)
     );
+    return onSnapshot(q, (snap) => {
+        const matches = snap.docs
+            .map((d) => ({ id: d.id, ...d.data(), questions: unpackQuestions(d.data().questions) }))
+            .filter((a) => a.classId === classId && (a.targetStudentIds || []).includes(uid));
+
+        if (matches.length === 0) {
+            onNone();
+            return;
+        }
+        // If more than one somehow targets this student, most recently assigned wins.
+        matches.sort((a, b) => (b.assignedAt?.toMillis?.() ?? 0) - (a.assignedAt?.toMillis?.() ?? 0));
+        onActive(matches[0]);
+    });
 }
 
 // ---------------------------------------------------------------------------
@@ -241,32 +281,83 @@ export async function savePassageProgress(uid, lessonId, data) {
 
 /**
  * Write a session log entry.
- * data: { date: 'YYYY-MM-DD', standardTimes: { [stdId]: { practiceSec, masterySec } }, sessionTimeLimit }
+ * data: { date: 'YYYY-MM-DD', standardTimes: { [stdId]: { practiceSec, masterySec } },
+ *         sessionTimeLimit, questionsAttempted?, correctUnassisted?, correctAssisted? }
+ * The question-count fields are optional (default to 0) — only MCAS tracks them.
  */
-export async function writeSessionLog(classId, uid, data) {
+/**
+ * Writes (or, given `sessionId`, re-writes) a session log doc.
+ *
+ * Previously this only ever fired once, at page exit (beforeunload/onDestroy)
+ * — losing an entire visit's practice time whenever that event never fired
+ * (mobile Safari's unreliable beforeunload, a crash, a killed tab). Callers
+ * now flush repeatedly through a visit reusing the same `sessionId` (each
+ * write carries the FULL accumulated standardTimes/question-count
+ * snapshot, not a delta, so a later write safely supersedes an earlier one)
+ * — pass the id this function returns back in on the next call. Omit
+ * `sessionId` for a one-off write with a fresh id.
+ *
+ * `startedAt` is only set on the doc's first write (tracked via `isFirstWrite`,
+ * since the caller — not this function — knows whether it's flushing the
+ * same visit again) so it keeps reflecting when the visit began rather than
+ * the most recent flush.
+ */
+export async function writeSessionLog(classId, uid, data, { sessionId = null, isFirstWrite = true } = {}) {
     const totalSec = Object.values(data.standardTimes)
         .reduce((s, t) => s + (t.practiceSec ?? 0) + (t.masterySec ?? 0), 0);
-    const id = `${classId}_${uid}_${Date.now()}`;
-    await setDoc(doc(db, 'sessions', id), {
+    const id = sessionId ?? `${classId}_${uid}_${Date.now()}`;
+    const payload = {
         classId,
         studentId: uid,
-        startedAt: serverTimestamp(),
         overtime: totalSec > data.sessionTimeLimit,
+        questionsAttempted: 0,
+        correctUnassisted: 0,
+        correctAssisted: 0,
         ...data,
-    });
+    };
+    if (isFirstWrite) payload.startedAt = serverTimestamp();
+    await setDoc(doc(db, 'sessions', id), payload, { merge: true });
+    return id;
 }
 
 /**
- * Load all session docs for a class within a date range.
- * weekStart/weekEnd: 'YYYY-MM-DD' strings (inclusive).
+ * Sum of active seconds already logged today, across every earlier visit —
+ * so a daily timer actually counts down for the *day* instead of resetting
+ * to the full limit each time a student reopens the class. studentId filter
+ * is required for the query to satisfy Firestore rules (students can only
+ * read their own session docs), not just a filter.
  */
-export async function loadWeeklySessions(classId, weekStart, weekEnd) {
+export async function loadTodaysSessionTotal(classId, uid, date) {
+    const q = query(
+        collection(db, 'sessions'),
+        where('classId', '==', classId),
+        where('studentId', '==', uid),
+        where('date', '==', date)
+    );
+    const snap = await getDocs(q);
+    let totalSec = 0;
+    snap.docs.forEach((d) => {
+        const data = d.data();
+        totalSec += Object.values(data.standardTimes ?? {})
+            .reduce((s, t) => s + (t.practiceSec ?? 0) + (t.masterySec ?? 0), 0);
+    });
+    return { totalSec };
+}
+
+/**
+ * Live session docs for a class within a date range — powers the Gradebook's
+ * Practice Log tab so newly-written session docs (students finishing a visit)
+ * show up without the teacher having to leave and re-enter the tab or change
+ * weeks. weekStart/weekEnd: 'YYYY-MM-DD' strings (inclusive).
+ */
+export function subscribeWeeklySessions(classId, weekStart, weekEnd, callback) {
     const q = query(
         collection(db, 'sessions'),
         where('classId', '==', classId),
         where('date', '>=', weekStart),
         where('date', '<=', weekEnd)
     );
-    const snap = await getDocs(q);
-    return snap.docs.map(d => d.data());
+    return onSnapshot(q, (snap) => {
+        callback(snap.docs.map((d) => d.data()));
+    });
 }

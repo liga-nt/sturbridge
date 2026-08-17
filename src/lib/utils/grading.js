@@ -127,6 +127,90 @@ function fractionsEqual(a, b) {
   return da === db;
 }
 
+// Deep-equal that ignores object key insertion order (arrays stay order-sensitive).
+// Drag-and-drop components build their placement object incrementally as the
+// student drops tiles ({...placed, [slotId]: tile}), so key order reflects drop
+// order, not slot order — a plain JSON.stringify comparison would mark a fully
+// correct placement wrong just because the student filled slots out of order.
+function deepEqualIgnoreKeyOrder(a, b) {
+  if (a === b) return true;
+  if (typeof a !== typeof b || a === null || b === null) return false;
+  if (Array.isArray(a) || Array.isArray(b)) {
+    if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false;
+    return a.every((v, i) => deepEqualIgnoreKeyOrder(v, b[i]));
+  }
+  if (typeof a === 'object') {
+    const aKeys = Object.keys(a), bKeys = Object.keys(b);
+    if (aKeys.length !== bKeys.length) return false;
+    return aKeys.every(k => Object.prototype.hasOwnProperty.call(b, k) && deepEqualIgnoreKeyOrder(a[k], b[k]));
+  }
+  return false;
+}
+
+// Extract a leading numeric/fraction token from the start of a string, ignoring
+// any explanation text that follows — constructed_response answers mix the two
+// in one box (e.g. "1/4, because it's less than 1/2"). Recognizes bracket-fraction
+// notation ("3[6/8]", "[6/8]") alongside plain numbers/fractions.
+function extractLeadingValue(str) {
+  const m = String(str).trim().match(/^-?(?:\d+\[\d+\/\d+\]|\[\d+\/\d+\]|\d+\s+\d+\/\d+|\d+\/\d+|\d*\.\d+|\d+)/);
+  return m ? m[0] : null;
+}
+
+// Convert bracket-fraction notation ("3[6/8]", "[6/8]") to the space-separated
+// form toDecimal() already understands, then delegate to it. This is what lets
+// fraction-based correct answers accept reduced or unreduced equivalents
+// ("3[6/8]" and "3[3/4]" both resolve to the same decimal).
+function toDecimalBracketAware(str) {
+  const s = String(str ?? '').trim()
+    .replace(/^(\d+)\[(\d+)\/(\d+)\]$/, '$1 $2/$3')
+    .replace(/^\[(\d+)\/(\d+)\]$/, '$1/$2');
+  return toDecimal(s);
+}
+
+// Multiplication-equation correct answers — accept any ordering/spacing of the
+// numbers and any multiplication symbol (×, x, *), since e.g. "8×3=24",
+// "3 x 8 = 24", and "24=8×3" all state the same fact (commutative). Two shapes:
+//   - product form:  "8 × 3 = 24"  (product written out, 3 numbers)
+//   - variable form: "b = 8 × 3"   (unknown named by a letter, product left
+//     unwritten by design — MA713939739-style "write the equation, don't
+//     solve it" items — only 2 numbers, so don't require/compare a product)
+// Returns null if cStr isn't one of these two equation shapes.
+function tryGradeMultiplicationEquation(studentStr, cStr) {
+  const trimmed = String(cStr).trim();
+  const productForm = trimmed.match(/^(\d+)\s*[×x*]\s*(\d+)\s*=\s*(\d+)$/i);
+  const variableForm = trimmed.match(/^[a-zA-Z]\w*\s*=\s*(\d+)\s*[×x*]\s*(\d+)$/i);
+  const m = productForm ?? variableForm;
+  if (!m) return null;
+  const cNums = (productForm ? [m[1], m[2], m[3]] : [m[1], m[2]]).map(Number).sort((a, b) => a - b);
+  const sStr = String(studentStr);
+  const hasMul = /[×x*]/i.test(sStr);
+  const hasEq = sStr.includes('=');
+  const sNums = (sStr.match(/\d+/g) || []).map(Number).sort((a, b) => a - b);
+  return hasMul && hasEq && sNums.length === cNums.length &&
+    sNums.every((n, i) => n === cNums[i]);
+}
+
+// Open-range correct answers: "<0.71", ">100,<200", "<1/2" — the student's value
+// must fall strictly within the given bound(s). Returns null if cStr isn't in this
+// format (caller should fall through to other grading strategies), otherwise the
+// boolean result. With fromStart, pulls the value from the start of a mixed
+// answer+explanation string instead of requiring the whole string to be numeric.
+function tryGradeOpenRange(studentStr, cStr, { fromStart = false } = {}) {
+  const trimmed = String(cStr).trim();
+  if (!/^[<>]/.test(trimmed)) return null;
+  const constraints = trimmed.split(',').map(p => {
+    const m = p.trim().match(/^([<>])(.+)$/);
+    if (!m) return null;
+    const bound = toDecimal(m[2]);
+    return bound === null ? null : { op: m[1], bound };
+  });
+  if (constraints.some(c => c === null)) return null;
+  const raw = fromStart ? extractLeadingValue(studentStr) : String(studentStr).trim();
+  const sv = raw === null ? null : toDecimal(raw);
+  if (sv === null) return false;
+  return constraints.every(({ op, bound }) => (op === '<' ? sv < bound : sv > bound));
+}
+
 export function gradeOrderedList(studentAnswer, correctAnswer) {
   function tokenize(str) {
     return normalize(str).split(/\s+/).filter(w => w && !STOP_WORDS.has(w));
@@ -186,6 +270,12 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
       if (/^[\d./]+\s*[<>=]\s*[\d./]+$/.test(cStr.trim())) {
         return { correct: gradeComparison(sStr, cStr) };
       }
+      // Multiplication equation: "8 × 3 = 24" — any order/spacing/symbol accepted
+      const mulEqResult = tryGradeMultiplicationEquation(sStr, cStr);
+      if (mulEqResult !== null) return { correct: mulEqResult };
+      // Open range: "<0.71", ">100,<200" — any value strictly within the bound(s)
+      const rangeResult = tryGradeOpenRange(sStr, cStr);
+      if (rangeResult !== null) return { correct: rangeResult };
       if (parseFractionValue(cStr)) {
         return { correct: fractionsEqual(sStr, cStr) };
       }
@@ -199,6 +289,20 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
       // Comparison operator only (>, <, =): check if student's answer contains it
       if (/^[<>=]$/.test(cStr)) {
         return { correct: String(s).includes(cStr) };
+      }
+
+      // Open range: "<0.71", ">100,<200" — value pulled from the start of the
+      // response since these boxes mix the answer with an explanation.
+      const rangeResult = tryGradeOpenRange(s, cStr, { fromStart: true });
+      if (rangeResult !== null) return { correct: rangeResult };
+
+      // Comparison sentence, e.g. "[5/8] > [5/6]" — may be followed by explanation
+      // prose in the same box, so only the leading number sentence is checked.
+      const bracketless = cStr.replace(/\[|\]/g, '');
+      if (/^[\d./]+\s*[<>=]\s*[\d./]+$/.test(bracketless)) {
+        const sBracketless = String(s).replace(/\[|\]/g, '').trim();
+        const leadMatch = sBracketless.match(/^[\d./]+\s*[<>=]\s*[\d./]+/);
+        return { correct: !!leadMatch && gradeComparison(leadMatch[0], bracketless) };
       }
 
       // Expanded form: correct answer is digits, spaces, and + signs with at least one +
@@ -228,15 +332,39 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
         if (!l || !w || l <= 0 || w <= 0) return { correct: false };
         return { correct: l + w === hp && l * w < maxA };
       }
-      if (parseFractionValue(cStr)) {
-        return { correct: fractionsEqual(String(s), cStr) };
+      // Alternate acceptable phrasings, pipe-separated (e.g. "Bucket C|C"). Each
+      // alt is matched as a whole word/phrase, not a bare substring, so a
+      // single-letter alt doesn't false-positive on unrelated text (e.g. "C"
+      // inside "because").
+      if (cStr.includes('|')) {
+        const alts = cStr.split('|').map(a => normalize(a)).filter(Boolean);
+        const sNorm = normalize(String(s));
+        const matched = alts.some(alt => {
+          const escaped = alt.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          return new RegExp(`(^|\\s)${escaped}(\\s|$)`).test(sNorm);
+        });
+        return { correct: matched };
+      }
+      // Fraction/mixed-number answer, bracket notation allowed ("3[6/8]", "[6/8]").
+      // Value is pulled from the start of the response (explanation may follow) and
+      // compared as a decimal, so reduced and unreduced forms both match
+      // ("3[6/8]" and "3[3/4]" grade the same).
+      const cDecimal = toDecimalBracketAware(cStr);
+      if (cDecimal !== null) {
+        const leading = extractLeadingValue(s);
+        const sDecimal = leading === null ? null : toDecimalBracketAware(leading);
+        return { correct: sDecimal !== null && sDecimal === cDecimal };
       }
       // Time answer: if correct value parses as a time, route to time grading
       const cNorm = cStr.toLowerCase().replace(/a\.m\./g, 'am').replace(/p\.m\./g, 'pm');
       if (parseTimeFromStart(cNorm)) {
         return gradePart(s, String(c), 'time');
       }
-      return { correct: fuzzyMatch(String(s), cStr) };
+      // These boxes mix a short answer with explanation prose, so the correct
+      // answer only needs to appear in the response, not match it in full.
+      // Plain substring (not fuzzyContains' word-fuzzy fallback) — that fallback
+      // would let "Bucket D" match a "Bucket C" target on the shared word "bucket".
+      return { correct: normalize(String(s)).includes(normalize(cStr)) };
     }
 
     case 'time': {
@@ -351,7 +479,7 @@ export function gradePart(studentAnswer, correctAnswer, answerType) {
       try {
         const parsed = typeof s === 'string' ? JSON.parse(s) : s;
         const cparsed = typeof c === 'string' ? JSON.parse(c) : c;
-        return { correct: JSON.stringify(parsed) === JSON.stringify(cparsed) };
+        return { correct: deepEqualIgnoreKeyOrder(parsed, cparsed) };
       } catch {
         return { correct: fuzzyMatch(String(s), String(c)) };
       }
@@ -405,6 +533,35 @@ export function gradeQuestion(answers, question) {
 
   const correct = gradePart(answers.answer ?? '', question.correct_answer, question.answer_type).correct;
   return { parts: [{ label: null, correct }], score: correct ? 1 : 0, total: 1 };
+}
+
+/**
+ * Human-readable correct answer, for teacher-facing displays (quiz preview,
+ * reveal-after-2-attempts) — not used for grading itself.
+ */
+export function formatCorrectAnswer(question) {
+  if (!question) return '';
+
+  if (question.answer_type === 'multi_part' && question.parts) {
+    const topCA = (question.correct_answer != null && typeof question.correct_answer === 'object')
+      ? question.correct_answer : null;
+    return question.parts
+      .map((p) => `${p.label}: ${p.correct_answer ?? topCA?.[p.label] ?? '—'}`)
+      .join(' · ');
+  }
+
+  const ca = question.correct_answer;
+  if (typeof ca === 'string') {
+    if (question.answer_type === 'multiple_choice' || question.answer_type === 'protractor_drag_drop') {
+      const opt = question.answer_options?.find((o) => o.letter === ca);
+      return opt ? `${ca}: ${opt.text}` : ca;
+    }
+    return ca;
+  }
+  if (typeof ca === 'object' && ca !== null) {
+    return Object.entries(ca).map(([k, v]) => `${k}: ${v}`).join(' · ');
+  }
+  return String(ca ?? '');
 }
 
 // ─── Grader Registry ─────────────────────────────────────────────────────────
@@ -862,8 +1019,8 @@ export const graders = {
     { label: 'D', correctAnswer: '7950', answerType: 'constructed_response' },
   ], 'A: 8 liters remaining. B: 2,000 mL. C: 225 minutes (3h45m). D: any value between 7,900 and 8,000 grams.'),
 
-  'MA000732007': single('MA000732007', 'B,C', 'inline_choice',
-    'PLM = 70° (B), KLP = 145° (C). Enter as "B,C".'),
+  'MA000732007': single('MA000732007', '70|145', 'inline_choice',
+    'PLM = 70°, KLP = 145°. InlineChoice emits pipe-separated raw selections, e.g. "70|145".'),
 
   'MA900750085': single('MA900750085', 'B,C,E', 'multiple_select',
     'Select exactly three factors of 64 (B=8, C=16, E=64). All required.'),

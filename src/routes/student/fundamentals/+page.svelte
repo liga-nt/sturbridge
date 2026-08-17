@@ -1,8 +1,9 @@
 <script>
     import { onMount, onDestroy, getContext, tick } from 'svelte';
     import { get } from 'svelte/store';
-    import { generatePage, gradePage } from '$lib/utils/fundamentals.js';
-    import { saveStandardState, subscribeLeaderboard, updateLeaderboard, writeSessionLog } from '$lib/utils/studentStore.js';
+    import { generatePage, gradePage, gradeProblem } from '$lib/utils/fundamentals.js';
+    import { saveStandardState, subscribeLeaderboard, updateLeaderboard, writeSessionLog, subscribeQuizAssignments } from '$lib/utils/studentStore.js';
+    import { getOrCreateQuizProgress, recordQuizAnswer, completeQuizProgressIfInProgress } from '$lib/utils/quizStore.js';
     import { session } from '$lib/stores/session';
 
     const ctx = getContext('student');
@@ -37,6 +38,23 @@
     let timerRunning   = false;
     let timerInterval  = null;
 
+    // ── Assigned quiz (teacher-built, one question at a time) ────────────────
+    let quizActive     = false;
+    let quizAssignment = null;   // { id, quizName, gradingMode, questions, ... }
+    let quizProgress   = null;   // { id, currentIndex, answers, ... }
+    let quizIndex      = 0;
+    let quizScore      = 0;
+    let quizAnswer     = '';
+    let quizAttempt    = 0;      // attempts on the current question (help mode)
+    let quizFeedback   = null;   // { correct } | null
+    let quizRevealed   = false;  // help mode: correct answer shown after 2nd miss
+    let quizSummary    = null;   // { correct, total } once finished
+    let quizInputRef;
+    let unsubscribeQuizAssignments = null;
+
+    $: quizQuestion = quizActive ? quizAssignment?.questions[quizIndex]?.questionData : null;
+    $: quizStrict = quizAssignment?.gradingMode === 'quiz';
+
     // ── Session timer ──────────────────────────────────────────────────────────
 
     let sessionTimeLimit = 600;      // seconds; loaded from classDoc
@@ -49,6 +67,9 @@
     let lastActivityMs = Date.now();
     let sessionDisplayInterval = null;
     let sessionDisplaySec = 0;
+    let sessionDocId = null;       // reused across every flush this visit, once assigned
+    let sessionLogFirstWrite = true;
+    let lastFlushMs = 0;
 
     function onActivity() {
         lastActivityMs = Date.now();
@@ -102,26 +123,139 @@
         }
         const date = new Date().toISOString().slice(0, 10);
         try {
-            await writeSessionLog(classDoc.classId, uid, {
+            sessionDocId = await writeSessionLog(classDoc.classId, uid, {
                 date,
                 standardTimes: roundedTimes,
                 sessionTimeLimit
-            });
+            }, { sessionId: sessionDocId, isFirstWrite: sessionLogFirstWrite });
+            sessionLogFirstWrite = false;
         } catch (e) {
             console.error('Error saving session log:', e);
         }
+    }
+
+    // ── Assigned quiz ──────────────────────────────────────────────────────────
+
+    function resetQuizQuestionState() {
+        quizAnswer = '';
+        quizAttempt = 0;
+        quizFeedback = null;
+        quizRevealed = false;
+    }
+
+    async function onQuizActive(assignment) {
+        if (quizActive && quizAssignment?.id === assignment.id) return; // already on this one
+        stopTimer();
+        pauseStint(); // session time tracks self-practice only, not quiz-taking
+        quizAssignment = assignment;
+        quizActive = true;
+        quizSummary = null;
+        quizScore = 0;
+
+        try {
+            const progress = await getOrCreateQuizProgress(assignment, uid);
+            quizProgress = progress;
+            quizIndex = progress.currentIndex;
+            quizScore = (progress.answers || []).filter((a) => a.correct).length;
+
+            if (progress.status !== 'in_progress') {
+                exitQuizToPractice();
+                return;
+            }
+            resetQuizQuestionState();
+            await tick();
+            quizInputRef?.focus();
+        } catch (e) {
+            console.error('Error loading quiz assignment:', e);
+            exitQuizToPractice();
+        }
+    }
+
+    function exitQuizToPractice() {
+        quizActive = false;
+        quizAssignment = null;
+        quizProgress = null;
+        quizIndex = 0;
+        quizSummary = null;
+        resetQuizQuestionState();
+        startStint();
+    }
+
+    async function recordQuizResult(correct, attempts) {
+        try {
+            const entry = {
+                order: quizIndex,
+                standardId: quizAssignment.questions[quizIndex].standardId,
+                correct, attempts, answeredAt: Date.now()
+            };
+            await recordQuizAnswer(quizProgress.id, entry, quizIndex + 1);
+        } catch (e) {
+            console.error('Error recording quiz answer:', e);
+        }
+        if (correct) quizScore++;
+    }
+
+    async function submitQuizAnswer() {
+        if (!quizQuestion || quizAnswer.trim() === '' || quizRevealed) return;
+        const correct = gradeProblem(quizQuestion, quizAnswer);
+
+        if (quizStrict) {
+            quizFeedback = { correct };
+            await recordQuizResult(correct, 1);
+            setTimeout(() => advanceQuiz(), 1200);
+            return;
+        }
+
+        quizAttempt++;
+        if (correct) {
+            quizFeedback = { correct: true };
+            await recordQuizResult(true, quizAttempt);
+            setTimeout(() => advanceQuiz(), 1200);
+        } else if (quizAttempt >= 2) {
+            quizFeedback = { correct: false };
+            quizRevealed = true;
+            await recordQuizResult(false, quizAttempt);
+        } else {
+            quizFeedback = { correct: false };
+            quizAnswer = '';
+            await tick();
+            quizInputRef?.focus();
+        }
+    }
+
+    async function advanceQuiz() {
+        quizIndex++;
+        if (quizIndex >= quizAssignment.questions.length) {
+            try { await completeQuizProgressIfInProgress(quizProgress.id); } catch (e) { console.error(e); }
+            quizSummary = { correct: quizScore, total: quizAssignment.questions.length };
+            quizActive = false; // keep quizAssignment around to render the summary screen
+        } else {
+            resetQuizQuestionState();
+            await tick();
+            quizInputRef?.focus();
+        }
+    }
+
+    function finishQuizSummary() {
+        quizAssignment = null;
+        quizProgress = null;
+        quizIndex = 0;
+        quizSummary = null;
+        startStint();
     }
 
     // ── Leaderboard ────────────────────────────────────────────────────────────
 
     let leaderboard = [];
     let unsubLeaderboard = null;
+    $: leaderboardEnabled = classDoc?.leaderboardEnabled ?? true;
+    $: leaderboardSize = classDoc?.leaderboardSize ?? 5;
 
     function loadLeaderboard() {
         if (unsubLeaderboard) unsubLeaderboard();
-        if (!classDoc?.classId || !standard?.id) return;
+        if (!leaderboardEnabled || !classDoc?.classId || !standard?.id) return;
         unsubLeaderboard = subscribeLeaderboard(classDoc.classId, standard.id, entries => {
-            leaderboard = entries;
+            leaderboard = entries.slice(0, leaderboardSize);
         });
     }
 
@@ -141,14 +275,27 @@
             const base = Object.values(standardTimes)
                 .reduce((s, t) => s + (t.practiceSec ?? 0) + (t.masterySec ?? 0), 0);
             sessionDisplaySec = Math.round(base + (isIdle ? 0 : elapsed));
+
+            // Periodic durability flush — bounds how much practice time can
+            // ever be lost to an unclean exit to ~30s, instead of the whole visit.
+            if (Date.now() - lastFlushMs > 30_000) {
+                lastFlushMs = Date.now();
+                saveSession();
+            }
         }, 1000);
         window.addEventListener('beforeunload', handleBeforeUnload);
+        unsubscribeQuizAssignments = subscribeQuizAssignments(
+            uid, classDoc.classId, classDoc.schoolId,
+            (assignment) => onQuizActive(assignment),
+            () => { if (quizActive) exitQuizToPractice(); }
+        );
     });
 
     onDestroy(() => {
         if (timerInterval) clearInterval(timerInterval);
         if (sessionDisplayInterval) clearInterval(sessionDisplayInterval);
         if (unsubLeaderboard) unsubLeaderboard();
+        if (unsubscribeQuizAssignments) unsubscribeQuizAssignments();
         window.removeEventListener('beforeunload', handleBeforeUnload);
         pauseStint();
         saveSession();
@@ -258,8 +405,10 @@
             await saveStandardState(uid, standard.id, newState);
             standardStates.update(s => ({ ...s, [standard.id]: newState }));
             // Update class leaderboard
-            const displayName = $session.user?.displayName || uid;
-            await updateLeaderboard(classDoc.classId, standard.id, uid, displayName, newState.bestTime);
+            if (leaderboardEnabled) {
+                const displayName = $session.user?.displayName || uid;
+                await updateLeaderboard(classDoc.classId, standard.id, uid, displayName, newState.bestTime);
+            }
         } catch (e) {
             console.error('Error saving mastery:', e);
         }
@@ -354,7 +503,55 @@
 
 <div class="min-h-screen bg-gray-100 py-8 px-4">
 
-    {#if allComplete}
+    {#if quizActive || quizSummary}
+        <div class="max-w-md mx-auto mt-16">
+            <div class="bg-white rounded-xl shadow p-8 text-center">
+                {#if quizSummary}
+                    <div class="text-4xl mb-3">{quizSummary.correct === quizSummary.total ? '★' : '✓'}</div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-1">Quiz Complete!</h2>
+                    <p class="text-gray-500 mb-6">{quizSummary.correct} / {quizSummary.total} correct</p>
+                    <button on:click={finishQuizSummary}
+                        class="px-6 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors">
+                        Back to Practice
+                    </button>
+                {:else if quizQuestion}
+                    <p class="text-xs font-medium text-indigo-500 uppercase tracking-wide mb-1">{quizAssignment.quizName}</p>
+                    <p class="text-xs text-gray-400 mb-4">Question {quizIndex + 1} of {quizAssignment.questions.length}</p>
+
+                    <p class="font-mono text-3xl text-gray-800 mb-5">{quizQuestion.display} =</p>
+
+                    <input
+                        type="text"
+                        inputmode="numeric"
+                        bind:this={quizInputRef}
+                        bind:value={quizAnswer}
+                        disabled={quizRevealed}
+                        placeholder={inputPlaceholder(quizQuestion.type)}
+                        on:keydown={(e) => e.key === 'Enter' && submitQuizAnswer()}
+                        class="w-40 mx-auto block px-3 py-2 border rounded text-center text-lg
+                               focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200 disabled:cursor-default
+                               {quizFeedback ? (quizFeedback.correct ? 'border-green-400 text-green-700' : 'border-red-400 text-red-600') : 'border-gray-300'}"
+                    />
+
+                    {#if quizRevealed}
+                        <p class="text-sm text-gray-400 mt-3">Correct answer: {quizQuestion.answer}</p>
+                        <button on:click={advanceQuiz}
+                            class="mt-4 px-6 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors">
+                            Next Question →
+                        </button>
+                    {:else}
+                        <button on:click={submitQuizAnswer}
+                            class="mt-5 px-6 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors">
+                            Submit
+                        </button>
+                    {/if}
+                {:else}
+                    <p class="text-gray-400">Loading your quiz…</p>
+                {/if}
+            </div>
+        </div>
+
+    {:else if allComplete}
         <div class="max-w-lg mx-auto bg-white rounded-xl shadow p-10 text-center mt-16">
             <div class="text-5xl mb-4">★</div>
             <h2 class="text-2xl font-bold text-gray-800 mb-2">Course Complete!</h2>
@@ -606,28 +803,30 @@
             </div>
 
             <!-- ── Right: leaderboard ── -->
-            <div class="w-48 flex-shrink-0">
-                <div class="bg-white rounded-xl shadow p-4">
-                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Top Times</h3>
-                    {#if leaderboard.length === 0}
-                        <p class="text-xs text-gray-400 italic">No times yet</p>
-                    {:else}
-                        <ol class="space-y-2">
-                            {#each leaderboard as entry, rank}
-                                <li class="flex items-center gap-2">
-                                    <span class="text-xs font-bold w-4 text-gray-400">{rank + 1}</span>
-                                    <div class="flex-1 min-w-0">
-                                        <div class="text-xs font-medium text-gray-700 truncate">{entry.name}</div>
-                                        <div class="text-xs font-mono {rank === 0 ? 'text-amber-600 font-bold' : 'text-gray-400'}">
-                                            {formatTime(entry.bestTime)}
+            {#if leaderboardEnabled}
+                <div class="w-48 flex-shrink-0">
+                    <div class="bg-white rounded-xl shadow p-4">
+                        <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Top Times</h3>
+                        {#if leaderboard.length === 0}
+                            <p class="text-xs text-gray-400 italic">No times yet</p>
+                        {:else}
+                            <ol class="space-y-2">
+                                {#each leaderboard as entry, rank}
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-xs font-bold w-4 text-gray-400">{rank + 1}</span>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="text-xs font-medium text-gray-700 truncate">{entry.name}</div>
+                                            <div class="text-xs font-mono {rank === 0 ? 'text-amber-600 font-bold' : 'text-gray-400'}">
+                                                {formatTime(entry.bestTime)}
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            {/each}
-                        </ol>
-                    {/if}
+                                    </li>
+                                {/each}
+                            </ol>
+                        {/if}
+                    </div>
                 </div>
-            </div>
+            {/if}
 
         </div>
     {/if}

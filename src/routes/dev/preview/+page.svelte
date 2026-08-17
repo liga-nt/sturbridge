@@ -5,9 +5,10 @@
   import questions2022 from '../../../../data/g4-math_2022_questions.json';
   import questions2023 from '../../../../data/g4-math_2023_questions.json';
   import questions2025 from '../../../../data/g4-math_2025_questions.json';
-  import { generators, generate } from '$lib/utils/generators.js';
+  import { generators } from '$lib/utils/generators.js';
+  import { pickVariant } from '$lib/utils/variantPool.js';
   import { graders, gradeQuestion } from '$lib/utils/grading.js';
-  import { fillTemplate, extractParams, loadFeedbackTemplate } from '$lib/utils/feedback.js';
+  import { fillTemplate, extractParams, loadFeedbackTemplate, findAudioUrl } from '$lib/utils/feedback.js';
   import MultipleChoice from '$lib/components/questions/MultipleChoice.svelte';
   import MultiPart from '$lib/components/questions/MultiPart.svelte';
   import ShortAnswer from '$lib/components/questions/ShortAnswer.svelte';
@@ -71,8 +72,8 @@
     testRevealed = false;
   }
 
-  function doGenerate() {
-    const variant = generate(q.item_id);
+  async function doGenerate() {
+    const variant = await pickVariant(q.item_id);
     generated = variant ? { ...variant, item_id: q.item_id } : null;
     resetTest();
   }
@@ -109,6 +110,30 @@
     if (!feedbackTemplate) return null;
     return fillTemplate(feedbackTemplate[key], extractParams(generated));
   }
+
+  // ── QA-only: audio playback for whatever tip/reveal text is currently shown.
+  // findAudioUrl (feedback.js) silently returns null if no audio has been
+  // pregenerated for this exact string (scripts/pregenerate-audio.mjs). Not a
+  // production feature — real playback lives in the question components.
+
+  function playAudio(url) {
+    if (url) new Audio(url).play();
+  }
+
+  let tipAudioUrl = null;
+  let revealAudioUrl = null;
+  $: findAudioUrl(testTip).then(url => tipAudioUrl = url);
+  $: revealText = (testRevealed && feedbackTemplate) ? fillTemplate(feedbackTemplate.reveal, extractParams(generated) ?? {}) : null;
+  $: findAudioUrl(revealText).then(url => revealAudioUrl = url);
+
+  // Question-content audio (stimulus_intro / question_text / math_expression) —
+  // same pregenerated-audio cache, but for the question itself rather than tips.
+  let introAudioUrl = null;
+  let questionAudioUrl = null;
+  let exprAudioUrl = null;
+  $: findAudioUrl(generated?.stimulus_intro ?? null).then(url => introAudioUrl = url);
+  $: findAudioUrl(generated?.question_text ?? null).then(url => questionAudioUrl = url);
+  $: findAudioUrl(generated?.math_expression ?? null).then(url => exprAudioUrl = url);
 
   // ── Feedback template from Firestore ─────────────────────────────────────
   let feedbackTemplate = null;
@@ -334,6 +359,15 @@
       {:else if generated}
         <span class="text-amber-500 normal-case tracking-normal font-normal">no tips</span>
       {/if}
+      {#if introAudioUrl}
+        <button on:click={() => playAudio(introAudioUrl)} title="Play intro audio" class="text-gray-500 hover:text-gray-800 normal-case tracking-normal font-normal">▶ intro</button>
+      {/if}
+      {#if questionAudioUrl}
+        <button on:click={() => playAudio(questionAudioUrl)} title="Play question audio" class="text-gray-500 hover:text-gray-800 normal-case tracking-normal font-normal">▶ question</button>
+      {/if}
+      {#if exprAudioUrl}
+        <button on:click={() => playAudio(exprAudioUrl)} title="Play expression audio" class="text-gray-500 hover:text-gray-800 normal-case tracking-normal font-normal">▶ expression</button>
+      {/if}
     </div>
 
     {#if !hasGenerator}
@@ -365,6 +399,7 @@
         {:else if generated.answer_type === 'multi_part'}
           <MultiPart
             question_text={generated.question_text}
+            stimulus_list={generated.stimulus_list ?? null}
             stimulus_type={generated.stimulus_type ?? null}
             stimulus_params={generated.stimulus_params ?? null}
             parts={generated.parts}
@@ -492,14 +527,19 @@
 
       <!-- Feedback display -->
       {#if testTip}
-        <div class="mt-3 px-4 py-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-900 leading-relaxed">
-          {testTip}
+        <div class="mt-3 px-4 py-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-900 leading-relaxed flex items-start gap-2">
+          <span class="flex-1">{testTip}</span>
+          {#if tipAudioUrl}
+            <button on:click={() => playAudio(tipAudioUrl)} title="Play audio" class="text-amber-700 hover:text-amber-900 shrink-0">▶</button>
+          {/if}
         </div>
       {/if}
-      {#if testRevealed && feedbackTemplate}
-        {@const rParams = extractParams(generated)}
-        <div class="mt-3 px-4 py-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-900 leading-relaxed">
-          {fillTemplate(feedbackTemplate.reveal, rParams ?? {})}
+      {#if revealText}
+        <div class="mt-3 px-4 py-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-900 leading-relaxed flex items-start gap-2">
+          <span class="flex-1">{revealText}</span>
+          {#if revealAudioUrl}
+            <button on:click={() => playAudio(revealAudioUrl)} title="Play audio" class="text-blue-700 hover:text-blue-900 shrink-0">▶</button>
+          {/if}
         </div>
       {/if}
 

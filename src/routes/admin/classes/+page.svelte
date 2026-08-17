@@ -7,6 +7,7 @@
         getDocs, collection, doc, setDoc, getDoc, serverTimestamp, updateDoc, query, where
     } from 'firebase/firestore';
     import { db } from '$lib/firebase/client';
+    import { syncUserClaims } from '$lib/utils/auth.js';
 
     let loading = true;
     let error = null;
@@ -29,6 +30,9 @@
     let studentAddResult = null;
 
     let classes = [];
+    let archivingId = null;
+
+    $: activeClasses = classes.filter((c) => !c.archived);
 
     onMount(async () => {
         try {
@@ -110,6 +114,11 @@
                 if (teacherSnap.exists()) {
                     const existing = teacherSnap.data().classIds || [];
                     await updateDoc(teacherRef, { classIds: [...existing, classId] });
+                    // Firestore rules check classIds off the auth token, not the user
+                    // doc — refresh the teacher's custom claims or their writes to
+                    // this class (quizzes, etc.) will be permission-denied until
+                    // their token happens to refresh on its own.
+                    await syncUserClaims(newTeacherId);
                 }
             }
 
@@ -125,6 +134,19 @@
         }
     }
 
+    async function archiveClass(cls) {
+        if (!confirm(`Archive "${cls.name || cls.classId}"? It will be hidden from this list but can be restored or deleted from the Archived Classes page.`)) return;
+        archivingId = cls.classId;
+        try {
+            await updateDoc(doc(db, 'classes', cls.classId), { archived: true, archivedAt: serverTimestamp() });
+            classes = classes.map((c) => c.classId === cls.classId ? { ...c, archived: true } : c);
+        } catch (e) {
+            alert('Failed to archive: ' + e.message);
+        } finally {
+            archivingId = null;
+        }
+    }
+
     async function addStudents() {
         if (!selectedClassId || !studentEmailsRaw.trim()) return;
         addingStudents = true;
@@ -137,9 +159,16 @@
 
             let added = 0;
             for (const email of emails) {
-                await setDoc(doc(db, 'invites', email), {
+                const inviteRef = doc(db, 'invites', email);
+                const existingSnap = await getDoc(inviteRef);
+                const existingClassIds = existingSnap.exists() ? (existingSnap.data().classIds || []) : [];
+                const classIds = existingClassIds.includes(selectedClassId)
+                    ? existingClassIds
+                    : [...existingClassIds, selectedClassId];
+
+                await setDoc(inviteRef, {
                     role: 'student',
-                    classIds: [selectedClassId],
+                    classIds,
                     schoolId: $page.url.searchParams.get('schoolId') ?? $session.schoolId ?? 'default',
                     createdAt: serverTimestamp()
                 }, { merge: true });
@@ -223,10 +252,13 @@
         </div>
 
         <!-- Existing classes list -->
-        {#if classes.length > 0}
+        {#if activeClasses.length > 0}
             <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
-                <div class="px-5 py-3 border-b border-gray-100 text-sm font-semibold text-gray-700">
-                    All Classes ({classes.length})
+                <div class="px-5 py-3 border-b border-gray-100 text-sm font-semibold text-gray-700 flex items-center justify-between">
+                    <span>All Classes ({activeClasses.length})</span>
+                    <a href="/admin/classes/archive{$page.url.search}" class="text-xs font-normal text-indigo-600 hover:text-indigo-800">
+                        View Archived Classes →
+                    </a>
                 </div>
                 <table class="w-full text-sm">
                     <thead class="bg-gray-50 text-xs text-gray-500 uppercase tracking-wide">
@@ -235,10 +267,11 @@
                             <th class="text-left px-4 py-3">Course</th>
                             <th class="text-left px-4 py-3">Standards</th>
                             <th class="text-left px-4 py-3">Students</th>
+                            <th class="text-right px-4 py-3">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
-                        {#each classes as cls}
+                        {#each activeClasses as cls}
                             <tr class="hover:bg-gray-50">
                                 <td class="px-4 py-3 font-medium text-gray-800">
                                     <a href="/admin/class/{cls.classId}" class="hover:text-indigo-600">{cls.name || cls.classId}</a>
@@ -248,10 +281,28 @@
                                 </td>
                                 <td class="px-4 py-3 text-gray-500">{cls.standardProgression?.length ?? 0}</td>
                                 <td class="px-4 py-3 text-gray-500">{cls.studentIds?.length ?? 0}</td>
+                                <td class="px-4 py-3 text-right space-x-3">
+                                    <a
+                                        href="/teacher?classId={cls.classId}"
+                                        class="text-xs font-medium text-indigo-600 hover:text-indigo-800"
+                                    >Teacher View →</a>
+                                    <button
+                                        on:click={() => archiveClass(cls)}
+                                        disabled={archivingId === cls.classId}
+                                        class="text-xs font-medium text-gray-400 hover:text-red-600 disabled:opacity-50"
+                                    >{archivingId === cls.classId ? 'Archiving…' : 'Archive'}</button>
+                                </td>
                             </tr>
                         {/each}
                     </tbody>
                 </table>
+            </div>
+        {:else if classes.length > 0}
+            <div class="bg-white rounded-lg border border-gray-200 p-5 text-sm text-gray-500 flex items-center justify-between">
+                <span>No active classes.</span>
+                <a href="/admin/classes/archive{$page.url.search}" class="text-xs font-medium text-indigo-600 hover:text-indigo-800">
+                    View Archived Classes →
+                </a>
             </div>
         {/if}
 

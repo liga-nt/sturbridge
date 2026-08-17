@@ -26,9 +26,8 @@
                 <span class="w-2 h-2 rounded-full bg-gray-700"></span>
                 <h2 class="font-semibold text-gray-800">Admin View</h2>
             </div>
-            <a href="/admin" class="text-sm text-indigo-600 hover:underline">All Classes</a>
-            <a href="/admin/teachers" class="text-sm text-indigo-600 hover:underline">Teachers</a>
             <a href="/admin/classes" class="text-sm text-indigo-600 hover:underline">Manage Classes</a>
+            <a href="/admin/teachers" class="text-sm text-indigo-600 hover:underline">Teachers</a>
         </div>
 
         <!-- Student View -->

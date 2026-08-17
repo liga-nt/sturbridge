@@ -425,7 +425,7 @@
     "stimulus_intro": "A teacher has 36 jars of paint to use in art class. The number of jars is 4 times the number of students in the class.",
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "Which of these equations can be used to find y, the number of students in the class? Select the three correct answers.",
+    "question_text": "Which of these equations can be used to find y, the number of students in the class?",
     "math_expression": null,
     "answer_type": "multiple_select",
     "answer_options": [
@@ -833,7 +833,7 @@
     "stimulus_intro": null,
     "stimulus_type": null,
     "stimulus_params": null,
-    "question_text": "Which of these numbers are factors of 64? Select the three correct answers.",
+    "question_text": "Which of these numbers are factors of 64?",
     "math_expression": null,
     "answer_type": "multiple_select",
     "answer_options": [

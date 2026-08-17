@@ -8,6 +8,7 @@
   import SymmetryFigure from './stimuli/SymmetryFigure.svelte';
   import FractionComparison from './stimuli/FractionComparison.svelte';
   import { renderMath } from '$lib/utils/math.js';
+  import AudioText from './AudioText.svelte';
 
   export let stimulus_intro = null;
   export let stimulus_list = null;   // optional bullet list after stimulus_intro
@@ -17,20 +18,26 @@
   export let math_expression = null;
   export let answer_options;
 
-  let selected = null;
+  // Read-the-question audio (student/mcas/+page.svelte's questionPlayer) —
+  // audio = { [fieldKey]: { alignment, active } }. Absent/null alignment
+  // just renders the text with no highlighting (AudioText degrades gracefully).
+  export let audio = {};
+  export let currentTime = 0;
+
   export let value = null;
+  let selected = value;
   $: value = selected;
 </script>
 
 <div class="question-body">
   {#if stimulus_intro}
-    <p class="q-text">{@html renderMath(stimulus_intro)}</p>
+    <p class="q-text"><AudioText text={stimulus_intro} alignment={audio.stimulus_intro?.alignment ?? null} active={audio.stimulus_intro?.active ?? false} {currentTime} /></p>
   {/if}
 
   {#if stimulus_list}
     <ul class="q-list">
-      {#each stimulus_list as item}
-        <li>{item}</li>
+      {#each stimulus_list as item, i}
+        <li><AudioText text={item} alignment={audio[`stimulus_list_${i}`]?.alignment ?? null} active={audio[`stimulus_list_${i}`]?.active ?? false} {currentTime} /></li>
       {/each}
     </ul>
   {/if}
@@ -70,11 +77,11 @@
   {/if}
 
   {#if math_expression}
-    <p class="math-expr">{@html renderMath(math_expression)}</p>
+    <p class="math-expr"><AudioText text={math_expression} alignment={audio.math_expression?.alignment ?? null} active={audio.math_expression?.active ?? false} {currentTime} /></p>
   {/if}
 
   {#if question_text}
-    <p class="q-text">{@html renderMath(question_text)}</p>
+    <p class="q-text"><AudioText text={question_text} alignment={audio.question_text?.alignment ?? null} active={audio.question_text?.active ?? false} {currentTime} /></p>
   {/if}
 
   <div class="distractors" role="group">

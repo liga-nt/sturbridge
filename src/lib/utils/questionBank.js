@@ -143,6 +143,9 @@ for (const q of allQuestions) {
   byStandard[std].push(q);
 }
 
+/** { [item_id]: question } — direct lookup, e.g. for the dev item-by-item audit walk. */
+export const byItemId = Object.fromEntries(allQuestions.map((q) => [q.item_id, q]));
+
 // Question types that have no bind:value export and can't be graded in the student view
 const UNSUPPORTED_TYPES = new Set([]);
 

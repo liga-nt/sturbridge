@@ -41,6 +41,13 @@ function divNoRemainder(dividendMin, dividendMax, divisorMin, divisorMax) {
   return { display: `${a} ÷ ${b}`, answer: String(q), type: 'number' };
 }
 
+function divFactProblem(divisorMax, quotientMax = 12) {
+  const b = randInt(1, divisorMax);
+  const q = randInt(0, quotientMax);
+  const a = b * q;
+  return { display: `${a} ÷ ${b}`, answer: String(q), type: 'number' };
+}
+
 function divWithRemainder(dividendMin, dividendMax, divisorMin, divisorMax) {
   const b = randInt(divisorMin, divisorMax);
   const a = randInt(dividendMin, dividendMax);
@@ -157,6 +164,52 @@ const CONFIGS = {
   'fund-d-fractions':   () => fractionAddSub(2, 12),
   'fund-d-reduction':   () => reductionProblem(),
 };
+
+function mult4Problem(n) {
+  const table = randInt(0, 12);
+  const factor = randInt(0, n);
+  const [x, y] = Math.random() < 0.5 ? [table, factor] : [factor, table];
+  return { display: `${x} × ${y}`, answer: String(x * y), type: 'number' };
+}
+
+// Grade 4 fact-automaticity tiers — multiplication ×0 through ×12 (cumulative),
+// division ÷1 through ÷12 (cumulative, no remainders, no ÷0).
+for (let n = 0; n <= 12; n++) {
+  CONFIGS[`fund4-mult-${n}`] = () => mult4Problem(n);
+}
+for (let n = 1; n <= 12; n++) {
+  CONFIGS[`fund4-div-${n}`] = () => divFactProblem(n);
+}
+
+// ---------------------------------------------------------------------------
+// Range-based problem generation — for teacher-built quizzes, where the
+// "table" factor is constrained to an explicit [tableMin, tableMax] range
+// rather than "0 through n" like the cumulative mastery-track configs above.
+// ---------------------------------------------------------------------------
+
+function multRangeProblem(tableMin, tableMax) {
+  const table = randInt(tableMin, tableMax);
+  const factor = randInt(0, 12);
+  const [x, y] = Math.random() < 0.5 ? [table, factor] : [factor, table];
+  return { display: `${x} × ${y}`, answer: String(x * y), type: 'number' };
+}
+
+function divRangeProblem(tableMin, tableMax) {
+  const table = randInt(tableMin, tableMax);
+  const quotient = randInt(0, 12);
+  const dividend = table * quotient;
+  return { display: `${dividend} ÷ ${table}`, answer: String(quotient), type: 'number' };
+}
+
+/**
+ * Generate `count` problems drawn from a specific table range, for a
+ * teacher-built quiz (as opposed to the cumulative mastery-track configs).
+ * operation: 'mult' | 'div'
+ */
+export function generateRangeProblems({ operation, tableMin, tableMax, count }) {
+  const build = operation === 'div' ? divRangeProblem : multRangeProblem;
+  return Array.from({ length: count }, () => build(tableMin, tableMax));
+}
 
 // ---------------------------------------------------------------------------
 // Public API

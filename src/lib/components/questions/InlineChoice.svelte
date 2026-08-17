@@ -2,8 +2,10 @@
   import SymmetryFigure from './stimuli/SymmetryFigure.svelte';
   import ProtractorImage from './stimuli/ProtractorImage.svelte';
   import { renderMath } from '$lib/utils/math.js';
+  import AudioText from './AudioText.svelte';
 
   export let stimulus_intro = null;
+  export let stimulus_list = null;
   export let question_text;
   export let stimulus_type = null;
   export let stimulus_params = null;
@@ -11,6 +13,9 @@
   export let sentences = [];
   export let dropdowns = [];
   export let drag_mode = false;   // true → tile bank + droppable boxes instead of selects
+
+  export let audio = {};
+  export let currentTime = 0;
 
   let selections = {};            // { [dropdownId]: string }
   export let value = null;
@@ -80,7 +85,15 @@
 
 <div class="question-body">
   {#if stimulus_intro}
-    <div class="q-text">{@html renderMath(stimulus_intro)}</div>
+    <p class="q-text"><AudioText text={stimulus_intro} alignment={audio.stimulus_intro?.alignment ?? null} active={audio.stimulus_intro?.active ?? false} {currentTime} /></p>
+  {/if}
+
+  {#if stimulus_list}
+    <ul class="q-list">
+      {#each stimulus_list as item, i}
+        <li><AudioText text={item} alignment={audio[`stimulus_list_${i}`]?.alignment ?? null} active={audio[`stimulus_list_${i}`]?.active ?? false} {currentTime} /></li>
+      {/each}
+    </ul>
   {/if}
 
   {#if stimulus_type === 'symmetry_figure'}
@@ -89,10 +102,10 @@
     <div class="stimulus-wrap"><ProtractorImage params={stimulus_params} /></div>
   {/if}
 
-  <p class="q-text">{@html renderMath(question_text)}</p>
+  <p class="q-text"><AudioText text={question_text} alignment={audio.question_text?.alignment ?? null} active={audio.question_text?.active ?? false} {currentTime} /></p>
 
   {#if instruction}
-    <p class="instruction">{instruction}</p>
+    <p class="instruction"><AudioText text={instruction} alignment={audio.instruction?.alignment ?? null} active={audio.instruction?.active ?? false} {currentTime} /></p>
   {/if}
 
   {#if drag_mode}
@@ -158,6 +171,14 @@
   }
 
   .q-text     { margin: 0 0 10px; }
+  .q-list {
+    list-style-type: disc;
+    margin: 0 0 10px 0;
+    padding-left: 28px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .q-list li { margin-bottom: 2px; }
   .stimulus-wrap { margin: 4px 0 10px; text-align: center; }
   .instruction   { margin: 0 0 6px; }
 

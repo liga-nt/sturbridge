@@ -19,7 +19,7 @@
 
   export let params;
 
-  const { shape, line = null, padding = 16 } = params;
+  $: ({ shape, line = null, padding = 16 } = params);
 
   // ── Shape builders — all coords relative to (0, 0) ──
 

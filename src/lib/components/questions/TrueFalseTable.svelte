@@ -1,6 +1,7 @@
 <script>
   import { renderMath } from '$lib/utils/math.js';
   import SymmetryFigure from '$lib/components/questions/stimuli/SymmetryFigure.svelte';
+  import AudioText from './AudioText.svelte';
 
   export let question_text;
   export let statements; // array of { text?: string, shape?: object }
@@ -11,8 +12,13 @@
   export let stimulus_type = null;  // reserved for future stimulus components
   export let instruction = null;    // optional instruction line shown below question_text
 
-  let answers = statements.map(() => null);
+  export let audio = {};
+  export let currentTime = 0;
+
   export let value = null;
+  let answers = value
+    ? value.split(',').map((v) => v.trim().toLowerCase())
+    : statements.map(() => null);
   $: value = answers.map(a =>
     a === 'true' ? 'True' : a === 'false' ? 'False' : null
   ).filter(Boolean).join(',');
@@ -20,11 +26,11 @@
 
 <div class="question-body">
   {#if stimulus_intro}
-    <div class="stimulus-intro">{@html stimulus_intro}</div>
+    <div class="stimulus-intro"><AudioText text={stimulus_intro} alignment={audio.stimulus_intro?.alignment ?? null} active={audio.stimulus_intro?.active ?? false} {currentTime} /></div>
   {/if}
-  <p class="q-text">{@html renderMath(question_text)}</p>
+  <p class="q-text"><AudioText text={question_text} alignment={audio.question_text?.alignment ?? null} active={audio.question_text?.active ?? false} {currentTime} /></p>
   {#if instruction}
-    <p class="q-instruction">{@html renderMath(instruction)}</p>
+    <p class="q-instruction"><AudioText text={instruction} alignment={audio.instruction?.alignment ?? null} active={audio.instruction?.active ?? false} {currentTime} /></p>
   {/if}
 
   <table class="tf-table">

@@ -1,5 +1,5 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onDestroy } from 'svelte';
   import DataTable from './stimuli/DataTable.svelte';
   import NumberBox from './stimuli/NumberBox.svelte';
   import StickerSet from './stimuli/StickerSet.svelte';
@@ -11,9 +11,96 @@
   import ShortAnswerInput from './ShortAnswerInput.svelte';
   import NumberLinePlot from './NumberLinePlot.svelte';
   import StepPattern from './stimuli/StepPattern.svelte';
+  import AudioText from './AudioText.svelte';
   import { renderMath } from '$lib/utils/math.js';
   import { gradePart, graders } from '$lib/utils/grading.js';
-  import { fillTemplate, extractParams } from '$lib/utils/feedback.js';
+  import { fillTemplate, extractParams, findAudioSegment } from '$lib/utils/feedback.js';
+  import { createAudioSequencePlayer } from '$lib/utils/audioSequencePlayer.js';
+  import { countSpokenWords } from '$lib/utils/audioAlign.js';
+  import { STATIC_INSTRUCTIONS, instructionSegmentsForPart } from '$lib/utils/staticInstructions.js';
+
+  // Part text is spoken as ONE clip (renderSpokenFields) but displayed as
+  // multiple \n\n-separated paragraphs — each gets its own AudioText
+  // instance, so each needs to know how many spoken words came before it in
+  // the single underlying clip.
+  function paragraphsWithOffset(text) {
+    let offset = 0;
+    return (text ?? '').split('\n\n').map((para) => {
+      const p = { text: para, wordOffset: offset };
+      offset += countSpokenWords(para);
+      return p;
+    });
+  }
+
+  // ── Pregenerated audio playback (scripts/pregenerate-audio.mjs) ────────────
+  // Three kinds of toggling, word-highlighted players: one shared "general
+  // setup" player (top-level question_text), one per part for that part's own
+  // text + math_expression, and one per part for whichever tip/reveal text is
+  // currently shown (mutually exclusive — a reveal replaces its tip, never
+  // shown together, so one player per part covers both).
+  const setupPlayer = createAudioSequencePlayer();
+  let setupSegments = [];      // [{fieldKey, text, audioUrl, alignment}] — for alignment lookups; playback state comes from setupPlayer's store
+
+  let partPlayers = {};        // { [label]: sequencePlayer }
+  let partPlayerStates = {};   // { [label]: {playing, activeIndex, activeFieldKey, currentTime} } — plain, Svelte-reactive mirror
+  let partSegments = {};       // { [label]: [{fieldKey, text, audioUrl, alignment}] }
+  let feedbackPlayers = {};       // { [label]: sequencePlayer }
+  let feedbackPlayerStates = {};  // { [label]: {playing, activeIndex, activeFieldKey, currentTime} }
+  let feedbackSegments = {};      // { [label]: [{fieldKey, text, audioUrl, alignment}] }
+  const unsubs = [];
+
+  function ensurePlayer(store, label, onUpdate) {
+    if (!store[label]) {
+      store[label] = createAudioSequencePlayer();
+      unsubs.push(store[label].subscribe(onUpdate));
+    }
+    return store[label];
+  }
+
+  // Alignment for a given fieldKey within a segment list — null (no audio piloted) degrades gracefully in AudioText.
+  function alignmentFor(segments, fieldKey) {
+    return segments?.find((s) => s.fieldKey === fieldKey)?.alignment ?? null;
+  }
+
+  async function buildSegment(fieldKey, text) {
+    if (!text) return null;
+    const seg = await findAudioSegment(text);
+    return { fieldKey, text, audioUrl: seg?.url ?? null, alignment: seg?.alignment ?? null };
+  }
+
+  async function loadSetupAudio(text) {
+    const seg = await buildSegment('question_text', text);
+    setupSegments = seg ? [seg] : [];
+    setupPlayer.setSegments(setupSegments);
+  }
+
+  async function loadPartAudio(label, partText, mathExpr, part) {
+    // Create the player synchronously so a button gated on it existing never
+    // races the async segment fetch below.
+    ensurePlayer(partPlayers, label, (s) => { partPlayerStates = { ...partPlayerStates, [label]: s }; });
+    const instructionSegs = instructionSegmentsForPart(part);
+    const segs = (await Promise.all([
+      buildSegment('text', partText),
+      buildSegment('math_expression', mathExpr),
+      ...instructionSegs.map(([fieldKey, text]) => buildSegment(fieldKey, text))
+    ])).filter(Boolean);
+    partSegments = { ...partSegments, [label]: segs };
+    partPlayers[label].setSegments(segs);
+  }
+
+  async function loadFeedbackAudio(label, kind, text) {
+    ensurePlayer(feedbackPlayers, label, (s) => { feedbackPlayerStates = { ...feedbackPlayerStates, [label]: s }; });
+    const seg = await buildSegment(kind, text);
+    feedbackSegments = { ...feedbackSegments, [label]: seg ? [seg] : [] };
+    feedbackPlayers[label].setSegments(feedbackSegments[label]);
+  }
+
+  onDestroy(() => {
+    setupPlayer.destroy();
+    unsubs.forEach((u) => u());
+    Object.values(partPlayers).forEach((p) => p.destroy());
+    Object.values(feedbackPlayers).forEach((p) => p.destroy());
+  });
 
   const dispatch = createEventDispatcher();
 
@@ -51,6 +138,28 @@
   // ordering: { partLabel: string[] } — slots in order
   let orderingSlots = {};
   let orderingDragging = null; // { value, from: 'bank'|index }
+  // drag_drop_match: { partLabel: string[] } — slots[targetIndex] = tile text placed there
+  let ddmSlots = {};
+  // true_false_table: { partLabel: ('true'|'false'|null)[] } — one entry per row
+  let tftSelections = {};
+
+  function updateTftAnswer(part, rowIndex, val) {
+    const rowCount = (part.statements ?? []).length;
+    const rows = [...(tftSelections[part.label] ?? Array(rowCount).fill(null))];
+    rows[rowIndex] = val;
+    tftSelections = { ...tftSelections, [part.label]: rows };
+    partAnswers = {
+      ...partAnswers,
+      [part.label]: rows.map(v => v === 'true' ? 'True' : v === 'false' ? 'False' : null).filter(Boolean).join(',')
+    };
+  }
+
+  // Converts target-indexed slots into the tile-indexed array format correct_matches
+  // uses (arr[tileIndex] = targetIndex), then stores it as the graded answer.
+  function updateDdmAnswer(part, slots) {
+    const answerArr = (part.tiles ?? []).map(tile => slots.indexOf(tile));
+    partAnswers = { ...partAnswers, [part.label]: JSON.stringify(answerArr) };
+  }
 
   // ── Per-part interactive state (only active when question prop is provided) ──
   let partStates = {};
@@ -60,8 +169,10 @@
     if (newId !== prevItemId) {
       prevItemId = newId;
       partStates = Object.fromEntries(parts.map(p => [p.label, {
-        attempt: 0, assisted: false, tip: null, revealed: false, correct: false,
+        attempt: 0, assisted: false, tip: null, revealed: false, revealText: null, correct: false,
       }]));
+      loadSetupAudio(question_text);
+      parts.forEach(p => loadPartAudio(p.label, p.question_text ?? p.text, p.math_expression, p));
     }
   }
 
@@ -81,6 +192,7 @@
     const params = question ? extractParams(question) : {};
     const tip = fillTemplate(partTemplate.tip1, params);
     partStates = { ...partStates, [label]: { ...partStates[label], assisted: true, tip } };
+    loadFeedbackAudio(label, 'tip', tip);
   }
 
   function submitPart(label, part) {
@@ -110,17 +222,28 @@
     } else {
       const newAttempt = state.attempt + 1;
       const partTemplate = feedbackTemplate?.parts?.[label];
+      // assisted: tip1 was already shown via "Learn", so wrong attempts give tip2 then reveal.
+      // unassisted: wrong attempts walk the full tip1 -> tip2 -> reveal ladder.
       let tip = null;
-      if (newAttempt === 1) {
-        const key = state.assisted ? 'tip2' : 'tip1';
-        tip = fillTemplate(partTemplate?.[key] ?? null, params);
+      let revealed;
+      if (state.assisted) {
+        if (newAttempt === 1) tip = fillTemplate(partTemplate?.tip2 ?? null, params);
+        revealed = newAttempt >= 2;
+      } else {
+        if (newAttempt === 1) tip = fillTemplate(partTemplate?.tip1 ?? null, params);
+        else if (newAttempt === 2) tip = fillTemplate(partTemplate?.tip2 ?? null, params);
+        revealed = newAttempt >= 3;
       }
+      const revealText = revealed ? fillTemplate(partTemplate?.reveal ?? null, params) : null;
       partStates = { ...partStates, [label]: {
         ...state,
         attempt: newAttempt,
         tip,
-        revealed: newAttempt >= 2,
+        revealed,
+        revealText,
       }};
+      if (tip) loadFeedbackAudio(label, 'tip', tip);
+      if (revealed) loadFeedbackAudio(label, 'reveal', revealText);
     }
   }
 
@@ -147,7 +270,16 @@
     <!-- ── Stacked layout: all content in a single column ── -->
     <p class="part-header">This question has {partWord} parts.</p>
     {#if question_text}
-      <p class="q-text">{@html renderMath(question_text)}</p>
+      <div class="setup-row">
+        <p class="q-text">
+          <AudioText text={question_text} alignment={alignmentFor(setupSegments, 'question_text')} active={$setupPlayer.activeFieldKey === 'question_text'} currentTime={$setupPlayer.currentTime} />
+        </p>
+        {#if setupSegments.some((s) => s.audioUrl)}
+          <button class="audio-toggle-btn" on:click={() => setupPlayer.toggle()} title={$setupPlayer.playing ? 'Pause' : 'Listen'}>
+            {$setupPlayer.playing ? '⏸' : '▶'} Listen
+          </button>
+        {/if}
+      </div>
     {/if}
 
     <!-- Top-level stimulus (shown before Part A) -->
@@ -158,11 +290,22 @@
     {/if}
 
     {#each parts as part}
-      <h3 class="part-label">Part {part.label}</h3>
+      {@const pps = partPlayerStates[part.label] ?? {}}
+      {@const psegs = partSegments[part.label] ?? []}
+      <div class="setup-row">
+        <h3 class="part-label">Part {part.label}</h3>
+        {#if psegs.some((s) => s.audioUrl)}
+          <button class="audio-toggle-btn" on:click={() => partPlayers[part.label].toggle()} title={pps.playing ? 'Pause' : 'Listen'}>
+            {pps.playing ? '⏸' : '▶'} Listen
+          </button>
+        {/if}
+      </div>
 
-      <!-- Part text: split on \n\n for multiple paragraphs -->
-      {#each ((part.question_text ?? part.text) ?? '').split('\n\n') as para}
-        <p class="part-text">{@html renderMath(para)}</p>
+      <!-- Part text: split on \n\n for multiple paragraphs, each its own AudioText with a running word offset -->
+      {#each paragraphsWithOffset(part.question_text ?? part.text) as para}
+        <p class="part-text">
+          <AudioText text={para.text} wordOffset={para.wordOffset} alignment={alignmentFor(psegs, 'text')} active={pps.activeFieldKey === 'text'} currentTime={pps.currentTime ?? 0} />
+        </p>
       {/each}
 
       <!-- Per-part stimulus -->
@@ -298,17 +441,57 @@
           </div>
         </div>
       {:else if part.answer_type === 'drag_drop_match'}
-        <!-- Static display: tiles on top, goal boxes with correct tile inside -->
+        <!-- Drag tiles from the bank into the goal box with the matching word form -->
+        {@const ddmTileCount = (part.tiles ?? []).length}
+        {@const ddmPlaced = ddmSlots[part.label] ?? Array(ddmTileCount).fill('')}
+        {@const ddmBankTiles = (part.tiles ?? []).filter(t => !ddmPlaced.includes(t))}
         <div class="ddm-wrap">
+          <!-- svelte-ignore a11y-no-static-element-interactions -->
+          <div class="tile-bank"
+            on:dragover|preventDefault
+            on:drop={(e) => {
+              const val = e.dataTransfer.getData('text');
+              if (!val) return;
+              const slots = [...(ddmSlots[part.label] ?? Array(ddmTileCount).fill(''))];
+              const si = slots.indexOf(val);
+              if (si >= 0) slots[si] = '';
+              ddmSlots = { ...ddmSlots, [part.label]: slots };
+              updateDdmAnswer(part, slots);
+            }}
+          >
+            {#each ddmBankTiles as tile}
+              <!-- svelte-ignore a11y-no-static-element-interactions -->
+              <div class="tile" draggable="true"
+                on:dragstart={(e) => e.dataTransfer.setData('text', tile)}
+              >{@html renderMath(tile)}</div>
+            {/each}
+          </div>
+
           {#each part.targets as target, ti}
-            {@const tileIdx = (part.correct_matches ?? []).indexOf(ti)}
             <div class="ddm-goal">
               <div class="ddm-goal-label">{target}</div>
-              {#if tileIdx >= 0 && part.tiles[tileIdx]}
-                <div class="ddm-tile-inside">{@html renderMath(part.tiles[tileIdx])}</div>
-              {:else}
-                <div class="ddm-tile-empty"></div>
-              {/if}
+              <!-- svelte-ignore a11y-no-static-element-interactions -->
+              <div
+                class={ddmPlaced[ti] ? 'ddm-tile-inside' : 'ddm-tile-empty'}
+                on:dragover|preventDefault
+                on:drop={(e) => {
+                  const val = e.dataTransfer.getData('text');
+                  if (!val) return;
+                  const slots = [...(ddmSlots[part.label] ?? Array(ddmTileCount).fill(''))];
+                  const prev = slots.indexOf(val);
+                  if (prev >= 0) slots[prev] = '';
+                  slots[ti] = val;
+                  ddmSlots = { ...ddmSlots, [part.label]: slots };
+                  updateDdmAnswer(part, slots);
+                }}
+              >
+                {#if ddmPlaced[ti]}
+                  <!-- svelte-ignore a11y-no-static-element-interactions -->
+                  <span draggable="true"
+                    on:dragstart={(e) => e.dataTransfer.setData('text', ddmPlaced[ti])}
+                  >{@html renderMath(ddmPlaced[ti])}</span>
+                {/if}
+              </div>
             </div>
           {/each}
         </div>
@@ -326,10 +509,14 @@
               <tr>
                 <td class="tft-stmt-cell"><p>{@html renderMath(stmt.text ?? '')}</p></td>
                 <td class="tft-radio-cell">
-                  <input type="radio" name="tft-{part.label}-row-{ri}" value="true" />
+                  <input type="radio" name="tft-{part.label}-row-{ri}" value="true"
+                    checked={(tftSelections[part.label] ?? [])[ri] === 'true'}
+                    on:change={() => updateTftAnswer(part, ri, 'true')} />
                 </td>
                 <td class="tft-radio-cell">
-                  <input type="radio" name="tft-{part.label}-row-{ri}" value="false" />
+                  <input type="radio" name="tft-{part.label}-row-{ri}" value="false"
+                    checked={(tftSelections[part.label] ?? [])[ri] === 'false'}
+                    on:change={() => updateTftAnswer(part, ri, 'false')} />
                 </td>
               </tr>
             {/each}
@@ -337,7 +524,7 @@
         </table>
       {:else if part.answer_type === 'inline_choice'}
         {#if part.math_expression}
-          <p class="math-expr">{@html renderMath(part.math_expression)}</p>
+          <p class="math-expr"><AudioText text={part.math_expression} alignment={alignmentFor(psegs, 'math_expression')} active={pps.activeFieldKey === 'math_expression'} currentTime={pps.currentTime ?? 0} /></p>
         {/if}
         {#if part.instruction}
           <p class="part-text">{part.instruction}</p>
@@ -370,10 +557,12 @@
         <NumberLinePlot
           question_text=""
           stimulus_params={part.stimulus_params ?? {}}
+          audio={{ answer_instruction: { alignment: alignmentFor(psegs, 'answer_instruction'), active: pps.activeFieldKey === 'answer_instruction' } }}
+          currentTime={pps.currentTime ?? 0}
           bind:value={partAnswers[part.label]}
         />
       {:else if part.answer_type === 'number_with_work'}
-        <p class="answer-instruction">Enter your answer in the box.</p>
+        <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartEnterBox} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
         <p class="fill-in-row">
           <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false"
             on:input={(e) => {
@@ -383,10 +572,14 @@
             <span class="fill-in-suffix">{part.answer_unit}</span>
           {/if}
         </p>
-        <p class="answer-instruction">{part.work_instruction ?? 'Show your work or explain how you got your answer.'}</p>
+        {#if part.work_instruction}
+          <p class="answer-instruction">{part.work_instruction}</p>
+        {:else}
+          <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartShowWorkDefault} alignment={alignmentFor(psegs, 'work_instruction')} active={pps.activeFieldKey === 'work_instruction'} currentTime={pps.currentTime ?? 0} /></p>
+        {/if}
         <ShortAnswerInput bind:value={partWork[part.label]} />
       {:else if part.answer_type === 'yes_no_explanation'}
-        <p class="answer-instruction">Enter your answer.</p>
+        <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartYesNo} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
         <div class="yes-no-row">
           <label class="yes-no-option">
             <input type="radio" name="yn-{part.label}" value="yes"
@@ -401,10 +594,10 @@
             No
           </label>
         </div>
-        <p class="answer-instruction">Explain your reasoning in the space provided.</p>
+        <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartExplainReasoning} alignment={alignmentFor(psegs, 'work_instruction')} active={pps.activeFieldKey === 'work_instruction'} currentTime={pps.currentTime ?? 0} /></p>
         <ShortAnswerInput bind:value={partWork[part.label]} />
       {:else if part.answer_type === 'dimension_pair'}
-        <p class="answer-instruction">Enter the length and width.</p>
+        <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartDimensionPair} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
         <div class="dimension-row">
           <label class="dimension-label">Length:
             <input class="fill-in-box" type="text" aria-label="length" autocomplete="off" spellcheck="false"
@@ -421,7 +614,7 @@
               }} /> feet
           </label>
         </div>
-        <p class="answer-instruction">Show your work or explain how you know your answer is correct.</p>
+        <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartShowWorkDimension} alignment={alignmentFor(psegs, 'work_instruction')} active={pps.activeFieldKey === 'work_instruction'} currentTime={pps.currentTime ?? 0} /></p>
         <ShortAnswerInput bind:value={partWork[part.label]} />
       {:else if part.answer_type === 'short_answer' || part.answer_type === 'constructed_response'}
         {#if part.answer_type === 'constructed_response'}
@@ -430,30 +623,38 @@
               <p class="answer-instruction">{@html renderMath(para)}</p>
             {/each}
           {:else}
-            <p class="answer-instruction">Enter your answer and your work or explanation in the space provided.</p>
+            <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartEnterWorkOrExplanation} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
           {/if}
           <ShortAnswerInput bind:value={partAnswers[part.label]} />
         {:else if part.input_widget === 'math'}
           <!-- Math-equation-only input (no rich-text toolbar) -->
-          <div class="math-eq-box" tabindex="0">
-            <span class="math-eq-placeholder">Click here to enter your answer.</span>
+          <div class="math-eq-box">
+            <input
+              class="math-eq-input"
+              type="text"
+              aria-label="equation answer"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Click here to enter your answer."
+              bind:value={partAnswers[part.label]}
+            />
           </div>
         {:else if part.answer_suffix}
-          <p class="answer-instruction">Enter your answer in the box.</p>
+          <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartEnterBox} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
           <p class="fill-in-row">
             <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false"
               bind:value={partAnswers[part.label]} />
             <span class="fill-in-suffix">{part.answer_suffix}</span>
           </p>
         {:else if part.math_expression_prefix}
-          <p class="answer-instruction">Enter your answer in the box.</p>
+          <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartEnterBox} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
           <p class="fill-in-row">
             <span class="fill-in-prefix">{@html renderMath(part.math_expression_prefix)}</span>
             <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false"
               bind:value={partAnswers[part.label]} />
           </p>
         {:else}
-          <p class="answer-instruction">Enter your answer in the space provided.</p>
+          <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartEnterSpaceProvided} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
           <ShortAnswerInput bind:value={partAnswers[part.label]} />
         {/if}
       {/if}
@@ -476,14 +677,28 @@
           {/if}
         </div>
         {#if ps.tip}
-          <div class="part-tip">{ps.tip}</div>
+          {@const fps = feedbackPlayerStates[part.label] ?? {}}
+          {@const fsegs = feedbackSegments[part.label] ?? []}
+          <div class="part-tip">
+            <span><AudioText text={ps.tip} alignment={alignmentFor(fsegs, 'tip')} active={fps.activeFieldKey === 'tip'} currentTime={fps.currentTime ?? 0} /></span>
+            {#if fsegs.some((s) => s.audioUrl)}
+              <button class="part-audio-btn" on:click={() => feedbackPlayers[part.label].toggle()} title={fps.playing ? 'Pause' : 'Play audio'}>{fps.playing ? '⏸' : '▶'}</button>
+            {/if}
+          </div>
         {/if}
         {#if ps.revealed}
+          {@const fps = feedbackPlayerStates[part.label] ?? {}}
+          {@const fsegs = feedbackSegments[part.label] ?? []}
           <div class="part-reveal">
-            {#if feedbackTemplate?.parts?.[part.label]?.reveal}
-              {fillTemplate(feedbackTemplate.parts[part.label].reveal, extractParams(question))}
+            <span>
+            {#if ps.revealText}
+              <AudioText text={ps.revealText} alignment={alignmentFor(fsegs, 'reveal')} active={fps.activeFieldKey === 'reveal'} currentTime={fps.currentTime ?? 0} />
             {:else}
               The answer is: {question.correct_answer?.[part.label] ?? part.correct_answer ?? ''}
+            {/if}
+            </span>
+            {#if fsegs.some((s) => s.audioUrl)}
+              <button class="part-audio-btn" on:click={() => feedbackPlayers[part.label].toggle()} title={fps.playing ? 'Pause' : 'Play audio'}>{fps.playing ? '⏸' : '▶'}</button>
             {/if}
           </div>
         {/if}
@@ -499,7 +714,16 @@
       <div class="left-pane">
         <p class="part-header">This question has {partWord} parts.</p>
         {#if question_text}
-          <p class="q-text">{@html renderMath(question_text)}</p>
+          <div class="setup-row">
+            <p class="q-text">
+              <AudioText text={question_text} alignment={alignmentFor(setupSegments, 'question_text')} active={$setupPlayer.activeFieldKey === 'question_text'} currentTime={$setupPlayer.currentTime} />
+            </p>
+            {#if setupSegments.some((s) => s.audioUrl)}
+              <button class="audio-toggle-btn" on:click={() => setupPlayer.toggle()} title={$setupPlayer.playing ? 'Pause' : 'Listen'}>
+                {$setupPlayer.playing ? '⏸' : '▶'} Listen
+              </button>
+            {/if}
+          </div>
         {/if}
         {#if stimulus_list}
           <ul class="q-list">
@@ -524,23 +748,43 @@
 
       <div class="right-pane">
         {#each parts as part}
+          {@const pps = partPlayerStates[part.label] ?? {}}
+          {@const psegs = partSegments[part.label] ?? []}
           <div class="part-section">
-            <h3 class="part-label">Part {part.label}</h3>
+            <div class="setup-row">
+              <h3 class="part-label">Part {part.label}</h3>
+              {#if psegs.some((s) => s.audioUrl)}
+                <button class="audio-toggle-btn" on:click={() => partPlayers[part.label].toggle()} title={pps.playing ? 'Pause' : 'Listen'}>
+                  {pps.playing ? '⏸' : '▶'} Listen
+                </button>
+              {/if}
+            </div>
 
-            <!-- Part text: split on \n\n for multiple paragraphs -->
-            {#each ((part.question_text ?? part.text) ?? '').split('\n\n') as para}
-              <p class="part-text">{@html renderMath(para)}</p>
+            <!-- Part text: split on \n\n for multiple paragraphs, each its own AudioText with a running word offset -->
+            {#each paragraphsWithOffset(part.question_text ?? part.text) as para}
+              <p class="part-text">
+                <AudioText text={para.text} wordOffset={para.wordOffset} alignment={alignmentFor(psegs, 'text')} active={pps.activeFieldKey === 'text'} currentTime={pps.currentTime ?? 0} />
+              </p>
             {/each}
 
             {#if part.math_expression}
-              <p class="math-expr">{@html renderMath(part.math_expression)}</p>
+              <p class="math-expr"><AudioText text={part.math_expression} alignment={alignmentFor(psegs, 'math_expression')} active={pps.activeFieldKey === 'math_expression'} currentTime={pps.currentTime ?? 0} /></p>
             {/if}
 
             {#if part.answer_type === 'multiple_choice'}
               <div class="part-mc" role="group">
                 {#each (part.answer_options ?? []) as opt, i}
                   {#if i > 0}<div class="mc-spacer"></div>{/if}
-                  <div class="mc-option" role="checkbox" aria-checked="false" tabindex="0">
+                  <div
+                    class="mc-option"
+                    class:selected={partAnswers[part.label] === opt.letter}
+                    role="checkbox"
+                    aria-checked={partAnswers[part.label] === opt.letter}
+                    tabindex="0"
+                    on:click={() => partAnswers = { ...partAnswers, [part.label]: opt.letter }}
+                    on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') &&
+                      (partAnswers = { ...partAnswers, [part.label]: opt.letter })}
+                  >
                     <span class="mc-bubble"><span>{opt.letter}</span></span>
                     <div class="mc-content">
                       <p>{@html renderMath(opt.text)}</p>
@@ -549,7 +793,7 @@
                 {/each}
               </div>
             {:else if part.answer_type === 'number_with_work'}
-              <p class="answer-instruction">Enter your answer in the box.</p>
+              <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartEnterBox} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
               <p class="fill-in-row">
                 <input class="fill-in-box" type="text" aria-label="answer" autocomplete="off" spellcheck="false"
                   on:input={(e) => {
@@ -559,10 +803,14 @@
                   <span class="fill-in-suffix">{part.answer_unit}</span>
                 {/if}
               </p>
-              <p class="answer-instruction">{part.work_instruction ?? 'Show your work or explain how you got your answer.'}</p>
+              {#if part.work_instruction}
+                <p class="answer-instruction">{part.work_instruction}</p>
+              {:else}
+                <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartShowWorkDefault} alignment={alignmentFor(psegs, 'work_instruction')} active={pps.activeFieldKey === 'work_instruction'} currentTime={pps.currentTime ?? 0} /></p>
+              {/if}
               <ShortAnswerInput bind:value={partWork[part.label]} />
             {:else if part.answer_type === 'yes_no_explanation'}
-              <p class="answer-instruction">Enter your answer.</p>
+              <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartYesNo} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
               <div class="yes-no-row">
                 <label class="yes-no-option">
                   <input type="radio" name="yn-{part.label}" value="yes"
@@ -577,10 +825,10 @@
                   No
                 </label>
               </div>
-              <p class="answer-instruction">Explain your reasoning in the space provided.</p>
+              <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartExplainReasoning} alignment={alignmentFor(psegs, 'work_instruction')} active={pps.activeFieldKey === 'work_instruction'} currentTime={pps.currentTime ?? 0} /></p>
               <ShortAnswerInput bind:value={partWork[part.label]} />
             {:else if part.answer_type === 'dimension_pair'}
-              <p class="answer-instruction">Enter the length and width.</p>
+              <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartDimensionPair} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
               <div class="dimension-row">
                 <label class="dimension-label">Length:
                   <input class="fill-in-box" type="text" aria-label="length" autocomplete="off" spellcheck="false"
@@ -597,13 +845,13 @@
                     }} /> feet
                 </label>
               </div>
-              <p class="answer-instruction">Show your work or explain how you know your answer is correct.</p>
+              <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartShowWorkDimension} alignment={alignmentFor(psegs, 'work_instruction')} active={pps.activeFieldKey === 'work_instruction'} currentTime={pps.currentTime ?? 0} /></p>
               <ShortAnswerInput bind:value={partWork[part.label]} />
             {:else if part.answer_type === 'constructed_response'}
-              <p class="answer-instruction">Enter your answer and your work or explanation in the space provided.</p>
+              <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartEnterWorkOrExplanation} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
               <ShortAnswerInput bind:value={partAnswers[part.label]} />
             {:else}
-              <p class="answer-instruction">Enter your answer in the space provided.</p>
+              <p class="answer-instruction"><AudioText text={STATIC_INSTRUCTIONS.multiPartEnterSpaceProvided} alignment={alignmentFor(psegs, 'answer_instruction')} active={pps.activeFieldKey === 'answer_instruction'} currentTime={pps.currentTime ?? 0} /></p>
               <ShortAnswerInput bind:value={partAnswers[part.label]} />
             {/if}
 
@@ -625,14 +873,28 @@
                 {/if}
               </div>
               {#if ps.tip}
-                <div class="part-tip">{ps.tip}</div>
+                {@const fps = feedbackPlayerStates[part.label] ?? {}}
+                {@const fsegs = feedbackSegments[part.label] ?? []}
+                <div class="part-tip">
+                  <span><AudioText text={ps.tip} alignment={alignmentFor(fsegs, 'tip')} active={fps.activeFieldKey === 'tip'} currentTime={fps.currentTime ?? 0} /></span>
+                  {#if fsegs.some((s) => s.audioUrl)}
+                    <button class="part-audio-btn" on:click={() => feedbackPlayers[part.label].toggle()} title={fps.playing ? 'Pause' : 'Play audio'}>{fps.playing ? '⏸' : '▶'}</button>
+                  {/if}
+                </div>
               {/if}
               {#if ps.revealed}
+                {@const fps = feedbackPlayerStates[part.label] ?? {}}
+                {@const fsegs = feedbackSegments[part.label] ?? []}
                 <div class="part-reveal">
-                  {#if feedbackTemplate?.parts?.[part.label]?.reveal}
-                    {fillTemplate(feedbackTemplate.parts[part.label].reveal, extractParams(question))}
+                  <span>
+                  {#if ps.revealText}
+                    <AudioText text={ps.revealText} alignment={alignmentFor(fsegs, 'reveal')} active={fps.activeFieldKey === 'reveal'} currentTime={fps.currentTime ?? 0} />
                   {:else}
                     The answer is: {question.correct_answer?.[part.label] ?? part.correct_answer ?? ''}
+                  {/if}
+                  </span>
+                  {#if fsegs.some((s) => s.audioUrl)}
+                    <button class="part-audio-btn" on:click={() => feedbackPlayers[part.label].toggle()} title={fps.playing ? 'Pause' : 'Play audio'}>{fps.playing ? '⏸' : '▶'}</button>
                   {/if}
                 </div>
               {/if}
@@ -832,12 +1094,21 @@
     background: #fff;
   }
 
-  .math-eq-placeholder {
+  .math-eq-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    text-align: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    color: #333;
+  }
+
+  .math-eq-input::placeholder {
     font-style: italic;
     color: #999;
-    font-size: 15px;
-    text-align: center;
-    pointer-events: none;
   }
 
   /* ── In-part multiple choice ── */
@@ -858,6 +1129,12 @@
     cursor: pointer;
   }
 
+  /* light-blue overlay on selected row, matching MultipleChoice.svelte */
+  .mc-option.selected {
+    background-size: cover;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2010%2010%27%3E%3Crect%20width%3D%2710%27%20height%3D%2710%27%20fill%3D%27rgba(57%2C171%2C255%2C0.3)%27%20%2F%3E%3C%2Fsvg%3E");
+  }
+
   .mc-bubble {
     flex: 0 0 auto;
     display: inline-block;
@@ -871,6 +1148,11 @@
     font-size: 13px;
     line-height: 20px;
     text-align: center;
+  }
+
+  .mc-option.selected .mc-bubble {
+    background-color: #3b81c9;
+    color: white;
   }
 
   .mc-bubble span {
@@ -891,7 +1173,7 @@
     line-height: 24px;
   }
 
-  /* ── Drag-drop match (static display) ── */
+  /* ── Drag-drop match ── */
   .ddm-wrap {
     display: flex;
     flex-direction: column;
@@ -919,7 +1201,7 @@
   }
 
   .ddm-tile-inside {
-    width: 100%;
+    width: calc(100% - 24px);
     text-align: center;
     font-size: 16px;
     padding: 10px 12px;
@@ -928,7 +1210,7 @@
     border: 1px dashed #999;
     border-radius: 2px;
     margin: 8px 12px;
-    width: calc(100% - 24px);
+    cursor: grab;
   }
 
   .ddm-tile-empty {
@@ -1167,6 +1449,9 @@
     font-size: 14px;
     color: #92400e;
     line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
   }
 
   .part-reveal {
@@ -1178,5 +1463,57 @@
     font-size: 14px;
     color: #1e3a8a;
     line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .part-tip span,
+  .part-reveal span {
+    flex: 1;
+  }
+
+  .part-audio-btn {
+    flex: 0 0 auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    color: inherit;
+    opacity: 0.75;
+    padding: 0;
+  }
+  .part-audio-btn:hover {
+    opacity: 1;
+  }
+
+  .setup-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .setup-row .q-text,
+  .setup-row .part-label {
+    margin: 0;
+    flex: 1;
+  }
+
+  .audio-toggle-btn {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: inherit;
+    color: #4338ca;
+    background: #eef2ff;
+    border: 1px solid #c7d2fe;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .audio-toggle-btn:hover {
+    background: #e0e7ff;
   }
 </style>

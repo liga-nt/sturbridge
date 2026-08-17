@@ -9,7 +9,7 @@
 
   export let params;
 
-  const { center, rays, arc_labels } = params;
+  $: ({ center, rays, arc_labels } = params);
 
   const W  = 272;
   const H  = 220;
@@ -27,9 +27,9 @@
     ];
   }
 
-  const rayMap = Object.fromEntries(rays.map(r => [r.label, r.angle]));
+  $: rayMap = Object.fromEntries(rays.map(r => [r.label, r.angle]));
 
-  const arcs = arc_labels.map(a => {
+  $: arcs = arc_labels.map(a => {
     const a1  = rayMap[a.between[0]];
     const a2  = rayMap[a.between[1]];
     const mid = (a1 + a2) / 2;

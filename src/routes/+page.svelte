@@ -24,6 +24,12 @@
         pending = false;
         try {
             const provider = new GoogleAuthProvider();
+            // Force the Google account chooser every time — without this, a
+            // browser that already has another account's session cached can
+            // silently sign in as that account instead of letting the user
+            // pick, which is exactly how one student ended up seeing another
+            // student's class/progress on a shared device.
+            provider.setCustomParameters({ prompt: 'select_account' });
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
 

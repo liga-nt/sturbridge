@@ -36,6 +36,7 @@
     let classDoc;
     let course;
     let standards = [];
+    let isTester = false;
     const standardStates = writable({});
 
     setContext('student', {
@@ -43,6 +44,7 @@
         get classDoc()  { return classDoc; },
         get course()    { return course; },
         get standards() { return standards; },
+        get isTester()  { return isTester; },
         standardStates
     });
 
@@ -53,20 +55,28 @@
     let showPicker        = false;
     let classOptions      = [];   // [{ classId, className, courseLabel, contentKey }]
     let hasMultipleClasses = false;
+    let switchingCourse    = false; // true from click on a picker option until the new route lands
 
     async function loadData() {
-        uid = $session.user?.uid;
+        // Dev can impersonate a specific student via ?studentId=, e.g. to drive
+        // the question loop as a demo student and verify it lands in the
+        // teacher gradebook. request.auth.uid stays the dev's own — firestore.rules
+        // grants dev a write bypass on studentProgress/sessions independent of uid.
+        const devTargetUid = $session.role === 'dev' ? $page.url.searchParams.get('studentId') : null;
+        uid = devTargetUid || $session.user?.uid;
         if (!uid) throw new Error('Not logged in');
 
         let classIds;
 
-        if ($session.role === 'dev') {
+        if ($session.role === 'dev' && !devTargetUid) {
             // Dev can see all classes without being enrolled
             classIds = await loadAllClassIds();
+            isTester = true; // dev always gets tester-only tools
         } else {
             // Always read classIds from the user doc — canonical source
             const userSnap = await getDoc(doc(db, 'users', uid));
             classIds = userSnap.data()?.classIds ?? [];
+            isTester = userSnap.data()?.isTester === true;
 
             // Fallback for legacy students whose classId only exists on studentProgress
             if (classIds.length === 0) {
@@ -84,17 +94,13 @@
         if (classIds.length === 1) {
             selectedClassId = classIds[0];
         } else {
+            // Always show the picker for multi-class students — every fresh
+            // login lands on the class list, never silently back into
+            // whichever class they used last.
             hasMultipleClasses = true;
-            // Dev always sees the picker; students get their remembered choice
-            const remembered = $session.role !== 'dev' && localStorage.getItem(`student_class_${uid}`);
-            if (remembered && classIds.includes(remembered)) {
-                classOptions = await loadPickerOptions(classIds);
-                selectedClassId = remembered;
-            } else {
-                classOptions = await loadPickerOptions(classIds);
-                showPicker = true;
-                return; // wait for user to pick
-            }
+            classOptions = await loadPickerOptions(classIds);
+            showPicker = true;
+            return; // wait for user to pick
         }
 
         await loadForClass(selectedClassId);
@@ -114,13 +120,25 @@
     }
 
     async function pickClass(classId) {
-        localStorage.setItem(`student_class_${uid}`, classId);
         showPicker = false;
-        await loadForClass(classId);
+        // Guards the window between loadForClass reassigning `course` (while
+        // the URL is still /student, or still on the old course's route) and
+        // the goto below landing: without this, the reactive redirect fires
+        // on that intermediate reassignment and flips showPicker back on,
+        // and the old route renders briefly with the new course's data.
+        switchingCourse = true;
+        try {
+            await loadForClass(classId);
+            // loadForClass only updates context data — if the student was already
+            // sitting on a course route (e.g. /student/mcas), we have to navigate
+            // explicitly or they'd stay on that route with the new course's data.
+            await goto(COURSE_ROUTES[course?.contentKey] ?? FALLBACK_ROUTE);
+        } finally {
+            switchingCourse = false;
+        }
     }
 
     function switchClass() {
-        if (uid) localStorage.removeItem(`student_class_${uid}`);
         showPicker = true;
     }
 
@@ -135,10 +153,20 @@
         standardStates.set(states);
 
         dataLoaded = true;
+    }
 
-        if ($page.url.pathname === '/student') {
-            const route = COURSE_ROUTES[course?.contentKey] ?? FALLBACK_ROUTE;
-            goto(route);
+    // Once data is loaded, /student itself is just a redirect target — send
+    // the student on to their course. Reactive (not a one-off check inside
+    // loadForClass) so it also fires when the "Home" nav link brings them
+    // back to /student later, without needing the layout to remount.
+    // For multi-class students, Home acts like "Switch course" — show the
+    // picker instead of silently bouncing back into whatever course they
+    // were already on.
+    $: if (dataLoaded && course && !switchingCourse && $page.url.pathname === '/student') {
+        if (hasMultipleClasses) {
+            showPicker = true;
+        } else {
+            goto(COURSE_ROUTES[course?.contentKey] ?? FALLBACK_ROUTE);
         }
     }
 
@@ -187,7 +215,7 @@
         </div>
     </div>
 
-{:else if !dataLoaded && !isStandalone($page.url.pathname)}
+{:else if (!dataLoaded && !isStandalone($page.url.pathname)) || switchingCourse}
     <div class="flex min-h-screen items-center justify-center">
         <p class="text-gray-400">Loading...</p>
     </div>

@@ -3,13 +3,15 @@
   // item: named key in the svgMap registry
   export let params;
 
-  const { rows, cols, item, item_size = 48 } = params;
+  $: ({ rows, cols, item, item_size = 48 } = params);
 
   const svgMap = {
     cupcake: '/cupcake-svgrepo-com.svg',
+    cookie: '/cookie-twemoji.svg',
+    donut: '/donut-twemoji.svg',
   };
 
-  const src = svgMap[item] ?? null;
+  $: src = svgMap[item] ?? null;
 </script>
 
 {#if src}

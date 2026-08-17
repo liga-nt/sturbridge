@@ -10,7 +10,7 @@
 
   export let params;
 
-  const { title, axis_label, data_points, tick_spacing = 50 } = params;
+  $: ({ title, axis_label, data_points, tick_spacing = 50 } = params);
 
   // ── Parse label strings ──────────────────────────────────────────────
   // Supports: "9", "9[1/8]", "[3/4]" (pure fraction, whole omitted)
@@ -31,21 +31,21 @@
   const MARK_H   = 18;   // vertical gap between stacked X marks
   const TITLE_H  = 24;   // space reserved for title at top
 
-  const n        = data_points.length;
-  const maxCount = Math.max(...data_points.map(d => d.count));
+  $: n        = data_points.length;
+  $: maxCount = Math.max(...data_points.map(d => d.count));
 
-  const AX_START = PAD_L;
-  const AX_END   = PAD_L + (n - 1) * tick_spacing;
-  const W        = AX_END + PAD_R;
+  $: AX_START = PAD_L;
+  $: AX_END   = PAD_L + (n - 1) * tick_spacing;
+  $: W        = AX_END + PAD_R;
 
   // Axis y sits below title + X mark area
-  const MARK_AREA_H = maxCount * MARK_H + 6;
-  const AX_Y        = TITLE_H + MARK_AREA_H;
+  $: MARK_AREA_H = maxCount * MARK_H + 6;
+  $: AX_Y        = TITLE_H + MARK_AREA_H;
 
   // Space below axis: tick marks + labels + axis title
-  const LABEL_Y      = AX_Y + 22;   // baseline for whole-number part of tick label
-  const AXIS_LABEL_Y = AX_Y + 58;
-  const H            = AXIS_LABEL_Y + 8;
+  $: LABEL_Y      = AX_Y + 22;   // baseline for whole-number part of tick label
+  $: AXIS_LABEL_Y = AX_Y + 58;
+  $: H            = AXIS_LABEL_Y + 8;
 
   // ── Arrowhead (from left-arrowhead-variant-svgrepo-com.svg) ──────────────
   // Original viewBox 571.815×571.815; tip at ~(76.208, 284), back at ~x=500
@@ -56,15 +56,15 @@
   const AH_W   = (500 - AH_OX) * AH_S;          // arrowhead width in px ≈ 11.9
 
   // Left arrowhead: tip points left, back connects to axis at AX_START - AX_EXT
-  const L_TX = (AX_START - AX_EXT - AH_W) - AH_S * AH_OX;
-  const L_TY = AX_Y - AH_S * AH_OY;
+  $: L_TX = (AX_START - AX_EXT - AH_W) - AH_S * AH_OX;
+  $: L_TY = AX_Y - AH_S * AH_OY;
 
   // Right arrowhead: horizontally flipped, back connects to axis at AX_END + AX_EXT
-  const R_TX = (AX_END + AX_EXT + AH_W) + AH_S * AH_OX;
-  const R_TY = AX_Y - AH_S * AH_OY;
+  $: R_TX = (AX_END + AX_EXT + AH_W) + AH_S * AH_OX;
+  $: R_TY = AX_Y - AH_S * AH_OY;
 
   // ── Pre-compute tick data ─────────────────────────────────────────────
-  const ticks = data_points.map((d, i) => ({
+  $: ticks = data_points.map((d, i) => ({
     x:      AX_START + i * tick_spacing,
     parsed: parseLabel(d.label),
     count:  d.count,

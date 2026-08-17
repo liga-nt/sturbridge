@@ -8,16 +8,16 @@
   // }
   export let params;
 
-  const { width = 12, height = 10, width_label, height_label } = params;
+  $: ({ width = 12, height = 10, width_label, height_label } = params);
 
   // ── Rectangle geometry ──────────────────────────────────────────────
   const RECT_LEFT   = 44;
   const RECT_TOP    = 12;
   const RECT_W      = 128;
-  const RECT_H      = Math.round(RECT_W * height / width);
+  $: RECT_H      = Math.round(RECT_W * height / width);
 
   const RECT_RIGHT  = RECT_LEFT + RECT_W;
-  const RECT_BOTTOM = RECT_TOP  + RECT_H;
+  $: RECT_BOTTOM = RECT_TOP  + RECT_H;
 
   // ── Right dimension line (measures height) ──────────────────────────
   // Dim line floats just outside the rectangle; short symmetric ticks
@@ -29,16 +29,16 @@
 
   // ── Bottom dimension line (measures width) ──────────────────────────
   const B_OFFSET = 9;                    // gap from rect bottom edge to dim line center
-  const B_DIM_Y  = RECT_BOTTOM + B_OFFSET;
+  $: B_DIM_Y  = RECT_BOTTOM + B_OFFSET;
   const B_TH     = 6;                    // tick half-length
-  const B_LBL_Y  = B_DIM_Y + B_TH + 12; // label text y
+  $: B_LBL_Y  = B_DIM_Y + B_TH + 12; // label text y
 
   // ── Right-angle corner marks ────────────────────────────────────────
   const CS = 9; // corner square size (px)
 
   // ── Canvas ──────────────────────────────────────────────────────────
   const SVG_W = R_LBL_X + 58;   // room for right label
-  const SVG_H = B_LBL_Y + 6;    // room for bottom label
+  $: SVG_H = B_LBL_Y + 6;    // room for bottom label
 </script>
 
 <svg

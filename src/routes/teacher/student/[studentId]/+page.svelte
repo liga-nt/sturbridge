@@ -99,7 +99,6 @@
                     <tr>
                         <th class="text-left px-4 py-3">Standard</th>
                         <th class="text-left px-4 py-3">Status</th>
-                        <th class="text-center px-4 py-3">Streak</th>
                         <th class="text-center px-4 py-3">Attempts</th>
                         <th class="text-center px-4 py-3">Assisted</th>
                     </tr>
@@ -127,9 +126,6 @@
                                 {:else}
                                     <span class="text-gray-300">—</span>
                                 {/if}
-                            </td>
-                            <td class="px-4 py-3 text-center text-gray-600">
-                                {s ? `${s.streak ?? 0} / 2` : '—'}
                             </td>
                             <td class="px-4 py-3 text-center text-gray-600">
                                 {s?.attempts ?? '—'}

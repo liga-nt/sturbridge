@@ -3,6 +3,8 @@
   import FractionComparison from './stimuli/FractionComparison.svelte';
   import SymmetryFigure from './stimuli/SymmetryFigure.svelte';
   import DecimalGrid from './stimuli/DecimalGrid.svelte';
+  import AudioText from './AudioText.svelte';
+  import { selectCountInstruction } from '$lib/utils/staticInstructions.js';
 
   export let stimulus_intro = null;
   export let stimulus_type = null;
@@ -13,11 +15,13 @@
   export let select_count;
   export let layout = null;  // reserved for future use
 
-  const COUNT_WORDS = { 1:'one', 2:'two', 3:'three', 4:'four', 5:'five' };
-  $: countWord = COUNT_WORDS[select_count] ?? select_count;
+  export let audio = {};
+  export let currentTime = 0;
 
-  let selected = new Set();
+  $: instructionText = selectCountInstruction(select_count);
+
   export let value = null;
+  let selected = new Set(value ? value.split(',').filter(Boolean) : []);
   $: value = [...selected].sort().join(',');
 
   function toggle(letter) {
@@ -32,7 +36,7 @@
 
 <div class="question-body">
   {#if stimulus_intro}
-    <p class="q-text">{stimulus_intro}</p>
+    <p class="q-text"><AudioText text={stimulus_intro} alignment={audio.stimulus_intro?.alignment ?? null} active={audio.stimulus_intro?.active ?? false} {currentTime} /></p>
   {/if}
 
   {#if stimulus_type === 'decimal_grid'}
@@ -42,12 +46,12 @@
   {/if}
 
   {#if math_expression}
-    <p class="math-expr">{@html renderMath(math_expression)}</p>
+    <p class="math-expr"><AudioText text={math_expression} alignment={audio.math_expression?.alignment ?? null} active={audio.math_expression?.active ?? false} {currentTime} /></p>
   {/if}
   {#if question_text}
-    <p class="q-text">{@html renderMath(question_text)}</p>
+    <p class="q-text"><AudioText text={question_text} alignment={audio.question_text?.alignment ?? null} active={audio.question_text?.active ?? false} {currentTime} /></p>
   {/if}
-  <p class="q-text">Select the <strong>{countWord}</strong> correct answers.</p>
+  <p class="q-text"><AudioText text={instructionText} alignment={audio.answer_instruction?.alignment ?? null} active={audio.answer_instruction?.active ?? false} {currentTime} /></p>
 
   <div class="distractors" role="group">
     {#each answer_options as opt, i}

@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import { session } from '$lib/stores/session';
     import { page } from '$app/stores';
-    import { getDocs, collection, doc, setDoc, serverTimestamp, query, where } from 'firebase/firestore';
+    import { getDocs, collection, doc, setDoc, updateDoc, serverTimestamp, query, where } from 'firebase/firestore';
     import { db } from '$lib/firebase/client';
 
     let loading = true;
@@ -12,6 +12,9 @@
     let adding = false;
     let addError = null;
     let addSuccess = null;
+    let archivingUid = null;
+
+    $: activeTeachers = teachers.filter((t) => !t.archived);
 
     onMount(async () => {
         await loadTeachers();
@@ -33,6 +36,19 @@
             error = 'Failed to load teachers.';
         } finally {
             loading = false;
+        }
+    }
+
+    async function archiveTeacher(teacher) {
+        if (!confirm(`Archive ${teacher.displayName || teacher.email}? They'll be hidden from this list but can be restored later. Their classes and access are not affected.`)) return;
+        archivingUid = teacher.uid;
+        try {
+            await updateDoc(doc(db, 'users', teacher.uid), { archived: true, archivedAt: serverTimestamp() });
+            teachers = teachers.map((t) => t.uid === teacher.uid ? { ...t, archived: true } : t);
+        } catch (e) {
+            alert('Failed to archive: ' + e.message);
+        } finally {
+            archivingUid = null;
         }
     }
 
@@ -94,24 +110,49 @@
         <p class="text-gray-400">Loading...</p>
     {:else if error}
         <p class="text-red-600">{error}</p>
-    {:else if teachers.length === 0}
-        <p class="text-gray-400 italic text-sm">No teachers have signed in yet.</p>
+    {:else if activeTeachers.length === 0}
+        <div class="text-sm text-gray-400 italic mb-3 flex items-center justify-between">
+            <span>{teachers.length === 0 ? 'No teachers have signed in yet.' : 'No active teachers.'}</span>
+            {#if teachers.length > 0}
+                <a href="/admin/teachers/archive{$page.url.search}" class="text-xs font-medium text-indigo-600 hover:text-indigo-800 not-italic">
+                    View Archived Teachers →
+                </a>
+            {/if}
+        </div>
     {:else}
-        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden mb-3">
+            <div class="px-4 py-3 border-b border-gray-100 text-sm font-semibold text-gray-700 flex items-center justify-between">
+                <span>All Teachers ({activeTeachers.length})</span>
+                <a href="/admin/teachers/archive{$page.url.search}" class="text-xs font-normal text-indigo-600 hover:text-indigo-800">
+                    View Archived Teachers →
+                </a>
+            </div>
             <table class="w-full text-sm">
                 <thead class="bg-gray-50 text-xs text-gray-500 uppercase tracking-wide">
                     <tr>
                         <th class="text-left px-4 py-3">Name</th>
                         <th class="text-left px-4 py-3">Email</th>
                         <th class="text-left px-4 py-3">Classes</th>
+                        <th class="text-right px-4 py-3">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
-                    {#each teachers as teacher}
+                    {#each activeTeachers as teacher}
                         <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3 font-medium text-gray-800">{teacher.displayName || '—'}</td>
+                            <td class="px-4 py-3 font-medium text-gray-800">
+                                <a href="/admin/teacher/{teacher.uid}{$page.url.search}" class="hover:text-indigo-600">
+                                    {teacher.displayName || '—'}
+                                </a>
+                            </td>
                             <td class="px-4 py-3 text-gray-600">{teacher.email}</td>
                             <td class="px-4 py-3 text-gray-500">{teacher.classIds?.length || 0} class(es)</td>
+                            <td class="px-4 py-3 text-right">
+                                <button
+                                    on:click={() => archiveTeacher(teacher)}
+                                    disabled={archivingUid === teacher.uid}
+                                    class="text-xs font-medium text-gray-400 hover:text-red-600 disabled:opacity-50"
+                                >{archivingUid === teacher.uid ? 'Archiving…' : 'Archive'}</button>
+                            </td>
                         </tr>
                     {/each}
                 </tbody>

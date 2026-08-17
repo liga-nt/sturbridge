@@ -10,7 +10,7 @@
 
   export let params;
 
-  const { title = null, axis_label = null, data_points, tick_spacing = 60 } = params;
+  $: ({ title = null, axis_label = null, data_points, tick_spacing = 60 } = params);
 
   // ── Parse label strings ──────────────────────────────────────────────
   // Handles: "1"  "[1/4]"  "1[1/2]"  "2[3/4]"
@@ -32,26 +32,26 @@
 
   const PAD_L    = 36;   // left padding (room for left arrow)
   const PAD_R    = 36;   // right padding
-  const TITLE_H  = title ? 28 : 4;   // space reserved for title at top
+  $: TITLE_H  = title ? 28 : 4;   // space reserved for title at top
 
-  const n        = data_points.length;
-  const maxCount = Math.max(...data_points.map(d => d.count));
+  $: n        = data_points.length;
+  $: maxCount = Math.max(...data_points.map(d => d.count));
 
-  const AX_START = PAD_L;
-  const AX_END   = PAD_L + (n - 1) * tick_spacing;
-  const W        = AX_END + PAD_R;
+  $: AX_START = PAD_L;
+  $: AX_END   = PAD_L + (n - 1) * tick_spacing;
+  $: W        = AX_END + PAD_R;
 
   // Dot area height: tallest stack sits fully above axis line (8px gap between axis and bottom dot)
-  const DOT_AREA_H = maxCount * DOT_STEP + DOT_R + 12;
-  const AX_Y       = TITLE_H + DOT_AREA_H;
+  $: DOT_AREA_H = maxCount * DOT_STEP + DOT_R + 12;
+  $: AX_Y       = TITLE_H + DOT_AREA_H;
 
   // Space below axis: tick marks + labels + axis title
   // Labels may need extra height for fraction denominators
-  const hasFractionLabels = data_points.some(d => parseLabel(d.label).num);
-  const LABEL_Y      = AX_Y + 22;           // baseline for whole part / numerator
-  const FRAC_EXTRA   = hasFractionLabels ? 16 : 0;
-  const AXIS_LABEL_Y = LABEL_Y + FRAC_EXTRA + 26;
-  const H            = axis_label ? AXIS_LABEL_Y + 10 : LABEL_Y + FRAC_EXTRA + 10;
+  $: hasFractionLabels = data_points.some(d => parseLabel(d.label).num);
+  $: LABEL_Y      = AX_Y + 22;           // baseline for whole part / numerator
+  $: FRAC_EXTRA   = hasFractionLabels ? 16 : 0;
+  $: AXIS_LABEL_Y = LABEL_Y + FRAC_EXTRA + 26;
+  $: H            = axis_label ? AXIS_LABEL_Y + 10 : LABEL_Y + FRAC_EXTRA + 10;
 
   // ── Arrowhead constants (same path as LinePlot) ───────────────────────
   const AX_EXT = 10;
@@ -60,14 +60,14 @@
   const AH_OY  = (296.042 + 272.07) / 2;
   const AH_W   = (500 - AH_OX) * AH_S;
 
-  const L_TX = (AX_START - AX_EXT - AH_W) - AH_S * AH_OX;
-  const L_TY = AX_Y - AH_S * AH_OY;
+  $: L_TX = (AX_START - AX_EXT - AH_W) - AH_S * AH_OX;
+  $: L_TY = AX_Y - AH_S * AH_OY;
 
-  const R_TX = (AX_END + AX_EXT + AH_W) + AH_S * AH_OX;
-  const R_TY = AX_Y - AH_S * AH_OY;
+  $: R_TX = (AX_END + AX_EXT + AH_W) + AH_S * AH_OX;
+  $: R_TY = AX_Y - AH_S * AH_OY;
 
   // ── Pre-compute tick data ─────────────────────────────────────────────
-  const ticks = data_points.map((d, i) => ({
+  $: ticks = data_points.map((d, i) => ({
     x:      AX_START + i * tick_spacing,
     parsed: parseLabel(d.label),
     count:  d.count,

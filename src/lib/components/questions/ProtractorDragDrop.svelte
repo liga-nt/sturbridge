@@ -5,8 +5,12 @@
   //   choices: [40, 60, 90, 120, 140]                — draggable tile values
   // }
 
+  import AudioText from './AudioText.svelte';
+
   export let question_text;
   export let stimulus_params;
+  export let audio = {};
+  export let currentTime = 0;
 
   const { angles, choices } = stimulus_params;
 
@@ -148,7 +152,7 @@
 <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; color:#333; background:white; padding:16px;">
 
   <!-- Question text -->
-  <p style="margin:0 0 8px;">{question_text}</p>
+  <p style="margin:0 0 8px;"><AudioText text={question_text} alignment={audio.question_text?.alignment ?? null} active={audio.question_text?.active ?? false} {currentTime} /></p>
   <p style="margin:0 0 16px;">Drag and drop an angle measure into each box.</p>
 
   <!-- Tile bank -->

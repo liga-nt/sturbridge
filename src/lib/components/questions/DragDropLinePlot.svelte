@@ -1,11 +1,26 @@
 <script>
-  import { renderMath } from '$lib/utils/math.js';
+  import AudioText from './AudioText.svelte';
+  import { countSpokenWords } from '$lib/utils/audioAlign.js';
 
   export let stimulus_intro = null;
   export let question_text = '';
   export let math_expression = null;
   export let stimulus_params = {};
   export let value = null;
+  export let audio = {};
+  export let currentTime = 0;
+
+  // question_text is spoken as ONE clip but displayed as \n\n-separated
+  // paragraphs — each gets its own AudioText with a running word offset.
+  // Mirrors MultiPart.svelte's paragraphsWithOffset.
+  $: questionParagraphs = (() => {
+    let offset = 0;
+    return (question_text ?? '').split('\n\n').map((para) => {
+      const p = { text: para, wordOffset: offset };
+      offset += countSpokenWords(para);
+      return p;
+    });
+  })();
 
   const {
     title = '',
@@ -103,18 +118,18 @@
 
 <div class="question-body">
   {#if stimulus_intro}
-    <p class="q-text">{stimulus_intro}</p>
+    <p class="q-text"><AudioText text={stimulus_intro} alignment={audio.stimulus_intro?.alignment ?? null} active={audio.stimulus_intro?.active ?? false} {currentTime} /></p>
   {/if}
 
   {#if math_expression}
     <div class="math-list">
-      <p>{@html renderMath(math_expression)}</p>
+      <p><AudioText text={math_expression} alignment={audio.math_expression?.alignment ?? null} active={audio.math_expression?.active ?? false} {currentTime} /></p>
     </div>
   {/if}
 
   {#if question_text}
-    {#each question_text.split('\n\n') as para}
-      <p class="q-text">{@html renderMath(para)}</p>
+    {#each questionParagraphs as para}
+      <p class="q-text"><AudioText text={para.text} wordOffset={para.wordOffset} alignment={audio.question_text?.alignment ?? null} active={audio.question_text?.active ?? false} {currentTime} /></p>
     {/each}
   {/if}
 

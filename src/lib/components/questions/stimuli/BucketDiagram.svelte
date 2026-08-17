@@ -16,7 +16,7 @@
 
   export let params;
 
-  const buckets = params.buckets ?? [];
+  $: buckets = params.buckets ?? [];
 
   // ── Bucket geometry (at scale 1, centered at 0,0) ────────────────────────────
   //
